@@ -30,3 +30,5 @@ Route::match(['get', 'head'], 'storage/{path}', function () {
 
 Route::get('/', fn () => view('home'))->name('home');
 Route::get('/about-us', fn () => view('about'))->name('about');
+Route::get('/motorcycles', fn () => view('motorcycles'))->name('motorcycles');
+Route::get('/parts', fn () => view('parts'))->name('parts');

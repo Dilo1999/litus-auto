@@ -78,7 +78,7 @@
                     Discover premium motorcycles, flexible ownership plans, genuine parts, and trusted service across the Maldives.
                 </p>
                 <div class="flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-                    <a href="#"
+                    <a href="{{ route('motorcycles') }}"
                        class="flex items-center justify-center gap-2 rounded-md bg-litus-red px-6 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90">
                         Explore Motorcycles
                         <x-litus-icon name="arrow-right" class="h-[15px] w-[15px]" />

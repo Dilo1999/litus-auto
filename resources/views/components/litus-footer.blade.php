@@ -2,11 +2,17 @@
     $quickLinks = [
         'Home' => route('home'),
         'About Us' => route('about'),
-        'Motorcycles' => '#',
+        'Motorcycles' => route('motorcycles'),
         'Ownership Plans' => '#',
         'Gallery' => '#',
     ];
-    $serviceLinks = ['Parts', 'Service Center', 'Application Made Easy', 'Genuine Parts', 'Reliable Service'];
+    $serviceLinks = [
+        'Parts' => route('parts'),
+        'Service Center' => '#',
+        'Application Made Easy' => '#',
+        'Genuine Parts' => route('parts'),
+        'Reliable Service' => '#',
+    ];
     $socialLinks = ['facebook', 'instagram', 'message-circle'];
 @endphp
 
@@ -46,8 +52,8 @@
         <div>
             <h4 class="mb-4 text-sm font-bold uppercase tracking-wider text-white">Our Services</h4>
             <ul class="space-y-2">
-                @foreach ($serviceLinks as $service)
-                    <li><a href="#" class="text-sm text-gray-400 transition-colors hover:text-white">{{ $service }}</a></li>
+                @foreach ($serviceLinks as $label => $url)
+                    <li><a href="{{ $url }}" class="text-sm text-gray-400 transition-colors hover:text-white">{{ $label }}</a></li>
                 @endforeach
             </ul>
         </div>

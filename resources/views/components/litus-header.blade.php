@@ -4,9 +4,9 @@
     $navLinks = [
         'Home' => route('home'),
         'About Us' => route('about'),
-        'Motorcycles' => '#',
+        'Motorcycles' => route('motorcycles'),
         'Ownership Plans' => '#',
-        'Parts' => '#',
+        'Parts' => route('parts'),
         'Service Center' => '#',
         'Contact Us' => '#',
         'Gallery' => '#',
