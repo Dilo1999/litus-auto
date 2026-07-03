@@ -29,3 +29,4 @@ Route::match(['get', 'head'], 'storage/{path}', function () {
 })->where('path', '.*')->name('storage.serve');
 
 Route::get('/', fn () => view('home'))->name('home');
+Route::get('/about-us', fn () => view('about'))->name('about');

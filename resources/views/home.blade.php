@@ -4,8 +4,6 @@
 
 @section('content')
 @php
-    $navLinks = ['Home', 'About Us', 'Motorcycles', 'Ownership Plans', 'Parts', 'Service Center', 'Contact Us', 'Gallery'];
-
     $promoCards = [
         ['model' => 'ADV 160 2026', 'discount' => 'MVR 16,750', 'img' => 'https://images.unsplash.com/photo-1588756681780-9d5859fc2ca0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
         ['model' => 'ADV 160 2026', 'discount' => 'MVR 16,750', 'img' => 'https://images.unsplash.com/photo-1582092722992-b2f960bafbfb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
@@ -54,69 +52,23 @@
         ['icon' => 'star', 'label' => 'Flexible Plans', 'desc' => 'Ownership options for everyone'],
     ];
 
-    $heroImg = 'https://images.unsplash.com/photo-1609630875171-b1321377ee65?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200&q=80';
+    $heroBg = asset('images/homepage/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_22_48 PM.png'));
 @endphp
 
 <div class="font-sans">
 
-    {{-- HEADER --}}
-    <header class="sticky top-0 z-50 w-full bg-litus-navy">
-        <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-[68px]">
-            <a href="{{ route('home') }}" class="flex items-center gap-2">
-                <div class="flex h-8 w-8 items-center justify-center rounded-sm bg-litus-red">
-                    <span class="text-sm font-black text-white">L</span>
-                </div>
-                <div>
-                    <span class="block text-lg font-black leading-none tracking-wide text-white">LITUS</span>
-                    <span class="block text-xs uppercase leading-none tracking-widest text-gray-400">Automobiles</span>
-                </div>
-            </a>
-
-            <nav class="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
-                @foreach ($navLinks as $link)
-                    <a href="#"
-                       class="rounded px-3 py-1.5 text-sm font-medium transition-colors {{ $link === 'Home' ? 'text-litus-red' : 'text-gray-300 hover:text-white' }}">
-                        {{ $link }}
-                    </a>
-                @endforeach
-            </nav>
-
-            <div class="flex items-center gap-3">
-                <a href="tel:+9603331234"
-                   class="hidden items-center gap-1.5 rounded-full bg-litus-red px-4 py-2 text-sm font-bold text-white transition-opacity hover:opacity-90 sm:flex">
-                    <x-litus-icon name="phone" class="h-3.5 w-3.5" />
-                    Call Now
-                </a>
-                <button type="button"
-                        class="text-white lg:hidden"
-                        data-litus-menu-toggle
-                        aria-expanded="false"
-                        aria-controls="litus-mobile-menu"
-                        aria-label="Toggle navigation menu">
-                    <x-litus-icon name="menu" class="h-[22px] w-[22px]" data-litus-menu-icon="open" />
-                    <x-litus-icon name="x" class="hidden h-[22px] w-[22px]" data-litus-menu-icon="close" />
-                </button>
-            </div>
-        </div>
-
-        <div id="litus-mobile-menu" class="hidden border-t border-white/10 px-4 pb-4 pt-2 lg:hidden" data-litus-mobile-menu>
-            @foreach ($navLinks as $link)
-                <a href="#" class="block py-2 text-sm font-medium text-gray-200 hover:text-white">{{ $link }}</a>
-            @endforeach
-            <a href="tel:+9603331234"
-               class="mt-3 flex w-fit items-center gap-2 rounded-full bg-litus-red px-4 py-2 text-sm font-bold text-white">
-                <x-litus-icon name="phone" class="h-3.5 w-3.5" />
-                Call Now
-            </a>
-        </div>
-    </header>
+    <x-litus-header active="Home" />
 
     {{-- HERO --}}
-    <section class="relative overflow-hidden bg-[linear-gradient(110deg,#8B0000_0%,#5a0a0a_20%,#1a1a2e_55%,#0d1b3e_100%)]">
-        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(ellipse at 80% 60%, #1a3a6b 0%, transparent 55%);"></div>
+    <section class="relative min-h-[640px] overflow-hidden lg:min-h-[720px]">
+        <img src="{{ $heroBg }}"
+             alt=""
+             class="absolute inset-0 h-full w-full object-cover object-center"
+             aria-hidden="true">
+        <div class="absolute inset-0 bg-[linear-gradient(110deg,rgba(139,0,0,0.6)_0%,rgba(11,22,40,0.85)_40%,rgba(11,22,40,0.45)_70%,rgba(11,22,40,0.2)_100%)]"></div>
 
-        <div class="relative z-10 mx-auto flex min-h-[520px] max-w-7xl flex-col items-center px-4 sm:px-6 lg:min-h-[560px] lg:flex-row">
-            <div class="py-16 text-center lg:w-[44%] lg:py-20 lg:text-left">
+        <div class="relative z-10 mx-auto flex min-h-[640px] max-w-7xl flex-col justify-center px-4 sm:px-6 lg:min-h-[720px]">
+            <div class="max-w-xl py-16 text-center lg:py-20 lg:text-left">
                 <p class="mb-3 text-xs font-bold uppercase tracking-widest text-litus-red">Premium Bikes. Trusted Service.</p>
                 <h1 class="mb-5 font-display text-[2.6rem] font-black leading-[1.1] text-white sm:text-5xl lg:text-[3.4rem]">
                     Ride Your Dream<br>with<br>
@@ -136,13 +88,6 @@
                         View Ownership Plans
                     </a>
                 </div>
-            </div>
-
-            <div class="flex w-full items-end justify-center self-stretch pt-8 lg:w-[56%] lg:justify-end lg:pt-0">
-                <img src="{{ $heroImg }}"
-                     alt="LITUS motorcycles and rider"
-                     class="w-full max-w-2xl object-contain object-bottom lg:max-w-none"
-                     style="max-height: 560px;">
             </div>
         </div>
 

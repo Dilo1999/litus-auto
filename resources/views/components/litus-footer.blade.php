@@ -1,5 +1,11 @@
 @php
-    $quickLinks = ['Home', 'About Us', 'Motorcycles', 'Ownership Plans', 'Gallery'];
+    $quickLinks = [
+        'Home' => route('home'),
+        'About Us' => route('about'),
+        'Motorcycles' => '#',
+        'Ownership Plans' => '#',
+        'Gallery' => '#',
+    ];
     $serviceLinks = ['Parts', 'Service Center', 'Application Made Easy', 'Genuine Parts', 'Reliable Service'];
     $socialLinks = ['facebook', 'instagram', 'message-circle'];
 @endphp
@@ -31,8 +37,8 @@
         <div>
             <h4 class="mb-4 text-sm font-bold uppercase tracking-wider text-white">Quick Links</h4>
             <ul class="space-y-2">
-                @foreach ($quickLinks as $link)
-                    <li><a href="#" class="text-sm text-gray-400 transition-colors hover:text-white">{{ $link }}</a></li>
+                @foreach ($quickLinks as $label => $url)
+                    <li><a href="{{ $url }}" class="text-sm text-gray-400 transition-colors hover:text-white">{{ $label }}</a></li>
                 @endforeach
             </ul>
         </div>
