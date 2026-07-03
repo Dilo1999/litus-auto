@@ -107,4 +107,16 @@ $attrs = $attributes->merge(['class' => $class, 'fill' => $fill, 'stroke' => 'cu
     @case('layers')
         <svg {{ $attrs }}><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/></svg>
         @break
+    @case('credit-card')
+        <svg {{ $attrs }}><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+        @break
+    @case('weight')
+        <svg {{ $attrs }}><circle cx="12" cy="5" r="3"/><path d="M6.5 8a2 2 0 0 0-1.905 1.46L2.1 18.5A2 2 0 0 0 4 21h16a2 2 0 0 0 1.925-2.54L17.4 9.5A2 2 0 0 0 15.48 8Z"/></svg>
+        @break
+    @case('arrow-up-down')
+        <svg {{ $attrs }}><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg>
+        @break
+    @case('circle')
+        <svg {{ $attrs }}><circle cx="12" cy="12" r="10"/></svg>
+        @break
 @endswitch
