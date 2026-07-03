@@ -22,11 +22,11 @@
         ['id' => 13, 'name' => 'Air Blade 125 Standard 2026','brand' => 'Honda',  'discount' => 'MVR 12,900', 'cc' => '125cc', 'img' => 'https://images.unsplash.com/photo-1550149550-33b46c745e03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
     ];
 
-    $trustBadges = [
-        ['icon' => 'star', 'label' => 'Limited Offers', 'sub' => 'Seasonal deals on top models'],
-        ['icon' => 'package', 'label' => 'Flexible Plans', 'sub' => 'Ownership for every budget'],
-        ['icon' => 'check-circle', 'label' => 'Genuine Brands', 'sub' => 'Honda & Yamaha certified'],
-        ['icon' => 'wrench', 'label' => 'Service Support', 'sub' => 'Expert after-sales care'],
+    $heroFeatures = [
+        ['icon' => 'star', 'title' => 'Limited Offers', 'desc' => 'Seasonal deals on top models'],
+        ['icon' => 'package', 'title' => 'Flexible Plans', 'desc' => 'Ownership for every budget'],
+        ['icon' => 'check-circle', 'title' => 'Genuine Brands', 'desc' => 'Honda & Yamaha certified'],
+        ['icon' => 'wrench', 'title' => 'Service Support', 'desc' => 'Expert after-sales care'],
     ];
 
     $whyLitus = [
@@ -42,45 +42,71 @@
     <x-litus-header active="Motorcycles" />
 
     {{-- HERO --}}
-    <section class="relative min-h-[640px] overflow-hidden bg-litus-footer lg:min-h-[720px]">
-        <img src="{{ $heroBg }}" alt="" class="absolute inset-0 h-full w-full object-cover opacity-25" aria-hidden="true">
-        <div class="absolute inset-0 bg-[linear-gradient(110deg,rgba(139,0,0,0.5)_0%,rgba(20,20,40,0.65)_55%,transparent_100%)]"></div>
+    <section class="relative min-h-[680px] overflow-hidden border border-[rgba(27,74,120,0.45)] bg-[#06101c] pb-[82px] max-[1100px]:min-h-0 max-[1100px]:pb-8">
+        <img src="{{ $heroBg }}"
+             alt=""
+             class="absolute inset-0 h-full w-full object-cover object-[center_right]"
+             aria-hidden="true">
 
-        <div class="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 py-24 sm:px-6 lg:flex-row lg:py-32">
-            <div class="text-center lg:w-3/5 lg:text-left">
-                <span class="mb-5 inline-block rounded-full border border-litus-red/30 bg-litus-red/15 px-3 py-1 text-xs font-bold uppercase tracking-widest text-litus-red">
+        <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,11,22,0.98)_0%,rgba(3,11,22,0.88)_32%,rgba(3,11,22,0.48)_58%,rgba(3,11,22,0.25)_100%)]"></div>
+        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(255,255,255,0.08),transparent_28%)]"></div>
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.1),rgba(2,10,19,0.95))]"></div>
+
+        <div class="relative z-[2] mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 sm:pt-20">
+            <div class="max-w-[720px] text-left">
+                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:text-[15px]">
                     Explore Our Collection
-                </span>
-                <h1 class="mb-5 font-display text-4xl font-black leading-[1.1] text-white sm:text-5xl lg:text-[3.2rem]">
+                </p>
+
+                <h1 class="mb-4 font-display text-[clamp(2.25rem,4.2vw,4.25rem)] font-black leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:text-[2.25rem]">
                     Find the Perfect Ride<br>
                     <span class="text-litus-red">for Your Journey</span>
                 </h1>
-                <p class="mx-auto mb-8 max-w-xl text-base leading-relaxed text-gray-300 lg:mx-0 lg:text-lg">
+
+                <p class="mb-6 max-w-[620px] text-base font-medium leading-[1.5] text-[#e6edf5] sm:text-lg sm:leading-[1.55] max-md:text-[17px]">
                     Browse the latest motorcycles and scooters from LITUS Automobiles, with limited-time offers, flexible ownership plans, and trusted after-sales support.
                 </p>
-                <div class="flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
+
+                <div class="flex flex-row flex-wrap items-center justify-start gap-5 sm:gap-7">
                     <a href="#inventory"
-                       class="flex items-center justify-center gap-2 rounded-md bg-litus-red px-7 py-3 text-sm font-bold text-white">
+                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] bg-[#f20d23] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(242,13,35,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9091c] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         View Motorcycles
-                        <x-litus-icon name="arrow-right" class="h-[15px] w-[15px]" />
+                        <x-litus-icon name="arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </a>
                     <a href="tel:+9603331234"
-                       class="rounded-md border border-white/30 px-7 py-3 text-sm font-bold text-white transition-all hover:border-white/60 hover:bg-white/5">
+                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f20d23] hover:bg-[rgba(242,13,35,0.15)] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         Contact Sales Team
+                        <x-litus-icon name="arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </a>
                 </div>
             </div>
+        </div>
 
-            <div class="mx-auto grid w-full max-w-sm grid-cols-2 gap-4 lg:mx-0 lg:w-2/5">
-                @foreach ($trustBadges as $badge)
-                    <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center backdrop-blur-sm">
-                        <div class="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-full bg-litus-red/20">
-                            <x-litus-icon :name="$badge['icon']" class="h-4 w-4 text-litus-red" />
+        <div class="absolute bottom-0 left-0 right-0 z-[3] border-t border-white/12 bg-[rgba(3,13,25,0.78)] backdrop-blur-sm max-[1100px]:relative max-[1100px]:mt-5">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6">
+                <div class="grid min-h-[76px] grid-cols-1 min-[1100px]:grid-cols-4 max-[1100px]:min-[701px]:grid-cols-2">
+                    @foreach ($heroFeatures as $index => $feature)
+                        <div @class([
+                            'relative flex items-center gap-3 py-3 sm:gap-3.5 min-[1100px]:py-3.5',
+                            'border-b border-white/12 max-md:border-b' => $index < count($heroFeatures) - 1,
+                            'max-md:last:border-b-0',
+                            'min-[1100px]:border-r min-[1100px]:border-white/16 min-[1100px]:pr-4' => $index < count($heroFeatures) - 1,
+                            'min-[1100px]:pl-0' => $index === 0,
+                            'min-[1100px]:pl-4' => $index > 0,
+                            'max-[1100px]:min-[701px]:border-r max-[1100px]:min-[701px]:border-white/16' => in_array($index, [0, 2]),
+                            'max-[1100px]:min-[701px]:border-b max-[1100px]:min-[701px]:border-white/12' => in_array($index, [0, 1]),
+                            'max-[1100px]:min-[701px]:border-r-0' => $index === 1,
+                        ])>
+                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-white/35 text-white shadow-[0_0_16px_rgba(255,255,255,0.06)] sm:h-10 sm:w-10">
+                                <x-litus-icon :name="$feature['icon']" class="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
+                            </div>
+                            <div class="min-w-0 text-left">
+                                <h3 class="mb-0.5 text-sm font-extrabold leading-tight text-white sm:text-[15px]">{{ $feature['title'] }}</h3>
+                                <p class="text-xs font-medium leading-snug text-[#c9d4df] sm:text-[13px]">{{ $feature['desc'] }}</p>
+                            </div>
                         </div>
-                        <p class="text-sm font-bold text-white">{{ $badge['label'] }}</p>
-                        <p class="mt-0.5 text-xs leading-tight text-gray-400">{{ $badge['sub'] }}</p>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>
