@@ -8,7 +8,7 @@
         'Ownership Plans' => '#',
         'Parts' => route('parts'),
         'Service Center' => '#',
-        'Contact Us' => '#',
+        'Contact Us' => route('contact'),
         'Gallery' => '#',
     ];
 @endphp

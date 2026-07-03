@@ -5,6 +5,7 @@
         'Motorcycles' => route('motorcycles'),
         'Ownership Plans' => '#',
         'Gallery' => '#',
+        'Contact Us' => route('contact'),
     ];
     $serviceLinks = [
         'Parts' => route('parts'),

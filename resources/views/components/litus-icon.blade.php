@@ -119,4 +119,13 @@ $attrs = $attributes->merge(['class' => $class, 'fill' => $fill, 'stroke' => 'cu
     @case('circle')
         <svg {{ $attrs }}><circle cx="12" cy="12" r="10"/></svg>
         @break
+    @case('navigation')
+        <svg {{ $attrs }}><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+        @break
+    @case('external-link')
+        <svg {{ $attrs }}><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+        @break
+    @case('message-square')
+        <svg {{ $attrs }}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        @break
 @endswitch

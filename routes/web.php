@@ -33,3 +33,4 @@ Route::get('/about-us', fn () => view('about'))->name('about');
 Route::get('/motorcycles', fn () => view('motorcycles'))->name('motorcycles');
 Route::get('/motorcycles/{slug}', fn () => view('motorcycle-detail'))->name('motorcycle.show');
 Route::get('/parts', fn () => view('parts'))->name('parts');
+Route::get('/contact-us', fn () => view('contact'))->name('contact');
