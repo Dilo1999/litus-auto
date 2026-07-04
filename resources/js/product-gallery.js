@@ -9,7 +9,23 @@ function initProductGallery() {
     const nextBtn = root.querySelector('[data-gallery-next]');
     const colorBtns = root.querySelectorAll('[data-gallery-color]');
 
+    const thumbActive = ['border-[#ff6b7b]', 'shadow-[0_0_0_1px_rgba(255,16,41,0.25)]'];
+    const thumbInactive = ['border-[#e3e7ec]'];
+    const colorActive = ['border-[#ff6b7b]', 'shadow-[0_0_0_1px_rgba(255,16,41,0.25)]'];
+    const colorInactive = ['border-[#e5e8ed]'];
+
     let activeIndex = 0;
+
+    function setThumbState(thumb, isActive) {
+        thumbActive.forEach((cls) => thumb.classList.toggle(cls, isActive));
+        thumbInactive.forEach((cls) => thumb.classList.toggle(cls, !isActive));
+    }
+
+    function setColorState(btn, isActive) {
+        colorActive.forEach((cls) => btn.classList.toggle(cls, isActive));
+        colorInactive.forEach((cls) => btn.classList.toggle(cls, !isActive));
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    }
 
     function setActive(index) {
         if (!images.length) return;
@@ -18,10 +34,7 @@ function initProductGallery() {
             mainImg.src = images[activeIndex];
             mainImg.alt = `Product view ${activeIndex + 1}`;
         }
-        thumbs.forEach((thumb, i) => {
-            thumb.classList.toggle('border-litus-red', i === activeIndex);
-            thumb.classList.toggle('border-transparent', i !== activeIndex);
-        });
+        thumbs.forEach((thumb, i) => setThumbState(thumb, i === activeIndex));
     }
 
     prevBtn?.addEventListener('click', () => setActive(activeIndex - 1));
@@ -36,26 +49,7 @@ function initProductGallery() {
 
     colorBtns.forEach((btn) => {
         btn.addEventListener('click', () => {
-            const hex = btn.dataset.colorHex;
-            const label = btn.dataset.galleryColor;
-            colorBtns.forEach((b) => {
-                const isActive = b === btn;
-                b.classList.toggle('border-litus-red', isActive);
-                b.classList.toggle('bg-litus-red/10', isActive);
-                b.classList.toggle('text-litus-red', isActive);
-                b.classList.toggle('border-gray-200', !isActive);
-                b.classList.toggle('text-gray-500', !isActive);
-                if (hex && isActive) {
-                    b.style.borderColor = hex;
-                    b.style.color = hex;
-                    b.style.backgroundColor = `${hex}15`;
-                } else if (!isActive) {
-                    b.style.borderColor = '';
-                    b.style.color = '';
-                    b.style.backgroundColor = '';
-                }
-            });
-            if (label) btn.setAttribute('aria-pressed', 'true');
+            colorBtns.forEach((b) => setColorState(b, b === btn));
         });
     });
 
