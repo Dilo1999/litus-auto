@@ -129,7 +129,7 @@
                             Contact Sales Team
                             <x-litus-icon name="arrow-right" class="h-4 w-4 shrink-0" />
                         </a>
-                        <a href="#"
+                        <a href="{{ route('ownership-plans') }}"
                            class="inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-4 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f40d23] hover:bg-[rgba(244,13,35,0.12)] min-[1100px]:h-12 min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[13px]">
                             <x-litus-icon name="credit-card" class="h-4 w-4 shrink-0" />
                             View Ownership Plans
@@ -326,7 +326,7 @@
                     <p class="mb-5 text-sm font-semibold leading-relaxed text-[#4d5969]">
                         Our ownership plans are designed to make your motorcycle journey simple and stress-free.
                     </p>
-                    <a href="#"
+                    <a href="{{ route('ownership-plans') }}"
                        class="inline-flex items-center gap-2.5 rounded-md bg-[#f30d23] px-6 py-3.5 text-sm font-black text-white">
                         View Ownership Plans
                         <x-litus-icon name="credit-card" class="h-4 w-4" />

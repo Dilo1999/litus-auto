@@ -89,7 +89,7 @@
                         Explore Motorcycles
                         <x-litus-icon name="arrow-right" class="h-[15px] w-[15px]" />
                     </a>
-                    <a href="#"
+                    <a href="{{ route('ownership-plans') }}"
                        class="rounded-md border border-white/30 px-6 py-3 text-sm font-bold text-white transition-all hover:border-white/60 hover:bg-white/5">
                         View Ownership Plans
                     </a>

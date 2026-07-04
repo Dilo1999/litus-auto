@@ -69,6 +69,21 @@
   }
 }
 
+@keyframes ownershipDrawerIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.ownership-drawer-open {
+  animation: ownershipDrawerIn 0.28s ease-out forwards;
+}
+
 /* Base typography (match React src/styles/theme.css) */
 :root {
   --font-size: 16px;

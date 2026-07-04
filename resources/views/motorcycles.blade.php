@@ -244,7 +244,7 @@
             </div>
             <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
                 <a href="tel:+9603331234" class="rounded-full bg-litus-red px-8 py-3.5 text-sm font-bold text-white">Talk to Sales</a>
-                <a href="#" class="rounded-full border border-white/30 px-8 py-3.5 text-sm font-bold text-white transition-all hover:border-white/60 hover:bg-white/5">View Ownership Plans</a>
+                <a href="{{ route('ownership-plans') }}" class="rounded-full border border-white/30 px-8 py-3.5 text-sm font-bold text-white transition-all hover:border-white/60 hover:bg-white/5">View Ownership Plans</a>
             </div>
         </div>
     </section>

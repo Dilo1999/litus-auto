@@ -3,7 +3,7 @@
         'Home' => route('home'),
         'About Us' => route('about'),
         'Motorcycles' => route('motorcycles'),
-        'Ownership Plans' => '#',
+        'Ownership Plans' => route('ownership-plans'),
         'Gallery' => '#',
         'Contact Us' => route('contact'),
     ];

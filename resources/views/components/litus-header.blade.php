@@ -5,7 +5,7 @@
         'Home' => route('home'),
         'About Us' => route('about'),
         'Motorcycles' => route('motorcycles'),
-        'Ownership Plans' => '#',
+        'Ownership Plans' => route('ownership-plans'),
         'Parts' => route('parts'),
         'Service Center' => route('service-center'),
         'Contact Us' => route('contact'),
