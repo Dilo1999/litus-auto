@@ -11,18 +11,16 @@
         'Contact Us' => route('contact'),
         'Gallery' => '#',
     ];
+
+    $logo = asset('images/logo/' . rawurlencode('Litus-Automobiles-white (1).png'));
 @endphp
 
 <header class="sticky top-0 z-50 w-full bg-litus-navy">
     <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-[68px]">
-        <a href="{{ route('home') }}" class="flex items-center gap-2">
-            <div class="flex h-8 w-8 items-center justify-center rounded-sm bg-litus-red">
-                <span class="text-sm font-black text-white">L</span>
-            </div>
-            <div>
-                <span class="block text-lg font-black leading-none tracking-wide text-white">LITUS</span>
-                <span class="block text-xs uppercase leading-none tracking-widest text-gray-400">Automobiles</span>
-            </div>
+        <a href="{{ route('home') }}" class="flex shrink-0 items-center">
+            <img src="{{ $logo }}"
+                 alt="LITUS Automobiles"
+                 class="h-9 w-auto sm:h-10">
         </a>
 
         <nav class="hidden items-center gap-1 lg:flex" aria-label="Main navigation">

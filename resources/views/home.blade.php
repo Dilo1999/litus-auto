@@ -110,214 +110,272 @@
     </section>
 
     {{-- ONGOING PROMOTIONS --}}
-    <section class="bg-gray-50 py-16">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
-            <div class="mb-8 flex items-end justify-between">
+    <section class="relative overflow-hidden border border-[#dfe3ea] px-5 py-[38px] pb-7 max-sm:px-3.5 max-sm:py-[30px]"
+             style="background: linear-gradient(rgba(255,255,255,0.94), rgba(255,255,255,0.94)), radial-gradient(circle at 10% 20%, rgba(6,21,48,0.08), transparent 25%);">
+        <div class="pointer-events-none absolute inset-0 opacity-40"
+             style="background-image: linear-gradient(30deg, rgba(6,21,48,0.035) 12%, transparent 12.5%, transparent 87%, rgba(6,21,48,0.035) 87.5%, rgba(6,21,48,0.035)), linear-gradient(150deg, rgba(6,21,48,0.035) 12%, transparent 12.5%, transparent 87%, rgba(6,21,48,0.035) 87.5%, rgba(6,21,48,0.035)); background-size: 55px 95px;"></div>
+
+        <div class="relative z-[2] mx-auto max-w-[1350px]">
+            <div class="mb-9 flex flex-col items-start justify-between gap-5 min-[651px]:mb-[35px] min-[651px]:flex-row min-[651px]:gap-5">
                 <div>
-                    <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Special Deals</span>
-                    <h2 class="mt-1 font-display text-3xl font-black text-gray-900 lg:text-4xl">Ongoing Promotions</h2>
-                    <p class="mt-1 text-gray-500">Limited-time deals on selected motorcycles and scooters.</p>
+                    <span class="mb-1.5 block text-sm font-black uppercase tracking-wide text-[#ff1029]">Special Deals</span>
+                    <h2 class="mb-3.5 text-[30px] font-black leading-tight tracking-[-0.5px] text-[#07152f] min-[651px]:text-4xl">Ongoing Promotions</h2>
+                    <p class="text-[15px] font-semibold text-[#424c5e]">Limited-time deals on selected motorcycles and scooters.</p>
                 </div>
-                <a href="#" class="hidden items-center gap-1 text-sm font-semibold text-gray-500 transition-colors hover:text-gray-800 sm:flex">
+                <a href="{{ route('motorcycles') }}"
+                   class="group/viewall inline-flex items-center gap-2.5 text-[15px] font-black text-[#07152f] transition-all duration-300 hover:gap-4 hover:text-[#ff1029] min-[651px]:mt-[58px]">
                     View All Promotions
-                    <x-litus-icon name="arrow-right" class="h-3.5 w-3.5" />
+                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
             </div>
 
-            <div class="relative">
-                <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="relative min-[1101px]:px-[42px]">
+                <button type="button"
+                        class="absolute left-0 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-3xl leading-none text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#f30d23] hover:text-white min-[1101px]:flex"
+                        aria-label="Previous promotions">
+                    <x-litus-icon name="chevron-left" class="h-6 w-6" />
+                </button>
+                <button type="button"
+                        class="absolute right-0 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-3xl leading-none text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#f30d23] hover:text-white min-[1101px]:flex"
+                        aria-label="Next promotions">
+                    <x-litus-icon name="chevron-right" class="h-6 w-6" />
+                </button>
+
+                <div class="grid grid-cols-1 gap-[18px] min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4">
                     @foreach ($promoCards as $card)
-                        <div class="group overflow-hidden rounded-2xl bg-white shadow-md transition-shadow hover:shadow-xl">
-                            <div class="relative">
-                                <img src="{{ $card['img'] }}"
-                                     alt="{{ $card['model'] }}"
-                                     class="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-105">
-                                <span class="absolute left-3 top-3 rounded-full bg-litus-red px-2.5 py-1 text-xs font-bold text-white">
+                        <div class="relative min-h-[360px] overflow-hidden rounded-[10px] border border-[#dfe3ea] bg-white px-[22px] pb-[26px] pt-[22px] shadow-[0_12px_28px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_42px_rgba(0,0,0,0.12)] min-[651px]:min-h-[390px]">
+                            <div class="absolute left-[18px] top-3.5">
+                                <span class="relative block rounded-t-lg rounded-br-lg bg-[#f30d23] px-[18px] py-2 text-xs font-black uppercase text-white shadow-[0_8px_16px_rgba(243,13,35,0.25)]">
                                     Limited Offer
+                                    <span class="absolute bottom-[-6px] left-0 h-1.5 w-[35px] rounded-br-lg bg-[#b80718]"></span>
                                 </span>
                             </div>
-                            <div class="p-4">
-                                <h3 class="text-base font-black text-gray-900">{{ $card['model'] }}</h3>
-                                <p class="mt-0.5 text-sm text-gray-500">Save up to</p>
-                                <p class="mt-1 text-xl font-black text-litus-red">{{ $card['discount'] }}</p>
-                                <button type="button" class="mt-3 w-full rounded-full bg-litus-red py-2 text-sm font-bold text-white transition-opacity hover:opacity-90">
+
+                            <div class="mt-9 flex h-[205px] items-center justify-center">
+                                <img src="{{ $card['img'] }}"
+                                     alt="{{ $card['model'] }}"
+                                     class="h-[180px] w-full max-w-[250px] object-contain drop-shadow-[0_20px_14px_rgba(0,0,0,0.22)] max-sm:max-w-[230px]">
+                            </div>
+
+                            <div class="mt-3 text-center">
+                                <h3 class="mb-3 text-lg font-black text-[#111b46]">{{ $card['model'] }}</h3>
+                                <p class="mb-5 text-[15px] font-black text-[#ff1029]">Discount: {{ $card['discount'] }}</p>
+                                <a href="{{ route('motorcycles') }}"
+                                   class="inline-flex h-[43px] w-[175px] items-center justify-center rounded-md border-2 border-[#8d97ad] bg-white text-sm font-black text-[#07152f] transition-colors duration-300 hover:border-[#f30d23] hover:bg-[#f30d23] hover:text-white">
                                     Buy Now
-                                </button>
+                                </a>
                             </div>
                         </div>
                     @endforeach
                 </div>
-
-                <button type="button" class="absolute -left-5 top-1/2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg hover:bg-gray-50 lg:flex" aria-label="Previous promotions">
-                    <x-litus-icon name="chevron-left" class="h-[18px] w-[18px] text-gray-600" />
-                </button>
-                <button type="button" class="absolute -right-5 top-1/2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg hover:bg-gray-50 lg:flex" aria-label="Next promotions">
-                    <x-litus-icon name="chevron-right" class="h-[18px] w-[18px] text-gray-600" />
-                </button>
             </div>
         </div>
     </section>
 
     {{-- TOP SELLING RIDES --}}
-    <section class="bg-litus-navy py-16">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
-            <div class="mb-8 flex items-end justify-between">
+    <section class="border border-white/[0.08] px-5 py-[42px] pb-[50px] max-[720px]:px-3.5 max-[720px]:py-[34px]"
+             style="background: radial-gradient(circle at top left, rgba(14,61,111,0.35), transparent 35%), radial-gradient(circle at bottom right, rgba(14,61,111,0.25), transparent 35%), linear-gradient(135deg, #061326 0%, #071a33 45%, #061326 100%);">
+        <div class="mx-auto max-w-[1420px]">
+
+            <div class="mb-[30px] flex flex-col items-start justify-between gap-5 min-[721px]:flex-row max-[1100px]:gap-5">
                 <div>
-                    <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Customer Favorites</span>
-                    <h2 class="mt-1 font-display text-3xl font-black text-white lg:text-4xl">Top Selling Rides</h2>
-                    <p class="mt-1 text-gray-400">Explore our most popular motorcycles and scooters.</p>
+                    <span class="mb-2 block text-[15px] font-black uppercase tracking-wide text-[#ff1029]">Customer Favorites</span>
+                    <h2 class="mb-3 text-[32px] font-black leading-tight tracking-[-0.5px] text-white min-[721px]:text-[42px]">Top Selling Rides</h2>
+                    <p class="text-base font-semibold text-[#d6dee9]">Explore our most popular motorcycles and scooters.</p>
                 </div>
-                <a href="#" class="hidden items-center gap-1 text-sm font-semibold text-gray-400 transition-colors hover:text-white sm:flex">
+                <a href="{{ route('motorcycles') }}"
+                   class="group/viewall inline-flex items-center gap-2.5 text-base font-black text-[#ff1029] transition-all duration-300 hover:gap-4 hover:text-white min-[721px]:mt-[55px]">
                     View All Rides
-                    <x-litus-icon name="arrow-right" class="h-3.5 w-3.5" />
+                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
             </div>
 
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <div class="grid grid-cols-1 gap-[22px] min-[721px]:gap-[38px] min-[1101px]:grid-cols-3 max-[1100px]:min-[721px]:grid-cols-2">
                 @foreach ($topRides as $ride)
-                    <div class="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition-colors hover:border-red-500/40">
-                        <div class="relative overflow-hidden">
+                    <div class="group relative min-h-0 overflow-hidden rounded-xl border border-white/12 bg-white/[0.07] px-[22px] pb-7 pt-6 shadow-[0_18px_35px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[rgba(255,16,41,0.55)] hover:shadow-[0_22px_45px_rgba(0,0,0,0.35)] min-[721px]:min-h-[385px] min-[721px]:px-[30px] min-[721px]:pb-7 min-[721px]:pt-6">
+                        <div class="mb-[18px] flex h-[190px] items-center justify-center min-[721px]:h-[215px]">
                             <img src="{{ $ride['img'] }}"
                                  alt="{{ $ride['model'] }}"
-                                 class="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-gradient-to-t from-litus-navy/80 via-transparent to-transparent"></div>
+                                 class="h-[185px] w-full max-w-[360px] object-contain drop-shadow-[0_22px_18px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:scale-105 min-[721px]:h-[210px]">
                         </div>
-                        <div class="p-5">
-                            <h3 class="text-lg font-black text-white">{{ $ride['model'] }}</h3>
-                            <div class="mt-3 flex items-center gap-4">
-                                <div class="flex items-center gap-1.5 text-sm text-gray-400">
-                                    <x-litus-icon name="gauge" class="h-3.5 w-3.5 text-litus-red" />
+
+                        <div>
+                            <h3 class="mb-4 text-[22px] font-black text-white">{{ $ride['model'] }}</h3>
+
+                            <div class="mb-[22px] flex flex-wrap items-center gap-6">
+                                <div class="flex items-center gap-2 text-[15px] font-extrabold text-[#e7eef8]">
+                                    <x-litus-icon name="gauge" class="h-[17px] w-[17px] text-white" />
                                     {{ $ride['cc'] }}
                                 </div>
-                                <div class="flex items-center gap-1.5 text-sm text-gray-400">
-                                    <x-litus-icon name="fuel" class="h-3.5 w-3.5 text-litus-red" />
+                                <div class="flex items-center gap-2 text-[15px] font-extrabold text-[#e7eef8]">
+                                    <x-litus-icon name="fuel" class="h-[17px] w-[17px] text-white" />
                                     Capacity {{ $ride['capacity'] }}
                                 </div>
                             </div>
-                            <button type="button" class="mt-4 w-full rounded-full border-2 border-litus-red py-2.5 text-sm font-bold text-litus-red transition-all hover:bg-litus-red hover:text-white">
+
+                            <a href="{{ route('motorcycles') }}"
+                               class="inline-flex h-12 w-[170px] items-center justify-center rounded-md border-2 border-[#bd2938] bg-transparent text-[15px] font-black text-[#ff394b] transition-colors duration-300 hover:border-[#ff1029] hover:bg-[#ff1029] hover:text-white">
                                 Explore More
-                            </button>
+                            </a>
                         </div>
                     </div>
                 @endforeach
             </div>
+
         </div>
     </section>
 
-    {{-- WHAT'S NEW --}}
-    <section class="bg-white py-16">
-        <div class="mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 sm:px-6 lg:flex-row lg:gap-16">
-            <div class="lg:w-1/2">
-                <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Stay Updated</span>
-                <h2 class="mt-2 font-display text-3xl font-black text-gray-900 lg:text-4xl">What's New?</h2>
-                <p class="mt-3 max-w-md leading-relaxed text-gray-500">
-                    Stay updated with the latest launches, offers, and stories from LITUS Automobiles.
-                </p>
-                <a href="#"
-                   class="mt-6 inline-flex items-center gap-2 rounded-full bg-litus-red px-6 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90">
-                    <x-litus-icon name="play" class="h-3.5 w-3.5" />
-                    Watch Latest Updates
-                </a>
-            </div>
+    {{-- WHAT'S NEW + WHAT WE OFFER --}}
+    <section class="border border-[#dfe3ea] bg-[#f8f9fb]">
 
-            <div class="w-full lg:w-1/2">
-                <div class="group relative cursor-pointer overflow-hidden rounded-2xl shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1550149550-33b46c745e03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80"
-                         alt="Latest updates"
-                         class="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105 lg:h-72">
-                    <div class="absolute inset-0 flex items-center justify-center bg-black/40">
-                        <div class="flex h-16 w-16 items-center justify-center rounded-full bg-litus-red shadow-xl transition-transform group-hover:scale-110">
-                            <x-litus-icon name="play" class="ml-1 h-[22px] w-[22px] text-white" />
+        {{-- Updates --}}
+        <div class="relative overflow-hidden px-5 py-5 pb-[22px] max-sm:px-3.5 max-sm:py-[30px]"
+             style="background-image: radial-gradient(circle, rgba(7, 21, 47, 0.10) 2px, transparent 2px); background-size: 24px 24px; background-color: #fafafa;">
+            <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(250,250,250,0.95)_0%,rgba(250,250,250,0.78)_25%,rgba(250,250,250,0.55)_50%,rgba(250,250,250,0.88)_100%)]"></div>
+
+            <div class="relative z-[2] mx-auto grid max-w-[1200px] grid-cols-1 items-center justify-between gap-10 max-[950px]:text-center min-[951px]:grid-cols-[38%_52%] min-[951px]:gap-10">
+                <div>
+                    <span class="mb-2 block text-[13px] font-black uppercase tracking-wide text-[#ff1029]">Stay Updated</span>
+                    <h2 class="mb-[18px] text-[34px] font-black leading-tight tracking-[-1px] text-[#07152f] min-[601px]:text-[42px]">What's New?</h2>
+                    <p class="mb-7 max-w-[360px] text-[15px] font-semibold leading-snug text-[#384354] max-[950px]:mx-auto">
+                        Stay updated with the latest launches, offers, and stories from LITUS Automobiles.
+                    </p>
+                    <a href="#"
+                       class="inline-flex h-12 min-w-[190px] items-center justify-center gap-3 rounded-md bg-[#f30d23] px-6 text-sm font-black text-white shadow-[0_8px_20px_rgba(243,13,35,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a]">
+                        Watch Latest Updates
+                        <x-litus-icon name="play" class="h-3.5 w-3.5" />
+                    </a>
+                </div>
+
+                <div class="relative mx-auto h-[190px] w-full max-w-[700px] overflow-hidden rounded-[9px] border border-black/15 bg-[#101722] shadow-[0_12px_32px_rgba(0,0,0,0.22)] min-[601px]:h-[225px] min-[951px]:mx-0 min-[951px]:max-w-none">
+                    <img src="https://images.unsplash.com/photo-1550149550-33b46c745e03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=900&q=80"
+                         alt="Latest LITUS update video"
+                         class="block h-full w-full object-cover opacity-[0.88]">
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/25 via-black/[0.05] to-black/45"></div>
+
+                    <p class="absolute left-[18px] top-4 z-[3] text-xs font-bold text-white">
+                        LITUS Automobiles – Latest Launches &amp; Offers
+                    </p>
+
+                    <button type="button"
+                            class="absolute left-1/2 top-1/2 z-[4] flex h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white transition-all duration-300 hover:scale-105 hover:bg-[#f30d23]"
+                            aria-label="Play latest updates video">
+                        <x-litus-icon name="play" class="ml-0.5 h-7 w-7" />
+                    </button>
+
+                    <div class="absolute bottom-2.5 left-4 right-4 z-[4] flex h-[30px] items-center gap-2.5 text-[11px] text-white">
+                        <x-litus-icon name="play" class="h-3 w-3 shrink-0" />
+                        <span class="shrink-0">0:00 / 0:37</span>
+                        <div class="h-1 flex-1 overflow-hidden rounded-full bg-white/35">
+                            <span class="block h-full w-1/4 bg-white"></span>
                         </div>
-                    </div>
-                    <div class="absolute bottom-4 left-4 right-4">
-                        <span class="text-sm font-bold text-white">LITUS Automobiles – Latest Launches &amp; Offers</span>
+                        <x-litus-icon name="settings" class="h-3 w-3 shrink-0" />
+                        <x-litus-icon name="external-link" class="h-3 w-3 shrink-0" />
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    {{-- WHAT WE OFFER --}}
-    <section class="bg-gray-50 py-16">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
-            <div class="mb-10 text-center">
-                <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Services</span>
-                <h2 class="mt-2 font-display text-3xl font-black text-gray-900 lg:text-4xl">What We Offer at LITUS</h2>
-            </div>
+        {{-- Services --}}
+        <div class="border-t border-[#e3e6eb] bg-white px-5 pb-[38px] pt-[18px] max-sm:px-3.5 max-sm:pb-[35px] max-sm:pt-[25px]">
+            <div class="mx-auto max-w-[1200px]">
 
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
-                @foreach ($services as $service)
-                    <div class="overflow-hidden rounded-2xl bg-white shadow-md transition-shadow hover:shadow-xl">
-                        <div class="relative">
-                            <img src="{{ $service['img'] }}" alt="{{ $service['title'] }}" class="h-44 w-full object-cover">
-                            <div class="absolute -bottom-5 left-5 flex h-10 w-10 items-center justify-center rounded-full bg-litus-red shadow-lg">
-                                <x-litus-icon :name="$service['icon']" class="h-[18px] w-[18px] text-white" />
+                <div class="mb-[18px] text-center">
+                    <span class="mb-1.5 block text-xs font-black uppercase text-[#ff1029]">Our Services</span>
+                    <h2 class="text-[27px] font-black leading-tight tracking-[-0.5px] text-[#07152f] min-[601px]:text-[32px]">What We Offer at LITUS</h2>
+                </div>
+
+                <div class="grid grid-cols-1 gap-[26px] max-[950px]:mx-auto max-[950px]:max-w-[650px] min-[951px]:grid-cols-3">
+                    @foreach ($services as $service)
+                        <div class="overflow-hidden rounded-[11px] border border-[#dfe3ea] bg-white shadow-[0_10px_26px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(0,0,0,0.12)]">
+                            <div class="relative h-[155px] overflow-hidden bg-[#dfe5ec] min-[601px]:h-[170px]">
+                                <img src="{{ $service['img'] }}"
+                                     alt="{{ $service['title'] }}"
+                                     class="block h-full w-full object-cover">
+                                <div class="absolute left-5 top-[18px] flex h-[50px] w-[50px] items-center justify-center rounded-full bg-white text-[#ff1029] shadow-[0_8px_18px_rgba(0,0,0,0.15)]">
+                                    <x-litus-icon :name="$service['icon']" class="h-6 w-6" />
+                                </div>
+                            </div>
+                            <div class="px-[22px] pb-6 pt-[18px]">
+                                <h3 class="mb-3 text-[17px] font-black text-[#111b46]">{{ $service['title'] }}</h3>
+                                <p class="text-[13.5px] font-semibold leading-snug text-[#344052]">{{ $service['text'] }}</p>
                             </div>
                         </div>
-                        <div class="px-5 pb-5 pt-8">
-                            <h3 class="text-lg font-black text-gray-900">{{ $service['title'] }}</h3>
-                            <p class="mt-2 text-sm leading-relaxed text-gray-500">{{ $service['text'] }}</p>
-                        </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+
             </div>
         </div>
+
     </section>
 
     {{-- WHO WE ARE --}}
-    <section class="relative overflow-hidden py-24">
-        <img src="https://images.unsplash.com/photo-1558979159-2b18a4070a87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1600&q=80"
-             alt="Motorcycle rider"
-             class="absolute inset-0 h-full w-full object-cover">
-        <div class="absolute inset-0 bg-gradient-to-r from-[rgba(6,14,28,0.95)] via-[rgba(6,14,28,0.7)] to-[rgba(6,14,28,0.3)]"></div>
-        <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
-            <div class="max-w-2xl">
-                <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Story</span>
-                <h2 class="mb-5 mt-2 font-display text-3xl font-black text-white lg:text-5xl">Who We Are</h2>
-                <p class="max-w-xl text-base leading-relaxed text-gray-300 lg:text-lg">
+    <section class="relative flex min-h-[360px] items-center overflow-hidden border border-white/12 bg-cover bg-center max-[900px]:min-h-0 max-[900px]:bg-[linear-gradient(90deg,rgba(3,12,28,0.88),rgba(3,12,28,0.94)),url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1800&q=80')] max-[900px]:bg-cover max-[900px]:bg-center"
+             style="background-image: linear-gradient(90deg, rgba(3,12,28,0.20) 0%, rgba(3,12,28,0.65) 36%, rgba(3,12,28,0.96) 68%, rgba(3,12,28,0.98) 100%), url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1800&q=80');">
+        <div class="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(3,12,28,0.08)_0%,rgba(3,12,28,0.35)_34%,rgba(3,12,28,0.88)_58%,rgba(3,12,28,0.96)_100%),radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.08),transparent_28%)]"></div>
+
+        <div class="relative z-[2] mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center px-[7%] py-[55px] min-[901px]:grid-cols-[48%_52%] max-[600px]:px-5 max-[600px]:py-[45px] max-[900px]:px-6 max-[900px]:py-[60px]">
+            <div class="min-h-[250px] max-[900px]:hidden"></div>
+
+            <div class="max-w-[720px] max-[900px]:max-w-full">
+                <span class="mb-2 block text-[15px] font-black uppercase tracking-wide text-[#ff1029]">Our Story</span>
+                <h2 class="mb-4 text-[34px] font-black leading-tight tracking-[-0.5px] text-white drop-shadow-[0_8px_20px_rgba(0,0,0,0.55)] min-[601px]:text-[44px]">Who We Are</h2>
+                <p class="mb-7 max-w-[690px] text-sm font-semibold leading-[1.7] text-[#e3e9f2] drop-shadow-[0_4px_14px_rgba(0,0,0,0.45)] min-[601px]:text-base min-[601px]:leading-[1.65]">
                     Established in 2014, LITUS Automobiles stands as the premier destination for motorcycles in the Maldives. As the largest motorcycle dealer, we specialize in the sale, lease, and service of top-notch motorcycles. Our commitment extends to providing genuine spare parts, ensuring every ride is a journey of excellence. At LITUS, we don't just sell motorcycles; we turn aspirations into reality and transform dreams of the open road into adventures that thrill. Join us and discover the joy of riding with LITUS Automobiles — where every adventure begins.
                 </p>
-                <a href="#"
-                   class="mt-7 inline-block rounded-full bg-litus-red px-7 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90">
+                <a href="{{ route('about') }}"
+                   class="inline-flex h-[52px] min-w-[200px] items-center justify-center gap-3.5 rounded-md bg-[#f30d23] px-7 text-[15px] font-black text-white shadow-[0_10px_26px_rgba(243,13,35,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a] max-[600px]:w-full">
                     Find Out More
+                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
             </div>
         </div>
     </section>
 
     {{-- GALLERY --}}
-    <section class="bg-white py-16">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
-            <div class="mb-8 flex items-end justify-between">
+    <section class="relative overflow-hidden border border-[#dfe3ea] px-5 py-[30px] pb-[18px] max-sm:px-3.5 max-sm:py-7"
+             style="background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), radial-gradient(circle at 15% 35%, rgba(7,21,47,0.08), transparent 28%);">
+        <div class="pointer-events-none absolute inset-0 opacity-35"
+             style="background-image: linear-gradient(30deg, rgba(7,21,47,0.035) 12%, transparent 12.5%, transparent 87%, rgba(7,21,47,0.035) 87.5%), linear-gradient(150deg, rgba(7,21,47,0.035) 12%, transparent 12.5%, transparent 87%, rgba(7,21,47,0.035) 87.5%); background-size: 55px 95px;"></div>
+
+        <div class="relative z-[2] mx-auto max-w-[1440px]">
+            <div class="mb-[22px] flex flex-col items-start justify-between gap-5 min-[651px]:flex-row">
                 <div>
-                    <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Gallery</span>
-                    <h2 class="mt-1 font-display text-3xl font-black text-gray-900 lg:text-4xl">Ride the Visual Journey</h2>
-                    <p class="mt-1 text-gray-500">Explore our collection of motorcycles, scooters, and customer moments.</p>
+                    <span class="mb-1 block text-[15px] font-black uppercase tracking-wide text-[#ff1029]">Our Gallery</span>
+                    <h2 class="mb-2.5 text-[30px] font-black leading-tight tracking-[-0.6px] text-[#07152f] min-[651px]:text-[38px]">Ride the Visual Journey</h2>
+                    <p class="text-sm font-semibold leading-normal text-[#4f5b6c] min-[651px]:text-[15px]">
+                        Explore our collection of motorcycles, scooters, and customer moments.
+                    </p>
                 </div>
-                <a href="#" class="hidden items-center gap-1 text-sm font-semibold text-gray-500 transition-colors hover:text-gray-800 sm:flex">
+                <a href="#"
+                   class="group/viewgallery inline-flex items-center gap-2.5 text-[15px] font-black text-[#07152f] transition-all duration-300 hover:gap-4 hover:text-[#ff1029] min-[651px]:mt-[52px]">
                     View Gallery
-                    <x-litus-icon name="arrow-right" class="h-3.5 w-3.5" />
+                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
             </div>
 
-            <div class="relative">
-                <div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            <div class="relative min-[1101px]:px-10">
+                <button type="button"
+                        class="absolute left-0 top-1/2 z-[5] hidden h-[54px] w-[54px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#ff1029] hover:text-white min-[1101px]:flex"
+                        aria-label="Previous gallery images">
+                    <x-litus-icon name="chevron-left" class="h-6 w-6" />
+                </button>
+                <button type="button"
+                        class="absolute right-0 top-1/2 z-[5] hidden h-[54px] w-[54px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#ff1029] hover:text-white min-[1101px]:flex"
+                        aria-label="Next gallery images">
+                    <x-litus-icon name="chevron-right" class="h-6 w-6" />
+                </button>
+
+                <div class="grid grid-cols-1 gap-3 min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4">
                     @foreach ($galleryImages as $image)
-                        <div class="group cursor-pointer overflow-hidden rounded-xl">
+                        <div class="group relative h-[210px] overflow-hidden rounded-xl border border-[#dfe3ea] bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.12)] min-[1101px]:h-[185px] max-[1100px]:min-[651px]:h-[220px]">
                             <img src="{{ $image['src'] }}"
                                  alt="{{ $image['alt'] }}"
-                                 class="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-105 lg:h-52">
+                                 class="block h-full w-full object-cover transition-transform duration-400 group-hover:scale-[1.07]">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/[0.18] to-black/[0.02] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
                         </div>
                     @endforeach
                 </div>
-
-                <button type="button" class="absolute -left-4 top-1/2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg hover:bg-gray-50 lg:flex" aria-label="Previous gallery images">
-                    <x-litus-icon name="chevron-left" class="h-[18px] w-[18px] text-gray-600" />
-                </button>
-                <button type="button" class="absolute -right-4 top-1/2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg hover:bg-gray-50 lg:flex" aria-label="Next gallery images">
-                    <x-litus-icon name="chevron-right" class="h-[18px] w-[18px] text-gray-600" />
-                </button>
             </div>
         </div>
     </section>
