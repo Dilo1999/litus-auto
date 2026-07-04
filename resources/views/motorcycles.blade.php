@@ -6,21 +6,32 @@
 @php
     $heroBg = asset('images/motorcycles/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
 
-    $products = [
-        ['id' => 1,  'name' => 'ADV 160 2026',               'slug' => 'adv-160-2026', 'brand' => 'Honda',  'discount' => 'MVR 16,750', 'cc' => '160cc', 'img' => 'https://images.unsplash.com/photo-1588756681780-9d5859fc2ca0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['id' => 2,  'name' => 'ADV 160 2026',               'slug' => 'adv-160-2026', 'brand' => 'Honda',  'discount' => 'MVR 16,750', 'cc' => '160cc', 'img' => 'https://images.unsplash.com/photo-1582092722992-b2f960bafbfb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['id' => 3,  'name' => 'PCX 160 ABS',                'slug' => 'pcx-160-abs', 'brand' => 'Honda',  'discount' => 'MVR 11,000', 'cc' => '160cc', 'img' => 'https://images.unsplash.com/photo-1611956292173-c2445aa61709?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['id' => 4,  'name' => 'N Max 155 Neo S',            'slug' => 'n-max-155-neo-s', 'brand' => 'Yamaha', 'discount' => 'MVR 14,100', 'cc' => '155cc', 'img' => 'https://images.unsplash.com/photo-1602111426534-9c097255ca46?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['id' => 5,  'name' => 'Aerox Alpha 155 Standard',   'slug' => 'aerox-alpha-155-standard', 'brand' => 'Yamaha', 'discount' => 'MVR 12,500', 'cc' => '155cc', 'img' => 'https://images.unsplash.com/photo-1629342651203-fab0990d8949?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['id' => 6,  'name' => 'Scoopy Prestige 2026',       'slug' => 'scoopy-prestige-2026', 'brand' => 'Honda',  'discount' => 'MVR 14,000', 'cc' => '110cc', 'img' => 'https://images.unsplash.com/photo-1550149550-33b46c745e03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['id' => 7,  'name' => 'Scoopy Fashion 2026',        'slug' => 'scoopy-fashion-2026', 'brand' => 'Honda',  'discount' => 'MVR 12,000', 'cc' => '110cc', 'img' => 'https://images.unsplash.com/photo-1598077737122-925e6f7cf137?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['id' => 8,  'name' => 'Scoopy Stylish 2026',        'slug' => 'scoopy-stylish-2026', 'brand' => 'Honda',  'discount' => 'MVR 14,000', 'cc' => '110cc', 'img' => 'https://images.unsplash.com/photo-1772090095175-ef442d5f56a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['id' => 9,  'name' => 'Scoopy Prestige 2026',       'slug' => 'scoopy-prestige-2026', 'brand' => 'Honda',  'discount' => 'MVR 11,500', 'cc' => '110cc', 'img' => 'https://images.unsplash.com/photo-1558979159-2b18a4070a87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['id' => 10, 'name' => 'Scoopy Club 12 2026',        'slug' => 'scoopy-club-12-2026', 'brand' => 'Honda',  'discount' => 'MVR 13,500', 'cc' => '110cc', 'img' => 'https://images.unsplash.com/photo-1585210256590-fc52fd1e8348?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['id' => 11, 'name' => 'Air Blade 125 Sport 2026',   'slug' => 'air-blade-125-sport-2026', 'brand' => 'Honda',  'discount' => 'MVR 14,400', 'cc' => '125cc', 'img' => 'https://images.unsplash.com/photo-1588756681780-9d5859fc2ca0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['id' => 12, 'name' => 'Air Blade 125 Special 2026', 'slug' => 'air-blade-125-special-2026', 'brand' => 'Honda',  'discount' => 'MVR 12,900', 'cc' => '125cc', 'img' => 'https://images.unsplash.com/photo-1582092722992-b2f960bafbfb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['id' => 13, 'name' => 'Air Blade 125 Standard 2026','slug' => 'air-blade-125-standard-2026', 'brand' => 'Honda',  'discount' => 'MVR 12,900', 'cc' => '125cc', 'img' => 'https://images.unsplash.com/photo-1550149550-33b46c745e03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
+    $productImages = [
+        asset('images/product/' . rawurlencode('premium 125 blue.png')),
+        asset('images/product/' . rawurlencode('premium 125 red.png')),
+        asset('images/product/' . rawurlencode('special edition 125 green yellow.png')),
     ];
+
+    $products = [
+        ['id' => 1,  'name' => 'ADV 160 2026',               'slug' => 'adv-160-2026', 'brand' => 'Honda',  'discount' => 'MVR 16,750', 'cc' => '160cc'],
+        ['id' => 2,  'name' => 'ADV 160 2026',               'slug' => 'adv-160-2026', 'brand' => 'Honda',  'discount' => 'MVR 16,750', 'cc' => '160cc'],
+        ['id' => 3,  'name' => 'PCX 160 ABS',                'slug' => 'pcx-160-abs', 'brand' => 'Honda',  'discount' => 'MVR 11,000', 'cc' => '160cc'],
+        ['id' => 4,  'name' => 'N Max 155 Neo S',            'slug' => 'n-max-155-neo-s', 'brand' => 'Yamaha', 'discount' => 'MVR 14,100', 'cc' => '155cc'],
+        ['id' => 5,  'name' => 'Aerox Alpha 155 Standard',   'slug' => 'aerox-alpha-155-standard', 'brand' => 'Yamaha', 'discount' => 'MVR 12,500', 'cc' => '155cc'],
+        ['id' => 6,  'name' => 'Scoopy Prestige 2026',       'slug' => 'scoopy-prestige-2026', 'brand' => 'Honda',  'discount' => 'MVR 14,000', 'cc' => '110cc'],
+        ['id' => 7,  'name' => 'Scoopy Fashion 2026',        'slug' => 'scoopy-fashion-2026', 'brand' => 'Honda',  'discount' => 'MVR 12,000', 'cc' => '110cc'],
+        ['id' => 8,  'name' => 'Scoopy Stylish 2026',        'slug' => 'scoopy-stylish-2026', 'brand' => 'Honda',  'discount' => 'MVR 14,000', 'cc' => '110cc'],
+        ['id' => 9,  'name' => 'Scoopy Prestige 2026',       'slug' => 'scoopy-prestige-2026', 'brand' => 'Honda',  'discount' => 'MVR 11,500', 'cc' => '110cc'],
+        ['id' => 10, 'name' => 'Scoopy Club 12 2026',        'slug' => 'scoopy-club-12-2026', 'brand' => 'Honda',  'discount' => 'MVR 13,500', 'cc' => '110cc'],
+        ['id' => 11, 'name' => 'Air Blade 125 Sport 2026',   'slug' => 'air-blade-125-sport-2026', 'brand' => 'Honda',  'discount' => 'MVR 14,400', 'cc' => '125cc'],
+        ['id' => 12, 'name' => 'Air Blade 125 Special 2026', 'slug' => 'air-blade-125-special-2026', 'brand' => 'Honda',  'discount' => 'MVR 12,900', 'cc' => '125cc'],
+        ['id' => 13, 'name' => 'Air Blade 125 Standard 2026','slug' => 'air-blade-125-standard-2026', 'brand' => 'Honda',  'discount' => 'MVR 12,900', 'cc' => '125cc'],
+    ];
+
+    foreach ($products as $index => &$product) {
+        $product['img'] = $productImages[$index % count($productImages)];
+    }
+    unset($product);
 
     $heroFeatures = [
         ['icon' => 'star', 'title' => 'Limited Offers', 'desc' => 'Seasonal deals on top models'],
@@ -179,10 +190,10 @@
                          data-motorcycle-card
                          data-brand="{{ $product['brand'] }}"
                          data-name="{{ $product['name'] }}">
-                        <div class="relative overflow-hidden bg-gray-100">
+                        <div class="relative overflow-hidden bg-white px-2 py-3">
                             <img src="{{ $product['img'] }}"
                                  alt="{{ $product['name'] }}"
-                                 class="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105">
+                                 class="h-48 w-full object-contain transition-transform duration-500 group-hover:scale-105">
                             <span class="absolute left-3 top-3 rounded-md bg-litus-red px-2.5 py-1 text-xs font-black text-white shadow">Limited Offer</span>
                             <span class="absolute right-3 top-3 rounded-md bg-white/90 px-2 py-1 text-xs font-bold text-gray-600 shadow">{{ $product['brand'] }}</span>
                         </div>

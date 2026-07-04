@@ -4,12 +4,13 @@
 
 @section('content')
 @php
-    $galleryImages = [
-        'https://images.unsplash.com/photo-1588756681780-9d5859fc2ca0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=900&q=80',
-        'https://images.unsplash.com/photo-1582092722992-b2f960bafbfb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=900&q=80',
-        'https://images.unsplash.com/photo-1550149550-33b46c745e03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=900&q=80',
-        'https://images.unsplash.com/photo-1629342651203-fab0990d8949?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=900&q=80',
+    $productImages = [
+        asset('images/product/' . rawurlencode('premium 125 blue.png')),
+        asset('images/product/' . rawurlencode('premium 125 red.png')),
+        asset('images/product/' . rawurlencode('special edition 125 green yellow.png')),
     ];
+
+    $galleryImages = $productImages;
 
     $colors = [
         ['label' => 'Green', 'hex' => '#2f3c1c'],
@@ -52,9 +53,9 @@
     ];
 
     $related = [
-        ['name' => 'PCX 160 ABS', 'discount' => 'MVR 11,000', 'img' => 'https://images.unsplash.com/photo-1611956292173-c2445aa61709?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', 'slug' => 'pcx-160-abs'],
-        ['name' => 'N Max 155 Neo S', 'discount' => 'MVR 14,100', 'img' => 'https://images.unsplash.com/photo-1602111426534-9c097255ca46?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', 'slug' => 'n-max-155-neo-s'],
-        ['name' => 'Scoopy Prestige 2026', 'discount' => 'MVR 14,000', 'img' => 'https://images.unsplash.com/photo-1550149550-33b46c745e03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', 'slug' => 'scoopy-prestige-2026'],
+        ['name' => 'PCX 160 ABS', 'discount' => 'MVR 11,000', 'img' => $productImages[0], 'slug' => 'pcx-160-abs'],
+        ['name' => 'N Max 155 Neo S', 'discount' => 'MVR 14,100', 'img' => $productImages[1], 'slug' => 'n-max-155-neo-s'],
+        ['name' => 'Scoopy Prestige 2026', 'discount' => 'MVR 14,000', 'img' => $productImages[2], 'slug' => 'scoopy-prestige-2026'],
     ];
 
     $heroBg = 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1800&q=80';
@@ -72,16 +73,6 @@
 
     <x-litus-header active="Motorcycles" />
 
-    {{-- BREADCRUMB --}}
-    <div class="border-b border-white/10 bg-litus-navy">
-        <div class="litus-container flex items-center gap-2 py-3 text-xs text-gray-400">
-            <a href="{{ route('home') }}" class="transition-colors hover:text-white">Home</a>
-            <span>/</span>
-            <a href="{{ route('motorcycles') }}" class="transition-colors hover:text-white">Motorcycles</a>
-            <span>/</span>
-            <span class="text-gray-300">ADV 160 2026</span>
-        </div>
-    </div>
 
     {{-- PRODUCT HERO --}}
     <section class="relative min-h-[680px] overflow-hidden border border-[rgba(40,85,130,0.45)] bg-[#06101f] bg-cover bg-center pb-[82px] max-[1100px]:min-h-0 max-[1100px]:pb-8"
@@ -143,12 +134,9 @@
                     </div>
                 </div>
 
-                <div class="relative flex min-h-[280px] items-center justify-center min-[1100px]:min-h-[420px]">
-                    <div class="absolute bottom-8 h-16 w-full max-w-[520px] rounded-full bg-black/55 blur-[14px] min-[1100px]:bottom-12 min-[1100px]:h-[90px] min-[1100px]:max-w-[630px]"></div>
-                    <img src="{{ $galleryImages[0] }}"
-                         alt="ADV 160 2026"
-                         class="relative z-[2] max-h-[320px] w-full max-w-[640px] rounded-lg object-contain shadow-[0_18px_35px_rgba(0,0,0,0.55)] min-[1100px]:max-h-[380px] min-[1100px]:max-w-[720px]">
-                </div>
+                <img src="{{ $galleryImages[0] }}"
+                     alt="ADV 160 2026"
+                     class="mx-auto max-h-[520px] w-full max-w-[900px] object-contain min-[1100px]:ml-20 min-[1100px]:mr-0 min-[1100px]:max-h-[640px] min-[1100px]:max-w-[1100px]">
             </div>
         </div>
 

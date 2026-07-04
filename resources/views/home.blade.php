@@ -4,17 +4,23 @@
 
 @section('content')
 @php
+    $productImages = [
+        asset('images/product/' . rawurlencode('premium 125 blue.png')),
+        asset('images/product/' . rawurlencode('premium 125 red.png')),
+        asset('images/product/' . rawurlencode('special edition 125 green yellow.png')),
+    ];
+
     $promoCards = [
-        ['model' => 'ADV 160 2026', 'discount' => 'MVR 16,750', 'img' => 'https://images.unsplash.com/photo-1588756681780-9d5859fc2ca0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['model' => 'ADV 160 2026', 'discount' => 'MVR 16,750', 'img' => 'https://images.unsplash.com/photo-1582092722992-b2f960bafbfb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['model' => 'PCX 160 ABS', 'discount' => 'MVR 11,000', 'img' => 'https://images.unsplash.com/photo-1611956292173-c2445aa61709?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['model' => 'N Max 155 Neo S', 'discount' => 'MVR 14,100', 'img' => 'https://images.unsplash.com/photo-1602111426534-9c097255ca46?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
+        ['model' => 'ADV 160 2026', 'discount' => 'MVR 16,750', 'img' => $productImages[0]],
+        ['model' => 'ADV 160 2026', 'discount' => 'MVR 16,750', 'img' => $productImages[1]],
+        ['model' => 'PCX 160 ABS', 'discount' => 'MVR 11,000', 'img' => $productImages[2]],
+        ['model' => 'N Max 155 Neo S', 'discount' => 'MVR 14,100', 'img' => $productImages[0]],
     ];
 
     $topRides = [
-        ['model' => 'ADV 160 2026', 'cc' => '160CC', 'capacity' => '8.1L', 'img' => 'https://images.unsplash.com/photo-1558979159-2b18a4070a87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['model' => 'Scoopy Prestige 2026', 'cc' => '110CC', 'capacity' => '4.2L', 'img' => 'https://images.unsplash.com/photo-1629342651203-fab0990d8949?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
-        ['model' => 'Scoopy Club 12 2026', 'cc' => '110CC', 'capacity' => '4.2L', 'img' => 'https://images.unsplash.com/photo-1550149550-33b46c745e03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80'],
+        ['model' => 'ADV 160 2026', 'cc' => '160CC', 'capacity' => '8.1L', 'img' => $productImages[0]],
+        ['model' => 'Scoopy Prestige 2026', 'cc' => '110CC', 'capacity' => '4.2L', 'img' => $productImages[1]],
+        ['model' => 'Scoopy Club 12 2026', 'cc' => '110CC', 'capacity' => '4.2L', 'img' => $productImages[2]],
     ];
 
     $galleryImages = [
@@ -240,37 +246,24 @@
                     <p class="mb-7 max-w-[360px] text-[15px] font-semibold leading-snug text-[#384354] max-[950px]:mx-auto">
                         Stay updated with the latest launches, offers, and stories from LITUS Automobiles.
                     </p>
-                    <a href="#"
+                    <a href="https://youtu.be/o8grf3wSwQU"
+                       target="_blank"
+                       rel="noopener noreferrer"
                        class="inline-flex h-12 min-w-[190px] items-center justify-center gap-3 rounded-md bg-[#f30d23] px-6 text-sm font-black text-white shadow-[0_8px_20px_rgba(243,13,35,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a]">
                         Watch Latest Updates
                         <x-litus-icon name="play" class="h-3.5 w-3.5" />
                     </a>
                 </div>
 
-                <div class="relative mx-auto h-[190px] w-full max-w-[700px] overflow-hidden rounded-[9px] border border-black/15 bg-[#101722] shadow-[0_12px_32px_rgba(0,0,0,0.22)] min-[601px]:h-[225px] min-[951px]:mx-0 min-[951px]:max-w-none">
-                    <img src="https://images.unsplash.com/photo-1550149550-33b46c745e03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=900&q=80"
-                         alt="Latest LITUS update video"
-                         class="block h-full w-full object-cover opacity-[0.88]">
-                    <div class="absolute inset-0 bg-gradient-to-b from-black/25 via-black/[0.05] to-black/45"></div>
-
-                    <p class="absolute left-[18px] top-4 z-[3] text-xs font-bold text-white">
-                        LITUS Automobiles – Latest Launches &amp; Offers
-                    </p>
-
-                    <button type="button"
-                            class="absolute left-1/2 top-1/2 z-[4] flex h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white transition-all duration-300 hover:scale-105 hover:bg-[#f30d23]"
-                            aria-label="Play latest updates video">
-                        <x-litus-icon name="play" class="ml-0.5 h-7 w-7" />
-                    </button>
-
-                    <div class="absolute bottom-2.5 left-4 right-4 z-[4] flex h-[30px] items-center gap-2.5 text-[11px] text-white">
-                        <x-litus-icon name="play" class="h-3 w-3 shrink-0" />
-                        <span class="shrink-0">0:00 / 0:37</span>
-                        <div class="h-1 flex-1 overflow-hidden rounded-full bg-white/35">
-                            <span class="block h-full w-1/4 bg-white"></span>
-                        </div>
-                        <x-litus-icon name="settings" class="h-3 w-3 shrink-0" />
-                        <x-litus-icon name="external-link" class="h-3 w-3 shrink-0" />
+                <div class="relative mx-auto w-full max-w-[700px] overflow-hidden rounded-[9px] border border-black/15 bg-[#101722] shadow-[0_12px_32px_rgba(0,0,0,0.22)] min-[951px]:mx-0 min-[951px]:max-w-none">
+                    <div class="relative aspect-video w-full">
+                        <iframe title="LITUS Automobiles – Latest Launches &amp; Offers"
+                                src="https://www.youtube.com/embed/o8grf3wSwQU"
+                                class="absolute inset-0 h-full w-full border-0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen
+                                loading="lazy"></iframe>
                     </div>
                 </div>
             </div>
