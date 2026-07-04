@@ -95,17 +95,17 @@
                         ADV 160 2026
                     </h1>
 
-                    <div class="mb-5">
-                        <p class="mb-4 text-lg font-extrabold text-white sm:text-[22px]">
+                    <div>
+                        <p class="text-lg font-extrabold text-white sm:text-[22px]">
                             Original Price:
                             <span class="text-[#d7dce5] line-through opacity-80">MVR 111,750.00</span>
                         </p>
-                        <p class="text-lg font-extrabold text-white sm:text-[22px]">
+                        <p class="mb-8 text-lg font-extrabold text-white sm:text-[22px]">
                             Sale Price: MVR 95,000.00
                         </p>
                     </div>
 
-                    <div class="relative mb-5 inline-block max-[1100px]:mx-auto">
+                    <div class="relative mb-5 mt-2 inline-block max-[1100px]:mx-auto">
                         <span class="absolute left-2.5 top-[-26px] rounded-t-md bg-[#f40d23] px-3.5 py-2 text-sm font-black text-white">
                             Limited Offer
                         </span>
