@@ -4,15 +4,15 @@
 
 @section('content')
 @php
-    $heroBg = 'https://images.unsplash.com/photo-1550149550-33b46c745e03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1600&q=80';
+    $heroBg = asset('images/ownership_plans/' . rawurlencode('ChatGPT Image Jul 4, 2026, 02_28_02 PM.png'));
 
     $benefits = [
-        ['icon' => 'zap', 'label' => 'Flexible ownership options'],
-        ['icon' => 'star', 'label' => 'Plans for different budgets'],
+        ['icon' => 'users', 'label' => 'Flexible ownership options'],
+        ['icon' => 'credit-card', 'label' => 'Plans for different budgets'],
         ['icon' => 'check-circle', 'label' => 'Fast transparent approval'],
-        ['icon' => 'award', 'label' => 'Early settlement options'],
+        ['icon' => 'calendar', 'label' => 'Early settlement options'],
         ['icon' => 'shield', 'label' => 'Islamic-compliant structure'],
-        ['icon' => 'users', 'label' => 'Dedicated support'],
+        ['icon' => 'headphones', 'label' => 'Dedicated support'],
     ];
 
     $plans = [
@@ -33,7 +33,7 @@
                 'docs' => ['Applicant ID card copy', 'Guarantor ID card copy', '6-month bank statement or qualifying Ijara repayment history', 'Supporting document confirming immediate family relationship, if required'],
                 'whoFor' => 'Customers looking for the lowest advance payment option, access to flexible early settlement, and who can provide additional supporting credentials.',
             ],
-            'compare' => ['advance' => 'Lowest', 'guarantor' => 'Required', 'approval' => 'Fast Approval', 'settlement' => 'Available', 'bestFor' => 'Customers with Ijara history'],
+            'compare' => ['advance' => 'Lowest', 'guarantor' => 'Required', 'approval' => 'Fast Approval', 'settlement' => 'Available', 'bestFor' => "Customers with\nIjara history"],
         ],
         [
             'id' => 'family',
@@ -52,7 +52,7 @@
                 'docs' => ['Applicant ID card copy', 'Guarantor ID card copy', 'Qualifying Ijara repayment history with LITUS Automobiles', 'Supporting document confirming immediate family relationship, if required'],
                 'whoFor' => 'Customers who have demonstrated responsible repayment behaviour with us and would like to benefit from lower upfront costs and flexible early settlement options.',
             ],
-            'compare' => ['advance' => 'Low', 'guarantor' => 'Immediate Family', 'approval' => 'Easier Qualification', 'settlement' => 'Available', 'bestFor' => 'Family Supported'],
+            'compare' => ['advance' => 'Low', 'guarantor' => 'Immediate Family', 'approval' => "Easier\nQualification", 'settlement' => 'Available', 'bestFor' => "Family\nSupported"],
         ],
         [
             'id' => 'secure',
@@ -71,7 +71,7 @@
                 'docs' => ['Applicant ID card copy', 'Guarantor ID card copy', 'Guarantor employment letter confirming minimum employment period'],
                 'whoFor' => 'Customers seeking a lower advance payment option and the flexibility of early settlement while being supported by an employed guarantor.',
             ],
-            'compare' => ['advance' => 'Reduced', 'guarantor' => 'Employed Guarantor', 'approval' => 'Standard Process', 'settlement' => 'Available', 'bestFor' => 'Employed Customers'],
+            'compare' => ['advance' => 'Reduced', 'guarantor' => 'Employed Guarantor', 'approval' => "Standard\nProcess", 'settlement' => 'Available', 'bestFor' => "Employed\nCustomers"],
         ],
         [
             'id' => 'flexi',
@@ -90,7 +90,7 @@
                 'docs' => ['Applicant ID card copy', 'Guarantor ID card copy'],
                 'whoFor' => 'Customers who may not meet the requirements of other plans but are looking for a practical ownership solution with greater flexibility and early settlement options.',
             ],
-            'compare' => ['advance' => 'Flexible', 'guarantor' => 'Flexible Guarantor', 'approval' => 'Accessible Pathway', 'settlement' => 'Available', 'bestFor' => 'Diverse Income Customers'],
+            'compare' => ['advance' => 'Flexible', 'guarantor' => "Flexible\nGuarantor", 'approval' => "Accessible\nPathway", 'settlement' => 'Available', 'bestFor' => "Diverse Income\nCustomers"],
         ],
         [
             'id' => 'freedom',
@@ -109,7 +109,7 @@
                 'docs' => ['Applicant ID card copy', 'Two alternative family contact numbers'],
                 'whoFor' => 'Customers who prefer a straightforward ownership process, value flexible early settlement, and can make a higher upfront contribution.',
             ],
-            'compare' => ['advance' => 'Higher', 'guarantor' => 'No Guarantor', 'approval' => 'Simple Process', 'settlement' => 'Available', 'bestFor' => 'Independent Customers'],
+            'compare' => ['advance' => 'Higher', 'guarantor' => "No Guarantor\nRequired", 'approval' => "Simple\nProcess", 'settlement' => 'Available', 'bestFor' => "Independent\nCustomers"],
         ],
         [
             'id' => 'premium',
@@ -129,7 +129,7 @@
                 'whoFor' => 'Customers who prefer shorter ownership periods, lower overall costs and a faster path to full ownership.',
                 'important' => 'Unlike Prime, Family, Secure, Flexi and Freedom Plans, Premium Plans operate on a fixed ownership structure. Since the total ownership cost is already reduced and fixed at the start, flexible early settlement benefits are not applicable under Premium Plans.',
             ],
-            'compare' => ['advance' => 'Lower Total', 'guarantor' => 'Required', 'approval' => 'Priority Processing', 'settlement' => 'Fixed plan', 'bestFor' => 'Lower cost & faster term'],
+            'compare' => ['advance' => 'Lower Total', 'guarantor' => 'Required', 'approval' => "Priority\nProcessing", 'settlement' => 'Not applicable', 'bestFor' => "Lower cost &\nfaster term"],
         ],
     ];
 
@@ -141,17 +141,26 @@
         ['label' => 'Best For', 'key' => 'bestFor'],
     ];
 
+    $planHeaderColors = [
+        'prime' => '#e6a500',
+        'family' => '#0854d8',
+        'secure' => '#0ca35b',
+        'flexi' => '#7335a8',
+        'freedom' => '#ff5a00',
+        'premium' => '#ed001c',
+    ];
+
     $steps = [
         ['icon' => 'bike', 'title' => 'Choose Your Ride', 'desc' => 'Select your preferred motorcycle from our collection.'],
         ['icon' => 'file-text', 'title' => 'Select a Plan', 'desc' => 'Choose the ownership plan that suits your budget and documents.'],
-        ['icon' => 'check-circle', 'title' => 'Start Riding', 'desc' => 'Complete the process and enjoy your motorcycle with LITUS support.'],
+        ['icon' => 'key', 'title' => 'Start Riding', 'desc' => 'Complete the process and enjoy your motorcycle with LITUS support.'],
     ];
 
-    $heroStats = [
-        ['val' => '6', 'label' => 'Ownership Plans'],
-        ['val' => '100%', 'label' => 'Islamic Compliant'],
-        ['val' => 'Simple', 'label' => 'Application Process'],
-        ['val' => 'Fast', 'label' => 'Transparent Approval'],
+    $heroFeatures = [
+        ['icon' => 'clipboard-list', 'title' => '6', 'desc' => 'Ownership Plans'],
+        ['icon' => 'shield', 'title' => '100%', 'desc' => 'Islamic Compliant'],
+        ['icon' => 'file-text', 'title' => 'Simple', 'desc' => 'Application Process'],
+        ['icon' => 'check-circle', 'title' => 'Fast', 'desc' => 'Transparent Approval'],
     ];
 @endphp
 
@@ -161,60 +170,89 @@
     <x-litus-header active="Ownership Plans" />
 
     {{-- HERO --}}
-    <section class="relative min-h-[520px] overflow-hidden bg-[#060E1C] lg:min-h-[560px]">
+    <section class="relative min-h-[680px] overflow-hidden border border-[rgba(27,74,120,0.45)] bg-[#06101c] pb-[82px] max-[1100px]:min-h-0 max-[1100px]:pb-8">
         <img src="{{ $heroBg }}"
              alt=""
-             class="absolute inset-0 h-full w-full object-cover opacity-20"
+             class="absolute inset-0 h-full w-full object-cover object-[center_right]"
              aria-hidden="true">
-        <div class="absolute inset-0 bg-[linear-gradient(110deg,rgba(11,22,40,0.97)_0%,rgba(11,22,40,0.75)_60%,rgba(6,14,28,0.4)_100%)]"></div>
 
-        <div class="relative z-10 litus-container flex flex-col items-center gap-10 py-20 lg:flex-row lg:py-28">
-            <div class="text-center lg:w-3/5 lg:text-left">
-                <span class="mb-5 inline-block rounded-full border border-[rgba(227,30,37,0.3)] bg-[rgba(227,30,37,0.15)] px-3 py-1 text-xs font-bold uppercase tracking-widest text-litus-red">
+        <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,11,22,0.98)_0%,rgba(3,11,22,0.88)_32%,rgba(3,11,22,0.48)_58%,rgba(3,11,22,0.25)_100%)]"></div>
+        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(255,255,255,0.08),transparent_28%)]"></div>
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.1),rgba(2,10,19,0.95))]"></div>
+
+        <div class="relative z-[2] litus-container pt-16 pb-12 sm:pt-20">
+            <div class="max-w-[720px] text-left">
+                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:text-[15px]">
                     Ownership Plans
-                </span>
-                <h1 class="mb-6 font-display text-[clamp(2.4rem,5vw,3.8rem)] font-black leading-[1.05] text-white">
+                </p>
+
+                <h1 class="mb-4 font-display text-[clamp(2.25rem,4.2vw,4.25rem)] font-black leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:text-[2.25rem]">
                     Any Bike. Any Budget.<br>
                     <span class="text-litus-red">Anyone Can Own.</span>
                 </h1>
-                <p class="mx-auto mb-8 max-w-xl text-base leading-relaxed text-gray-300 lg:mx-0 lg:text-lg">
+
+                <p class="mb-6 max-w-[620px] text-base font-medium leading-[1.5] text-[#e6edf5] sm:text-lg sm:leading-[1.55] max-md:text-[17px]">
                     Our Islamic-compliant Ijara Plans are designed to make motorcycle ownership more accessible for everyone. Whether you are a salaried employee, freelancer, fisherman, business owner, contractor, or first-time rider, we have an ownership solution that fits your budget and lifestyle.
                 </p>
-                <div class="flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
+
+                <div class="flex flex-row flex-wrap items-center justify-start gap-5 sm:gap-7">
                     <button type="button"
                             data-scroll-plans
-                            class="inline-flex items-center justify-center gap-2 rounded-md bg-litus-red px-8 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90">
+                            class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] bg-[#f20d23] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(242,13,35,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9091c] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         Explore Plans
-                        <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                        <x-litus-icon name="arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </button>
                     <a href="{{ route('contact') }}"
-                       class="inline-flex items-center justify-center rounded-md border border-white/30 px-8 py-3.5 text-sm font-bold text-white transition-all hover:border-white/60 hover:bg-white/5">
+                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f20d23] hover:bg-[rgba(242,13,35,0.15)] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         Talk to Our Team
+                        <x-litus-icon name="arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </a>
                 </div>
             </div>
+        </div>
 
-            <div class="mx-auto grid w-full max-w-sm grid-cols-2 gap-3 lg:mx-0 lg:w-2/5">
-                @foreach ($heroStats as $stat)
-                    <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center backdrop-blur-sm">
-                        <p class="text-2xl font-black text-litus-red">{{ $stat['val'] }}</p>
-                        <p class="mt-1 text-xs leading-tight text-gray-400">{{ $stat['label'] }}</p>
-                    </div>
-                @endforeach
+        <div class="absolute bottom-0 left-0 right-0 z-[3] border-t border-white/12 bg-[rgba(3,13,25,0.78)] backdrop-blur-sm max-[1100px]:relative max-[1100px]:mt-5">
+            <div class="litus-container">
+                <div class="grid min-h-[76px] grid-cols-1 min-[1100px]:grid-cols-4 max-[1100px]:min-[701px]:grid-cols-2">
+                    @foreach ($heroFeatures as $index => $feature)
+                        <div @class([
+                            'relative flex items-center gap-3 py-3 sm:gap-3.5 min-[1100px]:py-3.5',
+                            'border-b border-white/12 max-md:border-b' => $index < count($heroFeatures) - 1,
+                            'max-md:last:border-b-0',
+                            'min-[1100px]:border-r min-[1100px]:border-white/16 min-[1100px]:pr-4' => $index < count($heroFeatures) - 1,
+                            'min-[1100px]:pl-0' => $index === 0,
+                            'min-[1100px]:pl-4' => $index > 0,
+                            'max-[1100px]:min-[701px]:border-r max-[1100px]:min-[701px]:border-white/16' => in_array($index, [0, 2]),
+                            'max-[1100px]:min-[701px]:border-b max-[1100px]:min-[701px]:border-white/12' => in_array($index, [0, 1]),
+                            'max-[1100px]:min-[701px]:border-r-0' => $index === 1,
+                        ])>
+                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-white/35 text-white shadow-[0_0_16px_rgba(255,255,255,0.06)] sm:h-10 sm:w-10">
+                                <x-litus-icon :name="$feature['icon']" class="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
+                            </div>
+                            <div class="min-w-0 text-left">
+                                <h3 class="mb-0.5 text-sm font-extrabold leading-tight text-white sm:text-[15px]">{{ $feature['title'] }}</h3>
+                                <p class="text-xs font-medium leading-snug text-[#c9d4df] sm:text-[13px]">{{ $feature['desc'] }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>
 
     {{-- BENEFITS --}}
-    <section class="border-b border-gray-100 bg-white py-10">
+    <section class="border border-[#dfe3ea] bg-[#f8f9fb] px-4 py-5 max-[650px]:px-3 max-[650px]:py-4">
         <div class="litus-container">
-            <div class="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0 lg:grid-cols-6">
+            <div class="grid grid-cols-1 items-start gap-5 text-center min-[421px]:grid-cols-2 min-[421px]:gap-x-3 min-[421px]:gap-y-4 min-[651px]:grid-cols-3 min-[651px]:gap-y-5 min-[1101px]:grid-cols-6 min-[1101px]:gap-4">
                 @foreach ($benefits as $benefit)
-                    <div class="flex min-w-[140px] shrink-0 snap-center flex-col items-center gap-2 rounded-2xl px-2 py-4 text-center transition-colors hover:bg-gray-50 sm:min-w-0">
-                        <div class="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(227,30,37,0.08)]">
-                            <x-litus-icon :name="$benefit['icon']" class="h-5 w-5 text-litus-red" />
+                    <div class="flex flex-col items-center">
+                        <div class="relative mb-2.5 flex h-14 w-14 items-center justify-center rounded-full border border-[rgba(7,21,47,0.06)] bg-white text-[#07152f] shadow-[0_6px_18px_rgba(0,0,0,0.07)] min-[651px]:mb-3 min-[651px]:h-16 min-[651px]:w-16">
+                            <span class="pointer-events-none absolute inset-2 rounded-full border border-[rgba(232,151,50,0.25)]" aria-hidden="true"></span>
+                            <x-litus-icon :name="$benefit['icon']" class="relative z-[1] h-5 w-5 text-[#d8902d] min-[651px]:h-[22px] min-[651px]:w-[22px]" />
                         </div>
-                        <p class="text-xs font-semibold leading-tight text-gray-700">{{ $benefit['label'] }}</p>
+                        <h3 class="max-w-[155px] text-[13px] font-black leading-snug text-[#07152f] min-[651px]:max-w-[165px] min-[651px]:text-sm">
+                            {{ $benefit['label'] }}
+                        </h3>
                     </div>
                 @endforeach
             </div>
@@ -276,65 +314,75 @@
             </div>
 
             {{-- Help note --}}
-            <div class="mx-auto mt-8 flex max-w-2xl flex-col items-center gap-5 rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:flex-row"
-                 style="border-left: 4px solid #C89B3C">
-                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[rgba(200,155,60,0.1)]">
-                    <x-litus-icon name="message-square" class="h-[22px] w-[22px]" style="color: #C89B3C" />
+            <div class="relative mt-8 w-full overflow-hidden rounded-xl border border-[#e1e5eb] bg-white shadow-[0_10px_28px_rgba(0,0,0,0.06)]">
+                <span class="absolute left-0 top-0 h-full w-[5px] rounded-l-xl bg-[#f5b21f]" aria-hidden="true"></span>
+
+                <div class="grid grid-cols-1 items-center gap-5 px-[22px] py-7 text-center min-[701px]:grid-cols-[auto_1fr_auto] min-[701px]:gap-5 min-[701px]:py-[22px] min-[701px]:pl-7 min-[701px]:pr-6 min-[701px]:text-left">
+                    <div class="relative mx-auto flex h-[70px] w-[70px] shrink-0 items-center justify-center rounded-full border-2 border-[#f5b21f] bg-[#fffaf0] text-[#f5b21f] min-[701px]:mx-0">
+                        <span class="pointer-events-none absolute inset-[9px] rounded-full border border-[rgba(245,178,31,0.45)]" aria-hidden="true"></span>
+                        <x-litus-icon name="phone" class="relative z-[1] h-8 w-8" />
+                    </div>
+
+                    <div class="min-w-0">
+                        <h3 class="mb-2 text-lg font-black text-[#07152f]">Not sure which plan is right for you?</h3>
+                        <p class="text-[15px] font-semibold leading-[1.45] text-[#4e5969] min-[701px]:max-w-none">
+                            Our team can help you choose the ownership plan that best fits your budget and requirements.
+                        </p>
+                    </div>
+
+                    <a href="tel:+9607797442"
+                       class="inline-flex h-12 min-w-[145px] w-full shrink-0 items-center justify-center gap-2.5 rounded-md bg-[#061a45] px-6 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1029] min-[701px]:w-auto">
+                        <x-litus-icon name="phone" class="h-4 w-4" />
+                        Call Us
+                    </a>
                 </div>
-                <div class="flex-1 text-center sm:text-left">
-                    <p class="text-base font-black text-gray-900">Not sure which plan is right for you?</p>
-                    <p class="mt-0.5 text-sm text-gray-500">Our team can help you choose the ownership plan that best fits your budget and requirements.</p>
-                </div>
-                <a href="tel:+9607797442"
-                   class="flex shrink-0 items-center gap-2 rounded-full bg-litus-navy px-5 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90">
-                    <x-litus-icon name="phone" class="h-3.5 w-3.5" />
-                    Call Us
-                </a>
             </div>
         </div>
     </section>
 
     {{-- COMPARISON TABLE --}}
-    <section class="bg-white py-16">
+    <section class="bg-[#f8f9fb] px-5 py-[25px] pb-10 max-md:px-3.5 max-md:py-7 max-md:pb-9">
         <div class="litus-container">
-            <div class="mb-10 text-center">
-                <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Compare Plans</span>
-                <h2 class="mt-2 font-display text-3xl font-black text-gray-900 lg:text-4xl">Find the Right Ownership Option</h2>
+            <div class="mb-5 text-center">
+                <span class="mb-2 block text-[13px] font-black uppercase tracking-[0.6px] text-[#ff1029] min-[769px]:text-[15px]">Compare Plans</span>
+                <h2 class="font-display text-[28px] font-black leading-[1.1] tracking-[-0.5px] text-[#07152f] min-[769px]:text-4xl">Find the Right Ownership Option</h2>
             </div>
 
-            <div class="overflow-x-auto rounded-2xl border border-gray-100 shadow-md">
-                <table class="w-full min-w-[700px] border-collapse">
+            <div class="overflow-x-auto rounded-[10px] shadow-[0_10px_28px_rgba(0,0,0,0.06)]">
+                <table class="w-full min-w-[1100px] border-separate border-spacing-0 overflow-hidden rounded-[10px] bg-white [&_tbody_tr:last-child_td]:border-b-0">
                     <thead>
                         <tr>
-                            <th class="w-40 border-b border-gray-100 bg-gray-50 px-4 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">
+                            <th class="w-[210px] border-b border-r border-[#dfe3ea] bg-[#061a45] px-[18px] py-[18px] text-left text-[17px] font-black text-white min-[769px]:text-[17px] max-md:text-[15px]">
                                 Features
                             </th>
                             @foreach ($plans as $plan)
-                                <th class="border-b border-gray-100 px-3 py-4 text-center text-sm font-black"
-                                    style="background: {{ $plan['accentLight'] }}; color: {{ $plan['accent'] }}">
+                                <th class="border-b border-r border-[#dfe3ea] px-[18px] py-[18px] text-center text-[15px] font-black text-white last:border-r-0 min-[769px]:text-[17px]"
+                                    style="background: {{ $planHeaderColors[$plan['id']] }}">
                                     {{ $plan['name'] }}
                                 </th>
                             @endforeach
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($compareRows as $ri => $row)
-                            <tr class="{{ $ri % 2 === 0 ? 'bg-white' : 'bg-gray-50/60' }}">
-                                <td class="border-r border-gray-100 px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-gray-600">
+                        @foreach ($compareRows as $row)
+                            <tr>
+                                <td class="w-[210px] border-b border-r border-[#dfe3ea] bg-[#061a45] px-[18px] py-5 text-left text-[15px] font-black leading-[1.35] text-white max-md:px-3.5 max-md:py-4 max-md:text-sm">
                                     {{ $row['label'] }}
                                 </td>
                                 @foreach ($plans as $plan)
-                                    <td class="px-3 py-3.5 text-center text-sm font-medium text-gray-700">
+                                    <td class="border-b border-r border-[#dfe3ea] px-[18px] py-5 text-center align-middle text-[15px] font-bold leading-[1.35] text-[#25304a] last:border-r-0 max-md:px-3.5 max-md:py-4 max-md:text-sm">
                                         @if ($row['key'] === 'settlement')
                                             @php $val = $plan['compare']['settlement']; @endphp
-                                            <span class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-bold {{ $val === 'Available' ? 'bg-green-50 text-green-700' : 'bg-orange-50 text-orange-700' }}">
+                                            <span class="inline-flex items-center justify-center gap-2.5">
+                                                <span class="inline-flex h-[22px] w-[22px] min-w-[22px] items-center justify-center rounded-full bg-[#08a84f] text-sm font-black text-white">✓</span>
                                                 @if ($val === 'Available')
-                                                    <x-litus-icon name="check-circle" class="h-[11px] w-[11px]" />
+                                                    Available
+                                                @else
+                                                    Not applicable<br>(Fixed Plan)
                                                 @endif
-                                                {{ $val }}
                                             </span>
                                         @else
-                                            {{ $plan['compare'][$row['key']] }}
+                                            {!! nl2br(e($plan['compare'][$row['key']])) !!}
                                         @endif
                                     </td>
                                 @endforeach
@@ -346,58 +394,63 @@
         </div>
     </section>
 
-    {{-- HOW IT WORKS --}}
-    <section class="bg-gray-50 py-14">
+    {{-- HOW IT WORKS + CTA --}}
+    <section class="bg-[#f8f9fb] px-5 py-[22px] pb-9 max-[650px]:px-3.5 max-[650px]:py-7 max-[650px]:pb-9">
         <div class="litus-container">
-            <div class="mb-10 text-center">
-                <span class="text-xs font-bold uppercase tracking-widest text-litus-red">How Ownership Plans Work</span>
-                <h2 class="mt-2 font-display text-2xl font-black text-gray-900 lg:text-3xl">Simple. Transparent. Hassle-Free.</h2>
+            <div class="mb-[25px] text-center">
+                <span class="mb-[7px] block text-sm font-black uppercase tracking-[0.6px] text-[#ff1029]">How Ownership Plans Work</span>
+                <h2 class="font-display text-[28px] font-black leading-[1.1] tracking-[-0.5px] text-[#07152f] min-[651px]:text-4xl">Simple. Transparent. Hassle-Free.</h2>
             </div>
 
-            <div class="flex flex-col items-stretch gap-0 lg:flex-row">
+            <div class="mb-10 grid grid-cols-1 gap-[18px] min-[1151px]:grid-cols-[1fr_40px_1fr_40px_1fr] min-[1151px]:items-center min-[1151px]:gap-0">
                 @foreach ($steps as $i => $step)
-                    <div class="flex flex-1 flex-col items-stretch lg:flex-row">
-                        <div class="relative mx-2 flex-1 rounded-2xl border border-gray-100 bg-white p-7 text-center shadow-sm transition-shadow hover:shadow-md">
-                            <span class="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-litus-red text-xs font-black text-white">{{ $i + 1 }}</span>
-                            <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-[rgba(227,30,37,0.08)]">
-                                <x-litus-icon :name="$step['icon']" class="h-[30px] w-[30px] text-litus-red" />
-                            </div>
-                            <h3 class="mb-2 text-lg font-black text-gray-900">{{ $step['title'] }}</h3>
-                            <p class="text-sm leading-relaxed text-gray-500">{{ $step['desc'] }}</p>
+                    <div class="grid min-h-0 grid-cols-1 items-center gap-2.5 rounded-[10px] border border-[#e1e5eb] bg-white px-4 py-4 text-center shadow-[0_10px_26px_rgba(0,0,0,0.06)] min-[651px]:grid-cols-[72px_36px_1fr] min-[651px]:gap-3 min-[651px]:px-5 min-[651px]:py-4 min-[651px]:text-left">
+                        <div class="mx-auto flex items-center justify-center text-[#061a45] min-[651px]:mx-0">
+                            <x-litus-icon :name="$step['icon']" class="h-10 w-10 min-[651px]:h-11 min-[651px]:w-11" />
                         </div>
-                        @if ($i < count($steps) - 1)
-                            <div class="hidden flex-shrink-0 items-center justify-center lg:flex">
-                                <x-litus-icon name="arrow-right" class="h-[22px] w-[22px] text-gray-300" />
-                            </div>
-                        @endif
+                        <div class="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-[#ff1029] text-base font-black text-white shadow-[0_6px_14px_rgba(255,16,41,0.28)] min-[651px]:mx-0 min-[651px]:h-9 min-[651px]:w-9 min-[651px]:text-lg">
+                            {{ $i + 1 }}
+                        </div>
+                        <div>
+                            <h3 class="mb-1.5 text-base font-black text-[#07152f] min-[651px]:text-lg">{{ $step['title'] }}</h3>
+                            <p class="mx-auto max-w-[290px] text-[13px] font-semibold leading-snug text-[#4d5869] min-[651px]:mx-0 min-[651px]:text-sm">{{ $step['desc'] }}</p>
+                        </div>
                     </div>
+
+                    @if ($i < count($steps) - 1)
+                        <div class="flex items-center justify-center text-[30px] font-black tracking-[3px] text-[#07152f] min-[1151px]:text-[38px] max-[1150px]:rotate-90">
+                            ···›
+                        </div>
+                    @endif
                 @endforeach
             </div>
-        </div>
-    </section>
 
-    {{-- CTA --}}
-    <section class="bg-litus-navy py-14">
-        <div class="litus-container flex flex-col items-center gap-8 lg:flex-row lg:gap-16">
-            <div class="flex-1 text-center lg:text-left">
-                <h2 class="mb-3 font-display text-3xl font-black text-white lg:text-4xl">
-                    Need Help <span class="text-litus-red">Choosing?</span>
-                </h2>
-                <p class="leading-relaxed text-gray-400">Our team is here to help you find the ownership plan that best fits your needs.</p>
-            </div>
-            <div class="flex flex-shrink-0 flex-col gap-3 sm:flex-row">
-                <a href="https://wa.me/9607797442"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-7 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90">
-                    <x-litus-icon name="message-circle" class="h-4 w-4" />
-                    Chat on WhatsApp
-                </a>
-                <a href="tel:+9607797442"
-                   class="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-all hover:border-white/60 hover:bg-white/5">
-                    <x-litus-icon name="phone" class="h-4 w-4" />
-                    Call Us
-                </a>
+            <div class="grid grid-cols-1 items-center gap-8 rounded-[10px] border border-white/12 bg-[linear-gradient(135deg,#061a45,#020b1d)] px-[22px] py-[30px] shadow-[0_12px_32px_rgba(0,0,0,0.16)] min-[1151px]:grid-cols-[auto_1fr_auto] min-[1151px]:gap-9 min-[1151px]:px-11">
+                <div class="mx-auto flex h-24 w-24 min-w-24 items-center justify-center rounded-full border-2 border-white/50 bg-white/[0.03] text-white min-[1151px]:mx-0">
+                    <x-litus-icon name="headphones" class="h-11 w-11" />
+                </div>
+
+                <div class="text-center min-[1151px]:text-left">
+                    <h2 class="mb-3 text-[25px] font-black tracking-[-0.3px] text-white min-[651px]:text-[29px]">Need Help Choosing?</h2>
+                    <p class="mx-auto max-w-[560px] text-base font-semibold leading-[1.55] text-[#d9e2ef] min-[1151px]:mx-0">
+                        Our team is here to help you find the ownership plan that best fits your needs.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-[22px] min-[1151px]:justify-end">
+                    <a href="https://wa.me/9607797442"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="inline-flex h-[58px] w-full min-w-0 items-center justify-center gap-3 rounded-[7px] bg-[#ff1029] px-8 text-[17px] font-black text-white shadow-[0_10px_24px_rgba(255,16,41,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a] min-[651px]:w-auto min-[651px]:min-w-[260px]">
+                        <x-litus-icon name="message-circle" class="h-5 w-5" />
+                        Chat on WhatsApp
+                    </a>
+                    <a href="tel:+9607797442"
+                       class="inline-flex h-[58px] w-full min-w-0 items-center justify-center gap-3 rounded-[7px] border-2 border-white/55 bg-white/[0.03] px-8 text-[17px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ff1029] hover:bg-[rgba(255,16,41,0.12)] min-[651px]:w-auto min-[651px]:min-w-[260px]">
+                        <x-litus-icon name="phone" class="h-5 w-5" />
+                        Call Us
+                    </a>
+                </div>
             </div>
         </div>
     </section>
