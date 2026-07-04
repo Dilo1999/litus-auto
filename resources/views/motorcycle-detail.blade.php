@@ -74,7 +74,7 @@
 
     {{-- BREADCRUMB --}}
     <div class="border-b border-white/10 bg-litus-navy">
-        <div class="mx-auto flex max-w-7xl items-center gap-2 px-4 py-3 text-xs text-gray-400 sm:px-6">
+        <div class="litus-container flex items-center gap-2 py-3 text-xs text-gray-400">
             <a href="{{ route('home') }}" class="transition-colors hover:text-white">Home</a>
             <span>/</span>
             <a href="{{ route('motorcycles') }}" class="transition-colors hover:text-white">Motorcycles</a>
@@ -88,7 +88,7 @@
              style="background-image: linear-gradient(90deg, rgba(3,13,28,0.98) 0%, rgba(3,13,28,0.94) 35%, rgba(3,13,28,0.60) 58%, rgba(3,13,28,0.78) 100%), url('{{ $heroBg }}');">
         <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_48%,rgba(255,255,255,0.12),transparent_28%),linear-gradient(to_bottom,rgba(0,0,0,0.12),rgba(1,8,20,0.95))]"></div>
 
-        <div class="relative z-[2] mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 sm:pt-20">
+        <div class="relative z-[2] litus-container pt-16 pb-12 sm:pt-20">
             <div class="grid grid-cols-1 items-center gap-8 min-[1100px]:grid-cols-[46%_54%] min-[1100px]:gap-5">
                 <div class="max-w-[650px] text-left max-[1100px]:mx-auto max-[1100px]:text-center">
                     <p class="mb-6 text-base font-black uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:mb-5 max-md:text-[15px]">
@@ -153,7 +153,7 @@
         </div>
 
         <div class="absolute bottom-0 left-0 right-0 z-[3] border-t border-white/12 bg-[rgba(3,13,25,0.78)] backdrop-blur-sm max-[1100px]:relative max-[1100px]:mt-5">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6">
+            <div class="litus-container">
                 <div class="grid min-h-[76px] grid-cols-1 min-[1100px]:grid-cols-4 max-[1100px]:min-[701px]:grid-cols-2">
                     @foreach ($heroFeatures as $index => $feature)
                         <div @class([
@@ -185,7 +185,7 @@
     <section class="border border-[#d9d9d9] bg-[#f8f9fb] py-8 lg:py-10"
              data-product-gallery
              data-images='@json($galleryImages)'>
-        <div class="mx-auto grid max-w-7xl grid-cols-1 items-start gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-8">
+        <div class="litus-container grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-8">
             {{-- Gallery --}}
             <div class="w-full rounded-[14px] border border-black/5 bg-white p-2.5 shadow-[0_12px_35px_rgba(0,0,0,0.08)]">
                 <div class="relative flex aspect-[4/3] max-h-[420px] min-h-[280px] items-center justify-center overflow-hidden rounded-xl border border-[#e8ebef] bg-white sm:min-h-[340px] lg:max-h-[390px] lg:min-h-[390px]">
@@ -261,8 +261,8 @@
     </section>
 
     {{-- SPECIFICATIONS + OFFER + OWNERSHIP + RELATED + INQUIRY --}}
-    <section class="bg-[#f7f8fa] px-5 py-5 pb-7 max-sm:px-3.5">
-        <div class="mx-auto max-w-7xl space-y-4">
+    <section class="bg-[#f7f8fa] py-5 pb-7">
+        <div class="litus-container space-y-4">
 
             {{-- Specifications --}}
             <div class="rounded-[14px] border border-[#dfe3ea] bg-white px-5 py-5 shadow-[0_10px_28px_rgba(0,0,0,0.05)] sm:px-8 sm:pb-6 sm:pt-[18px]">

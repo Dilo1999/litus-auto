@@ -53,7 +53,7 @@
         <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(255,255,255,0.08),transparent_28%)]"></div>
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.1),rgba(2,10,19,0.95))]"></div>
 
-        <div class="relative z-[2] mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 sm:pt-20">
+        <div class="relative z-[2] litus-container pt-16 pb-12 sm:pt-20">
             <div class="max-w-[720px] text-left">
                 <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:text-[15px]">
                     Genuine Motorcycle Parts
@@ -86,7 +86,7 @@
         </div>
 
         <div class="absolute bottom-0 left-0 right-0 z-[3] border-t border-white/12 bg-[rgba(3,13,25,0.78)] backdrop-blur-sm max-[1100px]:relative max-[1100px]:mt-5">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6">
+            <div class="litus-container">
                 <div class="grid min-h-[76px] grid-cols-1 min-[1100px]:grid-cols-4 max-[1100px]:min-[701px]:grid-cols-2">
             @foreach ($heroFeatures as $index => $feature)
                 <div @class([
@@ -116,7 +116,7 @@
 
     {{-- PARTS CATEGORIES --}}
     <section class="bg-white py-16">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div class="litus-container">
             <div class="mb-10 text-center">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Parts Categories</span>
                 <h2 class="mt-2 font-display text-3xl font-black text-gray-900 lg:text-4xl">Motorcycle Genuine Spare Parts</h2>
@@ -145,7 +145,7 @@
 
     {{-- WHY GENUINE PARTS --}}
     <section class="bg-gray-100 py-14">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div class="litus-container">
             <div class="mb-10 text-center">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Why Genuine Parts?</span>
                 <h2 class="mt-2 font-display text-3xl font-black text-gray-900 lg:text-4xl">Built for Safety, Performance, and Reliability</h2>
@@ -167,7 +167,7 @@
 
     {{-- INQUIRY FORM --}}
     <section id="inquiry" class="bg-litus-footer py-16">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div class="litus-container">
             <div class="mb-10 text-center">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Parts Inquiry</span>
                 <h2 class="mt-2 font-display text-3xl font-black text-white lg:text-4xl">Request the Parts You Need</h2>
@@ -293,7 +293,7 @@
 
     {{-- HOW IT WORKS --}}
     <section class="bg-white py-14">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div class="litus-container">
             <div class="mb-10 text-center">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Simple Process</span>
                 <h2 class="mt-2 font-display text-2xl font-black text-gray-900 lg:text-3xl">How Parts Inquiry Works</h2>

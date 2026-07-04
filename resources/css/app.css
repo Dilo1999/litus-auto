@@ -12,6 +12,11 @@
   --color-litus-footer: #060e1c;
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Barlow', ui-sans-serif, system-ui, sans-serif;
+  --max-width-litus: 90rem;
+}
+
+@utility litus-container {
+  @apply mx-auto w-full max-w-litus px-4 sm:px-6;
 }
 
 /* Scroll & load animations (Framer Motion–style) */

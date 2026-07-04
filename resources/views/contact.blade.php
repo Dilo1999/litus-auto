@@ -69,7 +69,7 @@
              style="background-image: linear-gradient(90deg, rgba(2,14,32,0.95) 0%, rgba(3,18,40,0.92) 34%, rgba(3,18,40,0.82) 56%, rgba(3,18,40,0.90) 100%), url('{{ $heroBg }}');">
         <div class="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_30%_45%,rgba(4,42,83,0.6),transparent_35%),radial-gradient(circle_at_75%_45%,rgba(4,33,67,0.55),transparent_38%),linear-gradient(to_bottom,rgba(0,0,0,0.15),rgba(2,10,25,0.96))]"></div>
 
-        <div class="relative z-[2] mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-4 pt-16 pb-12 sm:px-6 sm:pt-20 min-[1100px]:grid-cols-[48%_52%] min-[1100px]:gap-10">
+        <div class="relative z-[2] litus-container grid w-full grid-cols-1 items-center gap-8 pt-16 pb-12 sm:pt-20 min-[1100px]:grid-cols-[48%_52%] min-[1100px]:gap-10">
             {{-- Support agents illustration --}}
             <div class="relative flex min-h-[320px] items-end justify-center min-[1100px]:min-h-[400px] min-[1100px]:origin-bottom min-[1100px]:scale-[0.82]">
                 <div class="contact-hero-person contact-hero-person-left" aria-hidden="true">
@@ -121,7 +121,7 @@
         </div>
 
         <div class="absolute bottom-0 left-0 right-0 z-[3] border-t border-white/12 bg-[rgba(3,13,25,0.78)] backdrop-blur-sm max-[1100px]:relative max-[1100px]:mt-5">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6">
+            <div class="litus-container">
                 <div class="grid min-h-[76px] grid-cols-1 min-[1100px]:grid-cols-4 max-[1100px]:min-[701px]:grid-cols-2">
                     @foreach ($heroFeatures as $index => $feature)
                         <div @class([
@@ -150,8 +150,8 @@
     </section>
 
     {{-- CONTACT CARDS --}}
-    <section class="min-h-[360px] border border-[#d8d8d8] bg-white px-5 py-11 pb-14 sm:px-5">
-        <div class="mx-auto max-w-7xl">
+    <section class="min-h-[360px] border border-[#d8d8d8] bg-white py-11 pb-14">
+        <div class="litus-container">
             <div class="mb-7 text-center">
                 <span class="mb-2.5 block text-sm font-black uppercase text-[#ff1029]">Get In Touch</span>
                 <h2 class="mb-3 font-display text-[28px] font-black tracking-[-0.5px] text-[#07152f] sm:text-[34px]">Contact LITUS Automobiles</h2>
@@ -160,7 +160,7 @@
                 </p>
             </div>
 
-            <div class="mx-auto grid max-w-[1200px] grid-cols-1 gap-4 max-lg:max-w-[650px] lg:grid-cols-3">
+            <div class="litus-container grid grid-cols-1 gap-4 max-lg:max-w-[650px] lg:grid-cols-3">
                 @foreach ($contactCards as $card)
                     <div class="group flex min-h-[145px] items-start gap-[22px] rounded-[10px] border border-black/[0.03] bg-white p-6 shadow-[0_15px_35px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_20px_45px_rgba(0,0,0,0.1)] max-sm:flex-col max-sm:p-6">
                         <div class="flex h-[68px] w-[68px] min-w-[68px] items-center justify-center rounded-full bg-[#061530] text-[#ff1029] shadow-[0_8px_18px_rgba(6,21,48,0.25)]">
@@ -191,8 +191,8 @@
     </section>
 
     {{-- FORM + MAP + SOCIAL + QUICK ASSISTANCE --}}
-    <section class="bg-[#f8f8f8] px-3.5 py-6 pb-11 max-sm:px-3.5 max-sm:pb-9 sm:px-5" id="contact-form">
-        <div class="mx-auto max-w-[1220px]">
+    <section class="bg-[#f8f8f8] py-6 pb-11 max-sm:pb-9" id="contact-form">
+        <div class="litus-container">
 
             <div class="mb-6 grid grid-cols-1 gap-5 max-lg:grid-cols-1 lg:mb-[25px] lg:grid-cols-[1fr_1.05fr] lg:gap-5">
                 {{-- Message form --}}
@@ -326,11 +326,11 @@
     </section>
 
     {{-- BUSINESS HOURS --}}
-    <section class="border border-[#d9d9d9] bg-[#fafafa] px-5 py-11 pb-14 sm:px-5">
-        <div class="mx-auto max-w-7xl">
+    <section class="border border-[#d9d9d9] bg-[#fafafa] py-11 pb-14">
+        <div class="litus-container">
             <h2 class="mb-7 text-center font-display text-[28px] font-black tracking-[-0.5px] text-[#07152f] sm:text-[34px]">Business Hours</h2>
 
-            <div class="mx-auto grid max-w-[1200px] grid-cols-1 gap-4 max-lg:max-w-[650px] lg:grid-cols-3">
+            <div class="litus-container grid grid-cols-1 gap-4 max-lg:max-w-[650px] lg:grid-cols-3">
                 @foreach ($hoursCards as $card)
                     <div class="group flex min-h-[145px] items-center gap-[22px] rounded-[10px] border border-black/[0.03] bg-white p-6 shadow-[0_15px_35px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_20px_45px_rgba(0,0,0,0.1)] max-[420px]:flex-col max-[420px]:text-center max-sm:flex-col">
                         <div class="flex h-[68px] w-[68px] min-w-[68px] items-center justify-center rounded-full bg-[#061530] text-white shadow-[0_8px_18px_rgba(6,21,48,0.25)]">

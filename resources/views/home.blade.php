@@ -67,7 +67,7 @@
              aria-hidden="true">
         <div class="absolute inset-0 bg-[linear-gradient(110deg,rgba(139,0,0,0.6)_0%,rgba(11,22,40,0.85)_40%,rgba(11,22,40,0.45)_70%,rgba(11,22,40,0.2)_100%)]"></div>
 
-        <div class="relative z-10 mx-auto flex min-h-[640px] max-w-7xl flex-col justify-center px-4 sm:px-6 lg:min-h-[720px]">
+        <div class="relative z-10 litus-container flex min-h-[640px] flex-col justify-center lg:min-h-[720px]">
             <div class="max-w-xl py-16 text-center lg:py-20 lg:text-left">
                 <p class="mb-3 text-xs font-bold uppercase tracking-widest text-litus-red">Premium Bikes. Trusted Service.</p>
                 <h1 class="mb-5 font-display text-[2.6rem] font-black leading-[1.1] text-white sm:text-5xl lg:text-[3.4rem]">
@@ -93,7 +93,7 @@
 
         {{-- Feature bar --}}
         <div class="relative z-10 border-t border-white/10 bg-black/35 backdrop-blur-sm">
-            <div class="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 py-5 sm:grid-cols-4 sm:px-6">
+            <div class="litus-container grid grid-cols-2 gap-6 py-5 sm:grid-cols-4">
                 @foreach ($features as $feature)
                     <div class="flex items-start gap-3">
                         <div class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-litus-red/25 bg-litus-red/15">
@@ -110,12 +110,12 @@
     </section>
 
     {{-- ONGOING PROMOTIONS --}}
-    <section class="relative overflow-hidden border border-[#dfe3ea] px-5 py-[38px] pb-7 max-sm:px-3.5 max-sm:py-[30px]"
+    <section class="relative overflow-hidden border border-[#dfe3ea] py-[38px] pb-7 max-sm:py-[30px]"
              style="background: linear-gradient(rgba(255,255,255,0.94), rgba(255,255,255,0.94)), radial-gradient(circle at 10% 20%, rgba(6,21,48,0.08), transparent 25%);">
         <div class="pointer-events-none absolute inset-0 opacity-40"
              style="background-image: linear-gradient(30deg, rgba(6,21,48,0.035) 12%, transparent 12.5%, transparent 87%, rgba(6,21,48,0.035) 87.5%, rgba(6,21,48,0.035)), linear-gradient(150deg, rgba(6,21,48,0.035) 12%, transparent 12.5%, transparent 87%, rgba(6,21,48,0.035) 87.5%, rgba(6,21,48,0.035)); background-size: 55px 95px;"></div>
 
-        <div class="relative z-[2] mx-auto max-w-[1350px]">
+        <div class="relative z-[2] litus-container">
             <div class="mb-9 flex flex-col items-start justify-between gap-5 min-[651px]:mb-[35px] min-[651px]:flex-row min-[651px]:gap-5">
                 <div>
                     <span class="mb-1.5 block text-sm font-black uppercase tracking-wide text-[#ff1029]">Special Deals</span>
@@ -173,9 +173,9 @@
     </section>
 
     {{-- TOP SELLING RIDES --}}
-    <section class="border border-white/[0.08] px-5 py-[42px] pb-[50px] max-[720px]:px-3.5 max-[720px]:py-[34px]"
+    <section class="border border-white/[0.08] py-[42px] pb-[50px] max-[720px]:py-[34px]"
              style="background: radial-gradient(circle at top left, rgba(14,61,111,0.35), transparent 35%), radial-gradient(circle at bottom right, rgba(14,61,111,0.25), transparent 35%), linear-gradient(135deg, #061326 0%, #071a33 45%, #061326 100%);">
-        <div class="mx-auto max-w-[1420px]">
+        <div class="litus-container">
 
             <div class="mb-[30px] flex flex-col items-start justify-between gap-5 min-[721px]:flex-row max-[1100px]:gap-5">
                 <div>
@@ -229,11 +229,11 @@
     <section class="border border-[#dfe3ea] bg-[#f8f9fb]">
 
         {{-- Updates --}}
-        <div class="relative overflow-hidden px-5 py-5 pb-[22px] max-sm:px-3.5 max-sm:py-[30px]"
+        <div class="relative overflow-hidden py-5 pb-[22px] max-sm:py-[30px]"
              style="background-image: radial-gradient(circle, rgba(7, 21, 47, 0.10) 2px, transparent 2px); background-size: 24px 24px; background-color: #fafafa;">
             <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(250,250,250,0.95)_0%,rgba(250,250,250,0.78)_25%,rgba(250,250,250,0.55)_50%,rgba(250,250,250,0.88)_100%)]"></div>
 
-            <div class="relative z-[2] mx-auto grid max-w-[1200px] grid-cols-1 items-center justify-between gap-10 max-[950px]:text-center min-[951px]:grid-cols-[38%_52%] min-[951px]:gap-10">
+            <div class="relative z-[2] litus-container grid grid-cols-1 items-center justify-between gap-10 max-[950px]:text-center min-[951px]:grid-cols-[38%_52%] min-[951px]:gap-10">
                 <div>
                     <span class="mb-2 block text-[13px] font-black uppercase tracking-wide text-[#ff1029]">Stay Updated</span>
                     <h2 class="mb-[18px] text-[34px] font-black leading-tight tracking-[-1px] text-[#07152f] min-[601px]:text-[42px]">What's New?</h2>
@@ -277,8 +277,8 @@
         </div>
 
         {{-- Services --}}
-        <div class="border-t border-[#e3e6eb] bg-white px-5 pb-[38px] pt-[18px] max-sm:px-3.5 max-sm:pb-[35px] max-sm:pt-[25px]">
-            <div class="mx-auto max-w-[1200px]">
+        <div class="border-t border-[#e3e6eb] bg-white pb-[38px] pt-[18px] max-sm:pb-[35px] max-sm:pt-[25px]">
+            <div class="litus-container">
 
                 <div class="mb-[18px] text-center">
                     <span class="mb-1.5 block text-xs font-black uppercase text-[#ff1029]">Our Services</span>
@@ -314,7 +314,7 @@
              style="background-image: linear-gradient(90deg, rgba(3,12,28,0.20) 0%, rgba(3,12,28,0.65) 36%, rgba(3,12,28,0.96) 68%, rgba(3,12,28,0.98) 100%), url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1800&q=80');">
         <div class="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(3,12,28,0.08)_0%,rgba(3,12,28,0.35)_34%,rgba(3,12,28,0.88)_58%,rgba(3,12,28,0.96)_100%),radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.08),transparent_28%)]"></div>
 
-        <div class="relative z-[2] mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center px-[7%] py-[55px] min-[901px]:grid-cols-[48%_52%] max-[600px]:px-5 max-[600px]:py-[45px] max-[900px]:px-6 max-[900px]:py-[60px]">
+        <div class="relative z-[2] litus-container grid w-full grid-cols-1 items-center px-[7%] py-[55px] min-[901px]:grid-cols-[48%_52%] max-[600px]:px-5 max-[600px]:py-[45px] max-[900px]:px-6 max-[900px]:py-[60px]">
             <div class="min-h-[250px] max-[900px]:hidden"></div>
 
             <div class="max-w-[720px] max-[900px]:max-w-full">
@@ -333,12 +333,12 @@
     </section>
 
     {{-- GALLERY --}}
-    <section class="relative overflow-hidden border border-[#dfe3ea] px-5 py-[30px] pb-[18px] max-sm:px-3.5 max-sm:py-7"
+    <section class="relative overflow-hidden border border-[#dfe3ea] py-[30px] pb-[18px] max-sm:py-7"
              style="background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), radial-gradient(circle at 15% 35%, rgba(7,21,47,0.08), transparent 28%);">
         <div class="pointer-events-none absolute inset-0 opacity-35"
              style="background-image: linear-gradient(30deg, rgba(7,21,47,0.035) 12%, transparent 12.5%, transparent 87%, rgba(7,21,47,0.035) 87.5%), linear-gradient(150deg, rgba(7,21,47,0.035) 12%, transparent 12.5%, transparent 87%, rgba(7,21,47,0.035) 87.5%); background-size: 55px 95px;"></div>
 
-        <div class="relative z-[2] mx-auto max-w-[1440px]">
+        <div class="relative z-[2] litus-container">
             <div class="mb-[22px] flex flex-col items-start justify-between gap-5 min-[651px]:flex-row">
                 <div>
                     <span class="mb-1 block text-[15px] font-black uppercase tracking-wide text-[#ff1029]">Our Gallery</span>

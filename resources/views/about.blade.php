@@ -71,7 +71,7 @@
         <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(255,255,255,0.08),transparent_28%)]"></div>
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.1),rgba(2,10,19,0.95))]"></div>
 
-        <div class="relative z-[2] mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 sm:pt-20">
+        <div class="relative z-[2] litus-container pt-16 pb-12 sm:pt-20">
             <div class="max-w-[720px] text-left">
                 <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:text-[15px]">
                     About LITUS Automobiles
@@ -102,7 +102,7 @@
         </div>
 
         <div class="absolute bottom-0 left-0 right-0 z-[3] border-t border-white/12 bg-[rgba(3,13,25,0.78)] backdrop-blur-sm max-[1100px]:relative max-[1100px]:mt-5">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6">
+            <div class="litus-container">
                 <div class="grid min-h-[76px] grid-cols-1 min-[1100px]:grid-cols-4 max-[1100px]:min-[701px]:grid-cols-2">
                     @foreach ($heroFeatures as $index => $feature)
                         <div @class([
@@ -132,11 +132,11 @@
 
     {{-- MISSION & VISION --}}
     <section id="mission-vision"
-             class="relative min-h-[260px] overflow-hidden border border-[#dcdfe5] px-5 py-[38px] pb-[45px] max-sm:px-[15px] max-sm:py-8 max-sm:pb-[38px]"
+             class="relative min-h-[260px] overflow-hidden border border-[#dcdfe5] py-[38px] pb-[45px] max-sm:py-8 max-sm:pb-[38px]"
              style="background-image: radial-gradient(circle, rgba(7, 21, 47, 0.12) 2px, transparent 2px); background-size: 24px 24px; background-color: #fafafa;">
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(250,250,250,0.95)_0%,rgba(250,250,250,0.55)_15%,rgba(250,250,250,0.25)_50%,rgba(250,250,250,0.55)_85%,rgba(250,250,250,0.95)_100%)]"></div>
 
-        <div class="relative z-[2] mx-auto max-w-[1120px] max-[900px]:max-w-[650px]">
+        <div class="relative z-[2] litus-container">
             <p class="mb-[22px] text-center text-[13px] font-black uppercase tracking-[3px] text-[#f20d23] min-[561px]:text-[15px] min-[561px]:tracking-[4px]">
                 Our Mission &amp; Vision
             </p>
@@ -158,8 +158,8 @@
     </section>
 
     {{-- LEADERSHIP & OPERATION TEAM --}}
-    <section class="bg-[#f8f9fb] px-[18px] py-5 pb-9">
-        <div class="mx-auto max-w-[1260px]">
+    <section class="bg-[#f8f9fb] py-5 pb-9">
+        <div class="litus-container">
 
             <div class="mb-[15px] text-center">
                 <span class="mb-1 block text-[13px] font-black uppercase tracking-[2px] text-[#ff1029]">Leadership Team</span>
@@ -252,8 +252,8 @@
     </section>
 
     {{-- SHOWROOMS & SERVICE CENTERS --}}
-    <section id="locations" class="bg-[#f7f8fa] px-5 pt-5 max-sm:px-3.5 max-sm:pt-[18px]">
-        <div class="mx-auto max-w-[1350px]">
+    <section id="locations" class="bg-[#f7f8fa] pt-5 max-sm:pt-[18px]">
+        <div class="litus-container">
 
             <div class="mb-[18px] text-center">
                 <span class="mb-1.5 block text-sm font-black uppercase tracking-[3px] text-[#ff1029]">Our Locations</span>
@@ -295,9 +295,9 @@
     </section>
 
     {{-- LOCATIONS CTA BANNER --}}
-    <section class="border-t border-white/[0.08] bg-cover bg-center px-5 py-[30px]"
+    <section class="border-t border-white/[0.08] bg-cover bg-center py-[30px]"
              style="background-image: linear-gradient(90deg, rgba(3,13,31,0.98), rgba(4,19,43,0.96)), url('{{ $locationsBannerBg }}');">
-        <div class="mx-auto grid max-w-[1350px] grid-cols-1 items-center gap-[22px] min-[1101px]:grid-cols-[auto_1fr_auto] min-[1101px]:gap-9 max-[1100px]:text-center">
+        <div class="litus-container grid grid-cols-1 items-center gap-[22px] min-[1101px]:grid-cols-[auto_1fr_auto] min-[1101px]:gap-9 max-[1100px]:text-center">
 
             <div class="flex items-center justify-center gap-6 min-[1101px]:justify-start">
                 <div class="relative">

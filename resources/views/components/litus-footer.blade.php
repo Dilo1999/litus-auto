@@ -18,7 +18,7 @@
 @endphp
 
 <footer class="bg-litus-footer">
-    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
+    <div class="litus-container grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
             <div class="mb-4 flex items-center gap-2">
                 <div class="flex h-8 w-8 items-center justify-center rounded-sm bg-litus-red">

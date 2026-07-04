@@ -16,7 +16,7 @@
 @endphp
 
 <header class="sticky top-0 z-50 w-full bg-litus-navy">
-    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-[68px]">
+    <div class="litus-container flex h-16 items-center justify-between lg:h-[68px]">
         <a href="{{ route('home') }}" class="flex shrink-0 items-center">
             <img src="{{ $logo }}"
                  alt="LITUS Automobiles"

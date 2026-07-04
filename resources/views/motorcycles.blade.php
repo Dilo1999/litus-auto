@@ -52,7 +52,7 @@
         <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(255,255,255,0.08),transparent_28%)]"></div>
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.1),rgba(2,10,19,0.95))]"></div>
 
-        <div class="relative z-[2] mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 sm:pt-20">
+        <div class="relative z-[2] litus-container pt-16 pb-12 sm:pt-20">
             <div class="max-w-[720px] text-left">
                 <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:text-[15px]">
                     Explore Our Collection
@@ -83,7 +83,7 @@
         </div>
 
         <div class="absolute bottom-0 left-0 right-0 z-[3] border-t border-white/12 bg-[rgba(3,13,25,0.78)] backdrop-blur-sm max-[1100px]:relative max-[1100px]:mt-5">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6">
+            <div class="litus-container">
                 <div class="grid min-h-[76px] grid-cols-1 min-[1100px]:grid-cols-4 max-[1100px]:min-[701px]:grid-cols-2">
                     @foreach ($heroFeatures as $index => $feature)
                         <div @class([
@@ -113,7 +113,7 @@
 
     {{-- FILTER BAR --}}
     <section class="border-b border-gray-200 bg-gray-50 py-8">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div class="litus-container">
             <div class="flex flex-col items-start gap-4 rounded-2xl bg-white p-5 shadow-md lg:flex-row lg:items-center">
                 <div class="relative w-full flex-1">
                     <x-litus-icon name="search" class="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
@@ -160,7 +160,7 @@
 
     {{-- PRODUCT GRID --}}
     <section id="inventory" class="bg-gray-50 py-14">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div class="litus-container">
             <div class="mb-10 text-center">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Inventory</span>
                 <h2 class="mt-2 font-display text-3xl font-black text-gray-900 lg:text-4xl">Explore Our Ride Collection</h2>
@@ -240,7 +240,7 @@
 
     {{-- WHY LITUS --}}
     <section class="bg-white py-14">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div class="litus-container">
             <div class="mb-10 text-center">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Promise</span>
                 <h2 class="mt-2 font-display text-2xl font-black text-gray-900 lg:text-3xl">Why Buy from LITUS Automobiles?</h2>
