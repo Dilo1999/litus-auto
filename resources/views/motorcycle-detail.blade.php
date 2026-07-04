@@ -80,8 +80,13 @@
         <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_48%,rgba(255,255,255,0.12),transparent_28%),linear-gradient(to_bottom,rgba(0,0,0,0.12),rgba(1,8,20,0.95))]"></div>
 
         <div class="relative z-[2] litus-container pt-16 pb-12 sm:pt-20">
-            <div class="grid grid-cols-1 items-center gap-8 min-[1100px]:grid-cols-[46%_54%] min-[1100px]:gap-5">
-                <div class="max-w-[650px] text-left max-[1100px]:mx-auto max-[1100px]:text-center">
+            {{-- Desktop hero product image — free-positioned for maximum size --}}
+            <img src="{{ $galleryImages[0] }}"
+                 alt="ADV 160 2026"
+                 class="pointer-events-none absolute bottom-6 right-0 z-[1] hidden h-auto max-h-[min(920px,85vh)] w-auto max-w-[min(980px,62vw)] object-contain object-bottom min-[1100px]:block">
+
+            <div class="relative z-[2] grid grid-cols-1 items-center gap-8 min-[1100px]:grid-cols-[50%_50%] min-[1100px]:gap-5">
+                <div class="max-w-[650px] text-left max-[1100px]:mx-auto max-[1100px]:text-center min-[1100px]:max-w-none">
                     <p class="mb-6 text-base font-black uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:mb-5 max-md:text-[15px]">
                         Category: Touring Bikes
                     </p>
@@ -113,30 +118,32 @@
                         This offer valid for Green, Brown Colors.
                     </p>
 
-                    <div class="flex max-w-[520px] flex-col gap-3 max-[1100px]:mx-auto">
-                        <div class="flex flex-col gap-3 sm:flex-row sm:gap-[22px]">
-                            <button type="button"
-                                    class="inline-flex h-14 min-w-0 flex-1 items-center justify-center gap-3 rounded-lg bg-[#f40d23] px-5 text-base font-black text-white shadow-[0_10px_24px_rgba(244,13,35,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a] sm:h-[58px] sm:px-[34px] sm:text-[17px]">
-                                Buy Now
-                                <x-litus-icon name="shopping-bag" class="h-5 w-5" />
-                            </button>
-                            <a href="tel:+9607797442"
-                               class="inline-flex h-14 min-w-0 flex-1 items-center justify-center gap-3 rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-5 text-base font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f40d23] hover:bg-[rgba(244,13,35,0.12)] sm:h-[58px] sm:px-[34px] sm:text-[17px]">
-                                Contact Sales Team
-                                <x-litus-icon name="arrow-right" class="h-5 w-5" />
-                            </a>
-                        </div>
+                    <div class="flex flex-col gap-3 max-[1100px]:mx-auto min-[1100px]:flex-row min-[1100px]:flex-nowrap min-[1100px]:items-stretch min-[1100px]:gap-2.5">
+                        <button type="button"
+                                class="inline-flex h-14 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[#f40d23] px-4 text-base font-black text-white shadow-[0_10px_24px_rgba(244,13,35,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a] min-[1100px]:h-[58px] min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[14px]">
+                            Buy Now
+                            <x-litus-icon name="shopping-bag" class="h-5 w-5 shrink-0" />
+                        </button>
+                        <a href="tel:+9607797442"
+                           class="inline-flex h-14 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-4 text-base font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f40d23] hover:bg-[rgba(244,13,35,0.12)] min-[1100px]:h-[58px] min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[14px]">
+                            Contact Sales Team
+                            <x-litus-icon name="arrow-right" class="h-5 w-5 shrink-0" />
+                        </a>
                         <a href="#"
-                           class="inline-flex h-14 w-full items-center justify-center gap-3 rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-5 text-base font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f40d23] hover:bg-[rgba(244,13,35,0.12)] sm:h-[58px] sm:text-[17px]">
-                            <x-litus-icon name="credit-card" class="h-5 w-5" />
+                           class="inline-flex h-14 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-4 text-base font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f40d23] hover:bg-[rgba(244,13,35,0.12)] min-[1100px]:h-[58px] min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[14px]">
+                            <x-litus-icon name="credit-card" class="h-5 w-5 shrink-0" />
                             View Ownership Plans
                         </a>
                     </div>
                 </div>
 
+                {{-- Mobile hero product image --}}
                 <img src="{{ $galleryImages[0] }}"
                      alt="ADV 160 2026"
-                     class="mx-auto max-h-[520px] w-full max-w-[900px] object-contain min-[1100px]:ml-20 min-[1100px]:mr-0 min-[1100px]:max-h-[640px] min-[1100px]:max-w-[1100px]">
+                     class="mx-auto max-h-[720px] w-full max-w-[1200px] object-contain min-[1100px]:hidden">
+
+                {{-- Desktop spacer keeps grid balance --}}
+                <div class="hidden min-[1100px]:block min-[1100px]:min-h-[560px]" aria-hidden="true"></div>
             </div>
         </div>
 
