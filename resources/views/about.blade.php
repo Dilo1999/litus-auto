@@ -31,17 +31,23 @@
     ];
 
     $opStats = [
-        ['icon' => 'users', 'label' => 'Dedicated Team', 'value' => '50+'],
-        ['icon' => 'headphones', 'label' => 'Customer Support', 'value' => '24/7'],
-        ['icon' => 'shopping-bag', 'label' => 'Sales Assistance', 'value' => 'Expert'],
-        ['icon' => 'wrench', 'label' => 'Service Guidance', 'value' => 'Pro'],
+        ['icon' => 'users', 'title' => 'Dedicated Team', 'desc' => 'Passionate professionals at your service'],
+        ['icon' => 'headphones', 'title' => 'Customer Support', 'desc' => 'Always here to help you on your journey'],
+        ['icon' => 'shopping-bag', 'title' => 'Sales Assistance', 'desc' => 'Find the perfect ride with expert guidance'],
+        ['icon' => 'wrench', 'title' => 'Service Guidance', 'desc' => "From parts to maintenance, we've got you covered"],
     ];
 
-    $trustBadges = [
-        ['icon' => 'star', 'val' => 'Est. 2014', 'label' => 'Established in 2014'],
-        ['icon' => 'check-circle', 'val' => '11+', 'label' => 'Largest Motorcycle Dealer'],
-        ['icon' => 'package', 'val' => '100%', 'label' => 'Genuine Parts'],
-        ['icon' => 'wrench', 'val' => '12+', 'label' => 'Reliable Service Centers'],
+    $operationBg = 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1400&q=80';
+    $operationTeamImg = 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=900&q=80';
+    $locationsBannerBg = 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1600&q=80';
+
+    $heroBg = 'https://images.unsplash.com/photo-1558979159-2b18a4070a87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1600&q=80';
+
+    $heroFeatures = [
+        ['icon' => 'star', 'title' => 'Est. 2014', 'desc' => 'Established in 2014'],
+        ['icon' => 'check-circle', 'title' => '11+', 'desc' => 'Largest Motorcycle Dealer'],
+        ['icon' => 'package', 'title' => '100%', 'desc' => 'Genuine Parts'],
+        ['icon' => 'wrench', 'title' => '12+', 'desc' => 'Reliable Service Centers'],
     ];
 
     $missionVision = [
@@ -55,150 +61,68 @@
     <x-litus-header active="About Us" />
 
     {{-- HERO --}}
-    <section class="relative min-h-[640px] overflow-hidden bg-litus-footer lg:min-h-[720px]">
-        <img src="https://images.unsplash.com/photo-1558979159-2b18a4070a87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1600&q=80"
-             alt="About LITUS"
-             class="absolute inset-0 h-full w-full object-cover opacity-30">
-        <div class="absolute inset-0 bg-[linear-gradient(110deg,rgba(139,0,0,0.55)_0%,rgba(20,20,40,0.6)_60%,transparent_100%)]"></div>
+    <section class="relative min-h-[680px] overflow-hidden border border-[rgba(27,74,120,0.45)] bg-[#06101c] pb-[82px] max-[1100px]:min-h-0 max-[1100px]:pb-8">
+        <img src="{{ $heroBg }}"
+             alt=""
+             class="absolute inset-0 h-full w-full object-cover object-[center_right]"
+             aria-hidden="true">
 
-        <div class="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 py-24 sm:px-6 lg:flex-row lg:py-32">
-            <div class="text-center lg:w-3/5 lg:text-left">
-                <span class="mb-5 inline-block rounded-full border border-litus-red/30 bg-litus-red/15 px-3 py-1 text-xs font-bold uppercase tracking-widest text-litus-red">
+        <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,11,22,0.98)_0%,rgba(3,11,22,0.88)_32%,rgba(3,11,22,0.48)_58%,rgba(3,11,22,0.25)_100%)]"></div>
+        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(255,255,255,0.08),transparent_28%)]"></div>
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.1),rgba(2,10,19,0.95))]"></div>
+
+        <div class="relative z-[2] mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 sm:pt-20">
+            <div class="max-w-[720px] text-left">
+                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:text-[15px]">
                     About LITUS Automobiles
-                </span>
-                <h1 class="mb-5 font-display text-4xl font-black leading-[1.1] text-white sm:text-5xl lg:text-6xl">
+                </p>
+
+                <h1 class="mb-4 font-display text-[clamp(2.25rem,4.2vw,4.25rem)] font-black leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:text-[2.25rem]">
                     Driven by Trust.<br>
                     <span class="text-litus-red">Built for Every Ride.</span>
                 </h1>
-                <p class="mx-auto mb-8 max-w-xl text-base leading-relaxed text-gray-300 lg:mx-0 lg:text-lg">
+
+                <p class="mb-6 max-w-[620px] text-base font-medium leading-[1.5] text-[#e6edf5] sm:text-lg sm:leading-[1.55] max-md:text-[17px]">
                     LITUS Automobiles is a leading motorcycle supplier in the Maldives, established in 2014. We offer a wide range of mobility solutions to meet the needs of our customers with quality products and excellent customer service.
                 </p>
-                <div class="flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
+
+                <div class="flex flex-row flex-wrap items-center justify-start gap-5 sm:gap-7">
                     <a href="#mission-vision"
-                       class="flex items-center justify-center gap-2 rounded-md bg-litus-red px-7 py-3 text-sm font-bold text-white">
+                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] bg-[#f20d23] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(242,13,35,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9091c] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         Explore Our Story
-                        <x-litus-icon name="arrow-right" class="h-[15px] w-[15px]" />
+                        <x-litus-icon name="arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </a>
-                    <a href="#"
-                       class="rounded-md border border-white/30 px-7 py-3 text-sm font-bold text-white transition-all hover:border-white/60 hover:bg-white/5">
+                    <a href="{{ route('contact') }}"
+                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f20d23] hover:bg-[rgba(242,13,35,0.15)] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         Contact Us
+                        <x-litus-icon name="arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </a>
                 </div>
             </div>
-
-            <div class="mx-auto grid w-full max-w-sm grid-cols-2 gap-4 lg:mx-0 lg:w-2/5">
-                @foreach ($trustBadges as $badge)
-                    <div class="rounded-xl border border-white/10 bg-white/[0.06] p-4 text-center backdrop-blur-sm">
-                        <div class="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-litus-red/20">
-                            <x-litus-icon :name="$badge['icon']" class="h-[18px] w-[18px] text-litus-red" />
-                        </div>
-                        <p class="text-xl font-black text-white">{{ $badge['val'] }}</p>
-                        <p class="mt-0.5 text-xs leading-tight text-gray-400">{{ $badge['label'] }}</p>
-                    </div>
-                @endforeach
-            </div>
         </div>
-    </section>
 
-    {{-- MISSION & VISION --}}
-    <section id="mission-vision" class="bg-gray-50 py-16">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
-            <div class="mb-10 text-center">
-                <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Purpose</span>
-                <h2 class="mt-2 font-display text-3xl font-black text-gray-900 lg:text-4xl">Our Mission &amp; Vision</h2>
-            </div>
-            <div class="mx-auto grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-2">
-                @foreach ($missionVision as $item)
-                    <div class="flex flex-col gap-5 rounded-2xl bg-white p-8 shadow-md transition-shadow hover:shadow-xl">
-                        <div class="flex h-14 w-14 items-center justify-center rounded-full {{ $item['accent'] === 'red' ? 'bg-litus-red/10' : 'bg-litus-navy/8' }}">
-                            <x-litus-icon :name="$item['icon']" class="h-[26px] w-[26px] {{ $item['accent'] === 'red' ? 'text-litus-red' : 'text-litus-navy' }}" />
-                        </div>
-                        <div>
-                            <h3 class="mb-2 text-xl font-black text-gray-900">{{ $item['title'] }}</h3>
-                            <p class="leading-relaxed text-gray-500">{{ $item['text'] }}</p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    {{-- LEADERSHIP TEAM --}}
-    <section class="bg-white py-16">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
-            <div class="mb-12 text-center">
-                <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Leadership Team</span>
-                <h2 class="mt-2 font-display text-3xl font-black text-gray-900 lg:text-4xl">Our Key Members</h2>
-                <p class="mx-auto mt-2 max-w-lg text-gray-500">Meet the leaders guiding LITUS Automobiles with experience, vision, and commitment.</p>
-            </div>
-
-            <div class="mb-6 grid grid-cols-1 gap-6 sm:grid-cols-3">
-                @foreach ($teamLeaders as $member)
-                    <div class="group overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-md transition-shadow hover:shadow-xl">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="{{ $member['img'] }}"
-                                 alt="{{ $member['name'] }}"
-                                 class="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-gradient-to-t from-litus-navy/75 via-transparent to-transparent"></div>
-                            <div class="absolute bottom-4 left-4 right-4">
-                                <p class="text-base font-black text-white">{{ $member['name'] }}</p>
-                                <p class="mt-0.5 text-xs text-gray-300">{{ $member['role'] }}</p>
+        <div class="absolute bottom-0 left-0 right-0 z-[3] border-t border-white/12 bg-[rgba(3,13,25,0.78)] backdrop-blur-sm max-[1100px]:relative max-[1100px]:mt-5">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6">
+                <div class="grid min-h-[76px] grid-cols-1 min-[1100px]:grid-cols-4 max-[1100px]:min-[701px]:grid-cols-2">
+                    @foreach ($heroFeatures as $index => $feature)
+                        <div @class([
+                            'relative flex items-center gap-3 py-3 sm:gap-3.5 min-[1100px]:py-3.5',
+                            'border-b border-white/12 max-md:border-b' => $index < count($heroFeatures) - 1,
+                            'max-md:last:border-b-0',
+                            'min-[1100px]:border-r min-[1100px]:border-white/16 min-[1100px]:pr-4' => $index < count($heroFeatures) - 1,
+                            'min-[1100px]:pl-0' => $index === 0,
+                            'min-[1100px]:pl-4' => $index > 0,
+                            'max-[1100px]:min-[701px]:border-r max-[1100px]:min-[701px]:border-white/16' => in_array($index, [0, 2]),
+                            'max-[1100px]:min-[701px]:border-b max-[1100px]:min-[701px]:border-white/12' => in_array($index, [0, 1]),
+                            'max-[1100px]:min-[701px]:border-r-0' => $index === 1,
+                        ])>
+                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-white/35 text-white shadow-[0_0_16px_rgba(255,255,255,0.06)] sm:h-10 sm:w-10">
+                                <x-litus-icon :name="$feature['icon']" class="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
                             </div>
-                            <a href="#" class="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-colors hover:bg-white/40" aria-label="LinkedIn profile for {{ $member['name'] }}">
-                                <x-litus-icon name="linkedin" class="h-[13px] w-[13px] text-white" />
-                            </a>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            <div class="grid grid-cols-2 gap-5 sm:grid-cols-4">
-                @foreach ($teamMembers as $member)
-                    <div class="group overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition-shadow hover:shadow-md">
-                        <div class="relative h-44 overflow-hidden">
-                            <img src="{{ $member['img'] }}"
-                                 alt="{{ $member['name'] }}"
-                                 class="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-gradient-to-t from-litus-navy/80 via-transparent to-transparent"></div>
-                            <div class="absolute bottom-3 left-3 right-3">
-                                <p class="text-sm font-bold leading-tight text-white">{{ $member['name'] }}</p>
+                            <div class="min-w-0 text-left">
+                                <h3 class="mb-0.5 text-sm font-extrabold leading-tight text-white sm:text-[15px]">{{ $feature['title'] }}</h3>
+                                <p class="text-xs font-medium leading-snug text-[#c9d4df] sm:text-[13px]">{{ $feature['desc'] }}</p>
                             </div>
-                        </div>
-                        <div class="px-3 py-3">
-                            <p class="text-xs font-semibold text-gray-800">{{ $member['role'] }}</p>
-                            @if ($member['dept'])
-                                <p class="mt-0.5 text-xs text-gray-400">{{ $member['dept'] }}</p>
-                            @endif
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    {{-- OPERATION TEAM --}}
-    <section class="bg-litus-navy py-16">
-        <div class="mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 sm:px-6 lg:flex-row lg:gap-14">
-            <div class="w-full lg:w-3/5">
-                <img src="https://images.unsplash.com/photo-1573496774426-fe3db3dd1731?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=900&q=80"
-                     alt="LITUS Operation Team"
-                     class="h-72 w-full rounded-2xl object-cover shadow-2xl lg:h-96">
-            </div>
-
-            <div class="text-center lg:w-2/5 lg:text-left">
-                <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our People</span>
-                <h2 class="mb-4 mt-2 font-display text-3xl font-black text-white lg:text-4xl">Our Operation Team</h2>
-                <p class="mb-8 text-sm leading-relaxed text-gray-400">
-                    Meet the LITUS Automobiles team, a passionate ensemble of dedicated professionals committed to elevating your motorcycle experience. With a wealth of knowledge and a shared drive to help every rider, our team is here to guide you, answer your questions, and keep your journey smooth from selection to service.
-                </p>
-                <div class="grid grid-cols-2 gap-4">
-                    @foreach ($opStats as $stat)
-                        <div class="rounded-xl border border-white/10 bg-white/5 p-4">
-                            <div class="mb-2 flex h-9 w-9 items-center justify-center rounded-full bg-litus-red/15">
-                                <x-litus-icon :name="$stat['icon']" class="h-4 w-4 text-litus-red" />
-                            </div>
-                            <p class="text-lg font-black text-white">{{ $stat['value'] }}</p>
-                            <p class="mt-0.5 text-xs text-gray-400">{{ $stat['label'] }}</p>
                         </div>
                     @endforeach
                 </div>
@@ -206,64 +130,26 @@
         </div>
     </section>
 
-    {{-- SHOWROOMS & SERVICE CENTERS --}}
-    <section id="locations" class="bg-gray-50 py-16">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
-            <div class="mb-10 text-center">
-                <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Locations</span>
-                <h2 class="mt-2 font-display text-3xl font-black text-gray-900 lg:text-4xl">Our Showrooms &amp; Service Centers</h2>
-                <p class="mx-auto mt-2 max-w-xl text-gray-500">Visit our showrooms and service centers across the Maldives for motorcycles, genuine parts, and trusted support.</p>
-            </div>
+    {{-- MISSION & VISION --}}
+    <section id="mission-vision"
+             class="relative min-h-[260px] overflow-hidden border border-[#dcdfe5] px-5 py-[38px] pb-[45px] max-sm:px-[15px] max-sm:py-8 max-sm:pb-[38px]"
+             style="background-image: radial-gradient(circle, rgba(7, 21, 47, 0.12) 2px, transparent 2px); background-size: 24px 24px; background-color: #fafafa;">
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(250,250,250,0.95)_0%,rgba(250,250,250,0.55)_15%,rgba(250,250,250,0.25)_50%,rgba(250,250,250,0.55)_85%,rgba(250,250,250,0.95)_100%)]"></div>
 
-            <div class="mb-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
-                @foreach (array_filter($showrooms, fn ($s) => $s['featured']) as $showroom)
-                    <div class="group overflow-hidden rounded-2xl bg-white shadow-md transition-shadow hover:shadow-xl">
-                        <div class="relative h-56 overflow-hidden">
-                            <img src="{{ $showroom['img'] }}"
-                                 alt="{{ $showroom['name'] }}"
-                                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-gradient-to-t from-litus-navy/70 via-transparent to-transparent"></div>
-                            <span class="absolute left-3 top-3 rounded-full bg-litus-red px-2.5 py-1 text-xs font-bold text-white">Featured</span>
-                        </div>
-                        <div class="p-5">
-                            <h3 class="text-lg font-black text-gray-900">{{ $showroom['name'] }}</h3>
-                            <p class="mt-1 flex items-center gap-1.5 text-sm text-gray-500">
-                                <x-litus-icon name="map-pin" class="h-[13px] w-[13px] text-litus-red" />
-                                {{ $showroom['address'] }}
-                            </p>
-                            <div class="mt-4 flex items-center gap-3">
-                                <a href="#" class="rounded-full bg-litus-red px-5 py-2 text-sm font-bold text-white">Contact Now</a>
-                                <a href="#" class="flex items-center gap-1 text-sm font-semibold text-gray-500 hover:text-gray-800">
-                                    View on Map
-                                    <x-litus-icon name="arrow-right" class="h-3 w-3" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+        <div class="relative z-[2] mx-auto max-w-[1120px] max-[900px]:max-w-[650px]">
+            <p class="mb-[22px] text-center text-[13px] font-black uppercase tracking-[3px] text-[#f20d23] min-[561px]:text-[15px] min-[561px]:tracking-[4px]">
+                Our Mission &amp; Vision
+            </p>
 
-            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                @foreach (array_filter($showrooms, fn ($s) => ! $s['featured']) as $showroom)
-                    <div class="group overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition-shadow hover:shadow-md">
-                        <div class="relative h-40 overflow-hidden">
-                            <img src="{{ $showroom['img'] }}"
-                                 alt="{{ $showroom['name'] }}"
-                                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="grid grid-cols-1 gap-[22px] min-[901px]:grid-cols-2">
+                @foreach ($missionVision as $item)
+                    <div class="flex min-h-[155px] flex-col items-center gap-[22px] rounded-xl border border-[#dfe3ea] bg-white px-[22px] py-7 shadow-[0_12px_28px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(0,0,0,0.11)] min-[561px]:flex-row min-[561px]:gap-[38px] min-[561px]:px-[38px] min-[561px]:py-[30px]">
+                        <div class="flex h-[95px] w-[95px] shrink-0 items-center justify-center rounded-full bg-[#f0f0f0] text-[#f20d23] min-[561px]:h-[118px] min-[561px]:w-[118px]">
+                            <x-litus-icon :name="$item['icon']" class="h-11 w-11 min-[561px]:h-14 min-[561px]:w-14" />
                         </div>
-                        <div class="p-4">
-                            <h3 class="text-base font-black text-gray-900">{{ $showroom['name'] }}</h3>
-                            <p class="mt-1 flex items-start gap-1.5 text-xs leading-snug text-gray-500">
-                                <x-litus-icon name="map-pin" class="mt-0.5 h-[11px] w-[11px] shrink-0 text-litus-red" />
-                                {{ $showroom['address'] }}
-                            </p>
-                            <div class="mt-3 flex items-center gap-3">
-                                <a href="#" class="rounded-full bg-litus-red px-4 py-1.5 text-xs font-bold text-white">Contact Now</a>
-                                <a href="#" class="flex items-center gap-1 text-xs font-semibold text-gray-400 hover:text-gray-700">
-                                    Map
-                                    <x-litus-icon name="arrow-right" class="h-[11px] w-[11px]" />
-                                </a>
-                            </div>
+                        <div class="text-center min-[561px]:text-left">
+                            <h2 class="mb-[18px] text-[25px] font-black tracking-[-0.5px] text-[#07152f] min-[561px]:text-[30px]">{{ $item['title'] }}</h2>
+                            <p class="max-w-[390px] text-[15px] font-semibold leading-[1.55] text-[#586273] min-[561px]:text-base">{{ $item['text'] }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -271,18 +157,178 @@
         </div>
     </section>
 
-    {{-- CTA BAND --}}
-    <section class="bg-litus-navy py-14">
-        <div class="mx-auto max-w-4xl px-4 text-center sm:px-6">
-            <div class="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-litus-red/15">
-                <x-litus-icon name="map-pin" class="h-[22px] w-[22px] text-litus-red" />
+    {{-- LEADERSHIP & OPERATION TEAM --}}
+    <section class="bg-[#f8f9fb] px-[18px] py-5 pb-9">
+        <div class="mx-auto max-w-[1260px]">
+
+            <div class="mb-[15px] text-center">
+                <span class="mb-1 block text-[13px] font-black uppercase tracking-[2px] text-[#ff1029]">Leadership Team</span>
+                <h2 class="mb-2 text-[27px] font-black leading-none text-[#07152f] min-[651px]:text-[32px]">Our Key Members</h2>
+                <p class="text-[13px] font-medium text-[#566070]">
+                    Meet the leaders guiding LITUS Automobiles with experience, vision, and commitment.
+                </p>
             </div>
-            <h2 class="mb-3 font-display text-3xl font-black text-white lg:text-4xl">Looking for the Nearest LITUS Showroom?</h2>
-            <p class="mb-8 text-gray-400">Our team is ready to help you find the right motorcycle, parts, or service support.</p>
-            <div class="flex flex-col justify-center gap-3 sm:flex-row">
-                <a href="#" class="rounded-full bg-litus-red px-8 py-3 text-sm font-bold text-white">Contact Us</a>
-                <a href="#locations" class="rounded-full border border-white/30 px-8 py-3 text-sm font-bold text-white transition-all hover:border-white/60 hover:bg-white/5">View Locations</a>
+
+            {{-- Leaders --}}
+            <div class="mb-[18px] grid grid-cols-1 gap-8 max-[1050px]:mx-auto max-[1050px]:max-w-[650px] min-[1051px]:grid-cols-3">
+                @foreach ($teamLeaders as $member)
+                    <div class="relative h-[280px] overflow-hidden rounded-lg bg-[#20242c] shadow-[0_10px_25px_rgba(0,0,0,0.18)] min-[651px]:h-[250px]">
+                        <img src="{{ $member['img'] }}"
+                             alt="{{ $member['name'] }}"
+                             class="block h-full w-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/92 via-black/25 to-black/[0.05]"></div>
+                        <div class="absolute bottom-3.5 left-4 z-[2] text-white">
+                            <h3 class="mb-1 text-[19px] font-black">{{ $member['name'] }}</h3>
+                            <p class="text-[13px] font-black text-[#ff1029]">{{ $member['role'] }}</p>
+                        </div>
+                        <a href="#"
+                           class="absolute bottom-3.5 right-3.5 z-[3] flex h-8 w-8 items-center justify-center rounded bg-white/90 text-[#07152f] transition-colors hover:bg-white"
+                           aria-label="LinkedIn profile for {{ $member['name'] }}">
+                            <x-litus-icon name="linkedin" class="h-3.5 w-3.5" />
+                        </a>
+                    </div>
+                @endforeach
             </div>
+
+            {{-- Team members --}}
+            <div class="mb-6 grid grid-cols-1 gap-6 max-[650px]:grid-cols-1 min-[651px]:grid-cols-2 min-[1051px]:grid-cols-4">
+                @foreach ($teamMembers as $member)
+                    <div class="relative overflow-hidden rounded-lg border border-[#dfe3ea] bg-white shadow-[0_8px_22px_rgba(0,0,0,0.06)]">
+                        <div class="h-[155px] overflow-hidden bg-[#edf0f5]">
+                            <img src="{{ $member['img'] }}"
+                                 alt="{{ $member['name'] }}"
+                                 class="block h-full w-full object-cover object-top">
+                        </div>
+                        <div class="relative min-h-[68px] px-3.5 pb-4 pt-3">
+                            <h4 class="mb-1 text-[13px] font-black text-[#111b46]">{{ $member['name'] }}</h4>
+                            <p class="text-[11px] font-medium leading-snug text-[#4e5a6a]">
+                                {{ $member['role'] }},<br>{{ $member['dept'] }}
+                            </p>
+                            <a href="#"
+                               class="absolute bottom-3.5 right-3 flex h-[27px] w-[27px] items-center justify-center rounded border border-[#dfe3ea] bg-white text-[#07152f] transition-colors hover:bg-gray-50"
+                               aria-label="LinkedIn profile for {{ $member['name'] }}">
+                                <x-litus-icon name="linkedin" class="h-3 w-3" />
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            {{-- Operation team --}}
+            <div class="overflow-hidden rounded-[14px] bg-cover bg-center px-5 py-7 pb-[22px] shadow-[0_14px_35px_rgba(0,0,0,0.18)] min-[651px]:px-[38px] min-[651px]:pt-7"
+                 style="background-image: linear-gradient(90deg, rgba(3,14,33,0.98), rgba(4,20,46,0.96)), url('{{ $operationBg }}');">
+                <div class="grid grid-cols-1 gap-7 min-[1051px]:grid-cols-[38%_62%]">
+                    <div>
+                        <span class="mb-2.5 block text-[13px] font-black uppercase tracking-[3px] text-[#ff1029]">Our People</span>
+                        <h2 class="mb-[18px] text-[28px] font-black leading-tight text-white min-[651px]:text-[33px]">Our Operation Team</h2>
+                        <p class="max-w-[470px] text-sm font-medium leading-[1.65] text-[#dbe4ee]">
+                            Meet the LITUS Automobiles team, a passionate ensemble of dedicated professionals committed to elevating your motorcycle experience. With a wealth of knowledge and a shared drive to help every rider, our team is here to guide you, answer your questions, and keep your journey smooth from selection to service.
+                        </p>
+                    </div>
+
+                    <div class="h-[180px] overflow-hidden rounded-lg bg-[#e9edf3] min-[651px]:h-[210px]">
+                        <img src="{{ $operationTeamImg }}"
+                             alt="LITUS Operation Team"
+                             class="block h-full w-full object-cover object-center">
+                    </div>
+
+                    <div class="col-span-full mt-2.5 grid grid-cols-1 gap-[22px] min-[651px]:grid-cols-2 min-[1051px]:grid-cols-4">
+                        @foreach ($opStats as $stat)
+                            <div class="flex items-center gap-[15px] rounded-lg border border-white/25 bg-white/[0.04] px-[18px] py-[17px] max-[650px]:items-start">
+                                <div class="flex h-[55px] w-[55px] shrink-0 items-center justify-center rounded-full bg-white text-[#ff1029]">
+                                    <x-litus-icon :name="$stat['icon']" class="h-6 w-6" />
+                                </div>
+                                <div>
+                                    <h4 class="mb-1 text-sm font-black text-white">{{ $stat['title'] }}</h4>
+                                    <p class="text-xs leading-snug text-[#dbe4ee]">{{ $stat['desc'] }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    {{-- SHOWROOMS & SERVICE CENTERS --}}
+    <section id="locations" class="bg-[#f7f8fa] px-5 pt-5 max-sm:px-3.5 max-sm:pt-[18px]">
+        <div class="mx-auto max-w-[1350px]">
+
+            <div class="mb-[18px] text-center">
+                <span class="mb-1.5 block text-sm font-black uppercase tracking-[3px] text-[#ff1029]">Our Locations</span>
+                <h2 class="mb-2 text-[28px] font-black leading-tight text-[#07152f] min-[651px]:text-[34px]">Our Showrooms &amp; Service Centers</h2>
+                <p class="text-sm font-semibold leading-normal text-[#555f70] min-[651px]:text-base">
+                    Visit our showrooms and service centers across the Maldives for motorcycles, genuine parts, and trusted support.
+                </p>
+            </div>
+
+            <div class="mb-[18px] grid grid-cols-1 gap-[18px] min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4">
+                @foreach ($showrooms as $showroom)
+                    <div @class([
+                        'overflow-hidden rounded-[9px] border border-[#dfe3ea] bg-white shadow-[0_8px_22px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(0,0,0,0.1)]',
+                        'min-[1101px]:col-span-2' => $showroom['featured'],
+                    ])>
+                        <div @class([
+                            'h-[160px] overflow-hidden bg-[#dfe5ec] max-sm:h-[160px]',
+                            'min-[651px]:h-[125px]' => ! $showroom['featured'],
+                            'min-[651px]:h-[145px]' => $showroom['featured'],
+                        ])>
+                            <img src="{{ $showroom['img'] }}"
+                                 alt="{{ $showroom['name'] }}"
+                                 class="block h-full w-full object-cover">
+                        </div>
+                        <div class="px-[18px] pb-4 pt-3.5">
+                            <h3 class="mb-2 text-base font-black text-[#111b46]">{{ $showroom['name'] }}</h3>
+                            <p class="mb-3.5 text-[13px] font-semibold leading-snug text-[#404b60]">{{ $showroom['address'] }}</p>
+                            <a href="{{ route('contact') }}"
+                               class="group/contact inline-flex h-8 min-w-[140px] items-center justify-center gap-3 rounded-[5px] bg-[#061a45] px-[18px] text-[13px] font-black text-white transition-colors duration-300 hover:bg-[#ff1029]">
+                                Contact Now
+                                <x-litus-icon name="arrow-right" class="h-4 w-4 text-[#ff1029] transition-colors group-hover/contact:text-white" />
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
+
+    {{-- LOCATIONS CTA BANNER --}}
+    <section class="border-t border-white/[0.08] bg-cover bg-center px-5 py-[30px]"
+             style="background-image: linear-gradient(90deg, rgba(3,13,31,0.98), rgba(4,19,43,0.96)), url('{{ $locationsBannerBg }}');">
+        <div class="mx-auto grid max-w-[1350px] grid-cols-1 items-center gap-[22px] min-[1101px]:grid-cols-[auto_1fr_auto] min-[1101px]:gap-9 max-[1100px]:text-center">
+
+            <div class="flex items-center justify-center gap-6 min-[1101px]:justify-start">
+                <div class="relative">
+                    <div class="flex h-[78px] w-[78px] shrink-0 items-center justify-center rounded-full border-[5px] border-white/20 bg-[#e9252f] text-white shadow-[0_0_0_2px_rgba(255,16,41,0.45)] min-[651px]:h-[92px] min-[651px]:w-[92px]">
+                        <x-litus-icon name="map-pin" class="h-8 w-8 min-[651px]:h-10 min-[651px]:w-10" />
+                    </div>
+                    <div class="pointer-events-none absolute -right-[70px] top-[15px] hidden h-[55px] w-[75px] rotate-[20deg] rounded-full border-r-[3px] border-t-[3px] border-dashed border-white/55 min-[651px]:block"></div>
+                </div>
+                <div class="hidden h-[75px] w-px bg-white/22 min-[1101px]:block"></div>
+            </div>
+
+            <div>
+                <h2 class="mb-2 text-[25px] font-black text-white min-[651px]:text-[32px]">Looking for the Nearest LITUS Showroom?</h2>
+                <p class="text-[15px] font-semibold text-[#d6deea]">
+                    Our team is ready to help you find the right motorcycle, parts, or service support.
+                </p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-[22px] max-sm:w-full max-sm:flex-col min-[1101px]:justify-end">
+                <a href="{{ route('contact') }}"
+                   class="inline-flex h-[52px] min-w-[190px] items-center justify-center gap-3.5 rounded-md bg-[#f30d23] px-7 text-[15px] font-black text-white shadow-[0_8px_22px_rgba(243,13,35,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a] max-sm:w-full">
+                    Contact Us
+                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                </a>
+                <a href="#locations"
+                   class="inline-flex h-[52px] min-w-[190px] items-center justify-center gap-3.5 rounded-md border-2 border-white/55 bg-white/[0.03] px-7 text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ff1029] hover:bg-[rgba(255,16,41,0.12)] max-sm:w-full">
+                    View Locations
+                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                </a>
+            </div>
+
         </div>
     </section>
 
