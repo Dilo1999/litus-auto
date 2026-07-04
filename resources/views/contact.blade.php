@@ -5,6 +5,7 @@
 @section('content')
 @php
     $heroBg = 'https://images.unsplash.com/photo-1605902711622-cfb43c4437d2?auto=format&fit=crop&w=1800&q=80';
+    $heroAgentsImg = asset('images/contact us/' . rawurlencode('ChatGPT Image Jul 4, 2026, 11_35_33 AM.png'));
 
     $heroFeatures = [
         ['icon' => 'phone', 'title' => 'Fast Response', 'desc' => 'Quick answers when you need them.'],
@@ -69,27 +70,29 @@
              style="background-image: linear-gradient(90deg, rgba(2,14,32,0.95) 0%, rgba(3,18,40,0.92) 34%, rgba(3,18,40,0.82) 56%, rgba(3,18,40,0.90) 100%), url('{{ $heroBg }}');">
         <div class="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_30%_45%,rgba(4,42,83,0.6),transparent_35%),radial-gradient(circle_at_75%_45%,rgba(4,33,67,0.55),transparent_38%),linear-gradient(to_bottom,rgba(0,0,0,0.15),rgba(2,10,25,0.96))]"></div>
 
-        <div class="relative z-[2] litus-container grid w-full grid-cols-1 items-center gap-8 pt-16 pb-12 sm:pt-20 min-[1100px]:grid-cols-[48%_52%] min-[1100px]:gap-10">
-            {{-- Support agents illustration --}}
-            <div class="relative flex min-h-[320px] items-end justify-center min-[1100px]:min-h-[400px] min-[1100px]:origin-bottom min-[1100px]:scale-[0.82]">
-                <div class="contact-hero-person contact-hero-person-left" aria-hidden="true">
-                    <div class="contact-hero-placeholder"></div>
-                    <div class="contact-hero-headset"></div>
-                    <div class="contact-hero-mic"></div>
-                    <div class="contact-hero-shirt-logo">LITUS</div>
-                    <div class="contact-hero-arms"></div>
-                </div>
-                <div class="contact-hero-person contact-hero-person-right" aria-hidden="true">
-                    <div class="contact-hero-placeholder"></div>
-                    <div class="contact-hero-headset"></div>
-                    <div class="contact-hero-mic"></div>
-                    <div class="contact-hero-shirt-logo">LITUS</div>
-                    <div class="contact-hero-arms"></div>
-                </div>
-            </div>
+        {{-- Support agents — outside grid, free bottom alignment (desktop) --}}
+        <img src="{{ $heroAgentsImg }}"
+             alt="LITUS customer support team"
+             class="pointer-events-none absolute z-[2] bottom-0 left-[max(1.25rem,calc((100vw-90rem)/2+1rem))] hidden h-auto max-h-[720px] w-auto max-w-[min(720px,43vw)] origin-bottom scale-[1.1] object-contain object-bottom min-[1100px]:block"
+             width="560"
+             height="400"
+             decoding="async">
+
+        <div class="relative z-[2] litus-container grid w-full grid-cols-1 gap-6 pt-14 pb-10 sm:pt-16 min-[1100px]:grid-cols-[minmax(0,42%)_minmax(0,58%)] min-[1100px]:items-center min-[1100px]:gap-12 min-[1100px]:pb-14 min-[1100px]:pt-16">
+            {{-- Mobile image only — no clipping wrapper --}}
+            <img src="{{ $heroAgentsImg }}"
+                 alt=""
+                 aria-hidden="true"
+                 class="mx-auto h-auto max-h-[340px] w-full max-w-[520px] origin-bottom scale-105 object-contain object-bottom min-[1100px]:hidden"
+                 width="560"
+                 height="400"
+                 decoding="async">
+
+            {{-- Desktop spacer keeps text column aligned --}}
+            <div class="hidden min-[1100px]:block min-[1100px]:min-h-[500px]" aria-hidden="true"></div>
 
             {{-- Hero content --}}
-            <div class="max-w-[760px] pl-0 text-center min-[1100px]:pl-5 min-[1100px]:text-left">
+            <div class="relative z-10 min-w-0 max-w-[760px] pl-0 text-center min-[1100px]:col-start-2 min-[1100px]:pl-4 min-[1100px]:text-left">
                 <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:text-[15px]">
                     Customer Support
                 </p>

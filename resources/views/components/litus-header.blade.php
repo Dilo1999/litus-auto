@@ -7,7 +7,7 @@
         'Motorcycles' => route('motorcycles'),
         'Ownership Plans' => '#',
         'Parts' => route('parts'),
-        'Service Center' => '#',
+        'Service Center' => route('service-center'),
         'Contact Us' => route('contact'),
         'Gallery' => '#',
     ];

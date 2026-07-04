@@ -9,7 +9,7 @@
     ];
     $serviceLinks = [
         'Parts' => route('parts'),
-        'Service Center' => '#',
+        'Service Center' => route('service-center'),
         'Application Made Easy' => '#',
         'Genuine Parts' => route('parts'),
         'Reliable Service' => '#',

@@ -5,3 +5,4 @@ import './motorcycles';
 import './parts';
 import './product-gallery';
 import './contact';
+import './service-center';
