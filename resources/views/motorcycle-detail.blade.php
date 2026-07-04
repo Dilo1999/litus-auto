@@ -58,7 +58,7 @@
         ['name' => 'Scoopy Prestige 2026', 'discount' => 'MVR 14,000', 'img' => $productImages[2], 'slug' => 'scoopy-prestige-2026'],
     ];
 
-    $heroBg = 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1800&q=80';
+    $heroBg = asset('images/motorcycles/details/' . rawurlencode('ChatGPT Image Jul 4, 2026, 12_38_11 PM.png'));
     $offerBannerBg = 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1400&q=80';
 
     $heroFeatures = [
@@ -75,15 +75,15 @@
 
 
     {{-- PRODUCT HERO --}}
-    <section class="relative min-h-[680px] overflow-hidden border border-[rgba(40,85,130,0.45)] bg-[#06101f] bg-cover bg-center pb-[82px] max-[1100px]:min-h-0 max-[1100px]:pb-8"
+    <section class="relative min-h-[540px] overflow-hidden border border-[rgba(40,85,130,0.45)] bg-[#06101f] bg-cover bg-center pb-[82px] max-[1100px]:min-h-0 max-[1100px]:pb-8"
              style="background-image: linear-gradient(90deg, rgba(3,13,28,0.98) 0%, rgba(3,13,28,0.94) 35%, rgba(3,13,28,0.60) 58%, rgba(3,13,28,0.78) 100%), url('{{ $heroBg }}');">
         <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_48%,rgba(255,255,255,0.12),transparent_28%),linear-gradient(to_bottom,rgba(0,0,0,0.12),rgba(1,8,20,0.95))]"></div>
 
-        <div class="relative z-[2] litus-container pt-16 pb-12 sm:pt-20">
+        <div class="relative z-[2] litus-container pt-12 pb-8 sm:pt-14">
             {{-- Desktop hero product image — free-positioned for maximum size --}}
             <img src="{{ $galleryImages[0] }}"
                  alt="ADV 160 2026"
-                 class="pointer-events-none absolute bottom-6 right-0 z-[1] hidden h-auto max-h-[min(920px,85vh)] w-auto max-w-[min(980px,62vw)] object-contain object-bottom min-[1100px]:block">
+                 class="pointer-events-none absolute bottom-6 right-0 z-[1] hidden h-auto max-h-[min(680px,72vh)] w-auto max-w-[min(820px,55vw)] object-contain object-bottom min-[1100px]:block">
 
             <div class="relative z-[2] grid grid-cols-1 items-center gap-8 min-[1100px]:grid-cols-[50%_50%] min-[1100px]:gap-5">
                 <div class="max-w-[650px] text-left max-[1100px]:mx-auto max-[1100px]:text-center min-[1100px]:max-w-none">
@@ -110,7 +110,7 @@
                             Limited Offer
                         </span>
                         <div class="rounded-[9px] bg-[#f40d23] px-5 py-4 text-2xl font-black text-white shadow-[0_12px_28px_rgba(244,13,35,0.35)] sm:px-[22px] sm:py-[19px] sm:text-[34px]">
-                            Special Price: MVR 16,750
+                            Special Discount: MVR 16,750
                         </div>
                     </div>
 
@@ -120,18 +120,18 @@
 
                     <div class="flex flex-col gap-3 max-[1100px]:mx-auto min-[1100px]:flex-row min-[1100px]:flex-nowrap min-[1100px]:items-stretch min-[1100px]:gap-2.5">
                         <button type="button"
-                                class="inline-flex h-14 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[#f40d23] px-4 text-base font-black text-white shadow-[0_10px_24px_rgba(244,13,35,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a] min-[1100px]:h-[58px] min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[14px]">
+                                class="inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[#f40d23] px-4 text-sm font-black text-white shadow-[0_10px_24px_rgba(244,13,35,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a] min-[1100px]:h-12 min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[13px]">
                             Buy Now
-                            <x-litus-icon name="shopping-bag" class="h-5 w-5 shrink-0" />
+                            <x-litus-icon name="shopping-bag" class="h-4 w-4 shrink-0" />
                         </button>
                         <a href="tel:+9607797442"
-                           class="inline-flex h-14 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-4 text-base font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f40d23] hover:bg-[rgba(244,13,35,0.12)] min-[1100px]:h-[58px] min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[14px]">
+                           class="inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-4 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f40d23] hover:bg-[rgba(244,13,35,0.12)] min-[1100px]:h-12 min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[13px]">
                             Contact Sales Team
-                            <x-litus-icon name="arrow-right" class="h-5 w-5 shrink-0" />
+                            <x-litus-icon name="arrow-right" class="h-4 w-4 shrink-0" />
                         </a>
                         <a href="#"
-                           class="inline-flex h-14 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-4 text-base font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f40d23] hover:bg-[rgba(244,13,35,0.12)] min-[1100px]:h-[58px] min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[14px]">
-                            <x-litus-icon name="credit-card" class="h-5 w-5 shrink-0" />
+                           class="inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-4 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f40d23] hover:bg-[rgba(244,13,35,0.12)] min-[1100px]:h-12 min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[13px]">
+                            <x-litus-icon name="credit-card" class="h-4 w-4 shrink-0" />
                             View Ownership Plans
                         </a>
                     </div>
@@ -140,10 +140,10 @@
                 {{-- Mobile hero product image --}}
                 <img src="{{ $galleryImages[0] }}"
                      alt="ADV 160 2026"
-                     class="mx-auto max-h-[720px] w-full max-w-[1200px] object-contain min-[1100px]:hidden">
+                     class="mx-auto max-h-[520px] w-full max-w-[1000px] object-contain min-[1100px]:hidden">
 
                 {{-- Desktop spacer keeps grid balance --}}
-                <div class="hidden min-[1100px]:block min-[1100px]:min-h-[560px]" aria-hidden="true"></div>
+                <div class="hidden min-[1100px]:block min-[1100px]:min-h-[400px]" aria-hidden="true"></div>
             </div>
         </div>
 
@@ -183,10 +183,10 @@
         <div class="litus-container grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-8">
             {{-- Gallery --}}
             <div class="w-full rounded-[14px] border border-black/5 bg-white p-2.5 shadow-[0_12px_35px_rgba(0,0,0,0.08)]">
-                <div class="relative flex aspect-[4/3] max-h-[420px] min-h-[280px] items-center justify-center overflow-hidden rounded-xl border border-[#e8ebef] bg-white sm:min-h-[340px] lg:max-h-[390px] lg:min-h-[390px]">
+                <div class="flex items-center justify-center gap-2 py-2 sm:gap-3">
                     <button type="button"
                             data-gallery-prev
-                            class="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#e3e7ec] bg-white text-xl font-light text-[#07152f] shadow-[0_6px_16px_rgba(0,0,0,0.08)] transition-all duration-300 hover:text-[#ff1029] sm:left-[18px] sm:h-[52px] sm:w-[52px]"
+                            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#e3e7ec] bg-white text-xl font-light text-[#07152f] shadow-[0_6px_16px_rgba(0,0,0,0.08)] transition-all duration-300 hover:text-[#ff1029] sm:h-[52px] sm:w-[52px]"
                             aria-label="Previous image">
                         <x-litus-icon name="chevron-left" class="h-6 w-6 sm:h-7 sm:w-7" />
                     </button>
@@ -194,17 +194,17 @@
                     <img data-gallery-main
                          src="{{ $galleryImages[0] }}"
                          alt="ADV 160 2026"
-                         class="max-h-[82%] max-w-[78%] object-contain drop-shadow-[0_18px_16px_rgba(0,0,0,0.2)] transition-opacity duration-300">
+                         class="min-w-0 flex-1 object-contain transition-opacity duration-300 max-h-[420px] sm:max-h-[480px]">
 
                     <button type="button"
                             data-gallery-next
-                            class="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#e3e7ec] bg-white text-xl font-light text-[#07152f] shadow-[0_6px_16px_rgba(0,0,0,0.08)] transition-all duration-300 hover:text-[#ff1029] sm:right-[18px] sm:h-[52px] sm:w-[52px]"
+                            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#e3e7ec] bg-white text-xl font-light text-[#07152f] shadow-[0_6px_16px_rgba(0,0,0,0.08)] transition-all duration-300 hover:text-[#ff1029] sm:h-[52px] sm:w-[52px]"
                             aria-label="Next image">
                         <x-litus-icon name="chevron-right" class="h-6 w-6 sm:h-7 sm:w-7" />
                     </button>
                 </div>
 
-                <div class="mt-3 grid grid-cols-4 gap-3 sm:gap-4">
+                <div class="mt-3 grid grid-cols-3 gap-3 sm:gap-4">
                     @foreach ($galleryImages as $index => $img)
                         <button type="button"
                                 data-gallery-thumb="{{ $index }}"

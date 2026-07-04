@@ -11,16 +11,16 @@
     ];
 
     $promoCards = [
-        ['model' => 'ADV 160 2026', 'discount' => 'MVR 16,750', 'img' => $productImages[0]],
-        ['model' => 'ADV 160 2026', 'discount' => 'MVR 16,750', 'img' => $productImages[1]],
-        ['model' => 'PCX 160 ABS', 'discount' => 'MVR 11,000', 'img' => $productImages[2]],
-        ['model' => 'N Max 155 Neo S', 'discount' => 'MVR 14,100', 'img' => $productImages[0]],
+        ['model' => 'ADV 160 2026', 'slug' => 'adv-160-2026', 'discount' => 'MVR 16,750', 'img' => $productImages[0]],
+        ['model' => 'ADV 160 2026', 'slug' => 'adv-160-2026', 'discount' => 'MVR 16,750', 'img' => $productImages[1]],
+        ['model' => 'PCX 160 ABS', 'slug' => 'pcx-160-abs', 'discount' => 'MVR 11,000', 'img' => $productImages[2]],
+        ['model' => 'N Max 155 Neo S', 'slug' => 'n-max-155-neo-s', 'discount' => 'MVR 14,100', 'img' => $productImages[0]],
     ];
 
     $topRides = [
-        ['model' => 'ADV 160 2026', 'cc' => '160CC', 'capacity' => '8.1L', 'img' => $productImages[0]],
-        ['model' => 'Scoopy Prestige 2026', 'cc' => '110CC', 'capacity' => '4.2L', 'img' => $productImages[1]],
-        ['model' => 'Scoopy Club 12 2026', 'cc' => '110CC', 'capacity' => '4.2L', 'img' => $productImages[2]],
+        ['model' => 'ADV 160 2026', 'slug' => 'adv-160-2026', 'cc' => '160CC', 'capacity' => '8.1L', 'img' => $productImages[0]],
+        ['model' => 'Scoopy Prestige 2026', 'slug' => 'scoopy-prestige-2026', 'cc' => '110CC', 'capacity' => '4.2L', 'img' => $productImages[1]],
+        ['model' => 'Scoopy Club 12 2026', 'slug' => 'scoopy-club-12-2026', 'cc' => '110CC', 'capacity' => '4.2L', 'img' => $productImages[2]],
     ];
 
     $galleryImages = [
@@ -149,23 +149,32 @@
 
                 <div class="grid grid-cols-1 gap-[18px] min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4">
                     @foreach ($promoCards as $card)
-                        <div class="relative min-h-[360px] overflow-hidden rounded-[10px] border border-[#dfe3ea] bg-white px-[22px] pb-[26px] pt-[22px] shadow-[0_12px_28px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_42px_rgba(0,0,0,0.12)] min-[651px]:min-h-[390px]">
-                            <div class="absolute left-[18px] top-3.5">
-                                <span class="relative block rounded-t-lg rounded-br-lg bg-[#f30d23] px-[18px] py-2 text-xs font-black uppercase text-white shadow-[0_8px_16px_rgba(243,13,35,0.25)]">
-                                    Limited Offer
-                                    <span class="absolute bottom-[-6px] left-0 h-1.5 w-[35px] rounded-br-lg bg-[#b80718]"></span>
-                                </span>
+                        <div class="group relative min-h-[360px] overflow-hidden rounded-[10px] border border-[#dfe3ea] bg-white px-[22px] pb-[26px] pt-[22px] shadow-[0_12px_28px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_42px_rgba(0,0,0,0.12)] min-[651px]:min-h-[390px]">
+                            <a href="{{ route('motorcycle.show', $card['slug']) }}"
+                               class="absolute inset-0 z-[1]"
+                               aria-label="View {{ $card['model'] }}"></a>
+
+                            <div class="pointer-events-none relative z-[2]">
+                                <div class="absolute left-[18px] top-3.5">
+                                    <span class="relative block rounded-t-lg rounded-br-lg bg-[#f30d23] px-[18px] py-2 text-xs font-black uppercase text-white shadow-[0_8px_16px_rgba(243,13,35,0.25)]">
+                                        Limited Offer
+                                        <span class="absolute bottom-[-6px] left-0 h-1.5 w-[35px] rounded-br-lg bg-[#b80718]"></span>
+                                    </span>
+                                </div>
+
+                                <div class="mt-9 flex h-[205px] items-center justify-center">
+                                    <img src="{{ $card['img'] }}"
+                                         alt="{{ $card['model'] }}"
+                                         class="h-[180px] w-full max-w-[250px] object-contain drop-shadow-[0_20px_14px_rgba(0,0,0,0.22)] max-sm:max-w-[230px]">
+                                </div>
+
+                                <div class="mt-3 text-center">
+                                    <h3 class="mb-3 text-lg font-black text-[#111b46]">{{ $card['model'] }}</h3>
+                                    <p class="mb-5 text-[15px] font-black text-[#ff1029]">Discount: {{ $card['discount'] }}</p>
+                                </div>
                             </div>
 
-                            <div class="mt-9 flex h-[205px] items-center justify-center">
-                                <img src="{{ $card['img'] }}"
-                                     alt="{{ $card['model'] }}"
-                                     class="h-[180px] w-full max-w-[250px] object-contain drop-shadow-[0_20px_14px_rgba(0,0,0,0.22)] max-sm:max-w-[230px]">
-                            </div>
-
-                            <div class="mt-3 text-center">
-                                <h3 class="mb-3 text-lg font-black text-[#111b46]">{{ $card['model'] }}</h3>
-                                <p class="mb-5 text-[15px] font-black text-[#ff1029]">Discount: {{ $card['discount'] }}</p>
+                            <div class="relative z-[2] text-center">
                                 <a href="{{ route('motorcycles') }}"
                                    class="inline-flex h-[43px] w-[175px] items-center justify-center rounded-md border-2 border-[#8d97ad] bg-white text-sm font-black text-[#07152f] transition-colors duration-300 hover:border-[#f30d23] hover:bg-[#f30d23] hover:text-white">
                                     Buy Now
@@ -199,26 +208,34 @@
             <div class="grid grid-cols-1 gap-[22px] min-[721px]:gap-[38px] min-[1101px]:grid-cols-3 max-[1100px]:min-[721px]:grid-cols-2">
                 @foreach ($topRides as $ride)
                     <div class="group relative min-h-0 overflow-hidden rounded-xl border border-white/12 bg-white/[0.07] px-[22px] pb-7 pt-6 shadow-[0_18px_35px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[rgba(255,16,41,0.55)] hover:shadow-[0_22px_45px_rgba(0,0,0,0.35)] min-[721px]:min-h-[385px] min-[721px]:px-[30px] min-[721px]:pb-7 min-[721px]:pt-6">
-                        <div class="mb-[18px] flex h-[190px] items-center justify-center min-[721px]:h-[215px]">
-                            <img src="{{ $ride['img'] }}"
-                                 alt="{{ $ride['model'] }}"
-                                 class="h-[185px] w-full max-w-[360px] object-contain drop-shadow-[0_22px_18px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:scale-105 min-[721px]:h-[210px]">
-                        </div>
+                        <a href="{{ route('motorcycle.show', $ride['slug']) }}"
+                           class="absolute inset-0 z-[1]"
+                           aria-label="View {{ $ride['model'] }}"></a>
 
-                        <div>
-                            <h3 class="mb-4 text-[22px] font-black text-white">{{ $ride['model'] }}</h3>
-
-                            <div class="mb-[22px] flex flex-wrap items-center gap-6">
-                                <div class="flex items-center gap-2 text-[15px] font-extrabold text-[#e7eef8]">
-                                    <x-litus-icon name="gauge" class="h-[17px] w-[17px] text-white" />
-                                    {{ $ride['cc'] }}
-                                </div>
-                                <div class="flex items-center gap-2 text-[15px] font-extrabold text-[#e7eef8]">
-                                    <x-litus-icon name="fuel" class="h-[17px] w-[17px] text-white" />
-                                    Capacity {{ $ride['capacity'] }}
-                                </div>
+                        <div class="pointer-events-none relative z-[2]">
+                            <div class="mb-[18px] flex h-[190px] items-center justify-center min-[721px]:h-[215px]">
+                                <img src="{{ $ride['img'] }}"
+                                     alt="{{ $ride['model'] }}"
+                                     class="h-[185px] w-full max-w-[360px] object-contain drop-shadow-[0_22px_18px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:scale-105 min-[721px]:h-[210px]">
                             </div>
 
+                            <div>
+                                <h3 class="mb-4 text-[22px] font-black text-white">{{ $ride['model'] }}</h3>
+
+                                <div class="mb-[22px] flex flex-wrap items-center gap-6">
+                                    <div class="flex items-center gap-2 text-[15px] font-extrabold text-[#e7eef8]">
+                                        <x-litus-icon name="gauge" class="h-[17px] w-[17px] text-white" />
+                                        {{ $ride['cc'] }}
+                                    </div>
+                                    <div class="flex items-center gap-2 text-[15px] font-extrabold text-[#e7eef8]">
+                                        <x-litus-icon name="fuel" class="h-[17px] w-[17px] text-white" />
+                                        Capacity {{ $ride['capacity'] }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative z-[2]">
                             <a href="{{ route('motorcycles') }}"
                                class="inline-flex h-12 w-[170px] items-center justify-center rounded-md border-2 border-[#bd2938] bg-transparent text-[15px] font-black text-[#ff394b] transition-colors duration-300 hover:border-[#ff1029] hover:bg-[#ff1029] hover:text-white">
                                 Explore More
