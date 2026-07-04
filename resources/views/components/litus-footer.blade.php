@@ -15,20 +15,17 @@
         'Reliable Service' => '#',
     ];
     $socialLinks = ['facebook', 'instagram', 'message-circle'];
+    $logo = asset('images/logo/' . rawurlencode('Litus-Automobiles-white (1).png'));
 @endphp
 
 <footer class="bg-litus-footer">
     <div class="litus-container grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-            <div class="mb-4 flex items-center gap-2">
-                <div class="flex h-8 w-8 items-center justify-center rounded-sm bg-litus-red">
-                    <span class="text-sm font-black text-white">L</span>
-                </div>
-                <div>
-                    <span class="text-lg font-black text-white">LITUS</span>
-                    <span class="block text-xs uppercase tracking-widest text-gray-400">Automobiles</span>
-                </div>
-            </div>
+            <a href="{{ route('home') }}" class="mb-4 inline-flex shrink-0 items-center">
+                <img src="{{ $logo }}"
+                     alt="LITUS Automobiles"
+                     class="h-9 w-auto sm:h-10">
+            </a>
             <p class="mb-5 text-sm leading-relaxed text-gray-400">
                 Your trusted partner for premium motorcycles, genuine parts, and reliable service across the Maldives.
             </p>

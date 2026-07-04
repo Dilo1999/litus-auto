@@ -149,34 +149,34 @@
 
                 <div class="grid grid-cols-1 gap-[18px] min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4">
                     @foreach ($promoCards as $card)
-                        <div class="group relative min-h-[360px] overflow-hidden rounded-[10px] border border-[#dfe3ea] bg-white px-[22px] pb-[26px] pt-[22px] shadow-[0_12px_28px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_42px_rgba(0,0,0,0.12)] min-[651px]:min-h-[390px]">
+                        <div class="group relative min-h-[320px] overflow-hidden rounded-[10px] border border-[#dfe3ea] bg-white px-[18px] pb-5 pt-[18px] shadow-[0_12px_28px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_42px_rgba(0,0,0,0.12)] min-[651px]:min-h-[340px]">
                             <a href="{{ route('motorcycle.show', $card['slug']) }}"
                                class="absolute inset-0 z-[1]"
                                aria-label="View {{ $card['model'] }}"></a>
 
                             <div class="pointer-events-none relative z-[2]">
-                                <div class="absolute left-[18px] top-3.5">
-                                    <span class="relative block rounded-t-lg rounded-br-lg bg-[#f30d23] px-[18px] py-2 text-xs font-black uppercase text-white shadow-[0_8px_16px_rgba(243,13,35,0.25)]">
+                                <div class="absolute left-3 top-3">
+                                    <span class="relative block rounded-t-lg rounded-br-lg bg-[#f30d23] px-4 py-1.5 text-xs font-black uppercase text-white shadow-[0_8px_16px_rgba(243,13,35,0.25)]">
                                         Limited Offer
                                         <span class="absolute bottom-[-6px] left-0 h-1.5 w-[35px] rounded-br-lg bg-[#b80718]"></span>
                                     </span>
                                 </div>
 
-                                <div class="mt-9 flex h-[205px] items-center justify-center">
+                                <div class="mt-7 flex h-[170px] items-center justify-center">
                                     <img src="{{ $card['img'] }}"
                                          alt="{{ $card['model'] }}"
-                                         class="h-[180px] w-full max-w-[250px] object-contain drop-shadow-[0_20px_14px_rgba(0,0,0,0.22)] max-sm:max-w-[230px]">
+                                         class="h-[150px] w-full max-w-[230px] object-contain drop-shadow-[0_20px_14px_rgba(0,0,0,0.22)] max-sm:max-w-[210px]">
                                 </div>
 
-                                <div class="mt-3 text-center">
-                                    <h3 class="mb-3 text-lg font-black text-[#111b46]">{{ $card['model'] }}</h3>
-                                    <p class="mb-5 text-[15px] font-black text-[#ff1029]">Discount: {{ $card['discount'] }}</p>
+                                <div class="mt-2 text-center">
+                                    <h3 class="mb-2 text-lg font-black text-[#111b46]">{{ $card['model'] }}</h3>
+                                    <p class="mb-4 text-[15px] font-black text-[#ff1029]">Discount: {{ $card['discount'] }}</p>
                                 </div>
                             </div>
 
                             <div class="relative z-[2] text-center">
                                 <a href="{{ route('motorcycles') }}"
-                                   class="inline-flex h-[43px] w-[175px] items-center justify-center rounded-md border-2 border-[#8d97ad] bg-white text-sm font-black text-[#07152f] transition-colors duration-300 hover:border-[#f30d23] hover:bg-[#f30d23] hover:text-white">
+                                   class="inline-flex h-10 w-[175px] items-center justify-center rounded-md border-2 border-[#8d97ad] bg-white text-sm font-black text-[#07152f] transition-colors duration-300 hover:border-[#f30d23] hover:bg-[#f30d23] hover:text-white">
                                     Buy Now
                                 </a>
                             </div>
