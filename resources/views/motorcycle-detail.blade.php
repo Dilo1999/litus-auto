@@ -1,69 +1,9 @@
 @extends('layouts.litus')
 
-@section('title', 'ADV 160 2026 — LITUS Automobiles')
+@section('title', $motorcycle->name . ' — LITUS Automobiles')
 
 @section('content')
 @php
-    $productImages = [
-        asset('images/product/' . rawurlencode('premium 125 blue.png')),
-        asset('images/product/' . rawurlencode('premium 125 red.png')),
-        asset('images/product/' . rawurlencode('special edition 125 green yellow.png')),
-    ];
-
-    $spinImageFiles = [
-        'download.png',
-        'download (1).png',
-        'download (2).png',
-        'download (3).png',
-        'download (4).png',
-    ];
-
-    $spin360Dir = public_path('images/360');
-    $spinImages = [];
-    foreach ($spinImageFiles as $file) {
-        if (is_file($spin360Dir . DIRECTORY_SEPARATOR . $file)) {
-            $spinImages[] = asset('images/360/' . rawurlencode($file));
-        }
-    }
-    if (empty($spinImages)) {
-        $spinImages = $productImages;
-    }
-
-    $galleryImages = $productImages;
-
-    $colors = [
-        ['label' => 'Green', 'hex' => '#2f3c1c'],
-        ['label' => 'Brown', 'hex' => '#5a3515'],
-    ];
-
-    $highlights = [
-        ['icon' => 'gauge', 'label' => 'Engine Capacity', 'value' => '160cc'],
-        ['icon' => 'fuel', 'label' => 'Fuel Tank Capacity', 'value' => '8.1L'],
-        ['icon' => 'zap', 'label' => 'Fuel Type', 'value' => 'Gasoline'],
-        ['icon' => 'settings', 'label' => 'Transmission', 'value' => 'Automatic CVT Transmission'],
-    ];
-
-    $specs = [
-        ['icon' => 'gauge', 'label' => 'Engine Capacity', 'value' => '160cc'],
-        ['icon' => 'zap', 'label' => 'Fuel Type', 'value' => 'Gasoline'],
-        ['icon' => 'settings', 'label' => 'Carburation', 'value' => 'Fuel Injection'],
-        ['icon' => 'disc', 'label' => 'Brakes Front', 'value' => 'Disc - ABS'],
-        ['icon' => 'disc', 'label' => 'Brakes Rear', 'value' => 'Disc'],
-        ['icon' => 'arrow-up-down', 'label' => 'Suspension Front', 'value' => 'Telescopic Fork'],
-        ['icon' => 'circle', 'label' => 'Wheels Front', 'value' => 'Cast'],
-        ['icon' => 'circle', 'label' => 'Wheels Rear', 'value' => 'Cast'],
-        ['icon' => 'fuel', 'label' => 'Fuel Tank Capacity', 'value' => '8.1L'],
-        ['icon' => 'arrow-up-down', 'label' => 'Ground Clearance', 'value' => '165 mm'],
-        ['icon' => 'shield', 'label' => 'Frame Type', 'value' => 'Double Cradle'],
-        ['icon' => 'weight', 'label' => 'Net Weight', 'value' => '134 kg'],
-        ['icon' => 'arrow-up-down', 'label' => 'Seat Height', 'value' => '781 mm'],
-        ['icon' => 'settings', 'label' => 'Clutch', 'value' => 'Automatic Centrifugal Dry Clutch'],
-        ['icon' => 'settings', 'label' => 'Final Drive', 'value' => 'Belt'],
-        ['icon' => 'settings', 'label' => 'Transmission Type', 'value' => 'Automatic CVT Transmission'],
-    ];
-
-    $specColumns = array_chunk($specs, 8);
-
     $ownership = [
         ['icon' => 'check-circle', 'title' => 'Easy Application', 'desc' => 'Quick and hassle-free application process.'],
         ['icon' => 'credit-card', 'title' => 'Flexible Payment Options', 'desc' => 'Plans that match your budget.'],
@@ -71,24 +11,21 @@
         ['icon' => 'wrench', 'title' => 'Service Assistance', 'desc' => 'Ongoing support for a worry-free ride.'],
     ];
 
-    $related = [
-        ['name' => 'PCX 160 ABS', 'discount' => 'MVR 11,000', 'img' => $productImages[0], 'slug' => 'pcx-160-abs'],
-        ['name' => 'N Max 155 Neo S', 'discount' => 'MVR 14,100', 'img' => $productImages[1], 'slug' => 'n-max-155-neo-s'],
-        ['name' => 'Scoopy Prestige 2026', 'discount' => 'MVR 14,000', 'img' => $productImages[2], 'slug' => 'scoopy-prestige-2026'],
-    ];
-
-    $heroBg = asset('images/motorcycles/details/' . rawurlencode('ChatGPT Image Jul 4, 2026, 12_38_11 PM.png'));
-    $offerBannerBg = 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1400&q=80';
-
     $heroFeatures = [
         ['icon' => 'star', 'title' => 'Limited-Time Offer', 'desc' => 'Best price, limited period'],
         ['icon' => 'credit-card', 'title' => 'Flexible Ownership', 'desc' => 'Plans that fit you'],
         ['icon' => 'shield', 'title' => 'Genuine Motorcycle', 'desc' => 'Trusted & authentic'],
         ['icon' => 'wrench', 'title' => 'Service Support', 'desc' => "We've got your back"],
     ];
+
+    $offerBannerBg = 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1400&q=80';
+    $specs = $motorcycle->specs ?? [];
+    $highlights = $motorcycle->highlights();
+    $specColumns = $motorcycle->specColumns();
+    $heroBg = $motorcycle->heroBackgroundUrl();
 @endphp
 
-<div class="font-sans">
+<div class="font-sans" data-motorcycle-detail data-spin-by-color='@json($spinByColor)' data-gallery-by-color='@json($galleryByColor)'>
 
     <x-litus-header active="Motorcycles" />
 
@@ -102,42 +39,44 @@
             {{-- Desktop hero product image — free-positioned for maximum size --}}
             <x-product-360-viewer
                 :frames="$spinImages"
-                alt="ADV 160 2026"
+                alt="{{ $motorcycle->name }}"
                 img-class="block h-auto max-h-[min(680px,72vh)] w-auto max-w-[min(820px,55vw)] object-contain object-bottom"
                 class="absolute bottom-6 right-0 z-[4] hidden cursor-grab select-none min-[1100px]:block" />
 
             <div class="relative z-[2] grid grid-cols-1 items-center gap-8 min-[1100px]:pointer-events-none min-[1100px]:grid-cols-[50%_50%] min-[1100px]:gap-5">
                 <div class="max-w-[650px] text-left max-[1100px]:mx-auto max-[1100px]:text-center min-[1100px]:pointer-events-auto min-[1100px]:max-w-none">
                     <p class="mb-6 text-base font-black uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:mb-5 max-md:text-[15px]">
-                        Category: Touring Bikes
+                        Category: {{ $motorcycle->category }}
                     </p>
 
                     <h1 class="mb-7 font-display text-[clamp(2.75rem,5.5vw,5.125rem)] font-black leading-none tracking-[-0.02em] text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.7)] max-md:text-5xl">
-                        ADV 160 2026
+                        {{ $motorcycle->name }}
                     </h1>
 
                     <div>
                         <p class="text-lg font-extrabold text-white sm:text-[22px]">
                             Original Price:
-                            <span class="text-[#d7dce5] line-through opacity-80">MVR 111,750.00</span>
+                            <span class="text-[#d7dce5] line-through opacity-80">{{ $motorcycle->formattedOriginalPrice() }}</span>
                         </p>
                         <p class="mb-8 text-lg font-extrabold text-white sm:text-[22px]">
-                            Sale Price: MVR 95,000.00
+                            Sale Price: {{ $motorcycle->formattedSalePrice() }}
                         </p>
                     </div>
 
                     <div class="relative mb-5 mt-2 inline-block max-[1100px]:mx-auto">
                         <span class="absolute left-2.5 top-[-26px] rounded-t-md bg-[#f40d23] px-3.5 py-2 text-sm font-black text-white">
-                            Limited Offer
+                            {{ $motorcycle->offer_label }}
                         </span>
                         <div class="rounded-[9px] bg-[#f40d23] px-5 py-4 text-2xl font-black text-white shadow-[0_12px_28px_rgba(244,13,35,0.35)] sm:px-[22px] sm:py-[19px] sm:text-[34px]">
-                            Special Discount: MVR 16,750
+                            Special Discount: {{ $motorcycle->formattedDiscount() }}
                         </div>
                     </div>
 
+                    @if ($motorcycle->offer_note)
                     <p class="mb-8 text-base font-semibold text-[#d7dce5] max-md:mb-6">
-                        This offer valid for Green, Brown Colors.
+                        {{ $motorcycle->offer_note }}
                     </p>
+                    @endif
 
                     <div class="flex flex-col gap-3 max-[1100px]:mx-auto min-[1100px]:flex-row min-[1100px]:flex-nowrap min-[1100px]:items-stretch min-[1100px]:gap-2.5">
                         <button type="button"
@@ -161,7 +100,7 @@
                 {{-- Mobile hero product image --}}
                 <x-product-360-viewer
                     :frames="$spinImages"
-                    alt="ADV 160 2026"
+                    alt="{{ $motorcycle->name }}"
                     img-class="mx-auto max-h-[520px] w-full max-w-[1000px] object-contain"
                     class="relative z-[1] cursor-grab select-none min-[1100px]:hidden" />
 
@@ -215,8 +154,8 @@
                     </button>
 
                     <img data-gallery-main
-                         src="{{ $galleryImages[0] }}"
-                         alt="ADV 160 2026"
+                         src="{{ $galleryImages[0] ?? '' }}"
+                         alt="{{ $motorcycle->name }}"
                          class="min-w-0 flex-1 object-contain transition-opacity duration-300 max-h-[420px] sm:max-h-[480px]">
 
                     <button type="button"
@@ -227,15 +166,7 @@
                     </button>
                 </div>
 
-                <div class="mt-3 grid grid-cols-3 gap-3 sm:gap-4">
-                    @foreach ($galleryImages as $index => $img)
-                        <button type="button"
-                                data-gallery-thumb="{{ $index }}"
-                                class="flex aspect-[4/3] max-h-[110px] items-center justify-center overflow-hidden rounded-[10px] border-2 bg-white p-1 transition-all duration-300 hover:border-[#ff1029] {{ $index === 0 ? 'border-[#ff6b7b] shadow-[0_0_0_1px_rgba(255,16,41,0.25)]' : 'border-[#e3e7ec]' }}">
-                            <img src="{{ $img }}" alt="View {{ $index + 1 }}" class="h-full w-full object-contain">
-                        </button>
-                    @endforeach
-                </div>
+                <div class="mt-3 grid grid-cols-3 gap-3 sm:gap-4" data-gallery-thumbs></div>
             </div>
 
             {{-- Color + specs --}}
@@ -257,10 +188,7 @@
 
                 <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3">
                     @foreach ($highlights as $item)
-                        <div class="flex min-h-[100px] w-full items-center gap-3.5 rounded-xl border border-[#e1e5ea] bg-white px-4 py-4 shadow-[0_8px_22px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(0,0,0,0.08)] sm:min-h-[108px] sm:gap-4 sm:px-5 sm:py-5">
-                            <div class="flex h-10 w-10 shrink-0 items-center justify-center text-[#07152f] sm:h-11 sm:w-11">
-                                <x-litus-icon :name="$item['icon']" class="h-7 w-7 sm:h-8 sm:w-8" stroke-width="1.75" />
-                            </div>
+                        <div class="flex min-h-[100px] w-full items-center rounded-xl border border-[#e1e5ea] bg-white px-4 py-4 shadow-[0_8px_22px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(0,0,0,0.08)] sm:min-h-[108px] sm:px-5 sm:py-5">
                             <div class="min-w-0 flex-1">
                                 <h4 class="mb-1 text-xs font-black text-[#151f44] sm:text-sm">{{ $item['label'] }}</h4>
                                 <p class="text-base font-black leading-snug text-[#07152f] sm:text-[17px]">
@@ -286,7 +214,7 @@
             <div class="rounded-[14px] border border-[#dfe3ea] bg-white px-5 py-5 shadow-[0_10px_28px_rgba(0,0,0,0.05)] sm:px-8 sm:pb-6 sm:pt-[18px]">
                 <div class="mb-3.5 text-center">
                     <span class="mb-1.5 block text-xs font-black uppercase text-[#ff1029]">Technical Details</span>
-                    <h2 class="text-[23px] font-black tracking-wide text-[#111b46] sm:text-[28px]">ADV 160 2026 Specifications</h2>
+                    <h2 class="text-[23px] font-black tracking-wide text-[#111b46] sm:text-[28px]">{{ $motorcycle->name }} Specifications</h2>
                 </div>
 
                 <div class="grid grid-cols-1 gap-2.5 min-[760px]:grid-cols-2 min-[760px]:gap-8">
@@ -294,12 +222,11 @@
                         <div class="flex flex-col">
                             @foreach ($column as $index => $spec)
                                 <div @class([
-                                    'grid min-h-[34px] grid-cols-[34px_1fr_1fr] items-center border-b border-[#dfe3ea] text-sm max-md:grid-cols-[30px_1fr] max-md:gap-2 max-md:py-2',
+                                    'grid min-h-[34px] grid-cols-[1fr_1fr] items-center border-b border-[#dfe3ea] text-sm max-md:grid-cols-1 max-md:gap-1 max-md:py-2',
                                     'border-b-0' => $index === count($column) - 1,
                                 ])>
-                                    <x-litus-icon :name="$spec['icon']" class="h-4 w-4 text-[#111b46] opacity-85" />
                                     <span class="font-bold text-[#1a2554]">{{ $spec['label'] }}</span>
-                                    <span class="text-right font-semibold text-[#1f2635] max-md:col-start-2 max-md:text-left">{{ $spec['value'] }}</span>
+                                    <span class="text-right font-semibold text-[#1f2635] max-md:text-left">{{ $spec['value'] }}</span>
                                 </div>
                             @endforeach
                         </div>
@@ -315,7 +242,7 @@
                 </div>
 
                 <div>
-                    <h2 class="mb-3 text-2xl font-black text-white min-[1100px]:text-[27px]">Ready to Own the ADV 160 2026?</h2>
+                    <h2 class="mb-3 text-2xl font-black text-white min-[1100px]:text-[27px]">Ready to Own the {{ $motorcycle->name }}?</h2>
                     <p class="max-w-[620px] text-[15px] font-semibold leading-relaxed text-[#dce5ef] max-[1100px]:mx-auto">
                         Take advantage of our limited offer and ride with confidence, performance, and style.
                     </p>

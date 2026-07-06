@@ -6,33 +6,6 @@
 @php
     $heroBg = asset('images/motorcycles/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
 
-    $productImages = [
-        asset('images/product/' . rawurlencode('premium 125 blue.png')),
-        asset('images/product/' . rawurlencode('premium 125 red.png')),
-        asset('images/product/' . rawurlencode('special edition 125 green yellow.png')),
-    ];
-
-    $products = [
-        ['id' => 1,  'name' => 'ADV 160 2026',               'slug' => 'adv-160-2026', 'brand' => 'Honda',  'discount' => 'MVR 16,750', 'cc' => '160cc'],
-        ['id' => 2,  'name' => 'ADV 160 2026',               'slug' => 'adv-160-2026', 'brand' => 'Honda',  'discount' => 'MVR 16,750', 'cc' => '160cc'],
-        ['id' => 3,  'name' => 'PCX 160 ABS',                'slug' => 'pcx-160-abs', 'brand' => 'Honda',  'discount' => 'MVR 11,000', 'cc' => '160cc'],
-        ['id' => 4,  'name' => 'N Max 155 Neo S',            'slug' => 'n-max-155-neo-s', 'brand' => 'Yamaha', 'discount' => 'MVR 14,100', 'cc' => '155cc'],
-        ['id' => 5,  'name' => 'Aerox Alpha 155 Standard',   'slug' => 'aerox-alpha-155-standard', 'brand' => 'Yamaha', 'discount' => 'MVR 12,500', 'cc' => '155cc'],
-        ['id' => 6,  'name' => 'Scoopy Prestige 2026',       'slug' => 'scoopy-prestige-2026', 'brand' => 'Honda',  'discount' => 'MVR 14,000', 'cc' => '110cc'],
-        ['id' => 7,  'name' => 'Scoopy Fashion 2026',        'slug' => 'scoopy-fashion-2026', 'brand' => 'Honda',  'discount' => 'MVR 12,000', 'cc' => '110cc'],
-        ['id' => 8,  'name' => 'Scoopy Stylish 2026',        'slug' => 'scoopy-stylish-2026', 'brand' => 'Honda',  'discount' => 'MVR 14,000', 'cc' => '110cc'],
-        ['id' => 9,  'name' => 'Scoopy Prestige 2026',       'slug' => 'scoopy-prestige-2026', 'brand' => 'Honda',  'discount' => 'MVR 11,500', 'cc' => '110cc'],
-        ['id' => 10, 'name' => 'Scoopy Club 12 2026',        'slug' => 'scoopy-club-12-2026', 'brand' => 'Honda',  'discount' => 'MVR 13,500', 'cc' => '110cc'],
-        ['id' => 11, 'name' => 'Air Blade 125 Sport 2026',   'slug' => 'air-blade-125-sport-2026', 'brand' => 'Honda',  'discount' => 'MVR 14,400', 'cc' => '125cc'],
-        ['id' => 12, 'name' => 'Air Blade 125 Special 2026', 'slug' => 'air-blade-125-special-2026', 'brand' => 'Honda',  'discount' => 'MVR 12,900', 'cc' => '125cc'],
-        ['id' => 13, 'name' => 'Air Blade 125 Standard 2026','slug' => 'air-blade-125-standard-2026', 'brand' => 'Honda',  'discount' => 'MVR 12,900', 'cc' => '125cc'],
-    ];
-
-    foreach ($products as $index => &$product) {
-        $product['img'] = $productImages[$index % count($productImages)];
-    }
-    unset($product);
-
     $heroFeatures = [
         ['icon' => 'star', 'title' => 'Limited Offers', 'desc' => 'Seasonal deals on top models'],
         ['icon' => 'package', 'title' => 'Flexible Plans', 'desc' => 'Ownership for every budget'],
@@ -135,11 +108,16 @@
                 </div>
 
                 <div class="flex shrink-0 items-center gap-1 rounded-xl bg-gray-100 p-1">
-                    @foreach (['All', 'Honda', 'Yamaha'] as $tab)
+                    <button type="button"
+                            data-motorcycle-brand="All"
+                            class="rounded-lg px-4 py-2 text-sm font-bold transition-all bg-litus-red text-white">
+                        All
+                    </button>
+                    @foreach ($brands as $brand)
                         <button type="button"
-                                data-motorcycle-brand="{{ $tab }}"
-                                class="rounded-lg px-4 py-2 text-sm font-bold transition-all {{ $tab === 'All' ? 'bg-litus-red text-white' : 'text-gray-500' }}">
-                            {{ $tab }}
+                                data-motorcycle-brand="{{ $brand }}"
+                                class="rounded-lg px-4 py-2 text-sm font-bold text-gray-500 transition-all">
+                            {{ $brand }}
                         </button>
                     @endforeach
                 </div>
@@ -163,7 +141,7 @@
             </div>
 
             <p class="mt-3 pl-1 text-sm text-gray-500">
-                Showing <span class="font-bold text-gray-800" data-motorcycle-count>{{ count($products) }}</span> motorcycles
+                Showing <span class="font-bold text-gray-800" data-motorcycle-count>{{ $motorcycles->count() }}</span> motorcycles
                 <span data-motorcycle-brand-wrap class="hidden">in <span class="font-bold text-gray-800" data-motorcycle-brand-label></span></span>
             </p>
         </div>
@@ -185,47 +163,47 @@
             </div>
 
             <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" data-motorcycle-grid>
-                @foreach ($products as $product)
+                @forelse ($motorcycles as $motorcycle)
                     <div class="group flex flex-col overflow-hidden rounded-[18px] border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:border-red-100 hover:shadow-xl"
                          data-motorcycle-card
-                         data-brand="{{ $product['brand'] }}"
-                         data-name="{{ $product['name'] }}">
+                         data-brand="{{ $motorcycle->brand }}"
+                         data-name="{{ $motorcycle->name }}">
                         <div class="relative overflow-hidden bg-white px-2 py-3">
-                            <img src="{{ $product['img'] }}"
-                                 alt="{{ $product['name'] }}"
+                            <img src="{{ $motorcycle->listImageUrl() }}"
+                                 alt="{{ $motorcycle->name }}"
                                  class="h-48 w-full object-contain transition-transform duration-500 group-hover:scale-105">
-                            <span class="absolute left-3 top-3 rounded-md bg-litus-red px-2.5 py-1 text-xs font-black text-white shadow">Limited Offer</span>
-                            <span class="absolute right-3 top-3 rounded-md bg-white/90 px-2 py-1 text-xs font-bold text-gray-600 shadow">{{ $product['brand'] }}</span>
+                            @if ($motorcycle->offer_label)
+                                <span class="absolute left-3 top-3 rounded-md bg-litus-red px-2.5 py-1 text-xs font-black text-white shadow">{{ $motorcycle->offer_label }}</span>
+                            @endif
+                            @if ($motorcycle->brand)
+                                <span class="absolute right-3 top-3 rounded-md bg-white/90 px-2 py-1 text-xs font-bold text-gray-600 shadow">{{ $motorcycle->brand }}</span>
+                            @endif
                         </div>
                         <div class="flex flex-1 flex-col p-4">
-                            <p class="mb-0.5 text-xs font-semibold text-gray-400">{{ $product['cc'] }} Engine</p>
-                            <h3 class="mb-2 text-base font-black leading-tight text-gray-900">{{ $product['name'] }}</h3>
-                            <div class="mb-4 flex items-center gap-1.5">
-                                <span class="text-xs text-gray-400">Save up to</span>
-                                <span class="text-lg font-black text-litus-red">{{ $product['discount'] }}</span>
-                            </div>
+                            @if ($motorcycle->engineCapacity())
+                                <p class="mb-0.5 text-xs font-semibold text-gray-400">{{ $motorcycle->engineCapacity() }} Engine</p>
+                            @endif
+                            <h3 class="mb-2 text-base font-black leading-tight text-gray-900">{{ $motorcycle->name }}</h3>
+                            @if ($motorcycle->discountAmount() > 0)
+                                <div class="mb-4 flex items-center gap-1.5">
+                                    <span class="text-xs text-gray-400">Save up to</span>
+                                    <span class="text-lg font-black text-litus-red">{{ $motorcycle->formattedDiscount() }}</span>
+                                </div>
+                            @endif
                             <div class="mt-auto flex flex-col gap-2">
-                                <a href="{{ route('motorcycle.show', $product['slug']) }}"
+                                <a href="{{ route('motorcycle.show', $motorcycle->slug) }}"
                                    class="w-full rounded-xl bg-litus-navy py-2.5 text-center text-sm font-bold text-white transition-opacity hover:opacity-90">Buy Now</a>
-                                <a href="{{ route('motorcycle.show', $product['slug']) }}"
+                                <a href="{{ route('motorcycle.show', $motorcycle->slug) }}"
                                    class="w-full rounded-xl border border-gray-200 py-2 text-center text-sm font-semibold text-gray-600 transition-colors hover:border-gray-400 hover:text-gray-900">View Details</a>
                             </div>
                         </div>
                     </div>
-                @endforeach
-            </div>
-
-            <div class="mt-10 flex justify-center">
-                <div class="flex items-center gap-2">
-                    @foreach ([1, 2, 3] as $n)
-                        <button type="button" class="h-9 w-9 rounded-full text-sm font-bold transition-all {{ $n === 1 ? 'bg-litus-red text-white shadow' : 'text-gray-500 hover:bg-gray-100' }}">{{ $n }}</button>
-                    @endforeach
-                    <span class="px-1 text-gray-400">…</span>
-                    <button type="button" class="flex items-center gap-1 rounded-full px-4 py-2 text-sm font-bold text-gray-500 hover:bg-gray-100">
-                        Next
-                        <x-litus-icon name="arrow-right" class="h-[13px] w-[13px]" />
-                    </button>
-                </div>
+                @empty
+                    <div class="col-span-full py-16 text-center text-gray-500">
+                        <p class="font-semibold">No motorcycles available yet.</p>
+                        <p class="mt-1 text-sm">Check back soon or contact our sales team.</p>
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>
