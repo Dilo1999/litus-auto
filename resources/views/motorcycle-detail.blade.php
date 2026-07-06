@@ -166,7 +166,7 @@
                     </button>
                 </div>
 
-                <div class="mt-3 grid grid-cols-3 gap-3 sm:gap-4" data-gallery-thumbs></div>
+                <div class="mt-3 flex flex-nowrap gap-2 sm:gap-3" data-gallery-thumbs></div>
             </div>
 
             {{-- Color + specs --}}
@@ -188,7 +188,10 @@
 
                 <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3">
                     @foreach ($highlights as $item)
-                        <div class="flex min-h-[100px] w-full items-center rounded-xl border border-[#e1e5ea] bg-white px-4 py-4 shadow-[0_8px_22px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(0,0,0,0.08)] sm:min-h-[108px] sm:px-5 sm:py-5">
+                        <div class="flex min-h-[100px] w-full items-center gap-3.5 rounded-xl border border-[#e1e5ea] bg-white px-4 py-4 shadow-[0_8px_22px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(0,0,0,0.08)] sm:min-h-[108px] sm:gap-4 sm:px-5 sm:py-5">
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center text-[#07152f] sm:h-11 sm:w-11">
+                                <x-litus-icon :name="$item['icon']" class="h-7 w-7 sm:h-8 sm:w-8" stroke-width="1.75" />
+                            </div>
                             <div class="min-w-0 flex-1">
                                 <h4 class="mb-1 text-xs font-black text-[#151f44] sm:text-sm">{{ $item['label'] }}</h4>
                                 <p class="text-base font-black leading-snug text-[#07152f] sm:text-[17px]">
@@ -222,11 +225,12 @@
                         <div class="flex flex-col">
                             @foreach ($column as $index => $spec)
                                 <div @class([
-                                    'grid min-h-[34px] grid-cols-[1fr_1fr] items-center border-b border-[#dfe3ea] text-sm max-md:grid-cols-1 max-md:gap-1 max-md:py-2',
+                                    'grid min-h-[34px] grid-cols-[34px_1fr_1fr] items-center border-b border-[#dfe3ea] text-sm max-md:grid-cols-[30px_1fr] max-md:gap-2 max-md:py-2',
                                     'border-b-0' => $index === count($column) - 1,
                                 ])>
+                                    <x-litus-icon :name="$spec['icon']" class="h-4 w-4 text-[#111b46] opacity-85" />
                                     <span class="font-bold text-[#1a2554]">{{ $spec['label'] }}</span>
-                                    <span class="text-right font-semibold text-[#1f2635] max-md:text-left">{{ $spec['value'] }}</span>
+                                    <span class="text-right font-semibold text-[#1f2635] max-md:col-start-2 max-md:text-left">{{ $spec['value'] }}</span>
                                 </div>
                             @endforeach
                         </div>

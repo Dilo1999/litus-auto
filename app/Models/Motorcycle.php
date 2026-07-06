@@ -131,10 +131,35 @@ class Motorcycle extends Model
 
     public function highlights(): array
     {
-        return array_values(array_filter(
+        $items = array_values(array_filter(
             array_slice(self::normalizeSpecs($this->specs), 0, 4),
             fn (array $spec) => filled($spec['value'] ?? null)
         ));
+
+        return array_map(
+            fn (array $spec) => [
+                ...$spec,
+                'icon' => self::iconForSpecLabel($spec['label'] ?? ''),
+            ],
+            $items
+        );
+    }
+
+    public static function iconForSpecLabel(string $label): string
+    {
+        return match ($label) {
+            'Engine Capacity' => 'gauge',
+            'Fuel Type' => 'zap',
+            'Carburation' => 'cpu',
+            'Brakes Front', 'Brakes Rear' => 'disc',
+            'Suspension Front', 'Ground Clearance', 'Seat Height' => 'arrow-up-down',
+            'Wheels Front', 'Wheels Rear' => 'circle',
+            'Fuel Tank Capacity' => 'fuel',
+            'Frame Type' => 'shield',
+            'Net Weight' => 'weight',
+            'Clutch', 'Final Drive', 'Transmission Type' => 'settings',
+            default => 'gauge',
+        };
     }
 
     public function specColumns(): array
@@ -143,6 +168,14 @@ class Motorcycle extends Model
             self::normalizeSpecs($this->specs),
             fn (array $spec) => filled($spec['value'] ?? null)
         ));
+
+        $specs = array_map(
+            fn (array $spec) => [
+                ...$spec,
+                'icon' => self::iconForSpecLabel($spec['label'] ?? ''),
+            ],
+            $specs
+        );
 
         return array_chunk($specs, 8);
     }

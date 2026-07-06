@@ -43,7 +43,7 @@ function initProductGallery() {
         thumbsWrap.innerHTML = images.map((img, index) => `
             <button type="button"
                     data-gallery-thumb="${index}"
-                    class="flex aspect-[4/3] max-h-[110px] items-center justify-center overflow-hidden rounded-[10px] border-2 bg-white p-1 transition-all duration-300 hover:border-[#ff1029] ${index === activeIndex ? 'border-[#ff6b7b] shadow-[0_0_0_1px_rgba(255,16,41,0.25)]' : 'border-[#e3e7ec]'}">
+                    class="flex aspect-[4/3] min-w-0 flex-1 items-center justify-center overflow-hidden rounded-[10px] border-2 bg-white p-1 transition-all duration-300 hover:border-[#ff1029] ${index === activeIndex ? 'border-[#ff6b7b] shadow-[0_0_0_1px_rgba(255,16,41,0.25)]' : 'border-[#e3e7ec]'}">
                 <img src="${img}" alt="View ${index + 1}" class="h-full w-full object-contain">
             </button>
         `).join('');
