@@ -7,3 +7,4 @@ import './product-gallery';
 import './contact';
 import './service-center';
 import './ownership-plans';
+import './gallery';

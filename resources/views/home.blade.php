@@ -252,7 +252,7 @@
     <section class="border border-[#dfe3ea] bg-[#f8f9fb]">
 
         {{-- Updates --}}
-        <div class="relative overflow-hidden py-5 pb-[22px] max-sm:py-[30px]"
+        <div class="relative overflow-hidden py-12 sm:py-16 lg:py-20"
              style="background-image: radial-gradient(circle, rgba(7, 21, 47, 0.10) 2px, transparent 2px); background-size: 24px 24px; background-color: #fafafa;">
             <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(250,250,250,0.95)_0%,rgba(250,250,250,0.78)_25%,rgba(250,250,250,0.55)_50%,rgba(250,250,250,0.88)_100%)]"></div>
 
@@ -287,7 +287,7 @@
         </div>
 
         {{-- Services --}}
-        <div class="border-t border-[#e3e6eb] bg-white pb-[38px] pt-[18px] max-sm:pb-[35px] max-sm:pt-[25px]">
+        <div class="border-t border-[#e3e6eb] bg-white py-12 sm:py-16 lg:py-20">
             <div class="litus-container">
 
                 <div class="mb-[18px] text-center">
@@ -343,7 +343,7 @@
     </section>
 
     {{-- GALLERY --}}
-    <section class="relative overflow-hidden border border-[#dfe3ea] py-[30px] pb-[18px] max-sm:py-7"
+    <section class="relative overflow-hidden border border-[#dfe3ea] py-12 sm:py-16 lg:py-20"
              style="background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), radial-gradient(circle at 15% 35%, rgba(7,21,47,0.08), transparent 28%);">
         <div class="pointer-events-none absolute inset-0 opacity-35"
              style="background-image: linear-gradient(30deg, rgba(7,21,47,0.035) 12%, transparent 12.5%, transparent 87%, rgba(7,21,47,0.035) 87.5%), linear-gradient(150deg, rgba(7,21,47,0.035) 12%, transparent 12.5%, transparent 87%, rgba(7,21,47,0.035) 87.5%); background-size: 55px 95px;"></div>
@@ -357,7 +357,7 @@
                         Explore our collection of motorcycles, scooters, and customer moments.
                     </p>
                 </div>
-                <a href="#"
+                <a href="{{ route('gallery') }}"
                    class="group/viewgallery inline-flex items-center gap-2.5 text-[15px] font-black text-[#07152f] transition-all duration-300 hover:gap-4 hover:text-[#ff1029] min-[651px]:mt-[52px]">
                     View Gallery
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />

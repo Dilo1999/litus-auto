@@ -9,13 +9,13 @@
         'Parts' => route('parts'),
         'Service Center' => route('service-center'),
         'Contact Us' => route('contact'),
-        'Gallery' => '#',
+        'Gallery' => route('gallery'),
     ];
 
     $logo = asset('images/logo/' . rawurlencode('Litus-Automobiles-white (1).png'));
 @endphp
 
-<header class="sticky top-0 z-50 w-full bg-litus-navy">
+<header class="sticky top-0 z-50 w-full bg-litus-header">
     <div class="litus-container flex h-16 items-center justify-between lg:h-[68px]">
         <a href="{{ route('home') }}" class="flex shrink-0 items-center">
             <img src="{{ $logo }}"
