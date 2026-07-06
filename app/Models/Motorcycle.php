@@ -16,6 +16,7 @@ class Motorcycle extends Model
         'brand',
         'card_image',
         'original_price',
+        'has_promotion',
         'sale_price',
         'offer_label',
         'offer_note',
@@ -27,6 +28,7 @@ class Motorcycle extends Model
 
     protected $casts = [
         'original_price' => 'decimal:2',
+        'has_promotion' => 'boolean',
         'sale_price' => 'decimal:2',
         'specs' => 'array',
         'is_published' => 'boolean',
@@ -41,7 +43,18 @@ class Motorcycle extends Model
             }
 
             $motorcycle->specs = self::normalizeSpecs($motorcycle->specs);
+
+            if (! $motorcycle->has_promotion) {
+                $motorcycle->sale_price = $motorcycle->original_price;
+                $motorcycle->offer_label = null;
+                $motorcycle->offer_note = null;
+            }
         });
+    }
+
+    public function hasPromotion(): bool
+    {
+        return (bool) $this->has_promotion;
     }
 
     public static function defaultSpecLabels(): array
@@ -115,6 +128,10 @@ class Motorcycle extends Model
 
     public function discountAmount(): float
     {
+        if (! $this->hasPromotion()) {
+            return 0;
+        }
+
         return max(0, (float) $this->original_price - (float) $this->sale_price);
     }
 
@@ -140,9 +157,29 @@ class Motorcycle extends Model
             fn (array $spec) => [
                 ...$spec,
                 'icon' => self::iconForSpecLabel($spec['label'] ?? ''),
+                'icon_url' => self::specIconUrlForLabel($spec['label'] ?? ''),
             ],
             $items
         );
+    }
+
+    public static function specIconUrlForLabel(string $label): ?string
+    {
+        return match ($label) {
+            'Engine Capacity' => self::detailsPageIcon('icons8-engine-50 (2).png'),
+            'Fuel Type' => self::detailsPageIcon('gasoline.png'),
+            'Carburation' => self::detailsPageIcon('carburettor.png'),
+            'Brakes Front', 'Brakes Rear' => self::detailsPageIcon('brakes.png'),
+            'Suspension Front' => self::detailsPageIcon('suspension.png'),
+            'Wheels Front', 'Wheels Rear' => self::detailsPageIcon('tyre.png'),
+            'Fuel Tank Capacity' => self::detailsPageIcon('fuel-gas.png'),
+            default => null,
+        };
+    }
+
+    private static function detailsPageIcon(string $filename): string
+    {
+        return asset('images/details_page/' . rawurlencode($filename));
     }
 
     public static function iconForSpecLabel(string $label): string
@@ -173,6 +210,7 @@ class Motorcycle extends Model
             fn (array $spec) => [
                 ...$spec,
                 'icon' => self::iconForSpecLabel($spec['label'] ?? ''),
+                'icon_url' => self::specIconUrlForLabel($spec['label'] ?? ''),
             ],
             $specs
         );
@@ -227,14 +265,31 @@ class Motorcycle extends Model
         $normalized = ltrim($path, '/');
 
         if (Storage::disk('public')->exists($normalized)) {
-            return asset('storage/' . $normalized);
+            return self::storageAssetUrl($normalized);
         }
 
         if (file_exists(public_path($normalized))) {
-            return asset($normalized);
+            return self::publicAssetUrl($normalized);
         }
 
-        return asset($normalized);
+        return self::publicAssetUrl($normalized);
+    }
+
+    private static function storageAssetUrl(string $path): string
+    {
+        return asset('storage/'.self::encodeAssetPath($path));
+    }
+
+    private static function publicAssetUrl(string $path): string
+    {
+        return asset(self::encodeAssetPath($path));
+    }
+
+    private static function encodeAssetPath(string $path): string
+    {
+        return collect(explode('/', ltrim($path, '/')))
+            ->map(fn (string $segment) => rawurlencode($segment))
+            ->implode('/');
     }
 
     public function spinFramesByColor(): array

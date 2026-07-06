@@ -3,79 +3,172 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 
 class StorageLinkRelative extends Command
 {
-    protected $signature = 'storage:link-relative';
-    protected $description = 'Create storage symlink using relative path (for cPanel/shared hosting)';
+    protected $signature = 'storage:link
+                {--relative : Create the link using a relative path}
+                {--force : Recreate existing storage links}';
+
+    protected $description = 'Create the public/storage link (relative path, Windows/WAMP compatible)';
 
     public function handle(): int
     {
-        $link = public_path('storage');
-        $target = storage_path('app/public');
+        $links = $this->laravel['config']['filesystems.links'] ?? [
+            public_path('storage') => storage_path('app/public'),
+        ];
 
-        if (!is_dir($target)) {
-            $this->error('Target directory does not exist: ' . $target);
-            return 1;
-        }
+        $useRelative = (bool) $this->option('relative') || PHP_OS_FAMILY === 'Windows';
+        $force = (bool) $this->option('force');
 
-        if (file_exists($link)) {
-            if (is_link($link)) {
-                $this->info('Storage link already exists.');
-                return 0;
+        $failed = false;
+
+        foreach ($links as $link => $target) {
+            $linkPath = $this->pathString($link);
+            $targetPath = $this->resolvePath($target);
+
+            if (! is_dir($targetPath)) {
+                File::ensureDirectoryExists($targetPath);
+                $this->components->warn("Created missing target directory: {$targetPath}");
             }
-            $this->error('A file or directory already exists at: ' . $link);
-            return 1;
+
+            if ($this->linkPointsToTarget($linkPath, $targetPath)) {
+                $this->components->info("The [{$linkPath}] link already points to [{$targetPath}].");
+                continue;
+            }
+
+            if (file_exists($linkPath) && ! $force) {
+                $this->components->error("The [{$linkPath}] path already exists. Run with --force to recreate it.");
+                $failed = true;
+                continue;
+            }
+
+            if (! $this->removeExistingLink($linkPath)) {
+                $this->components->error("Could not remove existing path: {$linkPath}");
+                $failed = true;
+                continue;
+            }
+
+            if ($this->createLink($linkPath, $targetPath, $useRelative)) {
+                $this->components->info("The [{$linkPath}] link has been connected to [{$targetPath}].");
+                continue;
+            }
+
+            $this->components->error("Failed to create storage link for [{$linkPath}].");
+            $failed = true;
         }
 
-        // Use relative path - works better on cPanel/shared hosting
-        $publicPath = realpath(public_path());
-        $targetReal = realpath($target);
-        if (!$publicPath || !$targetReal) {
-            $this->error('Could not resolve paths. Falling back to absolute symlink.');
-            return $this->runAbsolute($link, $target);
-        }
-
-        $relativeTarget = $this->getRelativePath($publicPath, $targetReal);
-        if ($relativeTarget === null) {
-            $this->warn('Could not compute relative path. Using absolute path.');
-            $relativeTarget = $targetReal;
-        }
-
-        if (symlink($relativeTarget, $link)) {
-            $this->info('Storage link created successfully (relative path).');
-            return 0;
-        }
-
-        $this->warn('Relative symlink failed. Trying absolute path...');
-        return $this->runAbsolute($link, $target);
+        return $failed ? self::FAILURE : self::SUCCESS;
     }
 
-    private function runAbsolute(string $link, string $target): int
+    private function pathString(string $path): string
     {
-        if (symlink($target, $link)) {
-            $this->info('Storage link created successfully (absolute path).');
-            return 0;
+        return str_replace('\\', '/', $path);
+    }
+
+    private function resolvePath(string $path): string
+    {
+        $real = realpath($path);
+
+        return $real ? str_replace('\\', '/', $real) : $this->pathString($path);
+    }
+
+    private function linkPointsToTarget(string $link, string $target): bool
+    {
+        if (! file_exists($link)) {
+            return false;
         }
-        $this->error('Failed to create symlink. Check permissions and that symlinks are allowed.');
-        return 1;
+
+        $linkReal = realpath($link);
+        $targetReal = realpath($target);
+
+        return $linkReal && $targetReal && $linkReal === $targetReal;
+    }
+
+    private function removeExistingLink(string $link): bool
+    {
+        if (! file_exists($link)) {
+            return true;
+        }
+
+        if (is_link($link)) {
+            return @unlink($link);
+        }
+
+        if (PHP_OS_FAMILY === 'Windows' && is_dir($link)) {
+            return @rmdir($link);
+        }
+
+        if (is_dir($link)) {
+            return File::deleteDirectory($link);
+        }
+
+        return @unlink($link);
+    }
+
+    private function createLink(string $link, string $target, bool $useRelative): bool
+    {
+        if ($useRelative) {
+            $relativeTarget = $this->getRelativePath(dirname($link), $target);
+
+            if ($relativeTarget !== null && @symlink($relativeTarget, $link)) {
+                return $this->linkPointsToTarget($link, $target);
+            }
+        }
+
+        if (@symlink($target, $link)) {
+            return $this->linkPointsToTarget($link, $target);
+        }
+
+        if (PHP_OS_FAMILY === 'Windows') {
+            return $this->createWindowsJunction($link, $target);
+        }
+
+        return false;
+    }
+
+    private function createWindowsJunction(string $link, string $target): bool
+    {
+        $parent = dirname($link);
+
+        if (! is_dir($parent)) {
+            File::ensureDirectoryExists($parent);
+        }
+
+        $command = 'cmd /C mklink /J '
+            .escapeshellarg(str_replace('/', '\\', $link)).' '
+            .escapeshellarg(str_replace('/', '\\', $target));
+
+        exec($command, $output, $exitCode);
+
+        return $exitCode === 0 && $this->linkPointsToTarget($link, $target);
     }
 
     private function getRelativePath(string $from, string $to): ?string
     {
-        $fromParts = explode(DIRECTORY_SEPARATOR, rtrim($from, DIRECTORY_SEPARATOR));
-        $toParts = explode(DIRECTORY_SEPARATOR, rtrim($to, DIRECTORY_SEPARATOR));
+        $from = $this->pathString(rtrim($from, '/'));
+        $to = $this->pathString(rtrim($to, '/'));
+
+        $fromParts = explode('/', $from);
+        $toParts = explode('/', $to);
 
         $commonLength = 0;
         $maxLength = min(count($fromParts), count($toParts));
-        while ($commonLength < $maxLength && $fromParts[$commonLength] === $toParts[$commonLength]) {
+
+        while ($commonLength < $maxLength && ($fromParts[$commonLength] ?? null) === ($toParts[$commonLength] ?? null)) {
             $commonLength++;
         }
 
         $upCount = count($fromParts) - $commonLength;
         $downParts = array_slice($toParts, $commonLength);
-        $relative = str_repeat('..' . DIRECTORY_SEPARATOR, $upCount) . implode(DIRECTORY_SEPARATOR, $downParts);
 
-        return $relative ?: null;
+        if ($upCount === 0 && $downParts === []) {
+            return '.';
+        }
+
+        $relative = str_repeat('../', $upCount).implode('/', $downParts);
+
+        return $relative !== '' ? $relative : null;
     }
 }

@@ -48,7 +48,9 @@ class MotorcycleController extends Controller
                 return [
                     'name' => $item->name,
                     'slug' => $item->slug,
-                    'discount' => $item->formattedDiscount(),
+                    'discount' => $item->hasPromotion() && $item->discountAmount() > 0
+                        ? $item->formattedDiscount()
+                        : null,
                     'img' => $gallery[0] ?? $spin[0] ?? '',
                 ];
             });

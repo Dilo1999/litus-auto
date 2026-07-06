@@ -77,10 +77,12 @@ class ColorVariantsRelationManager extends RelationManager
                 ColorColumn::make('hex_color')->label('Swatch'),
                 TextColumn::make('spin_frames')
                     ->label('360 frames')
-                    ->formatStateUsing(fn ($state) => is_array($state) ? count($state) . ' images' : '0 images'),
+                    ->getStateUsing(fn ($record) => self::countUploadedImages($record->spin_frames))
+                    ->formatStateUsing(fn ($state) => self::formatImageCount((int) $state)),
                 TextColumn::make('gallery_images')
                     ->label('Gallery')
-                    ->formatStateUsing(fn ($state) => is_array($state) ? count($state) . ' images' : '0 images'),
+                    ->getStateUsing(fn ($record) => self::countUploadedImages($record->gallery_images))
+                    ->formatStateUsing(fn ($state) => self::formatImageCount((int) $state)),
                 IconColumn::make('is_default')->boolean()->label('Default'),
             ])
             ->defaultSort('label')
@@ -95,5 +97,25 @@ class ColorVariantsRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    private static function countUploadedImages(mixed $images): int
+    {
+        if (is_array($images)) {
+            return count(array_filter($images));
+        }
+
+        if (is_string($images) && $images !== '') {
+            $decoded = json_decode($images, true);
+
+            return is_array($decoded) ? count(array_filter($decoded)) : 0;
+        }
+
+        return 0;
+    }
+
+    private static function formatImageCount(int $count): string
+    {
+        return $count.' '.($count === 1 ? 'image' : 'images');
     }
 }

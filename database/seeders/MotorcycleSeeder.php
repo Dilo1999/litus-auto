@@ -44,6 +44,7 @@ class MotorcycleSeeder extends Seeder
                 'category' => 'Touring Bikes',
                 'brand' => 'Honda',
                 'original_price' => 111750,
+                'has_promotion' => true,
                 'sale_price' => 95000,
                 'offer_label' => 'Limited Offer',
                 'offer_note' => 'This offer valid for Green, Brown Colors.',

@@ -69,17 +69,26 @@ class MotorcycleResource extends Resource
                             ->numeric()
                             ->prefix('MVR')
                             ->step(0.01),
+                        Toggle::make('has_promotion')
+                            ->label('Promotion active')
+                            ->helperText('Enable to set a sale price and offer label for this product.')
+                            ->default(false)
+                            ->reactive()
+                            ->columnSpanFull(),
                         TextInput::make('sale_price')
-                            ->required()
                             ->numeric()
                             ->prefix('MVR')
-                            ->step(0.01),
+                            ->step(0.01)
+                            ->required(fn (callable $get) => (bool) $get('has_promotion'))
+                            ->hidden(fn (callable $get) => ! $get('has_promotion')),
                         TextInput::make('offer_label')
                             ->default('Limited Offer')
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->hidden(fn (callable $get) => ! $get('has_promotion')),
                         Textarea::make('offer_note')
                             ->rows(2)
                             ->placeholder('e.g. This offer valid for Green, Brown Colors.')
+                            ->hidden(fn (callable $get) => ! $get('has_promotion'))
                             ->columnSpanFull(),
                     ])
                     ->columns(2),
@@ -117,10 +126,7 @@ class MotorcycleResource extends Resource
             ->columns([
                 TextColumn::make('name')->searchable()->sortable(),
                 TextColumn::make('category')->searchable(),
-                TextColumn::make('sale_price')
-                    ->label('Sale price')
-                    ->formatStateUsing(fn ($state) => 'MVR ' . number_format((float) $state, 2))
-                    ->sortable(),
+                IconColumn::make('has_promotion')->boolean()->label('Promotion'),
                 TextColumn::make('colorVariants_count')
                     ->counts('colorVariants')
                     ->label('Colors'),

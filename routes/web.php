@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MotorcycleController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -29,7 +30,7 @@ Route::match(['get', 'head'], 'storage/{path}', function () {
     return response()->file($realPath);
 })->where('path', '.*')->name('storage.serve');
 
-Route::get('/', fn () => view('home'))->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about-us', fn () => view('about'))->name('about');
 Route::get('/motorcycles', [MotorcycleController::class, 'index'])->name('motorcycles');
 Route::get('/motorcycles/{slug}', [MotorcycleController::class, 'show'])->name('motorcycle.show');

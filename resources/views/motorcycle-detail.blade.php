@@ -54,25 +54,35 @@
                     </h1>
 
                     <div>
-                        <p class="text-lg font-extrabold text-white sm:text-[22px]">
-                            Original Price:
-                            <span class="text-[#d7dce5] line-through opacity-80">{{ $motorcycle->formattedOriginalPrice() }}</span>
-                        </p>
-                        <p class="mb-8 text-lg font-extrabold text-white sm:text-[22px]">
-                            Sale Price: {{ $motorcycle->formattedSalePrice() }}
-                        </p>
+                        @if ($motorcycle->hasPromotion())
+                            <p class="text-lg font-extrabold text-white sm:text-[22px]">
+                                Original Price:
+                                <span class="text-[#d7dce5] line-through opacity-80">{{ $motorcycle->formattedOriginalPrice() }}</span>
+                            </p>
+                            <p class="mb-8 text-lg font-extrabold text-white sm:text-[22px]">
+                                Sale Price: {{ $motorcycle->formattedSalePrice() }}
+                            </p>
+                        @else
+                            <p class="mb-8 text-lg font-extrabold text-white sm:text-[22px]">
+                                Price: {{ $motorcycle->formattedOriginalPrice() }}
+                            </p>
+                        @endif
                     </div>
 
+                    @if ($motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0)
                     <div class="relative mb-5 mt-2 inline-block max-[1100px]:mx-auto">
+                        @if ($motorcycle->offer_label)
                         <span class="absolute left-2.5 top-[-26px] rounded-t-md bg-[#f40d23] px-3.5 py-2 text-sm font-black text-white">
                             {{ $motorcycle->offer_label }}
                         </span>
+                        @endif
                         <div class="rounded-[9px] bg-[#f40d23] px-5 py-4 text-2xl font-black text-white shadow-[0_12px_28px_rgba(244,13,35,0.35)] sm:px-[22px] sm:py-[19px] sm:text-[34px]">
                             Special Discount: {{ $motorcycle->formattedDiscount() }}
                         </div>
                     </div>
+                    @endif
 
-                    @if ($motorcycle->offer_note)
+                    @if ($motorcycle->hasPromotion() && $motorcycle->offer_note)
                     <p class="mb-8 text-base font-semibold text-[#d7dce5] max-md:mb-6">
                         {{ $motorcycle->offer_note }}
                     </p>
@@ -190,7 +200,7 @@
                     @foreach ($highlights as $item)
                         <div class="flex min-h-[100px] w-full items-center gap-3.5 rounded-xl border border-[#e1e5ea] bg-white px-4 py-4 shadow-[0_8px_22px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(0,0,0,0.08)] sm:min-h-[108px] sm:gap-4 sm:px-5 sm:py-5">
                             <div class="flex h-10 w-10 shrink-0 items-center justify-center text-[#07152f] sm:h-11 sm:w-11">
-                                <x-litus-icon :name="$item['icon']" class="h-7 w-7 sm:h-8 sm:w-8" stroke-width="1.75" />
+                                <x-spec-icon :icon="$item['icon']" :icon-url="$item['icon_url']" class="h-9 w-9 sm:h-10 sm:w-10" stroke-width="1.75" />
                             </div>
                             <div class="min-w-0 flex-1">
                                 <h4 class="mb-1 text-xs font-black text-[#151f44] sm:text-sm">{{ $item['label'] }}</h4>
@@ -214,23 +224,23 @@
         <div class="litus-container space-y-4">
 
             {{-- Specifications --}}
-            <div class="rounded-[14px] border border-[#dfe3ea] bg-white px-5 py-5 shadow-[0_10px_28px_rgba(0,0,0,0.05)] sm:px-8 sm:pb-6 sm:pt-[18px]">
-                <div class="mb-3.5 text-center">
-                    <span class="mb-1.5 block text-xs font-black uppercase text-[#ff1029]">Technical Details</span>
+            <div class="rounded-[14px] border border-[#dfe3ea] bg-white px-5 py-6 shadow-[0_10px_28px_rgba(0,0,0,0.05)] sm:px-10 sm:py-8">
+                <div class="mb-6 text-center sm:mb-8">
+                    <span class="mb-2 block text-xs font-black uppercase tracking-[0.08em] text-[#ff1029]">Technical Details</span>
                     <h2 class="text-[23px] font-black tracking-wide text-[#111b46] sm:text-[28px]">{{ $motorcycle->name }} Specifications</h2>
                 </div>
 
-                <div class="grid grid-cols-1 gap-2.5 min-[760px]:grid-cols-2 min-[760px]:gap-8">
+                <div class="grid grid-cols-1 gap-8 min-[760px]:grid-cols-2 min-[760px]:gap-x-14 min-[760px]:gap-y-0">
                     @foreach ($specColumns as $column)
                         <div class="flex flex-col">
                             @foreach ($column as $index => $spec)
                                 <div @class([
-                                    'grid min-h-[34px] grid-cols-[34px_1fr_1fr] items-center border-b border-[#dfe3ea] text-sm max-md:grid-cols-[30px_1fr] max-md:gap-2 max-md:py-2',
+                                    'grid grid-cols-[28px_1fr] items-start gap-x-3 gap-y-1 border-b border-[#dfe3ea] py-3.5 text-sm sm:grid-cols-[32px_minmax(0,1.1fr)_minmax(0,0.9fr)] sm:items-center sm:gap-x-4 sm:py-4',
                                     'border-b-0' => $index === count($column) - 1,
                                 ])>
-                                    <x-litus-icon :name="$spec['icon']" class="h-4 w-4 text-[#111b46] opacity-85" />
-                                    <span class="font-bold text-[#1a2554]">{{ $spec['label'] }}</span>
-                                    <span class="text-right font-semibold text-[#1f2635] max-md:col-start-2 max-md:text-left">{{ $spec['value'] }}</span>
+                                    <x-spec-icon :icon="$spec['icon']" :icon-url="$spec['icon_url']" class="mt-0.5 h-6 w-6 shrink-0 text-[#111b46] opacity-85 sm:mt-0 sm:h-7 sm:w-7" />
+                                    <span class="font-bold leading-snug text-[#1a2554]">{{ $spec['label'] }}</span>
+                                    <span class="col-start-2 font-semibold leading-snug text-[#1f2635] break-words sm:col-auto sm:pl-2 sm:text-right">{{ $spec['value'] }}</span>
                                 </div>
                             @endforeach
                         </div>
@@ -307,7 +317,9 @@
                              class="mx-auto h-[85px] w-[120px] object-contain min-[480px]:mx-0">
                         <div class="text-center min-[480px]:text-left">
                             <h3 class="mb-2.5 text-lg font-black text-[#111b46]">{{ $product['name'] }}</h3>
+                            @if (! empty($product['discount']))
                             <p class="mb-3 text-sm font-black text-[#ff1029]">Discount: {{ $product['discount'] }}</p>
+                            @endif
                             <a href="{{ route('motorcycle.show', $product['slug']) }}"
                                class="inline-flex items-center gap-2.5 rounded-[5px] bg-[#061a45] px-5 py-2.5 text-[13px] font-black text-white">
                                 View Details
