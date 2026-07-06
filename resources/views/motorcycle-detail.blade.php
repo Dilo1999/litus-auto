@@ -10,6 +10,25 @@
         asset('images/product/' . rawurlencode('special edition 125 green yellow.png')),
     ];
 
+    $spinImageFiles = [
+        'download.png',
+        'download (1).png',
+        'download (2).png',
+        'download (3).png',
+        'download (4).png',
+    ];
+
+    $spin360Dir = public_path('images/360');
+    $spinImages = [];
+    foreach ($spinImageFiles as $file) {
+        if (is_file($spin360Dir . DIRECTORY_SEPARATOR . $file)) {
+            $spinImages[] = asset('images/360/' . rawurlencode($file));
+        }
+    }
+    if (empty($spinImages)) {
+        $spinImages = $productImages;
+    }
+
     $galleryImages = $productImages;
 
     $colors = [
@@ -75,18 +94,20 @@
 
 
     {{-- PRODUCT HERO --}}
-    <section class="relative min-h-[540px] overflow-hidden border border-[rgba(40,85,130,0.45)] bg-[#06101f] bg-cover bg-center pb-[82px] max-[1100px]:min-h-0 max-[1100px]:pb-8"
+    <section class="relative min-h-[600px] overflow-hidden border border-[rgba(40,85,130,0.45)] bg-[#06101f] bg-cover bg-center pb-[82px] max-[1100px]:min-h-[520px] max-[1100px]:pb-8"
              style="background-image: linear-gradient(90deg, rgba(3,13,28,0.98) 0%, rgba(3,13,28,0.94) 35%, rgba(3,13,28,0.60) 58%, rgba(3,13,28,0.78) 100%), url('{{ $heroBg }}');">
         <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_48%,rgba(255,255,255,0.12),transparent_28%),linear-gradient(to_bottom,rgba(0,0,0,0.12),rgba(1,8,20,0.95))]"></div>
 
-        <div class="relative z-[2] litus-container pt-12 pb-8 sm:pt-14">
+        <div class="relative z-[2] litus-container pt-14 pb-10 sm:pt-16 sm:pb-12">
             {{-- Desktop hero product image — free-positioned for maximum size --}}
-            <img src="{{ $galleryImages[0] }}"
-                 alt="ADV 160 2026"
-                 class="pointer-events-none absolute bottom-6 right-0 z-[1] hidden h-auto max-h-[min(680px,72vh)] w-auto max-w-[min(820px,55vw)] object-contain object-bottom min-[1100px]:block">
+            <x-product-360-viewer
+                :frames="$spinImages"
+                alt="ADV 160 2026"
+                img-class="block h-auto max-h-[min(680px,72vh)] w-auto max-w-[min(820px,55vw)] object-contain object-bottom"
+                class="absolute bottom-6 right-0 z-[4] hidden cursor-grab select-none min-[1100px]:block" />
 
-            <div class="relative z-[2] grid grid-cols-1 items-center gap-8 min-[1100px]:grid-cols-[50%_50%] min-[1100px]:gap-5">
-                <div class="max-w-[650px] text-left max-[1100px]:mx-auto max-[1100px]:text-center min-[1100px]:max-w-none">
+            <div class="relative z-[2] grid grid-cols-1 items-center gap-8 min-[1100px]:pointer-events-none min-[1100px]:grid-cols-[50%_50%] min-[1100px]:gap-5">
+                <div class="max-w-[650px] text-left max-[1100px]:mx-auto max-[1100px]:text-center min-[1100px]:pointer-events-auto min-[1100px]:max-w-none">
                     <p class="mb-6 text-base font-black uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:mb-5 max-md:text-[15px]">
                         Category: Touring Bikes
                     </p>
@@ -138,12 +159,14 @@
                 </div>
 
                 {{-- Mobile hero product image --}}
-                <img src="{{ $galleryImages[0] }}"
-                     alt="ADV 160 2026"
-                     class="mx-auto max-h-[520px] w-full max-w-[1000px] object-contain min-[1100px]:hidden">
+                <x-product-360-viewer
+                    :frames="$spinImages"
+                    alt="ADV 160 2026"
+                    img-class="mx-auto max-h-[520px] w-full max-w-[1000px] object-contain"
+                    class="relative z-[1] cursor-grab select-none min-[1100px]:hidden" />
 
                 {{-- Desktop spacer keeps grid balance --}}
-                <div class="hidden min-[1100px]:block min-[1100px]:min-h-[400px]" aria-hidden="true"></div>
+                <div class="hidden min-[1100px]:block min-[1100px]:min-h-[460px]" aria-hidden="true"></div>
             </div>
         </div>
 
