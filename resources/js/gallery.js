@@ -87,7 +87,7 @@ function initGalleryPage() {
     };
 
     const renderMomentCard = (moment, isLarge) => {
-        const badgeClass = moment.badgeRed ? 'bg-[#f30d23]' : 'bg-[#061a45]';
+        const badgeClass = moment.badgeRed ? 'bg-[#0065ef]' : 'bg-[#061a45]';
         const titleClass = isLarge ? 'text-[22px] min-[651px]:text-[28px]' : 'text-xl';
 
         return `

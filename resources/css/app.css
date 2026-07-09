@@ -8,7 +8,11 @@
 /* LITUS Automobiles brand */
 @theme {
   --color-litus-navy: #0b1628;
-  --color-litus-red: #e31e25;
+  --color-litus-red: #0065ef;
+  --color-litus-primary: #0065ef;
+  --color-litus-primary-hover: #0052cc;
+  --color-litus-primary-dark: #004db8;
+  --color-litus-primary-light: #66a3ff;
   --color-litus-footer: #03045e;
   --color-litus-header: #03045e;
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;

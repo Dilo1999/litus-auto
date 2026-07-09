@@ -182,7 +182,7 @@
 
         <div class="relative z-[2] litus-container pt-16 pb-12 sm:pt-20">
             <div class="max-w-[720px] text-left">
-                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:text-[15px]">
+                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#0065ef] sm:text-lg max-md:text-[15px]">
                     Ownership Plans
                 </p>
 
@@ -198,12 +198,12 @@
                 <div class="flex flex-row flex-wrap items-center justify-start gap-5 sm:gap-7">
                     <button type="button"
                             data-scroll-plans
-                            class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] bg-[#f20d23] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(242,13,35,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9091c] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
+                            class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] bg-[#0065ef] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(0,101,239,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         Explore Plans
                         <x-litus-icon name="arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </button>
                     <a href="{{ route('contact') }}"
-                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f20d23] hover:bg-[rgba(242,13,35,0.15)] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
+                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.15)] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         Talk to Our Team
                         <x-litus-icon name="arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </a>
@@ -331,7 +331,7 @@
                     </div>
 
                     <a href="tel:+9607797442"
-                       class="inline-flex h-12 min-w-[145px] w-full shrink-0 items-center justify-center gap-2.5 rounded-md bg-[#061a45] px-6 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1029] min-[701px]:w-auto">
+                       class="inline-flex h-12 min-w-[145px] w-full shrink-0 items-center justify-center gap-2.5 rounded-md bg-[#061a45] px-6 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0065ef] min-[701px]:w-auto">
                         <x-litus-icon name="phone" class="h-4 w-4" />
                         Call Us
                     </a>
@@ -344,7 +344,7 @@
     <section class="bg-[#f8f9fb] px-5 py-[25px] pb-10 max-md:px-3.5 max-md:py-7 max-md:pb-9">
         <div class="litus-container">
             <div class="mb-5 text-center">
-                <span class="mb-2 block text-[13px] font-black uppercase tracking-[0.6px] text-[#ff1029] min-[769px]:text-[15px]">Compare Plans</span>
+                <span class="mb-2 block text-[13px] font-black uppercase tracking-[0.6px] text-[#0065ef] min-[769px]:text-[15px]">Compare Plans</span>
                 <h2 class="font-display text-[28px] font-black leading-[1.1] tracking-[-0.5px] text-[#07152f] min-[769px]:text-4xl">Find the Right Ownership Option</h2>
             </div>
 
@@ -398,7 +398,7 @@
     <section class="bg-[#f8f9fb] px-5 py-[22px] pb-9 max-[650px]:px-3.5 max-[650px]:py-7 max-[650px]:pb-9">
         <div class="litus-container">
             <div class="mb-[25px] text-center">
-                <span class="mb-[7px] block text-sm font-black uppercase tracking-[0.6px] text-[#ff1029]">How Ownership Plans Work</span>
+                <span class="mb-[7px] block text-sm font-black uppercase tracking-[0.6px] text-[#0065ef]">How Ownership Plans Work</span>
                 <h2 class="font-display text-[28px] font-black leading-[1.1] tracking-[-0.5px] text-[#07152f] min-[651px]:text-4xl">Simple. Transparent. Hassle-Free.</h2>
             </div>
 
@@ -408,7 +408,7 @@
                         <div class="mx-auto flex items-center justify-center text-[#061a45] min-[651px]:mx-0">
                             <x-litus-icon :name="$step['icon']" class="h-10 w-10 min-[651px]:h-11 min-[651px]:w-11" />
                         </div>
-                        <div class="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-[#ff1029] text-base font-black text-white shadow-[0_6px_14px_rgba(255,16,41,0.28)] min-[651px]:mx-0 min-[651px]:h-9 min-[651px]:w-9 min-[651px]:text-lg">
+                        <div class="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-[#0065ef] text-base font-black text-white shadow-[0_6px_14px_rgba(0,101,239,0.28)] min-[651px]:mx-0 min-[651px]:h-9 min-[651px]:w-9 min-[651px]:text-lg">
                             {{ $i + 1 }}
                         </div>
                         <div>
@@ -441,12 +441,12 @@
                     <a href="https://wa.me/9607797442"
                        target="_blank"
                        rel="noopener noreferrer"
-                       class="inline-flex h-[58px] w-full min-w-0 items-center justify-center gap-3 rounded-[7px] bg-[#ff1029] px-8 text-[17px] font-black text-white shadow-[0_10px_24px_rgba(255,16,41,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a] min-[651px]:w-auto min-[651px]:min-w-[260px]">
+                       class="inline-flex h-[58px] w-full min-w-0 items-center justify-center gap-3 rounded-[7px] bg-[#0065ef] px-8 text-[17px] font-black text-white shadow-[0_10px_24px_rgba(0,101,239,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] min-[651px]:w-auto min-[651px]:min-w-[260px]">
                         <x-litus-icon name="message-circle" class="h-5 w-5" />
                         Chat on WhatsApp
                     </a>
                     <a href="tel:+9607797442"
-                       class="inline-flex h-[58px] w-full min-w-0 items-center justify-center gap-3 rounded-[7px] border-2 border-white/55 bg-white/[0.03] px-8 text-[17px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ff1029] hover:bg-[rgba(255,16,41,0.12)] min-[651px]:w-auto min-[651px]:min-w-[260px]">
+                       class="inline-flex h-[58px] w-full min-w-0 items-center justify-center gap-3 rounded-[7px] border-2 border-white/55 bg-white/[0.03] px-8 text-[17px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] min-[651px]:w-auto min-[651px]:min-w-[260px]">
                         <x-litus-icon name="phone" class="h-5 w-5" />
                         Call Us
                     </a>

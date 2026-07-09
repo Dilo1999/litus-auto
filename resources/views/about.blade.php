@@ -73,7 +73,7 @@
 
         <div class="relative z-[2] litus-container pt-16 pb-12 sm:pt-20">
             <div class="max-w-[720px] text-left">
-                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:text-[15px]">
+                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#0065ef] sm:text-lg max-md:text-[15px]">
                     About LITUS Automobiles
                 </p>
 
@@ -88,12 +88,12 @@
 
                 <div class="flex flex-row flex-wrap items-center justify-start gap-5 sm:gap-7">
                     <a href="#mission-vision"
-                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] bg-[#f20d23] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(242,13,35,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9091c] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
+                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] bg-[#0065ef] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(0,101,239,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         Explore Our Story
                         <x-litus-icon name="arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </a>
                     <a href="{{ route('contact') }}"
-                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f20d23] hover:bg-[rgba(242,13,35,0.15)] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
+                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.15)] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         Contact Us
                         <x-litus-icon name="arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </a>
@@ -137,14 +137,14 @@
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(250,250,250,0.95)_0%,rgba(250,250,250,0.55)_15%,rgba(250,250,250,0.25)_50%,rgba(250,250,250,0.55)_85%,rgba(250,250,250,0.95)_100%)]"></div>
 
         <div class="relative z-[2] litus-container">
-            <p class="mb-[22px] text-center text-[13px] font-black uppercase tracking-[3px] text-[#f20d23] min-[561px]:text-[15px] min-[561px]:tracking-[4px]">
+            <p class="mb-[22px] text-center text-[13px] font-black uppercase tracking-[3px] text-[#0065ef] min-[561px]:text-[15px] min-[561px]:tracking-[4px]">
                 Our Mission &amp; Vision
             </p>
 
             <div class="grid grid-cols-1 gap-[22px] min-[901px]:grid-cols-2">
                 @foreach ($missionVision as $item)
                     <div class="flex min-h-[155px] flex-col items-center gap-[22px] rounded-xl border border-[#dfe3ea] bg-white px-[22px] py-7 shadow-[0_12px_28px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(0,0,0,0.11)] min-[561px]:flex-row min-[561px]:gap-[38px] min-[561px]:px-[38px] min-[561px]:py-[30px]">
-                        <div class="flex h-[95px] w-[95px] shrink-0 items-center justify-center rounded-full bg-[#f0f0f0] text-[#f20d23] min-[561px]:h-[118px] min-[561px]:w-[118px]">
+                        <div class="flex h-[95px] w-[95px] shrink-0 items-center justify-center rounded-full bg-[#f0f0f0] text-[#0065ef] min-[561px]:h-[118px] min-[561px]:w-[118px]">
                             <x-litus-icon :name="$item['icon']" class="h-11 w-11 min-[561px]:h-14 min-[561px]:w-14" />
                         </div>
                         <div class="text-center min-[561px]:text-left">
@@ -162,7 +162,7 @@
         <div class="litus-container">
 
             <div class="mb-[15px] text-center">
-                <span class="mb-1 block text-[13px] font-black uppercase tracking-[2px] text-[#ff1029]">Leadership Team</span>
+                <span class="mb-1 block text-[13px] font-black uppercase tracking-[2px] text-[#0065ef]">Leadership Team</span>
                 <h2 class="mb-2 text-[27px] font-black leading-none text-[#07152f] min-[651px]:text-[32px]">Our Key Members</h2>
                 <p class="text-[13px] font-medium text-[#566070]">
                     Meet the leaders guiding LITUS Automobiles with experience, vision, and commitment.
@@ -179,7 +179,7 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-black/92 via-black/25 to-black/[0.05]"></div>
                         <div class="absolute bottom-3.5 left-4 z-[2] text-white">
                             <h3 class="mb-1 text-[19px] font-black">{{ $member['name'] }}</h3>
-                            <p class="text-[13px] font-black text-[#ff1029]">{{ $member['role'] }}</p>
+                            <p class="text-[13px] font-black text-[#0065ef]">{{ $member['role'] }}</p>
                         </div>
                         <a href="#"
                            class="absolute bottom-3.5 right-3.5 z-[3] flex h-8 w-8 items-center justify-center rounded bg-white/90 text-[#07152f] transition-colors hover:bg-white"
@@ -219,7 +219,7 @@
                  style="background-image: linear-gradient(90deg, rgba(3,14,33,0.98), rgba(4,20,46,0.96)), url('{{ $operationBg }}');">
                 <div class="grid grid-cols-1 gap-7 min-[1051px]:grid-cols-[38%_62%]">
                     <div>
-                        <span class="mb-2.5 block text-[13px] font-black uppercase tracking-[3px] text-[#ff1029]">Our People</span>
+                        <span class="mb-2.5 block text-[13px] font-black uppercase tracking-[3px] text-[#0065ef]">Our People</span>
                         <h2 class="mb-[18px] text-[28px] font-black leading-tight text-white min-[651px]:text-[33px]">Our Operation Team</h2>
                         <p class="max-w-[470px] text-sm font-medium leading-[1.65] text-[#dbe4ee]">
                             Meet the LITUS Automobiles team, a passionate ensemble of dedicated professionals committed to elevating your motorcycle experience. With a wealth of knowledge and a shared drive to help every rider, our team is here to guide you, answer your questions, and keep your journey smooth from selection to service.
@@ -235,7 +235,7 @@
                     <div class="col-span-full mt-2.5 grid grid-cols-1 gap-[22px] min-[651px]:grid-cols-2 min-[1051px]:grid-cols-4">
                         @foreach ($opStats as $stat)
                             <div class="flex items-center gap-[15px] rounded-lg border border-white/25 bg-white/[0.04] px-[18px] py-[17px] max-[650px]:items-start">
-                                <div class="flex h-[55px] w-[55px] shrink-0 items-center justify-center rounded-full bg-white text-[#ff1029]">
+                                <div class="flex h-[55px] w-[55px] shrink-0 items-center justify-center rounded-full bg-white text-[#0065ef]">
                                     <x-litus-icon :name="$stat['icon']" class="h-6 w-6" />
                                 </div>
                                 <div>
@@ -256,7 +256,7 @@
         <div class="litus-container">
 
             <div class="mb-[18px] text-center">
-                <span class="mb-1.5 block text-sm font-black uppercase tracking-[3px] text-[#ff1029]">Our Locations</span>
+                <span class="mb-1.5 block text-sm font-black uppercase tracking-[3px] text-[#0065ef]">Our Locations</span>
                 <h2 class="mb-2 text-[28px] font-black leading-tight text-[#07152f] min-[651px]:text-[34px]">Our Showrooms &amp; Service Centers</h2>
                 <p class="text-sm font-semibold leading-normal text-[#555f70] min-[651px]:text-base">
                     Visit our showrooms and service centers across the Maldives for motorcycles, genuine parts, and trusted support.
@@ -282,9 +282,9 @@
                             <h3 class="mb-2 text-base font-black text-[#111b46]">{{ $showroom['name'] }}</h3>
                             <p class="mb-3.5 text-[13px] font-semibold leading-snug text-[#404b60]">{{ $showroom['address'] }}</p>
                             <a href="{{ route('contact') }}"
-                               class="group/contact inline-flex h-8 min-w-[140px] items-center justify-center gap-3 rounded-[5px] bg-[#061a45] px-[18px] text-[13px] font-black text-white transition-colors duration-300 hover:bg-[#ff1029]">
+                               class="group/contact inline-flex h-8 min-w-[140px] items-center justify-center gap-3 rounded-[5px] bg-[#061a45] px-[18px] text-[13px] font-black text-white transition-colors duration-300 hover:bg-[#0065ef]">
                                 Contact Now
-                                <x-litus-icon name="arrow-right" class="h-4 w-4 text-[#ff1029] transition-colors group-hover/contact:text-white" />
+                                <x-litus-icon name="arrow-right" class="h-4 w-4 text-[#0065ef] transition-colors group-hover/contact:text-white" />
                             </a>
                         </div>
                     </div>
@@ -301,7 +301,7 @@
 
             <div class="flex items-center justify-center gap-6 min-[1101px]:justify-start">
                 <div class="relative">
-                    <div class="flex h-[78px] w-[78px] shrink-0 items-center justify-center rounded-full border-[5px] border-white/20 bg-[#e9252f] text-white shadow-[0_0_0_2px_rgba(255,16,41,0.45)] min-[651px]:h-[92px] min-[651px]:w-[92px]">
+                    <div class="flex h-[78px] w-[78px] shrink-0 items-center justify-center rounded-full border-[5px] border-white/20 bg-[#0065ef] text-white shadow-[0_0_0_2px_rgba(0,101,239,0.45)] min-[651px]:h-[92px] min-[651px]:w-[92px]">
                         <x-litus-icon name="map-pin" class="h-8 w-8 min-[651px]:h-10 min-[651px]:w-10" />
                     </div>
                     <div class="pointer-events-none absolute -right-[70px] top-[15px] hidden h-[55px] w-[75px] rotate-[20deg] rounded-full border-r-[3px] border-t-[3px] border-dashed border-white/55 min-[651px]:block"></div>
@@ -318,12 +318,12 @@
 
             <div class="flex flex-wrap justify-center gap-[22px] max-sm:w-full max-sm:flex-col min-[1101px]:justify-end">
                 <a href="{{ route('contact') }}"
-                   class="inline-flex h-[52px] min-w-[190px] items-center justify-center gap-3.5 rounded-md bg-[#f30d23] px-7 text-[15px] font-black text-white shadow-[0_8px_22px_rgba(243,13,35,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a] max-sm:w-full">
+                   class="inline-flex h-[52px] min-w-[190px] items-center justify-center gap-3.5 rounded-md bg-[#0065ef] px-7 text-[15px] font-black text-white shadow-[0_8px_22px_rgba(0,101,239,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] max-sm:w-full">
                     Contact Us
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
                 <a href="#locations"
-                   class="inline-flex h-[52px] min-w-[190px] items-center justify-center gap-3.5 rounded-md border-2 border-white/55 bg-white/[0.03] px-7 text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ff1029] hover:bg-[rgba(255,16,41,0.12)] max-sm:w-full">
+                   class="inline-flex h-[52px] min-w-[190px] items-center justify-center gap-3.5 rounded-md border-2 border-white/55 bg-white/[0.03] px-7 text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] max-sm:w-full">
                     View Locations
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>

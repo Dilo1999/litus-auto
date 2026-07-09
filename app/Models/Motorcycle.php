@@ -173,6 +173,9 @@ class Motorcycle extends Model
             'Suspension Front' => self::detailsPageIcon('suspension.png'),
             'Wheels Front', 'Wheels Rear' => self::detailsPageIcon('tyre.png'),
             'Fuel Tank Capacity' => self::detailsPageIcon('fuel-gas.png'),
+            'Ground Clearance' => self::detailsPageIcon('ground.png'),
+            'Frame Type' => self::detailsPageIcon('frame.png'),
+            'Net Weight' => self::detailsPageIcon('weight.png'),
             default => null,
         };
     }

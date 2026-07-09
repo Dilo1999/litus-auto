@@ -74,7 +74,7 @@
 
         <div class="relative z-[2] litus-container pt-16 pb-12 sm:pt-20">
             <div class="max-w-[720px] text-left">
-                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:text-[15px]">
+                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#0065ef] sm:text-lg max-md:text-[15px]">
                     LITUS Gallery
                 </p>
 
@@ -90,12 +90,12 @@
                 <div class="mb-6 flex flex-row flex-wrap items-center justify-start gap-5 sm:gap-7">
                     <button type="button"
                             data-gallery-scroll-grid
-                            class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] bg-[#f20d23] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(242,13,35,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9091c] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
+                            class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] bg-[#0065ef] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(0,101,239,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         View Gallery
                         <x-litus-icon name="images" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </button>
                     <a href="#gallery-video"
-                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f20d23] hover:bg-[rgba(242,13,35,0.15)] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
+                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.15)] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         Watch Videos
                         <x-litus-icon name="play" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </a>
@@ -264,12 +264,12 @@
 
             <div class="flex flex-col gap-4 max-[1150px]:mx-auto max-[1150px]:w-full max-[1150px]:max-w-[420px]">
                 <a href="#"
-                   class="inline-flex h-[58px] w-full items-center justify-center gap-3 rounded-[9px] border-2 border-litus-red bg-litus-red text-[17px] font-black text-white shadow-[0_10px_24px_rgba(243,13,35,0.25)] transition-all duration-300 hover:-translate-y-[3px] hover:border-[#c9081a] hover:bg-[#c9081a]">
+                   class="inline-flex h-[58px] w-full items-center justify-center gap-3 rounded-[9px] border-2 border-litus-red bg-litus-red text-[17px] font-black text-white shadow-[0_10px_24px_rgba(0,101,239,0.25)] transition-all duration-300 hover:-translate-y-[3px] hover:border-[#0052cc] hover:bg-[#0052cc]">
                     <x-litus-icon name="users" class="h-6 w-6" />
                     Follow Us
                 </a>
                 <a href="tel:+9607797442"
-                   class="inline-flex h-[58px] w-full items-center justify-center gap-3 rounded-[9px] border-2 border-[#ff6b7b] bg-white text-[17px] font-black text-litus-red transition-all duration-300 hover:-translate-y-[3px] hover:border-litus-red hover:bg-litus-red hover:text-white">
+                   class="inline-flex h-[58px] w-full items-center justify-center gap-3 rounded-[9px] border-2 border-[#66a3ff] bg-white text-[17px] font-black text-litus-red transition-all duration-300 hover:-translate-y-[3px] hover:border-litus-red hover:bg-litus-red hover:text-white">
                     <x-litus-icon name="phone" class="h-6 w-6" />
                     Contact Us
                 </a>

@@ -55,7 +55,7 @@
 
         <div class="relative z-[2] litus-container pt-16 pb-12 sm:pt-20">
             <div class="max-w-[720px] text-left">
-                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:text-[15px]">
+                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#0065ef] sm:text-lg max-md:text-[15px]">
                     Genuine Motorcycle Parts
                 </p>
 
@@ -72,12 +72,12 @@
 
                 <div class="flex flex-row flex-wrap items-center justify-start gap-5 sm:gap-7">
                     <a href="#inquiry"
-                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] bg-[#f20d23] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(242,13,35,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9091c] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
+                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] bg-[#0065ef] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(0,101,239,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         Request Parts
                         <x-litus-icon name="arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </a>
                     <a href="tel:+9603331234"
-                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f20d23] hover:bg-[rgba(242,13,35,0.15)] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
+                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.15)] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         Contact Parts Team
                         <x-litus-icon name="arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </a>
@@ -125,7 +125,7 @@
 
             <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($categories as $category)
-                    <div class="group flex cursor-pointer items-start gap-5 rounded-2xl border border-gray-100 bg-white p-6 transition-all duration-300 hover:border-red-100 hover:shadow-lg">
+                    <div class="group flex cursor-pointer items-start gap-5 rounded-2xl border border-gray-100 bg-white p-6 transition-all duration-300 hover:border-blue-100 hover:shadow-lg">
                         <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-litus-red/10 transition-transform duration-300 group-hover:scale-105">
                             <x-litus-icon :name="$category['icon']" class="h-[26px] w-[26px] text-litus-red" />
                         </div>
@@ -209,7 +209,7 @@
                         <div>
                             <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-gray-300">Motorcycle Brand</label>
                             <div class="relative">
-                                <select name="brand" class="w-full cursor-pointer appearance-none rounded-xl border border-white/15 bg-white/10 px-4 py-3 pr-9 text-sm text-white outline-none transition-all focus:border-red-400 focus:ring-2 focus:ring-red-500/20">
+                                <select name="brand" class="w-full cursor-pointer appearance-none rounded-xl border border-white/15 bg-white/10 px-4 py-3 pr-9 text-sm text-white outline-none transition-all focus:border-blue-400 focus:ring-2 focus:ring-blue-500/20">
                                     <option value="" disabled selected>Select a Brand</option>
                                     <option value="Honda">Honda</option>
                                     <option value="Yamaha">Yamaha</option>
@@ -221,13 +221,13 @@
                         <div>
                             <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-gray-300">Year of Made</label>
                             <input type="text" name="year" placeholder="e.g. 2023"
-                                   class="w-full rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder-gray-400 outline-none transition-all focus:border-red-400 focus:ring-2 focus:ring-red-500/20">
+                                   class="w-full rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder-gray-400 outline-none transition-all focus:border-blue-400 focus:ring-2 focus:ring-blue-500/20">
                         </div>
 
                         <div class="sm:col-span-2">
                             <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-gray-300">Motorcycle Model</label>
                             <input type="text" name="model" placeholder="Enter motorcycle model"
-                                   class="w-full rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder-gray-400 outline-none transition-all focus:border-red-400 focus:ring-2 focus:ring-red-500/20">
+                                   class="w-full rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder-gray-400 outline-none transition-all focus:border-blue-400 focus:ring-2 focus:ring-blue-500/20">
                         </div>
 
                         <div class="sm:col-span-2">
@@ -246,19 +246,19 @@
                         <div class="sm:col-span-2">
                             <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-gray-300">Parts You Need</label>
                             <textarea name="parts" rows="3" placeholder="Describe the parts you need..."
-                                      class="w-full resize-none rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder-gray-400 outline-none transition-all focus:border-red-400 focus:ring-2 focus:ring-red-500/20"></textarea>
+                                      class="w-full resize-none rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder-gray-400 outline-none transition-all focus:border-blue-400 focus:ring-2 focus:ring-blue-500/20"></textarea>
                         </div>
 
                         <div>
                             <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-gray-300">Your Full Name</label>
                             <input type="text" name="name" placeholder="Your full name"
-                                   class="w-full rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder-gray-400 outline-none transition-all focus:border-red-400 focus:ring-2 focus:ring-red-500/20">
+                                   class="w-full rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder-gray-400 outline-none transition-all focus:border-blue-400 focus:ring-2 focus:ring-blue-500/20">
                         </div>
 
                         <div>
                             <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-gray-300">Contact Number</label>
                             <input type="tel" name="contact" placeholder="Phone number"
-                                   class="w-full rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder-gray-400 outline-none transition-all focus:border-red-400 focus:ring-2 focus:ring-red-500/20">
+                                   class="w-full rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder-gray-400 outline-none transition-all focus:border-blue-400 focus:ring-2 focus:ring-blue-500/20">
                         </div>
 
                         <div class="pt-1 sm:col-span-2">
@@ -303,7 +303,7 @@
                     <div class="flex flex-1 flex-col items-start gap-0 lg:flex-row">
                         <div class="group relative flex-1 px-6 py-8 text-center">
                             <div class="relative mb-5 inline-flex">
-                                <div class="flex h-16 w-16 items-center justify-center rounded-full border-2 border-dashed border-gray-200 bg-litus-red/5 transition-colors group-hover:border-red-200">
+                                <div class="flex h-16 w-16 items-center justify-center rounded-full border-2 border-dashed border-gray-200 bg-litus-red/5 transition-colors group-hover:border-blue-200">
                                     <x-litus-icon :name="$step['icon']" class="h-6 w-6 text-litus-red" />
                                 </div>
                                 <span class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-litus-red text-xs font-black text-white">{{ $index + 1 }}</span>

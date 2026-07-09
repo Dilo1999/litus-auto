@@ -19,9 +19,9 @@ function initProductGallery() {
     const nextBtn = root.querySelector('[data-gallery-next]');
     const colorBtns = root.querySelectorAll('[data-gallery-color]');
 
-    const thumbActive = ['border-[#ff6b7b]', 'shadow-[0_0_0_1px_rgba(255,16,41,0.25)]'];
+    const thumbActive = ['border-[#66a3ff]', 'shadow-[0_0_0_1px_rgba(0,101,239,0.25)]'];
     const thumbInactive = ['border-[#e3e7ec]'];
-    const colorActive = ['border-[#ff6b7b]', 'shadow-[0_0_0_1px_rgba(255,16,41,0.25)]'];
+    const colorActive = ['border-[#66a3ff]', 'shadow-[0_0_0_1px_rgba(0,101,239,0.25)]'];
     const colorInactive = ['border-[#e5e8ed]'];
 
     let activeIndex = 0;
@@ -43,7 +43,7 @@ function initProductGallery() {
         thumbsWrap.innerHTML = images.map((img, index) => `
             <button type="button"
                     data-gallery-thumb="${index}"
-                    class="flex aspect-[4/3] min-w-0 flex-1 items-center justify-center overflow-hidden rounded-[10px] border-2 bg-white p-1 transition-all duration-300 hover:border-[#ff1029] ${index === activeIndex ? 'border-[#ff6b7b] shadow-[0_0_0_1px_rgba(255,16,41,0.25)]' : 'border-[#e3e7ec]'}">
+                    class="flex aspect-[4/3] min-w-0 flex-1 items-center justify-center overflow-hidden rounded-[10px] border-2 bg-white p-1 transition-all duration-300 hover:border-[#0065ef] ${index === activeIndex ? 'border-[#66a3ff] shadow-[0_0_0_1px_rgba(0,101,239,0.25)]' : 'border-[#e3e7ec]'}">
                 <img src="${img}" alt="View ${index + 1}" class="h-full w-full object-contain">
             </button>
         `).join('');

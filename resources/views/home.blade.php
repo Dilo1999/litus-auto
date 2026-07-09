@@ -64,7 +64,7 @@
              alt=""
              class="absolute inset-0 h-full w-full object-cover object-center"
              aria-hidden="true">
-        <div class="absolute inset-0 bg-[linear-gradient(110deg,rgba(139,0,0,0.6)_0%,rgba(11,22,40,0.85)_40%,rgba(11,22,40,0.45)_70%,rgba(11,22,40,0.2)_100%)]"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(110deg,rgba(0,65,180,0.55)_0%,rgba(11,22,40,0.85)_40%,rgba(11,22,40,0.45)_70%,rgba(11,22,40,0.2)_100%)]"></div>
 
         <div class="relative z-10 litus-container flex min-h-[640px] flex-col justify-center lg:min-h-[720px]">
             <div class="max-w-xl py-16 text-center lg:py-20 lg:text-left">
@@ -117,12 +117,12 @@
         <div class="relative z-[2] litus-container">
             <div class="mb-9 flex flex-col items-start justify-between gap-5 min-[651px]:mb-[35px] min-[651px]:flex-row min-[651px]:gap-5">
                 <div>
-                    <span class="mb-1.5 block text-sm font-black uppercase tracking-wide text-[#ff1029]">Special Deals</span>
+                    <span class="mb-1.5 block text-sm font-black uppercase tracking-wide text-[#0065ef]">Special Deals</span>
                     <h2 class="mb-3.5 text-[30px] font-black leading-tight tracking-[-0.5px] text-[#07152f] min-[651px]:text-4xl">Ongoing Promotions</h2>
                     <p class="text-[15px] font-semibold text-[#424c5e]">Limited-time deals on selected motorcycles and scooters.</p>
                 </div>
                 <a href="{{ route('motorcycles') }}"
-                   class="group/viewall inline-flex items-center gap-2.5 text-[15px] font-black text-[#07152f] transition-all duration-300 hover:gap-4 hover:text-[#ff1029] min-[651px]:mt-[58px]">
+                   class="group/viewall inline-flex items-center gap-2.5 text-[15px] font-black text-[#07152f] transition-all duration-300 hover:gap-4 hover:text-[#0065ef] min-[651px]:mt-[58px]">
                     View All Promotions
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
@@ -130,50 +130,19 @@
 
             <div class="relative min-[1101px]:px-[42px]">
                 <button type="button"
-                        class="absolute left-0 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-3xl leading-none text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#f30d23] hover:text-white min-[1101px]:flex"
+                        class="absolute left-0 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-3xl leading-none text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#0065ef] hover:text-white min-[1101px]:flex"
                         aria-label="Previous promotions">
                     <x-litus-icon name="chevron-left" class="h-6 w-6" />
                 </button>
                 <button type="button"
-                        class="absolute right-0 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-3xl leading-none text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#f30d23] hover:text-white min-[1101px]:flex"
+                        class="absolute right-0 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-3xl leading-none text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#0065ef] hover:text-white min-[1101px]:flex"
                         aria-label="Next promotions">
                     <x-litus-icon name="chevron-right" class="h-6 w-6" />
                 </button>
 
                 <div class="grid grid-cols-1 gap-[18px] min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4">
                     @forelse ($promoMotorcycles as $motorcycle)
-                        <div class="group relative min-h-[320px] overflow-hidden rounded-[10px] border border-[#dfe3ea] bg-white px-[18px] pb-5 pt-[18px] shadow-[0_12px_28px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_42px_rgba(0,0,0,0.12)] min-[651px]:min-h-[340px]">
-                            <a href="{{ route('motorcycle.show', $motorcycle->slug) }}"
-                               class="absolute inset-0 z-[1]"
-                               aria-label="View {{ $motorcycle->name }}"></a>
-
-                            <div class="pointer-events-none relative z-[2]">
-                                <div class="absolute left-3 top-3">
-                                    <span class="relative block rounded-t-lg rounded-br-lg bg-[#f30d23] px-4 py-1.5 text-xs font-black uppercase text-white shadow-[0_8px_16px_rgba(243,13,35,0.25)]">
-                                        {{ $motorcycle->offer_label ?? 'Limited Offer' }}
-                                        <span class="absolute bottom-[-6px] left-0 h-1.5 w-[35px] rounded-br-lg bg-[#b80718]"></span>
-                                    </span>
-                                </div>
-
-                                <div class="mt-7 flex h-[170px] items-center justify-center">
-                                    <img src="{{ $motorcycle->listImageUrl() }}"
-                                         alt="{{ $motorcycle->name }}"
-                                         class="h-[150px] w-full max-w-[230px] object-contain drop-shadow-[0_20px_14px_rgba(0,0,0,0.22)] max-sm:max-w-[210px]">
-                                </div>
-
-                                <div class="mt-2 text-center">
-                                    <h3 class="mb-2 text-lg font-black text-[#111b46]">{{ $motorcycle->name }}</h3>
-                                    <p class="mb-4 text-[15px] font-black text-[#ff1029]">Discount: {{ $motorcycle->formattedDiscount() }}</p>
-                                </div>
-                            </div>
-
-                            <div class="relative z-[2] text-center">
-                                <a href="{{ route('motorcycle.show', $motorcycle->slug) }}"
-                                   class="inline-flex h-10 w-[175px] items-center justify-center rounded-md border-2 border-[#8d97ad] bg-white text-sm font-black text-[#07152f] transition-colors duration-300 hover:border-[#f30d23] hover:bg-[#f30d23] hover:text-white">
-                                    Buy Now
-                                </a>
-                            </div>
-                        </div>
+                        <x-promotion-card :motorcycle="$motorcycle" />
                     @empty
                         <div class="col-span-full rounded-[10px] border border-dashed border-[#dfe3ea] bg-white/80 px-6 py-12 text-center">
                             <p class="font-semibold text-[#424c5e]">No active promotions at the moment.</p>
@@ -192,12 +161,12 @@
 
             <div class="mb-[30px] flex flex-col items-start justify-between gap-5 min-[721px]:flex-row max-[1100px]:gap-5">
                 <div>
-                    <span class="mb-2 block text-[15px] font-black uppercase tracking-wide text-[#ff1029]">Customer Favorites</span>
+                    <span class="mb-2 block text-[15px] font-black uppercase tracking-wide text-[#0065ef]">Customer Favorites</span>
                     <h2 class="mb-3 text-[32px] font-black leading-tight tracking-[-0.5px] text-white min-[721px]:text-[42px]">Top Selling Rides</h2>
                     <p class="text-base font-semibold text-[#d6dee9]">Explore our most popular motorcycles and scooters.</p>
                 </div>
                 <a href="{{ route('motorcycles') }}"
-                   class="group/viewall inline-flex items-center gap-2.5 text-base font-black text-[#ff1029] transition-all duration-300 hover:gap-4 hover:text-white min-[721px]:mt-[55px]">
+                   class="group/viewall inline-flex items-center gap-2.5 text-base font-black text-[#0065ef] transition-all duration-300 hover:gap-4 hover:text-white min-[721px]:mt-[55px]">
                     View All Rides
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
@@ -205,7 +174,7 @@
 
             <div class="grid grid-cols-1 gap-[22px] min-[721px]:gap-[38px] min-[1101px]:grid-cols-3 max-[1100px]:min-[721px]:grid-cols-2">
                 @foreach ($topRides as $ride)
-                    <div class="group relative min-h-0 overflow-hidden rounded-xl border border-white/12 bg-white/[0.07] px-[22px] pb-7 pt-6 shadow-[0_18px_35px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[rgba(255,16,41,0.55)] hover:shadow-[0_22px_45px_rgba(0,0,0,0.35)] min-[721px]:min-h-[385px] min-[721px]:px-[30px] min-[721px]:pb-7 min-[721px]:pt-6">
+                    <div class="group relative min-h-0 overflow-hidden rounded-xl border border-white/12 bg-white/[0.07] px-[22px] pb-7 pt-6 shadow-[0_18px_35px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[rgba(0,101,239,0.55)] hover:shadow-[0_22px_45px_rgba(0,0,0,0.35)] min-[721px]:min-h-[385px] min-[721px]:px-[30px] min-[721px]:pb-7 min-[721px]:pt-6">
                         <a href="{{ route('motorcycle.show', $ride['slug']) }}"
                            class="absolute inset-0 z-[1]"
                            aria-label="View {{ $ride['model'] }}"></a>
@@ -235,7 +204,7 @@
 
                         <div class="relative z-[2]">
                             <a href="{{ route('motorcycles') }}"
-                               class="inline-flex h-12 w-[170px] items-center justify-center rounded-md border-2 border-[#bd2938] bg-transparent text-[15px] font-black text-[#ff394b] transition-colors duration-300 hover:border-[#ff1029] hover:bg-[#ff1029] hover:text-white">
+                               class="inline-flex h-12 w-[170px] items-center justify-center rounded-md border-2 border-[#4d7fcc] bg-transparent text-[15px] font-black text-[#3385ff] transition-colors duration-300 hover:border-[#0065ef] hover:bg-[#0065ef] hover:text-white">
                                 Explore More
                             </a>
                         </div>
@@ -256,7 +225,7 @@
 
             <div class="relative z-[2] litus-container grid grid-cols-1 items-center justify-between gap-10 max-[950px]:text-center min-[951px]:grid-cols-[38%_52%] min-[951px]:gap-10">
                 <div>
-                    <span class="mb-2 block text-[13px] font-black uppercase tracking-wide text-[#ff1029]">Stay Updated</span>
+                    <span class="mb-2 block text-[13px] font-black uppercase tracking-wide text-[#0065ef]">Stay Updated</span>
                     <h2 class="mb-[18px] text-[34px] font-black leading-tight tracking-[-1px] text-[#07152f] min-[601px]:text-[42px]">What's New?</h2>
                     <p class="mb-7 max-w-[360px] text-[15px] font-semibold leading-snug text-[#384354] max-[950px]:mx-auto">
                         Stay updated with the latest launches, offers, and stories from LITUS Automobiles.
@@ -264,7 +233,7 @@
                     <a href="https://youtu.be/o8grf3wSwQU"
                        target="_blank"
                        rel="noopener noreferrer"
-                       class="inline-flex h-12 min-w-[190px] items-center justify-center gap-3 rounded-md bg-[#f30d23] px-6 text-sm font-black text-white shadow-[0_8px_20px_rgba(243,13,35,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a]">
+                       class="inline-flex h-12 min-w-[190px] items-center justify-center gap-3 rounded-md bg-[#0065ef] px-6 text-sm font-black text-white shadow-[0_8px_20px_rgba(0,101,239,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc]">
                         Watch Latest Updates
                         <x-litus-icon name="play" class="h-3.5 w-3.5" />
                     </a>
@@ -289,7 +258,7 @@
             <div class="litus-container">
 
                 <div class="mb-[18px] text-center">
-                    <span class="mb-1.5 block text-xs font-black uppercase text-[#ff1029]">Our Services</span>
+                    <span class="mb-1.5 block text-xs font-black uppercase text-[#0065ef]">Our Services</span>
                     <h2 class="text-[27px] font-black leading-tight tracking-[-0.5px] text-[#07152f] min-[601px]:text-[32px]">What We Offer at LITUS</h2>
                 </div>
 
@@ -300,7 +269,7 @@
                                 <img src="{{ $service['img'] }}"
                                      alt="{{ $service['title'] }}"
                                      class="block h-full w-full object-cover">
-                                <div class="absolute left-5 top-[18px] flex h-[50px] w-[50px] items-center justify-center rounded-full bg-white text-[#ff1029] shadow-[0_8px_18px_rgba(0,0,0,0.15)]">
+                                <div class="absolute left-5 top-[18px] flex h-[50px] w-[50px] items-center justify-center rounded-full bg-white text-[#0065ef] shadow-[0_8px_18px_rgba(0,0,0,0.15)]">
                                     <x-litus-icon :name="$service['icon']" class="h-6 w-6" />
                                 </div>
                             </div>
@@ -326,13 +295,13 @@
             <div class="min-h-[250px] max-[900px]:hidden"></div>
 
             <div class="max-w-[720px] max-[900px]:max-w-full">
-                <span class="mb-2 block text-[15px] font-black uppercase tracking-wide text-[#ff1029]">Our Story</span>
+                <span class="mb-2 block text-[15px] font-black uppercase tracking-wide text-[#0065ef]">Our Story</span>
                 <h2 class="mb-4 text-[34px] font-black leading-tight tracking-[-0.5px] text-white drop-shadow-[0_8px_20px_rgba(0,0,0,0.55)] min-[601px]:text-[44px]">Who We Are</h2>
                 <p class="mb-7 max-w-[690px] text-sm font-semibold leading-[1.7] text-[#e3e9f2] drop-shadow-[0_4px_14px_rgba(0,0,0,0.45)] min-[601px]:text-base min-[601px]:leading-[1.65]">
                     Established in 2014, LITUS Automobiles stands as the premier destination for motorcycles in the Maldives. As the largest motorcycle dealer, we specialize in the sale, lease, and service of top-notch motorcycles. Our commitment extends to providing genuine spare parts, ensuring every ride is a journey of excellence. At LITUS, we don't just sell motorcycles; we turn aspirations into reality and transform dreams of the open road into adventures that thrill. Join us and discover the joy of riding with LITUS Automobiles — where every adventure begins.
                 </p>
                 <a href="{{ route('about') }}"
-                   class="inline-flex h-[52px] min-w-[200px] items-center justify-center gap-3.5 rounded-md bg-[#f30d23] px-7 text-[15px] font-black text-white shadow-[0_10px_26px_rgba(243,13,35,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a] max-[600px]:w-full">
+                   class="inline-flex h-[52px] min-w-[200px] items-center justify-center gap-3.5 rounded-md bg-[#0065ef] px-7 text-[15px] font-black text-white shadow-[0_10px_26px_rgba(0,101,239,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] max-[600px]:w-full">
                     Find Out More
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
@@ -349,14 +318,14 @@
         <div class="relative z-[2] litus-container">
             <div class="mb-[22px] flex flex-col items-start justify-between gap-5 min-[651px]:flex-row">
                 <div>
-                    <span class="mb-1 block text-[15px] font-black uppercase tracking-wide text-[#ff1029]">Our Gallery</span>
+                    <span class="mb-1 block text-[15px] font-black uppercase tracking-wide text-[#0065ef]">Our Gallery</span>
                     <h2 class="mb-2.5 text-[30px] font-black leading-tight tracking-[-0.6px] text-[#07152f] min-[651px]:text-[38px]">Ride the Visual Journey</h2>
                     <p class="text-sm font-semibold leading-normal text-[#4f5b6c] min-[651px]:text-[15px]">
                         Explore our collection of motorcycles, scooters, and customer moments.
                     </p>
                 </div>
                 <a href="{{ route('gallery') }}"
-                   class="group/viewgallery inline-flex items-center gap-2.5 text-[15px] font-black text-[#07152f] transition-all duration-300 hover:gap-4 hover:text-[#ff1029] min-[651px]:mt-[52px]">
+                   class="group/viewgallery inline-flex items-center gap-2.5 text-[15px] font-black text-[#07152f] transition-all duration-300 hover:gap-4 hover:text-[#0065ef] min-[651px]:mt-[52px]">
                     View Gallery
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
@@ -364,12 +333,12 @@
 
             <div class="relative min-[1101px]:px-10">
                 <button type="button"
-                        class="absolute left-0 top-1/2 z-[5] hidden h-[54px] w-[54px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#ff1029] hover:text-white min-[1101px]:flex"
+                        class="absolute left-0 top-1/2 z-[5] hidden h-[54px] w-[54px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#0065ef] hover:text-white min-[1101px]:flex"
                         aria-label="Previous gallery images">
                     <x-litus-icon name="chevron-left" class="h-6 w-6" />
                 </button>
                 <button type="button"
-                        class="absolute right-0 top-1/2 z-[5] hidden h-[54px] w-[54px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#ff1029] hover:text-white min-[1101px]:flex"
+                        class="absolute right-0 top-1/2 z-[5] hidden h-[54px] w-[54px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#0065ef] hover:text-white min-[1101px]:flex"
                         aria-label="Next gallery images">
                     <x-litus-icon name="chevron-right" class="h-6 w-6" />
                 </button>

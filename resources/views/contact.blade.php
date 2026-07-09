@@ -52,7 +52,7 @@
     $mapsEmbedUrl = 'https://www.google.com/maps?q=Ma.%20Elyzium%2C%20Buruzu%20Magu%2C%20Male%2C%20Maldives&output=embed';
     $mapsLinkUrl = 'https://www.google.com/maps/search/?api=1&query=Ma.%20Elyzium%2C%20Buruzu%20Magu%2C%20Male%2C%20Maldives';
 
-    $darkInputCls = 'w-full rounded-[5px] border border-white/[0.22] bg-[#061326] px-3.5 py-[13px] text-sm text-white placeholder-[#9ca8b7] outline-none transition-all duration-300 focus:border-[#ff1029] focus:shadow-[0_0_0_3px_rgba(255,16,41,0.15)]';
+    $darkInputCls = 'w-full rounded-[5px] border border-white/[0.22] bg-[#061326] px-3.5 py-[13px] text-sm text-white placeholder-[#9ca8b7] outline-none transition-all duration-300 focus:border-[#0065ef] focus:shadow-[0_0_0_3px_rgba(0,101,239,0.15)]';
 
     $hoursCards = [
         ['icon' => 'shopping-bag', 'title' => 'Sales Support', 'text' => 'Sun–Thu<br>8:30 AM – 6:00 PM'],
@@ -93,7 +93,7 @@
 
             {{-- Hero content --}}
             <div class="relative z-10 min-w-0 max-w-[760px] pl-0 text-center min-[1100px]:col-start-2 min-[1100px]:pl-4 min-[1100px]:text-left">
-                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:text-[15px]">
+                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#0065ef] sm:text-lg max-md:text-[15px]">
                     Customer Support
                 </p>
 
@@ -108,14 +108,14 @@
 
                 <div class="flex flex-row flex-wrap items-center justify-center gap-5 sm:gap-7 min-[1100px]:justify-start">
                     <a href="#contact-form"
-                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] bg-[#f20d23] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(242,13,35,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9091c] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
+                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] bg-[#0065ef] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(0,101,239,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         Contact Now
                         <x-litus-icon name="arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </a>
                     <a href="https://maps.google.com/?q=Male+Maldives+Buruzu+Magu"
                        target="_blank"
                        rel="noopener noreferrer"
-                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f20d23] hover:bg-[rgba(242,13,35,0.15)] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
+                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.15)] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
                         Get Directions
                         <x-litus-icon name="navigation" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </a>
@@ -156,7 +156,7 @@
     <section class="min-h-[360px] border border-[#d8d8d8] bg-white py-11 pb-14">
         <div class="litus-container">
             <div class="mb-7 text-center">
-                <span class="mb-2.5 block text-sm font-black uppercase text-[#ff1029]">Get In Touch</span>
+                <span class="mb-2.5 block text-sm font-black uppercase text-[#0065ef]">Get In Touch</span>
                 <h2 class="mb-3 font-display text-[28px] font-black tracking-[-0.5px] text-[#07152f] sm:text-[34px]">Contact LITUS Automobiles</h2>
                 <p class="text-[15px] font-medium leading-normal text-[#4d5566] sm:text-base">
                     Reach our team through phone, email, social media, or visit our office.
@@ -166,7 +166,7 @@
             <div class="litus-container grid grid-cols-1 gap-4 max-lg:max-w-[650px] lg:grid-cols-3">
                 @foreach ($contactCards as $card)
                     <div class="group flex min-h-[145px] items-start gap-[22px] rounded-[10px] border border-black/[0.03] bg-white p-6 shadow-[0_15px_35px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_20px_45px_rgba(0,0,0,0.1)] max-sm:flex-col max-sm:p-6">
-                        <div class="flex h-[68px] w-[68px] min-w-[68px] items-center justify-center rounded-full bg-[#061530] text-[#ff1029] shadow-[0_8px_18px_rgba(6,21,48,0.25)]">
+                        <div class="flex h-[68px] w-[68px] min-w-[68px] items-center justify-center rounded-full bg-[#061530] text-[#0065ef] shadow-[0_8px_18px_rgba(6,21,48,0.25)]">
                             <x-litus-icon :name="$card['icon']" class="h-[30px] w-[30px]" />
                         </div>
 
@@ -182,7 +182,7 @@
                             <a href="{{ $card['href'] }}"
                                target="{{ str_starts_with($card['href'], 'http') ? '_blank' : '_self' }}"
                                @if(str_starts_with($card['href'], 'http')) rel="noopener noreferrer" @endif
-                               class="inline-flex items-center gap-2 text-sm font-black text-[#ff1029] transition-all duration-300 hover:gap-3 hover:text-[#d80018]">
+                               class="inline-flex items-center gap-2 text-sm font-black text-[#0065ef] transition-all duration-300 hover:gap-3 hover:text-[#0052cc]">
                                 {{ $card['action'] }}
                                 <x-litus-icon name="arrow-right" class="h-3.5 w-3.5" />
                             </a>
@@ -204,12 +204,12 @@
                     <p class="mb-6 text-sm text-[#b9c3d0]">Fill out the form and our team will contact you shortly.</p>
 
                     <div class="hidden flex-col items-center justify-center py-12 text-center" data-contact-success>
-                        <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#ff1029]/15">
-                            <x-litus-icon name="check-circle" class="h-8 w-8 text-[#ff1029]" />
+                        <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#0065ef]/15">
+                            <x-litus-icon name="check-circle" class="h-8 w-8 text-[#0065ef]" />
                         </div>
                         <h3 class="mb-2 text-xl font-black text-white">Message Sent!</h3>
                         <p class="max-w-xs text-sm text-[#b9c3d0]">Our team will get back to you within 24 hours.</p>
-                        <button type="button" data-contact-reset class="mt-5 text-sm font-bold text-[#ff1029] underline">Send another message</button>
+                        <button type="button" data-contact-reset class="mt-5 text-sm font-bold text-[#0065ef] underline">Send another message</button>
                     </div>
 
                     <form data-contact-form action="#" method="post">
@@ -249,7 +249,7 @@
                         </div>
 
                         <button type="submit"
-                                class="flex h-[52px] w-full items-center justify-center gap-2.5 rounded-md bg-[#f40d23] text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a]">
+                                class="flex h-[52px] w-full items-center justify-center gap-2.5 rounded-md bg-[#0065ef] text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc]">
                             Send Message
                             <x-litus-icon name="arrow-right" class="h-4 w-4" />
                         </button>
@@ -269,7 +269,7 @@
                         <a href="{{ $mapsLinkUrl }}"
                            target="_blank"
                            rel="noopener noreferrer"
-                           class="inline-flex h-11 min-w-[220px] items-center justify-center gap-2.5 rounded-[5px] border border-white/45 text-sm font-extrabold text-white transition-all duration-300 hover:border-[#ff1029] hover:bg-[rgba(255,16,41,0.12)]">
+                           class="inline-flex h-11 min-w-[220px] items-center justify-center gap-2.5 rounded-[5px] border border-white/45 text-sm font-extrabold text-white transition-all duration-300 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)]">
                             Open in Google Maps
                             <x-litus-icon name="arrow-right" class="h-3.5 w-3.5" />
                         </a>
@@ -311,14 +311,14 @@
 
                 <div class="flex flex-wrap justify-center gap-[18px] max-sm:w-full lg:justify-end">
                     <a href="tel:+9607797442"
-                       class="inline-flex h-[52px] min-w-[165px] items-center justify-center gap-2.5 rounded-[7px] bg-[#f40d23] px-6 text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a] max-sm:w-full">
+                       class="inline-flex h-[52px] min-w-[165px] items-center justify-center gap-2.5 rounded-[7px] bg-[#0065ef] px-6 text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] max-sm:w-full">
                         Call Now
                         <x-litus-icon name="arrow-right" class="h-4 w-4" />
                     </a>
                     <a href="https://wa.me/9607797442"
                        target="_blank"
                        rel="noopener noreferrer"
-                       class="inline-flex h-[52px] min-w-[165px] items-center justify-center gap-2.5 rounded-[7px] border border-white/55 bg-white/[0.03] px-6 text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ff1029] hover:bg-[rgba(255,16,41,0.12)] max-sm:w-full">
+                       class="inline-flex h-[52px] min-w-[165px] items-center justify-center gap-2.5 rounded-[7px] border border-white/55 bg-white/[0.03] px-6 text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] max-sm:w-full">
                         WhatsApp Us
                         <x-litus-icon name="arrow-right" class="h-4 w-4" />
                     </a>

@@ -45,7 +45,7 @@
 
             <div class="relative z-[2] grid grid-cols-1 items-center gap-8 min-[1100px]:pointer-events-none min-[1100px]:grid-cols-[50%_50%] min-[1100px]:gap-5">
                 <div class="max-w-[650px] text-left max-[1100px]:mx-auto max-[1100px]:text-center min-[1100px]:pointer-events-auto min-[1100px]:max-w-none">
-                    <p class="mb-6 text-base font-black uppercase tracking-[2px] text-[#ff1029] sm:text-lg max-md:mb-5 max-md:text-[15px]">
+                    <p class="mb-6 text-base font-black uppercase tracking-[2px] text-[#0065ef] sm:text-lg max-md:mb-5 max-md:text-[15px]">
                         Category: {{ $motorcycle->category }}
                     </p>
 
@@ -72,11 +72,11 @@
                     @if ($motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0)
                     <div class="relative mb-5 mt-2 inline-block max-[1100px]:mx-auto">
                         @if ($motorcycle->offer_label)
-                        <span class="absolute left-2.5 top-[-26px] rounded-t-md bg-[#f40d23] px-3.5 py-2 text-sm font-black text-white">
+                        <span class="absolute left-2.5 top-[-26px] rounded-t-md bg-[#0065ef] px-3.5 py-2 text-sm font-black text-white">
                             {{ $motorcycle->offer_label }}
                         </span>
                         @endif
-                        <div class="rounded-[9px] bg-[#f40d23] px-5 py-4 text-2xl font-black text-white shadow-[0_12px_28px_rgba(244,13,35,0.35)] sm:px-[22px] sm:py-[19px] sm:text-[34px]">
+                        <div class="rounded-[9px] bg-[#0065ef] px-5 py-4 text-2xl font-black text-white shadow-[0_12px_28px_rgba(0,101,239,0.35)] sm:px-[22px] sm:py-[19px] sm:text-[34px]">
                             Special Discount: {{ $motorcycle->formattedDiscount() }}
                         </div>
                     </div>
@@ -90,17 +90,17 @@
 
                     <div class="flex flex-col gap-3 max-[1100px]:mx-auto min-[1100px]:flex-row min-[1100px]:flex-nowrap min-[1100px]:items-stretch min-[1100px]:gap-2.5">
                         <button type="button"
-                                class="inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[#f40d23] px-4 text-sm font-black text-white shadow-[0_10px_24px_rgba(244,13,35,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a] min-[1100px]:h-12 min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[13px]">
+                                class="inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[#0065ef] px-4 text-sm font-black text-white shadow-[0_10px_24px_rgba(0,101,239,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] min-[1100px]:h-12 min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[13px]">
                             Buy Now
                             <x-litus-icon name="shopping-bag" class="h-4 w-4 shrink-0" />
                         </button>
                         <a href="tel:+9607797442"
-                           class="inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-4 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f40d23] hover:bg-[rgba(244,13,35,0.12)] min-[1100px]:h-12 min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[13px]">
+                           class="inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-4 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] min-[1100px]:h-12 min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[13px]">
                             Contact Sales Team
                             <x-litus-icon name="arrow-right" class="h-4 w-4 shrink-0" />
                         </a>
                         <a href="{{ route('ownership-plans') }}"
-                           class="inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-4 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f40d23] hover:bg-[rgba(244,13,35,0.12)] min-[1100px]:h-12 min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[13px]">
+                           class="inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-4 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] min-[1100px]:h-12 min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[13px]">
                             <x-litus-icon name="credit-card" class="h-4 w-4 shrink-0" />
                             View Ownership Plans
                         </a>
@@ -158,7 +158,7 @@
                 <div class="flex items-center justify-center gap-2 py-2 sm:gap-3">
                     <button type="button"
                             data-gallery-prev
-                            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#e3e7ec] bg-white text-xl font-light text-[#07152f] shadow-[0_6px_16px_rgba(0,0,0,0.08)] transition-all duration-300 hover:text-[#ff1029] sm:h-[52px] sm:w-[52px]"
+                            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#e3e7ec] bg-white text-xl font-light text-[#07152f] shadow-[0_6px_16px_rgba(0,0,0,0.08)] transition-all duration-300 hover:text-[#0065ef] sm:h-[52px] sm:w-[52px]"
                             aria-label="Previous image">
                         <x-litus-icon name="chevron-left" class="h-6 w-6 sm:h-7 sm:w-7" />
                     </button>
@@ -170,7 +170,7 @@
 
                     <button type="button"
                             data-gallery-next
-                            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#e3e7ec] bg-white text-xl font-light text-[#07152f] shadow-[0_6px_16px_rgba(0,0,0,0.08)] transition-all duration-300 hover:text-[#ff1029] sm:h-[52px] sm:w-[52px]"
+                            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#e3e7ec] bg-white text-xl font-light text-[#07152f] shadow-[0_6px_16px_rgba(0,0,0,0.08)] transition-all duration-300 hover:text-[#0065ef] sm:h-[52px] sm:w-[52px]"
                             aria-label="Next image">
                         <x-litus-icon name="chevron-right" class="h-6 w-6 sm:h-7 sm:w-7" />
                     </button>
@@ -189,7 +189,7 @@
                                 data-gallery-color="{{ $color['label'] }}"
                                 data-color-hex="{{ $color['hex'] }}"
                                 aria-pressed="{{ $index === 0 ? 'true' : 'false' }}"
-                                class="inline-flex h-16 w-full items-center justify-center gap-3 rounded-[11px] border-2 bg-white text-base font-extrabold text-[#3b3f4a] shadow-[0_8px_22px_rgba(0,0,0,0.06)] transition-all duration-300 hover:border-[#ff1029] sm:h-[66px] sm:gap-4 sm:text-[17px] {{ $index === 0 ? 'border-[#ff6b7b] shadow-[0_0_0_1px_rgba(255,16,41,0.25)]' : 'border-[#e5e8ed]' }}">
+                                class="inline-flex h-16 w-full items-center justify-center gap-3 rounded-[11px] border-2 bg-white text-base font-extrabold text-[#3b3f4a] shadow-[0_8px_22px_rgba(0,0,0,0.06)] transition-all duration-300 hover:border-[#0065ef] sm:h-[66px] sm:gap-4 sm:text-[17px] {{ $index === 0 ? 'border-[#66a3ff] shadow-[0_0_0_1px_rgba(0,101,239,0.25)]' : 'border-[#e5e8ed]' }}">
                             <span class="inline-block h-7 w-7 shrink-0 rounded-full shadow-[inset_0_0_0_2px_rgba(0,0,0,0.15)] sm:h-[30px] sm:w-[30px]" style="background-color: {{ $color['hex'] }}"></span>
                             {{ $color['label'] }}
                         </button>
@@ -226,7 +226,7 @@
             {{-- Specifications --}}
             <div class="rounded-[14px] border border-[#dfe3ea] bg-white px-5 py-6 shadow-[0_10px_28px_rgba(0,0,0,0.05)] sm:px-10 sm:py-8">
                 <div class="mb-6 text-center sm:mb-8">
-                    <span class="mb-2 block text-xs font-black uppercase tracking-[0.08em] text-[#ff1029]">Technical Details</span>
+                    <span class="mb-2 block text-xs font-black uppercase tracking-[0.08em] text-[#0065ef]">Technical Details</span>
                     <h2 class="text-[23px] font-black tracking-wide text-[#111b46] sm:text-[28px]">{{ $motorcycle->name }} Specifications</h2>
                 </div>
 
@@ -251,7 +251,7 @@
             {{-- Offer banner --}}
             <div class="grid grid-cols-1 items-center gap-6 overflow-hidden rounded-xl bg-cover bg-right px-6 py-8 shadow-[0_12px_32px_rgba(0,0,0,0.16)] min-[1100px]:grid-cols-[auto_1fr_auto] min-[1100px]:gap-8 min-[1100px]:px-9 min-[1100px]:py-[34px] max-[1100px]:text-center"
                  style="background-image: linear-gradient(90deg, rgba(3,13,31,0.98), rgba(4,19,43,0.94)), url('{{ $offerBannerBg }}');">
-                <div class="mx-auto flex h-[92px] w-[92px] items-center justify-center rounded-full border-2 border-dashed border-[#ff1029] text-[#ff1029] min-[1100px]:mx-0">
+                <div class="mx-auto flex h-[92px] w-[92px] items-center justify-center rounded-full border-2 border-dashed border-[#0065ef] text-[#0065ef] min-[1100px]:mx-0">
                     <x-litus-icon name="star" class="h-9 w-9" />
                 </div>
 
@@ -265,12 +265,12 @@
                 <div class="flex flex-col items-start gap-3.5 max-[1100px]:mx-auto max-[1100px]:items-center">
                     <div class="flex flex-wrap gap-4 max-[760px]:w-full max-[760px]:flex-col">
                         <button type="button"
-                                class="inline-flex h-[52px] min-w-[190px] items-center justify-center gap-3 rounded-md bg-[#f30d23] px-6 text-[15px] font-black text-white shadow-[0_8px_22px_rgba(243,13,35,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9081a] max-[760px]:w-full">
+                                class="inline-flex h-[52px] min-w-[190px] items-center justify-center gap-3 rounded-md bg-[#0065ef] px-6 text-[15px] font-black text-white shadow-[0_8px_22px_rgba(0,101,239,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] max-[760px]:w-full">
                             Buy Now
                             <x-litus-icon name="shopping-bag" class="h-4 w-4" />
                         </button>
                         <button type="button"
-                                class="inline-flex h-[52px] min-w-[190px] items-center justify-center gap-3 rounded-md border-2 border-white/55 bg-white/[0.03] px-6 text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ff1029] hover:bg-[rgba(255,16,41,0.12)] max-[760px]:w-full">
+                                class="inline-flex h-[52px] min-w-[190px] items-center justify-center gap-3 rounded-md border-2 border-white/55 bg-white/[0.03] px-6 text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] max-[760px]:w-full">
                             Ask About This Offer
                             <x-litus-icon name="message-circle" class="h-4 w-4" />
                         </button>
@@ -291,7 +291,7 @@
                         Our ownership plans are designed to make your motorcycle journey simple and stress-free.
                     </p>
                     <a href="{{ route('ownership-plans') }}"
-                       class="inline-flex items-center gap-2.5 rounded-md bg-[#f30d23] px-6 py-3.5 text-sm font-black text-white">
+                       class="inline-flex items-center gap-2.5 rounded-md bg-[#0065ef] px-6 py-3.5 text-sm font-black text-white">
                         View Ownership Plans
                         <x-litus-icon name="credit-card" class="h-4 w-4" />
                     </a>
@@ -318,7 +318,7 @@
                         <div class="text-center min-[480px]:text-left">
                             <h3 class="mb-2.5 text-lg font-black text-[#111b46]">{{ $product['name'] }}</h3>
                             @if (! empty($product['discount']))
-                            <p class="mb-3 text-sm font-black text-[#ff1029]">Discount: {{ $product['discount'] }}</p>
+                            <p class="mb-3 text-sm font-black text-[#0065ef]">Discount: {{ $product['discount'] }}</p>
                             @endif
                             <a href="{{ route('motorcycle.show', $product['slug']) }}"
                                class="inline-flex items-center gap-2.5 rounded-[5px] bg-[#061a45] px-5 py-2.5 text-[13px] font-black text-white">
@@ -345,7 +345,7 @@
 
                 <div class="flex flex-wrap justify-center gap-4 max-[760px]:w-full max-[760px]:flex-col min-[1100px]:justify-end">
                     <a href="tel:+9607797442"
-                       class="inline-flex h-[52px] min-w-[170px] items-center justify-center gap-2.5 rounded-md bg-[#f30d23] px-6 text-[15px] font-black text-white shadow-[0_8px_22px_rgba(243,13,35,0.3)] transition-all hover:bg-[#c9081a] max-[760px]:w-full">
+                       class="inline-flex h-[52px] min-w-[170px] items-center justify-center gap-2.5 rounded-md bg-[#0065ef] px-6 text-[15px] font-black text-white shadow-[0_8px_22px_rgba(0,101,239,0.3)] transition-all hover:bg-[#0052cc] max-[760px]:w-full">
                         Contact Sales Team
                         <x-litus-icon name="arrow-right" class="h-4 w-4" />
                     </a>
