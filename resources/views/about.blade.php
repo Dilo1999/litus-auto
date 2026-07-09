@@ -12,22 +12,103 @@
 
     $teamMembers = [
         ['name' => 'Mohamed Nazeer', 'role' => 'Manager', 'dept' => 'Parts & Service Center', 'img' => asset('images/about_us/nazeer.webp')],
-        ['name' => 'Hifath Ali', 'role' => 'Head of Sales', 'dept' => 'Sales Department', 'img' => asset('images/about_us/Iffath.jpg')],
+        ['name' => 'Hifath Ali', 'role' => 'Head of Sales', 'dept' => 'Sales Department', 'img' => asset('images/about_us/Iffath.png')],
         ['name' => 'Dhanushka', 'role' => 'Inventory Officer', 'dept' => 'Inventory Management', 'img' => asset('images/about_us/dhanushka.webp')],
         ['name' => 'Mohamed Nafiz', 'role' => 'Lawyer', 'dept' => 'Legal Affairs', 'img' => asset('images/about_us/nafiz.webp')],
     ];
 
+    $showroomImage = function (string ...$parts): string {
+        return asset('images/about_us/showrooms/' . implode('/', array_map('rawurlencode', $parts)));
+    };
+
     $showrooms = [
-        ['name' => 'Malé Showroom', 'address' => 'Chaandhanee Magu, Malé, Maldives', 'featured' => true, 'img' => 'https://images.unsplash.com/photo-1773940792913-94baf5fa0130?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80'],
-        ['name' => 'Hithadhoo Showroom', 'address' => 'Fenfiyazmagu, S. Hithadhoo, Maldives', 'featured' => true, 'img' => 'https://images.unsplash.com/photo-1771402382481-de35db6c4159?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80'],
-        ['name' => 'Kulhudhuffushi Showroom', 'address' => 'Izzuddeen Magu, Kulhudhuffushi, Maldives', 'featured' => false, 'img' => 'https://images.unsplash.com/photo-1588756681780-9d5859fc2ca0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80'],
-        ['name' => 'Nolhivaranfaru Showroom', 'address' => 'Hdh. Nolhivaranfaru Magu, Maldives', 'featured' => false, 'img' => 'https://images.unsplash.com/photo-1582092722992-b2f960bafbfb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80'],
-        ['name' => 'Villingili Showroom', 'address' => 'Ameenee Magu, GA. Villingili, Maldives', 'featured' => false, 'img' => 'https://images.unsplash.com/photo-1611956292173-c2445aa61709?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80'],
-        ['name' => 'Feydhoo Showroom', 'address' => 'Maathila Magu, S. Feydhoo, Maldives', 'featured' => false, 'img' => 'https://images.unsplash.com/photo-1772090095175-ef442d5f56a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80'],
-        ['name' => 'Fonadhoo Showroom', 'address' => 'Sinajuddeen Magu, L. Fonadhoo, Maldives', 'featured' => false, 'img' => 'https://images.unsplash.com/photo-1550149550-33b46c745e03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80'],
-        ['name' => 'Head Office', 'address' => 'Ma. Eyrum, Buruzu Magu, Malé, Maldives', 'featured' => false, 'img' => 'https://images.unsplash.com/photo-1558979159-2b18a4070a87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80'],
-        ['name' => 'Hulhumale Showroom', 'address' => 'Nirolhu Magu, Hulhumale, Maldives', 'featured' => false, 'img' => 'https://images.unsplash.com/photo-1602111426534-9c097255ca46?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80'],
-        ['name' => 'Thinadhoo Showroom', 'address' => 'Daisy Magu, Thinadhoo, Maldives', 'featured' => false, 'img' => 'https://images.unsplash.com/photo-1629342651203-fab0990d8949?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80'],
+        [
+            'name' => 'Malé Showroom',
+            'address' => 'Chaandhanee Magu, Malé, Maldives',
+            'featured' => true,
+            'images' => [
+                $showroomImage("Male' Showroom", 'Malé Showroom.jpg'),
+                $showroomImage("Male' Showroom", "Male' Showroom1.webp"),
+                $showroomImage("Male' Showroom", "Male' Showroom2.jpg"),
+            ],
+        ],
+        [
+            'name' => 'Hithadhoo Showroom',
+            'address' => 'Fenfiyazmagu, S. Hithadhoo, Maldives',
+            'featured' => true,
+            'images' => [
+                $showroomImage('Hithadhoo Showroom', 'Hithadhoo Showroom.jpg'),
+                $showroomImage('Hithadhoo Showroom', 'Hithadhoo Showroom1.jpg'),
+                $showroomImage('Hithadhoo Showroom', 'Hithadhoo Showroom2.jpg'),
+            ],
+        ],
+        [
+            'name' => 'Kudahuvadhoo Showroom',
+            'address' => 'Izzudheen Magu, Dh. Kudahuvadhoo, Maldives',
+            'featured' => false,
+            'images' => [
+                $showroomImage('Kudahuvadhoo Showroom', 'Kudahuvadhoo Showroom.jpg'),
+                $showroomImage('Kudahuvadhoo Showroom', 'Kudahuvadhoo Showroom1.jpg'),
+            ],
+        ],
+        [
+            'name' => 'Naifaru Showroom',
+            'address' => 'Ifthithaahee Magu, Lh. Naifaru, Maldives',
+            'featured' => false,
+            'img' => $showroomImage('Naifaru Showroom', 'Naifaru Showroom.webp'),
+        ],
+        [
+            'name' => 'Villingili Showroom',
+            'address' => 'Ameenee Magu, GA. Villingili, Maldives',
+            'featured' => false,
+            'images' => [
+                $showroomImage('Villingili Showroom', 'Villingili Showroom.jpg'),
+                $showroomImage('Villingili Showroom', 'Villingili Showroom1.jpg'),
+                $showroomImage('Villingili Showroom', 'Villingili Showroom2.jpg'),
+            ],
+        ],
+        [
+            'name' => 'Feydhoo Showroom',
+            'address' => 'Maathila Magu, S. Feydhoo, Maldives',
+            'featured' => false,
+            'img' => $showroomImage('Feydhoo Showroom', 'Feydhoo Showroom.jpg'),
+        ],
+        [
+            'name' => 'Fonadhoo Showroom',
+            'address' => 'Sinajuddeen Magu, L. Fonadhoo, Maldives',
+            'featured' => false,
+            'images' => [
+                $showroomImage('Fonadhoo Showroom', 'Fonadhoo Showroom.jpg'),
+                $showroomImage('Fonadhoo Showroom', 'Fonadhoo Showroom1.jpg'),
+                $showroomImage('Fonadhoo Showroom', 'Fonadhoo Showroom2.jpg'),
+            ],
+        ],
+        [
+            'name' => 'Head Office',
+            'address' => 'Ma. Eyrum, Buruzu Magu, Malé, Maldives',
+            'featured' => false,
+            'img' => $showroomImage('Head Office', 'Head Office.webp'),
+        ],
+        [
+            'name' => 'Hulhumale Showroom',
+            'address' => 'Nirolhu Magu, Hulhumale, Maldives',
+            'featured' => false,
+            'images' => [
+                $showroomImage('Hulhumale Showroom', 'Hulhumale Showroom.webp'),
+                $showroomImage('Hulhumale Showroom', 'Hulhumale Showroom1.webp'),
+                $showroomImage('Hulhumale Showroom', 'Hulhumale Showroom2.webp'),
+            ],
+        ],
+        [
+            'name' => 'Thinadhoo Showroom',
+            'address' => 'Daisy Magu, Thinadhoo, Maldives',
+            'featured' => false,
+            'images' => [
+                $showroomImage('Thinadhoo Showroom', 'Thinadhoo Showroom.webp'),
+                $showroomImage('Thinadhoo Showroom', 'Thinadhoo Showroom1.webp'),
+                $showroomImage('Thinadhoo Showroom', 'Thinadhoo Showroom2.webp'),
+            ],
+        ],
     ];
 
     $opStats = [
@@ -254,26 +335,70 @@
                 </p>
             </div>
 
-            <div class="mb-[18px] grid grid-cols-1 gap-[18px] min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4">
+            <div class="mb-6 grid grid-cols-1 gap-5 min-[651px]:grid-cols-2 min-[651px]:gap-6 min-[1101px]:grid-cols-4">
                 @foreach ($showrooms as $showroom)
                     <div @class([
-                        'overflow-hidden rounded-[9px] border border-[#dfe3ea] bg-white shadow-[0_8px_22px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(0,0,0,0.1)]',
+                        'overflow-hidden border border-[#dfe3ea] bg-white shadow-[0_8px_22px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(0,0,0,0.1)]',
+                        'rounded-xl' => $showroom['featured'],
+                        'rounded-[9px]' => ! $showroom['featured'],
                         'min-[1101px]:col-span-2' => $showroom['featured'],
                     ])>
                         <div @class([
-                            'h-[160px] overflow-hidden bg-[#dfe5ec] max-sm:h-[160px]',
+                            'overflow-hidden bg-[#dfe5ec]',
+                            'relative' => ! empty($showroom['images']),
+                            'h-[220px]' => $showroom['featured'],
+                            'h-[160px]' => ! $showroom['featured'],
+                            'min-[651px]:h-[280px]' => $showroom['featured'],
                             'min-[651px]:h-[125px]' => ! $showroom['featured'],
-                            'min-[651px]:h-[145px]' => $showroom['featured'],
-                        ])>
-                            <img src="{{ $showroom['img'] }}"
-                                 alt="{{ $showroom['name'] }}"
-                                 class="block h-full w-full object-cover">
+                        ])
+                             @if (! empty($showroom['images'])) data-showroom-slider data-interval="4000" @endif>
+                            @if (! empty($showroom['images']))
+                                @foreach ($showroom['images'] as $index => $image)
+                                    <img src="{{ $image }}"
+                                         alt="{{ $showroom['name'] }}"
+                                         data-showroom-slide
+                                         @class([
+                                             'absolute inset-0 block h-full w-full object-cover transition-opacity duration-700',
+                                             'z-[1] opacity-100' => $index === 0,
+                                             'z-0 opacity-0' => $index !== 0,
+                                         ])>
+                                @endforeach
+                                <div class="absolute bottom-3 left-1/2 z-[2] flex -translate-x-1/2 gap-1.5">
+                                    @foreach ($showroom['images'] as $index => $image)
+                                        <span data-showroom-dot
+                                              @class([
+                                                  'h-1.5 rounded-full bg-white/50 transition-all duration-300',
+                                                  'w-5 bg-white' => $index === 0,
+                                                  'w-1.5' => $index !== 0,
+                                              ])></span>
+                                    @endforeach
+                                </div>
+                            @else
+                                <img src="{{ $showroom['img'] }}"
+                                     alt="{{ $showroom['name'] }}"
+                                     class="block h-full w-full object-cover">
+                            @endif
                         </div>
-                        <div class="px-[18px] pb-4 pt-3.5">
-                            <h3 class="mb-2 text-base font-black text-[#111b46]">{{ $showroom['name'] }}</h3>
-                            <p class="mb-3.5 text-[13px] font-semibold leading-snug text-[#404b60]">{{ $showroom['address'] }}</p>
+                        <div @class([
+                            'px-[18px] pb-4 pt-3.5' => ! $showroom['featured'],
+                            'px-6 pb-6 pt-5' => $showroom['featured'],
+                        ])>
+                            <h3 @class([
+                                'mb-2 font-black text-[#111b46]',
+                                'text-base' => ! $showroom['featured'],
+                                'text-lg min-[651px]:text-xl' => $showroom['featured'],
+                            ])>{{ $showroom['name'] }}</h3>
+                            <p @class([
+                                'mb-3.5 font-semibold leading-snug text-[#404b60]',
+                                'text-[13px]' => ! $showroom['featured'],
+                                'text-sm min-[651px]:text-[15px]' => $showroom['featured'],
+                            ])>{{ $showroom['address'] }}</p>
                             <a href="{{ route('contact') }}"
-                               class="group/contact inline-flex h-8 min-w-[140px] items-center justify-center gap-3 rounded-[5px] bg-[#061a45] px-[18px] text-[13px] font-black text-white transition-colors duration-300 hover:bg-[#0065ef]">
+                               @class([
+                                   'group/contact inline-flex items-center justify-center gap-3 rounded-[5px] bg-[#061a45] font-black text-white transition-colors duration-300 hover:bg-[#0065ef]',
+                                   'h-8 min-w-[140px] px-[18px] text-[13px]' => ! $showroom['featured'],
+                                   'h-10 min-w-[160px] px-6 text-sm' => $showroom['featured'],
+                               ])>
                                 Contact Now
                                 <x-litus-icon name="arrow-right" class="h-4 w-4 text-[#0065ef] transition-colors group-hover/contact:text-white" />
                             </a>

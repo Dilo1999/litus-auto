@@ -9,3 +9,4 @@ import './contact';
 import './service-center';
 import './ownership-plans';
 import './gallery';
+import './showroom-slider';
