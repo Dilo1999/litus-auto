@@ -23,6 +23,7 @@
     $highlights = $motorcycle->highlights();
     $specGroups = $motorcycle->specGroups();
     $heroBg = $motorcycle->heroBackgroundUrl();
+    $galleryMainBg = asset('images/details_page/' . rawurlencode('ChatGPT Image Jul 9, 2026, 02_17_21 PM.png'));
 
     $galleryFeatures = [
         ['icon' => 'shield', 'title' => 'Genuine Quality', 'desc' => '100% genuine parts & trusted quality'],
@@ -172,7 +173,8 @@
                         </svg>
                     </button>
 
-                    <div class="relative flex h-[260px] items-center justify-center min-[1150px]:h-[340px]">
+                    <div class="relative flex h-[260px] items-center justify-center overflow-hidden rounded-xl bg-cover bg-center min-[1150px]:h-[340px]"
+                         style="background-image: url('{{ $galleryMainBg }}');">
                         <button type="button"
                                 data-gallery-prev
                                 class="absolute left-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-xl font-light text-[#061a45] shadow-[0_10px_22px_rgba(7,21,47,0.12)] transition-all duration-300 hover:scale-105 hover:bg-[#1f7bff] hover:text-white min-[1150px]:h-12 min-[1150px]:w-12"
@@ -183,7 +185,7 @@
                         <img data-gallery-main
                              src="{{ $galleryImages[0] ?? '' }}"
                              alt="{{ $motorcycle->name }}"
-                             class="h-[240px] w-full max-w-[480px] object-contain drop-shadow-[0_20px_14px_rgba(0,0,0,0.16)] transition-opacity duration-300 min-[1150px]:h-[310px]">
+                             class="relative z-[1] h-[240px] w-full max-w-[480px] object-contain drop-shadow-[0_20px_14px_rgba(0,0,0,0.16)] transition-opacity duration-300 min-[1150px]:h-[310px]">
 
                         <button type="button"
                                 data-gallery-next
