@@ -142,7 +142,7 @@
 
                 <div class="grid grid-cols-1 gap-[18px] min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4">
                     @forelse ($promoMotorcycles as $motorcycle)
-                        <x-promotion-card :motorcycle="$motorcycle" />
+                        <x-card.promotion-card :motorcycle="$motorcycle" />
                     @empty
                         <div class="col-span-full rounded-[10px] border border-dashed border-[#dfe3ea] bg-white/80 px-6 py-12 text-center">
                             <p class="font-semibold text-[#424c5e]">No active promotions at the moment.</p>

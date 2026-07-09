@@ -21,8 +21,15 @@
     $offerBannerBg = 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1400&q=80';
     $specs = $motorcycle->specs ?? [];
     $highlights = $motorcycle->highlights();
-    $specColumns = $motorcycle->specColumns();
+    $specGroups = $motorcycle->specGroups();
     $heroBg = $motorcycle->heroBackgroundUrl();
+
+    $galleryFeatures = [
+        ['icon' => 'shield', 'title' => 'Genuine Quality', 'desc' => '100% genuine parts & trusted quality'],
+        ['icon' => 'wrench', 'title' => 'Service Support', 'desc' => 'Expert service & maintenance across Maldives'],
+        ['icon' => 'check-circle', 'title' => 'Warranty Coverage', 'desc' => 'Reliable warranty & extended protection'],
+        ['icon' => 'star', 'title' => 'Trusted Brand', 'desc' => 'LITUS Automobiles – trusted by hundreds'],
+    ];
 @endphp
 
 <div class="font-sans" data-motorcycle-detail data-spin-by-color='@json($spinByColor)' data-gallery-by-color='@json($galleryByColor)'>
@@ -88,16 +95,16 @@
                     </p>
                     @endif
 
-                    <div class="flex flex-col gap-3 max-[1100px]:mx-auto min-[1100px]:flex-row min-[1100px]:flex-nowrap min-[1100px]:items-stretch min-[1100px]:gap-2.5">
-                        <button type="button"
-                                class="inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[#0065ef] px-4 text-sm font-black text-white shadow-[0_10px_24px_rgba(0,101,239,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] min-[1100px]:h-12 min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[13px]">
-                            Buy Now
-                            <x-litus-icon name="shopping-bag" class="h-4 w-4 shrink-0" />
-                        </button>
+                    <div class="flex flex-col gap-4 max-[1100px]:mx-auto min-[1100px]:flex-row min-[1100px]:flex-nowrap min-[1100px]:items-stretch min-[1100px]:gap-4">
                         <a href="tel:+9607797442"
-                           class="inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-4 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] min-[1100px]:h-12 min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[13px]">
+                           class="inline-flex h-[52px] w-full shrink-0 items-center justify-center gap-2.5 rounded-md bg-[#0065ef] px-6 text-[15px] font-black text-white shadow-[0_8px_22px_rgba(0,101,239,0.3)] transition-all hover:bg-[#0052cc] min-[1100px]:w-auto">
                             Contact Sales Team
                             <x-litus-icon name="arrow-right" class="h-4 w-4 shrink-0" />
+                        </a>
+                        <a href="tel:+9607797442"
+                           class="inline-flex h-[52px] w-full shrink-0 items-center justify-center gap-2.5 rounded-md border-2 border-[#1d2430] bg-white px-6 text-[15px] font-black text-[#1d2430] min-[1100px]:w-auto">
+                            <x-litus-icon name="phone" class="h-4 w-4 shrink-0" />
+                            Call Now
                         </a>
                         <a href="{{ route('ownership-plans') }}"
                            class="inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-4 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] min-[1100px]:h-12 min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[13px]">
@@ -149,72 +156,129 @@
     </section>
 
     {{-- GALLERY + HIGHLIGHTS --}}
-    <section class="border border-[#d9d9d9] bg-[#f8f9fb] py-8 lg:py-10"
+    <section class="bg-[#f4f7fb] py-6 lg:py-8"
              data-product-gallery
              data-images='@json($galleryImages)'>
-        <div class="litus-container grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-8">
-            {{-- Gallery --}}
-            <div class="w-full rounded-[14px] border border-black/5 bg-white p-2.5 shadow-[0_12px_35px_rgba(0,0,0,0.08)]">
-                <div class="flex items-center justify-center gap-2 py-2 sm:gap-3">
+        <div class="litus-container">
+            <div class="grid grid-cols-1 items-start gap-6 min-[1150px]:grid-cols-[1.08fr_0.95fr] min-[1150px]:gap-8">
+                {{-- Gallery --}}
+                <div class="relative w-full rounded-2xl border border-[#07152f]/5 bg-white p-4 shadow-[0_14px_35px_rgba(7,21,47,0.07)] min-[1150px]:p-5">
                     <button type="button"
-                            data-gallery-prev
-                            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#e3e7ec] bg-white text-xl font-light text-[#07152f] shadow-[0_6px_16px_rgba(0,0,0,0.08)] transition-all duration-300 hover:text-[#0065ef] sm:h-[52px] sm:w-[52px]"
-                            aria-label="Previous image">
-                        <x-litus-icon name="chevron-left" class="h-6 w-6 sm:h-7 sm:w-7" />
+                            data-gallery-expand
+                            class="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#061a45] shadow-[0_10px_22px_rgba(7,21,47,0.12)] transition-all duration-300 hover:scale-105 hover:bg-[#1f7bff] hover:text-white min-[1150px]:h-11 min-[1150px]:w-11"
+                            aria-label="Expand image">
+                        <svg class="h-4 w-4 min-[1150px]:h-5 min-[1150px]:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M15 3h6v6"/><path d="m21 3-7 7"/><path d="m3 21 7-7"/><path d="M9 21H3v-6"/>
+                        </svg>
                     </button>
 
-                    <img data-gallery-main
-                         src="{{ $galleryImages[0] ?? '' }}"
-                         alt="{{ $motorcycle->name }}"
-                         class="min-w-0 flex-1 object-contain transition-opacity duration-300 max-h-[420px] sm:max-h-[480px]">
+                    <div class="relative flex h-[260px] items-center justify-center min-[1150px]:h-[340px]">
+                        <button type="button"
+                                data-gallery-prev
+                                class="absolute left-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-xl font-light text-[#061a45] shadow-[0_10px_22px_rgba(7,21,47,0.12)] transition-all duration-300 hover:scale-105 hover:bg-[#1f7bff] hover:text-white min-[1150px]:h-12 min-[1150px]:w-12"
+                                aria-label="Previous image">
+                            <x-litus-icon name="chevron-left" class="h-5 w-5 min-[1150px]:h-6 min-[1150px]:w-6" />
+                        </button>
 
-                    <button type="button"
-                            data-gallery-next
-                            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#e3e7ec] bg-white text-xl font-light text-[#07152f] shadow-[0_6px_16px_rgba(0,0,0,0.08)] transition-all duration-300 hover:text-[#0065ef] sm:h-[52px] sm:w-[52px]"
-                            aria-label="Next image">
-                        <x-litus-icon name="chevron-right" class="h-6 w-6 sm:h-7 sm:w-7" />
-                    </button>
+                        <img data-gallery-main
+                             src="{{ $galleryImages[0] ?? '' }}"
+                             alt="{{ $motorcycle->name }}"
+                             class="h-[240px] w-full max-w-[480px] object-contain drop-shadow-[0_20px_14px_rgba(0,0,0,0.16)] transition-opacity duration-300 min-[1150px]:h-[310px]">
+
+                        <button type="button"
+                                data-gallery-next
+                                class="absolute right-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-xl font-light text-[#061a45] shadow-[0_10px_22px_rgba(7,21,47,0.12)] transition-all duration-300 hover:scale-105 hover:bg-[#1f7bff] hover:text-white min-[1150px]:h-12 min-[1150px]:w-12"
+                                aria-label="Next image">
+                            <x-litus-icon name="chevron-right" class="h-5 w-5 min-[1150px]:h-6 min-[1150px]:w-6" />
+                        </button>
+                    </div>
+
+                    <div class="mt-3 grid grid-cols-3 gap-2 min-[700px]:grid-cols-5 min-[1150px]:gap-3"
+                         data-gallery-thumbs></div>
+
+                    <div class="mt-4 flex justify-center gap-2"
+                         data-gallery-dots
+                         aria-hidden="true"></div>
                 </div>
 
-                <div class="mt-3 flex flex-nowrap gap-2 sm:gap-3" data-gallery-thumbs></div>
+                {{-- Color + specs + actions --}}
+                <div class="flex w-full flex-col gap-4 min-[1150px]:gap-5">
+                    <div class="rounded-2xl border border-[#07152f]/5 bg-white px-5 py-5 shadow-[0_14px_35px_rgba(7,21,47,0.07)] min-[1150px]:px-6 min-[1150px]:py-6">
+                        <h3 class="mb-4 text-xl font-black text-[#07152f] min-[1150px]:mb-5 min-[1150px]:text-2xl">Select Color</h3>
+
+                        <div class="grid grid-cols-1 gap-3 min-[700px]:grid-cols-2 min-[1150px]:gap-4">
+                            @foreach ($colors as $index => $color)
+                                <button type="button"
+                                        data-gallery-color="{{ $color['label'] }}"
+                                        data-color-hex="{{ $color['hex'] }}"
+                                        aria-pressed="{{ $index === 0 ? 'true' : 'false' }}"
+                                        class="relative inline-flex min-h-[60px] w-full items-center gap-4 rounded-xl border-2 bg-white px-4 text-base font-black text-[#07152f] transition-all duration-300 hover:border-[#1f7bff] min-[1150px]:min-h-[68px] min-[1150px]:gap-4 min-[1150px]:px-5 min-[1150px]:text-lg {{ $index === 0 ? 'border-[#1f7bff] shadow-[0_0_0_2px_rgba(31,123,255,0.08)]' : 'border-[#dce3ed]' }}">
+                                    <span class="inline-block h-8 w-8 shrink-0 rounded-full shadow-[inset_0_0_0_2px_rgba(0,0,0,0.14)] min-[1150px]:h-9 min-[1150px]:w-9"
+                                          style="background-color: {{ $color['hex'] }}"></span>
+                                    {{ $color['label'] }}
+                                    <span data-color-check
+                                          @class([
+                                              'absolute right-4 flex h-7 w-7 items-center justify-center rounded-full bg-[#1f7bff] text-xs font-black text-white min-[1150px]:right-5 min-[1150px]:h-8 min-[1150px]:w-8 min-[1150px]:text-sm',
+                                              'hidden' => $index !== 0,
+                                          ])>✓</span>
+                                </button>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-3 min-[700px]:grid-cols-2 min-[1150px]:gap-3.5">
+                        @foreach ($highlights as $item)
+                            <div class="flex min-h-[100px] w-full items-center gap-4 rounded-2xl border border-[#07152f]/5 bg-white px-4 py-4 shadow-[0_14px_35px_rgba(7,21,47,0.07)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(7,21,47,0.1)] min-[1150px]:min-h-[110px] min-[1150px]:gap-4 min-[1150px]:px-5 min-[1150px]:py-5">
+                                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#f1f5fb] text-[#061a45] min-[1150px]:h-12 min-[1150px]:w-12">
+                                    <x-spec-icon :icon="$item['icon']" :icon-url="$item['icon_url']" class="h-7 w-7 min-[1150px]:h-8 min-[1150px]:w-8" stroke-width="1.75" />
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <h4 class="mb-1 text-sm font-black text-[#07152f] min-[1150px]:mb-1.5 min-[1150px]:text-base">{{ $item['label'] }}</h4>
+                                    <p class="text-lg font-black leading-tight text-[#07152f] min-[1150px]:text-xl">
+                                        @if (!empty($item['value_html']))
+                                            {!! $item['value'] !!}
+                                        @else
+                                            {{ $item['value'] }}
+                                        @endif
+                                    </p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4 min-[700px]:grid-cols-2">
+                        <a href="tel:+9607797442"
+                           class="inline-flex h-[52px] w-full items-center justify-center gap-2.5 rounded-md bg-[#0065ef] px-6 text-[15px] font-black text-white shadow-[0_8px_22px_rgba(0,101,239,0.3)] transition-all hover:bg-[#0052cc]">
+                            Contact Sales Team
+                            <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                        </a>
+                        <a href="tel:+9607797442"
+                           class="inline-flex h-[52px] w-full items-center justify-center gap-2.5 rounded-md border-2 border-[#1d2430] bg-white text-[15px] font-black text-[#1d2430]">
+                            <x-litus-icon name="phone" class="h-4 w-4" />
+                            Call Now
+                        </a>
+                    </div>
+                </div>
             </div>
 
-            {{-- Color + specs --}}
-            <div class="flex w-full flex-col">
-                <h3 class="mb-5 text-[22px] font-black text-[#07152f]">Select Color</h3>
-
-                <div class="mb-7 grid grid-cols-2 gap-4 sm:gap-5">
-                    @foreach ($colors as $index => $color)
-                        <button type="button"
-                                data-gallery-color="{{ $color['label'] }}"
-                                data-color-hex="{{ $color['hex'] }}"
-                                aria-pressed="{{ $index === 0 ? 'true' : 'false' }}"
-                                class="inline-flex h-16 w-full items-center justify-center gap-3 rounded-[11px] border-2 bg-white text-base font-extrabold text-[#3b3f4a] shadow-[0_8px_22px_rgba(0,0,0,0.06)] transition-all duration-300 hover:border-[#0065ef] sm:h-[66px] sm:gap-4 sm:text-[17px] {{ $index === 0 ? 'border-[#66a3ff] shadow-[0_0_0_1px_rgba(0,101,239,0.25)]' : 'border-[#e5e8ed]' }}">
-                            <span class="inline-block h-7 w-7 shrink-0 rounded-full shadow-[inset_0_0_0_2px_rgba(0,0,0,0.15)] sm:h-[30px] sm:w-[30px]" style="background-color: {{ $color['hex'] }}"></span>
-                            {{ $color['label'] }}
-                        </button>
-                    @endforeach
-                </div>
-
-                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3">
-                    @foreach ($highlights as $item)
-                        <div class="flex min-h-[100px] w-full items-center gap-3.5 rounded-xl border border-[#e1e5ea] bg-white px-4 py-4 shadow-[0_8px_22px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(0,0,0,0.08)] sm:min-h-[108px] sm:gap-4 sm:px-5 sm:py-5">
-                            <div class="flex h-10 w-10 shrink-0 items-center justify-center text-[#07152f] sm:h-11 sm:w-11">
-                                <x-spec-icon :icon="$item['icon']" :icon-url="$item['icon_url']" class="h-9 w-9 sm:h-10 sm:w-10" stroke-width="1.75" />
-                            </div>
-                            <div class="min-w-0 flex-1">
-                                <h4 class="mb-1 text-xs font-black text-[#151f44] sm:text-sm">{{ $item['label'] }}</h4>
-                                <p class="text-base font-black leading-snug text-[#07152f] sm:text-[17px]">
-                                    @if (!empty($item['value_html']))
-                                        {!! $item['value'] !!}
-                                    @else
-                                        {{ $item['value'] }}
-                                    @endif
-                                </p>
-                            </div>
+            {{-- Feature bar --}}
+            <div class="mt-6 grid grid-cols-1 gap-4 rounded-2xl border border-[#07152f]/5 bg-white px-5 py-5 shadow-[0_14px_35px_rgba(7,21,47,0.07)] min-[700px]:grid-cols-2 min-[1150px]:mt-8 min-[1150px]:grid-cols-4 min-[1150px]:gap-5 min-[1150px]:px-8 min-[1150px]:py-6">
+                @foreach ($galleryFeatures as $index => $feature)
+                    <div @class([
+                        'relative flex items-center gap-4 min-[1150px]:gap-5',
+                        'min-[1150px]:after:absolute min-[1150px]:after:-right-2.5 min-[1150px]:after:top-1/2 min-[1150px]:after:h-12 min-[1150px]:after:w-px min-[1150px]:after:-translate-y-1/2 min-[1150px]:after:bg-[#dce3ed]' => $index < count($galleryFeatures) - 1,
+                        'max-[1150px]:min-[700px]:after:hidden' => in_array($index, [1, 3]),
+                        'max-[700px]:after:hidden' => $index < count($galleryFeatures) - 1,
+                    ])>
+                        <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#061a45] text-white min-[1150px]:h-12 min-[1150px]:w-12">
+                            <x-litus-icon :name="$feature['icon']" class="h-5 w-5 min-[1150px]:h-6 min-[1150px]:w-6" />
                         </div>
-                    @endforeach
-                </div>
+                        <div class="min-w-0">
+                            <h4 class="mb-0.5 text-base font-black text-[#07152f] min-[1150px]:mb-1 min-[1150px]:text-lg">{{ $feature['title'] }}</h4>
+                            <p class="text-xs font-medium leading-snug text-[#07152f] min-[1150px]:text-sm min-[1150px]:leading-relaxed">{{ $feature['desc'] }}</p>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -224,58 +288,67 @@
         <div class="litus-container space-y-4">
 
             {{-- Specifications --}}
-            <div class="rounded-[14px] border border-[#dfe3ea] bg-white px-5 py-6 shadow-[0_10px_28px_rgba(0,0,0,0.05)] sm:px-10 sm:py-8">
+            <div>
                 <div class="mb-6 text-center sm:mb-8">
                     <span class="mb-2 block text-xs font-black uppercase tracking-[0.08em] text-[#0065ef]">Technical Details</span>
                     <h2 class="text-[23px] font-black tracking-wide text-[#111b46] sm:text-[28px]">{{ $motorcycle->name }} Specifications</h2>
                 </div>
 
-                <div class="grid grid-cols-1 gap-8 min-[760px]:grid-cols-2 min-[760px]:gap-x-14 min-[760px]:gap-y-0">
-                    @foreach ($specColumns as $column)
-                        <div class="flex flex-col">
-                            @foreach ($column as $index => $spec)
-                                <div @class([
-                                    'grid grid-cols-[28px_1fr] items-start gap-x-3 gap-y-1 border-b border-[#dfe3ea] py-3.5 text-sm sm:grid-cols-[32px_minmax(0,1.1fr)_minmax(0,0.9fr)] sm:items-center sm:gap-x-4 sm:py-4',
-                                    'border-b-0' => $index === count($column) - 1,
-                                ])>
-                                    <x-spec-icon :icon="$spec['icon']" :icon-url="$spec['icon_url']" class="mt-0.5 h-6 w-6 shrink-0 text-[#111b46] opacity-85 sm:mt-0 sm:h-7 sm:w-7" />
-                                    <span class="font-bold leading-snug text-[#1a2554]">{{ $spec['label'] }}</span>
-                                    <span class="col-start-2 font-semibold leading-snug text-[#1f2635] break-words sm:col-auto sm:pl-2 sm:text-right">{{ $spec['value'] }}</span>
+                <div class="grid grid-cols-1 gap-5 min-[650px]:grid-cols-2 min-[1100px]:grid-cols-4">
+                    @foreach ($specGroups as $group)
+                        <div class="overflow-hidden rounded-[10px] border border-[#dce3ee] bg-white shadow-[0_10px_30px_rgba(7,21,47,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_38px_rgba(7,21,47,0.09)]">
+                            <div class="flex h-[70px] items-center gap-4 border-b-2 border-[#0065ef] px-6">
+                                <div class="flex h-[34px] w-[34px] shrink-0 items-center justify-center text-[#07152f]">
+                                    <x-litus-icon :name="$group['icon']" class="h-7 w-7" />
                                 </div>
-                            @endforeach
+                                <h3 class="text-sm font-black uppercase tracking-wide text-[#07152f]">{{ $group['title'] }}</h3>
+                            </div>
+
+                            <div class="px-5 pb-6 pt-1 sm:px-[22px] sm:pb-6 sm:pt-[18px]">
+                                @foreach ($group['specs'] as $index => $spec)
+                                    <div @class([
+                                        'grid grid-cols-[32px_1fr] items-center gap-3 py-4 min-[651px]:grid-cols-[32px_1fr_auto]',
+                                        'border-b border-dashed border-[#d7deea]' => $index < count($group['specs']) - 1,
+                                    ])>
+                                        <x-spec-icon :icon="$spec['icon']" :icon-url="$spec['icon_url']" class="h-8 w-8 shrink-0 text-[#07152f]" />
+                                        <span class="text-[13px] font-bold leading-snug text-[#25304a]">{{ $spec['label'] }}</span>
+                                        <span class="col-start-2 text-[13px] font-black leading-snug text-[#07152f] min-[651px]:col-auto min-[651px]:max-w-[115px] min-[651px]:text-right">{{ $spec['value'] }}</span>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     @endforeach
                 </div>
             </div>
 
             {{-- Offer banner --}}
-            <div class="grid grid-cols-1 items-center gap-6 overflow-hidden rounded-xl bg-cover bg-right px-6 py-8 shadow-[0_12px_32px_rgba(0,0,0,0.16)] min-[1100px]:grid-cols-[auto_1fr_auto] min-[1100px]:gap-8 min-[1100px]:px-9 min-[1100px]:py-[34px] max-[1100px]:text-center"
+            <div class="my-8 grid grid-cols-1 items-center gap-4 overflow-hidden rounded-xl bg-cover bg-right px-8 py-6 shadow-[0_12px_32px_rgba(0,0,0,0.16)] min-[1100px]:my-10 min-[1100px]:grid-cols-[auto_1fr_auto] min-[1100px]:gap-6 min-[1100px]:px-12 min-[1100px]:py-7 max-[1100px]:text-center"
                  style="background-image: linear-gradient(90deg, rgba(3,13,31,0.98), rgba(4,19,43,0.94)), url('{{ $offerBannerBg }}');">
-                <div class="mx-auto flex h-[92px] w-[92px] items-center justify-center rounded-full border-2 border-dashed border-[#0065ef] text-[#0065ef] min-[1100px]:mx-0">
-                    <x-litus-icon name="star" class="h-9 w-9" />
+                <div class="mx-auto flex h-[72px] w-[72px] items-center justify-center rounded-full border-2 border-dashed border-[#0065ef] text-[#0065ef] min-[1100px]:mx-0">
+                    <x-litus-icon name="star" class="h-7 w-7" />
                 </div>
 
                 <div>
-                    <h2 class="mb-3 text-2xl font-black text-white min-[1100px]:text-[27px]">Ready to Own the {{ $motorcycle->name }}?</h2>
-                    <p class="max-w-[620px] text-[15px] font-semibold leading-relaxed text-[#dce5ef] max-[1100px]:mx-auto">
+                    <h2 class="mb-2 text-xl font-black text-white min-[1100px]:text-2xl">Ready to Own the {{ $motorcycle->name }}?</h2>
+                    <p class="max-w-[620px] text-sm font-semibold leading-relaxed text-[#dce5ef] min-[1100px]:text-[15px] max-[1100px]:mx-auto">
                         Take advantage of our limited offer and ride with confidence, performance, and style.
                     </p>
                 </div>
 
-                <div class="flex flex-col items-start gap-3.5 max-[1100px]:mx-auto max-[1100px]:items-center">
-                    <div class="flex flex-wrap gap-4 max-[760px]:w-full max-[760px]:flex-col">
+                <div class="flex flex-col items-start gap-2.5 max-[1100px]:mx-auto max-[1100px]:items-center">
+                    <div class="flex flex-wrap gap-3 max-[760px]:w-full max-[760px]:flex-col">
                         <button type="button"
-                                class="inline-flex h-[52px] min-w-[190px] items-center justify-center gap-3 rounded-md bg-[#0065ef] px-6 text-[15px] font-black text-white shadow-[0_8px_22px_rgba(0,101,239,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] max-[760px]:w-full">
+                                class="inline-flex h-11 min-w-[170px] items-center justify-center gap-2.5 rounded-md bg-[#0065ef] px-5 text-sm font-black text-white shadow-[0_8px_22px_rgba(0,101,239,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] max-[760px]:w-full">
                             Buy Now
                             <x-litus-icon name="shopping-bag" class="h-4 w-4" />
                         </button>
                         <button type="button"
-                                class="inline-flex h-[52px] min-w-[190px] items-center justify-center gap-3 rounded-md border-2 border-white/55 bg-white/[0.03] px-6 text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] max-[760px]:w-full">
+                                class="inline-flex h-11 min-w-[170px] items-center justify-center gap-2.5 rounded-md border-2 border-white/55 bg-white/[0.03] px-5 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] max-[760px]:w-full">
                             Ask About This Offer
                             <x-litus-icon name="message-circle" class="h-4 w-4" />
                         </button>
                     </div>
-                    <p class="pl-0.5 text-[13px] font-semibold text-[#dce5ef] max-[1100px]:text-center">
+                    <p class="pl-0.5 text-xs font-semibold text-[#dce5ef] min-[1100px]:text-[13px] max-[1100px]:text-center">
                         Offer valid for selected colors and subject to availability.
                     </p>
                 </div>
@@ -283,25 +356,25 @@
 
             {{-- Ownership plans --}}
             <div class="overflow-hidden rounded-xl border border-[#e1e5eb] bg-white shadow-[0_10px_28px_rgba(0,0,0,0.05)] max-[1100px]:grid max-[1100px]:grid-cols-2 max-[760px]:grid-cols-1 min-[1100px]:grid min-[1100px]:grid-cols-[1.25fr_repeat(4,1fr)]">
-                <div class="p-7 max-[1100px]:col-span-2 max-[1100px]:text-center max-[760px]:col-span-1">
-                    <h2 class="mb-4 text-2xl font-black leading-tight text-[#111b46] min-[1100px]:text-[27px]">
+                <div class="p-5 max-[1100px]:col-span-2 max-[1100px]:text-center max-[760px]:col-span-1 min-[1100px]:p-6">
+                    <h2 class="mb-3 text-xl font-black leading-tight text-[#111b46] min-[1100px]:text-2xl">
                         Need a Flexible<br>Ownership Plan?
                     </h2>
-                    <p class="mb-5 text-sm font-semibold leading-relaxed text-[#4d5969]">
+                    <p class="mb-4 text-xs font-semibold leading-relaxed text-[#4d5969] min-[1100px]:text-sm">
                         Our ownership plans are designed to make your motorcycle journey simple and stress-free.
                     </p>
                     <a href="{{ route('ownership-plans') }}"
-                       class="inline-flex items-center gap-2.5 rounded-md bg-[#0065ef] px-6 py-3.5 text-sm font-black text-white">
+                       class="inline-flex items-center gap-2 rounded-md bg-[#0065ef] px-5 py-2.5 text-xs font-black text-white min-[1100px]:text-sm">
                         View Ownership Plans
-                        <x-litus-icon name="credit-card" class="h-4 w-4" />
+                        <x-litus-icon name="credit-card" class="h-3.5 w-3.5 min-[1100px]:h-4 min-[1100px]:w-4" />
                     </a>
                 </div>
 
                 @foreach ($ownership as $item)
-                    <div class="flex flex-col items-center justify-center border-t border-[#e1e5eb] px-5 py-6 text-center min-[1100px]:border-l min-[1100px]:border-t-0">
-                        <x-litus-icon :name="$item['icon']" class="mb-4 h-10 w-10 text-[#111b46] min-[1100px]:h-11 min-[1100px]:w-11" />
-                        <h3 class="mb-2.5 text-base font-black text-[#111b46]">{{ $item['title'] }}</h3>
-                        <p class="text-[13px] font-semibold leading-snug text-[#4d5969]">{{ $item['desc'] }}</p>
+                    <div class="flex flex-col items-center justify-center border-t border-[#e1e5eb] px-4 py-4 text-center min-[1100px]:border-l min-[1100px]:border-t-0 min-[1100px]:px-5 min-[1100px]:py-5">
+                        <x-litus-icon :name="$item['icon']" class="mb-2.5 h-8 w-8 text-[#111b46] min-[1100px]:mb-3 min-[1100px]:h-9 min-[1100px]:w-9" />
+                        <h3 class="mb-1.5 text-sm font-black text-[#111b46] min-[1100px]:text-base">{{ $item['title'] }}</h3>
+                        <p class="text-xs font-semibold leading-snug text-[#4d5969] min-[1100px]:text-[13px]">{{ $item['desc'] }}</p>
                     </div>
                 @endforeach
             </div>

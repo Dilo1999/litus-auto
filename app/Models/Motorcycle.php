@@ -221,6 +221,88 @@ class Motorcycle extends Model
         return array_chunk($specs, 8);
     }
 
+    public function specGroups(): array
+    {
+        $specs = array_values(array_filter(
+            self::normalizeSpecs($this->specs),
+            fn (array $spec) => filled($spec['value'] ?? null)
+        ));
+
+        $specsByLabel = [];
+        foreach ($specs as $spec) {
+            $label = $spec['label'] ?? '';
+            if ($label === '') {
+                continue;
+            }
+
+            $specsByLabel[$label] = [
+                ...$spec,
+                'icon' => self::iconForSpecLabel($label),
+                'icon_url' => self::specIconUrlForLabel($label),
+            ];
+        }
+
+        $groups = [
+            [
+                'title' => 'Performance',
+                'icon' => 'gauge',
+                'labels' => ['Engine Capacity', 'Fuel Type', 'Carburation', 'Transmission Type', 'Fuel Tank Capacity'],
+            ],
+            [
+                'title' => 'Safety & Braking',
+                'icon' => 'shield',
+                'labels' => ['Brakes Front', 'Brakes Rear'],
+            ],
+            [
+                'title' => 'Ride & Comfort',
+                'icon' => 'arrow-up-down',
+                'labels' => ['Suspension Front', 'Seat Height', 'Ground Clearance', 'Net Weight'],
+            ],
+            [
+                'title' => 'Build & Drivetrain',
+                'icon' => 'settings',
+                'labels' => ['Frame Type', 'Clutch', 'Final Drive', 'Wheels Front', 'Wheels Rear'],
+            ],
+        ];
+
+        $result = [];
+
+        foreach ($groups as $group) {
+            $items = [];
+
+            foreach ($group['labels'] as $label) {
+                if (isset($specsByLabel[$label])) {
+                    $items[] = $specsByLabel[$label];
+                }
+            }
+
+            if ($items !== []) {
+                $result[] = [
+                    'title' => $group['title'],
+                    'icon' => $group['icon'],
+                    'specs' => $items,
+                ];
+            }
+        }
+
+        $groupedLabels = array_merge(...array_column($groups, 'labels'));
+        $ungrouped = array_values(array_filter(
+            $specsByLabel,
+            fn (array $spec, string $label) => ! in_array($label, $groupedLabels, true),
+            ARRAY_FILTER_USE_BOTH
+        ));
+
+        if ($ungrouped !== []) {
+            $result[] = [
+                'title' => 'Additional Details',
+                'icon' => 'clipboard-list',
+                'specs' => $ungrouped,
+            ];
+        }
+
+        return $result;
+    }
+
     public function offerColorLabels(): string
     {
         $labels = $this->colorVariants->pluck('label')->filter()->all();
