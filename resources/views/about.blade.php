@@ -239,49 +239,69 @@
     </section>
 
     {{-- LEADERSHIP & OPERATION TEAM --}}
-    <section class="bg-[#f8f9fb] py-5 pb-9">
-        <div class="litus-container">
+    <section class="bg-[radial-gradient(circle_at_top,rgba(20,105,255,0.05),transparent_35%)] bg-[#f7f9fc] py-10 pb-14">
+        <div class="litus-container max-w-[1500px]">
 
-            <div class="mb-[15px] text-center">
-                <span class="mb-1 block text-[13px] font-black uppercase tracking-[2px] text-[#0065ef]">Leadership Team</span>
-                <h2 class="mb-2 text-[27px] font-black leading-none text-[#07152f] min-[651px]:text-[32px]">Our Key Members</h2>
-                <p class="text-[13px] font-medium text-[#566070]">
-                    Meet the leaders guiding LITUS Automobiles with experience, vision, and commitment.
+            <div class="mb-10 text-center min-[651px]:mb-[42px]">
+                <span class="mb-5 inline-flex items-center gap-3 text-xs font-black uppercase tracking-[4px] text-[#0065ef] min-[651px]:gap-[18px] min-[651px]:text-base min-[651px]:tracking-[6px]">
+                    <span class="h-0.5 w-8 bg-gradient-to-r from-transparent to-[#0065ef] min-[651px]:w-[42px]"></span>
+                    Leadership Team
+                    <span class="h-0.5 w-8 bg-gradient-to-l from-transparent to-[#0065ef] min-[651px]:w-[42px]"></span>
+                </span>
+                <h2 class="mb-5 text-[clamp(2.625rem,5vw,4rem)] font-black leading-[1.05] tracking-[-1.5px] text-[#07152f]">Our Key Members</h2>
+                <div class="mx-auto mb-[22px] h-1 w-[70px] rounded-[10px] bg-[#0065ef]"></div>
+                <p class="text-[15px] font-semibold leading-relaxed text-[#667085] min-[651px]:text-lg">
+                    Meet the talented leaders driving our vision and growth with dedication and expertise.
                 </p>
             </div>
 
             {{-- Leaders --}}
-            <div class="mb-[18px] grid grid-cols-1 gap-8 max-[1050px]:mx-auto max-[1050px]:max-w-[650px] min-[1051px]:grid-cols-3">
+            <div class="mb-[34px] grid grid-cols-1 gap-6 min-[1151px]:grid-cols-3">
                 @foreach ($teamLeaders as $member)
-                    <div class="overflow-hidden rounded-lg border border-[#dfe3ea] bg-white shadow-[0_10px_25px_rgba(0,0,0,0.12)]">
-                        <div class="relative flex h-[280px] items-end justify-center overflow-hidden bg-[#edf0f5] min-[651px]:h-[300px]">
+                    <div class="relative mx-auto flex w-full min-h-[440px] overflow-hidden rounded-[10px] border border-[#07152f]/[0.08] bg-[#061a45] shadow-[0_18px_42px_rgba(7,21,47,0.14)] min-[701px]:min-h-[275px] min-[1151px]:mx-0 min-[1151px]:max-w-none max-[1150px]:max-w-[760px]">
+                        <div class="pointer-events-none absolute inset-0 z-[1] opacity-25"
+                             style="background-image: radial-gradient(rgba(255,255,255,0.09) 1px, transparent 1px); background-size: 12px 12px;"></div>
+                        <div class="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(to_top,rgba(3,15,39,0.98)_0%,rgba(3,15,39,0.68)_58%,rgba(3,15,39,0.10)_100%)] min-[701px]:bg-[radial-gradient(circle_at_30%_55%,rgba(0,105,255,0.22),transparent_30%),linear-gradient(90deg,rgba(3,15,39,0.98)_0%,rgba(3,15,39,0.82)_45%,rgba(3,15,39,0.10)_100%)]"></div>
+
+                        <div class="relative z-[4] flex w-full flex-col justify-end px-6 pb-7 pt-[210px] text-white min-[701px]:w-[52%] min-[701px]:justify-center min-[701px]:py-7 min-[701px]:pl-[26px] min-[701px]:pr-0 min-[701px]:pt-7">
+                            <div class="mb-9 hidden h-[54px] w-[54px] items-center justify-center rounded-full border border-[#0065ef]/45 text-[#0065ef] min-[701px]:flex">
+                                <x-litus-icon name="award" class="h-6 w-6" />
+                            </div>
+                            <h3 class="mb-2.5 text-[25px] font-black leading-[1.15]">{{ $member['name'] }}</h3>
+                            <p class="mb-[22px] text-base font-medium text-[#e5ecf5]">{{ $member['role'] }}</p>
+                            <div class="mb-[26px] h-[3px] w-8 rounded-[10px] bg-[#0065ef]"></div>
+                            <a href="{{ route('contact') }}"
+                               class="group/profile inline-flex h-12 w-fit min-w-[145px] items-center justify-center gap-4 rounded-full bg-white px-[18px] text-sm font-black text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0065ef] hover:text-white">
+                                View Profile
+                                <x-litus-icon name="arrow-right" class="h-5 w-5 text-[#0065ef] transition-colors group-hover/profile:text-white" />
+                            </a>
+                        </div>
+
+                        <div class="absolute right-0 top-0 z-[3] h-[65%] w-full min-[701px]:bottom-0 min-[701px]:top-auto min-[701px]:h-full min-[701px]:w-[58%]">
                             <img src="{{ $member['img'] }}"
                                  alt="{{ $member['name'] }}"
-                                 class="h-full w-full object-contain object-bottom px-3 pt-3">
-                        </div>
-                        <div class="border-t border-[#dfe3ea] bg-[#07152f] px-4 py-4">
-                            <h3 class="mb-1 text-[19px] font-black text-white">{{ $member['name'] }}</h3>
-                            <p class="text-[13px] font-black text-[#66a3ff]">{{ $member['role'] }}</p>
+                                 class="h-full w-full object-cover object-top min-[701px]:object-bottom">
                         </div>
                     </div>
                 @endforeach
             </div>
 
             {{-- Team members --}}
-            <div class="mb-6 grid grid-cols-1 gap-6 max-[650px]:grid-cols-1 min-[651px]:grid-cols-2 min-[1051px]:grid-cols-4">
+            <div class="mb-6 grid grid-cols-1 gap-6 min-[701px]:grid-cols-2 min-[1151px]:grid-cols-4">
                 @foreach ($teamMembers as $member)
-                    <div class="overflow-hidden rounded-lg border border-[#dfe3ea] bg-white shadow-[0_8px_22px_rgba(0,0,0,0.06)]">
-                        <div class="flex h-[200px] items-end justify-center overflow-hidden bg-[#edf0f5] px-3 pt-3 min-[651px]:h-[210px]">
+                    <div class="min-h-[335px] rounded-[10px] border border-[#07152f]/[0.05] bg-white px-7 pb-[26px] pt-7 text-center shadow-[0_14px_34px_rgba(7,21,47,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_46px_rgba(7,21,47,0.12)]">
+                        <div class="mx-auto h-[150px] w-[150px] overflow-hidden rounded-full bg-[#eef2f7] shadow-[0_12px_28px_rgba(7,21,47,0.08)]">
                             <img src="{{ $member['img'] }}"
                                  alt="{{ $member['name'] }}"
-                                 class="max-h-full w-full object-contain object-bottom">
+                                 class="h-full w-full object-cover object-top">
                         </div>
-                        <div class="px-3.5 pb-4 pt-3">
-                            <h4 class="mb-1 text-[13px] font-black text-[#111b46]">{{ $member['name'] }}</h4>
-                            <p class="text-[11px] font-medium leading-snug text-[#4e5a6a]">
-                                {{ $member['role'] }},<br>{{ $member['dept'] }}
-                            </p>
+                        <div class="relative z-[3] mx-auto -mt-[22px] mb-[18px] flex h-[52px] w-[52px] items-center justify-center rounded-full border border-[#e2e8f0] bg-white text-[#0065ef] shadow-[0_8px_22px_rgba(7,21,47,0.08)]">
+                            <x-litus-icon name="award" class="h-6 w-6" />
                         </div>
+                        <h4 class="mb-3 text-[22px] font-black text-[#07152f]">{{ $member['name'] }}</h4>
+                        <p class="mb-[22px] text-base font-extrabold text-[#0065ef]">{{ $member['role'] }}</p>
+                        <div class="mx-auto mb-5 h-px w-[150px] bg-[#dce3ed]"></div>
+                        <p class="mx-auto max-w-[230px] text-base font-medium leading-snug text-[#667085]">{{ $member['dept'] }}</p>
                     </div>
                 @endforeach
             </div>
