@@ -367,9 +367,9 @@
                             'overflow-hidden bg-[#dfe5ec]',
                             'relative' => ! empty($showroom['images']),
                             'h-[220px]' => $showroom['featured'],
-                            'h-[160px]' => ! $showroom['featured'],
+                            'h-[200px]' => ! $showroom['featured'],
                             'min-[651px]:h-[280px]' => $showroom['featured'],
-                            'min-[651px]:h-[125px]' => ! $showroom['featured'],
+                            'min-[651px]:h-[220px]' => ! $showroom['featured'],
                         ])
                              @if (! empty($showroom['images'])) data-showroom-slider data-interval="4000" @endif>
                             @if (! empty($showroom['images']))
