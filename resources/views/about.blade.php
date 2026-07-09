@@ -5,16 +5,16 @@
 @section('content')
 @php
     $teamLeaders = [
-        ['name' => 'Mohamed Zahid', 'role' => 'Chief Executive Officer', 'img' => 'https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80'],
-        ['name' => 'Ahmed Zahir', 'role' => 'Chief Operating Officer', 'img' => 'https://images.unsplash.com/photo-1705645930353-0e335311ef20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80'],
-        ['name' => 'Asif Rasheed', 'role' => 'Chief Strategy & Marketing Officer', 'img' => 'https://images.unsplash.com/photo-1718209881007-c0ecdfc00f9d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80'],
+        ['name' => 'Mohamed Zahid', 'role' => 'Chief Executive Officer', 'img' => asset('images/about_us/mohomad_zahid.webp')],
+        ['name' => 'Ahmed Zahir', 'role' => 'Chief Operating Officer', 'img' => asset('images/about_us/ahmed.webp')],
+        ['name' => 'Asif Rasheed', 'role' => 'Chief Strategy & Marketing Officer', 'img' => asset('images/about_us/asif.webp')],
     ];
 
     $teamMembers = [
-        ['name' => 'Mohamed Nazeer', 'role' => 'Manager', 'dept' => 'Parts & Service Center', 'img' => 'https://images.unsplash.com/photo-1613181013804-1dcba09e6a9d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300&q=80'],
-        ['name' => 'Hifath Ali', 'role' => 'Head of Sales', 'dept' => 'Sales Department', 'img' => 'https://images.unsplash.com/photo-1648474484044-bb82df2f5a1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300&q=80'],
-        ['name' => 'Dhanushka', 'role' => 'Inventory Officer', 'dept' => 'Inventory Management', 'img' => 'https://images.unsplash.com/photo-1600878459138-e1123b37cb30?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300&q=80'],
-        ['name' => 'Mohamed Nafiz', 'role' => 'Lawyer', 'dept' => 'Legal Affairs', 'img' => 'https://images.unsplash.com/photo-1543132220-4bf3de6e10ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300&q=80'],
+        ['name' => 'Mohamed Nazeer', 'role' => 'Manager', 'dept' => 'Parts & Service Center', 'img' => asset('images/about_us/nazeer.webp')],
+        ['name' => 'Hifath Ali', 'role' => 'Head of Sales', 'dept' => 'Sales Department', 'img' => asset('images/about_us/Iffath.jpg')],
+        ['name' => 'Dhanushka', 'role' => 'Inventory Officer', 'dept' => 'Inventory Management', 'img' => asset('images/about_us/dhanushka.webp')],
+        ['name' => 'Mohamed Nafiz', 'role' => 'Lawyer', 'dept' => 'Legal Affairs', 'img' => asset('images/about_us/nafiz.webp')],
     ];
 
     $showrooms = [
@@ -38,7 +38,7 @@
     ];
 
     $operationBg = 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1400&q=80';
-    $operationTeamImg = 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=900&q=80';
+    $operationTeamImg = asset('images/about_us/team-2.png');
     $locationsBannerBg = 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1600&q=80';
 
     $heroBg = 'https://images.unsplash.com/photo-1558979159-2b18a4070a87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1600&q=80';
@@ -132,24 +132,24 @@
 
     {{-- MISSION & VISION --}}
     <section id="mission-vision"
-             class="relative min-h-[260px] overflow-hidden border border-[#dcdfe5] py-[38px] pb-[45px] max-sm:py-8 max-sm:pb-[38px]"
+             class="relative overflow-hidden border border-[#dcdfe5] py-6 pb-8 max-sm:py-5 max-sm:pb-6"
              style="background-image: radial-gradient(circle, rgba(7, 21, 47, 0.12) 2px, transparent 2px); background-size: 24px 24px; background-color: #fafafa;">
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(250,250,250,0.95)_0%,rgba(250,250,250,0.55)_15%,rgba(250,250,250,0.25)_50%,rgba(250,250,250,0.55)_85%,rgba(250,250,250,0.95)_100%)]"></div>
 
         <div class="relative z-[2] litus-container">
-            <p class="mb-[22px] text-center text-[13px] font-black uppercase tracking-[3px] text-[#0065ef] min-[561px]:text-[15px] min-[561px]:tracking-[4px]">
+            <p class="mb-4 text-center text-xs font-black uppercase tracking-[2px] text-[#0065ef] min-[561px]:text-[13px] min-[561px]:tracking-[3px]">
                 Our Mission &amp; Vision
             </p>
 
-            <div class="grid grid-cols-1 gap-[22px] min-[901px]:grid-cols-2">
+            <div class="grid grid-cols-1 gap-4 min-[901px]:grid-cols-2">
                 @foreach ($missionVision as $item)
-                    <div class="flex min-h-[155px] flex-col items-center gap-[22px] rounded-xl border border-[#dfe3ea] bg-white px-[22px] py-7 shadow-[0_12px_28px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(0,0,0,0.11)] min-[561px]:flex-row min-[561px]:gap-[38px] min-[561px]:px-[38px] min-[561px]:py-[30px]">
-                        <div class="flex h-[95px] w-[95px] shrink-0 items-center justify-center rounded-full bg-[#f0f0f0] text-[#0065ef] min-[561px]:h-[118px] min-[561px]:w-[118px]">
-                            <x-litus-icon :name="$item['icon']" class="h-11 w-11 min-[561px]:h-14 min-[561px]:w-14" />
+                    <div class="flex flex-col items-center gap-4 rounded-xl border border-[#dfe3ea] bg-white px-5 py-5 shadow-[0_10px_24px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.1)] min-[561px]:flex-row min-[561px]:gap-5 min-[561px]:px-6 min-[561px]:py-5">
+                        <div class="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-full bg-[#f0f0f0] text-[#0065ef] min-[561px]:h-20 min-[561px]:w-20">
+                            <x-litus-icon :name="$item['icon']" class="h-8 w-8 min-[561px]:h-9 min-[561px]:w-9" />
                         </div>
                         <div class="text-center min-[561px]:text-left">
-                            <h2 class="mb-[18px] text-[25px] font-black tracking-[-0.5px] text-[#07152f] min-[561px]:text-[30px]">{{ $item['title'] }}</h2>
-                            <p class="max-w-[390px] text-[15px] font-semibold leading-[1.55] text-[#586273] min-[561px]:text-base">{{ $item['text'] }}</p>
+                            <h2 class="mb-2.5 text-xl font-black tracking-[-0.5px] text-[#07152f] min-[561px]:text-2xl">{{ $item['title'] }}</h2>
+                            <p class="max-w-[390px] text-sm font-semibold leading-relaxed text-[#586273]">{{ $item['text'] }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -172,20 +172,16 @@
             {{-- Leaders --}}
             <div class="mb-[18px] grid grid-cols-1 gap-8 max-[1050px]:mx-auto max-[1050px]:max-w-[650px] min-[1051px]:grid-cols-3">
                 @foreach ($teamLeaders as $member)
-                    <div class="relative h-[280px] overflow-hidden rounded-lg bg-[#20242c] shadow-[0_10px_25px_rgba(0,0,0,0.18)] min-[651px]:h-[250px]">
-                        <img src="{{ $member['img'] }}"
-                             alt="{{ $member['name'] }}"
-                             class="block h-full w-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/92 via-black/25 to-black/[0.05]"></div>
-                        <div class="absolute bottom-3.5 left-4 z-[2] text-white">
-                            <h3 class="mb-1 text-[19px] font-black">{{ $member['name'] }}</h3>
-                            <p class="text-[13px] font-black text-[#0065ef]">{{ $member['role'] }}</p>
+                    <div class="overflow-hidden rounded-lg border border-[#dfe3ea] bg-white shadow-[0_10px_25px_rgba(0,0,0,0.12)]">
+                        <div class="relative flex h-[280px] items-end justify-center overflow-hidden bg-[#edf0f5] min-[651px]:h-[300px]">
+                            <img src="{{ $member['img'] }}"
+                                 alt="{{ $member['name'] }}"
+                                 class="h-full w-full object-contain object-bottom px-3 pt-3">
                         </div>
-                        <a href="#"
-                           class="absolute bottom-3.5 right-3.5 z-[3] flex h-8 w-8 items-center justify-center rounded bg-white/90 text-[#07152f] transition-colors hover:bg-white"
-                           aria-label="LinkedIn profile for {{ $member['name'] }}">
-                            <x-litus-icon name="linkedin" class="h-3.5 w-3.5" />
-                        </a>
+                        <div class="border-t border-[#dfe3ea] bg-[#07152f] px-4 py-4">
+                            <h3 class="mb-1 text-[19px] font-black text-white">{{ $member['name'] }}</h3>
+                            <p class="text-[13px] font-black text-[#66a3ff]">{{ $member['role'] }}</p>
+                        </div>
                     </div>
                 @endforeach
             </div>
@@ -193,22 +189,17 @@
             {{-- Team members --}}
             <div class="mb-6 grid grid-cols-1 gap-6 max-[650px]:grid-cols-1 min-[651px]:grid-cols-2 min-[1051px]:grid-cols-4">
                 @foreach ($teamMembers as $member)
-                    <div class="relative overflow-hidden rounded-lg border border-[#dfe3ea] bg-white shadow-[0_8px_22px_rgba(0,0,0,0.06)]">
-                        <div class="h-[155px] overflow-hidden bg-[#edf0f5]">
+                    <div class="overflow-hidden rounded-lg border border-[#dfe3ea] bg-white shadow-[0_8px_22px_rgba(0,0,0,0.06)]">
+                        <div class="flex h-[200px] items-end justify-center overflow-hidden bg-[#edf0f5] px-3 pt-3 min-[651px]:h-[210px]">
                             <img src="{{ $member['img'] }}"
                                  alt="{{ $member['name'] }}"
-                                 class="block h-full w-full object-cover object-top">
+                                 class="max-h-full w-full object-contain object-bottom">
                         </div>
-                        <div class="relative min-h-[68px] px-3.5 pb-4 pt-3">
+                        <div class="px-3.5 pb-4 pt-3">
                             <h4 class="mb-1 text-[13px] font-black text-[#111b46]">{{ $member['name'] }}</h4>
                             <p class="text-[11px] font-medium leading-snug text-[#4e5a6a]">
                                 {{ $member['role'] }},<br>{{ $member['dept'] }}
                             </p>
-                            <a href="#"
-                               class="absolute bottom-3.5 right-3 flex h-[27px] w-[27px] items-center justify-center rounded border border-[#dfe3ea] bg-white text-[#07152f] transition-colors hover:bg-gray-50"
-                               aria-label="LinkedIn profile for {{ $member['name'] }}">
-                                <x-litus-icon name="linkedin" class="h-3 w-3" />
-                            </a>
                         </div>
                     </div>
                 @endforeach
@@ -217,8 +208,8 @@
             {{-- Operation team --}}
             <div class="overflow-hidden rounded-[14px] bg-cover bg-center px-5 py-7 pb-[22px] shadow-[0_14px_35px_rgba(0,0,0,0.18)] min-[651px]:px-[38px] min-[651px]:pt-7"
                  style="background-image: linear-gradient(90deg, rgba(3,14,33,0.98), rgba(4,20,46,0.96)), url('{{ $operationBg }}');">
-                <div class="grid grid-cols-1 gap-7 min-[1051px]:grid-cols-[38%_62%]">
-                    <div>
+                <div class="grid grid-cols-1 gap-7 min-[1051px]:grid-cols-[38%_62%] min-[1051px]:items-stretch">
+                    <div class="flex flex-col justify-center">
                         <span class="mb-2.5 block text-[13px] font-black uppercase tracking-[3px] text-[#0065ef]">Our People</span>
                         <h2 class="mb-[18px] text-[28px] font-black leading-tight text-white min-[651px]:text-[33px]">Our Operation Team</h2>
                         <p class="max-w-[470px] text-sm font-medium leading-[1.65] text-[#dbe4ee]">
@@ -226,10 +217,10 @@
                         </p>
                     </div>
 
-                    <div class="h-[180px] overflow-hidden rounded-lg bg-[#e9edf3] min-[651px]:h-[210px]">
+                    <div class="overflow-hidden rounded-xl border border-white/10 bg-white px-3 pt-3">
                         <img src="{{ $operationTeamImg }}"
                              alt="LITUS Operation Team"
-                             class="block h-full w-full object-cover object-center">
+                             class="block w-full h-auto object-contain">
                     </div>
 
                     <div class="col-span-full mt-2.5 grid grid-cols-1 gap-[22px] min-[651px]:grid-cols-2 min-[1051px]:grid-cols-4">
