@@ -269,12 +269,7 @@
                             </div>
                             <h3 class="mb-2.5 text-[25px] font-black leading-[1.15]">{{ $member['name'] }}</h3>
                             <p class="mb-[22px] text-base font-medium text-[#e5ecf5]">{{ $member['role'] }}</p>
-                            <div class="mb-[26px] h-[3px] w-8 rounded-[10px] bg-[#0065ef]"></div>
-                            <a href="{{ route('contact') }}"
-                               class="group/profile inline-flex h-12 w-fit min-w-[145px] items-center justify-center gap-4 rounded-full bg-white px-[18px] text-sm font-black text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0065ef] hover:text-white">
-                                View Profile
-                                <x-litus-icon name="arrow-right" class="h-5 w-5 text-[#0065ef] transition-colors group-hover/profile:text-white" />
-                            </a>
+                            <div class="h-[3px] w-8 rounded-[10px] bg-[#0065ef]"></div>
                         </div>
 
                         <div class="absolute right-0 top-0 z-[3] h-[65%] w-full min-[701px]:bottom-0 min-[701px]:top-auto min-[701px]:h-full min-[701px]:w-[58%]">
