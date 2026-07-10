@@ -38,14 +38,14 @@
     ];
 
     $featuredMoments = [
-        ['id' => 1, 'label' => 'Adventure Awaits',       'cat' => 'Motorcycles',      'badge' => 'Motorcycle',       'badgeRed' => false, 'img' => 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=900&q=80', 'large' => true],
+        ['id' => 1, 'label' => '',                       'cat' => 'Motorcycles',      'badge' => 'Motorcycle',       'badgeRed' => false, 'img' => 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=900&q=80', 'large' => true],
         ['id' => 2, 'label' => 'Urban Freedom',          'cat' => 'Scooter',          'badge' => 'Scooter',          'badgeRed' => false, 'img' => 'https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?auto=format&fit=crop&w=700&q=80'],
         ['id' => 3, 'label' => 'LITUS Showroom, Malé',  'cat' => 'Showroom',         'badge' => 'Showroom',         'badgeRed' => false, 'img' => 'https://images.unsplash.com/photo-1560472355-536de3962603?auto=format&fit=crop&w=800&q=80'],
         ['id' => 4, 'label' => 'Island Vibes',           'cat' => 'Motorcycles',      'badge' => 'Lifestyle',        'badgeRed' => true,  'img' => 'https://images.unsplash.com/photo-1600705722908-bab8f59a0862?auto=format&fit=crop&w=700&q=80'],
         ['id' => 5, 'label' => 'Ride with Confidence',   'cat' => 'Customer Moments', 'badge' => 'Customer Moment',  'badgeRed' => true,  'img' => 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=700&q=80'],
     ];
 
-    $momentCategories = ['All', 'Motorcycles', 'Scooters', 'Showrooms', 'Customer Moments', 'Videos'];
+    $momentCategories = ['All', 'Motorcycles', 'Showrooms', 'Customer Moments', 'Videos'];
 
     $heroFeatures = [
         ['icon' => 'bike', 'title' => 'Motorcycles', 'desc' => 'Adventure & street ride moments'],
@@ -169,7 +169,7 @@
             <div class="mb-8 flex items-end justify-between">
                 <div>
                     <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Collection</span>
-                    <h2 class="mt-1 font-display text-2xl font-black text-gray-900 lg:text-3xl">Motorcycles & Scooter Gallery</h2>
+                    <h2 class="mt-1 font-display text-2xl font-black text-gray-900 lg:text-3xl">Motorcycles Gallery</h2>
                 </div>
             </div>
 
