@@ -17,10 +17,10 @@
     ];
 
     $galleryImages = [
+        ['src' => 'https://images.unsplash.com/photo-1759665973333-76aafabd7247?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80', 'alt' => 'Motorcycle adventure'],
+        ['src' => 'https://images.unsplash.com/photo-1777991412484-8fa8cb512e6b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80', 'alt' => 'Motorcycle ride'],
         ['src' => 'https://images.unsplash.com/photo-1588756681780-9d5859fc2ca0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80', 'alt' => 'Motorcycle lifestyle'],
-        ['src' => 'https://images.unsplash.com/photo-1602111426534-9c097255ca46?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80', 'alt' => 'Scooter ride'],
-        ['src' => 'https://images.unsplash.com/photo-1598077737122-925e6f7cf137?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80', 'alt' => 'White scooter'],
-        ['src' => 'https://images.unsplash.com/photo-1585210256590-fc52fd1e8348?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80', 'alt' => 'Red motorcycle'],
+        ['src' => 'https://images.unsplash.com/photo-1582092722992-b2f960bafbfb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80', 'alt' => 'Red motorcycle'],
     ];
 
     $services = [
@@ -307,7 +307,7 @@
                     <span class="mb-1 block text-[15px] font-black uppercase tracking-wide text-[#0065ef]">Our Gallery</span>
                     <h2 class="mb-2.5 text-[30px] font-black leading-tight tracking-[-0.6px] text-[#07152f] min-[651px]:text-[38px]">Ride the Visual Journey</h2>
                     <p class="text-sm font-semibold leading-normal text-[#4f5b6c] min-[651px]:text-[15px]">
-                        Explore our collection of motorcycles, scooters, and customer moments.
+                        Explore our collection of motorcycle rides and lifestyle moments.
                     </p>
                 </div>
                 <a href="{{ route('gallery') }}"
