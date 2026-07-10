@@ -79,11 +79,9 @@
 
                     @if ($motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0)
                     <div class="relative mb-5 mt-2 inline-block max-[1100px]:mx-auto">
-                        @if ($motorcycle->offer_label)
                         <span class="absolute left-2.5 top-[-26px] rounded-t-md bg-[#0065ef] px-3.5 py-2 text-sm font-black text-white">
-                            {{ $motorcycle->offer_label }}
+                            {{ $motorcycle->offerLabel() }}
                         </span>
-                        @endif
                         <div class="rounded-[9px] bg-[#0065ef] px-5 py-4 text-2xl font-black text-white shadow-[0_12px_28px_rgba(0,101,239,0.35)] sm:px-[22px] sm:py-[19px] sm:text-[34px]">
                             Special Discount: {{ $motorcycle->formattedDiscount() }}
                         </div>
@@ -163,7 +161,8 @@
         <div class="litus-container">
             <div class="grid grid-cols-1 items-start gap-8 min-[1150px]:grid-cols-[1.08fr_0.95fr] min-[1150px]:items-stretch min-[1150px]:gap-10">
                 {{-- Gallery --}}
-                <div class="relative w-full overflow-hidden rounded-2xl border border-[#07152f]/5 bg-white shadow-[0_14px_35px_rgba(7,21,47,0.07)]">
+                <div class="animate-on-scroll relative w-full overflow-hidden rounded-2xl border border-[#07152f]/5 bg-white shadow-[0_14px_35px_rgba(7,21,47,0.07)]"
+                     data-animate="slideLeft">
                     <button type="button"
                             data-gallery-expand
                             class="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#061a45] shadow-[0_10px_22px_rgba(7,21,47,0.12)] transition-all duration-300 hover:scale-105 hover:bg-[#1f7bff] hover:text-white min-[1150px]:right-4 min-[1150px]:top-4 min-[1150px]:h-11 min-[1150px]:w-11"
@@ -206,7 +205,9 @@
                 </div>
 
                 {{-- Color + specs + actions --}}
-                <div class="flex w-full flex-col justify-between gap-5 min-[1150px]:gap-6">
+                <div class="animate-on-scroll flex w-full flex-col justify-between gap-5 min-[1150px]:gap-6"
+                     data-animate="slideRight"
+                     data-delay="0.1">
                     <div>
                         <h3 class="mb-5 text-xl font-black text-[#07152f] min-[1150px]:mb-6 min-[1150px]:text-2xl">Select Color</h3>
 
@@ -228,7 +229,9 @@
 
                     <div class="grid grid-cols-1 gap-4 min-[700px]:grid-cols-2 min-[1150px]:gap-4">
                         @foreach ($highlights as $item)
-                            <div class="flex min-h-[118px] w-full items-center gap-4 rounded-2xl border border-[#07152f]/5 bg-white px-4 py-5 shadow-[0_14px_35px_rgba(7,21,47,0.07)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(7,21,47,0.1)] min-[1150px]:min-h-[128px] min-[1150px]:gap-4 min-[1150px]:px-5 min-[1150px]:py-6">
+                            <div class="animate-on-scroll flex min-h-[118px] w-full items-center gap-4 rounded-2xl border border-[#07152f]/5 bg-white px-4 py-5 shadow-[0_14px_35px_rgba(7,21,47,0.07)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(7,21,47,0.1)] min-[1150px]:min-h-[128px] min-[1150px]:gap-4 min-[1150px]:px-5 min-[1150px]:py-6"
+                                 data-animate="fadeInUp"
+                                 data-delay="{{ $loop->index * 0.1 }}">
                                 <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#f1f5fb] text-[#061a45] min-[1150px]:h-12 min-[1150px]:w-12">
                                     <x-spec-icon :icon="$item['icon']" :icon-url="$item['icon_url']" class="h-7 w-7 min-[1150px]:h-8 min-[1150px]:w-8" stroke-width="1.75" />
                                 </div>
@@ -262,7 +265,9 @@
             </div>
 
             {{-- Feature bar --}}
-            <div class="mt-8 grid grid-cols-1 gap-4 rounded-2xl border border-[#07152f]/5 bg-white px-5 py-6 shadow-[0_14px_35px_rgba(7,21,47,0.07)] min-[700px]:grid-cols-2 min-[1150px]:mt-10 min-[1150px]:grid-cols-4 min-[1150px]:gap-5 min-[1150px]:px-8 min-[1150px]:py-7">
+            <div class="animate-on-scroll mt-8 grid grid-cols-1 gap-4 rounded-2xl border border-[#07152f]/5 bg-white px-5 py-6 shadow-[0_14px_35px_rgba(7,21,47,0.07)] min-[700px]:grid-cols-2 min-[1150px]:mt-10 min-[1150px]:grid-cols-4 min-[1150px]:gap-5 min-[1150px]:px-8 min-[1150px]:py-7"
+                 data-animate="fadeInUp"
+                 data-delay="0.15">
                 @foreach ($galleryFeatures as $index => $feature)
                     <div @class([
                         'relative flex items-center gap-4 min-[1150px]:gap-5',
@@ -288,7 +293,7 @@
         <div class="litus-container space-y-4">
 
             {{-- Specifications --}}
-            <div>
+            <div class="animate-on-scroll" data-animate="fadeInUp">
                 <div class="mb-6 text-center sm:mb-8">
                     <span class="mb-2 block text-xs font-black uppercase tracking-[0.08em] text-[#0065ef]">Technical Details</span>
                     <h2 class="text-[23px] font-black tracking-wide text-[#111b46] sm:text-[28px]">{{ $motorcycle->name }} Specifications</h2>
@@ -296,7 +301,9 @@
 
                 <div class="grid grid-cols-1 gap-5 min-[650px]:grid-cols-2 min-[1100px]:grid-cols-4">
                     @foreach ($specGroups as $group)
-                        <div class="overflow-hidden rounded-[10px] border border-[#dce3ee] bg-white shadow-[0_10px_30px_rgba(7,21,47,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_38px_rgba(7,21,47,0.09)]">
+                        <div class="animate-on-scroll overflow-hidden rounded-[10px] border border-[#dce3ee] bg-white shadow-[0_10px_30px_rgba(7,21,47,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_38px_rgba(7,21,47,0.09)]"
+                             data-animate="fadeInUp"
+                             data-delay="{{ $loop->index * 0.1 }}">
                             <div class="flex h-[70px] items-center gap-4 border-b-2 border-[#0065ef] px-6">
                                 <div class="flex h-[34px] w-[34px] shrink-0 items-center justify-center text-[#07152f]">
                                     <x-litus-icon :name="$group['icon']" class="h-7 w-7" />
@@ -322,7 +329,8 @@
             </div>
 
             {{-- Offer banner --}}
-            <div class="my-8 grid grid-cols-1 items-center gap-4 overflow-hidden rounded-xl bg-cover bg-right px-8 py-6 shadow-[0_12px_32px_rgba(0,0,0,0.16)] min-[1100px]:my-10 min-[1100px]:grid-cols-[auto_1fr_auto] min-[1100px]:gap-6 min-[1100px]:px-12 min-[1100px]:py-7 max-[1100px]:text-center"
+            <div class="animate-on-scroll my-8 grid grid-cols-1 items-center gap-4 overflow-hidden rounded-xl bg-cover bg-right px-8 py-6 shadow-[0_12px_32px_rgba(0,0,0,0.16)] min-[1100px]:my-10 min-[1100px]:grid-cols-[auto_1fr_auto] min-[1100px]:gap-6 min-[1100px]:px-12 min-[1100px]:py-7 max-[1100px]:text-center"
+                 data-animate="fadeInUp"
                  style="background-image: linear-gradient(90deg, rgba(3,13,31,0.98), rgba(4,19,43,0.94)), url('{{ $offerBannerBg }}');">
                 <div class="mx-auto flex h-[72px] w-[72px] items-center justify-center rounded-full border-2 border-dashed border-[#0065ef] text-[#0065ef] min-[1100px]:mx-0">
                     <x-litus-icon name="star" class="h-7 w-7" />
@@ -355,7 +363,9 @@
             </div>
 
             {{-- Ownership plans --}}
-            <div class="overflow-hidden rounded-xl border border-[#e1e5eb] bg-white shadow-[0_10px_28px_rgba(0,0,0,0.05)] max-[1100px]:grid max-[1100px]:grid-cols-2 max-[760px]:grid-cols-1 min-[1100px]:grid min-[1100px]:grid-cols-[1.25fr_repeat(4,1fr)]">
+            <div class="animate-on-scroll overflow-hidden rounded-xl border border-[#e1e5eb] bg-white shadow-[0_10px_28px_rgba(0,0,0,0.05)] max-[1100px]:grid max-[1100px]:grid-cols-2 max-[760px]:grid-cols-1 min-[1100px]:grid min-[1100px]:grid-cols-[1.25fr_repeat(4,1fr)]"
+                 data-animate="fadeInUp"
+                 data-delay="0.1">
                 <div class="p-5 max-[1100px]:col-span-2 max-[1100px]:text-center max-[760px]:col-span-1 min-[1100px]:p-6">
                     <h2 class="mb-3 text-xl font-black leading-tight text-[#111b46] min-[1100px]:text-2xl">
                         Need a Flexible<br>Ownership Plan?
@@ -380,11 +390,14 @@
             </div>
 
             {{-- Related products --}}
-            <h2 class="pt-2 text-center text-[25px] font-black text-[#111b46]">You May Also Like</h2>
+            <h2 class="animate-on-scroll pt-2 text-center text-[25px] font-black text-[#111b46]"
+                data-animate="fadeInUp">You May Also Like</h2>
 
             <div class="grid grid-cols-1 gap-3.5 min-[1100px]:grid-cols-3">
                 @foreach ($related as $product)
-                    <div class="grid grid-cols-1 items-center gap-4 rounded-lg border border-[#e1e5eb] bg-white px-4 py-3 shadow-[0_8px_22px_rgba(0,0,0,0.04)] min-[480px]:grid-cols-[130px_1fr] min-[480px]:gap-[18px] min-[480px]:px-[18px]">
+                    <div class="animate-on-scroll grid grid-cols-1 items-center gap-4 rounded-lg border border-[#e1e5eb] bg-white px-4 py-3 shadow-[0_8px_22px_rgba(0,0,0,0.04)] min-[480px]:grid-cols-[130px_1fr] min-[480px]:gap-[18px] min-[480px]:px-[18px]"
+                         data-animate="fadeInUp"
+                         data-delay="{{ $loop->index * 0.12 }}">
                         <img src="{{ $product['img'] }}"
                              alt="{{ $product['name'] }}"
                              class="mx-auto h-[85px] w-[120px] object-contain min-[480px]:mx-0">
@@ -404,7 +417,9 @@
             </div>
 
             {{-- Questions --}}
-            <div class="grid grid-cols-1 items-center gap-6 rounded-[14px] bg-white px-6 py-6 shadow-[0_10px_28px_rgba(0,0,0,0.05)] min-[1100px]:grid-cols-[auto_1fr_auto] min-[1100px]:gap-7 min-[1100px]:px-8 max-[1100px]:text-center">
+            <div class="animate-on-scroll grid grid-cols-1 items-center gap-6 rounded-[14px] bg-white px-6 py-6 shadow-[0_10px_28px_rgba(0,0,0,0.05)] min-[1100px]:grid-cols-[auto_1fr_auto] min-[1100px]:gap-7 min-[1100px]:px-8 max-[1100px]:text-center"
+                 data-animate="fadeInUp"
+                 data-delay="0.1">
                 <div class="mx-auto flex h-[76px] w-[76px] items-center justify-center rounded-full bg-[#061a45] text-white min-[1100px]:mx-0">
                     <x-litus-icon name="headphones" class="h-8 w-8" />
                 </div>

@@ -15,7 +15,7 @@
             </div>
 
             <span class="truncate text-sm font-black uppercase tracking-wide text-white min-[651px]:text-base min-[1101px]:text-lg">
-                {{ $motorcycle->offer_label ?? 'Limited Offer' }}
+                {{ $motorcycle->offerLabel() }}
             </span>
         </div>
     </div>

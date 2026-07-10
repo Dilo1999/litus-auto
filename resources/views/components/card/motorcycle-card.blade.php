@@ -8,8 +8,8 @@
         <img src="{{ $motorcycle->listImageUrl() }}"
              alt="{{ $motorcycle->name }}"
              class="h-48 w-full object-contain transition-transform duration-500 group-hover:scale-105">
-        @if ($motorcycle->hasPromotion() && $motorcycle->offer_label)
-            <span class="absolute left-3 top-3 rounded-md bg-litus-red px-2.5 py-1 text-xs font-black text-white shadow">{{ $motorcycle->offer_label }}</span>
+        @if ($motorcycle->hasPromotion())
+            <span class="absolute left-3 top-3 rounded-md bg-litus-red px-2.5 py-1 text-xs font-black text-white shadow">{{ $motorcycle->offerLabel() }}</span>
         @endif
         @if ($motorcycle->brand)
             <span class="absolute right-3 top-3 rounded-md bg-white/90 px-2 py-1 text-xs font-bold text-gray-600 shadow">{{ $motorcycle->brand }}</span>

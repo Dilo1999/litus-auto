@@ -9,6 +9,8 @@ use Illuminate\Support\Str;
 
 class Motorcycle extends Model
 {
+    public const OFFER_LABEL = 'Limited Offer';
+
     protected $fillable = [
         'name',
         'slug',
@@ -18,7 +20,6 @@ class Motorcycle extends Model
         'original_price',
         'has_promotion',
         'sale_price',
-        'offer_label',
         'offer_note',
         'specs',
         'hero_background',
@@ -48,6 +49,8 @@ class Motorcycle extends Model
                 $motorcycle->sale_price = $motorcycle->original_price;
                 $motorcycle->offer_label = null;
                 $motorcycle->offer_note = null;
+            } else {
+                $motorcycle->offer_label = self::OFFER_LABEL;
             }
         });
     }
@@ -55,6 +58,11 @@ class Motorcycle extends Model
     public function hasPromotion(): bool
     {
         return (bool) $this->has_promotion;
+    }
+
+    public function offerLabel(): string
+    {
+        return self::OFFER_LABEL;
     }
 
     public static function defaultSpecLabels(): array

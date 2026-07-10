@@ -71,7 +71,7 @@ class MotorcycleResource extends Resource
                             ->step(0.01),
                         Toggle::make('has_promotion')
                             ->label('Promotion active')
-                            ->helperText('Enable to set a sale price and offer label for this product.')
+                            ->helperText('Enable to set a sale price and promotional offer for this product.')
                             ->default(false)
                             ->reactive()
                             ->columnSpanFull(),
@@ -80,10 +80,6 @@ class MotorcycleResource extends Resource
                             ->prefix('MVR')
                             ->step(0.01)
                             ->required(fn (callable $get) => (bool) $get('has_promotion'))
-                            ->hidden(fn (callable $get) => ! $get('has_promotion')),
-                        TextInput::make('offer_label')
-                            ->default('Limited Offer')
-                            ->maxLength(255)
                             ->hidden(fn (callable $get) => ! $get('has_promotion')),
                         Textarea::make('offer_note')
                             ->rows(2)
