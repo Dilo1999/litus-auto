@@ -20,6 +20,25 @@ class HomeController extends Controller
             ->filter(fn (Motorcycle $motorcycle) => $motorcycle->discountAmount() > 0)
             ->values();
 
+        $topRides = Motorcycle::query()
+            ->where('is_published', true)
+            ->where('is_top_selling', true)
+            ->with(['colorVariants' => fn ($q) => $q->orderBy('sort_order')])
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->limit(6)
+            ->get()
+            ->map(fn (Motorcycle $motorcycle) => [
+                'model' => $motorcycle->name,
+                'slug' => $motorcycle->slug,
+                'cc' => $motorcycle->engineCapacity() ?: '—',
+                'capacity' => $motorcycle->fuelTankCapacity() ?: '—',
+                'img' => $motorcycle->listImageUrl(),
+                'variant' => 'blue',
+                'badge' => '★ Best Seller',
+            ])
+            ->all();
+
         $galleryImages = GalleryImage::query()
             ->published()
             ->featured()
@@ -33,6 +52,6 @@ class HomeController extends Controller
             ])
             ->all();
 
-        return view('home', compact('promoMotorcycles', 'galleryImages'));
+        return view('home', compact('promoMotorcycles', 'topRides', 'galleryImages'));
     }
 }

@@ -4,17 +4,7 @@
 
 @section('content')
 @php
-    $productImages = [
-        asset('images/product/' . rawurlencode('premium 125 blue.png')),
-        asset('images/product/' . rawurlencode('premium 125 red.png')),
-        asset('images/product/' . rawurlencode('special edition 125 green yellow.png')),
-    ];
-
-    $topRides = [
-        ['model' => 'ADV 160 2026', 'slug' => 'adv-160-2026', 'cc' => '160CC', 'capacity' => '8.1L', 'img' => $productImages[0], 'variant' => 'blue', 'badge' => '★ Best Seller'],
-        ['model' => 'Scoopy Prestige 2026', 'slug' => 'scoopy-prestige-2026', 'cc' => '110CC', 'capacity' => '4.2L', 'img' => $productImages[1], 'variant' => 'blue', 'badge' => '★ Best Seller'],
-        ['model' => 'Scoopy Club 12 2026', 'slug' => 'scoopy-club-12-2026', 'cc' => '110CC', 'capacity' => '4.2L', 'img' => $productImages[2], 'variant' => 'blue', 'badge' => '★ Best Seller'],
-    ];
+    $topRides = $topRides ?? [];
 
     $galleryImages = $galleryImages ?? [];
 

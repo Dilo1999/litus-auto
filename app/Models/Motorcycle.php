@@ -24,6 +24,7 @@ class Motorcycle extends Model
         'specs',
         'hero_background',
         'is_published',
+        'is_top_selling',
         'sort_order',
     ];
 
@@ -33,6 +34,7 @@ class Motorcycle extends Model
         'sale_price' => 'decimal:2',
         'specs' => 'array',
         'is_published' => 'boolean',
+        'is_top_selling' => 'boolean',
         'sort_order' => 'integer',
     ];
 
@@ -320,8 +322,18 @@ class Motorcycle extends Model
 
     public function engineCapacity(): ?string
     {
+        return $this->specValue('Engine Capacity');
+    }
+
+    public function fuelTankCapacity(): ?string
+    {
+        return $this->specValue('Fuel Tank Capacity');
+    }
+
+    public function specValue(string $label): ?string
+    {
         foreach (self::normalizeSpecs($this->specs) as $spec) {
-            if (($spec['label'] ?? '') === 'Engine Capacity' && filled($spec['value'] ?? null)) {
+            if (($spec['label'] ?? '') === $label && filled($spec['value'] ?? null)) {
                 return $spec['value'];
             }
         }

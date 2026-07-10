@@ -17,6 +17,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Builder;
 
 class MotorcycleResource extends Resource
 {
@@ -59,6 +60,10 @@ class MotorcycleResource extends Resource
                         Toggle::make('is_published')
                             ->label('Published')
                             ->default(true),
+                        Toggle::make('is_top_selling')
+                            ->label('Top Selling')
+                            ->helperText('Show this motorcycle in the Top Selling Rides section on the home page.')
+                            ->default(false),
                     ])
                     ->columns(2),
 
@@ -123,11 +128,29 @@ class MotorcycleResource extends Resource
                 TextColumn::make('name')->searchable()->sortable(),
                 TextColumn::make('category')->searchable(),
                 IconColumn::make('has_promotion')->boolean()->label('Promotion'),
-                TextColumn::make('colorVariants_count')
-                    ->counts('colorVariants')
-                    ->label('Colors'),
+                IconColumn::make('is_top_selling')->boolean()->label('Top Selling'),
+                TextColumn::make('colors')
+                    ->label('Colors')
+                    ->getStateUsing(function (Motorcycle $record): \Illuminate\Support\HtmlString {
+                        $variants = $record->colorVariants;
+
+                        if ($variants->isEmpty()) {
+                            return new \Illuminate\Support\HtmlString('<span style="color:#9ca3af;">—</span>');
+                        }
+
+                        $swatches = $variants->map(function ($variant) {
+                            $hex = e($variant->hex_color ?: '#d1d5db');
+                            $label = e($variant->label ?: 'Color');
+
+                            return '<span title="'.$label.'" style="display:inline-block;width:22px;height:22px;border-radius:6px;background:'.$hex.';border:1px solid rgba(0,0,0,0.12);"></span>';
+                        })->implode('');
+
+                        return new \Illuminate\Support\HtmlString(
+                            '<span style="display:inline-flex;align-items:center;gap:8px;">'.$swatches.'</span>'
+                        );
+                    })
+                    ->html(),
                 IconColumn::make('is_published')->boolean()->label('Published'),
-                TextColumn::make('updated_at')->dateTime()->sortable(),
             ])
             ->defaultSort('name')
             ->actions([
@@ -136,6 +159,11 @@ class MotorcycleResource extends Resource
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->with(['colorVariants' => fn ($q) => $q->orderBy('sort_order')]);
     }
 
     public static function getRelations(): array
