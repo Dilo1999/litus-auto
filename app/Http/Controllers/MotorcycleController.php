@@ -41,17 +41,13 @@ class MotorcycleController extends Controller
             ->limit(3)
             ->get()
             ->map(function (Motorcycle $item) {
-                $variant = $item->defaultColorVariant();
-                $gallery = $variant?->galleryImageUrls() ?? [];
-                $spin = $variant?->spinFrameUrls() ?? [];
-
                 return [
                     'name' => $item->name,
                     'slug' => $item->slug,
                     'discount' => $item->hasPromotion() && $item->discountAmount() > 0
                         ? $item->formattedDiscount()
                         : null,
-                    'img' => $gallery[0] ?? $spin[0] ?? '',
+                    'img' => $item->listImageUrl(),
                 ];
             });
 

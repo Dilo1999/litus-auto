@@ -157,27 +157,27 @@
     </section>
 
     {{-- GALLERY + HIGHLIGHTS --}}
-    <section class="bg-[#f4f7fb] py-6 lg:py-8"
+    <section class="bg-[#f4f7fb] py-10 lg:py-12"
              data-product-gallery
              data-images='@json($galleryImages)'>
         <div class="litus-container">
-            <div class="grid grid-cols-1 items-start gap-6 min-[1150px]:grid-cols-[1.08fr_0.95fr] min-[1150px]:gap-8">
+            <div class="grid grid-cols-1 items-start gap-8 min-[1150px]:grid-cols-[1.08fr_0.95fr] min-[1150px]:items-stretch min-[1150px]:gap-10">
                 {{-- Gallery --}}
-                <div class="relative w-full rounded-2xl border border-[#07152f]/5 bg-white p-4 shadow-[0_14px_35px_rgba(7,21,47,0.07)] min-[1150px]:p-5">
+                <div class="relative w-full overflow-hidden rounded-2xl border border-[#07152f]/5 bg-white shadow-[0_14px_35px_rgba(7,21,47,0.07)]">
                     <button type="button"
                             data-gallery-expand
-                            class="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#061a45] shadow-[0_10px_22px_rgba(7,21,47,0.12)] transition-all duration-300 hover:scale-105 hover:bg-[#1f7bff] hover:text-white min-[1150px]:h-11 min-[1150px]:w-11"
+                            class="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#061a45] shadow-[0_10px_22px_rgba(7,21,47,0.12)] transition-all duration-300 hover:scale-105 hover:bg-[#1f7bff] hover:text-white min-[1150px]:right-4 min-[1150px]:top-4 min-[1150px]:h-11 min-[1150px]:w-11"
                             aria-label="Expand image">
                         <svg class="h-4 w-4 min-[1150px]:h-5 min-[1150px]:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M15 3h6v6"/><path d="m21 3-7 7"/><path d="m3 21 7-7"/><path d="M9 21H3v-6"/>
                         </svg>
                     </button>
 
-                    <div class="relative flex h-[260px] items-center justify-center overflow-hidden rounded-xl bg-cover bg-center min-[1150px]:h-[340px]"
+                    <div class="relative flex h-[340px] w-full items-center justify-center overflow-hidden bg-cover bg-center min-[1150px]:h-[440px]"
                          style="background-image: url('{{ $galleryMainBg }}');">
                         <button type="button"
                                 data-gallery-prev
-                                class="absolute left-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-xl font-light text-[#061a45] shadow-[0_10px_22px_rgba(7,21,47,0.12)] transition-all duration-300 hover:scale-105 hover:bg-[#1f7bff] hover:text-white min-[1150px]:h-12 min-[1150px]:w-12"
+                                class="absolute left-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-xl font-light text-[#061a45] shadow-[0_10px_22px_rgba(7,21,47,0.12)] transition-all duration-300 hover:scale-105 hover:bg-[#1f7bff] hover:text-white min-[1150px]:left-3 min-[1150px]:h-12 min-[1150px]:w-12"
                                 aria-label="Previous image">
                             <x-litus-icon name="chevron-left" class="h-5 w-5 min-[1150px]:h-6 min-[1150px]:w-6" />
                         </button>
@@ -185,52 +185,50 @@
                         <img data-gallery-main
                              src="{{ $galleryImages[0] ?? '' }}"
                              alt="{{ $motorcycle->name }}"
-                             class="relative z-[1] h-[240px] w-full max-w-[480px] object-contain drop-shadow-[0_20px_14px_rgba(0,0,0,0.16)] transition-opacity duration-300 min-[1150px]:h-[310px]">
+                             class="relative z-[1] h-full w-full max-w-none object-contain drop-shadow-[0_20px_14px_rgba(0,0,0,0.16)] transition-opacity duration-300">
 
                         <button type="button"
                                 data-gallery-next
-                                class="absolute right-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-xl font-light text-[#061a45] shadow-[0_10px_22px_rgba(7,21,47,0.12)] transition-all duration-300 hover:scale-105 hover:bg-[#1f7bff] hover:text-white min-[1150px]:h-12 min-[1150px]:w-12"
+                                class="absolute right-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-xl font-light text-[#061a45] shadow-[0_10px_22px_rgba(7,21,47,0.12)] transition-all duration-300 hover:scale-105 hover:bg-[#1f7bff] hover:text-white min-[1150px]:right-3 min-[1150px]:h-12 min-[1150px]:w-12"
                                 aria-label="Next image">
                             <x-litus-icon name="chevron-right" class="h-5 w-5 min-[1150px]:h-6 min-[1150px]:w-6" />
                         </button>
                     </div>
 
-                    <div class="mt-3 grid grid-cols-3 gap-2 min-[700px]:grid-cols-5 min-[1150px]:gap-3"
-                         data-gallery-thumbs></div>
+                    <div class="px-5 pb-5 pt-4 min-[1150px]:px-6 min-[1150px]:pb-6 min-[1150px]:pt-5">
+                        <div class="grid grid-cols-3 gap-2.5 min-[700px]:grid-cols-5 min-[1150px]:gap-3.5"
+                             data-gallery-thumbs></div>
 
-                    <div class="mt-4 flex justify-center gap-2"
-                         data-gallery-dots
-                         aria-hidden="true"></div>
+                        <div class="mt-4 flex justify-center gap-2"
+                             data-gallery-dots
+                             aria-hidden="true"></div>
+                    </div>
                 </div>
 
                 {{-- Color + specs + actions --}}
-                <div class="flex w-full flex-col gap-4 min-[1150px]:gap-5">
-                    <div class="rounded-2xl border border-[#07152f]/5 bg-white px-5 py-5 shadow-[0_14px_35px_rgba(7,21,47,0.07)] min-[1150px]:px-6 min-[1150px]:py-6">
-                        <h3 class="mb-4 text-xl font-black text-[#07152f] min-[1150px]:mb-5 min-[1150px]:text-2xl">Select Color</h3>
+                <div class="flex w-full flex-col justify-between gap-5 min-[1150px]:gap-6">
+                    <div>
+                        <h3 class="mb-5 text-xl font-black text-[#07152f] min-[1150px]:mb-6 min-[1150px]:text-2xl">Select Color</h3>
 
-                        <div class="grid grid-cols-1 gap-3 min-[700px]:grid-cols-2 min-[1150px]:gap-4">
+                        <div class="flex flex-wrap items-center gap-4 min-[1150px]:gap-5">
                             @foreach ($colors as $index => $color)
                                 <button type="button"
                                         data-gallery-color="{{ $color['label'] }}"
                                         data-color-hex="{{ $color['hex'] }}"
+                                        aria-label="{{ $color['label'] }}"
+                                        title="{{ $color['label'] }}"
                                         aria-pressed="{{ $index === 0 ? 'true' : 'false' }}"
-                                        class="relative inline-flex min-h-[60px] w-full items-center gap-4 rounded-xl border-2 bg-white px-4 text-base font-black text-[#07152f] transition-all duration-300 hover:border-[#1f7bff] min-[1150px]:min-h-[68px] min-[1150px]:gap-4 min-[1150px]:px-5 min-[1150px]:text-lg {{ $index === 0 ? 'border-[#1f7bff] shadow-[0_0_0_2px_rgba(31,123,255,0.08)]' : 'border-[#dce3ed]' }}">
-                                    <span class="inline-block h-8 w-8 shrink-0 rounded-full shadow-[inset_0_0_0_2px_rgba(0,0,0,0.14)] min-[1150px]:h-9 min-[1150px]:w-9"
+                                        class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 bg-white p-1 transition-all duration-300 hover:border-[#1f7bff] min-[1150px]:h-12 min-[1150px]:w-12 {{ $index === 0 ? 'border-[#1f7bff] shadow-[0_0_0_3px_rgba(31,123,255,0.2)]' : 'border-[#dce3ed]' }}">
+                                    <span class="block h-full w-full rounded-full shadow-[inset_0_0_0_1px_rgba(0,0,0,0.12)]"
                                           style="background-color: {{ $color['hex'] }}"></span>
-                                    {{ $color['label'] }}
-                                    <span data-color-check
-                                          @class([
-                                              'absolute right-4 flex h-7 w-7 items-center justify-center rounded-full bg-[#1f7bff] text-xs font-black text-white min-[1150px]:right-5 min-[1150px]:h-8 min-[1150px]:w-8 min-[1150px]:text-sm',
-                                              'hidden' => $index !== 0,
-                                          ])>✓</span>
                                 </button>
                             @endforeach
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 gap-3 min-[700px]:grid-cols-2 min-[1150px]:gap-3.5">
+                    <div class="grid grid-cols-1 gap-4 min-[700px]:grid-cols-2 min-[1150px]:gap-4">
                         @foreach ($highlights as $item)
-                            <div class="flex min-h-[100px] w-full items-center gap-4 rounded-2xl border border-[#07152f]/5 bg-white px-4 py-4 shadow-[0_14px_35px_rgba(7,21,47,0.07)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(7,21,47,0.1)] min-[1150px]:min-h-[110px] min-[1150px]:gap-4 min-[1150px]:px-5 min-[1150px]:py-5">
+                            <div class="flex min-h-[118px] w-full items-center gap-4 rounded-2xl border border-[#07152f]/5 bg-white px-4 py-5 shadow-[0_14px_35px_rgba(7,21,47,0.07)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(7,21,47,0.1)] min-[1150px]:min-h-[128px] min-[1150px]:gap-4 min-[1150px]:px-5 min-[1150px]:py-6">
                                 <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#f1f5fb] text-[#061a45] min-[1150px]:h-12 min-[1150px]:w-12">
                                     <x-spec-icon :icon="$item['icon']" :icon-url="$item['icon_url']" class="h-7 w-7 min-[1150px]:h-8 min-[1150px]:w-8" stroke-width="1.75" />
                                 </div>
@@ -248,14 +246,14 @@
                         @endforeach
                     </div>
 
-                    <div class="grid grid-cols-1 gap-4 min-[700px]:grid-cols-2">
+                    <div class="grid grid-cols-1 gap-4 min-[700px]:grid-cols-2 min-[1150px]:mt-2">
                         <a href="tel:+9607797442"
-                           class="inline-flex h-[52px] w-full items-center justify-center gap-2.5 rounded-md bg-[#0065ef] px-6 text-[15px] font-black text-white shadow-[0_8px_22px_rgba(0,101,239,0.3)] transition-all hover:bg-[#0052cc]">
+                           class="inline-flex h-[56px] w-full items-center justify-center gap-2.5 rounded-md bg-[#0065ef] px-6 text-[15px] font-black text-white shadow-[0_8px_22px_rgba(0,101,239,0.3)] transition-all hover:bg-[#0052cc]">
                             Contact Sales Team
                             <x-litus-icon name="arrow-right" class="h-4 w-4" />
                         </a>
                         <a href="tel:+9607797442"
-                           class="inline-flex h-[52px] w-full items-center justify-center gap-2.5 rounded-md border-2 border-[#1d2430] bg-white text-[15px] font-black text-[#1d2430]">
+                           class="inline-flex h-[56px] w-full items-center justify-center gap-2.5 rounded-md border-2 border-[#1d2430] bg-white text-[15px] font-black text-[#1d2430]">
                             <x-litus-icon name="phone" class="h-4 w-4" />
                             Call Now
                         </a>
@@ -264,7 +262,7 @@
             </div>
 
             {{-- Feature bar --}}
-            <div class="mt-6 grid grid-cols-1 gap-4 rounded-2xl border border-[#07152f]/5 bg-white px-5 py-5 shadow-[0_14px_35px_rgba(7,21,47,0.07)] min-[700px]:grid-cols-2 min-[1150px]:mt-8 min-[1150px]:grid-cols-4 min-[1150px]:gap-5 min-[1150px]:px-8 min-[1150px]:py-6">
+            <div class="mt-8 grid grid-cols-1 gap-4 rounded-2xl border border-[#07152f]/5 bg-white px-5 py-6 shadow-[0_14px_35px_rgba(7,21,47,0.07)] min-[700px]:grid-cols-2 min-[1150px]:mt-10 min-[1150px]:grid-cols-4 min-[1150px]:gap-5 min-[1150px]:px-8 min-[1150px]:py-7">
                 @foreach ($galleryFeatures as $index => $feature)
                     <div @class([
                         'relative flex items-center gap-4 min-[1150px]:gap-5',
