@@ -11,9 +11,9 @@
     ];
 
     $topRides = [
-        ['model' => 'ADV 160 2026', 'slug' => 'adv-160-2026', 'cc' => '160CC', 'capacity' => '8.1L', 'img' => $productImages[0]],
-        ['model' => 'Scoopy Prestige 2026', 'slug' => 'scoopy-prestige-2026', 'cc' => '110CC', 'capacity' => '4.2L', 'img' => $productImages[1]],
-        ['model' => 'Scoopy Club 12 2026', 'slug' => 'scoopy-club-12-2026', 'cc' => '110CC', 'capacity' => '4.2L', 'img' => $productImages[2]],
+        ['model' => 'ADV 160 2026', 'slug' => 'adv-160-2026', 'cc' => '160CC', 'capacity' => '8.1L', 'img' => $productImages[0], 'variant' => 'blue', 'badge' => '★ Best Seller'],
+        ['model' => 'Scoopy Prestige 2026', 'slug' => 'scoopy-prestige-2026', 'cc' => '110CC', 'capacity' => '4.2L', 'img' => $productImages[1], 'variant' => 'blue', 'badge' => '★ Best Seller'],
+        ['model' => 'Scoopy Club 12 2026', 'slug' => 'scoopy-club-12-2026', 'cc' => '110CC', 'capacity' => '4.2L', 'img' => $productImages[2], 'variant' => 'blue', 'badge' => '★ Best Seller'],
     ];
 
     $galleryImages = [
@@ -59,31 +59,31 @@
     <x-litus-header active="Home" />
 
     {{-- HERO --}}
-    <section class="relative min-h-[640px] overflow-hidden lg:min-h-[720px]">
+    <section class="relative min-h-[720px] overflow-hidden lg:min-h-[820px]">
         <img src="{{ $heroBg }}"
              alt=""
              class="absolute inset-0 h-full w-full object-cover object-center"
              aria-hidden="true">
         <div class="absolute inset-0 bg-[linear-gradient(110deg,rgba(0,65,180,0.55)_0%,rgba(11,22,40,0.85)_40%,rgba(11,22,40,0.45)_70%,rgba(11,22,40,0.2)_100%)]"></div>
 
-        <div class="relative z-10 litus-container flex min-h-[640px] flex-col justify-center lg:min-h-[720px]">
-            <div class="max-w-xl py-16 text-center lg:py-20 lg:text-left">
-                <p class="mb-3 text-xs font-bold uppercase tracking-widest text-litus-red">Premium Bikes. Trusted Service.</p>
-                <h1 class="mb-5 font-display text-[2.6rem] font-black leading-[1.1] text-white sm:text-5xl lg:text-[3.4rem]">
+        <div class="relative z-10 litus-container flex min-h-[720px] flex-col justify-center lg:min-h-[820px]">
+            <div class="max-w-xl py-20 text-left lg:py-24">
+                <p class="mb-4 text-sm font-bold uppercase tracking-widest text-litus-red sm:text-base">Premium Bikes. Trusted Service.</p>
+                <h1 class="mb-6 font-display text-[2.9rem] font-black leading-[1.08] text-white sm:text-[3.25rem] lg:text-[3.85rem]">
                     Ride Your Dream<br>with<br>
                     <span class="text-litus-red">LITUS Automobiles</span>
                 </h1>
-                <p class="mx-auto mb-8 max-w-sm text-sm leading-relaxed text-gray-300 lg:mx-0 lg:text-base">
+                <p class="mb-9 max-w-md text-base leading-relaxed text-gray-300 lg:text-lg">
                     Discover premium motorcycles, flexible ownership plans, genuine parts, and trusted service across the Maldives.
                 </p>
-                <div class="flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
+                <div class="flex flex-col justify-start gap-3 sm:flex-row sm:gap-4">
                     <a href="{{ route('motorcycles') }}"
-                       class="flex items-center justify-center gap-2 rounded-md bg-litus-red px-6 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90">
+                       class="flex items-center justify-center gap-2 rounded-md bg-litus-red px-7 py-3.5 text-base font-bold text-white transition-opacity hover:opacity-90">
                         Explore Motorcycles
-                        <x-litus-icon name="arrow-right" class="h-[15px] w-[15px]" />
+                        <x-litus-icon name="arrow-right" class="h-4 w-4" />
                     </a>
                     <a href="{{ route('ownership-plans') }}"
-                       class="rounded-md border border-white/30 px-6 py-3 text-sm font-bold text-white transition-all hover:border-white/60 hover:bg-white/5">
+                       class="rounded-md border border-white/30 px-7 py-3.5 text-base font-bold text-white transition-all hover:border-white/60 hover:bg-white/5">
                         View Ownership Plans
                     </a>
                 </div>
@@ -92,18 +92,30 @@
 
         {{-- Feature bar --}}
         <div class="relative z-10 border-t border-white/10 bg-black/35 backdrop-blur-sm">
-            <div class="litus-container grid grid-cols-2 gap-6 py-5 sm:grid-cols-4">
-                @foreach ($features as $feature)
-                    <div class="flex items-start gap-3">
-                        <div class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-litus-red/25 bg-litus-red/15">
-                            <x-litus-icon :name="$feature['icon']" class="h-[17px] w-[17px] text-litus-red" />
+            <div class="litus-container">
+                <div class="grid min-h-[120px] grid-cols-1 items-center min-[701px]:grid-cols-2 min-[1100px]:min-h-[130px] min-[1100px]:grid-cols-4">
+                    @foreach ($features as $index => $feature)
+                        <div @class([
+                            'flex items-center gap-3.5 py-8 sm:gap-4 sm:py-9 lg:py-10',
+                            'border-b border-white/10 max-md:border-b' => $index < count($features) - 1,
+                            'max-md:last:border-b-0',
+                            'min-[1100px]:border-r min-[1100px]:border-white/10 min-[1100px]:pr-6' => $index < count($features) - 1,
+                            'min-[1100px]:pl-0' => $index === 0,
+                            'min-[1100px]:pl-6' => $index > 0,
+                            'max-[1100px]:min-[701px]:border-r max-[1100px]:min-[701px]:border-white/10' => in_array($index, [0, 2]),
+                            'max-[1100px]:min-[701px]:border-b max-[1100px]:min-[701px]:border-white/10' => in_array($index, [0, 1]),
+                            'max-[1100px]:min-[701px]:border-r-0' => $index === 1,
+                        ])>
+                            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-litus-red/25 bg-litus-red/15 sm:h-[52px] sm:w-[52px]">
+                                <x-litus-icon :name="$feature['icon']" class="h-5 w-5 text-litus-red sm:h-[22px] sm:w-[22px]" />
+                            </div>
+                            <div class="min-w-0 text-left">
+                                <p class="text-sm font-bold leading-tight text-white sm:text-[15px]">{{ $feature['label'] }}</p>
+                                <p class="mt-1 text-xs leading-snug text-gray-400 sm:text-[13px]">{{ $feature['desc'] }}</p>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-sm font-bold leading-tight text-white">{{ $feature['label'] }}</p>
-                            <p class="mt-0.5 text-xs leading-snug text-gray-400">{{ $feature['desc'] }}</p>
-                        </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>
@@ -174,41 +186,15 @@
 
             <div class="grid grid-cols-1 gap-[22px] min-[721px]:gap-[38px] min-[1101px]:grid-cols-3 max-[1100px]:min-[721px]:grid-cols-2">
                 @foreach ($topRides as $ride)
-                    <div class="group relative min-h-0 overflow-hidden rounded-xl border border-white/12 bg-white/[0.07] px-[22px] pb-7 pt-6 shadow-[0_18px_35px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[rgba(0,101,239,0.55)] hover:shadow-[0_22px_45px_rgba(0,0,0,0.35)] min-[721px]:min-h-[385px] min-[721px]:px-[30px] min-[721px]:pb-7 min-[721px]:pt-6">
-                        <a href="{{ route('motorcycle.show', $ride['slug']) }}"
-                           class="absolute inset-0 z-[1]"
-                           aria-label="View {{ $ride['model'] }}"></a>
-
-                        <div class="pointer-events-none relative z-[2]">
-                            <div class="mb-[18px] flex h-[190px] items-center justify-center min-[721px]:h-[215px]">
-                                <img src="{{ $ride['img'] }}"
-                                     alt="{{ $ride['model'] }}"
-                                     class="h-[185px] w-full max-w-[360px] object-contain drop-shadow-[0_22px_18px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:scale-105 min-[721px]:h-[210px]">
-                            </div>
-
-                            <div>
-                                <h3 class="mb-4 text-[22px] font-black text-white">{{ $ride['model'] }}</h3>
-
-                                <div class="mb-[22px] flex flex-wrap items-center gap-6">
-                                    <div class="flex items-center gap-2 text-[15px] font-extrabold text-[#e7eef8]">
-                                        <x-litus-icon name="gauge" class="h-[17px] w-[17px] text-white" />
-                                        {{ $ride['cc'] }}
-                                    </div>
-                                    <div class="flex items-center gap-2 text-[15px] font-extrabold text-[#e7eef8]">
-                                        <x-litus-icon name="fuel" class="h-[17px] w-[17px] text-white" />
-                                        Capacity {{ $ride['capacity'] }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="relative z-[2]">
-                            <a href="{{ route('motorcycles') }}"
-                               class="inline-flex h-12 w-[170px] items-center justify-center rounded-md border-2 border-[#4d7fcc] bg-transparent text-[15px] font-black text-[#3385ff] transition-colors duration-300 hover:border-[#0065ef] hover:bg-[#0065ef] hover:text-white">
-                                Explore More
-                            </a>
-                        </div>
-                    </div>
+                    <x-card.litus-ride-card
+                        :model="$ride['model']"
+                        :slug="$ride['slug']"
+                        :cc="$ride['cc']"
+                        :capacity="$ride['capacity']"
+                        :img="$ride['img']"
+                        :variant="$ride['variant']"
+                        :badge="$ride['badge']"
+                    />
                 @endforeach
             </div>
 
