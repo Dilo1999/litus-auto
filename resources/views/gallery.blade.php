@@ -5,8 +5,9 @@
 @section('content')
 @php
     $heroBg = asset('images/motorcycles/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
-    $videoUrl = 'https://youtu.be/o8grf3wSwQU';
-    $videoThumb = 'https://images.unsplash.com/photo-1588756681780-9d5859fc2ca0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1000&q=80';
+    $videoId = 'o8grf3wSwQU';
+    $videoEmbedUrl = 'https://www.youtube-nocookie.com/embed/' . $videoId . '?autoplay=1&rel=0';
+    $videoThumb = 'https://img.youtube.com/vi/' . $videoId . '/maxresdefault.jpg';
 
     $catColors = [
         'Motorcycles' => '#E31E25',
@@ -197,82 +198,110 @@
                 <p class="mb-6 text-sm leading-relaxed text-gray-500">
                     Get a closer look at our motorcycles in action. Explore ride reviews, lifestyle journeys, and stories from our riders across the Maldives.
                 </p>
-                <a href="{{ $videoUrl }}"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="mx-auto inline-flex items-center gap-2 rounded-full bg-litus-red px-7 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90 lg:mx-0">
+                <button type="button"
+                        data-gallery-video-play
+                        class="mx-auto inline-flex items-center gap-2 rounded-full bg-litus-red px-7 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90 lg:mx-0">
                     <x-litus-icon name="play" class="h-4 w-4" fill="currentColor" />
                     Watch Video
-                </a>
+                </button>
             </div>
 
             <div class="w-full lg:w-3/5">
-                <a href="{{ $videoUrl }}"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="group relative block cursor-pointer overflow-hidden rounded-2xl bg-gray-900 shadow-2xl">
-                    <img src="{{ $videoThumb }}"
-                         alt="LITUS Ride Experience"
-                         class="h-64 w-full object-cover opacity-80 transition-opacity duration-300 group-hover:opacity-70 lg:h-80">
-                    <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <div class="flex h-20 w-20 items-center justify-center rounded-full bg-litus-red shadow-2xl transition-transform duration-300 group-hover:scale-110">
+                <div class="relative overflow-hidden rounded-2xl bg-gray-900 shadow-2xl"
+                     data-gallery-video
+                     data-video-embed="{{ $videoEmbedUrl }}">
+                    <div class="aspect-video w-full" data-gallery-video-player></div>
+
+                    <button type="button"
+                            data-gallery-video-play
+                            class="group absolute inset-0 flex cursor-pointer flex-col items-center justify-center border-0 bg-transparent p-0 text-left"
+                            aria-label="Play LITUS ride experience video">
+                        <img src="{{ $videoThumb }}"
+                             alt="LITUS Ride Experience"
+                             class="absolute inset-0 h-full w-full object-cover opacity-80 transition-opacity duration-300 group-hover:opacity-70">
+                        <div class="relative z-[1] flex h-20 w-20 items-center justify-center rounded-full bg-litus-red shadow-2xl transition-transform duration-300 group-hover:scale-110">
                             <x-litus-icon name="play" class="ml-1.5 h-7 w-7 text-white" fill="currentColor" />
                         </div>
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[rgba(6,14,28,0.9)] to-transparent px-5 py-4">
-                        <p class="text-sm font-bold text-white">LITUS Automobiles — Latest Launches & Offers 2026</p>
-                        <p class="mt-0.5 text-xs text-gray-400">Watch on YouTube · LITUS Official</p>
-                    </div>
-                </a>
+                        <div class="absolute bottom-0 left-0 right-0 z-[1] bg-gradient-to-t from-[rgba(6,14,28,0.9)] to-transparent px-5 py-4">
+                            <p class="text-sm font-bold text-white">LITUS Automobiles — Latest Launches & Offers 2026</p>
+                            <p class="mt-0.5 text-xs text-gray-400">Watch on YouTube · LITUS Official</p>
+                        </div>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
     {{-- SOCIAL --}}
-    <section class="border border-[#dfe3ea] bg-[#f8f9fb] px-5 py-[35px] max-[520px]:px-3.5 max-[520px]:py-[30px]">
-        <div class="litus-container grid grid-cols-1 items-center gap-7 min-[1151px]:grid-cols-[280px_1fr_260px] max-[1150px]:text-center">
-            <div>
-                <h2 class="mb-4 font-display text-[31px] font-black leading-[1.05] tracking-[-0.7px] text-[#07152f] min-[521px]:text-[38px]">
-                    Follow Our<br>Latest Rides
-                </h2>
-                <p class="max-w-[260px] text-[15px] font-semibold leading-[1.55] text-[#667085] max-[1150px]:mx-auto max-[1150px]:max-w-[520px]">
-                    Stay connected for new arrivals, exclusive offers, showroom updates, and ride moments.
-                </p>
-            </div>
+    <section class="bg-[#f8f9fb] px-5 py-[35px] max-[520px]:px-3.5 max-[520px]:py-[30px]">
+        <div class="litus-container">
+            @php
+                $socialLogo = asset('images/logo/' . rawurlencode('Litus-Automobiles-white (1).png'));
+                $socialLinks = [
+                    ['icon' => 'facebook', 'label' => 'Facebook', 'handle' => '/LITUSAutomobiles', 'href' => '#', 'iconClass' => 'bg-[#1877f2]'],
+                    ['icon' => 'instagram', 'label' => 'Instagram', 'handle' => '@litusautomobiles', 'href' => '#', 'iconClass' => 'bg-gradient-to-br from-[#833ab4] via-[#fd1d1d] to-[#fcb045]'],
+                    ['icon' => 'message-circle', 'label' => 'WhatsApp', 'handle' => '+960 779 7442', 'href' => 'https://wa.me/9607797442', 'iconClass' => 'bg-[#25d366]'],
+                ];
+            @endphp
 
-            <div class="grid grid-cols-1 gap-[18px] min-[801px]:grid-cols-3 max-[800px]:mx-auto max-[800px]:w-full max-[800px]:max-w-[520px]">
-                @foreach ([
-                    ['icon' => 'facebook', 'label' => 'Facebook', 'handle' => '/LITUSAutomobiles', 'iconClass' => 'bg-[#1877f2]'],
-                    ['icon' => 'instagram', 'label' => 'Instagram', 'handle' => '@litusautomobiles', 'iconClass' => 'bg-gradient-to-br from-[#833ab4] via-[#fd1d1d] to-[#fcb045]'],
-                    ['icon' => 'message-circle', 'label' => 'WhatsApp', 'handle' => '+960 779 7442', 'iconClass' => 'bg-[#25d366]'],
-                ] as $social)
-                    <a href="#"
-                       class="group flex min-h-[125px] items-center gap-[22px] rounded-xl border border-[#dfe3ea] bg-white px-7 py-6 shadow-[0_10px_26px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)] max-[520px]:px-[22px]">
-                        <div @class([
-                            'flex h-[58px] w-[58px] shrink-0 items-center justify-center rounded-xl text-white shadow-[0_8px_20px_rgba(0,0,0,0.16)] min-[521px]:h-[66px] min-[521px]:w-[66px]',
-                            $social['iconClass'],
-                        ])>
-                            <x-litus-icon :name="$social['icon']" class="h-7 w-7 min-[521px]:h-8 min-[521px]:w-8" fill="currentColor" />
+            <div class="rounded-[20px] border border-[#e8ecf2] bg-white shadow-[0_12px_40px_rgba(7,21,47,0.08)]">
+                <div class="flex flex-col gap-6 p-5 sm:p-6 min-[1401px]:flex-row min-[1401px]:items-center min-[1401px]:gap-5 min-[1401px]:px-7 min-[1401px]:py-6">
+                    <div class="flex items-center gap-4 min-[1401px]:shrink-0">
+                        <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#07152f] p-3 shadow-[0_8px_20px_rgba(7,21,47,0.18)] min-[1401px]:h-[68px] min-[1401px]:w-[68px] min-[1401px]:p-3.5">
+                            <img src="{{ $socialLogo }}" alt="LITUS Automobiles" class="h-full w-full object-contain">
                         </div>
-                        <div class="text-left">
-                            <h3 class="mb-2 text-lg font-extrabold text-[#07152f]">{{ $social['label'] }}</h3>
-                            <p class="text-sm font-semibold text-[#4f5b6c]">{{ $social['handle'] }}</p>
+                        <div class="hidden h-12 w-px shrink-0 bg-[#dfe3ea] min-[1401px]:block"></div>
+                        <div class="min-w-0">
+                            <h2 class="mb-1 text-[17px] font-black leading-tight text-[#07152f] min-[521px]:text-[19px] min-[1401px]:text-[18px]">
+                                Follow Our Latest Rides
+                            </h2>
+                            <p class="text-[12px] font-semibold leading-snug text-[#667085] min-[521px]:text-[13px] min-[1401px]:max-w-[220px]">
+                                Stay connected for new arrivals, exclusive offers, showroom updates, and ride moments.
+                            </p>
                         </div>
-                    </a>
-                @endforeach
-            </div>
+                    </div>
 
-            <div class="flex flex-col gap-4 max-[1150px]:mx-auto max-[1150px]:w-full max-[1150px]:max-w-[420px]">
-                <a href="#"
-                   class="inline-flex h-[58px] w-full items-center justify-center gap-3 rounded-[9px] border-2 border-litus-red bg-litus-red text-[17px] font-black text-white shadow-[0_10px_24px_rgba(0,101,239,0.25)] transition-all duration-300 hover:-translate-y-[3px] hover:border-[#0052cc] hover:bg-[#0052cc]">
-                    <x-litus-icon name="users" class="h-6 w-6" />
-                    Follow Us
-                </a>
-                <a href="tel:+9607797442"
-                   class="inline-flex h-[58px] w-full items-center justify-center gap-3 rounded-[9px] border-2 border-[#66a3ff] bg-white text-[17px] font-black text-litus-red transition-all duration-300 hover:-translate-y-[3px] hover:border-litus-red hover:bg-litus-red hover:text-white">
-                    <x-litus-icon name="phone" class="h-6 w-6" />
-                    Contact Us
-                </a>
+                    <div class="hidden w-px self-stretch bg-[#dfe3ea] min-[1401px]:block"></div>
+
+                    <div class="flex min-w-0 flex-1 flex-col gap-5 min-[1401px]:flex-row min-[1401px]:items-center min-[1401px]:justify-between min-[1401px]:gap-4">
+                        <div class="grid grid-cols-1 gap-3 min-[601px]:grid-cols-3 min-[1401px]:flex min-[1401px]:min-w-0 min-[1401px]:flex-1 min-[1401px]:items-center min-[1401px]:justify-center min-[1401px]:gap-0">
+                            @foreach ($socialLinks as $index => $social)
+                                @if ($index > 0)
+                                    <div class="hidden h-10 w-px shrink-0 bg-[#dfe3ea] min-[1401px]:block"></div>
+                                @endif
+                                <a href="{{ $social['href'] }}"
+                                   @if (str_starts_with($social['href'], 'http')) target="_blank" rel="noopener noreferrer" @endif
+                                   class="group flex items-center gap-2.5 transition-opacity hover:opacity-80 min-[1401px]:shrink-0 min-[1401px]:px-3">
+                                    <div @class([
+                                        'flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white shadow-[0_6px_16px_rgba(0,0,0,0.14)] min-[521px]:h-11 min-[521px]:w-11',
+                                        $social['iconClass'],
+                                    ])>
+                                        <x-litus-icon :name="$social['icon']" class="h-[18px] w-[18px]" fill="currentColor" />
+                                    </div>
+                                    <div class="min-w-0 text-left">
+                                        <h3 class="text-[13px] font-extrabold text-[#07152f]">{{ $social['label'] }}</h3>
+                                        <p class="text-[11px] font-semibold text-[#667085] min-[1401px]:whitespace-nowrap">{{ $social['handle'] }}</p>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+
+                        <div class="hidden w-px self-stretch bg-[#dfe3ea] min-[1401px]:block"></div>
+
+                        <div class="flex shrink-0 flex-wrap items-center justify-center gap-3 min-[1401px]:justify-end">
+                            <a href="#"
+                               class="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full bg-[#061a45] px-5 text-[13px] font-black text-white shadow-[0_8px_20px_rgba(6,26,69,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0065ef] min-[521px]:h-11 min-[521px]:px-6 min-[521px]:text-sm">
+                                <x-litus-icon name="users" class="h-4 w-4" />
+                                Follow Us
+                            </a>
+                            <a href="{{ route('contact') }}"
+                               class="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full border-2 border-[#66a3ff] bg-white px-5 text-[13px] font-black text-[#0065ef] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[#0065ef] hover:text-white min-[521px]:h-11 min-[521px]:px-6 min-[521px]:text-sm">
+                                <x-litus-icon name="phone" class="h-4 w-4" />
+                                Contact Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

@@ -6,6 +6,16 @@
 @php
     $heroBg = 'https://images.unsplash.com/photo-1558979159-2b18a4070a87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1600&q=80';
     $teamImg = 'https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=800&q=80';
+    $bookingBg = 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=900&q=80';
+
+    $bookingFeatures = [
+        ['icon' => 'headphones', 'title' => 'Expert Support', 'desc' => 'Our team is ready to assist you with the best service.'],
+        ['icon' => 'shield', 'title' => 'Genuine Service', 'desc' => '100% genuine parts and trusted service quality.'],
+        ['icon' => 'clock', 'title' => 'Quick & Easy', 'desc' => 'Book your service in just a few simple steps.'],
+    ];
+
+    $formInputBox = 'flex h-11 items-center gap-3 rounded-lg border border-[#d7dee8] bg-white px-4 transition-all focus-within:border-[#0065ef] focus-within:shadow-[0_0_0_4px_rgba(0,101,239,0.08)]';
+    $formInput = 'h-full w-full border-0 bg-transparent text-sm text-[#07152f] outline-none placeholder-[#747f91]';
 
     $heroFeatures = [
         ['icon' => 'settings', 'title' => 'Periodic Maintenance', 'desc' => 'Scheduled manufacturer services'],
@@ -147,77 +157,124 @@
                 @endforeach
             </div>
 
-            <div id="appointment" class="mx-auto grid max-w-[1080px] grid-cols-1 min-[1051px]:grid-cols-[1fr_1.12fr]">
-                {{-- Support image --}}
-                <div class="relative min-h-[340px] overflow-visible min-[1051px]:min-h-[470px]">
-                    <div class="absolute inset-0 overflow-hidden rounded-[10px] shadow-[0_12px_30px_rgba(0,0,0,0.12)] min-[1051px]:rounded-l-[10px] min-[1051px]:rounded-r-none max-[1050px]:rounded-b-none">
-                        <img src="{{ $teamImg }}"
-                             alt="Service support team"
-                             class="absolute inset-0 h-full w-full object-cover object-center">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[rgba(3,13,31,0.2)] to-transparent"></div>
-                    </div>
-                    <div class="absolute z-[5] flex h-[74px] w-[74px] items-center justify-center rounded-full border-[5px] border-white bg-[#061a45] text-white shadow-[0_10px_25px_rgba(0,0,0,0.25)] max-[1050px]:bottom-[-38px] max-[1050px]:left-1/2 max-[1050px]:top-auto max-[1050px]:-translate-x-1/2 min-[1051px]:right-[-36px] min-[1051px]:top-[43%] min-[1051px]:-translate-y-1/2">
-                        <x-litus-icon name="headphones" class="h-8 w-8" />
+            <div id="appointment"
+                 class="mx-auto grid max-w-[1450px] grid-cols-1 overflow-hidden rounded-[20px] border border-[#07152f]/[0.06] bg-white shadow-[0_24px_70px_rgba(7,21,47,0.12)] min-[1101px]:grid-cols-[0.58fr_1fr] min-[1101px]:rounded-[28px]">
+
+                {{-- Booking info --}}
+                <div class="relative overflow-hidden px-6 py-8 text-white min-[651px]:px-8 min-[651px]:py-9 min-[1101px]:px-10 min-[1101px]:py-10"
+                     style="background-image: linear-gradient(135deg, rgba(3,14,31,0.98), rgba(5,21,45,0.96)), url('{{ $bookingBg }}'); background-size: cover; background-position: center;">
+                    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.08),transparent_25%),linear-gradient(to_bottom,rgba(2,11,25,0.15),rgba(2,11,25,0.95))]"></div>
+                    <div class="pointer-events-none absolute right-8 top-6 h-[120px] w-[120px] opacity-30 max-[700px]:hidden"
+                         style="background-image: radial-gradient(rgba(255,255,255,0.18) 1.5px, transparent 1.5px); background-size: 16px 16px;"></div>
+
+                    <div class="relative z-[2]">
+                        <div class="mb-4 flex items-center gap-2.5 text-xs font-extrabold uppercase tracking-wide min-[651px]:text-sm">
+                            <x-litus-icon name="award" class="h-5 w-5 text-[#0065ef]" />
+                            Book a Service
+                        </div>
+
+                        <h2 class="mb-4 text-[clamp(1.875rem,4vw,2.75rem)] font-black leading-[1.12] tracking-[-0.5px]">
+                            Book an<br>
+                            Appointment
+                            <span class="mt-0.5 block text-[#0065ef]">Now</span>
+                        </h2>
+
+                        <div class="mb-4 h-[3px] w-14 rounded-[10px] bg-[#0065ef]"></div>
+
+                        <p class="mb-6 max-w-[390px] text-sm font-medium leading-snug text-[#dbe2ec] min-[651px]:mb-7 min-[651px]:text-[15px]">
+                            We will contact you right away to confirm your booking.
+                        </p>
+
+                        @foreach ($bookingFeatures as $feature)
+                            <div @class([
+                                'grid max-w-[390px] gap-3 border-b border-white/15 py-3.5 min-[651px]:grid-cols-[52px_1fr] min-[651px]:items-center min-[651px]:gap-4 min-[651px]:py-4',
+                                'border-b-0' => $loop->last,
+                                'text-center min-[651px]:text-left' => true,
+                            ])>
+                                <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#0065ef] text-[#0065ef] min-[651px]:mx-0">
+                                    <x-litus-icon :name="$feature['icon']" class="h-5 w-5" />
+                                </div>
+                                <div>
+                                    <h3 class="mb-1 text-sm font-black min-[651px]:text-base">{{ $feature['title'] }}</h3>
+                                    <p class="text-xs leading-snug text-[#dbe2ec] min-[651px]:text-sm">{{ $feature['desc'] }}</p>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 
                 {{-- Booking form --}}
-                <div class="rounded-[10px] bg-gradient-to-br from-[#061a45] to-[#020b1d] px-[22px] py-[30px] text-white shadow-[0_12px_30px_rgba(0,0,0,0.15)] min-[651px]:px-11 min-[1051px]:rounded-l-none min-[1051px]:rounded-r-[10px] min-[1051px]:py-[35px] max-[1050px]:rounded-t-none">
-                    <span class="mb-2 block text-xs font-black uppercase text-[#0065ef]">Book a Service</span>
-                    <h2 class="mb-2.5 text-2xl font-black leading-tight min-[651px]:text-[28px]">Book an Appointment Now</h2>
-                    <p class="mb-[26px] text-sm font-semibold text-[#c5cedd]">We will contact you right away.</p>
-
-                    <form data-service-appointment-form>
-                        <div class="grid grid-cols-1 gap-0 min-[651px]:grid-cols-2 min-[651px]:gap-[18px]">
-                            <div class="mb-[18px]">
-                                <label class="mb-2 block text-[13px] font-extrabold text-white">Your Name</label>
-                                <input type="text" name="name" placeholder="Enter your name" required
-                                       class="h-[45px] w-full rounded-lg border border-white/30 bg-[rgba(4,17,42,0.7)] px-[15px] text-[13px] text-white placeholder-[#9faabd] outline-none transition-all focus:border-[#0065ef] focus:shadow-[0_0_0_3px_rgba(0,101,239,0.15)]">
-                            </div>
-                            <div class="mb-[18px]">
-                                <label class="mb-2 block text-[13px] font-extrabold text-white">Your Mobile No</label>
-                                <input type="tel" name="mobile" placeholder="Enter mobile number" required
-                                       class="h-[45px] w-full rounded-lg border border-white/30 bg-[rgba(4,17,42,0.7)] px-[15px] text-[13px] text-white placeholder-[#9faabd] outline-none transition-all focus:border-[#0065ef] focus:shadow-[0_0_0_3px_rgba(0,101,239,0.15)]">
+                <div class="bg-white px-6 py-8 min-[651px]:px-8 min-[651px]:py-9 min-[1101px]:px-10 min-[1101px]:py-10">
+                    <form data-service-appointment-form class="grid grid-cols-1 gap-4 min-[651px]:grid-cols-2 min-[651px]:gap-x-6 min-[651px]:gap-y-4">
+                        <div>
+                            <label class="mb-2 block text-sm font-black text-[#101827]">Your Name</label>
+                            <div class="{{ $formInputBox }}">
+                                <x-litus-icon name="users" class="h-5 w-5 shrink-0 text-[#68758a]" />
+                                <input type="text" name="name" placeholder="Enter your name" required class="{{ $formInput }}">
                             </div>
                         </div>
 
-                        <div class="mb-[18px]">
-                            <label class="mb-2 block text-[13px] font-extrabold text-white">Your ID No</label>
-                            <input type="text" name="id_no" placeholder="Enter ID number"
-                                   class="h-[45px] w-full rounded-lg border border-white/30 bg-[rgba(4,17,42,0.7)] px-[15px] text-[13px] text-white placeholder-[#9faabd] outline-none transition-all focus:border-[#0065ef] focus:shadow-[0_0_0_3px_rgba(0,101,239,0.15)]">
+                        <div>
+                            <label class="mb-2 block text-sm font-black text-[#101827]">Your Mobile No</label>
+                            <div class="{{ $formInputBox }}">
+                                <x-litus-icon name="phone" class="h-5 w-5 shrink-0 text-[#68758a]" />
+                                <input type="tel" name="mobile" placeholder="Enter mobile number" required class="{{ $formInput }}">
+                            </div>
                         </div>
-                        <div class="mb-[18px]">
-                            <label class="mb-2 block text-[13px] font-extrabold text-white">Motorcycle Reg No</label>
-                            <input type="text" name="reg_no" placeholder="Enter registration number"
-                                   class="h-[45px] w-full rounded-lg border border-white/30 bg-[rgba(4,17,42,0.7)] px-[15px] text-[13px] text-white placeholder-[#9faabd] outline-none transition-all focus:border-[#0065ef] focus:shadow-[0_0_0_3px_rgba(0,101,239,0.15)]">
+
+                        <div class="min-[651px]:col-span-2">
+                            <label class="mb-2 block text-sm font-black text-[#101827]">Your ID No</label>
+                            <div class="{{ $formInputBox }}">
+                                <x-litus-icon name="credit-card" class="h-5 w-5 shrink-0 text-[#68758a]" />
+                                <input type="text" name="id_no" placeholder="Enter ID number" class="{{ $formInput }}">
+                            </div>
                         </div>
-                        <div class="mb-[18px]">
-                            <label class="mb-2 block text-[13px] font-extrabold text-white">Motorcycle Model</label>
-                            <input type="text" name="model" placeholder="Enter motorcycle model"
-                                   class="h-[45px] w-full rounded-lg border border-white/30 bg-[rgba(4,17,42,0.7)] px-[15px] text-[13px] text-white placeholder-[#9faabd] outline-none transition-all focus:border-[#0065ef] focus:shadow-[0_0_0_3px_rgba(0,101,239,0.15)]">
+
+                        <div class="min-[651px]:col-span-2">
+                            <label class="mb-2 block text-sm font-black text-[#101827]">Motorcycle Reg No</label>
+                            <div class="{{ $formInputBox }}">
+                                <x-litus-icon name="bike" class="h-5 w-5 shrink-0 text-[#68758a]" />
+                                <input type="text" name="reg_no" placeholder="Enter registration number" class="{{ $formInput }}">
+                            </div>
                         </div>
-                        <div class="mb-[18px]">
-                            <label class="mb-2 block text-[13px] font-extrabold text-white">Booking Date</label>
-                            <input type="date" name="date"
-                                   class="h-[45px] w-full cursor-pointer rounded-lg border border-white/30 bg-[rgba(4,17,42,0.7)] px-[15px] text-[13px] text-white outline-none transition-all focus:border-[#0065ef] focus:shadow-[0_0_0_3px_rgba(0,101,239,0.15)] [color-scheme:dark]">
+
+                        <div class="min-[651px]:col-span-2">
+                            <label class="mb-2 block text-sm font-black text-[#101827]">Motorcycle Model</label>
+                            <div class="{{ $formInputBox }}">
+                                <x-litus-icon name="bike" class="h-5 w-5 shrink-0 text-[#68758a]" />
+                                <input type="text" name="model" placeholder="Enter motorcycle model" class="{{ $formInput }}">
+                            </div>
+                        </div>
+
+                        <div class="min-[651px]:col-span-2">
+                            <label class="mb-2 block text-sm font-black text-[#101827]">Booking Date</label>
+                            <div class="{{ $formInputBox }}">
+                                <x-litus-icon name="calendar" class="h-5 w-5 shrink-0 text-[#68758a]" />
+                                <input type="date" name="date" class="{{ $formInput }} cursor-pointer">
+                                <x-litus-icon name="calendar" class="h-5 w-5 shrink-0 text-[#68758a]" />
+                            </div>
                         </div>
 
                         <button type="submit"
-                                class="mt-2.5 flex h-[55px] w-full items-center justify-center gap-2 rounded-md bg-[#0065ef] text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc]">
+                                class="flex h-12 min-[651px]:col-span-2 items-center justify-center gap-3 rounded-lg bg-[#0065ef] text-sm font-black text-white shadow-[0_10px_24px_rgba(0,101,239,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc]">
                             Submit Appointment
                             <x-litus-icon name="arrow-right" class="h-4 w-4" />
                         </button>
-                        <p class="mt-3 text-center text-xs text-[#9faabd]">Our service team will confirm your booking within 24 hours.</p>
+
+                        <p class="flex items-center justify-center gap-2 text-center text-xs font-medium text-[#5f6b7d] min-[651px]:col-span-2 min-[651px]:text-sm">
+                            <x-litus-icon name="shield" class="h-4 w-4 shrink-0 text-[#0065ef]" />
+                            Our service team will confirm your booking within 24 hours.
+                        </p>
                     </form>
 
-                    <div data-service-appointment-success class="hidden py-8 text-center">
-                        <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#0065ef]/15">
-                            <x-litus-icon name="check-circle" class="h-7 w-7 text-[#0065ef]" />
+                    <div data-service-appointment-success class="hidden py-8 text-center min-[651px]:py-10">
+                        <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#0065ef]/10">
+                            <x-litus-icon name="check-circle" class="h-8 w-8 text-[#0065ef]" />
                         </div>
-                        <h3 class="mb-2 text-xl font-black text-white">Appointment Submitted!</h3>
-                        <p class="mb-6 text-sm text-[#c5cedd]">Our service team will contact you within 24 hours to confirm your booking.</p>
+                        <h3 class="mb-3 text-2xl font-black text-[#07152f]">Appointment Submitted!</h3>
+                        <p class="mx-auto mb-8 max-w-md text-base text-[#5f6b7d]">Our service team will contact you within 24 hours to confirm your booking.</p>
                         <button type="button" data-service-appointment-reset
-                                class="rounded-md border border-white/30 px-6 py-2.5 text-sm font-bold text-white transition-all hover:border-white/60 hover:bg-white/5">
+                                class="inline-flex h-12 items-center justify-center rounded-lg border-2 border-[#0065ef] px-8 text-sm font-black text-[#0065ef] transition-all hover:bg-[#0065ef] hover:text-white">
                             Submit Another Request
                         </button>
                     </div>
@@ -228,39 +285,48 @@
     </section>
 
     {{-- SERVICE PROGRAMS --}}
-    <section id="service-programs" class="border border-[#dfe3ea] bg-white px-5 py-6 pb-10 max-sm:px-3.5 max-sm:py-7 max-sm:pb-9">
-        <div class="litus-container">
+    <section id="service-programs"
+             class="relative overflow-hidden border border-[#dfe3ea] bg-[radial-gradient(circle_at_left_42%,rgba(0,102,255,0.08),transparent_18%),radial-gradient(circle_at_right_78%,rgba(0,102,255,0.06),transparent_18%),#f8fafc] px-5 py-8 pb-10 max-sm:px-3.5 max-sm:py-7 max-sm:pb-9">
+        <div class="pointer-events-none absolute left-0 top-[200px] h-[200px] w-[150px] opacity-40 max-sm:hidden"
+             style="background-image: radial-gradient(rgba(0,102,255,0.22) 2px, transparent 2px); background-size: 18px 18px;"></div>
+        <div class="pointer-events-none absolute bottom-16 right-0 h-[180px] w-[170px] opacity-40 max-sm:hidden"
+             style="background-image: radial-gradient(rgba(0,102,255,0.18) 2px, transparent 2px); background-size: 18px 18px;"></div>
 
+        <div class="litus-container relative z-[2] max-w-[1420px]">
             <div class="mb-7 text-center">
-                <span class="mb-2 block text-sm font-black uppercase tracking-wide text-[#0065ef]">Our Service Programs</span>
-                <h2 class="text-[25px] font-black leading-tight tracking-tight text-[#07152f] min-[601px]:text-[30px] min-[901px]:text-4xl">
+                <span class="mb-3 inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[3px] text-[#0065ef] min-[651px]:gap-5 min-[651px]:text-xs min-[651px]:tracking-[5px]">
+                    <span class="h-0.5 w-6 bg-[#0065ef]"></span>
+                    Our Service Programs
+                    <span class="h-0.5 w-6 bg-[#0065ef]"></span>
+                </span>
+                <h2 class="mb-3 text-[clamp(1.75rem,3.5vw,2.75rem)] font-black leading-[1.12] tracking-[-0.8px] text-[#07152f]">
                     Understand the Right Service for Your Motorcycle
                 </h2>
+                <p class="mx-auto max-w-2xl text-sm font-medium leading-relaxed text-[#667085] min-[651px]:text-base">
+                    Choose the right service at the right time to keep your motorcycle running at its best.
+                </p>
             </div>
 
-            <div class="overflow-hidden rounded-[14px] border border-[#dfe3ea] bg-white shadow-[0_10px_28px_rgba(0,0,0,0.06)]">
-                @foreach ($servicePrograms as $index => $program)
-                    <div @class([
-                             'group grid min-h-[112px] items-center gap-[18px] bg-white transition-colors duration-300 hover:bg-[#fbfbfc]',
-                             'grid-cols-1 px-[18px] py-6 text-center max-[600px]:gap-3.5',
-                             'min-[601px]:grid-cols-[90px_1fr_40px] min-[601px]:px-[18px] min-[601px]:py-[18px] min-[601px]:text-left',
-                             'min-[901px]:grid-cols-[115px_1fr_55px] min-[901px]:px-7 min-[901px]:py-[18px]',
-                             'border-b border-[#e2e6ec]' => $index < count($servicePrograms) - 1,
-                         ])>
-                        <div class="mx-auto flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[#f0f0f0] text-[#07152f] min-[901px]:h-[74px] min-[901px]:w-[74px]">
-                            <x-litus-icon :name="$program['icon']" class="h-8 w-8 min-[901px]:h-9 min-[901px]:w-9" />
+            <div class="flex flex-col gap-2">
+                @foreach ($servicePrograms as $program)
+                    <div class="group relative grid min-h-[100px] grid-cols-1 items-center gap-3 overflow-hidden rounded-xl border border-[#e3e8f0] bg-white px-4 py-5 text-center shadow-[0_8px_24px_rgba(7,21,47,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(7,21,47,0.08)] min-[651px]:grid-cols-[96px_1fr] min-[651px]:gap-4 min-[651px]:px-4 min-[651px]:py-4 min-[651px]:text-left min-[901px]:grid-cols-[120px_1fr] min-[901px]:gap-4 min-[901px]:px-6 min-[901px]:py-4">
+                        <div class="absolute left-0 top-0 h-full w-1 rounded-l-xl bg-[#0065ef]"></div>
+
+                        <div class="mx-auto flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-2xl bg-[#f2f6fb] min-[651px]:ml-2 min-[901px]:h-[84px] min-[901px]:w-[84px]">
+                            <div class="relative flex h-11 w-11 items-center justify-center rounded-full border border-dashed border-[#0065ef]/65 text-[#0065ef] min-[901px]:h-[58px] min-[901px]:w-[58px]">
+                                <span class="absolute right-2.5 top-0 h-1 w-1 rounded-full bg-[#0065ef]"></span>
+                                <span class="absolute bottom-0 left-3.5 h-1 w-1 rounded-full bg-[#0065ef]"></span>
+                                <x-litus-icon :name="$program['icon']" class="h-5 w-5 min-[901px]:h-6 min-[901px]:w-6" />
+                            </div>
                         </div>
 
-                        <div>
-                            <h3 class="mb-2 text-xl font-black text-[#111b46] min-[901px]:text-[22px]">{{ $program['title'] }}</h3>
-                            <p class="mx-auto max-w-[1120px] text-sm font-semibold leading-snug text-[#4d5869] min-[901px]:text-[15px]">{{ $program['text'] }}</p>
+                        <div class="min-w-0">
+                            <h3 class="mb-1.5 text-lg font-black text-[#07152f] min-[901px]:text-xl">{{ $program['title'] }}</h3>
+                            <p class="mx-auto max-w-[1040px] text-[13px] font-medium leading-snug text-[#344054] min-[651px]:mx-0 min-[901px]:text-sm min-[901px]:leading-relaxed">{{ $program['text'] }}</p>
                         </div>
-
-                        <span class="text-center text-[28px] font-normal text-[#0065ef] transition-transform duration-300 group-hover:translate-x-1.5 min-[901px]:text-4xl" aria-hidden="true">›</span>
                     </div>
                 @endforeach
             </div>
-
         </div>
     </section>
 
@@ -287,15 +353,15 @@
 
     {{-- CTA BAND --}}
     <section class="bg-litus-navy py-14">
-        <div class="litus-container flex max-w-5xl flex-col items-center gap-8 lg:flex-row lg:gap-16">
-            <div class="flex-1 text-center lg:text-left">
+        <div class="litus-container flex flex-col items-center justify-between gap-8 lg:flex-row lg:items-center lg:gap-12">
+            <div class="min-w-0 flex-1 text-center lg:text-left">
                 <h2 class="mb-3 font-display text-3xl font-black text-white lg:text-4xl">
                     Need Motorcycle<br>
                     <span class="text-litus-red">Service Support?</span>
                 </h2>
-                <p class="leading-relaxed text-gray-400">Our team is ready to help you book maintenance, repairs, inspections, or service guidance.</p>
+                <p class="max-w-xl leading-relaxed text-gray-400 lg:max-w-2xl">Our team is ready to help you book maintenance, repairs, inspections, or service guidance.</p>
             </div>
-            <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
+            <div class="flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row lg:justify-end">
                 <a href="#appointment"
                    class="rounded-full bg-litus-red px-8 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90">
                     Book Now

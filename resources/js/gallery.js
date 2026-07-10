@@ -177,6 +177,35 @@ function initGalleryPage() {
         root.querySelector('#gallery-grid-section')?.scrollIntoView({ behavior: 'smooth' });
     });
 
+    const videoWrap = root.querySelector('[data-gallery-video]');
+    const videoPlayer = root.querySelector('[data-gallery-video-player]');
+    const videoPlayButtons = root.querySelectorAll('[data-gallery-video-play]');
+    let videoPlaying = false;
+
+    const playGalleryVideo = () => {
+        if (!videoWrap || !videoPlayer || videoPlaying) return;
+
+        const embedUrl = videoWrap.dataset.videoEmbed;
+        if (!embedUrl) return;
+
+        videoPlaying = true;
+        videoWrap.querySelector('[data-gallery-video-play]')?.remove();
+
+        videoPlayer.innerHTML = `
+            <iframe src="${embedUrl}"
+                    title="LITUS Ride Experience"
+                    class="h-full w-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+        `;
+
+        videoWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+
+    videoPlayButtons.forEach((btn) => {
+        btn.addEventListener('click', playGalleryVideo);
+    });
+
     renderGrid();
     renderMoments();
 }

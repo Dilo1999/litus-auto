@@ -197,9 +197,9 @@
     <section class="bg-[#f8f8f8] py-6 pb-11 max-sm:pb-9" id="contact-form">
         <div class="litus-container">
 
-            <div class="mb-6 grid grid-cols-1 gap-5 max-lg:grid-cols-1 lg:mb-[25px] lg:grid-cols-[1fr_1.05fr] lg:gap-5">
+            <div class="mb-6 grid grid-cols-1 gap-5 lg:mb-[25px] lg:grid-cols-2 lg:items-stretch lg:gap-5">
                 {{-- Message form --}}
-                <div class="overflow-hidden rounded-[10px] bg-gradient-to-br from-[#06152d] to-[#010a18] p-7 text-white shadow-[0_12px_30px_rgba(0,0,0,0.08)] max-sm:p-[22px]">
+                <div class="flex h-full flex-col overflow-hidden rounded-[10px] bg-gradient-to-br from-[#06152d] to-[#010a18] p-7 text-white shadow-[0_12px_30px_rgba(0,0,0,0.08)] max-sm:p-[22px]">
                     <h2 class="mb-2.5 text-2xl font-black">Send Us a Message</h2>
                     <p class="mb-6 text-sm text-[#b9c3d0]">Fill out the form and our team will contact you shortly.</p>
 
@@ -212,7 +212,7 @@
                         <button type="button" data-contact-reset class="mt-5 text-sm font-bold text-[#0065ef] underline">Send another message</button>
                     </div>
 
-                    <form data-contact-form action="#" method="post">
+                    <form data-contact-form action="#" method="post" class="flex flex-1 flex-col">
                         @csrf
                         <div class="mb-[18px] grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 max-sm:gap-0">
                             <div class="mb-[18px] sm:mb-0">
@@ -257,15 +257,15 @@
                 </div>
 
                 {{-- Map --}}
-                <div class="overflow-hidden rounded-[10px] bg-white p-2.5 shadow-[0_12px_30px_rgba(0,0,0,0.08)]">
-                    <div class="h-[300px] overflow-hidden rounded-md bg-[#dde5ef] max-sm:h-[300px] lg:h-[390px]">
+                <div class="flex h-full min-h-0 flex-col overflow-hidden rounded-[10px] bg-white p-2.5 shadow-[0_12px_30px_rgba(0,0,0,0.08)]">
+                    <div class="min-h-[300px] flex-1 overflow-hidden rounded-md bg-[#dde5ef]">
                         <iframe title="LITUS Group Head Office"
                                 src="{{ $mapsEmbedUrl }}"
-                                class="block h-full w-full border-0"
+                                class="block h-full min-h-[300px] w-full border-0"
                                 loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
-                    <div class="rounded-b-[7px] bg-gradient-to-br from-[#06152d] to-[#010a18] p-[18px] text-center">
+                    <div class="shrink-0 rounded-b-[7px] bg-gradient-to-br from-[#06152d] to-[#010a18] p-[18px] text-center">
                         <a href="{{ $mapsLinkUrl }}"
                            target="_blank"
                            rel="noopener noreferrer"
