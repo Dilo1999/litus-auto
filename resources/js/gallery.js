@@ -114,14 +114,6 @@ function initGalleryPage() {
         if (!momentsGrid) return;
 
         if (activeMomentCat === 'Videos') {
-            momentsGrid.innerHTML = `
-                <div class="col-span-full rounded-[10px] border border-[#dfe3ea] bg-white px-6 py-10 text-center shadow-[0_10px_26px_rgba(0,0,0,0.06)]">
-                    <p class="mb-4 text-base font-semibold text-[#667085]">Watch our latest ride videos and launch highlights.</p>
-                    <a href="#gallery-video" class="inline-flex h-12 items-center justify-center rounded-[9px] bg-litus-red px-8 text-sm font-extrabold text-white transition-opacity hover:opacity-90">
-                        Go to Video Gallery
-                    </a>
-                </div>
-            `;
             return;
         }
 
@@ -144,6 +136,33 @@ function initGalleryPage() {
         });
     };
 
+    const videoWrap = root.querySelector('[data-gallery-video]');
+    const videoPlayer = root.querySelector('[data-gallery-video-player]');
+    const videoSection = root.querySelector('#gallery-video');
+    let videoPlaying = false;
+
+    const playGalleryVideo = ({ scroll = false } = {}) => {
+        if (scroll) {
+            videoSection?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        if (!videoWrap || !videoPlayer || videoPlaying) return;
+
+        const embedUrl = videoWrap.dataset.videoEmbed;
+        if (!embedUrl) return;
+
+        videoPlaying = true;
+        videoWrap.querySelectorAll('[data-gallery-video-play]').forEach((btn) => btn.remove());
+
+        videoPlayer.innerHTML = `
+            <iframe src="${embedUrl}"
+                    title="LITUS Ride Experience"
+                    class="h-full w-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+        `;
+    };
+
     root.querySelectorAll('[data-gallery-moment-cat]').forEach((btn) => {
         btn.addEventListener('click', () => {
             activeMomentCat = btn.dataset.galleryMomentCat;
@@ -156,6 +175,12 @@ function initGalleryPage() {
                 b.classList.toggle('bg-white', !active);
                 b.classList.toggle('text-[#1a2554]', !active);
             });
+
+            if (activeMomentCat === 'Videos') {
+                playGalleryVideo({ scroll: true });
+                return;
+            }
+
             renderMoments();
         });
     });
@@ -175,33 +200,8 @@ function initGalleryPage() {
         root.querySelector('#gallery-grid-section')?.scrollIntoView({ behavior: 'smooth' });
     });
 
-    const videoWrap = root.querySelector('[data-gallery-video]');
-    const videoPlayer = root.querySelector('[data-gallery-video-player]');
-    const videoPlayButtons = root.querySelectorAll('[data-gallery-video-play]');
-    let videoPlaying = false;
-
-    const playGalleryVideo = () => {
-        if (!videoWrap || !videoPlayer || videoPlaying) return;
-
-        const embedUrl = videoWrap.dataset.videoEmbed;
-        if (!embedUrl) return;
-
-        videoPlaying = true;
-        videoWrap.querySelector('[data-gallery-video-play]')?.remove();
-
-        videoPlayer.innerHTML = `
-            <iframe src="${embedUrl}"
-                    title="LITUS Ride Experience"
-                    class="h-full w-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen></iframe>
-        `;
-
-        videoWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    };
-
-    videoPlayButtons.forEach((btn) => {
-        btn.addEventListener('click', playGalleryVideo);
+    root.querySelectorAll('[data-gallery-video-play]').forEach((btn) => {
+        btn.addEventListener('click', () => playGalleryVideo({ scroll: false }));
     });
 
     renderGrid();
