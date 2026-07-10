@@ -44,7 +44,7 @@ class HomeController extends Controller
             ->featured()
             ->ofCategory(GalleryImage::CATEGORY_MOTORCYCLES)
             ->ordered()
-            ->limit(4)
+            ->limit(8)
             ->get()
             ->map(fn (GalleryImage $image) => [
                 'src' => $image->imageUrl(),

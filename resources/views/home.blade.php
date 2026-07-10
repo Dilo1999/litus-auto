@@ -12,19 +12,19 @@
         [
             'title' => 'Application Made Easy',
             'icon' => 'check-circle',
-            'img' => 'https://images.unsplash.com/photo-1558979159-2b18a4070a87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80',
+            'img' => asset('images/homepage/' . rawurlencode('Application Made Easy.webp')),
             'text' => 'LITUS Automobiles simplifies the process of leasing a motorcycle by eliminating bureaucracy. A simple ID card is required for verification and applications can be made via social media platforms. Customers can choose from upfront or installment options.',
         ],
         [
             'title' => 'Genuine Parts',
             'icon' => 'package',
-            'img' => 'https://images.unsplash.com/photo-1582092722992-b2f960bafbfb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80',
+            'img' => asset('images/homepage/' . rawurlencode('Genuine Parts.webp')),
             'text' => 'LITUS Automobiles provides genuine parts to take care of your beloved motorbike for durability and performance quality. Visit our Service Center for professional service.',
         ],
         [
             'title' => 'Reliable Service',
             'icon' => 'wrench',
-            'img' => 'https://images.unsplash.com/photo-1550149550-33b46c745e03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80',
+            'img' => asset('images/homepage/' . rawurlencode('Reliable Service.webp')),
             'text' => 'LITUS Automobiles provides dependable motorcycle servicing at our Service Centers staffed with experienced mechanics and state-of-the-art tools and equipment. Our team aims to offer premium and reliable service to all customers.',
         ],
     ];
@@ -225,33 +225,53 @@
         </div>
 
         {{-- Services --}}
-        <div class="border-t border-[#e3e6eb] bg-white py-12 sm:py-16 lg:py-20">
-            <div class="litus-container">
+        <div class="relative overflow-hidden border-t border-[#e3e6eb] py-10 sm:py-12 lg:py-14"
+             style="background: radial-gradient(circle at left 25%, rgba(0,101,239,0.06), transparent 22%), radial-gradient(circle at right 72%, rgba(0,101,239,0.05), transparent 22%), linear-gradient(135deg, #ffffff 0%, #f6f9fd 55%, #ffffff 100%);">
+            <div class="pointer-events-none absolute left-0 top-28 h-[180px] w-[140px] opacity-40"
+                 style="background-image: radial-gradient(rgba(0,101,239,0.18) 2px, transparent 2px); background-size: 18px 18px;"></div>
+            <div class="pointer-events-none absolute -right-[100px] bottom-6 h-[240px] w-[240px]"
+                 style="background: linear-gradient(135deg, transparent 0 35%, rgba(7,21,47,0.035) 35% 47%, transparent 47%), linear-gradient(135deg, transparent 0 55%, rgba(7,21,47,0.035) 55% 68%, transparent 68%);"></div>
 
-                <div class="mb-[18px] text-center">
-                    <span class="mb-1.5 block text-xs font-black uppercase text-[#0065ef]">Our Services</span>
-                    <h2 class="text-[27px] font-black leading-tight tracking-[-0.5px] text-[#07152f] min-[601px]:text-[32px]">What We Offer at LITUS</h2>
+            <div class="relative z-[2] litus-container">
+                <div class="mb-7 text-center min-[651px]:mb-8">
+                    <div class="mb-2.5 inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.24em] text-[#0065ef] min-[651px]:gap-4 min-[651px]:text-xs min-[651px]:tracking-[0.28em]">
+                        <span class="inline-block h-0.5 w-3 bg-[#0065ef] min-[651px]:w-6"></span>
+                        Our Services
+                        <span class="inline-block h-0.5 w-3 bg-[#0065ef] min-[651px]:w-6"></span>
+                    </div>
+                    <h2 class="mb-2 text-[28px] font-black leading-tight tracking-[-0.6px] text-[#07152f] min-[651px]:text-[34px]">
+                        What We Offer at LITUS
+                    </h2>
+                    <p class="mx-auto max-w-[640px] text-sm font-medium leading-normal text-[#667085] min-[651px]:text-[15px]">
+                        Quality service, genuine parts, and customer satisfaction — that’s the LITUS promise.
+                    </p>
                 </div>
 
-                <div class="grid grid-cols-1 gap-[26px] max-[950px]:mx-auto max-[950px]:max-w-[650px] min-[951px]:grid-cols-3">
+                <div class="mx-auto grid max-w-[560px] grid-cols-1 gap-5 min-[1101px]:max-w-none min-[1101px]:grid-cols-3">
                     @foreach ($services as $service)
-                        <div class="overflow-hidden rounded-[11px] border border-[#dfe3ea] bg-white shadow-[0_10px_26px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(0,0,0,0.12)]">
-                            <div class="relative h-[155px] overflow-hidden bg-[#dfe5ec] min-[601px]:h-[170px]">
+                        <article class="group relative overflow-hidden rounded-xl border border-[rgba(7,21,47,0.05)] bg-white shadow-[0_12px_28px_rgba(7,21,47,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(7,21,47,0.11)] min-[1101px]:min-h-[520px]">
+                            <div class="relative h-[200px] overflow-hidden bg-[#dce3ed] min-[651px]:h-[230px]">
                                 <img src="{{ $service['img'] }}"
                                      alt="{{ $service['title'] }}"
-                                     class="block h-full w-full object-cover">
-                                <div class="absolute left-5 top-[18px] flex h-[50px] w-[50px] items-center justify-center rounded-full bg-white text-[#0065ef] shadow-[0_8px_18px_rgba(0,0,0,0.15)]">
-                                    <x-litus-icon :name="$service['icon']" class="h-6 w-6" />
-                                </div>
+                                     class="block h-full w-full object-cover transition-transform duration-[450ms] ease-out group-hover:scale-105"
+                                     loading="lazy">
+                                <div class="pointer-events-none absolute -bottom-9 -left-[8%] -right-[8%] z-[2] h-[84px] rounded-t-[50%] bg-white"></div>
                             </div>
-                            <div class="px-[22px] pb-6 pt-[18px]">
-                                <h3 class="mb-3 text-[17px] font-black text-[#111b46]">{{ $service['title'] }}</h3>
-                                <p class="text-[13.5px] font-semibold leading-snug text-[#344052]">{{ $service['text'] }}</p>
+
+                            <div class="absolute left-1/2 top-[168px] z-[5] flex h-[64px] w-[64px] -translate-x-1/2 items-center justify-center rounded-full bg-white text-[#0065ef] shadow-[0_10px_22px_rgba(7,21,47,0.12)] min-[651px]:top-[196px] min-[651px]:h-[70px] min-[651px]:w-[70px]">
+                                <x-litus-icon :name="$service['icon']" class="h-8 w-8 min-[651px]:h-9 min-[651px]:w-9" />
                             </div>
-                        </div>
+
+                            <div class="px-5 pb-7 pt-14 text-center min-[651px]:px-7 min-[651px]:pb-8 min-[651px]:pt-16">
+                                <h3 class="mb-2.5 text-lg font-black leading-tight text-[#07152f] min-[651px]:text-[20px]">{{ $service['title'] }}</h3>
+                                <div class="mx-auto mb-3.5 h-0.5 w-9 rounded-full bg-[#0065ef]"></div>
+                                <p class="text-left text-[13px] font-medium leading-snug text-[#344054] max-[650px]:text-center min-[651px]:text-[13.5px] min-[651px]:leading-[1.55]">
+                                    {{ $service['text'] }}
+                                </p>
+                            </div>
+                        </article>
                     @endforeach
                 </div>
-
             </div>
         </div>
 
@@ -281,48 +301,59 @@
     </section>
 
     {{-- GALLERY --}}
-    <section class="relative overflow-hidden border border-[#dfe3ea] py-12 sm:py-16 lg:py-20"
-             style="background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), radial-gradient(circle at 15% 35%, rgba(7,21,47,0.08), transparent 28%);">
-        <div class="pointer-events-none absolute inset-0 opacity-35"
-             style="background-image: linear-gradient(30deg, rgba(7,21,47,0.035) 12%, transparent 12.5%, transparent 87%, rgba(7,21,47,0.035) 87.5%), linear-gradient(150deg, rgba(7,21,47,0.035) 12%, transparent 12.5%, transparent 87%, rgba(7,21,47,0.035) 87.5%); background-size: 55px 95px;"></div>
+    <section class="relative overflow-hidden bg-[#f4f6f9] py-12 sm:py-16 lg:py-20"
+             data-home-gallery>
+        <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0065ef]/35 to-transparent"></div>
 
-        <div class="relative z-[2] litus-container">
-            <div class="mb-[22px] flex flex-col items-start justify-between gap-5 min-[651px]:flex-row">
-                <div>
-                    <span class="mb-1 block text-[15px] font-black uppercase tracking-wide text-[#0065ef]">Our Gallery</span>
+        <div class="litus-container">
+            <div class="mb-8 flex flex-col items-start justify-between gap-5 min-[651px]:mb-10 min-[651px]:flex-row min-[651px]:items-end">
+                <div class="max-w-[560px]">
+                    <span class="mb-1.5 block text-[13px] font-black uppercase tracking-[0.14em] text-[#0065ef]">Our Gallery</span>
                     <h2 class="mb-2.5 text-[30px] font-black leading-tight tracking-[-0.6px] text-[#07152f] min-[651px]:text-[38px]">Ride the Visual Journey</h2>
                     <p class="text-sm font-semibold leading-normal text-[#4f5b6c] min-[651px]:text-[15px]">
                         Explore our collection of motorcycle rides and lifestyle moments.
                     </p>
                 </div>
                 <a href="{{ route('gallery') }}"
-                   class="group/viewgallery inline-flex items-center gap-2.5 text-[15px] font-black text-[#07152f] transition-all duration-300 hover:gap-4 hover:text-[#0065ef] min-[651px]:mt-[52px]">
+                   class="group/viewgallery inline-flex items-center gap-2.5 text-[15px] font-black text-[#07152f] transition-all duration-300 hover:gap-4 hover:text-[#0065ef]">
                     View Gallery
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
             </div>
 
-            <div class="relative min-[1101px]:px-10">
+            <div class="relative">
                 <button type="button"
-                        class="absolute left-0 top-1/2 z-[5] hidden h-[54px] w-[54px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#0065ef] hover:text-white min-[1101px]:flex"
+                        data-home-gallery-prev
+                        class="absolute -left-3 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#dfe3ea] bg-white text-[#07152f] shadow-[0_8px_20px_rgba(7,21,47,0.12)] transition-all duration-300 hover:border-[#0065ef] hover:bg-[#0065ef] hover:text-white min-[1101px]:-left-5 min-[1101px]:flex"
                         aria-label="Previous gallery images">
-                    <x-litus-icon name="chevron-left" class="h-6 w-6" />
+                    <x-litus-icon name="chevron-left" class="h-5 w-5" />
                 </button>
                 <button type="button"
-                        class="absolute right-0 top-1/2 z-[5] hidden h-[54px] w-[54px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#0065ef] hover:text-white min-[1101px]:flex"
+                        data-home-gallery-next
+                        class="absolute -right-3 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#dfe3ea] bg-white text-[#07152f] shadow-[0_8px_20px_rgba(7,21,47,0.12)] transition-all duration-300 hover:border-[#0065ef] hover:bg-[#0065ef] hover:text-white min-[1101px]:-right-5 min-[1101px]:flex"
                         aria-label="Next gallery images">
-                    <x-litus-icon name="chevron-right" class="h-6 w-6" />
+                    <x-litus-icon name="chevron-right" class="h-5 w-5" />
                 </button>
 
-                <div class="grid grid-cols-1 gap-3 min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4">
-                    @foreach ($galleryImages as $image)
-                        <div class="group relative h-[210px] overflow-hidden rounded-xl border border-[#dfe3ea] bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.12)] min-[1101px]:h-[185px] max-[1100px]:min-[651px]:h-[220px]">
+                <div class="-mx-1 flex gap-3 overflow-x-auto px-1 pb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-[1101px]:gap-4"
+                     data-home-gallery-track>
+                    @forelse ($galleryImages as $image)
+                        <a href="{{ route('gallery') }}"
+                           class="group relative aspect-[4/5] w-[78%] shrink-0 snap-start overflow-hidden rounded-2xl bg-[#0b1528] shadow-[0_14px_36px_rgba(7,21,47,0.14)] transition-transform duration-300 hover:-translate-y-1 min-[651px]:w-[46%] min-[1101px]:w-[calc((100%-3rem)/4)]">
                             <img src="{{ $image['src'] }}"
                                  alt="{{ $image['alt'] }}"
-                                 class="block h-full w-full object-cover transition-transform duration-400 group-hover:scale-[1.07]">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/[0.18] to-black/[0.02] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                                 class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                                 loading="lazy">
+                            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#07152f]/55 via-transparent to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-90"></div>
+                            <span class="pointer-events-none absolute bottom-4 left-4 right-4 translate-y-1 text-[13px] font-bold text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                                View in gallery
+                            </span>
+                        </a>
+                    @empty
+                        <div class="flex h-[280px] w-full items-center justify-center rounded-2xl border border-dashed border-[#cfd6e0] bg-white text-sm font-semibold text-[#6b7788]">
+                            Gallery images coming soon.
                         </div>
-                    @endforeach
+                    @endforelse
                 </div>
             </div>
         </div>
