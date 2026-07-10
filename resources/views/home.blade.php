@@ -137,7 +137,7 @@
                     <x-litus-icon name="chevron-right" class="h-6 w-6" />
                 </button>
 
-                <div class="grid grid-cols-1 gap-[18px] min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4">
+                <div class="grid grid-cols-1 gap-x-7 gap-y-6 min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4">
                     @forelse ($promoMotorcycles as $motorcycle)
                         <x-card.promotion-card :motorcycle="$motorcycle" />
                     @empty
