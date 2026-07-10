@@ -30,6 +30,8 @@
 
     $partCategoryOptions = ['Body Covers', 'Engine Components', 'Braking Systems', 'Electrical and Ignition', 'Chassis and Suspension', 'Wheels and Tires'];
 
+    $motorcycleBrands = ['Honda', 'Yamaha', 'Suzuki', 'Piaggio', 'Other'];
+
     $heroFeatures = [
         ['icon' => 'shield', 'title' => 'Genuine Components', 'desc' => '100% authentic parts.'],
         ['icon' => 'settings', 'title' => 'Quality Checked', 'desc' => 'Tested for safety & durability.'],
@@ -66,7 +68,7 @@
 
                 <p class="mb-6 max-w-[620px] text-base font-medium leading-[1.5] text-[#e6edf5] sm:text-lg sm:leading-[1.55] max-md:text-[17px]">
                     Explore a wide range of genuine motorcycle parts built for quality,
-                    reliability, safety, and performance — engineered to keep your ride
+                    reliability, safety, and performance - engineered to keep your ride
                     at its best.
                 </p>
 
@@ -208,13 +210,28 @@
                     <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
                         <div>
                             <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-gray-300">Motorcycle Brand</label>
-                            <div class="relative">
-                                <select name="brand" class="w-full cursor-pointer appearance-none rounded-xl border border-white/15 bg-white/10 px-4 py-3 pr-9 text-sm text-white outline-none transition-all focus:border-blue-400 focus:ring-2 focus:ring-blue-500/20">
-                                    <option value="" disabled selected>Select a Brand</option>
-                                    <option value="Honda">Honda</option>
-                                    <option value="Yamaha">Yamaha</option>
-                                </select>
+                            <div class="relative z-20" data-parts-brand-select>
+                                <input type="hidden" name="brand" value="" required data-parts-brand-input>
+                                <button type="button"
+                                        data-parts-brand-trigger
+                                        aria-haspopup="listbox"
+                                        aria-expanded="false"
+                                        class="flex w-full cursor-pointer items-center rounded-xl border border-white/15 bg-white/10 px-4 py-3 pr-9 text-left text-sm outline-none transition-all focus:border-blue-400 focus:ring-2 focus:ring-blue-500/20">
+                                    <span data-parts-brand-label class="text-gray-400">Select a Brand</span>
+                                </button>
                                 <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-gray-400" />
+                                <div data-parts-brand-menu
+                                     role="listbox"
+                                     class="absolute left-0 right-0 top-full z-30 mt-1 hidden overflow-hidden rounded-xl border border-white/15 bg-[#03045e] shadow-xl">
+                                    @foreach ($motorcycleBrands as $brand)
+                                        <button type="button"
+                                                role="option"
+                                                data-parts-brand-option="{{ $brand }}"
+                                                class="block w-full px-4 py-3 text-left text-sm text-white transition-colors hover:bg-white/10">
+                                            {{ $brand }}
+                                        </button>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
 
@@ -276,16 +293,16 @@
 
     {{-- CTA BAND --}}
     <section class="bg-litus-navy py-14">
-        <div class="mx-auto flex max-w-5xl flex-col items-center gap-8 px-4 sm:px-6 lg:flex-row lg:gap-16">
-            <div class="flex-1 text-center lg:text-left">
+        <div class="litus-container flex flex-col items-center justify-between gap-8 lg:flex-row lg:items-center lg:gap-12">
+            <div class="min-w-0 flex-1 text-center lg:text-left">
                 <h2 class="mb-3 font-display text-3xl font-black text-white lg:text-4xl">
                     Not Sure Which Part<br>
                     <span class="text-litus-red">You Need?</span>
                 </h2>
-                <p class="leading-relaxed text-gray-400">Our parts team can help you identify the correct component for your motorcycle model.</p>
+                <p class="max-w-xl leading-relaxed text-gray-400 lg:max-w-2xl">Our parts team can help you identify the correct component for your motorcycle model.</p>
             </div>
-            <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
-                <a href="tel:+9603331234" class="rounded-full bg-litus-red px-8 py-3.5 text-sm font-bold text-white">Talk to Parts Team</a>
+            <div class="flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row lg:justify-end">
+                <a href="tel:+9603331234" class="rounded-full bg-litus-red px-8 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90">Talk to Parts Team</a>
                 <a href="{{ route('service-center') }}" class="rounded-full border border-white/30 px-8 py-3.5 text-sm font-bold text-white transition-all hover:border-white/60 hover:bg-white/5">Visit Service Center</a>
             </div>
         </div>

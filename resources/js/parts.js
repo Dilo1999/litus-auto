@@ -21,6 +21,58 @@ function initPartsForm() {
             });
         });
     });
+
+    const brandSelect = root.querySelector('[data-parts-brand-select]');
+    if (brandSelect) {
+        const trigger = brandSelect.querySelector('[data-parts-brand-trigger]');
+        const menu = brandSelect.querySelector('[data-parts-brand-menu]');
+        const label = brandSelect.querySelector('[data-parts-brand-label]');
+        const input = brandSelect.querySelector('[data-parts-brand-input]');
+        const options = brandSelect.querySelectorAll('[data-parts-brand-option]');
+
+        const closeMenu = () => {
+            menu?.classList.add('hidden');
+            trigger?.setAttribute('aria-expanded', 'false');
+        };
+
+        const openMenu = () => {
+            menu?.classList.remove('hidden');
+            trigger?.setAttribute('aria-expanded', 'true');
+        };
+
+        trigger?.addEventListener('click', () => {
+            if (menu?.classList.contains('hidden')) {
+                openMenu();
+            } else {
+                closeMenu();
+            }
+        });
+
+        options.forEach((option) => {
+            option.addEventListener('click', () => {
+                const value = option.dataset.partsBrandOption || '';
+                if (input) input.value = value;
+                if (label) {
+                    label.textContent = value;
+                    label.classList.remove('text-gray-400');
+                    label.classList.add('text-white');
+                }
+                closeMenu();
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!brandSelect.contains(event.target)) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeMenu();
+            }
+        });
+    }
 }
 
 if (document.readyState === 'loading') {

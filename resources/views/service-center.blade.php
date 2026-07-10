@@ -4,9 +4,9 @@
 
 @section('content')
 @php
-    $heroBg = 'https://images.unsplash.com/photo-1558979159-2b18a4070a87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1600&q=80';
+    $heroBg = asset('images/service_center/' . rawurlencode('ChatGPT Image Jul 10, 2026, 10_31_01 AM.png'));
     $teamImg = 'https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=800&q=80';
-    $bookingBg = 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=900&q=80';
+    $bookingBg = asset('images/service_center/' . rawurlencode('ChatGPT Image Jul 10, 2026, 10_16_22 AM.png'));
 
     $bookingFeatures = [
         ['icon' => 'headphones', 'title' => 'Expert Support', 'desc' => 'Our team is ready to assist you with the best service.'],
@@ -161,10 +161,14 @@
                  class="mx-auto grid max-w-[1450px] grid-cols-1 overflow-hidden rounded-[20px] border border-[#07152f]/[0.06] bg-white shadow-[0_24px_70px_rgba(7,21,47,0.12)] min-[1101px]:grid-cols-[0.58fr_1fr] min-[1101px]:rounded-[28px]">
 
                 {{-- Booking info --}}
-                <div class="relative overflow-hidden px-6 py-8 text-white min-[651px]:px-8 min-[651px]:py-9 min-[1101px]:px-10 min-[1101px]:py-10"
-                     style="background-image: linear-gradient(135deg, rgba(3,14,31,0.98), rgba(5,21,45,0.96)), url('{{ $bookingBg }}'); background-size: cover; background-position: center;">
-                    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.08),transparent_25%),linear-gradient(to_bottom,rgba(2,11,25,0.15),rgba(2,11,25,0.95))]"></div>
-                    <div class="pointer-events-none absolute right-8 top-6 h-[120px] w-[120px] opacity-30 max-[700px]:hidden"
+                <div class="relative overflow-hidden px-6 py-8 text-white min-[651px]:px-8 min-[651px]:py-9 min-[1101px]:px-10 min-[1101px]:py-10">
+                    <img src="{{ $bookingBg }}"
+                         alt=""
+                         aria-hidden="true"
+                         class="pointer-events-none absolute inset-0 h-full w-full object-cover object-[center_65%]">
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#030e1f]/50 via-[#05152d]/40 to-[#030e1f]/55"></div>
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#020b19]/60 via-[#020b19]/15 to-transparent"></div>
+                    <div class="pointer-events-none absolute right-8 top-6 h-[120px] w-[120px] opacity-20 max-[700px]:hidden"
                          style="background-image: radial-gradient(rgba(255,255,255,0.18) 1.5px, transparent 1.5px); background-size: 16px 16px;"></div>
 
                     <div class="relative z-[2]">
