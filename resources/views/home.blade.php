@@ -44,15 +44,15 @@
     <x-litus-header active="Home" />
 
     {{-- HERO --}}
-    <section class="relative min-h-[720px] overflow-hidden lg:min-h-[820px]">
+    <section class="relative min-h-[640px] overflow-hidden lg:min-h-[720px]">
         <img src="{{ $heroBg }}"
              alt=""
              class="absolute inset-0 h-full w-full object-cover object-center"
              aria-hidden="true">
         <div class="absolute inset-0 bg-[linear-gradient(110deg,rgba(0,65,180,0.55)_0%,rgba(11,22,40,0.85)_40%,rgba(11,22,40,0.45)_70%,rgba(11,22,40,0.2)_100%)]"></div>
 
-        <div class="relative z-10 litus-container flex min-h-[720px] flex-col justify-center lg:min-h-[820px]">
-            <div class="max-w-xl py-20 text-left lg:py-24">
+        <div class="relative z-10 litus-container flex min-h-[640px] flex-col justify-center lg:min-h-[720px]">
+            <div class="max-w-xl py-16 text-left lg:py-20">
                 <p class="mb-4 text-sm font-bold uppercase tracking-widest text-litus-red sm:text-base">Premium Bikes. Trusted Service.</p>
                 <h1 class="mb-6 font-display text-[2.9rem] font-black leading-[1.08] text-white sm:text-[3.25rem] lg:text-[3.85rem]">
                     Ride Your Dream<br>with<br>
