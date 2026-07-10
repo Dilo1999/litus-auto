@@ -17,6 +17,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
 
 class MotorcycleResource extends Resource
@@ -127,8 +128,8 @@ class MotorcycleResource extends Resource
             ->columns([
                 TextColumn::make('name')->searchable()->sortable(),
                 TextColumn::make('category')->searchable(),
-                IconColumn::make('has_promotion')->boolean()->label('Promotion'),
-                IconColumn::make('is_top_selling')->boolean()->label('Top Selling'),
+                ToggleColumn::make('has_promotion')->label('Promotion'),
+                ToggleColumn::make('is_top_selling')->label('Top Selling'),
                 TextColumn::make('colors')
                     ->label('Colors')
                     ->getStateUsing(function (Motorcycle $record): \Illuminate\Support\HtmlString {
