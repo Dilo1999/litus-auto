@@ -16,12 +16,7 @@
         ['model' => 'Scoopy Club 12 2026', 'slug' => 'scoopy-club-12-2026', 'cc' => '110CC', 'capacity' => '4.2L', 'img' => $productImages[2], 'variant' => 'blue', 'badge' => '★ Best Seller'],
     ];
 
-    $galleryImages = [
-        ['src' => 'https://images.unsplash.com/photo-1759665973333-76aafabd7247?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80', 'alt' => 'Motorcycle adventure'],
-        ['src' => 'https://images.unsplash.com/photo-1777991412484-8fa8cb512e6b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80', 'alt' => 'Motorcycle ride'],
-        ['src' => 'https://images.unsplash.com/photo-1588756681780-9d5859fc2ca0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80', 'alt' => 'Motorcycle lifestyle'],
-        ['src' => 'https://images.unsplash.com/photo-1582092722992-b2f960bafbfb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80', 'alt' => 'Red motorcycle'],
-    ];
+    $galleryImages = $galleryImages ?? [];
 
     $services = [
         [

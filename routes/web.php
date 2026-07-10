@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MotorcycleController;
 use Illuminate\Support\Facades\Route;
@@ -38,4 +39,4 @@ Route::get('/ownership-plans', fn () => view('ownership-plans'))->name('ownershi
 Route::get('/parts', fn () => view('parts'))->name('parts');
 Route::get('/service-center', fn () => view('service-center'))->name('service-center');
 Route::get('/contact-us', fn () => view('contact'))->name('contact');
-Route::get('/gallery', fn () => view('gallery'))->name('gallery');
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');

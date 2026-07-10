@@ -3,58 +3,6 @@
 @section('title', 'Gallery — LITUS Automobiles')
 
 @section('content')
-@php
-    $heroBg = asset('images/motorcycles/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
-    $videoId = 'o8grf3wSwQU';
-    $videoEmbedUrl = 'https://www.youtube-nocookie.com/embed/' . $videoId . '?autoplay=1&rel=0';
-    $videoThumb = 'https://img.youtube.com/vi/' . $videoId . '/maxresdefault.jpg';
-
-    $catColors = [
-        'Motorcycles' => '#E31E25',
-        'Scooter' => '#3B82F6',
-        'Showroom' => '#7C3AED',
-        'Customer Moments' => '#16A34A',
-    ];
-
-    $allImages = [
-        ['id' => 1,  'cat' => 'Motorcycles',      'label' => 'Adventure Awaits',        'img' => 'https://images.unsplash.com/photo-1759665973333-76aafabd7247?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=900&q=80'],
-        ['id' => 2,  'cat' => 'Scooter',          'label' => 'Urban Freedom',           'img' => 'https://images.unsplash.com/photo-1761744384561-0dc984f510c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 3,  'cat' => 'Showroom',         'label' => 'LITUS Showroom, Malé',    'img' => 'https://images.unsplash.com/photo-1671354925315-229af5178a83?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 4,  'cat' => 'Motorcycles',      'label' => 'Grand Vibes',             'img' => 'https://images.unsplash.com/photo-1777991412484-8fa8cb512e6b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 5,  'cat' => 'Customer Moments', 'label' => 'Ride with Confidence',    'img' => 'https://images.unsplash.com/photo-1767543153176-7ac37c535af6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 6,  'cat' => 'Motorcycles',      'label' => 'Coastal Cruising',        'img' => 'https://images.unsplash.com/photo-1588756681780-9d5859fc2ca0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 7,  'cat' => 'Scooter',          'label' => 'Island Ride',             'img' => 'https://images.unsplash.com/photo-1602111426534-9c097255ca46?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 8,  'cat' => 'Motorcycles',      'label' => 'Street Style',            'img' => 'https://images.unsplash.com/photo-1582092722992-b2f960bafbfb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 9,  'cat' => 'Showroom',         'label' => 'Premium Display',         'img' => 'https://images.unsplash.com/photo-1676246751280-16f3d4d0db7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 10, 'cat' => 'Customer Moments', 'label' => 'Happy Riders',            'img' => 'https://images.unsplash.com/photo-1598077737122-925e6f7cf137?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 11, 'cat' => 'Motorcycles',      'label' => 'Ready to Ride',           'img' => 'https://images.unsplash.com/photo-1550149550-33b46c745e03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 12, 'cat' => 'Scooter',          'label' => 'Palm Street Cruise',      'img' => 'https://images.unsplash.com/photo-1778874294856-a3e32a698216?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 13, 'cat' => 'Motorcycles',      'label' => 'Power & Precision',       'img' => 'https://images.unsplash.com/photo-1601556402552-23ce8f2b31fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 14, 'cat' => 'Showroom',         'label' => 'Showroom Floor',          'img' => 'https://images.unsplash.com/photo-1692201841147-3c1c5f87cb05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 15, 'cat' => 'Customer Moments', 'label' => 'Family Ride Day',         'img' => 'https://images.unsplash.com/photo-1683914791874-3d7cd42e2543?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 16, 'cat' => 'Motorcycles',      'label' => 'Sunset Trail',            'img' => 'https://images.unsplash.com/photo-1558979159-2b18a4070a87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 17, 'cat' => 'Scooter',          'label' => 'City Flow',               'img' => 'https://images.unsplash.com/photo-1611956292173-c2445aa61709?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-        ['id' => 18, 'cat' => 'Customer Moments', 'label' => 'Delivery Ready',          'img' => 'https://images.unsplash.com/photo-1629342651203-fab0990d8949?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80'],
-    ];
-
-    $featuredMoments = [
-        ['id' => 1, 'label' => '',                       'cat' => 'Motorcycles',      'badge' => 'Motorcycle',       'badgeRed' => false, 'img' => 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=900&q=80', 'large' => true],
-        ['id' => 2, 'label' => 'Urban Freedom',          'cat' => 'Scooter',          'badge' => 'Scooter',          'badgeRed' => false, 'img' => 'https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?auto=format&fit=crop&w=700&q=80'],
-        ['id' => 3, 'label' => 'LITUS Showroom, Malé',  'cat' => 'Showroom',         'badge' => 'Showroom',         'badgeRed' => false, 'img' => 'https://images.unsplash.com/photo-1560472355-536de3962603?auto=format&fit=crop&w=800&q=80'],
-        ['id' => 4, 'label' => 'Island Vibes',           'cat' => 'Motorcycles',      'badge' => 'Lifestyle',        'badgeRed' => true,  'img' => 'https://images.unsplash.com/photo-1600705722908-bab8f59a0862?auto=format&fit=crop&w=700&q=80'],
-        ['id' => 5, 'label' => 'Ride with Confidence',   'cat' => 'Customer Moments', 'badge' => 'Customer Moment',  'badgeRed' => true,  'img' => 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=700&q=80'],
-    ];
-
-    $momentCategories = ['All', 'Motorcycles', 'Showrooms', 'Customer Moments', 'Videos'];
-
-    $heroFeatures = [
-        ['icon' => 'bike', 'title' => 'Motorcycles', 'desc' => 'Adventure & street ride moments'],
-        ['icon' => 'disc', 'title' => 'Scooters', 'desc' => 'Urban mobility across the islands'],
-        ['icon' => 'eye', 'title' => 'Showroom', 'desc' => 'Premium display & launch highlights'],
-        ['icon' => 'users', 'title' => 'Customer Moments', 'desc' => 'Real experiences from our riders'],
-    ];
-@endphp
-
 <div class="font-sans" data-gallery-page>
     <script type="application/json" id="gallery-all-images">@json($allImages)</script>
     <script type="application/json" id="gallery-featured-moments">@json($featuredMoments)</script>
@@ -85,7 +33,7 @@
                 </h1>
 
                 <p class="mb-6 max-w-[620px] text-base font-medium leading-[1.5] text-[#e6edf5] sm:text-lg sm:leading-[1.55] max-md:text-[17px]">
-                    Explore our collection of motorcycles, scooters, showroom moments, customer experiences, and lifestyle shots from LITUS Automobiles.
+                    Explore our collection of motorcycles, showroom moments, customer experiences, and lifestyle shots from LITUS Automobiles.
                 </p>
 
                 <div class="mb-6 flex flex-row flex-wrap items-center justify-start gap-5 sm:gap-7">
@@ -140,7 +88,7 @@
                 <div>
                     <h2 class="mb-2 font-display text-[30px] font-black tracking-[-0.7px] text-[#07152f] min-[651px]:text-[38px]">Explore LITUS Moments</h2>
                     <p class="max-w-[470px] text-sm font-semibold leading-normal text-[#667085] min-[651px]:text-base min-[651px]:leading-[1.5]">
-                        Browse our collection of motorcycles, scooters, lifestyle shots, showroom images, and video highlights.
+                        Browse our collection of motorcycles, lifestyle shots, showroom images, and video highlights.
                     </p>
                 </div>
                 <div class="flex flex-wrap gap-2.5 min-[1051px]:justify-end max-[650px]:w-full">

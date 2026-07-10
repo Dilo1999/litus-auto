@@ -133,9 +133,9 @@ function initGalleryPage() {
             return;
         }
 
-        const largeItem = filtered.find((m) => m.large) || filtered[0];
-        const others = filtered.filter((m) => m !== largeItem);
-        const ordered = [largeItem, ...others];
+        // Keep only 5 cards in the top layout (1 large + 4 small). Shuffle on each filter change.
+        filtered = [...filtered].sort(() => Math.random() - 0.5).slice(0, 5);
+        const ordered = filtered;
 
         momentsGrid.innerHTML = ordered.map((moment, index) => renderMomentCard(moment, index === 0 && ordered.length > 1)).join('');
 

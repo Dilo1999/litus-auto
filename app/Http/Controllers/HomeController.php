@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GalleryImage;
 use App\Models\Motorcycle;
 use Illuminate\View\View;
 
@@ -19,6 +20,19 @@ class HomeController extends Controller
             ->filter(fn (Motorcycle $motorcycle) => $motorcycle->discountAmount() > 0)
             ->values();
 
-        return view('home', compact('promoMotorcycles'));
+        $galleryImages = GalleryImage::query()
+            ->published()
+            ->featured()
+            ->ofCategory(GalleryImage::CATEGORY_MOTORCYCLES)
+            ->ordered()
+            ->limit(4)
+            ->get()
+            ->map(fn (GalleryImage $image) => [
+                'src' => $image->imageUrl(),
+                'alt' => $image->title ?: 'Motorcycle gallery',
+            ])
+            ->all();
+
+        return view('home', compact('promoMotorcycles', 'galleryImages'));
     }
 }
