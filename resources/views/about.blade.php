@@ -142,73 +142,47 @@
     <x-litus-header active="About Us" />
 
     {{-- HERO --}}
-    <section class="relative min-h-[680px] overflow-hidden border border-[rgba(27,74,120,0.45)] bg-[#06101c] pb-[82px] max-[1100px]:min-h-0 max-[1100px]:pb-8">
+    <section class="relative min-h-[680px] overflow-hidden border border-[rgba(27,74,120,0.45)] bg-[#06101c] pb-[82px] max-md:min-h-0 max-md:pb-0 max-[1100px]:min-h-0 max-[1100px]:pb-8">
         <img src="{{ $heroBg }}"
              alt=""
-             class="absolute inset-0 h-full w-full object-cover object-[center_right]"
+             class="absolute inset-0 h-full w-full object-cover object-[center_right] max-md:object-[center_30%]"
              aria-hidden="true">
 
-        <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,11,22,0.98)_0%,rgba(3,11,22,0.88)_32%,rgba(3,11,22,0.48)_58%,rgba(3,11,22,0.25)_100%)]"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,11,22,0.98)_0%,rgba(3,11,22,0.88)_32%,rgba(3,11,22,0.48)_58%,rgba(3,11,22,0.25)_100%)] max-md:bg-[linear-gradient(180deg,rgba(11,22,40,0.55)_0%,rgba(11,22,40,0.78)_42%,rgba(11,22,40,0.92)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(255,255,255,0.08),transparent_28%)]"></div>
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.1),rgba(2,10,19,0.95))]"></div>
 
-        <div class="relative z-[2] litus-container pt-16 pb-12 sm:pt-20">
+        <div class="relative z-[2] litus-container pb-12 pt-16 max-md:pb-5 max-md:pt-16 sm:pt-20">
             <div class="max-w-[720px] text-left">
-                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#0065ef] sm:text-lg max-md:text-[15px]">
+                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#0065ef] max-md:mb-1.5 max-md:text-[10px] max-md:tracking-[0.18em] sm:text-lg">
                     About LITUS Automobiles
                 </p>
 
-                <h1 class="mb-4 font-display text-[clamp(2.25rem,4.2vw,4.25rem)] font-black leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:text-[2.25rem]">
+                <h1 class="mb-4 font-display text-[clamp(2.25rem,4.2vw,4.25rem)] font-black leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
                     Driven by Trust.<br>
                     <span class="text-litus-red">Built for Every Ride.</span>
                 </h1>
 
-                <p class="mb-6 max-w-[620px] text-base font-medium leading-[1.5] text-[#e6edf5] sm:text-lg sm:leading-[1.55] max-md:text-[17px]">
+                <p class="mb-6 max-w-[620px] text-base font-medium leading-[1.5] text-[#e6edf5] max-md:mb-3.5 max-md:max-w-[34ch] max-md:text-[13px] max-md:leading-snug sm:text-lg sm:leading-[1.55]">
                     LITUS Automobiles is a leading motorcycle supplier in the Maldives, established in 2014. We offer a wide range of mobility solutions to meet the needs of our customers with quality products and excellent customer service.
                 </p>
 
-                <div class="flex flex-row flex-wrap items-center justify-start gap-5 sm:gap-7">
+                <div class="flex flex-col items-stretch justify-start gap-2.5 max-md:w-full max-md:flex-row max-md:gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-7">
                     <a href="#mission-vision"
-                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] bg-[#0065ef] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(0,101,239,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
+                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-2 rounded-[9px] bg-[#0065ef] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(0,101,239,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] max-md:h-11 max-md:min-h-11 max-md:min-w-0 max-md:flex-1 max-md:rounded-xl max-md:px-3 max-md:text-[13px] sm:h-[60px] sm:min-w-[220px] sm:text-lg">
                         Explore Our Story
-                        <x-litus-icon name="arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
+                        <x-litus-icon name="arrow-right" class="h-4 w-4 max-md:h-3.5 max-md:w-3.5 sm:h-5 sm:w-5" />
                     </a>
                     <a href="{{ route('contact') }}"
-                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-3 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.15)] sm:h-[60px] sm:min-w-[220px] sm:text-lg max-md:w-full max-md:min-w-0">
+                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-2 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.15)] max-md:h-11 max-md:min-h-11 max-md:min-w-0 max-md:flex-1 max-md:rounded-xl max-md:border-white/35 max-md:bg-white/[0.06] max-md:px-3 max-md:text-[13px] sm:h-[60px] sm:min-w-[220px] sm:text-lg">
                         Contact Us
-                        <x-litus-icon name="arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
+                        <x-litus-icon name="arrow-right" class="h-4 w-4 max-md:h-3.5 max-md:w-3.5 sm:h-5 sm:w-5" />
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="absolute bottom-0 left-0 right-0 z-[3] border-t border-white/12 bg-[rgba(3,13,25,0.78)] backdrop-blur-sm max-[1100px]:relative max-[1100px]:mt-5">
-            <div class="litus-container">
-                <div class="grid min-h-[76px] grid-cols-1 min-[1100px]:grid-cols-4 max-[1100px]:min-[701px]:grid-cols-2">
-                    @foreach ($heroFeatures as $index => $feature)
-                        <div @class([
-                            'relative flex items-center gap-3 py-3 sm:gap-3.5 min-[1100px]:py-3.5',
-                            'border-b border-white/12 max-md:border-b' => $index < count($heroFeatures) - 1,
-                            'max-md:last:border-b-0',
-                            'min-[1100px]:border-r min-[1100px]:border-white/16 min-[1100px]:pr-4' => $index < count($heroFeatures) - 1,
-                            'min-[1100px]:pl-0' => $index === 0,
-                            'min-[1100px]:pl-4' => $index > 0,
-                            'max-[1100px]:min-[701px]:border-r max-[1100px]:min-[701px]:border-white/16' => in_array($index, [0, 2]),
-                            'max-[1100px]:min-[701px]:border-b max-[1100px]:min-[701px]:border-white/12' => in_array($index, [0, 1]),
-                            'max-[1100px]:min-[701px]:border-r-0' => $index === 1,
-                        ])>
-                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-white/35 text-white shadow-[0_0_16px_rgba(255,255,255,0.06)] sm:h-10 sm:w-10">
-                                <x-litus-icon :name="$feature['icon']" class="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
-                            </div>
-                            <div class="min-w-0 text-left">
-                                <h3 class="mb-0.5 text-sm font-extrabold leading-tight text-white sm:text-[15px]">{{ $feature['title'] }}</h3>
-                                <p class="text-xs font-medium leading-snug text-[#c9d4df] sm:text-[13px]">{{ $feature['desc'] }}</p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
+        <x-litus-hero-features :features="$heroFeatures" />
     </section>
 
     {{-- MISSION & VISION --}}
@@ -258,12 +232,12 @@
             {{-- Leaders --}}
             <div class="mb-[34px] grid grid-cols-1 gap-6 min-[1151px]:grid-cols-3">
                 @foreach ($teamLeaders as $member)
-                    <div class="relative mx-auto flex w-full min-h-[440px] overflow-hidden rounded-[10px] border border-[#07152f]/[0.08] bg-[#061a45] shadow-[0_18px_42px_rgba(7,21,47,0.14)] min-[701px]:min-h-[275px] min-[1151px]:mx-0 min-[1151px]:max-w-none max-[1150px]:max-w-[760px]">
+                    <div class="relative mx-auto flex w-full min-h-[440px] overflow-hidden rounded-[10px] border border-[#07152f]/[0.08] bg-[#061a45] shadow-[0_18px_42px_rgba(7,21,47,0.14)] max-[700px]:min-h-[480px] min-[701px]:min-h-[275px] min-[1151px]:mx-0 min-[1151px]:max-w-none max-[1150px]:max-w-[760px]">
                         <div class="pointer-events-none absolute inset-0 z-[1] opacity-25"
                              style="background-image: radial-gradient(rgba(255,255,255,0.09) 1px, transparent 1px); background-size: 12px 12px;"></div>
                         <div class="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(to_top,rgba(3,15,39,0.98)_0%,rgba(3,15,39,0.68)_58%,rgba(3,15,39,0.10)_100%)] min-[701px]:bg-[radial-gradient(circle_at_30%_55%,rgba(0,105,255,0.22),transparent_30%),linear-gradient(90deg,rgba(3,15,39,0.98)_0%,rgba(3,15,39,0.82)_45%,rgba(3,15,39,0.10)_100%)]"></div>
 
-                        <div class="relative z-[4] flex w-full flex-col justify-end px-6 pb-7 pt-[210px] text-white min-[701px]:w-[52%] min-[701px]:justify-center min-[701px]:py-7 min-[701px]:pl-[26px] min-[701px]:pr-0 min-[701px]:pt-7">
+                        <div class="relative z-[4] flex w-full flex-col justify-end px-6 pb-7 pt-[210px] text-white max-[700px]:pb-8 max-[700px]:pt-[200px] min-[701px]:w-[52%] min-[701px]:justify-center min-[701px]:py-7 min-[701px]:pl-[26px] min-[701px]:pr-0 min-[701px]:pt-7">
                             <div class="mb-9 hidden h-[54px] w-[54px] items-center justify-center rounded-full border border-[#0065ef]/45 text-[#0065ef] min-[701px]:flex">
                                 <x-litus-icon name="award" class="h-6 w-6" />
                             </div>
@@ -411,7 +385,7 @@
                             <a href="{{ route('contact') }}"
                                @class([
                                    'group/contact inline-flex items-center justify-center gap-3 rounded-[5px] bg-[#061a45] font-black text-white transition-colors duration-300 hover:bg-[#0065ef]',
-                                   'h-8 min-w-[140px] px-[18px] text-[13px]' => ! $showroom['featured'],
+                                   'h-8 min-w-[140px] px-[18px] text-[13px] max-md:h-10' => ! $showroom['featured'],
                                    'h-10 min-w-[160px] px-6 text-sm' => $showroom['featured'],
                                ])>
                                 Contact Now

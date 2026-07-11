@@ -21,8 +21,10 @@ function initProductSpin() {
         let frameIndex = 0;
         let isDragging = false;
         let startX = 0;
+        let startY = 0;
         let startFrame = 0;
         let activePointerId = null;
+        let lockAxis = null;
 
         const pixelsPerFrame = () => Math.max(12, Math.min(30, 200 / Math.max(frames.length, 1)));
 
@@ -52,18 +54,29 @@ function initProductSpin() {
             if (activePointerId !== null) return;
             activePointerId = e.pointerId;
             isDragging = true;
+            lockAxis = null;
             startX = e.clientX;
+            startY = e.clientY;
             startFrame = frameIndex;
             root.classList.add('cursor-grabbing');
             hint?.classList.remove('opacity-0');
             img.setPointerCapture?.(e.pointerId);
-            e.preventDefault();
         };
 
         const onPointerMove = (e) => {
             if (!isDragging || e.pointerId !== activePointerId) return;
-            const delta = e.clientX - startX;
-            const next = startFrame - Math.round(delta / pixelsPerFrame());
+
+            const deltaX = e.clientX - startX;
+            const deltaY = e.clientY - startY;
+
+            if (lockAxis === null && (Math.abs(deltaX) > 8 || Math.abs(deltaY) > 8)) {
+                lockAxis = Math.abs(deltaX) >= Math.abs(deltaY) ? 'x' : 'y';
+            }
+
+            if (lockAxis !== 'x') return;
+
+            e.preventDefault();
+            const next = startFrame - Math.round(deltaX / pixelsPerFrame());
             if (next !== frameIndex) setFrame(next);
         };
 
@@ -71,6 +84,7 @@ function initProductSpin() {
             if (e.pointerId !== activePointerId) return;
             isDragging = false;
             activePointerId = null;
+            lockAxis = null;
             root.classList.remove('cursor-grabbing');
             img.releasePointerCapture?.(e.pointerId);
         };

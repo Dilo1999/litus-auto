@@ -1,12 +1,12 @@
 @props(['motorcycle'])
 
-<div class="group relative overflow-visible rounded-[24px] border border-[#07152f]/8 bg-white px-5 pb-5 pt-[88px] shadow-[0_20px_50px_rgba(7,21,47,0.12)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(7,21,47,0.16)] min-[651px]:rounded-[28px] min-[651px]:px-6 min-[651px]:pb-6 min-[651px]:pt-24 min-[1101px]:rounded-[32px] min-[1101px]:px-7 min-[1101px]:pb-7 min-[1101px]:pt-[100px]">
+<div class="group relative overflow-visible rounded-[24px] border border-[#07152f]/8 bg-white px-5 pb-5 pt-[88px] shadow-[0_20px_50px_rgba(7,21,47,0.12)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(7,21,47,0.16)] max-sm:overflow-hidden min-[651px]:rounded-[28px] min-[651px]:px-6 min-[651px]:pb-6 min-[651px]:pt-24 min-[1101px]:rounded-[32px] min-[1101px]:px-7 min-[1101px]:pb-7 min-[1101px]:pt-[100px]">
     {{-- Offer ribbon --}}
-    <div class="absolute -left-4 top-4 z-[3] min-[651px]:top-6 min-[1101px]:-left-5 min-[1101px]:top-8">
-        <span class="absolute bottom-[-18px] left-0 h-5 w-5 bg-[#0037aa] [clip-path:polygon(0_0,100%_0,100%_100%)] min-[1101px]:bottom-[-20px] min-[1101px]:h-5 min-[1101px]:w-5"
+    <div class="absolute -left-4 top-4 z-[3] max-sm:left-0 min-[651px]:top-6 min-[1101px]:-left-5 min-[1101px]:top-8">
+        <span class="absolute bottom-[-18px] left-0 h-5 w-5 bg-[#0037aa] [clip-path:polygon(0_0,100%_0,100%_100%)] max-sm:hidden min-[1101px]:bottom-[-20px] min-[1101px]:h-5 min-[1101px]:w-5"
               aria-hidden="true"></span>
 
-        <div class="relative flex h-[52px] min-w-[200px] items-center gap-2.5 rounded-r-xl bg-gradient-to-br from-[#004be8] to-[#2685ff] px-3.5 shadow-[0_12px_24px_rgba(0,75,232,0.28)] min-[651px]:h-[56px] min-[651px]:min-w-[220px] min-[651px]:gap-3 min-[651px]:px-5 min-[1101px]:h-[60px] min-[1101px]:min-w-[240px] min-[1101px]:px-6">
+        <div class="relative flex h-[52px] min-w-[200px] items-center gap-2.5 rounded-r-xl bg-gradient-to-br from-[#004be8] to-[#2685ff] px-3.5 shadow-[0_12px_24px_rgba(0,75,232,0.28)] max-sm:min-w-0 max-sm:max-w-[calc(100%-1rem)] min-[651px]:h-[56px] min-[651px]:min-w-[220px] min-[651px]:gap-3 min-[651px]:px-5 min-[1101px]:h-[60px] min-[1101px]:min-w-[240px] min-[1101px]:px-6">
             <span class="absolute -right-2.5 top-0 -z-10 hidden h-full w-8 skew-x-[-18deg] rounded-r-xl bg-gradient-to-br from-[#2685ff] to-[#0069ff] min-[651px]:block min-[1101px]:-right-3 min-[1101px]:w-10"
                   aria-hidden="true"></span>
 
@@ -42,7 +42,7 @@
         </p>
 
         <a href="{{ route('motorcycle.show', $motorcycle->slug) }}"
-           class="group relative z-[3] mx-auto flex h-9 w-full items-center justify-center rounded-lg border-2 border-[#0066ff] bg-transparent text-sm font-black text-[#0066ff] transition-all duration-300 hover:-translate-y-0.5 hover:border-transparent hover:bg-gradient-to-r hover:from-[#0066ff] hover:to-[#004fe8] hover:text-white hover:shadow-[0_12px_24px_rgba(0,90,255,0.28)] min-[651px]:h-10 min-[651px]:text-base min-[1101px]:h-11 min-[1101px]:rounded-xl min-[1101px]:text-lg">
+           class="group relative z-[3] mx-auto flex h-9 w-full items-center justify-center rounded-lg border-2 border-[#0066ff] bg-transparent text-sm font-black text-[#0066ff] transition-all duration-300 hover:-translate-y-0.5 hover:border-transparent hover:bg-gradient-to-r hover:from-[#0066ff] hover:to-[#004fe8] hover:text-white hover:shadow-[0_12px_24px_rgba(0,90,255,0.28)] max-sm:h-11 min-[651px]:h-10 min-[651px]:text-base min-[1101px]:h-11 min-[1101px]:rounded-xl min-[1101px]:text-lg">
             <span class="inline-flex items-center gap-2.5 min-[651px]:gap-3 min-[1101px]:gap-4">
                 <img src="{{ asset('images/homepage/cart/icons8-cart-80.png') }}"
                      alt=""

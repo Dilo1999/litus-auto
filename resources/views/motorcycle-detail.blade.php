@@ -39,11 +39,11 @@
 
 
     {{-- PRODUCT HERO --}}
-    <section class="relative min-h-[600px] overflow-hidden border border-[rgba(40,85,130,0.45)] bg-[#06101f] bg-cover bg-center pb-[82px] max-[1100px]:min-h-[520px] max-[1100px]:pb-8"
+    <section class="relative min-h-[600px] overflow-hidden border border-[rgba(40,85,130,0.45)] bg-[#06101f] bg-cover bg-center pb-[82px] max-md:min-h-0 max-md:pb-0 max-[1100px]:min-h-[520px] max-[1100px]:pb-8"
              style="background-image: linear-gradient(90deg, rgba(3,13,28,0.98) 0%, rgba(3,13,28,0.94) 35%, rgba(3,13,28,0.60) 58%, rgba(3,13,28,0.78) 100%), url('{{ $heroBg }}');">
-        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_48%,rgba(255,255,255,0.12),transparent_28%),linear-gradient(to_bottom,rgba(0,0,0,0.12),rgba(1,8,20,0.95))]"></div>
+        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_48%,rgba(255,255,255,0.12),transparent_28%),linear-gradient(to_bottom,rgba(0,0,0,0.12),rgba(1,8,20,0.95))] max-md:bg-[linear-gradient(180deg,rgba(11,22,40,0.55)_0%,rgba(11,22,40,0.78)_42%,rgba(11,22,40,0.92)_100%)]"></div>
 
-        <div class="relative z-[2] litus-container pt-14 pb-10 sm:pt-16 sm:pb-12">
+        <div class="relative z-[2] litus-container pb-10 pt-14 max-md:pb-5 max-md:pt-16 sm:pb-12 sm:pt-16">
             {{-- Desktop hero product image — free-positioned for maximum size --}}
             <x-product-360-viewer
                 :frames="$spinImages"
@@ -51,13 +51,13 @@
                 img-class="block h-auto max-h-[min(680px,72vh)] w-auto max-w-[min(820px,55vw)] object-contain object-bottom"
                 class="absolute bottom-6 right-0 z-[4] hidden cursor-grab select-none min-[1100px]:block" />
 
-            <div class="relative z-[2] grid grid-cols-1 items-center gap-8 min-[1100px]:pointer-events-none min-[1100px]:grid-cols-[50%_50%] min-[1100px]:gap-5">
+            <div class="relative z-[2] grid grid-cols-1 items-center gap-8 max-md:gap-5 min-[1100px]:pointer-events-none min-[1100px]:grid-cols-[50%_50%] min-[1100px]:gap-5">
                 <div class="max-w-[650px] text-left max-[1100px]:mx-auto max-[1100px]:text-center min-[1100px]:pointer-events-auto min-[1100px]:max-w-none">
-                    <p class="mb-6 text-base font-black uppercase tracking-[2px] text-[#0065ef] sm:text-lg max-md:mb-5 max-md:text-[15px]">
+                    <p class="mb-6 text-base font-black uppercase tracking-[2px] text-[#0065ef] max-md:mb-1.5 max-md:text-[10px] max-md:tracking-[0.18em] sm:text-lg">
                         {{ $motorcycle->category }}
                     </p>
 
-                    <h1 class="mb-7 font-display text-[clamp(2.75rem,5.5vw,5.125rem)] font-black leading-none tracking-[-0.02em] text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.7)] max-md:text-5xl">
+                    <h1 class="mb-7 font-display text-[clamp(2.75rem,5.5vw,5.125rem)] font-black leading-none tracking-[-0.02em] text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.7)] max-md:mb-3 max-md:text-[1.85rem] max-md:leading-[1.05]">
                         {{ $motorcycle->name }}
                     </h1>
 
@@ -77,11 +77,11 @@
                     </div>
 
                     @if ($motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0)
-                    <div class="relative mb-5 mt-2 inline-block max-[1100px]:mx-auto">
-                        <span class="absolute left-2.5 top-[-26px] rounded-t-md bg-[#0065ef] px-3.5 py-2 text-sm font-black text-white">
+                    <div class="relative mb-5 mt-2 inline-block max-md:block max-md:w-full max-[1100px]:mx-auto">
+                        <span class="absolute left-2.5 top-[-26px] rounded-t-md bg-[#0065ef] px-3.5 py-2 text-sm font-black text-white max-md:static max-md:mb-2 max-md:inline-block">
                             {{ $motorcycle->offerLabel() }}
                         </span>
-                        <div class="rounded-[9px] border-2 border-[#0065ef] bg-transparent px-5 py-4 text-2xl font-black text-[#0065ef] transition-all duration-300 hover:bg-[#0065ef] hover:text-white hover:shadow-[0_12px_28px_rgba(0,101,239,0.35)] sm:px-[22px] sm:py-[19px] sm:text-[34px]">
+                        <div class="rounded-[9px] border-2 border-[#0065ef] bg-transparent px-5 py-4 text-2xl font-black text-[#0065ef] transition-all duration-300 hover:bg-[#0065ef] hover:text-white hover:shadow-[0_12px_28px_rgba(0,101,239,0.35)] max-md:w-full max-md:px-4 max-md:py-3 max-md:text-lg sm:px-[22px] sm:py-[19px] sm:text-[34px]">
                             Special Discount: {{ $motorcycle->formattedDiscount() }}
                         </div>
                     </div>
@@ -93,20 +93,22 @@
                     </p>
                     @endif
 
-                    <div class="flex flex-col gap-4 max-[1100px]:mx-auto min-[1100px]:flex-row min-[1100px]:flex-nowrap min-[1100px]:items-stretch min-[1100px]:gap-4">
-                        <a href="tel:+9607797442"
-                           class="inline-flex h-[52px] w-full shrink-0 items-center justify-center gap-2.5 rounded-md bg-[#0065ef] px-6 text-[15px] font-black text-white shadow-[0_8px_22px_rgba(0,101,239,0.3)] transition-all hover:bg-[#0052cc] min-[1100px]:w-auto">
-                            Contact Sales Team
-                            <x-litus-icon name="arrow-right" class="h-4 w-4 shrink-0" />
-                        </a>
-                        <a href="tel:+9607797442"
-                           class="inline-flex h-[52px] w-full shrink-0 items-center justify-center gap-2.5 rounded-md border-2 border-[#1d2430] bg-white px-6 text-[15px] font-black text-[#1d2430] min-[1100px]:w-auto">
-                            <x-litus-icon name="phone" class="h-4 w-4 shrink-0" />
-                            Call Now
-                        </a>
+                    <div class="flex flex-col gap-2.5 max-[1100px]:mx-auto min-[1100px]:flex-row min-[1100px]:flex-nowrap min-[1100px]:items-stretch min-[1100px]:gap-4">
+                        <div class="flex flex-col gap-2.5 max-md:flex-row max-md:gap-2 min-[1100px]:contents">
+                            <a href="tel:+9607797442"
+                               class="inline-flex h-[52px] w-full shrink-0 items-center justify-center gap-2.5 rounded-md bg-[#0065ef] px-6 text-[15px] font-black text-white shadow-[0_8px_22px_rgba(0,101,239,0.3)] transition-all hover:bg-[#0052cc] max-md:h-11 max-md:min-h-11 max-md:min-w-0 max-md:flex-1 max-md:rounded-xl max-md:px-3 max-md:text-[13px] min-[1100px]:w-auto">
+                                Contact Sales Team
+                                <x-litus-icon name="arrow-right" class="h-4 w-4 shrink-0 max-md:h-3.5 max-md:w-3.5" />
+                            </a>
+                            <a href="tel:+9607797442"
+                               class="inline-flex h-[52px] w-full shrink-0 items-center justify-center gap-2.5 rounded-md border-2 border-[#1d2430] bg-white px-6 text-[15px] font-black text-[#1d2430] max-md:h-11 max-md:min-h-11 max-md:min-w-0 max-md:flex-1 max-md:rounded-xl max-md:px-3 max-md:text-[13px] min-[1100px]:w-auto">
+                                <x-litus-icon name="phone" class="h-4 w-4 shrink-0 max-md:h-3.5 max-md:w-3.5" />
+                                Call Now
+                            </a>
+                        </div>
                         <a href="{{ route('ownership-plans') }}"
-                           class="inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-4 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] min-[1100px]:h-12 min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[13px]">
-                            <x-litus-icon name="credit-card" class="h-4 w-4 shrink-0" />
+                           class="inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/55 bg-[rgba(4,16,35,0.45)] px-4 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] max-md:h-11 max-md:min-h-11 max-md:rounded-xl max-md:border-white/35 max-md:bg-white/[0.06] max-md:px-3 max-md:text-[13px] min-[1100px]:h-12 min-[1100px]:w-auto min-[1100px]:px-4 min-[1100px]:text-[13px]">
+                            <x-litus-icon name="credit-card" class="h-4 w-4 shrink-0 max-md:h-3.5 max-md:w-3.5" />
                             View Ownership Plans
                         </a>
                     </div>
@@ -116,7 +118,7 @@
                 <x-product-360-viewer
                     :frames="$spinImages"
                     alt="{{ $motorcycle->name }}"
-                    img-class="mx-auto max-h-[520px] w-full max-w-[1000px] object-contain"
+                    img-class="mx-auto max-h-[520px] w-full max-w-[1000px] object-contain max-md:max-h-[40vh]"
                     class="relative z-[1] cursor-grab select-none min-[1100px]:hidden" />
 
                 {{-- Desktop spacer keeps grid balance --}}
@@ -124,33 +126,7 @@
             </div>
         </div>
 
-        <div class="absolute bottom-0 left-0 right-0 z-[3] border-t border-white/12 bg-[rgba(3,13,25,0.78)] backdrop-blur-sm max-[1100px]:relative max-[1100px]:mt-5">
-            <div class="litus-container">
-                <div class="grid min-h-[76px] grid-cols-1 min-[1100px]:grid-cols-4 max-[1100px]:min-[701px]:grid-cols-2">
-                    @foreach ($heroFeatures as $index => $feature)
-                        <div @class([
-                            'relative flex items-center gap-3 py-3 sm:gap-3.5 min-[1100px]:py-3.5',
-                            'border-b border-white/12 max-md:border-b' => $index < count($heroFeatures) - 1,
-                            'max-md:last:border-b-0',
-                            'min-[1100px]:border-r min-[1100px]:border-white/16 min-[1100px]:pr-4' => $index < count($heroFeatures) - 1,
-                            'min-[1100px]:pl-0' => $index === 0,
-                            'min-[1100px]:pl-4' => $index > 0,
-                            'max-[1100px]:min-[701px]:border-r max-[1100px]:min-[701px]:border-white/16' => in_array($index, [0, 2]),
-                            'max-[1100px]:min-[701px]:border-b max-[1100px]:min-[701px]:border-white/12' => in_array($index, [0, 1]),
-                            'max-[1100px]:min-[701px]:border-r-0' => $index === 1,
-                        ])>
-                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-white/35 text-white shadow-[0_0_16px_rgba(255,255,255,0.06)] sm:h-10 sm:w-10">
-                                <x-litus-icon :name="$feature['icon']" class="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
-                            </div>
-                            <div class="min-w-0 text-left">
-                                <h4 class="mb-0.5 text-sm font-extrabold leading-tight text-white sm:text-[15px]">{{ $feature['title'] }}</h4>
-                                <p class="text-xs font-medium leading-snug text-[#c9d4df] sm:text-[13px]">{{ $feature['desc'] }}</p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
+        <x-litus-hero-features :features="$heroFeatures" />
     </section>
 
     {{-- GALLERY + HIGHLIGHTS --}}
@@ -171,7 +147,7 @@
                         </svg>
                     </button>
 
-                    <div class="relative flex h-[340px] w-full items-center justify-center overflow-hidden bg-cover bg-center min-[1150px]:h-[440px]"
+                    <div class="relative flex h-[340px] w-full items-center justify-center overflow-hidden bg-cover bg-center max-md:h-[260px] min-[1150px]:h-[440px]"
                          style="background-image: url('{{ $galleryMainBg }}');">
                         <button type="button"
                                 data-gallery-prev

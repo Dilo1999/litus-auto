@@ -6,6 +6,7 @@ import './parts';
 import './product-gallery';
 import './product-spin';
 import './contact';
+import './hero-features';
 import './service-center';
 import './ownership-plans';
 import './gallery';

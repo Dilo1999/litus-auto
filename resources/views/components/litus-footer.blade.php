@@ -31,7 +31,7 @@
             </p>
             <div class="flex gap-3">
                 @foreach ($socialLinks as $social)
-                    <a href="#" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-gray-400 transition-colors hover:border-white/30 hover:text-white">
+                    <a href="#" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-gray-400 transition-colors hover:border-white/30 hover:text-white max-lg:h-11 max-lg:w-11">
                         <x-litus-icon :name="$social" class="h-[15px] w-[15px]" />
                     </a>
                 @endforeach
@@ -78,14 +78,15 @@
             </ul>
 
             <h4 class="mb-3 text-sm font-bold uppercase tracking-wider text-white">Stay Updated</h4>
-            <form class="flex" action="#" method="post">
+            <form class="flex max-sm:flex-col max-sm:gap-2" action="#" method="post">
                 @csrf
                 <input type="email"
                        name="email"
                        placeholder="Your email"
-                       class="flex-1 rounded-l-full border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder-gray-500 outline-none">
-                <button type="submit" class="flex items-center gap-1 rounded-r-full bg-litus-red px-4 py-2 text-sm font-bold text-white">
+                       class="min-w-0 flex-1 rounded-l-full border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder-gray-500 outline-none max-sm:rounded-full max-sm:px-4 max-sm:py-3">
+                <button type="submit" class="flex items-center justify-center gap-1 rounded-r-full bg-litus-red px-4 py-2 text-sm font-bold text-white max-sm:min-h-11 max-sm:w-full max-sm:rounded-full">
                     <x-litus-icon name="send" class="h-[13px] w-[13px]" />
+                    <span class="hidden max-sm:inline">Subscribe</span>
                 </button>
             </form>
         </div>
