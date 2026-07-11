@@ -255,31 +255,32 @@
                     </p>
                 </div>
 
-                <div class="mx-auto grid max-w-[560px] grid-cols-1 gap-5 max-md:gap-4 min-[1101px]:max-w-none min-[1101px]:grid-cols-3">
+                <div class="mx-auto grid max-w-[560px] grid-cols-1 gap-5 max-md:-mx-4 max-md:flex max-md:max-w-none max-md:snap-x max-md:snap-mandatory max-md:gap-4 max-md:overflow-x-auto max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden min-[1101px]:max-w-none min-[1101px]:grid-cols-3">
                     @foreach ($services as $service)
-                        <article class="group relative overflow-hidden rounded-xl border border-[rgba(7,21,47,0.05)] bg-white shadow-[0_12px_28px_rgba(7,21,47,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(7,21,47,0.11)] max-md:rounded-2xl min-[1101px]:min-h-[520px]">
-                            <div class="relative h-[200px] overflow-hidden bg-[#dce3ed] max-[650px]:h-[170px] min-[651px]:h-[230px]">
+                        <article class="group relative overflow-hidden rounded-xl border border-[rgba(7,21,47,0.05)] bg-white shadow-[0_12px_28px_rgba(7,21,47,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(7,21,47,0.11)] max-md:w-[88%] max-md:shrink-0 max-md:snap-center max-md:rounded-2xl min-[1101px]:min-h-[520px]">
+                            <div class="relative h-[200px] overflow-hidden bg-[#dce3ed] max-md:h-[210px] max-[650px]:h-[210px] min-[651px]:h-[230px] max-md:min-[651px]:h-[210px]">
                                 <img src="{{ $service['img'] }}"
                                      alt="{{ $service['title'] }}"
                                      class="block h-full w-full object-cover transition-transform duration-[450ms] ease-out group-hover:scale-105"
                                      loading="lazy">
-                                <div class="pointer-events-none absolute -bottom-9 -left-[8%] -right-[8%] z-[2] h-[84px] rounded-t-[50%] bg-white max-[650px]:-bottom-7 max-[650px]:h-[68px]"></div>
+                                <div class="pointer-events-none absolute -bottom-9 -left-[8%] -right-[8%] z-[2] h-[84px] rounded-t-[50%] bg-white max-md:-bottom-8 max-md:h-[76px] max-[650px]:-bottom-8 max-[650px]:h-[76px]"></div>
                             </div>
 
-                            <div class="absolute left-1/2 top-[168px] z-[5] flex h-[64px] w-[64px] -translate-x-1/2 items-center justify-center rounded-full bg-white text-[#0065ef] shadow-[0_10px_22px_rgba(7,21,47,0.12)] max-[650px]:top-[142px] max-[650px]:h-[56px] max-[650px]:w-[56px] min-[651px]:top-[196px] min-[651px]:h-[70px] min-[651px]:w-[70px]">
-                                <x-litus-icon :name="$service['icon']" class="h-8 w-8 max-[650px]:h-7 max-[650px]:w-7 min-[651px]:h-9 min-[651px]:w-9" />
+                            <div class="absolute left-1/2 top-[168px] z-[5] flex h-[64px] w-[64px] -translate-x-1/2 items-center justify-center rounded-full bg-white text-[#0065ef] shadow-[0_10px_22px_rgba(7,21,47,0.12)] max-md:top-[178px] max-md:h-[64px] max-md:w-[64px] max-[650px]:top-[178px] max-[650px]:h-[64px] max-[650px]:w-[64px] min-[651px]:top-[196px] min-[651px]:h-[70px] min-[651px]:w-[70px] max-md:min-[651px]:top-[178px] max-md:min-[651px]:h-[64px] max-md:min-[651px]:w-[64px]">
+                                <x-litus-icon :name="$service['icon']" class="h-8 w-8 max-md:h-8 max-md:w-8 max-[650px]:h-8 max-[650px]:w-8 min-[651px]:h-9 min-[651px]:w-9 max-md:min-[651px]:h-8 max-md:min-[651px]:w-8" />
                             </div>
 
-                            <div class="px-5 pb-7 pt-14 text-center max-[650px]:px-4 max-[650px]:pb-5 max-[650px]:pt-12 min-[651px]:px-7 min-[651px]:pb-8 min-[651px]:pt-16">
-                                <h3 class="mb-2.5 text-lg font-black leading-tight text-[#07152f] max-[650px]:mb-2 max-[650px]:text-base min-[651px]:text-[20px]">{{ $service['title'] }}</h3>
-                                <div class="mx-auto mb-3.5 h-0.5 w-9 rounded-full bg-[#0065ef] max-[650px]:mb-3"></div>
-                                <p class="text-left text-[13px] font-medium leading-snug text-[#344054] max-[650px]:line-clamp-4 max-[650px]:text-center min-[651px]:text-[13.5px] min-[651px]:leading-[1.55]">
+                            <div class="px-5 pb-7 pt-14 text-center max-md:px-5 max-md:pb-6 max-md:pt-14 max-[650px]:px-5 max-[650px]:pb-6 max-[650px]:pt-14 min-[651px]:px-7 min-[651px]:pb-8 min-[651px]:pt-16 max-md:min-[651px]:px-5 max-md:min-[651px]:pb-6 max-md:min-[651px]:pt-14">
+                                <h3 class="mb-2.5 text-lg font-black leading-tight text-[#07152f] max-md:mb-2.5 max-md:text-[18px] max-[650px]:mb-2.5 max-[650px]:text-[18px] min-[651px]:text-[20px] max-md:min-[651px]:mb-2.5 max-md:min-[651px]:text-[18px]">{{ $service['title'] }}</h3>
+                                <div class="mx-auto mb-3.5 h-0.5 w-9 rounded-full bg-[#0065ef] max-md:mb-3.5 max-[650px]:mb-3.5"></div>
+                                <p class="text-left text-[13px] font-medium leading-snug text-[#344054] max-md:line-clamp-5 max-md:text-center max-md:text-[13.5px] max-md:leading-relaxed max-[650px]:line-clamp-5 max-[650px]:text-center max-[650px]:text-[13.5px] min-[651px]:text-[13.5px] min-[651px]:leading-[1.55]">
                                     {{ $service['text'] }}
                                 </p>
                             </div>
                         </article>
                     @endforeach
                 </div>
+                <p class="mt-3 hidden text-center text-xs font-semibold text-[#8a94a6] max-md:block">Swipe for more services</p>
             </div>
         </div>
 
