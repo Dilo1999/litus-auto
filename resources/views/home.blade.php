@@ -109,20 +109,28 @@
     </section>
 
     {{-- ONGOING PROMOTIONS --}}
-    <section class="relative overflow-hidden border border-[#dfe3ea] py-[38px] pb-7 max-md:py-8 max-md:pb-9 max-sm:py-[30px]"
-             style="background: linear-gradient(rgba(255,255,255,0.94), rgba(255,255,255,0.94)), radial-gradient(circle at 10% 20%, rgba(6,21,48,0.08), transparent 25%);">
-        <div class="pointer-events-none absolute inset-0 opacity-40"
+    <section class="relative overflow-hidden border border-[#dfe3ea] bg-[#f7f8fa] py-[38px] pb-7 max-md:border-0 max-md:py-8 max-md:pb-8 max-sm:py-7 min-[651px]:bg-white">
+        <div class="pointer-events-none absolute inset-0 hidden opacity-100 min-[651px]:block"
+             style="background: linear-gradient(rgba(255,255,255,0.94), rgba(255,255,255,0.94)), radial-gradient(circle at 10% 20%, rgba(6,21,48,0.08), transparent 25%);"></div>
+        <div class="pointer-events-none absolute inset-0 hidden opacity-40 min-[651px]:block"
              style="background-image: linear-gradient(30deg, rgba(6,21,48,0.035) 12%, transparent 12.5%, transparent 87%, rgba(6,21,48,0.035) 87.5%, rgba(6,21,48,0.035)), linear-gradient(150deg, rgba(6,21,48,0.035) 12%, transparent 12.5%, transparent 87%, rgba(6,21,48,0.035) 87.5%, rgba(6,21,48,0.035)); background-size: 55px 95px;"></div>
 
-        <div class="relative z-[2] litus-container">
-            <div class="mb-9 flex flex-col items-start justify-between gap-5 max-md:mb-6 max-md:gap-3 min-[651px]:mb-[35px] min-[651px]:flex-row min-[651px]:gap-5">
-                <div>
-                    <span class="mb-1.5 block text-sm font-black uppercase tracking-wide text-[#0065ef] max-md:text-[11px] max-md:tracking-[0.14em]">Special Deals</span>
-                    <h2 class="mb-3.5 text-[30px] font-black leading-tight tracking-[-0.5px] text-[#07152f] max-md:mb-2 max-md:text-[26px] min-[651px]:text-4xl">Ongoing Promotions</h2>
-                    <p class="text-[15px] font-semibold text-[#424c5e] max-md:text-sm">Limited-time deals on selected motorcycles and scooters.</p>
+        <div class="relative z-[2] litus-container max-md:!px-0">
+            <div class="mb-9 flex flex-col items-start justify-between gap-5 max-md:mb-5 max-md:gap-3 max-md:px-4 min-[651px]:mb-[35px] min-[651px]:flex-row min-[651px]:gap-5">
+                <div class="max-md:w-full">
+                    <div class="mb-2 flex items-center justify-between gap-3 max-md:mb-1.5">
+                        <span class="block text-sm font-black uppercase tracking-wide text-[#0065ef] max-md:text-[11px] max-md:tracking-[0.14em]">Special Deals</span>
+                        <a href="{{ route('motorcycles') }}"
+                           class="hidden items-center gap-1.5 text-[12px] font-black text-[#0065ef] max-md:inline-flex">
+                            View all
+                            <x-litus-icon name="arrow-right" class="h-3.5 w-3.5" />
+                        </a>
+                    </div>
+                    <h2 class="mb-3.5 text-[30px] font-black leading-tight tracking-[-0.5px] text-[#07152f] max-md:mb-1.5 max-md:text-[24px] min-[651px]:text-4xl">Ongoing Promotions</h2>
+                    <p class="text-[15px] font-semibold text-[#424c5e] max-md:max-w-[32ch] max-md:text-[13px] max-md:leading-snug">Limited-time deals on selected motorcycles and scooters.</p>
                 </div>
                 <a href="{{ route('motorcycles') }}"
-                   class="group/viewall inline-flex min-h-11 items-center gap-2.5 text-[15px] font-black text-[#07152f] transition-all duration-300 hover:gap-4 hover:text-[#0065ef] max-md:text-[#0065ef] min-[651px]:mt-[58px]">
+                   class="group/viewall inline-flex min-h-11 items-center gap-2.5 text-[15px] font-black text-[#07152f] transition-all duration-300 hover:gap-4 hover:text-[#0065ef] max-md:hidden min-[651px]:mt-[58px]">
                     View All Promotions
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
@@ -140,20 +148,30 @@
                     <x-litus-icon name="chevron-right" class="h-6 w-6" />
                 </button>
 
-                <div class="grid grid-cols-1 gap-x-7 gap-y-6 max-[650px]:-mx-4 max-[650px]:flex max-[650px]:snap-x max-[650px]:snap-mandatory max-[650px]:gap-4 max-[650px]:overflow-x-auto max-[650px]:px-4 max-[650px]:pb-2 max-[650px]:[scrollbar-width:none] max-[650px]:[&::-webkit-scrollbar]:hidden min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4">
+                <div class="grid grid-cols-1 gap-x-7 gap-y-6 max-[650px]:flex max-[650px]:snap-x max-[650px]:snap-mandatory max-[650px]:gap-3.5 max-[650px]:overflow-x-auto max-[650px]:scroll-smooth max-[650px]:px-4 max-[650px]:pb-1 max-[650px]:[scrollbar-width:none] max-[650px]:[&::-webkit-scrollbar]:hidden min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4"
+                     data-promo-slider>
                     @forelse ($promoMotorcycles as $motorcycle)
-                        <div class="max-[650px]:w-[82%] max-[650px]:shrink-0 max-[650px]:snap-start min-[651px]:contents">
+                        <div class="max-[650px]:w-[86%] max-[650px]:shrink-0 max-[650px]:snap-center min-[651px]:contents">
                             <x-card.promotion-card :motorcycle="$motorcycle" />
                         </div>
                     @empty
-                        <div class="col-span-full rounded-[10px] border border-dashed border-[#dfe3ea] bg-white/80 px-6 py-12 text-center max-[650px]:w-full">
+                        <div class="col-span-full rounded-[10px] border border-dashed border-[#dfe3ea] bg-white/80 px-6 py-12 text-center max-[650px]:mx-4 max-[650px]:w-auto">
                             <p class="font-semibold text-[#424c5e]">No active promotions at the moment.</p>
                             <p class="mt-1 text-sm text-[#667085]">Check back soon or browse our full motorcycle range.</p>
                         </div>
                     @endforelse
                 </div>
+
                 @if ($promoMotorcycles->isNotEmpty())
-                    <p class="mt-3 hidden text-center text-xs font-semibold text-[#8a94a6] max-[650px]:block">Swipe for more deals</p>
+                    <div class="mt-4 hidden items-center justify-center gap-1.5 max-[650px]:flex" aria-hidden="true">
+                        @foreach ($promoMotorcycles as $index => $motorcycle)
+                            <span @class([
+                                'h-1.5 rounded-full transition-all',
+                                'w-5 bg-[#0065ef]' => $index === 0,
+                                'w-1.5 bg-[#c5ccd6]' => $index !== 0,
+                            ])></span>
+                        @endforeach
+                    </div>
                 @endif
             </div>
         </div>
@@ -258,19 +276,21 @@
                 <div class="mx-auto grid max-w-[560px] grid-cols-1 gap-5 max-md:-mx-4 max-md:flex max-md:max-w-none max-md:snap-x max-md:snap-mandatory max-md:gap-4 max-md:overflow-x-auto max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden min-[1101px]:max-w-none min-[1101px]:grid-cols-3">
                     @foreach ($services as $service)
                         <article class="group relative overflow-hidden rounded-xl border border-[rgba(7,21,47,0.05)] bg-white shadow-[0_12px_28px_rgba(7,21,47,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(7,21,47,0.11)] max-md:w-[88%] max-md:shrink-0 max-md:snap-center max-md:rounded-2xl min-[1101px]:min-h-[520px]">
-                            <div class="relative h-[200px] overflow-hidden bg-[#dce3ed] max-md:h-[210px] max-[650px]:h-[210px] min-[651px]:h-[230px] max-md:min-[651px]:h-[210px]">
-                                <img src="{{ $service['img'] }}"
-                                     alt="{{ $service['title'] }}"
-                                     class="block h-full w-full object-cover transition-transform duration-[450ms] ease-out group-hover:scale-105"
-                                     loading="lazy">
-                                <div class="pointer-events-none absolute -bottom-9 -left-[8%] -right-[8%] z-[2] h-[84px] rounded-t-[50%] bg-white max-md:-bottom-8 max-md:h-[76px] max-[650px]:-bottom-8 max-[650px]:h-[76px]"></div>
+                            <div class="relative">
+                                <div class="relative h-[200px] overflow-hidden bg-[#dce3ed] max-md:h-[210px] max-[650px]:h-[210px] min-[651px]:h-[230px] max-md:min-[651px]:h-[210px]">
+                                    <img src="{{ $service['img'] }}"
+                                         alt="{{ $service['title'] }}"
+                                         class="block h-full w-full object-cover transition-transform duration-[450ms] ease-out group-hover:scale-105"
+                                         loading="lazy">
+                                </div>
+                                <div class="pointer-events-none absolute -bottom-10 -left-[10%] -right-[10%] z-[2] h-[88px] rounded-t-[50%] bg-white max-md:-bottom-9 max-md:h-[80px] max-[650px]:-bottom-9 max-[650px]:h-[80px]"></div>
                             </div>
 
                             <div class="absolute left-1/2 top-[168px] z-[5] flex h-[64px] w-[64px] -translate-x-1/2 items-center justify-center rounded-full bg-white text-[#0065ef] shadow-[0_10px_22px_rgba(7,21,47,0.12)] max-md:top-[178px] max-md:h-[64px] max-md:w-[64px] max-[650px]:top-[178px] max-[650px]:h-[64px] max-[650px]:w-[64px] min-[651px]:top-[196px] min-[651px]:h-[70px] min-[651px]:w-[70px] max-md:min-[651px]:top-[178px] max-md:min-[651px]:h-[64px] max-md:min-[651px]:w-[64px]">
                                 <x-litus-icon :name="$service['icon']" class="h-8 w-8 max-md:h-8 max-md:w-8 max-[650px]:h-8 max-[650px]:w-8 min-[651px]:h-9 min-[651px]:w-9 max-md:min-[651px]:h-8 max-md:min-[651px]:w-8" />
                             </div>
 
-                            <div class="px-5 pb-7 pt-14 text-center max-md:px-5 max-md:pb-6 max-md:pt-14 max-[650px]:px-5 max-[650px]:pb-6 max-[650px]:pt-14 min-[651px]:px-7 min-[651px]:pb-8 min-[651px]:pt-16 max-md:min-[651px]:px-5 max-md:min-[651px]:pb-6 max-md:min-[651px]:pt-14">
+                            <div class="relative z-[3] -mt-px bg-white px-5 pb-7 pt-14 text-center max-md:px-5 max-md:pb-6 max-md:pt-14 max-[650px]:px-5 max-[650px]:pb-6 max-[650px]:pt-14 min-[651px]:px-7 min-[651px]:pb-8 min-[651px]:pt-16 max-md:min-[651px]:px-5 max-md:min-[651px]:pb-6 max-md:min-[651px]:pt-14">
                                 <h3 class="mb-2.5 text-lg font-black leading-tight text-[#07152f] max-md:mb-2.5 max-md:text-[18px] max-[650px]:mb-2.5 max-[650px]:text-[18px] min-[651px]:text-[20px] max-md:min-[651px]:mb-2.5 max-md:min-[651px]:text-[18px]">{{ $service['title'] }}</h3>
                                 <div class="mx-auto mb-3.5 h-0.5 w-9 rounded-full bg-[#0065ef] max-md:mb-3.5 max-[650px]:mb-3.5"></div>
                                 <p class="text-left text-[13px] font-medium leading-snug text-[#344054] max-md:line-clamp-5 max-md:text-center max-md:text-[13.5px] max-md:leading-relaxed max-[650px]:line-clamp-5 max-[650px]:text-center max-[650px]:text-[13.5px] min-[651px]:text-[13.5px] min-[651px]:leading-[1.55]">

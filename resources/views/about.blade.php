@@ -256,21 +256,21 @@
             </div>
 
             {{-- Team members --}}
-            <div class="mb-6 grid grid-cols-1 gap-6 min-[701px]:grid-cols-2 min-[1151px]:grid-cols-4">
+            <div class="mb-6 grid grid-cols-2 gap-3 max-md:gap-2.5 min-[701px]:gap-6 min-[1151px]:grid-cols-4">
                 @foreach ($teamMembers as $member)
-                    <div class="min-h-[335px] rounded-[10px] border border-[#07152f]/[0.05] bg-white px-7 pb-[26px] pt-7 text-center shadow-[0_14px_34px_rgba(7,21,47,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_46px_rgba(7,21,47,0.12)]">
-                        <div class="mx-auto h-[150px] w-[150px] overflow-hidden rounded-full bg-[#eef2f7] shadow-[0_12px_28px_rgba(7,21,47,0.08)]">
+                    <div class="rounded-[10px] border border-[#07152f]/[0.05] bg-white px-3 pb-4 pt-4 text-center shadow-[0_14px_34px_rgba(7,21,47,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_46px_rgba(7,21,47,0.12)] max-md:min-h-0 min-[701px]:min-h-[335px] min-[701px]:px-7 min-[701px]:pb-[26px] min-[701px]:pt-7">
+                        <div class="mx-auto h-[88px] w-[88px] overflow-hidden rounded-full bg-[#eef2f7] shadow-[0_12px_28px_rgba(7,21,47,0.08)] max-md:h-[80px] max-md:w-[80px] min-[701px]:h-[150px] min-[701px]:w-[150px]">
                             <img src="{{ $member['img'] }}"
                                  alt="{{ $member['name'] }}"
                                  class="h-full w-full object-cover object-top">
                         </div>
-                        <div class="relative z-[3] mx-auto -mt-[22px] mb-[18px] flex h-[52px] w-[52px] items-center justify-center rounded-full border border-[#e2e8f0] bg-white text-[#0065ef] shadow-[0_8px_22px_rgba(7,21,47,0.08)]">
-                            <x-litus-icon name="award" class="h-6 w-6" />
+                        <div class="relative z-[3] mx-auto -mt-3.5 mb-2.5 flex h-9 w-9 items-center justify-center rounded-full border border-[#e2e8f0] bg-white text-[#0065ef] shadow-[0_8px_22px_rgba(7,21,47,0.08)] max-md:-mt-3 max-md:mb-2 max-md:h-8 max-md:w-8 min-[701px]:-mt-[22px] min-[701px]:mb-[18px] min-[701px]:h-[52px] min-[701px]:w-[52px]">
+                            <x-litus-icon name="award" class="h-4 w-4 max-md:h-3.5 max-md:w-3.5 min-[701px]:h-6 min-[701px]:w-6" />
                         </div>
-                        <h4 class="mb-3 text-[22px] font-black text-[#07152f]">{{ $member['name'] }}</h4>
-                        <p class="mb-[22px] text-base font-extrabold text-[#0065ef]">{{ $member['role'] }}</p>
-                        <div class="mx-auto mb-5 h-px w-[150px] bg-[#dce3ed]"></div>
-                        <p class="mx-auto max-w-[230px] text-base font-medium leading-snug text-[#667085]">{{ $member['dept'] }}</p>
+                        <h4 class="mb-1 text-[13px] font-black leading-snug text-[#07152f] max-md:line-clamp-2 min-[701px]:mb-3 min-[701px]:text-[22px]">{{ $member['name'] }}</h4>
+                        <p class="mb-2.5 text-[11px] font-extrabold text-[#0065ef] max-md:mb-2 min-[701px]:mb-[22px] min-[701px]:text-base">{{ $member['role'] }}</p>
+                        <div class="mx-auto mb-2.5 h-px w-16 bg-[#dce3ed] max-md:mb-2 min-[701px]:mb-5 min-[701px]:w-[150px]"></div>
+                        <p class="mx-auto max-w-[230px] text-[10px] font-medium leading-snug text-[#667085] max-md:line-clamp-2 min-[701px]:text-base">{{ $member['dept'] }}</p>
                     </div>
                 @endforeach
             </div>
@@ -293,15 +293,15 @@
                              class="block w-full h-auto object-contain">
                     </div>
 
-                    <div class="col-span-full mt-2.5 grid grid-cols-1 gap-[22px] min-[651px]:grid-cols-2 min-[1051px]:grid-cols-4">
+                    <div class="col-span-full mt-2.5 grid grid-cols-2 gap-2.5 max-md:gap-2 min-[651px]:gap-[22px] min-[1051px]:grid-cols-4">
                         @foreach ($opStats as $stat)
-                            <div class="flex items-center gap-[15px] rounded-lg border border-white/25 bg-white/[0.04] px-[18px] py-[17px] max-[650px]:items-start">
-                                <div class="flex h-[55px] w-[55px] shrink-0 items-center justify-center rounded-full bg-white text-[#0065ef]">
-                                    <x-litus-icon :name="$stat['icon']" class="h-6 w-6" />
+                            <div class="flex items-center gap-3 rounded-lg border border-white/25 bg-white/[0.04] px-3 py-3 max-md:flex-col max-md:items-center max-md:gap-2 max-md:px-2.5 max-md:py-3 max-md:text-center min-[651px]:gap-[15px] min-[651px]:px-[18px] min-[651px]:py-[17px] min-[651px]:text-left">
+                                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#0065ef] max-md:h-10 max-md:w-10 min-[651px]:h-[55px] min-[651px]:w-[55px]">
+                                    <x-litus-icon :name="$stat['icon']" class="h-5 w-5 max-md:h-[18px] max-md:w-[18px] min-[651px]:h-6 min-[651px]:w-6" />
                                 </div>
-                                <div>
-                                    <h4 class="mb-1 text-sm font-black text-white">{{ $stat['title'] }}</h4>
-                                    <p class="text-xs leading-snug text-[#dbe4ee]">{{ $stat['desc'] }}</p>
+                                <div class="min-w-0">
+                                    <h4 class="mb-0.5 text-[12px] font-black leading-tight text-white max-md:mb-1 min-[651px]:mb-1 min-[651px]:text-sm">{{ $stat['title'] }}</h4>
+                                    <p class="text-[10px] leading-snug text-[#dbe4ee] max-md:line-clamp-2 min-[651px]:text-xs">{{ $stat['desc'] }}</p>
                                 </div>
                             </div>
                         @endforeach
@@ -324,21 +324,19 @@
                 </p>
             </div>
 
-            <div class="mb-6 grid grid-cols-1 gap-5 min-[651px]:grid-cols-2 min-[651px]:gap-6 min-[1101px]:grid-cols-4">
+            <div class="mb-6 grid grid-cols-2 gap-3 max-md:gap-2.5 min-[651px]:gap-6 min-[1101px]:grid-cols-4">
                 @foreach ($showrooms as $showroom)
                     <div @class([
-                        'overflow-hidden border border-[#dfe3ea] bg-white shadow-[0_8px_22px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(0,0,0,0.1)]',
+                        'flex flex-col overflow-hidden border border-[#dfe3ea] bg-white shadow-[0_8px_22px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(0,0,0,0.1)]',
                         'rounded-xl' => $showroom['featured'],
-                        'rounded-[9px]' => ! $showroom['featured'],
+                        'rounded-[9px] max-md:rounded-xl' => ! $showroom['featured'],
                         'min-[1101px]:col-span-2' => $showroom['featured'],
                     ])>
                         <div @class([
                             'overflow-hidden bg-[#dfe5ec]',
                             'relative' => ! empty($showroom['images']),
-                            'h-[220px]' => $showroom['featured'],
-                            'h-[200px]' => ! $showroom['featured'],
-                            'min-[651px]:h-[280px]' => $showroom['featured'],
-                            'min-[651px]:h-[220px]' => ! $showroom['featured'],
+                            'h-[110px] min-[651px]:h-[280px]' => $showroom['featured'],
+                            'h-[110px] min-[651px]:h-[220px]' => ! $showroom['featured'],
                         ])
                              @if (! empty($showroom['images'])) data-showroom-slider data-interval="4000" @endif>
                             @if (! empty($showroom['images']))
@@ -352,13 +350,13 @@
                                              'z-0 opacity-0' => $index !== 0,
                                          ])>
                                 @endforeach
-                                <div class="absolute bottom-3 left-1/2 z-[2] flex -translate-x-1/2 gap-1.5">
+                                <div class="absolute bottom-2 left-1/2 z-[2] flex -translate-x-1/2 gap-1 max-md:bottom-1.5 max-md:gap-1 min-[651px]:bottom-3 min-[651px]:gap-1.5">
                                     @foreach ($showroom['images'] as $index => $image)
                                         <span data-showroom-dot
                                               @class([
-                                                  'h-1.5 rounded-full bg-white/50 transition-all duration-300',
-                                                  'w-5 bg-white' => $index === 0,
-                                                  'w-1.5' => $index !== 0,
+                                                  'h-1 rounded-full bg-white/50 transition-all duration-300 max-md:h-1 min-[651px]:h-1.5',
+                                                  'w-3.5 bg-white max-md:w-3 min-[651px]:w-5' => $index === 0,
+                                                  'w-1 max-md:w-1 min-[651px]:w-1.5' => $index !== 0,
                                               ])></span>
                                     @endforeach
                                 </div>
@@ -369,27 +367,29 @@
                             @endif
                         </div>
                         <div @class([
-                            'px-[18px] pb-4 pt-3.5' => ! $showroom['featured'],
-                            'px-6 pb-6 pt-5' => $showroom['featured'],
+                            'flex flex-1 flex-col px-2.5 pb-2.5 pt-2 max-md:px-2 max-md:pb-2 max-md:pt-1.5',
+                            'min-[651px]:px-[18px] min-[651px]:pb-4 min-[651px]:pt-3.5' => ! $showroom['featured'],
+                            'min-[651px]:px-6 min-[651px]:pb-6 min-[651px]:pt-5' => $showroom['featured'],
                         ])>
                             <h3 @class([
-                                'mb-2 font-black text-[#111b46]',
+                                'mb-1 font-black leading-snug text-[#111b46] max-md:mb-0.5 max-md:line-clamp-2 max-md:text-[12px]',
                                 'text-base' => ! $showroom['featured'],
-                                'text-lg min-[651px]:text-xl' => $showroom['featured'],
+                                'text-base min-[651px]:text-xl' => $showroom['featured'],
                             ])>{{ $showroom['name'] }}</h3>
                             <p @class([
-                                'mb-3.5 font-semibold leading-snug text-[#404b60]',
+                                'mb-2 font-semibold leading-snug text-[#404b60] max-md:mb-2 max-md:line-clamp-2 max-md:text-[10px]',
                                 'text-[13px]' => ! $showroom['featured'],
-                                'text-sm min-[651px]:text-[15px]' => $showroom['featured'],
+                                'text-[12px] min-[651px]:text-[15px]' => $showroom['featured'],
                             ])>{{ $showroom['address'] }}</p>
                             <a href="{{ route('contact') }}"
                                @class([
-                                   'group/contact inline-flex items-center justify-center gap-3 rounded-[5px] bg-[#061a45] font-black text-white transition-colors duration-300 hover:bg-[#0065ef]',
-                                   'h-8 min-w-[140px] px-[18px] text-[13px] max-md:h-10' => ! $showroom['featured'],
-                                   'h-10 min-w-[160px] px-6 text-sm' => $showroom['featured'],
+                                   'group/contact mt-auto inline-flex w-full items-center justify-center gap-1.5 rounded-[5px] bg-[#061a45] font-black text-white transition-colors duration-300 hover:bg-[#0065ef] max-md:h-8 max-md:gap-1 max-md:px-2 max-md:text-[10px]',
+                                   'h-8 min-w-0 px-2 text-[11px] min-[651px]:h-8 min-[651px]:min-w-[140px] min-[651px]:px-[18px] min-[651px]:text-[13px]' => ! $showroom['featured'],
+                                   'h-8 min-w-0 px-2 text-[11px] min-[651px]:h-10 min-[651px]:min-w-[160px] min-[651px]:px-6 min-[651px]:text-sm' => $showroom['featured'],
                                ])>
-                                Contact Now
-                                <x-litus-icon name="arrow-right" class="h-4 w-4 text-[#0065ef] transition-colors group-hover/contact:text-white" />
+                                <span class="max-md:hidden min-[651px]:inline">Contact Now</span>
+                                <span class="min-[651px]:hidden">Contact</span>
+                                <x-litus-icon name="arrow-right" class="h-3 w-3 text-[#0065ef] transition-colors group-hover/contact:text-white max-md:h-3 max-md:w-3 min-[651px]:h-4 min-[651px]:w-4" />
                             </a>
                         </div>
                     </div>
