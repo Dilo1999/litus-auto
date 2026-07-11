@@ -54,7 +54,7 @@
             <div class="relative z-[2] grid grid-cols-1 items-center gap-8 min-[1100px]:pointer-events-none min-[1100px]:grid-cols-[50%_50%] min-[1100px]:gap-5">
                 <div class="max-w-[650px] text-left max-[1100px]:mx-auto max-[1100px]:text-center min-[1100px]:pointer-events-auto min-[1100px]:max-w-none">
                     <p class="mb-6 text-base font-black uppercase tracking-[2px] text-[#0065ef] sm:text-lg max-md:mb-5 max-md:text-[15px]">
-                        Category: {{ $motorcycle->category }}
+                        {{ $motorcycle->category }}
                     </p>
 
                     <h1 class="mb-7 font-display text-[clamp(2.75rem,5.5vw,5.125rem)] font-black leading-none tracking-[-0.02em] text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.7)] max-md:text-5xl">
@@ -64,15 +64,14 @@
                     <div>
                         @if ($motorcycle->hasPromotion())
                             <p class="text-lg font-extrabold text-white sm:text-[22px]">
-                                Original Price:
                                 <span class="text-[#d7dce5] line-through opacity-80">{{ $motorcycle->formattedOriginalPrice() }}</span>
                             </p>
                             <p class="mb-8 text-lg font-extrabold text-white sm:text-[22px]">
-                                Sale Price: {{ $motorcycle->formattedSalePrice() }}
+                                {{ $motorcycle->formattedSalePrice() }}
                             </p>
                         @else
                             <p class="mb-8 text-lg font-extrabold text-white sm:text-[22px]">
-                                Price: {{ $motorcycle->formattedOriginalPrice() }}
+                                {{ $motorcycle->formattedOriginalPrice() }}
                             </p>
                         @endif
                     </div>
@@ -82,7 +81,7 @@
                         <span class="absolute left-2.5 top-[-26px] rounded-t-md bg-[#0065ef] px-3.5 py-2 text-sm font-black text-white">
                             {{ $motorcycle->offerLabel() }}
                         </span>
-                        <div class="rounded-[9px] bg-[#0065ef] px-5 py-4 text-2xl font-black text-white shadow-[0_12px_28px_rgba(0,101,239,0.35)] sm:px-[22px] sm:py-[19px] sm:text-[34px]">
+                        <div class="rounded-[9px] border-2 border-[#0065ef] bg-transparent px-5 py-4 text-2xl font-black text-[#0065ef] transition-all duration-300 hover:bg-[#0065ef] hover:text-white hover:shadow-[0_12px_28px_rgba(0,101,239,0.35)] sm:px-[22px] sm:py-[19px] sm:text-[34px]">
                             Special Discount: {{ $motorcycle->formattedDiscount() }}
                         </div>
                     </div>
