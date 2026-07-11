@@ -70,9 +70,31 @@
     </section>
 
     {{-- FILTER BAR --}}
-    <section class="border-b border-gray-200 bg-gray-50 py-8">
+    <section class="border-b border-gray-200 bg-gray-50 py-8 max-md:py-5">
         <div class="litus-container">
-            <div class="flex flex-col items-start gap-4 rounded-2xl bg-white p-5 shadow-md lg:flex-row lg:items-center">
+
+            {{-- Mobile: search + filter trigger --}}
+            <div class="mb-3 flex items-center gap-2.5 lg:hidden">
+                <div class="relative min-w-0 flex-1">
+                    <x-litus-icon name="search" class="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                    <input type="text"
+                           data-motorcycle-search
+                           placeholder="Search motorcycles..."
+                           class="w-full rounded-xl border border-gray-200 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-700 placeholder-gray-400 outline-none transition-all focus:border-[#0065ef] focus:ring-2 focus:ring-[#0065ef]/15">
+                </div>
+                <button type="button"
+                        data-motorcycle-filter-open
+                        class="relative inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-3.5 text-sm font-bold text-[#07152f] shadow-sm transition-colors active:bg-gray-50"
+                        aria-label="Open filters">
+                    <x-litus-icon name="sliders" class="h-4 w-4 text-[#0065ef]" />
+                    <span>Filters</span>
+                    <span data-motorcycle-filter-badge
+                          class="absolute -right-1.5 -top-1.5 hidden min-w-[18px] items-center justify-center rounded-full bg-[#0065ef] px-1 text-[10px] font-black leading-[18px] text-white"></span>
+                </button>
+            </div>
+
+            {{-- Desktop: inline filter bar --}}
+            <div class="hidden flex-col items-start gap-4 rounded-2xl bg-white p-5 shadow-md lg:flex lg:flex-row lg:items-center">
                 <div class="relative w-full flex-1">
                     <x-litus-icon name="search" class="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <input type="text"
@@ -81,16 +103,16 @@
                            class="w-full rounded-xl border border-gray-200 py-2.5 pl-10 pr-4 text-sm text-gray-700 placeholder-gray-400 outline-none transition-all focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
                 </div>
 
-                <div class="flex shrink-0 items-center gap-1 rounded-xl bg-gray-100 p-1 max-lg:w-full max-lg:flex-wrap">
+                <div class="flex shrink-0 items-center gap-1 rounded-xl bg-gray-100 p-1">
                     <button type="button"
                             data-motorcycle-brand="All"
-                            class="rounded-lg px-4 py-2 text-sm font-bold transition-all bg-litus-red text-white max-lg:min-h-10">
+                            class="rounded-lg px-4 py-2 text-sm font-bold transition-all bg-litus-red text-white">
                         All
                     </button>
                     @foreach ($brands as $brand)
                         <button type="button"
                                 data-motorcycle-brand="{{ $brand }}"
-                                class="rounded-lg px-4 py-2 text-sm font-bold text-gray-500 transition-all max-lg:min-h-10">
+                                class="rounded-lg px-4 py-2 text-sm font-bold text-gray-500 transition-all">
                             {{ $brand }}
                         </button>
                     @endforeach
@@ -104,22 +126,144 @@
                         </button>
                     @endforeach
                     <div class="relative">
-                        <select class="cursor-pointer appearance-none rounded-xl border border-gray-200 bg-white py-2 pl-3 pr-8 text-sm text-gray-600 outline-none">
-                            <option>Sort by Latest</option>
-                            <option>Sort by Price</option>
-                            <option>Sort by Popular</option>
+                        <select data-motorcycle-sort class="cursor-pointer appearance-none rounded-xl border border-gray-200 bg-white py-2 pl-3 pr-8 text-sm text-gray-600 outline-none">
+                            <option value="latest">Sort by Latest</option>
+                            <option value="price">Sort by Price</option>
+                            <option value="popular">Sort by Popular</option>
                         </select>
                         <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-2.5 top-1/2 h-[13px] w-[13px] -translate-y-1/2 text-gray-400" />
                     </div>
                 </div>
             </div>
 
-            <p class="mt-3 pl-1 text-sm text-gray-500">
+            <p class="mt-3 pl-1 text-sm text-gray-500 max-md:mt-2 max-md:pl-0">
                 Showing <span class="font-bold text-gray-800" data-motorcycle-count>{{ $motorcycles->count() }}</span> motorcycles
                 <span data-motorcycle-brand-wrap class="hidden">in <span class="font-bold text-gray-800" data-motorcycle-brand-label></span></span>
             </p>
         </div>
     </section>
+
+    {{-- Mobile filter drawer --}}
+    <div class="fixed inset-0 z-[80] lg:hidden"
+         data-motorcycle-filter-drawer
+         hidden
+         aria-hidden="true">
+        <button type="button"
+                class="absolute inset-0 bg-black/45 opacity-0 transition-opacity duration-300"
+                data-motorcycle-filter-backdrop
+                aria-label="Close filters"></button>
+
+        <aside class="absolute inset-y-0 left-0 flex w-[min(100%,340px)] -translate-x-full flex-col bg-[#f7f8fa] shadow-[8px_0_32px_rgba(7,21,47,0.18)] transition-transform duration-300 ease-out"
+               data-motorcycle-filter-panel
+               role="dialog"
+               aria-modal="true"
+               aria-labelledby="motorcycle-filters-title">
+            <div class="flex items-center justify-between border-b border-[#e6eaf0] bg-white px-5 py-4">
+                <h2 id="motorcycle-filters-title" class="text-lg font-black text-[#07152f]">Filters</h2>
+                <button type="button"
+                        data-motorcycle-filter-close
+                        class="flex h-9 w-9 items-center justify-center rounded-full text-[#5b6575] transition-colors hover:bg-gray-100"
+                        aria-label="Close filters">
+                    <x-litus-icon name="x" class="h-5 w-5" />
+                </button>
+            </div>
+
+            <div class="flex-1 overflow-y-auto px-5 py-5">
+                <div class="mb-6">
+                    <h3 class="mb-3 text-sm font-black text-[#0065ef]">Brand</h3>
+                    <div class="space-y-2.5">
+                        <label class="flex cursor-pointer items-center gap-3 text-sm font-semibold text-[#4d5566]">
+                            <input type="radio"
+                                   name="motorcycle-brand-drawer"
+                                   value="All"
+                                   data-motorcycle-brand-option
+                                   checked
+                                   class="h-4 w-4 accent-[#0065ef]">
+                            All brands
+                        </label>
+                        @foreach ($brands as $brand)
+                            <label class="flex cursor-pointer items-center gap-3 text-sm font-semibold text-[#4d5566]">
+                                <input type="radio"
+                                       name="motorcycle-brand-drawer"
+                                       value="{{ $brand }}"
+                                       data-motorcycle-brand-option
+                                       class="h-4 w-4 accent-[#0065ef]">
+                                {{ $brand }}
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="mb-3 text-sm font-black text-[#0065ef]">Engine Capacity</h3>
+                    <div class="relative">
+                        <select data-motorcycle-engine
+                                class="w-full cursor-pointer appearance-none rounded-xl border border-[#dce2ea] bg-white px-3.5 py-3 pr-10 text-sm font-semibold text-[#4d5566] outline-none focus:border-[#0065ef]">
+                            <option value="">Any capacity</option>
+                            <option value="110">Up to 110cc</option>
+                            <option value="125">111cc – 125cc</option>
+                            <option value="150">126cc – 150cc</option>
+                            <option value="200">151cc+</option>
+                        </select>
+                        <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="mb-3 text-sm font-black text-[#0065ef]">Price Range</h3>
+                    <div class="relative">
+                        <select data-motorcycle-price
+                                class="w-full cursor-pointer appearance-none rounded-xl border border-[#dce2ea] bg-white px-3.5 py-3 pr-10 text-sm font-semibold text-[#4d5566] outline-none focus:border-[#0065ef]">
+                            <option value="">Any price</option>
+                            <option value="low">Under MVR 40,000</option>
+                            <option value="mid">MVR 40,000 – 70,000</option>
+                            <option value="high">Above MVR 70,000</option>
+                        </select>
+                        <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="mb-3 text-sm font-black text-[#0065ef]">Availability</h3>
+                    <div class="relative">
+                        <select data-motorcycle-availability
+                                class="w-full cursor-pointer appearance-none rounded-xl border border-[#dce2ea] bg-white px-3.5 py-3 pr-10 text-sm font-semibold text-[#4d5566] outline-none focus:border-[#0065ef]">
+                            <option value="">All</option>
+                            <option value="in-stock">In stock</option>
+                            <option value="promotion">On promotion</option>
+                        </select>
+                        <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <h3 class="mb-3 text-sm font-black text-[#0065ef]">Sort By</h3>
+                    <div class="relative">
+                        <select data-motorcycle-sort
+                                class="w-full cursor-pointer appearance-none rounded-xl border border-[#dce2ea] bg-white px-3.5 py-3 pr-10 text-sm font-semibold text-[#4d5566] outline-none focus:border-[#0065ef]">
+                            <option value="latest">Latest</option>
+                            <option value="price">Price</option>
+                            <option value="popular">Popular</option>
+                        </select>
+                        <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-[#e6eaf0] bg-white px-5 py-4">
+                <button type="button"
+                        data-motorcycle-filter-apply
+                        class="mb-2.5 flex h-12 w-full items-center justify-center rounded-full bg-[#0065ef] text-[15px] font-black text-white transition-colors hover:bg-[#0052cc]">
+                    Show results
+                </button>
+                <button type="button"
+                        data-motorcycle-filter-clear
+                        class="flex h-12 w-full items-center justify-center rounded-full border border-[#d5dbe5] bg-white text-[15px] font-bold text-[#07152f] transition-colors hover:bg-gray-50">
+                    Clear all filters
+                </button>
+            </div>
+        </aside>
+    </div>
 
     {{-- PRODUCT GRID --}}
     <section id="inventory" class="bg-gray-50 py-14">
@@ -136,7 +280,7 @@
                 <p class="mt-1 text-sm">Try a different search or filter.</p>
             </div>
 
-            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" data-motorcycle-grid>
+            <div class="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4" data-motorcycle-grid>
                 @forelse ($motorcycles as $motorcycle)
                     <x-card.motorcycle-card :motorcycle="$motorcycle" />
                 @empty
