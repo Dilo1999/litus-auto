@@ -268,38 +268,89 @@
         <div class="litus-container space-y-4">
 
             {{-- Specifications --}}
-            <div class="animate-on-scroll" data-animate="fadeInUp">
+            @php
+                $keySpecLabels = ['Engine Capacity', 'Fuel Tank Capacity', 'Seat Height', 'Net Weight'];
+                $flatSpecs = collect($specGroups)->flatMap(fn ($group) => $group['specs']);
+                $keySpecs = collect($keySpecLabels)
+                    ->map(fn ($label) => $flatSpecs->firstWhere('label', $label))
+                    ->filter()
+                    ->values();
+            @endphp
+            <div class="animate-on-scroll" data-animate="fadeInUp" data-motorcycle-specs>
                 <div class="mb-6 text-center sm:mb-8">
                     <span class="mb-2 block text-xs font-black uppercase tracking-[0.08em] text-[#0065ef]">Technical Details</span>
                     <h2 class="font-montserrat text-[23px] font-bold tracking-wide text-[#111b46] sm:text-[28px]">{{ $motorcycle->name }} Specifications</h2>
                 </div>
 
-                <div class="grid grid-cols-1 gap-5 min-[650px]:grid-cols-2 min-[1100px]:grid-cols-4">
-                    @foreach ($specGroups as $group)
-                        <div class="animate-on-scroll overflow-hidden rounded-[10px] border border-[#dce3ee] bg-white shadow-[0_10px_30px_rgba(7,21,47,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_38px_rgba(7,21,47,0.09)]"
-                             data-animate="fadeInUp"
-                             data-delay="{{ $loop->index * 0.1 }}">
-                            <div class="flex h-[70px] items-center gap-4 border-b-2 border-[#0065ef] px-6">
-                                <div class="flex h-[34px] w-[34px] shrink-0 items-center justify-center text-[#07152f]">
-                                    <x-litus-icon :name="$group['icon']" class="h-7 w-7" />
-                                </div>
-                                <h3 class="text-sm font-bold uppercase tracking-wide text-[#07152f]">{{ $group['title'] }}</h3>
+                @if ($keySpecs->isNotEmpty())
+                    <div class="mb-5 grid grid-cols-2 gap-3 min-[900px]:grid-cols-4 min-[900px]:gap-4">
+                        @foreach ($keySpecs as $keySpec)
+                            <div class="rounded-xl border border-[#e3e8f0] bg-white px-4 py-4 text-center transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(7,21,47,0.08)] sm:px-5 sm:py-5">
+                                <p class="mb-1.5 text-[11px] font-bold uppercase tracking-[0.06em] text-[#7a8494] sm:text-xs">{{ $keySpec['label'] }}</p>
+                                <p class="font-montserrat text-xl font-bold leading-none text-[#07152f] sm:text-2xl">{{ $keySpec['value'] }}</p>
                             </div>
+                        @endforeach
+                    </div>
+                @endif
 
-                            <div class="px-5 pb-6 pt-1 sm:px-[22px] sm:pb-6 sm:pt-[18px]">
-                                @foreach ($group['specs'] as $index => $spec)
-                                    <div @class([
-                                        'grid grid-cols-[32px_1fr] items-center gap-3 py-4 min-[651px]:grid-cols-[32px_1fr_auto]',
-                                        'border-b border-dashed border-[#d7deea]' => $index < count($group['specs']) - 1,
-                                    ])>
-                                        <x-spec-icon :icon="$spec['icon']" :icon-url="$spec['icon_url']" class="h-8 w-8 shrink-0 text-[#07152f]" />
-                                        <span class="text-[13px] font-bold leading-snug text-[#25304a]">{{ $spec['label'] }}</span>
-                                        <span class="col-start-2 text-[13px] font-black leading-snug text-[#07152f] min-[651px]:col-auto min-[651px]:max-w-[115px] min-[651px]:text-right">{{ $spec['value'] }}</span>
-                                    </div>
-                                @endforeach
-                            </div>
+                <div class="overflow-hidden rounded-2xl border border-[#e3e8f0] bg-white">
+                    <div class="border-b border-[#eef1f5] bg-[#fbfcfe]">
+                        <div class="flex gap-1 overflow-x-auto px-3 py-2.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-2 sm:px-4"
+                             role="tablist"
+                             aria-label="Specification categories"
+                             data-specs-tabs>
+                            @foreach ($specGroups as $group)
+                                <button type="button"
+                                        role="tab"
+                                        id="spec-tab-{{ $loop->index }}"
+                                        aria-controls="spec-panel-{{ $loop->index }}"
+                                        aria-selected="{{ $loop->first ? 'true' : 'false' }}"
+                                        data-specs-tab="{{ $loop->index }}"
+                                        @class([
+                                            'inline-flex shrink-0 items-center gap-2 rounded-xl px-3.5 py-2.5 text-[13px] font-bold transition-all duration-200 sm:px-4 sm:text-sm',
+                                            'bg-[#0065ef] text-white shadow-[0_8px_18px_rgba(0,101,239,0.22)]' => $loop->first,
+                                            'bg-transparent text-[#4d5869] hover:bg-[#f0f4f9] hover:text-[#07152f]' => ! $loop->first,
+                                        ])>
+                                    <x-litus-icon :name="$group['icon']" class="h-4 w-4 shrink-0" />
+                                    <span class="whitespace-nowrap">{{ $group['title'] }}</span>
+                                </button>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
+
+                    <div class="p-4 sm:p-6" data-specs-panels>
+                        @foreach ($specGroups as $group)
+                            <div id="spec-panel-{{ $loop->index }}"
+                                 role="tabpanel"
+                                 aria-labelledby="spec-tab-{{ $loop->index }}"
+                                 data-specs-panel="{{ $loop->index }}"
+                                 @class([
+                                     'hidden' => ! $loop->first,
+                                 ])>
+                                <div class="mb-4 flex items-center gap-3 sm:mb-5">
+                                    <div class="flex h-10 w-10 items-center justify-center rounded-full bg-[#0065ef]/10 text-[#0065ef]">
+                                        <x-litus-icon :name="$group['icon']" class="h-5 w-5" />
+                                    </div>
+                                    <div>
+                                        <h3 class="font-montserrat text-base font-bold text-[#07152f] sm:text-lg">{{ $group['title'] }}</h3>
+                                        <p class="text-xs font-medium text-[#7a8494]">{{ count($group['specs']) }} specifications</p>
+                                    </div>
+                                </div>
+
+                                <div class="divide-y divide-[#eef1f5] overflow-hidden rounded-xl border border-[#eef1f5]">
+                                    @foreach ($group['specs'] as $spec)
+                                        <div class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 bg-white px-4 py-3.5 transition-colors hover:bg-[#f8fafc] sm:grid-cols-[40px_minmax(0,1fr)_auto] sm:gap-4 sm:px-5 sm:py-4">
+                                            <div class="hidden h-9 w-9 items-center justify-center rounded-lg bg-[#f3f6fa] text-[#07152f] sm:flex">
+                                                <x-spec-icon :icon="$spec['icon']" :icon-url="$spec['icon_url']" class="h-5 w-5 shrink-0" />
+                                            </div>
+                                            <span class="text-[13px] font-semibold leading-snug text-[#4d5869] sm:text-sm">{{ $spec['label'] }}</span>
+                                            <span class="text-right text-[13px] font-black leading-snug text-[#07152f] sm:text-sm">{{ $spec['value'] }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
 

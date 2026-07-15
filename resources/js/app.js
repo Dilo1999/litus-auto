@@ -5,6 +5,7 @@ import './motorcycles';
 import './parts';
 import './product-gallery';
 import './product-spin';
+import './motorcycle-specs';
 import './contact';
 import './hero-features';
 import './service-center';
