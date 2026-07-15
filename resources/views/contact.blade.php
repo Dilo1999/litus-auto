@@ -137,7 +137,7 @@
             </div>
 
             {{-- Mobile: compact action list --}}
-            <div class="overflow-hidden rounded-2xl border border-[#e6eaf0] bg-white shadow-[0_8px_24px_rgba(7,21,47,0.05)] md:hidden">
+            <div class="overflow-hidden rounded-2xl border border-[#e6eaf0] bg-white shadow-none md:hidden">
                 @foreach ($contactCards as $index => $card)
                     <a href="{{ $card['href'] }}"
                        target="{{ str_starts_with($card['href'], 'http') ? '_blank' : '_self' }}"
@@ -170,7 +170,7 @@
                     <a href="{{ $card['href'] }}"
                        target="{{ str_starts_with($card['href'], 'http') ? '_blank' : '_self' }}"
                        @if(str_starts_with($card['href'], 'http')) rel="noopener noreferrer" @endif
-                       class="group flex items-center gap-[22px] rounded-2xl border border-[#e8ecf2] bg-white p-6 shadow-[0_10px_28px_rgba(7,21,47,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(7,21,47,0.1)] lg:min-h-[145px]">
+                       class="group flex items-center gap-[22px] rounded-2xl border border-[#e8ecf2] bg-white p-6 shadow-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(7,21,47,0.1)] lg:min-h-[145px]">
                         <div class="flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-full bg-[#061530] text-[#0065ef] shadow-[0_8px_18px_rgba(6,21,48,0.2)]">
                             <x-litus-icon :name="$card['icon']" class="h-[30px] w-[30px]" />
                         </div>
@@ -195,11 +195,11 @@
         </div>
     </section>
 
-    {{-- FORM + MAP + SOCIAL + QUICK ASSISTANCE --}}
-    <section class="bg-[#f8f8f8] py-6 pb-11 max-md:py-8 max-md:pb-10" id="contact-form">
+    {{-- FORM + MAP --}}
+    <section class="bg-[#f8f8f8] py-14 min-[651px]:py-16" id="contact-form">
         <div class="litus-container">
 
-            <div class="mb-5 grid grid-cols-1 gap-4 lg:mb-[25px] lg:grid-cols-2 lg:items-stretch lg:gap-5">
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch lg:gap-5">
                 {{-- Message form --}}
                 <div class="flex h-full flex-col overflow-hidden rounded-2xl bg-gradient-to-br from-[#06152d] to-[#010a18] p-5 text-white shadow-[0_12px_30px_rgba(0,0,0,0.08)] max-md:rounded-2xl sm:p-7 max-sm:p-5">
                     <h2 class="font-montserrat mb-2 text-[22px] font-bold max-md:text-xl sm:mb-2.5 sm:text-2xl">Send Us a Message</h2>
@@ -279,8 +279,13 @@
                 </div>
             </div>
 
-            {{-- Connect With Us --}}
-            <div class="mb-4 flex flex-col items-center justify-between gap-5 overflow-hidden rounded-2xl bg-white px-5 py-6 shadow-[0_12px_30px_rgba(0,0,0,0.08)] max-lg:text-center sm:gap-6 sm:px-9 sm:py-7 lg:mb-6 lg:flex-row lg:rounded-[10px]">
+        </div>
+    </section>
+
+    {{-- CONNECT WITH US --}}
+    <section class="border-t border-[#e6eaf0] bg-white py-12 min-[651px]:py-16">
+        <div class="litus-container">
+            <div class="flex flex-col items-center justify-between gap-5 overflow-hidden rounded-2xl border border-[#e8ecf2] bg-white px-6 py-8 shadow-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(7,21,47,0.1)] max-lg:text-center sm:gap-6 sm:px-10 sm:py-9 lg:flex-row lg:rounded-[10px] lg:px-12 lg:py-10">
                 <div>
                     <h2 class="font-montserrat mb-1.5 text-xl font-bold text-[#07152f] sm:mb-2 sm:text-2xl">Connect With Us</h2>
                     <p class="text-sm text-[#4f5b6c] sm:text-[15px]">Follow or message us through our social channels.</p>
@@ -296,8 +301,12 @@
                     @endforeach
                 </div>
             </div>
+        </div>
+    </section>
 
-            {{-- Quick Assistance --}}
+    {{-- QUICK ASSISTANCE --}}
+    <section class="bg-white pb-11 max-md:pb-10 min-[651px]:pb-14">
+        <div class="litus-container">
             <div class="grid grid-cols-1 items-center gap-5 overflow-hidden rounded-2xl bg-cover bg-right px-5 py-7 text-white shadow-[0_12px_30px_rgba(0,0,0,0.08)] max-lg:text-center sm:gap-7 sm:rounded-[10px] sm:px-[38px] sm:py-8 lg:grid-cols-[auto_1fr_auto]"
                  style="background-image: linear-gradient(90deg, rgba(3,13,28,0.98), rgba(3,13,28,0.94)), url('{{ $quickAssistanceBg }}');">
                 <div class="mx-auto flex h-[72px] w-[72px] min-w-[72px] items-center justify-center rounded-full border border-white/75 sm:h-[90px] sm:w-[90px] sm:min-w-[90px] lg:mx-0">
@@ -326,7 +335,6 @@
                     </a>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -337,7 +345,7 @@
 
             <div class="mx-auto grid max-w-[650px] grid-cols-1 gap-3.5 max-md:gap-3 lg:max-w-none lg:grid-cols-3 lg:gap-4">
                 @foreach ($hoursCards as $card)
-                    <div class="group flex items-center gap-4 rounded-2xl border border-[#e8ecf2] bg-white p-4 shadow-[0_10px_28px_rgba(7,21,47,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(7,21,47,0.1)] max-md:min-h-[92px] sm:gap-[22px] sm:p-6 lg:min-h-[145px]">
+                    <div class="group flex items-center gap-4 rounded-2xl border border-[#e8ecf2] bg-white p-4 shadow-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(7,21,47,0.1)] max-md:min-h-[92px] sm:gap-[22px] sm:p-6 lg:min-h-[145px]">
                         <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#061530] text-white shadow-[0_8px_18px_rgba(6,21,48,0.2)] sm:h-[68px] sm:w-[68px]">
                             <x-litus-icon :name="$card['icon']" class="h-5 w-5 sm:h-[30px] sm:w-[30px]" />
                         </div>

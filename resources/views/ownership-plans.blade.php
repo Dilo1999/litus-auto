@@ -244,7 +244,7 @@
 
             <div class="grid grid-cols-1 gap-4 max-md:gap-3.5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
                 @foreach ($plans as $plan)
-                    <div class="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:shadow-xl max-md:rounded-xl"
+                    <div class="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-none transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl max-md:rounded-xl"
                          style="border-top: 3px solid {{ $plan['accent'] }}">
                         <div class="p-6 pb-4 max-md:p-4 max-md:pb-3">
                             <div class="mb-4 flex items-start justify-between max-md:mb-3">

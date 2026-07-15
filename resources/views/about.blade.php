@@ -187,18 +187,16 @@
 
     {{-- MISSION & VISION --}}
     <section id="mission-vision"
-             class="relative overflow-hidden border border-[#dcdfe5] py-6 pb-8 max-sm:py-5 max-sm:pb-6"
-             style="background-image: radial-gradient(circle, rgba(7, 21, 47, 0.12) 2px, transparent 2px); background-size: 24px 24px; background-color: #fafafa;">
-        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(250,250,250,0.95)_0%,rgba(250,250,250,0.55)_15%,rgba(250,250,250,0.25)_50%,rgba(250,250,250,0.55)_85%,rgba(250,250,250,0.95)_100%)]"></div>
+             class="relative overflow-hidden border border-[#dcdfe5] bg-white py-6 pb-8 max-sm:py-5 max-sm:pb-6">
 
-        <div class="relative z-[2] litus-container">
+        <div class="litus-container">
             <p class="mb-4 text-center text-xs font-black uppercase tracking-[2px] text-[#0065ef] min-[561px]:text-[13px] min-[561px]:tracking-[3px]">
                 Our Mission &amp; Vision
             </p>
 
             <div class="grid grid-cols-1 gap-4 min-[901px]:grid-cols-2">
                 @foreach ($missionVision as $item)
-                    <div class="flex flex-col items-center gap-4 rounded-xl border border-[#dfe3ea] bg-white px-5 py-5 shadow-[0_10px_24px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.1)] min-[561px]:flex-row min-[561px]:gap-5 min-[561px]:px-6 min-[561px]:py-5">
+                    <div class="flex flex-col items-center gap-4 rounded-xl border border-[#dfe3ea] bg-white px-5 py-5 shadow-none transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.1)] min-[561px]:flex-row min-[561px]:gap-5 min-[561px]:px-6 min-[561px]:py-5">
                         <div class="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-full bg-[#f0f0f0] text-[#0065ef] min-[561px]:h-20 min-[561px]:w-20">
                             <x-litus-icon :name="$item['icon']" class="h-8 w-8 min-[561px]:h-9 min-[561px]:w-9" />
                         </div>
@@ -230,7 +228,7 @@
             </div>
 
             {{-- Leaders --}}
-            <div class="mb-[34px] grid grid-cols-1 gap-6 min-[1151px]:grid-cols-3">
+            <div class="mb-[34px] grid grid-cols-1 gap-6 pb-8 min-[651px]:pb-10 min-[1151px]:grid-cols-3">
                 @foreach ($teamLeaders as $member)
                     <div class="relative mx-auto flex w-full min-h-[440px] overflow-hidden rounded-[10px] border border-[#07152f]/[0.08] bg-[#061a45] shadow-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(7,21,47,0.14)] max-[700px]:min-h-[480px] min-[701px]:min-h-[275px] min-[1151px]:mx-0 min-[1151px]:max-w-none max-[1150px]:max-w-[760px]">
                         <div class="pointer-events-none absolute inset-0 z-[1] opacity-25"
@@ -256,7 +254,7 @@
             </div>
 
             {{-- Team members --}}
-            <div class="mb-6 grid grid-cols-2 gap-3 max-md:gap-2.5 min-[701px]:gap-6 min-[1151px]:grid-cols-4">
+            <div class="mb-6 grid grid-cols-2 gap-3 pb-8 max-md:gap-2.5 min-[651px]:pb-10 min-[701px]:gap-6 min-[1151px]:grid-cols-4">
                 @foreach ($teamMembers as $member)
                     <div class="rounded-[10px] border border-[#07152f]/[0.05] bg-white px-3 pb-4 pt-4 text-center shadow-none transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_46px_rgba(7,21,47,0.12)] max-md:min-h-0 min-[701px]:min-h-[335px] min-[701px]:px-7 min-[701px]:pb-[26px] min-[701px]:pt-7">
                         <div class="mx-auto mb-3 h-[88px] w-[88px] overflow-hidden rounded-full bg-[#eef2f7] shadow-[0_12px_28px_rgba(7,21,47,0.08)] max-md:mb-2.5 max-md:h-[80px] max-md:w-[80px] min-[701px]:mb-4 min-[701px]:h-[150px] min-[701px]:w-[150px]">

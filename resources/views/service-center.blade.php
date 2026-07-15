@@ -97,7 +97,7 @@
     </section>
 
     {{-- WHAT WE OFFER + APPOINTMENT --}}
-    <section class="border border-[#dfe3ea] bg-white px-5 py-9 pb-12 max-sm:px-3.5 max-sm:py-8 max-sm:pb-10">
+    <section class="border border-[#dfe3ea] bg-white px-5 py-9 pb-16 max-sm:px-3.5 max-sm:py-8 max-sm:pb-12 min-[651px]:pb-20">
         <div class="litus-container">
 
             <div class="relative mb-8 text-center">
@@ -114,9 +114,9 @@
                 </a>
             </div>
 
-            <div class="mb-9 grid grid-cols-1 gap-[22px] min-[651px]:grid-cols-2 min-[1051px]:mb-9 min-[1051px]:grid-cols-4">
+            <div class="mb-9 grid grid-cols-1 gap-[22px] pb-8 min-[651px]:grid-cols-2 min-[651px]:pb-10 min-[1051px]:mb-9 min-[1051px]:grid-cols-4">
                 @foreach ($serviceCards as $card)
-                    <div class="min-h-[260px] rounded-[10px] border border-[#e1e5eb] bg-white px-[22px] py-7 text-center shadow-[0_10px_26px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_38px_rgba(0,0,0,0.1)]">
+                    <div class="min-h-[260px] rounded-[10px] border border-[#e1e5eb] bg-white px-[22px] py-7 text-center shadow-none transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_38px_rgba(0,0,0,0.1)]">
                         <div class="mx-auto mb-[22px] flex h-[92px] w-[92px] items-center justify-center rounded-full bg-[#f1f1f1] text-[#07152f]">
                             <x-litus-icon :name="$card['icon']" class="h-10 w-10" />
                         </div>
@@ -287,7 +287,7 @@
 
             <div class="flex flex-col gap-2">
                 @foreach ($servicePrograms as $program)
-                    <div class="group relative grid min-h-[100px] grid-cols-1 items-center gap-3 overflow-hidden rounded-xl border border-[#e3e8f0] bg-white px-4 py-5 text-center shadow-[0_8px_24px_rgba(7,21,47,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(7,21,47,0.08)] min-[651px]:grid-cols-[96px_1fr] min-[651px]:gap-4 min-[651px]:px-4 min-[651px]:py-4 min-[651px]:text-left min-[901px]:grid-cols-[120px_1fr] min-[901px]:gap-4 min-[901px]:px-6 min-[901px]:py-4">
+                    <div class="group relative grid min-h-[100px] grid-cols-1 items-center gap-3 overflow-hidden rounded-xl border border-[#e3e8f0] bg-white px-4 py-5 text-center shadow-none transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(7,21,47,0.08)] min-[651px]:grid-cols-[96px_1fr] min-[651px]:gap-4 min-[651px]:px-4 min-[651px]:py-4 min-[651px]:text-left min-[901px]:grid-cols-[120px_1fr] min-[901px]:gap-4 min-[901px]:px-6 min-[901px]:py-4">
                         <div class="absolute left-0 top-0 h-full w-1 rounded-l-xl bg-[#0065ef]"></div>
 
                         <div class="mx-auto flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-2xl bg-[#f2f6fb] min-[651px]:ml-2 min-[901px]:h-[84px] min-[901px]:w-[84px]">
