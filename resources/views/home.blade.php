@@ -275,7 +275,7 @@
 
                 <div class="mx-auto grid max-w-[560px] grid-cols-1 gap-5 max-md:-mx-4 max-md:flex max-md:max-w-none max-md:snap-x max-md:snap-mandatory max-md:gap-4 max-md:overflow-x-auto max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden min-[1101px]:max-w-none min-[1101px]:grid-cols-3">
                     @foreach ($services as $service)
-                        <article class="group relative overflow-hidden rounded-xl border border-[rgba(7,21,47,0.05)] bg-white shadow-[0_12px_28px_rgba(7,21,47,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(7,21,47,0.11)] max-md:w-[88%] max-md:shrink-0 max-md:snap-center max-md:rounded-2xl min-[1101px]:min-h-[520px]">
+                        <article class="group relative overflow-hidden rounded-xl border border-[rgba(7,21,47,0.05)] bg-white shadow-none transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(7,21,47,0.11)] max-md:w-[88%] max-md:shrink-0 max-md:snap-center max-md:rounded-2xl min-[1101px]:min-h-[520px]">
                             <div class="relative">
                                 <div class="relative h-[200px] overflow-hidden bg-[#dce3ed] max-md:h-[210px] max-[650px]:h-[210px] min-[651px]:h-[230px] max-md:min-[651px]:h-[210px]">
                                     <img src="{{ $service['img'] }}"

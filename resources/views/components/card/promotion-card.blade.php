@@ -1,20 +1,22 @@
 @props(['motorcycle'])
 
-<div class="group relative overflow-visible rounded-[24px] border border-[#07152f]/8 bg-white px-5 pb-5 pt-[88px] shadow-[0_20px_50px_rgba(7,21,47,0.12)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(7,21,47,0.16)] max-[650px]:overflow-hidden max-[650px]:rounded-2xl max-[650px]:px-4 max-[650px]:pb-4 max-[650px]:pt-[78px] max-[650px]:shadow-[0_12px_28px_rgba(7,21,47,0.08)] min-[651px]:rounded-[28px] min-[651px]:px-6 min-[651px]:pb-6 min-[651px]:pt-24 min-[1101px]:rounded-[32px] min-[1101px]:px-7 min-[1101px]:pb-7 min-[1101px]:pt-[100px]">
+<div class="group relative overflow-visible rounded-[24px] border border-[#07152f]/8 bg-white px-5 pb-5 pt-[88px] shadow-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(7,21,47,0.16)] max-[650px]:overflow-hidden max-[650px]:rounded-2xl max-[650px]:px-4 max-[650px]:pb-4 max-[650px]:pt-[78px] max-[650px]:shadow-none max-[650px]:hover:shadow-[0_12px_28px_rgba(7,21,47,0.1)] min-[651px]:rounded-[28px] min-[651px]:px-6 min-[651px]:pb-6 min-[651px]:pt-24 min-[1101px]:rounded-[32px] min-[1101px]:px-7 min-[1101px]:pb-7 min-[1101px]:pt-[100px]">
     {{-- Offer ribbon --}}
     <div class="absolute -left-4 top-4 z-[3] max-[650px]:left-0 max-[650px]:right-0 max-[650px]:top-3 min-[651px]:top-6 min-[1101px]:-left-5 min-[1101px]:top-8">
-        <span class="absolute bottom-[-18px] left-0 h-5 w-5 bg-[#0037aa] [clip-path:polygon(0_0,100%_0,100%_100%)] max-[650px]:hidden min-[1101px]:bottom-[-20px] min-[1101px]:h-5 min-[1101px]:w-5"
+        {{-- Fold shadow under left edge --}}
+        <span class="absolute bottom-[-16px] left-0 h-4 w-4 bg-[#0037aa] [clip-path:polygon(0_0,100%_0,100%_100%)] max-[650px]:hidden"
               aria-hidden="true"></span>
 
-        <div class="relative flex h-[52px] min-w-[200px] items-center gap-2.5 rounded-r-xl bg-gradient-to-br from-[#004be8] to-[#2685ff] px-3.5 shadow-[0_12px_24px_rgba(0,75,232,0.28)] max-[650px]:h-auto max-[650px]:min-h-10 max-[650px]:w-[calc(100%-0.75rem)] max-[650px]:max-w-none max-[650px]:gap-2 max-[650px]:rounded-r-lg max-[650px]:px-3 max-[650px]:py-2 max-[650px]:shadow-md min-[651px]:h-[56px] min-[651px]:min-w-[220px] min-[651px]:gap-3 min-[651px]:px-5 min-[1101px]:h-[60px] min-[1101px]:min-w-[240px] min-[1101px]:px-6">
-            <span class="absolute -right-2.5 top-0 -z-10 hidden h-full w-8 skew-x-[-18deg] rounded-r-xl bg-gradient-to-br from-[#2685ff] to-[#0069ff] min-[651px]:block min-[1101px]:-right-3 min-[1101px]:w-10"
+        <div class="relative flex h-[52px] min-w-[200px] items-center gap-2.5 bg-gradient-to-br from-[#004be8] to-[#2685ff] py-0 pl-3.5 pr-8 shadow-[0_12px_24px_rgba(0,75,232,0.28)] [clip-path:polygon(0_0,calc(100%-28px)_0,calc(100%-12px)_18%,calc(100%-4px)_38%,100%_50%,calc(100%-4px)_62%,calc(100%-12px)_82%,calc(100%-28px)_100%,0_100%)] max-[650px]:h-auto max-[650px]:min-h-10 max-[650px]:w-[calc(100%-0.5rem)] max-[650px]:max-w-none max-[650px]:gap-2 max-[650px]:py-2 max-[650px]:pl-3 max-[650px]:pr-7 max-[650px]:shadow-md max-[650px]:[clip-path:polygon(0_0,calc(100%-22px)_0,calc(100%-10px)_18%,calc(100%-3px)_38%,100%_50%,calc(100%-3px)_62%,calc(100%-10px)_82%,calc(100%-22px)_100%,0_100%)] min-[651px]:h-[56px] min-[651px]:min-w-[220px] min-[651px]:gap-3 min-[651px]:pl-5 min-[651px]:pr-9 min-[651px]:[clip-path:polygon(0_0,calc(100%-30px)_0,calc(100%-14px)_18%,calc(100%-5px)_38%,100%_50%,calc(100%-5px)_62%,calc(100%-14px)_82%,calc(100%-30px)_100%,0_100%)] min-[1101px]:h-[60px] min-[1101px]:min-w-[240px] min-[1101px]:pl-6 min-[1101px]:pr-10 min-[1101px]:[clip-path:polygon(0_0,calc(100%-32px)_0,calc(100%-15px)_18%,calc(100%-5px)_38%,100%_50%,calc(100%-5px)_62%,calc(100%-15px)_82%,calc(100%-32px)_100%,0_100%)]">
+            {{-- Soft depth on the curved tip --}}
+            <span class="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#003fbf]/40 to-transparent max-[650px]:w-6"
                   aria-hidden="true"></span>
 
-            <div class="flex h-6 w-6 shrink-0 rotate-[30deg] items-center justify-center rounded-lg border-2 border-white text-white max-[650px]:h-5 max-[650px]:w-5 max-[650px]:rounded-md min-[651px]:h-7 min-[651px]:w-7 min-[1101px]:h-8 min-[1101px]:w-8">
+            <div class="relative z-[1] flex h-6 w-6 shrink-0 rotate-[30deg] items-center justify-center rounded-lg border-2 border-white text-white max-[650px]:h-5 max-[650px]:w-5 max-[650px]:rounded-md min-[651px]:h-7 min-[651px]:w-7 min-[1101px]:h-8 min-[1101px]:w-8">
                 <span class="rotate-[-30deg] text-[10px] font-black max-[650px]:text-[9px] min-[651px]:text-xs min-[1101px]:text-sm" aria-hidden="true">★</span>
             </div>
 
-            <span class="text-sm font-black uppercase tracking-wide text-white max-[650px]:whitespace-normal max-[650px]:break-words max-[650px]:text-[12px] max-[650px]:leading-tight max-[650px]:tracking-[0.04em] min-[651px]:truncate min-[651px]:text-base min-[1101px]:text-lg">
+            <span class="relative z-[1] text-sm font-black uppercase tracking-wide text-white max-[650px]:whitespace-normal max-[650px]:break-words max-[650px]:text-[12px] max-[650px]:leading-tight max-[650px]:tracking-[0.04em] min-[651px]:truncate min-[651px]:text-base min-[1101px]:text-lg">
                 {{ $motorcycle->offerLabel() }}
             </span>
         </div>

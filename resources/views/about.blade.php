@@ -214,7 +214,7 @@
 
     {{-- LEADERSHIP & OPERATION TEAM --}}
     <section class="bg-[radial-gradient(circle_at_top,rgba(20,105,255,0.05),transparent_35%)] bg-[#f7f9fc] py-10 pb-14">
-        <div class="litus-container max-w-[1500px]">
+        <div class="litus-container">
 
             <div class="mb-10 text-center min-[651px]:mb-[42px]">
                 <span class="mb-5 inline-flex items-center gap-3 text-xs font-black uppercase tracking-[4px] text-[#0065ef] min-[651px]:gap-[18px] min-[651px]:text-base min-[651px]:tracking-[6px]">
@@ -232,7 +232,7 @@
             {{-- Leaders --}}
             <div class="mb-[34px] grid grid-cols-1 gap-6 min-[1151px]:grid-cols-3">
                 @foreach ($teamLeaders as $member)
-                    <div class="relative mx-auto flex w-full min-h-[440px] overflow-hidden rounded-[10px] border border-[#07152f]/[0.08] bg-[#061a45] shadow-[0_18px_42px_rgba(7,21,47,0.14)] max-[700px]:min-h-[480px] min-[701px]:min-h-[275px] min-[1151px]:mx-0 min-[1151px]:max-w-none max-[1150px]:max-w-[760px]">
+                    <div class="relative mx-auto flex w-full min-h-[440px] overflow-hidden rounded-[10px] border border-[#07152f]/[0.08] bg-[#061a45] shadow-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(7,21,47,0.14)] max-[700px]:min-h-[480px] min-[701px]:min-h-[275px] min-[1151px]:mx-0 min-[1151px]:max-w-none max-[1150px]:max-w-[760px]">
                         <div class="pointer-events-none absolute inset-0 z-[1] opacity-25"
                              style="background-image: radial-gradient(rgba(255,255,255,0.09) 1px, transparent 1px); background-size: 12px 12px;"></div>
                         <div class="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(to_top,rgba(3,15,39,0.98)_0%,rgba(3,15,39,0.68)_58%,rgba(3,15,39,0.10)_100%)] min-[701px]:bg-[radial-gradient(circle_at_30%_55%,rgba(0,105,255,0.22),transparent_30%),linear-gradient(90deg,rgba(3,15,39,0.98)_0%,rgba(3,15,39,0.82)_45%,rgba(3,15,39,0.10)_100%)]"></div>
@@ -258,14 +258,11 @@
             {{-- Team members --}}
             <div class="mb-6 grid grid-cols-2 gap-3 max-md:gap-2.5 min-[701px]:gap-6 min-[1151px]:grid-cols-4">
                 @foreach ($teamMembers as $member)
-                    <div class="rounded-[10px] border border-[#07152f]/[0.05] bg-white px-3 pb-4 pt-4 text-center shadow-[0_14px_34px_rgba(7,21,47,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_46px_rgba(7,21,47,0.12)] max-md:min-h-0 min-[701px]:min-h-[335px] min-[701px]:px-7 min-[701px]:pb-[26px] min-[701px]:pt-7">
-                        <div class="mx-auto h-[88px] w-[88px] overflow-hidden rounded-full bg-[#eef2f7] shadow-[0_12px_28px_rgba(7,21,47,0.08)] max-md:h-[80px] max-md:w-[80px] min-[701px]:h-[150px] min-[701px]:w-[150px]">
+                    <div class="rounded-[10px] border border-[#07152f]/[0.05] bg-white px-3 pb-4 pt-4 text-center shadow-none transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_46px_rgba(7,21,47,0.12)] max-md:min-h-0 min-[701px]:min-h-[335px] min-[701px]:px-7 min-[701px]:pb-[26px] min-[701px]:pt-7">
+                        <div class="mx-auto mb-3 h-[88px] w-[88px] overflow-hidden rounded-full bg-[#eef2f7] shadow-[0_12px_28px_rgba(7,21,47,0.08)] max-md:mb-2.5 max-md:h-[80px] max-md:w-[80px] min-[701px]:mb-4 min-[701px]:h-[150px] min-[701px]:w-[150px]">
                             <img src="{{ $member['img'] }}"
                                  alt="{{ $member['name'] }}"
                                  class="h-full w-full object-cover object-top">
-                        </div>
-                        <div class="relative z-[3] mx-auto -mt-3.5 mb-2.5 flex h-9 w-9 items-center justify-center rounded-full border border-[#e2e8f0] bg-white text-[#0065ef] shadow-[0_8px_22px_rgba(7,21,47,0.08)] max-md:-mt-3 max-md:mb-2 max-md:h-8 max-md:w-8 min-[701px]:-mt-[22px] min-[701px]:mb-[18px] min-[701px]:h-[52px] min-[701px]:w-[52px]">
-                            <x-litus-icon name="award" class="h-4 w-4 max-md:h-3.5 max-md:w-3.5 min-[701px]:h-6 min-[701px]:w-6" />
                         </div>
                         <h4 class="mb-1 text-[13px] font-bold leading-snug text-[#07152f] max-md:line-clamp-2 min-[701px]:mb-3 min-[701px]:text-[22px]">{{ $member['name'] }}</h4>
                         <p class="mb-2.5 text-[11px] font-extrabold text-[#0065ef] max-md:mb-2 min-[701px]:mb-[22px] min-[701px]:text-base">{{ $member['role'] }}</p>
@@ -276,7 +273,7 @@
             </div>
 
             {{-- Operation team --}}
-            <div class="overflow-hidden rounded-[14px] bg-cover bg-center px-5 py-7 pb-[22px] shadow-[0_14px_35px_rgba(0,0,0,0.18)] min-[651px]:px-[38px] min-[651px]:pt-7"
+            <div class="overflow-hidden rounded-[14px] bg-cover bg-center px-5 py-7 pb-[22px] pr-7 shadow-[0_14px_35px_rgba(0,0,0,0.18)] min-[651px]:px-[38px] min-[651px]:pr-[52px] min-[651px]:pt-7"
                  style="background-image: linear-gradient(90deg, rgba(3,14,33,0.98), rgba(4,20,46,0.96)), url('{{ $operationBg }}');">
                 <div class="grid grid-cols-1 gap-7 min-[1051px]:grid-cols-[38%_62%] min-[1051px]:items-stretch">
                     <div class="flex flex-col justify-center">
@@ -287,7 +284,7 @@
                         </p>
                     </div>
 
-                    <div class="overflow-hidden rounded-xl border border-white/10 bg-white px-3 pt-3">
+                    <div class="overflow-hidden rounded-xl border border-white/10 bg-white p-3 pl-2 pr-6">
                         <img src="{{ $operationTeamImg }}"
                              alt="LITUS Operation Team"
                              class="block w-full h-auto object-contain">
