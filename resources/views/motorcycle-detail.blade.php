@@ -140,7 +140,7 @@
                      data-animate="slideLeft">
                     <button type="button"
                             data-gallery-expand
-                            class="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#061a45] shadow-[0_10px_22px_rgba(7,21,47,0.12)] transition-all duration-300 hover:scale-105 hover:bg-[#1f7bff] hover:text-white min-[1150px]:right-4 min-[1150px]:top-4 min-[1150px]:h-11 min-[1150px]:w-11"
+                            class="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)] transition-all duration-300 hover:scale-110 hover:text-[#0065ef] min-[1150px]:right-4 min-[1150px]:top-4 min-[1150px]:h-11 min-[1150px]:w-11"
                             aria-label="Expand image">
                         <svg class="h-4 w-4 min-[1150px]:h-5 min-[1150px]:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M15 3h6v6"/><path d="m21 3-7 7"/><path d="m3 21 7-7"/><path d="M9 21H3v-6"/>
@@ -151,7 +151,7 @@
                          style="background-image: url('{{ $galleryMainBg }}');">
                         <button type="button"
                                 data-gallery-prev
-                                class="absolute left-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-xl font-light text-[#061a45] shadow-[0_10px_22px_rgba(7,21,47,0.12)] transition-all duration-300 hover:scale-105 hover:bg-[#1f7bff] hover:text-white min-[1150px]:left-3 min-[1150px]:h-12 min-[1150px]:w-12"
+                                class="absolute left-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)] transition-all duration-300 hover:scale-110 hover:text-[#0065ef] min-[1150px]:left-3 min-[1150px]:h-12 min-[1150px]:w-12"
                                 aria-label="Previous image">
                             <x-litus-icon name="chevron-left" class="h-5 w-5 min-[1150px]:h-6 min-[1150px]:w-6" />
                         </button>
@@ -163,7 +163,7 @@
 
                         <button type="button"
                                 data-gallery-next
-                                class="absolute right-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-xl font-light text-[#061a45] shadow-[0_10px_22px_rgba(7,21,47,0.12)] transition-all duration-300 hover:scale-105 hover:bg-[#1f7bff] hover:text-white min-[1150px]:right-3 min-[1150px]:h-12 min-[1150px]:w-12"
+                                class="absolute right-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)] transition-all duration-300 hover:scale-110 hover:text-[#0065ef] min-[1150px]:right-3 min-[1150px]:h-12 min-[1150px]:w-12"
                                 aria-label="Next image">
                             <x-litus-icon name="chevron-right" class="h-5 w-5 min-[1150px]:h-6 min-[1150px]:w-6" />
                         </button>
