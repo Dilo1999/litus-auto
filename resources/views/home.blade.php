@@ -350,43 +350,82 @@
                 </a>
             </div>
 
-            <div class="relative">
+            <div class="relative" data-home-gallery-stage>
                 <button type="button"
                         data-home-gallery-prev
-                        class="absolute -left-3 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#dfe3ea] bg-white text-[#07152f] shadow-[0_8px_20px_rgba(7,21,47,0.12)] transition-all duration-300 hover:border-[#0065ef] hover:bg-[#0065ef] hover:text-white min-[1101px]:-left-5 min-[1101px]:flex"
+                        class="absolute -left-3 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#dfe3ea] bg-white text-[#07152f] shadow-[0_8px_20px_rgba(7,21,47,0.12)] transition-all duration-300 hover:border-[#0065ef] hover:bg-[#0065ef] hover:text-white max-md:left-2 max-md:flex max-md:h-10 max-md:w-10 max-md:bg-white/90 min-[1101px]:-left-5 min-[1101px]:flex"
                         aria-label="Previous gallery images">
                     <x-litus-icon name="chevron-left" class="h-5 w-5" />
                 </button>
                 <button type="button"
                         data-home-gallery-next
-                        class="absolute -right-3 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#dfe3ea] bg-white text-[#07152f] shadow-[0_8px_20px_rgba(7,21,47,0.12)] transition-all duration-300 hover:border-[#0065ef] hover:bg-[#0065ef] hover:text-white min-[1101px]:-right-5 min-[1101px]:flex"
+                        class="absolute -right-3 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#dfe3ea] bg-white text-[#07152f] shadow-[0_8px_20px_rgba(7,21,47,0.12)] transition-all duration-300 hover:border-[#0065ef] hover:bg-[#0065ef] hover:text-white max-md:right-2 max-md:flex max-md:h-10 max-md:w-10 max-md:bg-white/90 min-[1101px]:-right-5 min-[1101px]:flex"
                         aria-label="Next gallery images">
                     <x-litus-icon name="chevron-right" class="h-5 w-5" />
                 </button>
 
-                <div class="-mx-1 flex gap-3 overflow-x-auto px-1 pb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden max-md:-mx-4 max-md:gap-3 max-md:px-4 min-[1101px]:gap-4"
-                     data-home-gallery-track>
-                    @forelse ($galleryImages as $image)
+                {{-- Mobile: fade / scale crossfade carousel --}}
+                <div class="relative hidden h-[290px] overflow-hidden rounded-xl max-md:block"
+                     data-home-gallery-fade>
+                    @forelse ($galleryImages as $index => $image)
                         <a href="{{ route('gallery') }}"
-                           class="group relative aspect-[4/5] w-[78%] shrink-0 snap-start overflow-hidden rounded-2xl bg-[#0b1528] shadow-[0_14px_36px_rgba(7,21,47,0.14)] transition-transform duration-300 hover:-translate-y-1 max-md:w-[72%] max-md:rounded-xl min-[651px]:w-[46%] min-[1101px]:w-[calc((100%-3rem)/4)]">
+                           data-home-gallery-fade-slide
+                           @class([
+                               'home-gallery-fade-slide group absolute inset-0 overflow-hidden rounded-xl bg-[#0b1528]',
+                               'is-active' => $index === 0,
+                           ])>
                             <img src="{{ $image['src'] }}"
                                  alt="{{ $image['alt'] }}"
-                                 class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                                 loading="lazy">
-                            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#07152f]/55 via-transparent to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-90 max-md:opacity-90"></div>
-                            <span class="pointer-events-none absolute bottom-4 left-4 right-4 translate-y-1 text-[13px] font-bold text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 max-md:translate-y-0 max-md:opacity-100">
+                                 class="absolute inset-0 h-full w-full object-cover"
+                                 loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
+                            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#07152f]/60 via-transparent to-transparent"></div>
+                            <span class="pointer-events-none absolute bottom-3 left-3.5 right-3.5 text-[12px] font-bold text-white">
                                 View in gallery
                             </span>
                         </a>
                     @empty
-                        <div class="flex h-[280px] w-full items-center justify-center rounded-2xl border border-dashed border-[#cfd6e0] bg-white text-sm font-semibold text-[#6b7788]">
+                        <div class="flex h-full w-full items-center justify-center rounded-xl border border-dashed border-[#cfd6e0] bg-white text-sm font-semibold text-[#6b7788]">
                             Gallery images coming soon.
                         </div>
                     @endforelse
                 </div>
-                @if (count($galleryImages) > 0)
-                    <p class="mt-3 hidden text-center text-xs font-semibold text-[#8a94a6] max-md:block">Swipe to browse photos</p>
+
+                @if (count($galleryImages) > 1)
+                    <div class="mt-3.5 hidden items-center justify-center gap-1.5 max-md:flex" data-home-gallery-dots aria-hidden="true">
+                        @foreach ($galleryImages as $index => $image)
+                            <button type="button"
+                                    data-home-gallery-dot="{{ $index }}"
+                                    @class([
+                                        'h-1.5 rounded-full transition-all duration-300',
+                                        'w-5 bg-[#0065ef]' => $index === 0,
+                                        'w-1.5 bg-[#c5ccd6]' => $index !== 0,
+                                    ])
+                                    aria-label="Go to gallery image {{ $index + 1 }}"></button>
+                        @endforeach
+                    </div>
                 @endif
+
+                {{-- Tablet / desktop: horizontal track --}}
+                <div class="-mx-1 hidden gap-3 overflow-x-auto px-1 pb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-[651px]:flex min-[1101px]:gap-4"
+                     data-home-gallery-track>
+                    @forelse ($galleryImages as $image)
+                        <a href="{{ route('gallery') }}"
+                           class="group relative aspect-[4/5] w-[46%] shrink-0 snap-start overflow-hidden rounded-2xl bg-[#0b1528] shadow-[0_14px_36px_rgba(7,21,47,0.14)] transition-transform duration-300 hover:-translate-y-1 min-[1101px]:w-[calc((100%-3rem)/4)]">
+                            <img src="{{ $image['src'] }}"
+                                 alt="{{ $image['alt'] }}"
+                                 class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                                 loading="lazy">
+                            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#07152f]/55 via-transparent to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-90"></div>
+                            <span class="pointer-events-none absolute bottom-4 left-4 right-4 translate-y-1 text-[13px] font-bold text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                                View in gallery
+                            </span>
+                        </a>
+                    @empty
+                        <div class="flex h-[290px] w-full items-center justify-center rounded-2xl border border-dashed border-[#cfd6e0] bg-white text-sm font-semibold text-[#6b7788]">
+                            Gallery images coming soon.
+                        </div>
+                    @endforelse
+                </div>
             </div>
         </div>
     </section>

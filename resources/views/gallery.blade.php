@@ -241,13 +241,30 @@
     <div data-gallery-lightbox class="fixed inset-0 z-[80] hidden flex items-center justify-center bg-black/90 p-4">
         <button type="button"
                 data-gallery-lightbox-close
-                class="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 max-md:top-[max(1.25rem,env(safe-area-inset-top))]"
+                class="absolute right-5 top-5 z-[2] flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 max-md:top-[max(1.25rem,env(safe-area-inset-top))]"
                 aria-label="Close lightbox">
             <x-litus-icon name="x" class="h-5 w-5" />
         </button>
+
+        <button type="button"
+                data-gallery-lightbox-prev
+                onclick="event.stopPropagation()"
+                class="absolute left-3 top-1/2 z-[2] flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/25 max-md:h-10 max-md:w-10 sm:left-5"
+                aria-label="Previous image">
+            <x-litus-icon name="chevron-left" class="h-6 w-6" />
+        </button>
+        <button type="button"
+                data-gallery-lightbox-next
+                onclick="event.stopPropagation()"
+                class="absolute right-3 top-1/2 z-[2] flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/25 max-md:h-10 max-md:w-10 sm:right-5"
+                aria-label="Next image">
+            <x-litus-icon name="chevron-right" class="h-6 w-6" />
+        </button>
+
         <div class="w-full max-w-4xl" onclick="event.stopPropagation()">
             <img data-gallery-lightbox-img src="" alt="" class="max-h-[80vh] w-full rounded-xl object-contain shadow-2xl">
             <p data-gallery-lightbox-label class="mt-4 text-center text-base font-bold text-white"></p>
+            <p data-gallery-lightbox-counter class="mt-1.5 text-center text-xs font-semibold text-white/60"></p>
         </div>
     </div>
 </div>

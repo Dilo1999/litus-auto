@@ -106,6 +106,39 @@
   animation: ownershipDrawerIn 0.28s ease-out forwards;
 }
 
+/* Home gallery mobile fade / scale crossfade */
+.home-gallery-fade-slide {
+  opacity: 0;
+  transform: scale(1.08);
+  pointer-events: none;
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 0;
+}
+
+.home-gallery-fade-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.home-gallery-fade-slide.is-leaving {
+  opacity: 0;
+  transform: scale(0.94);
+  z-index: 1;
+}
+
+.home-gallery-fade-slide img {
+  transform: scale(1);
+  transition: transform 6s linear;
+}
+
+.home-gallery-fade-slide.is-active img {
+  transform: scale(1.08);
+}
+
 /* Base typography (match React src/styles/theme.css) */
 :root {
   --font-size: 16px;
