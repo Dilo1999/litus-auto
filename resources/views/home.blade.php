@@ -44,15 +44,15 @@
     <x-litus-header active="Home" />
 
     {{-- HERO --}}
-    <section class="relative min-h-[640px] overflow-hidden max-md:min-h-0 lg:min-h-[720px]">
+    <section class="relative min-h-[580px] overflow-hidden max-md:min-h-0 lg:min-h-[660px]">
         <img src="{{ $heroBg }}"
              alt=""
              class="absolute inset-0 h-full w-full object-cover object-center max-md:object-[center_30%]"
              aria-hidden="true">
         <div class="absolute inset-0 bg-[linear-gradient(110deg,rgba(0,65,180,0.55)_0%,rgba(11,22,40,0.85)_40%,rgba(11,22,40,0.45)_70%,rgba(11,22,40,0.2)_100%)] max-md:bg-[linear-gradient(180deg,rgba(11,22,40,0.55)_0%,rgba(11,22,40,0.78)_42%,rgba(11,22,40,0.92)_100%)]"></div>
 
-        <div class="relative z-10 litus-container flex min-h-[640px] flex-col justify-center max-md:min-h-0 max-md:justify-end lg:min-h-[720px]">
-            <div class="max-w-xl py-16 text-left max-md:pb-8 max-md:pt-24 lg:py-20">
+        <div class="relative z-10 litus-container flex min-h-[580px] flex-col justify-center max-md:min-h-0 max-md:justify-end lg:min-h-[660px]">
+            <div class="max-w-xl py-14 text-left max-md:pb-8 max-md:pt-24 lg:py-16">
                 <p class="mb-4 text-sm font-bold uppercase tracking-widest text-litus-red max-md:mb-3 max-md:text-[11px] max-md:tracking-[0.18em] sm:text-base">Premium Bikes. Trusted Service.</p>
                 <h1 class="mb-6 font-montserrat text-[2.9rem] font-bold leading-[1.08] text-white max-md:mb-4 max-md:text-[2.35rem] max-md:leading-[1.05] sm:text-[3.25rem] lg:text-[3.85rem]">
                     Ride Your Dream<br class="hidden sm:inline"><span class="sm:hidden"> </span>with<br>
@@ -78,11 +78,12 @@
         {{-- Feature bar --}}
         <div class="relative z-10 border-t border-white/10 bg-black/35 backdrop-blur-sm max-md:bg-black/50">
             <div class="litus-container">
-                <div class="grid min-h-[120px] grid-cols-1 items-center max-md:min-h-0 max-md:grid-cols-2 max-md:gap-0 min-[701px]:grid-cols-2 min-[1100px]:min-h-[130px] min-[1100px]:grid-cols-4">
+                <div class="grid min-h-[140px] grid-cols-1 items-center max-md:min-h-0 max-md:grid-cols-2 max-md:gap-0 min-[701px]:grid-cols-2 min-[1100px]:min-h-[155px] min-[1100px]:grid-cols-4">
                     @foreach ($features as $index => $feature)
                         <div @class([
-                            'flex items-center gap-3.5 py-8 sm:gap-4 sm:py-9 lg:py-10',
-                            'max-md:gap-2.5 max-md:px-1 max-md:py-4',
+                            'flex items-center gap-3.5 pt-6 pb-11 sm:gap-4 sm:pt-7 sm:pb-12 lg:pt-8 lg:pb-14',
+                            'max-md:gap-2.5 max-md:px-1 max-md:pt-3 max-md:pb-7',
+                            'min-[1100px]:border-b-0',
                             'border-b border-white/10 max-md:border-b' => $index < count($features) - 1,
                             'max-md:last:border-b-0',
                             'max-md:border-r max-md:border-white/10' => in_array($index, [0, 2]),
