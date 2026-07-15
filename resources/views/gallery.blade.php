@@ -80,8 +80,14 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 gap-4 min-[1051px]:grid-cols-[1.1fr_0.75fr_1fr] min-[1051px]:grid-rows-[260px_190px] max-[1050px]:min-[651px]:grid-cols-2"
-                 data-gallery-moments-grid></div>
+            <div class="relative">
+                <div class="grid grid-cols-1 gap-4 max-[650px]:flex max-[650px]:snap-x max-[650px]:snap-mandatory max-[650px]:gap-3.5 max-[650px]:overflow-x-auto max-[650px]:scroll-smooth max-[650px]:pb-1 max-[650px]:[scrollbar-width:none] max-[650px]:[&::-webkit-scrollbar]:hidden min-[651px]:grid min-[651px]:grid-cols-2 min-[1051px]:grid-cols-[1.1fr_0.75fr_1fr] min-[1051px]:grid-rows-[260px_190px]"
+                     data-gallery-moments-grid
+                     data-gallery-moments-slider
+                     data-interval="4000"></div>
+
+                <div class="mt-4 hidden items-center justify-center gap-1.5 max-[650px]:flex" data-gallery-moments-dots aria-hidden="true"></div>
+            </div>
         </div>
     </section>
 

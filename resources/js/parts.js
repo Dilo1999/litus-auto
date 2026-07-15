@@ -4,23 +4,81 @@ function initPartsForm() {
 
     const categoryButtons = root.querySelectorAll('[data-parts-category]');
     const categoryInput = root.querySelector('[data-parts-category-input]');
+    const categorySelect = root.querySelector('[data-parts-category-select]');
+    const categoryLabel = categorySelect?.querySelector('[data-parts-category-label]');
+    const categoryMenu = categorySelect?.querySelector('[data-parts-category-menu]');
+    const categoryTrigger = categorySelect?.querySelector('[data-parts-category-trigger]');
+    const categoryOptions = categorySelect?.querySelectorAll('[data-parts-category-option]') || [];
+
+    const setCategoryButtons = (value) => {
+        categoryButtons.forEach((btn) => {
+            const isActive = btn.dataset.partsCategory === value;
+            btn.classList.toggle('bg-litus-red', isActive);
+            btn.classList.toggle('border-litus-red', isActive);
+            btn.classList.toggle('text-white', isActive);
+            btn.classList.toggle('bg-white/5', !isActive);
+            btn.classList.toggle('border-white/10', !isActive);
+            btn.classList.toggle('text-gray-400', !isActive);
+        });
+    };
+
+    const setCategoryLabel = (value) => {
+        if (!categoryLabel) return;
+        categoryLabel.textContent = value || 'Select a Category';
+        categoryLabel.classList.toggle('text-gray-400', !value);
+        categoryLabel.classList.toggle('text-white', Boolean(value));
+    };
+
+    const setCategory = (value) => {
+        if (categoryInput) categoryInput.value = value;
+        setCategoryButtons(value);
+        setCategoryLabel(value);
+    };
 
     categoryButtons.forEach((button) => {
         button.addEventListener('click', () => {
-            const value = button.dataset.partsCategory;
-            if (categoryInput) categoryInput.value = value;
-
-            categoryButtons.forEach((btn) => {
-                const isActive = btn === button;
-                btn.classList.toggle('bg-litus-red', isActive);
-                btn.classList.toggle('border-litus-red', isActive);
-                btn.classList.toggle('text-white', isActive);
-                btn.classList.toggle('bg-white/5', !isActive);
-                btn.classList.toggle('border-white/10', !isActive);
-                btn.classList.toggle('text-gray-400', !isActive);
-            });
+            setCategory(button.dataset.partsCategory || '');
         });
     });
+
+    if (categorySelect && categoryTrigger && categoryMenu) {
+        const closeCategoryMenu = () => {
+            categoryMenu.classList.add('hidden');
+            categoryTrigger.setAttribute('aria-expanded', 'false');
+        };
+
+        const openCategoryMenu = () => {
+            categoryMenu.classList.remove('hidden');
+            categoryTrigger.setAttribute('aria-expanded', 'true');
+        };
+
+        categoryTrigger.addEventListener('click', () => {
+            if (categoryMenu.classList.contains('hidden')) {
+                openCategoryMenu();
+            } else {
+                closeCategoryMenu();
+            }
+        });
+
+        categoryOptions.forEach((option) => {
+            option.addEventListener('click', () => {
+                setCategory(option.dataset.partsCategoryOption || '');
+                closeCategoryMenu();
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!categorySelect.contains(event.target)) {
+                closeCategoryMenu();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeCategoryMenu();
+            }
+        });
+    }
 
     const brandSelect = root.querySelector('[data-parts-brand-select]');
     if (brandSelect) {

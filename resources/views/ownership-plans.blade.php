@@ -217,14 +217,14 @@
     {{-- BENEFITS --}}
     <section class="border border-[#dfe3ea] bg-[#f8f9fb] px-4 py-5 max-[650px]:px-3 max-[650px]:py-4">
         <div class="litus-container">
-            <div class="grid grid-cols-1 items-start gap-5 text-center min-[421px]:grid-cols-2 min-[421px]:gap-x-3 min-[421px]:gap-y-4 min-[651px]:grid-cols-3 min-[651px]:gap-y-5 min-[1101px]:grid-cols-6 min-[1101px]:gap-4">
+            <div class="grid grid-cols-2 items-start gap-x-3 gap-y-4 text-center min-[651px]:grid-cols-3 min-[651px]:gap-y-5 min-[1101px]:grid-cols-6 min-[1101px]:gap-4">
                 @foreach ($benefits as $benefit)
                     <div class="flex flex-col items-center">
-                        <div class="relative mb-2.5 flex h-14 w-14 items-center justify-center rounded-full border border-[rgba(7,21,47,0.06)] bg-white text-[#07152f] shadow-[0_6px_18px_rgba(0,0,0,0.07)] min-[651px]:mb-3 min-[651px]:h-16 min-[651px]:w-16">
+                        <div class="relative mb-2.5 flex h-12 w-12 items-center justify-center rounded-full border border-[rgba(7,21,47,0.06)] bg-white text-[#07152f] shadow-[0_6px_18px_rgba(0,0,0,0.07)] min-[651px]:mb-3 min-[651px]:h-16 min-[651px]:w-16">
                             <span class="pointer-events-none absolute inset-2 rounded-full border border-[rgba(232,151,50,0.25)]" aria-hidden="true"></span>
-                            <x-litus-icon :name="$benefit['icon']" class="relative z-[1] h-5 w-5 text-[#d8902d] min-[651px]:h-[22px] min-[651px]:w-[22px]" />
+                            <x-litus-icon :name="$benefit['icon']" class="relative z-[1] h-[18px] w-[18px] text-[#d8902d] min-[651px]:h-[22px] min-[651px]:w-[22px]" />
                         </div>
-                        <h3 class="max-w-[155px] text-[13px] font-bold leading-snug text-[#07152f] min-[651px]:max-w-[165px] min-[651px]:text-sm">
+                        <h3 class="max-w-[155px] text-[12px] font-bold leading-snug text-[#07152f] min-[651px]:max-w-[165px] min-[651px]:text-sm">
                             {{ $benefit['label'] }}
                         </h3>
                     </div>
@@ -234,53 +234,53 @@
     </section>
 
     {{-- PLAN CARDS --}}
-    <section id="ownership-plans" class="bg-gray-50 py-16">
+    <section id="ownership-plans" class="bg-gray-50 py-16 max-md:py-8">
         <div class="litus-container">
-            <div class="mb-10 text-center">
-                <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Plans</span>
-                <h2 class="mt-2 font-montserrat text-3xl font-bold text-gray-900 lg:text-4xl">Our Ownership Plans</h2>
-                <p class="mt-2 text-gray-500">Choose the Ijara Plan that suits you best.</p>
+            <div class="mb-10 text-center max-md:mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest text-litus-red max-md:text-[11px] max-md:tracking-[0.14em]">Our Plans</span>
+                <h2 class="mt-2 font-montserrat text-3xl font-bold text-gray-900 max-md:text-[24px] lg:text-4xl">Our Ownership Plans</h2>
+                <p class="mt-2 text-gray-500 max-md:mx-auto max-md:max-w-[32ch] max-md:text-sm">Choose the Ijara Plan that suits you best.</p>
             </div>
 
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="grid grid-cols-1 gap-4 max-md:gap-3.5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
                 @foreach ($plans as $plan)
-                    <div class="group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:shadow-xl"
+                    <div class="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:shadow-xl max-md:rounded-xl"
                          style="border-top: 3px solid {{ $plan['accent'] }}">
-                        <div class="p-6 pb-4">
-                            <div class="mb-4 flex items-start justify-between">
-                                <div class="flex h-12 w-12 items-center justify-center rounded-xl" style="background: {{ $plan['accentLight'] }}">
-                                    <x-litus-icon :name="$plan['icon']" class="h-6 w-6" style="color: {{ $plan['accent'] }}" />
+                        <div class="p-6 pb-4 max-md:p-4 max-md:pb-3">
+                            <div class="mb-4 flex items-start justify-between max-md:mb-3">
+                                <div class="flex h-12 w-12 items-center justify-center rounded-xl max-md:h-10 max-md:w-10 max-md:rounded-lg" style="background: {{ $plan['accentLight'] }}">
+                                    <x-litus-icon :name="$plan['icon']" class="h-6 w-6 max-md:h-5 max-md:w-5" style="color: {{ $plan['accent'] }}" />
                                 </div>
-                                <span class="rounded-full px-2.5 py-1 text-xs font-bold" style="background: {{ $plan['accentLight'] }}; color: {{ $plan['accent'] }}">
+                                <span class="rounded-full px-2.5 py-1 text-xs font-bold max-md:px-2 max-md:py-0.5 max-md:text-[10px]" style="background: {{ $plan['accentLight'] }}; color: {{ $plan['accent'] }}">
                                     Ijara Plan
                                 </span>
                             </div>
-                            <h3 class="text-2xl font-bold text-gray-900">{{ $plan['name'] }}</h3>
-                            <p class="mt-1 mb-3 text-xs font-semibold" style="color: {{ $plan['accent'] }}">{{ $plan['tagline'] }}</p>
-                            <p class="text-sm leading-relaxed text-gray-500">{{ $plan['desc'] }}</p>
+                            <h3 class="text-2xl font-bold text-gray-900 max-md:text-xl">{{ $plan['name'] }}</h3>
+                            <p class="mt-1 mb-3 text-xs font-semibold max-md:mb-2 max-md:text-[11px]" style="color: {{ $plan['accent'] }}">{{ $plan['tagline'] }}</p>
+                            <p class="text-sm leading-relaxed text-gray-500 max-md:text-[13px] max-md:leading-snug">{{ $plan['desc'] }}</p>
                         </div>
 
-                        <div class="flex-1 px-6 pb-5">
-                            <div class="mb-4 h-px bg-gray-100"></div>
-                            <ul class="space-y-2">
+                        <div class="flex-1 px-6 pb-5 max-md:px-4 max-md:pb-3">
+                            <div class="mb-4 h-px bg-gray-100 max-md:mb-3"></div>
+                            <ul class="space-y-2 max-md:space-y-1.5">
                                 @foreach ($plan['points'] as $point)
-                                    <li class="flex items-start gap-2 text-sm text-gray-600">
-                                        <x-litus-icon name="check-circle" class="mt-0.5 h-3.5 w-3.5 shrink-0" style="color: {{ $plan['accent'] }}" />
+                                    <li class="flex items-start gap-2 text-sm text-gray-600 max-md:text-[13px]">
+                                        <x-litus-icon name="check-circle" class="mt-0.5 h-3.5 w-3.5 shrink-0 max-md:h-3 max-md:w-3" style="color: {{ $plan['accent'] }}" />
                                         {{ $point }}
                                     </li>
                                 @endforeach
                             </ul>
                         </div>
 
-                        <div class="px-6 pb-6">
+                        <div class="px-6 pb-6 max-md:px-4 max-md:pb-4">
                             <button type="button"
                                     data-plan-open="{{ $plan['id'] }}"
-                                    class="flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold transition-all hover:text-white"
+                                    class="flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold transition-all hover:text-white max-md:min-h-11 max-md:rounded-lg max-md:py-2.5 max-md:text-[13px]"
                                     style="background: {{ $plan['accentLight'] }}; color: {{ $plan['accent'] }}; border: 1.5px solid {{ $plan['accent'] }}"
                                     onmouseenter="this.style.background='{{ $plan['accent'] }}'; this.style.color='#fff'"
                                     onmouseleave="this.style.background='{{ $plan['accentLight'] }}'; this.style.color='{{ $plan['accent'] }}'">
                                 View Details
-                                <x-litus-icon name="chevron-right" class="h-4 w-4" />
+                                <x-litus-icon name="chevron-right" class="h-4 w-4 max-md:h-3.5 max-md:w-3.5" />
                             </button>
                         </div>
                     </div>
@@ -288,24 +288,24 @@
             </div>
 
             {{-- Help note --}}
-            <div class="relative mt-8 w-full overflow-hidden rounded-xl border border-[#e1e5eb] bg-white shadow-[0_10px_28px_rgba(0,0,0,0.06)]">
+            <div class="relative mt-8 w-full overflow-hidden rounded-xl border border-[#e1e5eb] bg-white shadow-[0_10px_28px_rgba(0,0,0,0.06)] max-md:mt-6 max-md:rounded-2xl">
                 <span class="absolute left-0 top-0 h-full w-[5px] rounded-l-xl bg-[#f5b21f]" aria-hidden="true"></span>
 
-                <div class="grid grid-cols-1 items-center gap-5 px-[22px] py-7 text-center min-[701px]:grid-cols-[auto_1fr_auto] min-[701px]:gap-5 min-[701px]:py-[22px] min-[701px]:pl-7 min-[701px]:pr-6 min-[701px]:text-left">
-                    <div class="relative mx-auto flex h-[70px] w-[70px] shrink-0 items-center justify-center rounded-full border-2 border-[#f5b21f] bg-[#fffaf0] text-[#f5b21f] min-[701px]:mx-0">
+                <div class="grid grid-cols-1 items-center gap-5 px-[22px] py-7 text-center max-md:gap-4 max-md:px-4 max-md:py-5 min-[701px]:grid-cols-[auto_1fr_auto] min-[701px]:gap-5 min-[701px]:py-[22px] min-[701px]:pl-7 min-[701px]:pr-6 min-[701px]:text-left">
+                    <div class="relative mx-auto flex h-[62px] w-[62px] shrink-0 items-center justify-center rounded-full border-2 border-[#f5b21f] bg-[#fffaf0] text-[#f5b21f] max-md:h-14 max-md:w-14 min-[701px]:mx-0 min-[701px]:h-[70px] min-[701px]:w-[70px]">
                         <span class="pointer-events-none absolute inset-[9px] rounded-full border border-[rgba(245,178,31,0.45)]" aria-hidden="true"></span>
-                        <x-litus-icon name="phone" class="relative z-[1] h-8 w-8" />
+                        <x-litus-icon name="phone" class="relative z-[1] h-7 w-7 min-[701px]:h-8 min-[701px]:w-8" />
                     </div>
 
                     <div class="min-w-0">
-                        <h3 class="mb-2 text-lg font-bold text-[#07152f]">Not sure which plan is right for you?</h3>
-                        <p class="text-[15px] font-semibold leading-[1.45] text-[#4e5969] min-[701px]:max-w-none">
+                        <h3 class="mb-2 text-lg font-bold text-[#07152f] max-md:mb-1.5 max-md:text-base">Not sure which plan is right for you?</h3>
+                        <p class="text-[15px] font-semibold leading-[1.45] text-[#4e5969] max-md:text-sm max-md:leading-snug min-[701px]:max-w-none">
                             Our team can help you choose the ownership plan that best fits your budget and requirements.
                         </p>
                     </div>
 
                     <a href="tel:+9607797442"
-                       class="inline-flex h-12 min-w-[145px] w-full shrink-0 items-center justify-center gap-2.5 rounded-md bg-[#061a45] px-6 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0065ef] min-[701px]:w-auto">
+                       class="inline-flex h-12 min-w-[145px] w-full shrink-0 items-center justify-center gap-2.5 rounded-md bg-[#061a45] px-6 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0065ef] max-md:min-h-11 max-md:rounded-xl min-[701px]:w-auto">
                         <x-litus-icon name="phone" class="h-4 w-4" />
                         Call Us
                     </a>
@@ -315,23 +315,70 @@
     </section>
 
     {{-- COMPARISON TABLE --}}
-    <section class="bg-[#f8f9fb] px-5 py-[25px] pb-10 max-md:px-3.5 max-md:py-7 max-md:pb-9">
+    <section class="bg-[#f8f9fb] px-5 py-[25px] pb-10 max-md:px-4 max-md:py-7 max-md:pb-8">
         <div class="litus-container">
-            <div class="mb-5 text-center">
-                <span class="mb-2 block text-[13px] font-black uppercase tracking-[0.6px] text-[#0065ef] min-[769px]:text-[15px]">Compare Plans</span>
-                <h2 class="font-montserrat text-[28px] font-bold leading-[1.1] tracking-[-0.5px] text-[#07152f] min-[769px]:text-4xl">Find the Right Ownership Option</h2>
+            <div class="mb-5 text-center max-md:mb-4">
+                <span class="mb-2 block text-[13px] font-black uppercase tracking-[0.6px] text-[#0065ef] max-md:text-[11px] max-md:tracking-[0.14em] min-[769px]:text-[15px]">Compare Plans</span>
+                <h2 class="font-montserrat text-[28px] font-bold leading-[1.1] tracking-[-0.5px] text-[#07152f] max-md:text-[24px] min-[769px]:text-4xl">Find the Right Ownership Option</h2>
             </div>
 
-            <p class="mb-2 hidden text-center text-xs font-semibold text-[#667085] max-md:block">Swipe sideways to compare plans →</p>
-            <div class="overflow-x-auto rounded-[10px] shadow-[0_10px_28px_rgba(0,0,0,0.06)] max-md:snap-x max-md:snap-mandatory">
+            {{-- Mobile: compact mini tables --}}
+            <div class="grid grid-cols-2 gap-2.5 min-[769px]:hidden">
+                @foreach ($plans as $plan)
+                    <div class="overflow-hidden rounded-xl border border-[#dfe3ea] bg-white shadow-[0_6px_18px_rgba(0,0,0,0.05)]">
+                        <div class="px-2.5 py-2 text-center text-[12px] font-black text-white"
+                             style="background: {{ $planHeaderColors[$plan['id']] }}">
+                            {{ $plan['name'] }}
+                        </div>
+                        <table class="w-full border-separate border-spacing-0">
+                            <tbody>
+                                @foreach ($compareRows as $rowIndex => $row)
+                                    @php
+                                        $val = $plan['compare'][$row['key']];
+                                        $isLast = $rowIndex === count($compareRows) - 1;
+                                    @endphp
+                                    <tr>
+                                        <td @class([
+                                            'w-[42%] bg-[#f4f6f9] px-2 py-1.5 text-left text-[10px] font-bold leading-snug text-[#425066]',
+                                            'border-b border-[#e8ecf2]' => ! $isLast,
+                                        ])>
+                                            {{ $row['label'] }}
+                                        </td>
+                                        <td @class([
+                                            'px-2 py-1.5 text-left text-[10px] font-bold leading-snug text-[#07152f]',
+                                            'border-b border-[#e8ecf2]' => ! $isLast,
+                                        ])>
+                                            @if ($row['key'] === 'settlement')
+                                                @if ($val === 'Available')
+                                                    <span class="inline-flex items-center gap-1">
+                                                        <span class="inline-flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[#08a84f] text-[9px] font-black text-white">✓</span>
+                                                        Available
+                                                    </span>
+                                                @else
+                                                    Not applicable
+                                                @endif
+                                            @else
+                                                {{ str_replace("\n", ' ', $val) }}
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endforeach
+            </div>
+
+            {{-- Desktop: full comparison table --}}
+            <div class="hidden overflow-x-auto rounded-[10px] shadow-[0_10px_28px_rgba(0,0,0,0.06)] min-[769px]:block">
                 <table class="w-full min-w-[1100px] border-separate border-spacing-0 overflow-hidden rounded-[10px] bg-white [&_tbody_tr:last-child_td]:border-b-0">
                     <thead>
                         <tr>
-                            <th class="w-[210px] border-b border-r border-[#dfe3ea] bg-[#061a45] px-[18px] py-[18px] text-left text-[17px] font-black text-white min-[769px]:text-[17px] max-md:text-[15px]">
+                            <th class="w-[210px] border-b border-r border-[#dfe3ea] bg-[#061a45] px-[18px] py-[18px] text-left text-[17px] font-black text-white">
                                 Features
                             </th>
                             @foreach ($plans as $plan)
-                                <th class="border-b border-r border-[#dfe3ea] px-[18px] py-[18px] text-center text-[15px] font-black text-white last:border-r-0 min-[769px]:text-[17px]"
+                                <th class="border-b border-r border-[#dfe3ea] px-[18px] py-[18px] text-center text-[17px] font-black text-white last:border-r-0"
                                     style="background: {{ $planHeaderColors[$plan['id']] }}">
                                     {{ $plan['name'] }}
                                 </th>
@@ -341,11 +388,11 @@
                     <tbody>
                         @foreach ($compareRows as $row)
                             <tr>
-                                <td class="w-[210px] border-b border-r border-[#dfe3ea] bg-[#061a45] px-[18px] py-5 text-left text-[15px] font-black leading-[1.35] text-white max-md:px-3.5 max-md:py-4 max-md:text-sm">
+                                <td class="w-[210px] border-b border-r border-[#dfe3ea] bg-[#061a45] px-[18px] py-5 text-left text-[15px] font-black leading-[1.35] text-white">
                                     {{ $row['label'] }}
                                 </td>
                                 @foreach ($plans as $plan)
-                                    <td class="border-b border-r border-[#dfe3ea] px-[18px] py-5 text-center align-middle text-[15px] font-bold leading-[1.35] text-[#25304a] last:border-r-0 max-md:px-3.5 max-md:py-4 max-md:text-sm">
+                                    <td class="border-b border-r border-[#dfe3ea] px-[18px] py-5 text-center align-middle text-[15px] font-bold leading-[1.35] text-[#25304a] last:border-r-0">
                                         @if ($row['key'] === 'settlement')
                                             @php $val = $plan['compare']['settlement']; @endphp
                                             <span class="inline-flex items-center justify-center gap-2.5">
@@ -370,59 +417,59 @@
     </section>
 
     {{-- HOW IT WORKS + CTA --}}
-    <section class="bg-[#f8f9fb] px-5 py-[22px] pb-9 max-[650px]:px-3.5 max-[650px]:py-7 max-[650px]:pb-9">
-        <div class="litus-container">
-            <div class="mb-[25px] text-center">
-                <span class="mb-[7px] block text-sm font-black uppercase tracking-[0.6px] text-[#0065ef]">How Ownership Plans Work</span>
-                <h2 class="font-montserrat text-[28px] font-bold leading-[1.1] tracking-[-0.5px] text-[#07152f] min-[651px]:text-4xl">Simple. Transparent. Hassle-Free.</h2>
+    <section class="bg-[#f8f9fb] px-5 py-[22px] pb-9 max-[650px]:px-0 max-[650px]:py-7 max-[650px]:pb-8">
+        <div class="litus-container max-[650px]:!px-0">
+            <div class="mb-[25px] text-center max-[650px]:mb-5 max-[650px]:px-4">
+                <span class="mb-[7px] block text-sm font-black uppercase tracking-[0.6px] text-[#0065ef] max-[650px]:text-[11px] max-[650px]:tracking-[0.14em]">How Ownership Plans Work</span>
+                <h2 class="font-montserrat text-[28px] font-bold leading-[1.1] tracking-[-0.5px] text-[#07152f] max-[650px]:text-[24px] min-[651px]:text-4xl">Simple. Transparent. Hassle-Free.</h2>
             </div>
 
-            <div class="mb-10 grid grid-cols-1 gap-[18px] min-[1151px]:grid-cols-[1fr_40px_1fr_40px_1fr] min-[1151px]:items-center min-[1151px]:gap-0">
+            <div class="mb-10 grid grid-cols-1 gap-[18px] max-[650px]:mb-7 max-[650px]:gap-3 max-[650px]:px-4 min-[1151px]:grid-cols-[1fr_40px_1fr_40px_1fr] min-[1151px]:items-center min-[1151px]:gap-0">
                 @foreach ($steps as $i => $step)
-                    <div class="grid min-h-0 grid-cols-1 items-center gap-2.5 rounded-[10px] border border-[#e1e5eb] bg-white px-4 py-4 text-center shadow-[0_10px_26px_rgba(0,0,0,0.06)] min-[651px]:grid-cols-[72px_36px_1fr] min-[651px]:gap-3 min-[651px]:px-5 min-[651px]:py-4 min-[651px]:text-left">
+                    <div class="grid min-h-0 grid-cols-1 items-center gap-2.5 rounded-[10px] border border-[#e1e5eb] bg-white px-4 py-4 text-center shadow-[0_10px_26px_rgba(0,0,0,0.06)] max-[650px]:rounded-xl max-[650px]:px-3.5 max-[650px]:py-3.5 min-[651px]:grid-cols-[72px_36px_1fr] min-[651px]:gap-3 min-[651px]:px-5 min-[651px]:py-4 min-[651px]:text-left">
                         <div class="mx-auto flex items-center justify-center text-[#061a45] min-[651px]:mx-0">
-                            <x-litus-icon :name="$step['icon']" class="h-10 w-10 min-[651px]:h-11 min-[651px]:w-11" />
+                            <x-litus-icon :name="$step['icon']" class="h-9 w-9 min-[651px]:h-11 min-[651px]:w-11" />
                         </div>
-                        <div class="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-[#0065ef] text-base font-black text-white shadow-[0_6px_14px_rgba(0,101,239,0.28)] min-[651px]:mx-0 min-[651px]:h-9 min-[651px]:w-9 min-[651px]:text-lg">
+                        <div class="mx-auto flex h-7 w-7 items-center justify-center rounded-full bg-[#0065ef] text-sm font-black text-white shadow-[0_6px_14px_rgba(0,101,239,0.28)] min-[651px]:mx-0 min-[651px]:h-9 min-[651px]:w-9 min-[651px]:text-lg">
                             {{ $i + 1 }}
                         </div>
                         <div>
-                            <h3 class="mb-1.5 text-base font-bold text-[#07152f] min-[651px]:text-lg">{{ $step['title'] }}</h3>
-                            <p class="mx-auto max-w-[290px] text-[13px] font-semibold leading-snug text-[#4d5869] min-[651px]:mx-0 min-[651px]:text-sm">{{ $step['desc'] }}</p>
+                            <h3 class="mb-1 text-[15px] font-bold text-[#07152f] min-[651px]:mb-1.5 min-[651px]:text-lg">{{ $step['title'] }}</h3>
+                            <p class="mx-auto max-w-[290px] text-[12px] font-semibold leading-snug text-[#4d5869] min-[651px]:mx-0 min-[651px]:text-sm">{{ $step['desc'] }}</p>
                         </div>
                     </div>
 
                     @if ($i < count($steps) - 1)
-                        <div class="flex items-center justify-center text-[30px] font-black tracking-[3px] text-[#07152f] min-[1151px]:text-[38px] max-[1150px]:rotate-90">
+                        <div class="hidden items-center justify-center text-[30px] font-black tracking-[3px] text-[#07152f] min-[1151px]:flex min-[1151px]:text-[38px]">
                             ···›
                         </div>
                     @endif
                 @endforeach
             </div>
 
-            <div class="grid grid-cols-1 items-center gap-8 rounded-[10px] border border-white/12 bg-[linear-gradient(135deg,#061a45,#020b1d)] px-[22px] py-[30px] shadow-[0_12px_32px_rgba(0,0,0,0.16)] min-[1151px]:grid-cols-[auto_1fr_auto] min-[1151px]:gap-9 min-[1151px]:px-11">
-                <div class="mx-auto flex h-24 w-24 min-w-24 items-center justify-center rounded-full border-2 border-white/50 bg-white/[0.03] text-white min-[1151px]:mx-0">
-                    <x-litus-icon name="headphones" class="h-11 w-11" />
+            <div class="grid grid-cols-1 items-center gap-8 rounded-[10px] border border-white/12 bg-[linear-gradient(135deg,#061a45,#020b1d)] px-[22px] py-[30px] shadow-[0_12px_32px_rgba(0,0,0,0.16)] max-[650px]:mx-4 max-[650px]:gap-5 max-[650px]:rounded-2xl max-[650px]:px-4 max-[650px]:py-6 min-[1151px]:grid-cols-[auto_1fr_auto] min-[1151px]:gap-9 min-[1151px]:px-11">
+                <div class="mx-auto flex h-20 w-20 min-w-20 items-center justify-center rounded-full border-2 border-white/50 bg-white/[0.03] text-white min-[1151px]:mx-0 min-[1151px]:h-24 min-[1151px]:w-24 min-[1151px]:min-w-24">
+                    <x-litus-icon name="headphones" class="h-9 w-9 min-[1151px]:h-11 min-[1151px]:w-11" />
                 </div>
 
                 <div class="text-center min-[1151px]:text-left">
-                    <h2 class="font-montserrat mb-3 text-[25px] font-bold tracking-[-0.3px] text-white min-[651px]:text-[29px]">Need Help Choosing?</h2>
-                    <p class="mx-auto max-w-[560px] text-base font-semibold leading-[1.55] text-[#d9e2ef] min-[1151px]:mx-0">
+                    <h2 class="font-montserrat mb-3 text-[25px] font-bold tracking-[-0.3px] text-white max-[650px]:mb-2 max-[650px]:text-[22px] min-[651px]:text-[29px]">Need Help Choosing?</h2>
+                    <p class="mx-auto max-w-[560px] text-base font-semibold leading-[1.55] text-[#d9e2ef] max-[650px]:text-sm max-[650px]:leading-snug min-[1151px]:mx-0">
                         Our team is here to help you find the ownership plan that best fits your needs.
                     </p>
                 </div>
 
-                <div class="flex flex-wrap justify-center gap-[22px] min-[1151px]:justify-end">
+                <div class="flex w-full flex-col justify-center gap-3 max-[650px]:gap-2.5 min-[1151px]:w-auto min-[1151px]:flex-wrap min-[1151px]:justify-end min-[1151px]:gap-[22px]">
                     <a href="https://wa.me/9607797442"
                        target="_blank"
                        rel="noopener noreferrer"
-                       class="inline-flex h-[58px] w-full min-w-0 items-center justify-center gap-3 rounded-[7px] bg-[#0065ef] px-8 text-[17px] font-black text-white shadow-[0_10px_24px_rgba(0,101,239,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] min-[651px]:w-auto min-[651px]:min-w-[260px]">
-                        <x-litus-icon name="message-circle" class="h-5 w-5" />
+                       class="inline-flex h-[58px] w-full min-w-0 items-center justify-center gap-3 rounded-[7px] bg-[#0065ef] px-8 text-[17px] font-black text-white shadow-[0_10px_24px_rgba(0,101,239,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] max-[650px]:h-11 max-[650px]:rounded-xl max-[650px]:px-4 max-[650px]:text-[14px] min-[651px]:w-auto min-[651px]:min-w-[260px]">
+                        <x-litus-icon name="message-circle" class="h-5 w-5 max-[650px]:h-4 max-[650px]:w-4" />
                         Chat on WhatsApp
                     </a>
                     <a href="tel:+9607797442"
-                       class="inline-flex h-[58px] w-full min-w-0 items-center justify-center gap-3 rounded-[7px] border-2 border-white/55 bg-white/[0.03] px-8 text-[17px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] min-[651px]:w-auto min-[651px]:min-w-[260px]">
-                        <x-litus-icon name="phone" class="h-5 w-5" />
+                       class="inline-flex h-[58px] w-full min-w-0 items-center justify-center gap-3 rounded-[7px] border-2 border-white/55 bg-white/[0.03] px-8 text-[17px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] max-[650px]:h-11 max-[650px]:rounded-xl max-[650px]:px-4 max-[650px]:text-[14px] min-[651px]:w-auto min-[651px]:min-w-[260px]">
+                        <x-litus-icon name="phone" class="h-5 w-5 max-[650px]:h-4 max-[650px]:w-4" />
                         Call Us
                     </a>
                 </div>
@@ -436,8 +483,8 @@
     <div data-plan-drawer-backdrop class="fixed inset-0 z-[60] hidden bg-black/60 backdrop-blur-sm"></div>
 
     <div data-plan-drawer
-         class="fixed top-0 right-0 z-[70] hidden flex h-full w-full flex-col bg-white shadow-2xl sm:w-[430px]">
-        <div data-drawer-header-stripe class="flex items-start justify-between border-b border-gray-100 px-6 pb-5 pt-6" style="border-top: 4px solid #E31E25">
+         class="fixed top-0 right-0 z-[70] hidden flex h-full w-full max-w-full flex-col bg-white shadow-2xl sm:max-w-[430px]">
+        <div data-drawer-header-stripe class="flex items-start justify-between border-b border-gray-100 px-6 pb-5 pt-6 max-md:px-4 max-md:pb-4 max-md:pt-5" style="border-top: 4px solid #E31E25">
             <div>
                 <div class="mb-1 flex items-center gap-2">
                     <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-[rgba(227,30,37,0.08)]">
@@ -456,7 +503,7 @@
             </button>
         </div>
 
-        <div class="flex-1 space-y-6 overflow-y-auto px-6 py-5">
+        <div class="flex-1 space-y-6 overflow-y-auto px-6 py-5 max-md:space-y-5 max-md:px-4 max-md:py-4">
             <p data-drawer-desc class="text-sm leading-relaxed text-gray-600"></p>
 
             <div>
@@ -485,11 +532,11 @@
             </div>
         </div>
 
-        <div class="border-t border-gray-100 bg-white px-6 py-4">
+        <div class="border-t border-gray-100 bg-white px-6 py-4 max-md:px-4 max-md:py-3.5">
             <a href="https://wa.me/9607797442"
                target="_blank"
                rel="noopener noreferrer"
-               class="flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3.5 text-sm font-black text-white transition-opacity hover:opacity-90">
+               class="flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3.5 text-sm font-black text-white transition-opacity hover:opacity-90 max-md:min-h-11 max-md:py-3">
                 <x-litus-icon name="message-circle" class="h-[17px] w-[17px]" />
                 Apply via WhatsApp
             </a>

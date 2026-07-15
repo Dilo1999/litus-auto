@@ -309,20 +309,20 @@
     </section>
 
     {{-- WHY LITUS --}}
-    <section class="bg-white py-14">
+    <section class="bg-white py-14 max-md:py-10">
         <div class="litus-container">
-            <div class="mb-10 text-center">
-                <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Promise</span>
-                <h2 class="mt-2 font-montserrat text-2xl font-bold text-gray-900 lg:text-3xl">Why Service Your Motorcycle at LITUS?</h2>
+            <div class="mb-10 text-center max-md:mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest text-litus-red max-md:text-[11px] max-md:tracking-[0.14em]">Our Promise</span>
+                <h2 class="mt-2 font-montserrat text-2xl font-bold text-gray-900 max-md:text-[24px] lg:text-3xl">Why Service Your Motorcycle at LITUS?</h2>
             </div>
-            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="grid grid-cols-2 gap-3 max-md:gap-2.5 sm:gap-5 lg:grid-cols-4">
                 @foreach ($whyLitus as $item)
-                    <div class="group rounded-2xl border border-gray-100 p-6 text-center transition-all hover:border-blue-100 hover:shadow-md">
-                        <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-litus-red/8">
-                            <x-litus-icon :name="$item['icon']" class="h-5 w-5 text-litus-red" />
+                    <div class="group rounded-xl border border-gray-100 p-3 text-center transition-all hover:border-blue-100 hover:shadow-md sm:rounded-2xl sm:p-6">
+                        <div class="mx-auto mb-2.5 flex h-10 w-10 items-center justify-center rounded-full bg-litus-red/8 sm:mb-4 sm:h-12 sm:w-12">
+                            <x-litus-icon :name="$item['icon']" class="h-4 w-4 text-litus-red sm:h-5 sm:w-5" />
                         </div>
-                        <h3 class="mb-2 text-base font-bold text-gray-900">{{ $item['title'] }}</h3>
-                        <p class="text-sm leading-relaxed text-gray-500">{{ $item['desc'] }}</p>
+                        <h3 class="mb-1 line-clamp-2 text-[13px] font-bold leading-snug text-gray-900 sm:mb-2 sm:text-base">{{ $item['title'] }}</h3>
+                        <p class="line-clamp-3 text-[11px] leading-snug text-gray-500 sm:line-clamp-none sm:text-sm sm:leading-relaxed">{{ $item['desc'] }}</p>
                     </div>
                 @endforeach
             </div>

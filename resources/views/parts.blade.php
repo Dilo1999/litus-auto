@@ -91,26 +91,26 @@
     </section>
 
     {{-- PARTS CATEGORIES --}}
-    <section class="bg-white py-16">
+    <section class="bg-white py-16 max-md:py-10">
         <div class="litus-container">
-            <div class="mb-10 text-center">
-                <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Parts Categories</span>
-                <h2 class="mt-2 font-montserrat text-3xl font-bold text-gray-900 lg:text-4xl">Motorcycle Genuine Spare Parts</h2>
-                <p class="mx-auto mt-2 max-w-xl text-gray-500">Browse our curated selection of genuine motorcycle components, ensuring peak performance, reliability, and longevity.</p>
+            <div class="mb-10 text-center max-md:mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest text-litus-red max-md:text-[11px] max-md:tracking-[0.14em]">Parts Categories</span>
+                <h2 class="mt-2 font-montserrat text-3xl font-bold text-gray-900 max-md:text-[24px] lg:text-4xl">Motorcycle Genuine Spare Parts</h2>
+                <p class="mx-auto mt-2 max-w-xl text-gray-500 max-md:max-w-[34ch] max-md:text-sm">Browse our curated selection of genuine motorcycle components, ensuring peak performance, reliability, and longevity.</p>
             </div>
 
-            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="grid grid-cols-2 gap-3 max-md:gap-2.5 sm:gap-5 lg:grid-cols-3">
                 @foreach ($categories as $category)
-                    <div class="group flex cursor-pointer items-start gap-5 rounded-2xl border border-gray-100 bg-white p-6 transition-all duration-300 hover:border-blue-100 hover:shadow-lg">
-                        <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-litus-red/10 transition-transform duration-300 group-hover:scale-105">
-                            <x-litus-icon :name="$category['icon']" class="h-[26px] w-[26px] text-litus-red" />
+                    <div class="group flex cursor-pointer flex-col items-start gap-2.5 rounded-xl border border-gray-100 bg-white p-3 transition-all duration-300 hover:border-blue-100 hover:shadow-lg max-md:min-h-[148px] sm:flex-row sm:items-start sm:gap-5 sm:rounded-2xl sm:p-6">
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-litus-red/10 transition-transform duration-300 group-hover:scale-105 sm:h-14 sm:w-14 sm:rounded-2xl">
+                            <x-litus-icon :name="$category['icon']" class="h-5 w-5 text-litus-red sm:h-[26px] sm:w-[26px]" />
                         </div>
-                        <div class="flex-1">
-                            <h3 class="mb-1 text-base font-bold text-gray-900">{{ $category['title'] }}</h3>
-                            <p class="mb-3 text-sm leading-relaxed text-gray-500">{{ $category['desc'] }}</p>
-                            <span class="inline-flex items-center gap-1 text-xs font-bold text-litus-red">
+                        <div class="flex min-w-0 flex-1 flex-col">
+                            <h3 class="mb-0.5 line-clamp-2 text-[13px] font-bold leading-snug text-gray-900 sm:mb-1 sm:text-base">{{ $category['title'] }}</h3>
+                            <p class="mb-2 line-clamp-3 text-[11px] leading-snug text-gray-500 sm:mb-3 sm:line-clamp-none sm:text-sm sm:leading-relaxed">{{ $category['desc'] }}</p>
+                            <span class="mt-auto inline-flex items-center gap-1 text-[10px] font-bold text-litus-red sm:text-xs">
                                 Explore
-                                <x-litus-icon name="arrow-right" class="h-3 w-3" />
+                                <x-litus-icon name="arrow-right" class="h-2.5 w-2.5 sm:h-3 sm:w-3" />
                             </span>
                         </div>
                     </div>
@@ -223,11 +223,37 @@
 
                         <div class="sm:col-span-2">
                             <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-gray-300">Select a Category</label>
-                            <div class="grid grid-cols-2 gap-2 max-sm:grid-cols-1 sm:grid-cols-3">
+
+                            {{-- Mobile dropdown --}}
+                            <div class="relative z-10 max-sm:block sm:hidden" data-parts-category-select>
+                                <button type="button"
+                                        data-parts-category-trigger
+                                        aria-haspopup="listbox"
+                                        aria-expanded="false"
+                                        class="flex w-full cursor-pointer items-center rounded-xl border border-white/15 bg-white/10 px-4 py-3 pr-9 text-left text-sm outline-none transition-all focus:border-blue-400 focus:ring-2 focus:ring-blue-500/20">
+                                    <span data-parts-category-label class="text-gray-400">Select a Category</span>
+                                </button>
+                                <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-gray-400" />
+                                <div data-parts-category-menu
+                                     role="listbox"
+                                     class="absolute left-0 right-0 top-full z-30 mt-1 hidden max-h-56 overflow-y-auto overflow-hidden rounded-xl border border-white/15 bg-[#03045e] shadow-xl">
+                                    @foreach ($partCategoryOptions as $option)
+                                        <button type="button"
+                                                role="option"
+                                                data-parts-category-option="{{ $option }}"
+                                                class="block w-full px-4 py-3 text-left text-sm text-white transition-colors hover:bg-white/10">
+                                            {{ $option }}
+                                        </button>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            {{-- Desktop button grid --}}
+                            <div class="hidden grid-cols-2 gap-2 sm:grid sm:grid-cols-3">
                                 @foreach ($partCategoryOptions as $option)
                                     <button type="button"
                                             data-parts-category="{{ $option }}"
-                                            class="rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-left text-xs font-semibold text-gray-400 transition-all max-sm:min-h-11 max-sm:py-3">
+                                            class="rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-left text-xs font-semibold text-gray-400 transition-all">
                                         {{ $option }}
                                     </button>
                                 @endforeach
@@ -283,27 +309,30 @@
     </section>
 
     {{-- HOW IT WORKS --}}
-    <section class="bg-white py-14">
+    <section class="bg-white py-14 max-md:py-10">
         <div class="litus-container">
-            <div class="mb-10 text-center">
-                <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Simple Process</span>
-                <h2 class="mt-2 font-montserrat text-2xl font-bold text-gray-900 lg:text-3xl">How Parts Inquiry Works</h2>
+            <div class="mb-10 text-center max-md:mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest text-litus-red max-md:text-[11px] max-md:tracking-[0.14em]">Simple Process</span>
+                <h2 class="mt-2 font-montserrat text-2xl font-bold text-gray-900 max-md:text-[24px] lg:text-3xl">How Parts Inquiry Works</h2>
             </div>
-            <div class="flex flex-col items-start lg:flex-row">
+
+            <div class="grid grid-cols-1 gap-3 max-md:gap-2.5 lg:flex lg:items-start">
                 @foreach ($steps as $index => $step)
-                    <div class="flex flex-1 flex-col items-start gap-0 lg:flex-row">
-                        <div class="group relative flex-1 px-6 py-8 text-center">
-                            <div class="relative mb-5 inline-flex">
-                                <div class="flex h-16 w-16 items-center justify-center rounded-full border-2 border-dashed border-gray-200 bg-litus-red/5 transition-colors group-hover:border-blue-200">
-                                    <x-litus-icon :name="$step['icon']" class="h-6 w-6 text-litus-red" />
+                    <div class="flex flex-1 flex-col items-stretch gap-0 lg:flex-row">
+                        <div class="grid grid-cols-[56px_1fr] items-center gap-3 rounded-xl border border-gray-100 bg-white px-3.5 py-3.5 text-left shadow-[0_6px_18px_rgba(0,0,0,0.05)] sm:grid-cols-1 sm:px-6 sm:py-8 sm:text-center sm:shadow-sm lg:flex-1">
+                            <div class="relative flex items-center justify-center sm:mx-auto sm:mb-5 sm:inline-flex">
+                                <div class="flex h-12 w-12 items-center justify-center rounded-full border-2 border-dashed border-gray-200 bg-litus-red/5 sm:h-16 sm:w-16">
+                                    <x-litus-icon :name="$step['icon']" class="h-5 w-5 text-litus-red sm:h-6 sm:w-6" />
                                 </div>
-                                <span class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-litus-red text-xs font-black text-white">{{ $index + 1 }}</span>
+                                <span class="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-litus-red text-[10px] font-black text-white sm:h-6 sm:w-6 sm:text-xs">{{ $index + 1 }}</span>
                             </div>
-                            <h3 class="mb-2 text-base font-bold text-gray-900">{{ $step['title'] }}</h3>
-                            <p class="mx-auto max-w-[200px] text-sm leading-relaxed text-gray-500">{{ $step['desc'] }}</p>
+                            <div class="min-w-0">
+                                <h3 class="mb-0.5 text-[14px] font-bold leading-snug text-gray-900 sm:mb-2 sm:text-base">{{ $step['title'] }}</h3>
+                                <p class="text-[12px] leading-snug text-gray-500 sm:mx-auto sm:max-w-[200px] sm:text-sm sm:leading-relaxed">{{ $step['desc'] }}</p>
+                            </div>
                         </div>
                         @if ($index < count($steps) - 1)
-                            <div class="hidden items-center justify-center self-center lg:flex">
+                            <div class="hidden items-center justify-center self-center px-2 lg:flex">
                                 <x-litus-icon name="arrow-right" class="h-[22px] w-[22px] text-gray-300" />
                             </div>
                         @endif
