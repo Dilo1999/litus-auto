@@ -158,7 +158,7 @@
                     About LITUS Automobiles
                 </p>
 
-                <h1 class="mb-4 font-display text-[clamp(2.25rem,4.2vw,4.25rem)] font-black leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
+                <h1 class="mb-4 font-montserrat text-[clamp(2.25rem,4.2vw,4.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
                     Driven by Trust.<br>
                     <span class="text-litus-red">Built for Every Ride.</span>
                 </h1>
@@ -203,7 +203,7 @@
                             <x-litus-icon :name="$item['icon']" class="h-8 w-8 min-[561px]:h-9 min-[561px]:w-9" />
                         </div>
                         <div class="text-center min-[561px]:text-left">
-                            <h2 class="mb-2.5 text-xl font-black tracking-[-0.5px] text-[#07152f] min-[561px]:text-2xl">{{ $item['title'] }}</h2>
+                            <h2 class="font-montserrat mb-2.5 text-xl font-bold tracking-[-0.5px] text-[#07152f] min-[561px]:text-2xl">{{ $item['title'] }}</h2>
                             <p class="max-w-[390px] text-sm font-semibold leading-relaxed text-[#586273]">{{ $item['text'] }}</p>
                         </div>
                     </div>
@@ -222,7 +222,7 @@
                     Leadership Team
                     <span class="h-0.5 w-8 bg-gradient-to-l from-transparent to-[#0065ef] min-[651px]:w-[42px]"></span>
                 </span>
-                <h2 class="mb-5 text-[clamp(2.625rem,5vw,4rem)] font-black leading-[1.05] tracking-[-1.5px] text-[#07152f]">Our Key Members</h2>
+                <h2 class="mb-5 font-montserrat text-[clamp(2.625rem,5vw,4rem)] font-bold leading-[1.05] tracking-[-1.5px] text-[#07152f]">Our Key Members</h2>
                 <div class="mx-auto mb-[22px] h-1 w-[70px] rounded-[10px] bg-[#0065ef]"></div>
                 <p class="text-[15px] font-semibold leading-relaxed text-[#667085] min-[651px]:text-lg">
                     Meet the talented leaders driving our vision and growth with dedication and expertise.
@@ -241,7 +241,7 @@
                             <div class="mb-9 hidden h-[54px] w-[54px] items-center justify-center rounded-full border border-[#0065ef]/45 text-[#0065ef] min-[701px]:flex">
                                 <x-litus-icon name="award" class="h-6 w-6" />
                             </div>
-                            <h3 class="mb-2.5 text-[25px] font-black leading-[1.15]">{{ $member['name'] }}</h3>
+                            <h3 class="mb-2.5 text-[25px] font-bold leading-[1.15]">{{ $member['name'] }}</h3>
                             <p class="mb-[22px] text-base font-medium text-[#e5ecf5]">{{ $member['role'] }}</p>
                             <div class="h-[3px] w-8 rounded-[10px] bg-[#0065ef]"></div>
                         </div>
@@ -267,7 +267,7 @@
                         <div class="relative z-[3] mx-auto -mt-3.5 mb-2.5 flex h-9 w-9 items-center justify-center rounded-full border border-[#e2e8f0] bg-white text-[#0065ef] shadow-[0_8px_22px_rgba(7,21,47,0.08)] max-md:-mt-3 max-md:mb-2 max-md:h-8 max-md:w-8 min-[701px]:-mt-[22px] min-[701px]:mb-[18px] min-[701px]:h-[52px] min-[701px]:w-[52px]">
                             <x-litus-icon name="award" class="h-4 w-4 max-md:h-3.5 max-md:w-3.5 min-[701px]:h-6 min-[701px]:w-6" />
                         </div>
-                        <h4 class="mb-1 text-[13px] font-black leading-snug text-[#07152f] max-md:line-clamp-2 min-[701px]:mb-3 min-[701px]:text-[22px]">{{ $member['name'] }}</h4>
+                        <h4 class="mb-1 text-[13px] font-bold leading-snug text-[#07152f] max-md:line-clamp-2 min-[701px]:mb-3 min-[701px]:text-[22px]">{{ $member['name'] }}</h4>
                         <p class="mb-2.5 text-[11px] font-extrabold text-[#0065ef] max-md:mb-2 min-[701px]:mb-[22px] min-[701px]:text-base">{{ $member['role'] }}</p>
                         <div class="mx-auto mb-2.5 h-px w-16 bg-[#dce3ed] max-md:mb-2 min-[701px]:mb-5 min-[701px]:w-[150px]"></div>
                         <p class="mx-auto max-w-[230px] text-[10px] font-medium leading-snug text-[#667085] max-md:line-clamp-2 min-[701px]:text-base">{{ $member['dept'] }}</p>
@@ -281,7 +281,7 @@
                 <div class="grid grid-cols-1 gap-7 min-[1051px]:grid-cols-[38%_62%] min-[1051px]:items-stretch">
                     <div class="flex flex-col justify-center">
                         <span class="mb-2.5 block text-[13px] font-black uppercase tracking-[3px] text-[#0065ef]">Our People</span>
-                        <h2 class="mb-[18px] text-[28px] font-black leading-tight text-white min-[651px]:text-[33px]">Our Operation Team</h2>
+                        <h2 class="font-montserrat mb-[18px] text-[28px] font-bold leading-tight text-white min-[651px]:text-[33px]">Our Operation Team</h2>
                         <p class="max-w-[470px] text-sm font-medium leading-[1.65] text-[#dbe4ee]">
                             Meet the LITUS Automobiles team, a passionate ensemble of dedicated professionals committed to elevating your motorcycle experience. With a wealth of knowledge and a shared drive to help every rider, our team is here to guide you, answer your questions, and keep your journey smooth from selection to service.
                         </p>
@@ -300,7 +300,7 @@
                                     <x-litus-icon :name="$stat['icon']" class="h-5 w-5 max-md:h-[18px] max-md:w-[18px] min-[651px]:h-6 min-[651px]:w-6" />
                                 </div>
                                 <div class="min-w-0">
-                                    <h4 class="mb-0.5 text-[12px] font-black leading-tight text-white max-md:mb-1 min-[651px]:mb-1 min-[651px]:text-sm">{{ $stat['title'] }}</h4>
+                                    <h4 class="mb-0.5 text-[12px] font-bold leading-tight text-white max-md:mb-1 min-[651px]:mb-1 min-[651px]:text-sm">{{ $stat['title'] }}</h4>
                                     <p class="text-[10px] leading-snug text-[#dbe4ee] max-md:line-clamp-2 min-[651px]:text-xs">{{ $stat['desc'] }}</p>
                                 </div>
                             </div>
@@ -313,12 +313,12 @@
     </section>
 
     {{-- SHOWROOMS & SERVICE CENTERS --}}
-    <section id="locations" class="bg-[#f7f8fa] pt-5 max-sm:pt-[18px]">
+    <section id="locations" class="bg-[#f7f8fa] pt-5 pb-8 max-sm:pt-[18px] max-sm:pb-6 min-[651px]:pb-12">
         <div class="litus-container">
 
             <div class="mb-[18px] text-center">
                 <span class="mb-1.5 block text-sm font-black uppercase tracking-[3px] text-[#0065ef]">Our Locations</span>
-                <h2 class="mb-2 text-[28px] font-black leading-tight text-[#07152f] min-[651px]:text-[34px]">Our Showrooms &amp; Service Centers</h2>
+                <h2 class="font-montserrat mb-2 text-[28px] font-bold leading-tight text-[#07152f] min-[651px]:text-[34px]">Our Showrooms &amp; Service Centers</h2>
                 <p class="text-sm font-semibold leading-normal text-[#555f70] min-[651px]:text-base">
                     Visit our showrooms and service centers across the Maldives for motorcycles, genuine parts, and trusted support.
                 </p>
@@ -372,7 +372,7 @@
                             'min-[651px]:px-6 min-[651px]:pb-6 min-[651px]:pt-5' => $showroom['featured'],
                         ])>
                             <h3 @class([
-                                'mb-1 font-black leading-snug text-[#111b46] max-md:mb-0.5 max-md:line-clamp-2 max-md:text-[12px]',
+                                'mb-1 font-bold leading-snug text-[#111b46] max-md:mb-0.5 max-md:line-clamp-2 max-md:text-[12px]',
                                 'text-base' => ! $showroom['featured'],
                                 'text-base min-[651px]:text-xl' => $showroom['featured'],
                             ])>{{ $showroom['name'] }}</h3>
@@ -415,7 +415,7 @@
             </div>
 
             <div>
-                <h2 class="mb-2 text-[25px] font-black text-white min-[651px]:text-[32px]">Looking for the Nearest LITUS Showroom?</h2>
+                <h2 class="font-montserrat mb-2 text-[25px] font-bold text-white min-[651px]:text-[32px]">Looking for the Nearest LITUS Showroom?</h2>
                 <p class="text-[15px] font-semibold text-[#d6deea]">
                     Our team is ready to help you find the right motorcycle, parts, or service support.
                 </p>

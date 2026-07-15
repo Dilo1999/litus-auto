@@ -57,7 +57,7 @@
     <div class="pointer-events-none relative z-[3] px-[30px] pb-0 pt-3 text-center max-[720px]:px-5">
         <div class="mx-auto mb-[26px] h-[3px] w-11 rounded-[10px] max-[720px]:mb-4 {{ $styles['line'] }}"></div>
 
-        <h3 class="mb-6 text-[23px] font-black text-[#07152f] max-[720px]:mb-4 max-[720px]:text-[20px]">{{ $model }}</h3>
+        <h3 class="mb-6 text-[23px] font-bold text-[#07152f] max-[720px]:mb-4 max-[720px]:text-[20px]">{{ $model }}</h3>
 
         <div class="flex items-center justify-center gap-[18px] text-[15px] font-extrabold text-[#344054] max-[720px]:gap-3 max-[720px]:text-[13px]">
             <span class="inline-flex items-center gap-2">

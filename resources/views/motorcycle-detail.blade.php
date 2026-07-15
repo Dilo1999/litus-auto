@@ -57,7 +57,7 @@
                         {{ $motorcycle->category }}
                     </p>
 
-                    <h1 class="mb-7 font-display text-[clamp(2.75rem,5.5vw,5.125rem)] font-black leading-none tracking-[-0.02em] text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.7)] max-md:mb-3 max-md:text-[1.85rem] max-md:leading-[1.05]">
+                    <h1 class="mb-7 font-display text-[clamp(2.75rem,5.5vw,5.125rem)] font-bold leading-none tracking-[-0.02em] text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.7)] max-md:mb-3 max-md:text-[1.85rem] max-md:leading-[1.05]">
                         {{ $motorcycle->name }}
                     </h1>
 
@@ -184,7 +184,7 @@
                      data-animate="slideRight"
                      data-delay="0.1">
                     <div>
-                        <h3 class="mb-5 text-xl font-black text-[#07152f] min-[1150px]:mb-6 min-[1150px]:text-2xl">Select Color</h3>
+                        <h3 class="mb-5 text-xl font-bold text-[#07152f] min-[1150px]:mb-6 min-[1150px]:text-2xl">Select Color</h3>
 
                         <div class="flex flex-wrap items-center gap-4 min-[1150px]:gap-5">
                             @foreach ($colors as $index => $color)
@@ -211,7 +211,7 @@
                                     <x-spec-icon :icon="$item['icon']" :icon-url="$item['icon_url']" class="h-7 w-7 min-[1150px]:h-8 min-[1150px]:w-8" stroke-width="1.75" />
                                 </div>
                                 <div class="min-w-0 flex-1">
-                                    <h4 class="mb-1 text-sm font-black text-[#07152f] min-[1150px]:mb-1.5 min-[1150px]:text-base">{{ $item['label'] }}</h4>
+                                    <h4 class="mb-1 text-sm font-bold text-[#07152f] min-[1150px]:mb-1.5 min-[1150px]:text-base">{{ $item['label'] }}</h4>
                                     <p class="text-lg font-black leading-tight text-[#07152f] min-[1150px]:text-xl">
                                         @if (!empty($item['value_html']))
                                             {!! $item['value'] !!}
@@ -254,7 +254,7 @@
                             <x-litus-icon :name="$feature['icon']" class="h-5 w-5 min-[1150px]:h-6 min-[1150px]:w-6" />
                         </div>
                         <div class="min-w-0">
-                            <h4 class="mb-0.5 text-base font-black text-[#07152f] min-[1150px]:mb-1 min-[1150px]:text-lg">{{ $feature['title'] }}</h4>
+                            <h4 class="mb-0.5 text-base font-bold text-[#07152f] min-[1150px]:mb-1 min-[1150px]:text-lg">{{ $feature['title'] }}</h4>
                             <p class="text-xs font-medium leading-snug text-[#07152f] min-[1150px]:text-sm min-[1150px]:leading-relaxed">{{ $feature['desc'] }}</p>
                         </div>
                     </div>
@@ -271,7 +271,7 @@
             <div class="animate-on-scroll" data-animate="fadeInUp">
                 <div class="mb-6 text-center sm:mb-8">
                     <span class="mb-2 block text-xs font-black uppercase tracking-[0.08em] text-[#0065ef]">Technical Details</span>
-                    <h2 class="text-[23px] font-black tracking-wide text-[#111b46] sm:text-[28px]">{{ $motorcycle->name }} Specifications</h2>
+                    <h2 class="font-montserrat text-[23px] font-bold tracking-wide text-[#111b46] sm:text-[28px]">{{ $motorcycle->name }} Specifications</h2>
                 </div>
 
                 <div class="grid grid-cols-1 gap-5 min-[650px]:grid-cols-2 min-[1100px]:grid-cols-4">
@@ -283,7 +283,7 @@
                                 <div class="flex h-[34px] w-[34px] shrink-0 items-center justify-center text-[#07152f]">
                                     <x-litus-icon :name="$group['icon']" class="h-7 w-7" />
                                 </div>
-                                <h3 class="text-sm font-black uppercase tracking-wide text-[#07152f]">{{ $group['title'] }}</h3>
+                                <h3 class="text-sm font-bold uppercase tracking-wide text-[#07152f]">{{ $group['title'] }}</h3>
                             </div>
 
                             <div class="px-5 pb-6 pt-1 sm:px-[22px] sm:pb-6 sm:pt-[18px]">
@@ -312,7 +312,7 @@
                 </div>
 
                 <div>
-                    <h2 class="mb-2 text-xl font-black text-white min-[1100px]:text-2xl">Ready to Own the {{ $motorcycle->name }}?</h2>
+                    <h2 class="font-montserrat mb-2 text-xl font-bold text-white min-[1100px]:text-2xl">Ready to Own the {{ $motorcycle->name }}?</h2>
                     <p class="max-w-[620px] text-sm font-semibold leading-relaxed text-[#dce5ef] min-[1100px]:text-[15px] max-[1100px]:mx-auto">
                         Take advantage of our limited offer and ride with confidence, performance, and style.
                     </p>
@@ -342,7 +342,7 @@
                  data-animate="fadeInUp"
                  data-delay="0.1">
                 <div class="p-5 max-[1100px]:col-span-2 max-[1100px]:text-center max-[760px]:col-span-1 min-[1100px]:p-6">
-                    <h2 class="mb-3 text-xl font-black leading-tight text-[#111b46] min-[1100px]:text-2xl">
+                    <h2 class="font-montserrat mb-3 text-xl font-bold leading-tight text-[#111b46] min-[1100px]:text-2xl">
                         Need a Flexible<br>Ownership Plan?
                     </h2>
                     <p class="mb-4 text-xs font-semibold leading-relaxed text-[#4d5969] min-[1100px]:text-sm">
@@ -358,14 +358,14 @@
                 @foreach ($ownership as $item)
                     <div class="flex flex-col items-center justify-center border-t border-[#e1e5eb] px-4 py-4 text-center min-[1100px]:border-l min-[1100px]:border-t-0 min-[1100px]:px-5 min-[1100px]:py-5">
                         <x-litus-icon :name="$item['icon']" class="mb-2.5 h-8 w-8 text-[#111b46] min-[1100px]:mb-3 min-[1100px]:h-9 min-[1100px]:w-9" />
-                        <h3 class="mb-1.5 text-sm font-black text-[#111b46] min-[1100px]:text-base">{{ $item['title'] }}</h3>
+                        <h3 class="mb-1.5 text-sm font-bold text-[#111b46] min-[1100px]:text-base">{{ $item['title'] }}</h3>
                         <p class="text-xs font-semibold leading-snug text-[#4d5969] min-[1100px]:text-[13px]">{{ $item['desc'] }}</p>
                     </div>
                 @endforeach
             </div>
 
             {{-- Related products --}}
-            <h2 class="animate-on-scroll pt-2 text-center text-[25px] font-black text-[#111b46]"
+            <h2 class="font-montserrat animate-on-scroll pt-2 text-center text-[25px] font-bold text-[#111b46]"
                 data-animate="fadeInUp">You May Also Like</h2>
 
             <div class="grid grid-cols-1 gap-3.5 min-[1100px]:grid-cols-3">
@@ -377,7 +377,7 @@
                              alt="{{ $product['name'] }}"
                              class="mx-auto h-[85px] w-[120px] object-contain min-[480px]:mx-0">
                         <div class="text-center min-[480px]:text-left">
-                            <h3 class="mb-2.5 text-lg font-black text-[#111b46]">{{ $product['name'] }}</h3>
+                            <h3 class="mb-2.5 text-lg font-bold text-[#111b46]">{{ $product['name'] }}</h3>
                             @if (! empty($product['discount']))
                             <p class="mb-3 text-sm font-black text-[#0065ef]">Discount: {{ $product['discount'] }}</p>
                             @endif
@@ -400,7 +400,7 @@
                 </div>
 
                 <div>
-                    <h2 class="mb-2 text-2xl font-black text-[#111b46]">Have Questions About This Motorcycle?</h2>
+                    <h2 class="font-montserrat mb-2 text-2xl font-bold text-[#111b46]">Have Questions About This Motorcycle?</h2>
                     <p class="text-[15px] font-semibold leading-snug text-[#3e4858]">
                         Our sales team can help with availability, pricing, ownership plans, and service support.
                     </p>

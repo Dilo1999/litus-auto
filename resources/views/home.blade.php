@@ -54,7 +54,7 @@
         <div class="relative z-10 litus-container flex min-h-[640px] flex-col justify-center max-md:min-h-0 max-md:justify-end lg:min-h-[720px]">
             <div class="max-w-xl py-16 text-left max-md:pb-8 max-md:pt-24 lg:py-20">
                 <p class="mb-4 text-sm font-bold uppercase tracking-widest text-litus-red max-md:mb-3 max-md:text-[11px] max-md:tracking-[0.18em] sm:text-base">Premium Bikes. Trusted Service.</p>
-                <h1 class="mb-6 font-display text-[2.9rem] font-black leading-[1.08] text-white max-md:mb-4 max-md:text-[2.35rem] max-md:leading-[1.05] sm:text-[3.25rem] lg:text-[3.85rem]">
+                <h1 class="mb-6 font-montserrat text-[2.9rem] font-bold leading-[1.08] text-white max-md:mb-4 max-md:text-[2.35rem] max-md:leading-[1.05] sm:text-[3.25rem] lg:text-[3.85rem]">
                     Ride Your Dream<br class="hidden sm:inline"><span class="sm:hidden"> </span>with<br>
                     <span class="text-litus-red">LITUS Automobiles</span>
                 </h1>
@@ -126,7 +126,7 @@
                             <x-litus-icon name="arrow-right" class="h-3.5 w-3.5" />
                         </a>
                     </div>
-                    <h2 class="mb-3.5 text-[30px] font-black leading-tight tracking-[-0.5px] text-[#07152f] max-md:mb-1.5 max-md:text-[24px] min-[651px]:text-4xl">Ongoing Promotions</h2>
+                    <h2 class="font-montserrat mb-3.5 text-[30px] font-bold leading-tight tracking-[-0.5px] text-[#07152f] max-md:mb-1.5 max-md:text-[24px] min-[651px]:text-4xl">Ongoing Promotions</h2>
                     <p class="text-[15px] font-semibold text-[#424c5e] max-md:max-w-[32ch] max-md:text-[13px] max-md:leading-snug">Limited-time deals on selected motorcycles and scooters.</p>
                 </div>
                 <a href="{{ route('motorcycles') }}"
@@ -185,7 +185,7 @@
             <div class="mb-[30px] flex flex-col items-start justify-between gap-5 max-[720px]:mb-6 max-[720px]:gap-3 min-[721px]:flex-row max-[1100px]:gap-5">
                 <div>
                     <span class="mb-2 block text-[15px] font-black uppercase tracking-wide text-[#0065ef] max-[720px]:mb-1.5 max-[720px]:text-[11px] max-[720px]:tracking-[0.14em]">Customer Favorites</span>
-                    <h2 class="mb-3 text-[32px] font-black leading-tight tracking-[-0.5px] text-white max-[720px]:mb-2 max-[720px]:text-[26px] min-[721px]:text-[42px]">Top Selling Rides</h2>
+                    <h2 class="font-montserrat mb-3 text-[32px] font-bold leading-tight tracking-[-0.5px] text-white max-[720px]:mb-2 max-[720px]:text-[26px] min-[721px]:text-[42px]">Top Selling Rides</h2>
                     <p class="text-base font-semibold text-[#d6dee9] max-[720px]:text-sm">Explore our most popular motorcycles and scooters.</p>
                 </div>
                 <a href="{{ route('motorcycles') }}"
@@ -223,7 +223,7 @@
             <div class="relative z-[2] litus-container grid grid-cols-1 items-center justify-between gap-10 max-md:gap-6 max-[950px]:text-center min-[951px]:grid-cols-[38%_52%] min-[951px]:gap-10">
                 <div>
                     <span class="mb-2 block text-[13px] font-black uppercase tracking-wide text-[#0065ef] max-md:text-[11px] max-md:tracking-[0.14em]">Stay Updated</span>
-                    <h2 class="mb-[18px] text-[34px] font-black leading-tight tracking-[-1px] text-[#07152f] max-md:mb-3 max-md:text-[26px] min-[601px]:text-[42px]">What's New?</h2>
+                    <h2 class="font-montserrat mb-[18px] text-[34px] font-bold leading-tight tracking-[-1px] text-[#07152f] max-md:mb-3 max-md:text-[26px] min-[601px]:text-[42px]">What's New?</h2>
                     <p class="mb-7 max-w-[360px] text-[15px] font-semibold leading-snug text-[#384354] max-md:mb-5 max-md:text-sm max-[950px]:mx-auto">
                         Stay updated with the latest launches, offers, and stories from LITUS Automobiles.
                     </p>
@@ -265,7 +265,7 @@
                         Our Services
                         <span class="inline-block h-0.5 w-3 bg-[#0065ef] min-[651px]:w-6"></span>
                     </div>
-                    <h2 class="mb-2 text-[28px] font-black leading-tight tracking-[-0.6px] text-[#07152f] max-md:text-[26px] min-[651px]:text-[34px]">
+                    <h2 class="font-montserrat mb-2 text-[28px] font-bold leading-tight tracking-[-0.6px] text-[#07152f] max-md:text-[26px] min-[651px]:text-[34px]">
                         What We Offer at LITUS
                     </h2>
                     <p class="mx-auto max-w-[640px] text-sm font-medium leading-normal text-[#667085] max-md:px-1 min-[651px]:text-[15px]">
@@ -291,7 +291,7 @@
                             </div>
 
                             <div class="relative z-[3] -mt-px bg-white px-5 pb-7 pt-14 text-center max-md:px-5 max-md:pb-6 max-md:pt-14 max-[650px]:px-5 max-[650px]:pb-6 max-[650px]:pt-14 min-[651px]:px-7 min-[651px]:pb-8 min-[651px]:pt-16 max-md:min-[651px]:px-5 max-md:min-[651px]:pb-6 max-md:min-[651px]:pt-14">
-                                <h3 class="mb-2.5 text-lg font-black leading-tight text-[#07152f] max-md:mb-2.5 max-md:text-[18px] max-[650px]:mb-2.5 max-[650px]:text-[18px] min-[651px]:text-[20px] max-md:min-[651px]:mb-2.5 max-md:min-[651px]:text-[18px]">{{ $service['title'] }}</h3>
+                                <h3 class="mb-2.5 text-lg font-bold leading-tight text-[#07152f] max-md:mb-2.5 max-md:text-[18px] max-[650px]:mb-2.5 max-[650px]:text-[18px] min-[651px]:text-[20px] max-md:min-[651px]:mb-2.5 max-md:min-[651px]:text-[18px]">{{ $service['title'] }}</h3>
                                 <div class="mx-auto mb-3.5 h-0.5 w-9 rounded-full bg-[#0065ef] max-md:mb-3.5 max-[650px]:mb-3.5"></div>
                                 <p class="text-left text-[13px] font-medium leading-snug text-[#344054] max-md:line-clamp-5 max-md:text-center max-md:text-[13.5px] max-md:leading-relaxed max-[650px]:line-clamp-5 max-[650px]:text-center max-[650px]:text-[13.5px] min-[651px]:text-[13.5px] min-[651px]:leading-[1.55]">
                                     {{ $service['text'] }}
@@ -316,7 +316,7 @@
 
             <div class="max-w-[720px] max-[900px]:max-w-full">
                 <span class="mb-2 block text-[15px] font-black uppercase tracking-wide text-[#0065ef] max-md:text-[11px] max-md:tracking-[0.14em]">Our Story</span>
-                <h2 class="mb-4 text-[34px] font-black leading-tight tracking-[-0.5px] text-white drop-shadow-[0_8px_20px_rgba(0,0,0,0.55)] max-md:mb-3 max-md:text-[28px] min-[601px]:text-[44px]">Who We Are</h2>
+                <h2 class="font-montserrat mb-4 text-[34px] font-bold leading-tight tracking-[-0.5px] text-white drop-shadow-[0_8px_20px_rgba(0,0,0,0.55)] max-md:mb-3 max-md:text-[28px] min-[601px]:text-[44px]">Who We Are</h2>
                 <p class="mb-7 max-w-[690px] text-sm font-semibold leading-[1.7] text-[#e3e9f2] drop-shadow-[0_4px_14px_rgba(0,0,0,0.45)] max-md:mb-5 max-md:line-clamp-6 max-md:text-[13.5px] max-md:leading-relaxed min-[601px]:text-base min-[601px]:leading-[1.65]">
                     Established in 2014, LITUS Automobiles stands as the premier destination for motorcycles in the Maldives. As the largest motorcycle dealer, we specialize in the sale, lease, and service of top-notch motorcycles. Our commitment extends to providing genuine spare parts, ensuring every ride is a journey of excellence. At LITUS, we don't just sell motorcycles; we turn aspirations into reality and transform dreams of the open road into adventures that thrill. Join us and discover the joy of riding with LITUS Automobiles — where every adventure begins.
                 </p>
@@ -338,7 +338,7 @@
             <div class="mb-8 flex flex-col items-start justify-between gap-5 max-md:mb-5 max-md:gap-3 min-[651px]:mb-10 min-[651px]:flex-row min-[651px]:items-end">
                 <div class="max-w-[560px]">
                     <span class="mb-1.5 block text-[13px] font-black uppercase tracking-[0.14em] text-[#0065ef] max-md:text-[11px]">Our Gallery</span>
-                    <h2 class="mb-2.5 text-[30px] font-black leading-tight tracking-[-0.6px] text-[#07152f] max-md:mb-2 max-md:text-[26px] min-[651px]:text-[38px]">Ride the Visual Journey</h2>
+                    <h2 class="font-montserrat mb-2.5 text-[30px] font-bold leading-tight tracking-[-0.6px] text-[#07152f] max-md:mb-2 max-md:text-[26px] min-[651px]:text-[38px]">Ride the Visual Journey</h2>
                     <p class="text-sm font-semibold leading-normal text-[#4f5b6c] min-[651px]:text-[15px]">
                         Explore our collection of motorcycle rides and lifestyle moments.
                     </p>

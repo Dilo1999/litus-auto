@@ -96,7 +96,7 @@
                     Customer Support
                 </p>
 
-                <h1 class="mb-4 font-display text-[clamp(2.25rem,4.2vw,4.25rem)] font-black leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
+                <h1 class="mb-4 font-montserrat text-[clamp(2.25rem,4.2vw,4.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
                     We're Here to Help<br>
                     You Ride Better
                 </h1>
@@ -130,7 +130,7 @@
         <div class="litus-container">
             <div class="mb-7 text-center max-md:mb-4">
                 <span class="mb-2.5 block text-sm font-black uppercase text-[#0065ef] max-md:mb-1.5 max-md:text-[11px] max-md:tracking-[0.16em]">Get In Touch</span>
-                <h2 class="mb-3 font-display text-[28px] font-black tracking-[-0.5px] text-[#07152f] max-md:mb-1.5 max-md:text-[22px] sm:text-[34px]">Contact LITUS Automobiles</h2>
+                <h2 class="mb-3 font-montserrat text-[28px] font-bold tracking-[-0.5px] text-[#07152f] max-md:mb-1.5 max-md:text-[22px] sm:text-[34px]">Contact LITUS Automobiles</h2>
                 <p class="text-[15px] font-medium leading-normal text-[#4d5566] max-md:mx-auto max-md:max-w-[32ch] max-md:text-[13px] sm:text-base">
                     Reach our team through phone, email, or visit our office.
                 </p>
@@ -202,14 +202,14 @@
             <div class="mb-5 grid grid-cols-1 gap-4 lg:mb-[25px] lg:grid-cols-2 lg:items-stretch lg:gap-5">
                 {{-- Message form --}}
                 <div class="flex h-full flex-col overflow-hidden rounded-2xl bg-gradient-to-br from-[#06152d] to-[#010a18] p-5 text-white shadow-[0_12px_30px_rgba(0,0,0,0.08)] max-md:rounded-2xl sm:p-7 max-sm:p-5">
-                    <h2 class="mb-2 text-[22px] font-black max-md:text-xl sm:mb-2.5 sm:text-2xl">Send Us a Message</h2>
+                    <h2 class="font-montserrat mb-2 text-[22px] font-bold max-md:text-xl sm:mb-2.5 sm:text-2xl">Send Us a Message</h2>
                     <p class="mb-5 text-sm text-[#b9c3d0] max-md:mb-4">Fill out the form and our team will contact you shortly.</p>
 
                     <div class="hidden flex-col items-center justify-center py-12 text-center" data-contact-success>
                         <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#0065ef]/15">
                             <x-litus-icon name="check-circle" class="h-8 w-8 text-[#0065ef]" />
                         </div>
-                        <h3 class="mb-2 text-xl font-black text-white">Message Sent!</h3>
+                        <h3 class="mb-2 text-xl font-bold text-white">Message Sent!</h3>
                         <p class="max-w-xs text-sm text-[#b9c3d0]">Our team will get back to you within 24 hours.</p>
                         <button type="button" data-contact-reset class="mt-5 min-h-11 text-sm font-bold text-[#0065ef] underline">Send another message</button>
                     </div>
@@ -282,7 +282,7 @@
             {{-- Connect With Us --}}
             <div class="mb-4 flex flex-col items-center justify-between gap-5 overflow-hidden rounded-2xl bg-white px-5 py-6 shadow-[0_12px_30px_rgba(0,0,0,0.08)] max-lg:text-center sm:gap-6 sm:px-9 sm:py-7 lg:mb-6 lg:flex-row lg:rounded-[10px]">
                 <div>
-                    <h2 class="mb-1.5 text-xl font-black text-[#07152f] sm:mb-2 sm:text-2xl">Connect With Us</h2>
+                    <h2 class="font-montserrat mb-1.5 text-xl font-bold text-[#07152f] sm:mb-2 sm:text-2xl">Connect With Us</h2>
                     <p class="text-sm text-[#4f5b6c] sm:text-[15px]">Follow or message us through our social channels.</p>
                 </div>
                 <div class="flex items-center justify-center gap-4 max-md:w-full max-md:justify-between max-md:px-2 sm:gap-[25px]">
@@ -305,7 +305,7 @@
                 </div>
 
                 <div>
-                    <h2 class="mb-2 text-xl font-black sm:mb-2.5 sm:text-2xl">Need Quick Assistance?</h2>
+                    <h2 class="font-montserrat mb-2 text-xl font-bold sm:mb-2.5 sm:text-2xl">Need Quick Assistance?</h2>
                     <p class="mx-auto max-w-[580px] text-sm leading-relaxed text-[#d7dee9] max-md:max-w-[34ch] sm:text-[15px] lg:mx-0">
                         Our team can help with motorcycle availability, ownership plans, parts, and service bookings.
                     </p>
@@ -333,7 +333,7 @@
     {{-- BUSINESS HOURS --}}
     <section class="border border-[#d9d9d9] bg-[#fafafa] py-11 pb-14 max-md:border-0 max-md:py-9 max-md:pb-10">
         <div class="litus-container">
-            <h2 class="mb-7 text-center font-display text-[28px] font-black tracking-[-0.5px] text-[#07152f] max-md:mb-5 max-md:text-[24px] sm:text-[34px]">Business Hours</h2>
+            <h2 class="mb-7 text-center font-montserrat text-[24px] font-bold tracking-[-0.5px] text-[#07152f] max-md:mb-5 max-md:text-[22px] sm:text-[28px]">Business Hours</h2>
 
             <div class="mx-auto grid max-w-[650px] grid-cols-1 gap-3.5 max-md:gap-3 lg:max-w-none lg:grid-cols-3 lg:gap-4">
                 @foreach ($hoursCards as $card)
@@ -342,8 +342,8 @@
                             <x-litus-icon :name="$card['icon']" class="h-5 w-5 sm:h-[30px] sm:w-[30px]" />
                         </div>
                         <div class="min-w-0 text-left">
-                            <h3 class="mb-1 text-sm font-extrabold text-[#07152f] sm:mb-2.5 sm:text-base">{{ $card['title'] }}</h3>
-                            <p class="text-[14px] font-semibold leading-snug text-[#4e5a6a] sm:text-lg sm:leading-[1.35] sm:text-[19px]">{!! $card['text'] !!}</p>
+                            <h3 class="mb-1 text-[13px] font-extrabold text-[#07152f] sm:mb-2 sm:text-sm">{{ $card['title'] }}</h3>
+                            <p class="text-[12px] font-semibold leading-snug text-[#4e5a6a] sm:text-[14px] sm:leading-[1.4]">{!! $card['text'] !!}</p>
                         </div>
                     </div>
                 @endforeach

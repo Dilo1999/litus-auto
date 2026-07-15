@@ -29,7 +29,7 @@
 
     {{-- Product info --}}
     <div class="relative z-[2] mt-2 text-center max-[650px]:mt-1.5 min-[1101px]:mt-3">
-        <h3 class="mb-3 line-clamp-2 text-lg font-black leading-tight tracking-[-0.5px] text-[#07152f] max-[650px]:mb-2 max-[650px]:text-[16px] min-[651px]:text-xl min-[1101px]:text-[22px]">
+        <h3 class="mb-3 line-clamp-2 font-a4speed text-lg font-bold leading-tight tracking-[-0.5px] text-[#07152f] max-[650px]:mb-2 max-[650px]:text-[16px] min-[651px]:text-xl min-[1101px]:text-[22px]">
             {{ $motorcycle->name }}
         </h3>
 

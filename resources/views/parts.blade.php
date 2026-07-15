@@ -61,7 +61,7 @@
                     Genuine Motorcycle Parts
                 </p>
 
-                <h1 class="mb-4 font-display text-[clamp(2.25rem,4.2vw,4.25rem)] font-black leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
+                <h1 class="mb-4 font-montserrat text-[clamp(2.25rem,4.2vw,4.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
                     Find Genuine Parts<br>
                     for Every Ride
                 </h1>
@@ -95,7 +95,7 @@
         <div class="litus-container">
             <div class="mb-10 text-center">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Parts Categories</span>
-                <h2 class="mt-2 font-display text-3xl font-black text-gray-900 lg:text-4xl">Motorcycle Genuine Spare Parts</h2>
+                <h2 class="mt-2 font-montserrat text-3xl font-bold text-gray-900 lg:text-4xl">Motorcycle Genuine Spare Parts</h2>
                 <p class="mx-auto mt-2 max-w-xl text-gray-500">Browse our curated selection of genuine motorcycle components, ensuring peak performance, reliability, and longevity.</p>
             </div>
 
@@ -106,7 +106,7 @@
                             <x-litus-icon :name="$category['icon']" class="h-[26px] w-[26px] text-litus-red" />
                         </div>
                         <div class="flex-1">
-                            <h3 class="mb-1 text-base font-black text-gray-900">{{ $category['title'] }}</h3>
+                            <h3 class="mb-1 text-base font-bold text-gray-900">{{ $category['title'] }}</h3>
                             <p class="mb-3 text-sm leading-relaxed text-gray-500">{{ $category['desc'] }}</p>
                             <span class="inline-flex items-center gap-1 text-xs font-bold text-litus-red">
                                 Explore
@@ -124,7 +124,7 @@
         <div class="litus-container">
             <div class="mb-10 text-center">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Why Genuine Parts?</span>
-                <h2 class="mt-2 font-display text-3xl font-black text-gray-900 lg:text-4xl">Built for Safety, Performance, and Reliability</h2>
+                <h2 class="mt-2 font-montserrat text-3xl font-bold text-gray-900 lg:text-4xl">Built for Safety, Performance, and Reliability</h2>
             </div>
             <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach ($whyGenuine as $item)
@@ -132,7 +132,7 @@
                         <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-litus-navy/5">
                             <x-litus-icon :name="$item['icon']" class="h-[22px] w-[22px] text-litus-navy" />
                         </div>
-                        <h3 class="mb-2 text-base font-black text-gray-900">{{ $item['title'] }}</h3>
+                        <h3 class="mb-2 text-base font-bold text-gray-900">{{ $item['title'] }}</h3>
                         <p class="text-sm leading-relaxed text-gray-500">{{ $item['desc'] }}</p>
                         <div class="mx-auto mt-4 h-1 w-8 rounded-full bg-litus-red"></div>
                     </div>
@@ -146,7 +146,7 @@
         <div class="litus-container">
             <div class="mb-10 text-center">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Parts Inquiry</span>
-                <h2 class="mt-2 font-display text-3xl font-black text-white lg:text-4xl">Request the Parts You Need</h2>
+                <h2 class="mt-2 font-montserrat text-3xl font-bold text-white lg:text-4xl">Request the Parts You Need</h2>
                 <p class="mt-2 text-gray-400">Fill out the form and our team will help you find the right genuine parts for your motorcycle.</p>
             </div>
 
@@ -269,7 +269,7 @@
     <section class="bg-litus-navy py-14">
         <div class="litus-container flex flex-col items-center justify-between gap-8 lg:flex-row lg:items-center lg:gap-12">
             <div class="min-w-0 flex-1 text-center lg:text-left">
-                <h2 class="mb-3 font-display text-3xl font-black text-white lg:text-4xl">
+                <h2 class="mb-3 font-montserrat text-3xl font-bold text-white lg:text-4xl">
                     Not Sure Which Part<br>
                     <span class="text-litus-red">You Need?</span>
                 </h2>
@@ -287,7 +287,7 @@
         <div class="litus-container">
             <div class="mb-10 text-center">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Simple Process</span>
-                <h2 class="mt-2 font-display text-2xl font-black text-gray-900 lg:text-3xl">How Parts Inquiry Works</h2>
+                <h2 class="mt-2 font-montserrat text-2xl font-bold text-gray-900 lg:text-3xl">How Parts Inquiry Works</h2>
             </div>
             <div class="flex flex-col items-start lg:flex-row">
                 @foreach ($steps as $index => $step)
@@ -299,7 +299,7 @@
                                 </div>
                                 <span class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-litus-red text-xs font-black text-white">{{ $index + 1 }}</span>
                             </div>
-                            <h3 class="mb-2 text-base font-black text-gray-900">{{ $step['title'] }}</h3>
+                            <h3 class="mb-2 text-base font-bold text-gray-900">{{ $step['title'] }}</h3>
                             <p class="mx-auto max-w-[200px] text-sm leading-relaxed text-gray-500">{{ $step['desc'] }}</p>
                         </div>
                         @if ($index < count($steps) - 1)

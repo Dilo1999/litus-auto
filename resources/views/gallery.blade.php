@@ -27,7 +27,7 @@
                     LITUS Gallery
                 </p>
 
-                <h1 class="mb-4 font-display text-[clamp(2.25rem,4.2vw,4.25rem)] font-black leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
+                <h1 class="mb-4 font-montserrat text-[clamp(2.25rem,4.2vw,4.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
                     Ride the<br>
                     <span class="text-litus-red">Visual Journey</span>
                 </h1>
@@ -60,7 +60,7 @@
         <div class="litus-container">
             <div class="mb-[25px] grid grid-cols-1 items-start gap-[30px] min-[1051px]:grid-cols-[1fr_auto]">
                 <div>
-                    <h2 class="mb-2 font-display text-[30px] font-black tracking-[-0.7px] text-[#07152f] min-[651px]:text-[38px]">Explore LITUS Moments</h2>
+                    <h2 class="mb-2 font-montserrat text-[30px] font-bold tracking-[-0.7px] text-[#07152f] min-[651px]:text-[38px]">Explore LITUS Moments</h2>
                     <p class="max-w-[470px] text-sm font-semibold leading-normal text-[#667085] min-[651px]:text-base min-[651px]:leading-[1.5]">
                         Browse our collection of motorcycles, lifestyle shots, showroom images, and video highlights.
                     </p>
@@ -91,7 +91,7 @@
             <div class="mb-8 flex items-end justify-between">
                 <div>
                     <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Collection</span>
-                    <h2 class="mt-1 font-display text-2xl font-black text-gray-900 lg:text-3xl">Motorcycles Gallery</h2>
+                    <h2 class="mt-1 font-montserrat text-2xl font-bold text-gray-900 lg:text-3xl">Motorcycles Gallery</h2>
                 </div>
             </div>
 
@@ -114,7 +114,7 @@
         <div class="litus-container flex flex-col items-center gap-10 lg:flex-row lg:gap-16">
             <div class="text-center lg:w-2/5 lg:text-left">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Video Gallery</span>
-                <h2 class="mt-2 mb-4 font-display text-2xl font-black text-gray-900 lg:text-3xl">
+                <h2 class="mt-2 mb-4 font-montserrat text-2xl font-bold text-gray-900 lg:text-3xl">
                     Watch the LITUS<br>Ride Experience
                 </h2>
                 <p class="mb-6 text-sm leading-relaxed text-gray-500">
@@ -174,7 +174,7 @@
                         </div>
                         <div class="hidden h-12 w-px shrink-0 bg-[#dfe3ea] min-[1401px]:block"></div>
                         <div class="min-w-0">
-                            <h2 class="mb-1 text-[17px] font-black leading-tight text-[#07152f] min-[521px]:text-[19px] min-[1401px]:text-[18px]">
+                            <h2 class="font-montserrat mb-1 text-[17px] font-bold leading-tight text-[#07152f] min-[521px]:text-[19px] min-[1401px]:text-[18px]">
                                 Follow Our Latest Rides
                             </h2>
                             <p class="text-[12px] font-semibold leading-snug text-[#667085] min-[521px]:text-[13px] min-[1401px]:max-w-[220px]">

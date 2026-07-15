@@ -21,7 +21,7 @@
             <p class="mb-0.5 text-xs font-semibold text-gray-400 max-md:text-[10px]">{{ $motorcycle->engineCapacity() }} Engine</p>
         @endif
 
-        <h3 class="mb-2 text-base font-black leading-tight text-gray-900 max-md:mb-1.5 max-md:line-clamp-2 max-md:text-[13px]">{{ $motorcycle->name }}</h3>
+        <h3 class="mb-2 text-base font-bold leading-tight text-gray-900 max-md:mb-1.5 max-md:line-clamp-2 max-md:text-[13px]">{{ $motorcycle->name }}</h3>
 
         @if ($motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0)
             <div class="mb-4 flex flex-wrap items-center gap-1 max-md:mb-2.5 max-md:gap-0.5">

@@ -42,7 +42,7 @@
                     Explore Our Collection
                 </p>
 
-                <h1 class="mb-4 font-display text-[clamp(2.25rem,4.2vw,4.25rem)] font-black leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
+                <h1 class="mb-4 font-montserrat text-[clamp(2.25rem,4.2vw,4.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
                     Find the Perfect Ride<br>
                     <span class="text-litus-red">for Your Journey</span>
                 </h1>
@@ -159,7 +159,7 @@
                aria-modal="true"
                aria-labelledby="motorcycle-filters-title">
             <div class="flex items-center justify-between border-b border-[#e6eaf0] bg-white px-5 py-4">
-                <h2 id="motorcycle-filters-title" class="text-lg font-black text-[#07152f]">Filters</h2>
+                <h2 id="motorcycle-filters-title" class="font-montserrat text-lg font-bold text-[#07152f]">Filters</h2>
                 <button type="button"
                         data-motorcycle-filter-close
                         class="flex h-9 w-9 items-center justify-center rounded-full text-[#5b6575] transition-colors hover:bg-gray-100"
@@ -170,7 +170,7 @@
 
             <div class="flex-1 overflow-y-auto px-5 py-5">
                 <div class="mb-6">
-                    <h3 class="mb-3 text-sm font-black text-[#0065ef]">Brand</h3>
+                    <h3 class="mb-3 text-sm font-bold text-[#0065ef]">Brand</h3>
                     <div class="space-y-2.5">
                         <label class="flex cursor-pointer items-center gap-3 text-sm font-semibold text-[#4d5566]">
                             <input type="radio"
@@ -195,7 +195,7 @@
                 </div>
 
                 <div class="mb-6">
-                    <h3 class="mb-3 text-sm font-black text-[#0065ef]">Engine Capacity</h3>
+                    <h3 class="mb-3 text-sm font-bold text-[#0065ef]">Engine Capacity</h3>
                     <div class="relative">
                         <select data-motorcycle-engine
                                 class="w-full cursor-pointer appearance-none rounded-xl border border-[#dce2ea] bg-white px-3.5 py-3 pr-10 text-sm font-semibold text-[#4d5566] outline-none focus:border-[#0065ef]">
@@ -210,7 +210,7 @@
                 </div>
 
                 <div class="mb-6">
-                    <h3 class="mb-3 text-sm font-black text-[#0065ef]">Price Range</h3>
+                    <h3 class="mb-3 text-sm font-bold text-[#0065ef]">Price Range</h3>
                     <div class="relative">
                         <select data-motorcycle-price
                                 class="w-full cursor-pointer appearance-none rounded-xl border border-[#dce2ea] bg-white px-3.5 py-3 pr-10 text-sm font-semibold text-[#4d5566] outline-none focus:border-[#0065ef]">
@@ -224,7 +224,7 @@
                 </div>
 
                 <div class="mb-6">
-                    <h3 class="mb-3 text-sm font-black text-[#0065ef]">Availability</h3>
+                    <h3 class="mb-3 text-sm font-bold text-[#0065ef]">Availability</h3>
                     <div class="relative">
                         <select data-motorcycle-availability
                                 class="w-full cursor-pointer appearance-none rounded-xl border border-[#dce2ea] bg-white px-3.5 py-3 pr-10 text-sm font-semibold text-[#4d5566] outline-none focus:border-[#0065ef]">
@@ -237,7 +237,7 @@
                 </div>
 
                 <div class="mb-2">
-                    <h3 class="mb-3 text-sm font-black text-[#0065ef]">Sort By</h3>
+                    <h3 class="mb-3 text-sm font-bold text-[#0065ef]">Sort By</h3>
                     <div class="relative">
                         <select data-motorcycle-sort
                                 class="w-full cursor-pointer appearance-none rounded-xl border border-[#dce2ea] bg-white px-3.5 py-3 pr-10 text-sm font-semibold text-[#4d5566] outline-none focus:border-[#0065ef]">
@@ -270,7 +270,7 @@
         <div class="litus-container">
             <div class="mb-10 text-center">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Inventory</span>
-                <h2 class="mt-2 font-display text-3xl font-black text-gray-900 lg:text-4xl">Explore Our Ride Collection</h2>
+                <h2 class="mt-2 font-montserrat text-3xl font-bold text-gray-900 lg:text-4xl">Explore Our Ride Collection</h2>
                 <p class="mt-2 text-gray-500">Choose from our latest motorcycles and scooters with exclusive promotional offers.</p>
             </div>
 
@@ -297,7 +297,7 @@
     <section class="bg-litus-navy py-16">
         <div class="mx-auto flex max-w-5xl flex-col items-center gap-8 px-4 sm:px-6 lg:flex-row lg:gap-16">
             <div class="flex-1 text-center lg:text-left">
-                <h2 class="mb-3 font-display text-3xl font-black text-white lg:text-4xl">
+                <h2 class="mb-3 font-montserrat text-3xl font-bold text-white lg:text-4xl">
                     Need Help Choosing the<br>
                     <span class="text-litus-red">Right Motorcycle?</span>
                 </h2>
@@ -317,7 +317,7 @@
         <div class="litus-container">
             <div class="mb-10 text-center">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Promise</span>
-                <h2 class="mt-2 font-display text-2xl font-black text-gray-900 lg:text-3xl">Why Buy from LITUS Automobiles?</h2>
+                <h2 class="mt-2 font-montserrat text-2xl font-bold text-gray-900 lg:text-3xl">Why Buy from LITUS Automobiles?</h2>
             </div>
             <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach ($whyLitus as $item)
@@ -325,7 +325,7 @@
                         <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-litus-red/10">
                             <x-litus-icon :name="$item['icon']" class="h-[22px] w-[22px] text-litus-red" />
                         </div>
-                        <h3 class="mb-2 text-base font-black text-gray-900">{{ $item['title'] }}</h3>
+                        <h3 class="mb-2 text-base font-bold text-gray-900">{{ $item['title'] }}</h3>
                         <p class="text-sm leading-relaxed text-gray-500">{{ $item['desc'] }}</p>
                     </div>
                 @endforeach

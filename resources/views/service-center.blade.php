@@ -69,7 +69,7 @@
                     LITUS Service Center
                 </p>
 
-                <h1 class="mb-4 font-display text-[clamp(2.25rem,4.2vw,4.25rem)] font-black leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
+                <h1 class="mb-4 font-montserrat text-[clamp(2.25rem,4.2vw,4.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
                     Expert Care for<br>
                     <span class="text-litus-red">Every Motorcycle</span>
                 </h1>
@@ -102,7 +102,7 @@
 
             <div class="relative mb-8 text-center">
                 <span class="mb-1.5 block text-xs font-black uppercase tracking-wide text-[#0065ef]">Our Capabilities</span>
-                <h2 class="mb-2.5 text-[27px] font-black leading-tight text-[#07152f] min-[651px]:text-[34px]">
+                <h2 class="font-montserrat mb-2.5 text-[27px] font-bold leading-tight text-[#07152f] min-[651px]:text-[34px]">
                     What We Offer at Our Service Centers
                 </h2>
                 <p class="text-sm font-semibold text-[#556071] min-[651px]:text-[15px]">
@@ -120,7 +120,7 @@
                         <div class="mx-auto mb-[22px] flex h-[92px] w-[92px] items-center justify-center rounded-full bg-[#f1f1f1] text-[#07152f]">
                             <x-litus-icon :name="$card['icon']" class="h-10 w-10" />
                         </div>
-                        <h3 class="mb-3.5 text-[21px] font-black leading-tight text-[#111b46]">{{ $card['title'] }}</h3>
+                        <h3 class="mb-3.5 text-[21px] font-bold leading-tight text-[#111b46]">{{ $card['title'] }}</h3>
                         <p class="mb-[22px] text-[13px] font-semibold leading-snug text-[#5a6575]">{{ $card['desc'] }}</p>
                         <a href="#service-programs"
                            class="group/learn inline-flex items-center gap-1.5 text-[13px] font-black text-[#0065ef] transition-all duration-300 hover:gap-3">
@@ -151,7 +151,7 @@
                             Book a Service
                         </div>
 
-                        <h2 class="mb-4 text-[clamp(1.875rem,4vw,2.75rem)] font-black leading-[1.12] tracking-[-0.5px]">
+                        <h2 class="font-montserrat mb-4 text-[clamp(1.875rem,4vw,2.75rem)] font-bold leading-[1.12] tracking-[-0.5px]">
                             Book an<br>
                             Appointment
                             <span class="mt-0.5 block text-[#0065ef]">Now</span>
@@ -173,7 +173,7 @@
                                     <x-litus-icon :name="$feature['icon']" class="h-5 w-5" />
                                 </div>
                                 <div>
-                                    <h3 class="mb-1 text-sm font-black min-[651px]:text-base">{{ $feature['title'] }}</h3>
+                                    <h3 class="mb-1 text-sm font-bold min-[651px]:text-base">{{ $feature['title'] }}</h3>
                                     <p class="text-xs leading-snug text-[#dbe2ec] min-[651px]:text-sm">{{ $feature['desc'] }}</p>
                                 </div>
                             </div>
@@ -249,7 +249,7 @@
                         <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#0065ef]/10">
                             <x-litus-icon name="check-circle" class="h-8 w-8 text-[#0065ef]" />
                         </div>
-                        <h3 class="mb-3 text-2xl font-black text-[#07152f]">Appointment Submitted!</h3>
+                        <h3 class="mb-3 text-2xl font-bold text-[#07152f]">Appointment Submitted!</h3>
                         <p class="mx-auto mb-8 max-w-md text-base text-[#5f6b7d]">Our service team will contact you within 24 hours to confirm your booking.</p>
                         <button type="button" data-service-appointment-reset
                                 class="inline-flex h-12 items-center justify-center rounded-lg border-2 border-[#0065ef] px-8 text-sm font-black text-[#0065ef] transition-all hover:bg-[#0065ef] hover:text-white">
@@ -277,7 +277,7 @@
                     Our Service Programs
                     <span class="h-0.5 w-6 bg-[#0065ef]"></span>
                 </span>
-                <h2 class="mb-3 text-[clamp(1.75rem,3.5vw,2.75rem)] font-black leading-[1.12] tracking-[-0.8px] text-[#07152f]">
+                <h2 class="font-montserrat mb-3 text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-[1.12] tracking-[-0.8px] text-[#07152f]">
                     Understand the Right Service for Your Motorcycle
                 </h2>
                 <p class="mx-auto max-w-2xl text-sm font-medium leading-relaxed text-[#667085] min-[651px]:text-base">
@@ -299,7 +299,7 @@
                         </div>
 
                         <div class="min-w-0">
-                            <h3 class="mb-1.5 text-lg font-black text-[#07152f] min-[901px]:text-xl">{{ $program['title'] }}</h3>
+                            <h3 class="mb-1.5 text-lg font-bold text-[#07152f] min-[901px]:text-xl">{{ $program['title'] }}</h3>
                             <p class="mx-auto max-w-[1040px] text-[13px] font-medium leading-snug text-[#344054] min-[651px]:mx-0 min-[901px]:text-sm min-[901px]:leading-relaxed">{{ $program['text'] }}</p>
                         </div>
                     </div>
@@ -313,7 +313,7 @@
         <div class="litus-container">
             <div class="mb-10 text-center">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Promise</span>
-                <h2 class="mt-2 font-display text-2xl font-black text-gray-900 lg:text-3xl">Why Service Your Motorcycle at LITUS?</h2>
+                <h2 class="mt-2 font-montserrat text-2xl font-bold text-gray-900 lg:text-3xl">Why Service Your Motorcycle at LITUS?</h2>
             </div>
             <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach ($whyLitus as $item)
@@ -321,7 +321,7 @@
                         <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-litus-red/8">
                             <x-litus-icon :name="$item['icon']" class="h-5 w-5 text-litus-red" />
                         </div>
-                        <h3 class="mb-2 text-base font-black text-gray-900">{{ $item['title'] }}</h3>
+                        <h3 class="mb-2 text-base font-bold text-gray-900">{{ $item['title'] }}</h3>
                         <p class="text-sm leading-relaxed text-gray-500">{{ $item['desc'] }}</p>
                     </div>
                 @endforeach
@@ -333,7 +333,7 @@
     <section class="bg-litus-navy py-14">
         <div class="litus-container flex flex-col items-center justify-between gap-8 lg:flex-row lg:items-center lg:gap-12">
             <div class="min-w-0 flex-1 text-center lg:text-left">
-                <h2 class="mb-3 font-display text-3xl font-black text-white lg:text-4xl">
+                <h2 class="mb-3 font-montserrat text-3xl font-bold text-white lg:text-4xl">
                     Need Motorcycle<br>
                     <span class="text-litus-red">Service Support?</span>
                 </h2>

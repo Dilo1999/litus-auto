@@ -186,7 +186,7 @@
                     Ownership Plans
                 </p>
 
-                <h1 class="mb-4 font-display text-[clamp(2.25rem,4.2vw,4.25rem)] font-black leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
+                <h1 class="mb-4 font-montserrat text-[clamp(2.25rem,4.2vw,4.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
                     Any Bike. Any Budget.<br>
                     <span class="text-litus-red">Anyone Can Own.</span>
                 </h1>
@@ -224,7 +224,7 @@
                             <span class="pointer-events-none absolute inset-2 rounded-full border border-[rgba(232,151,50,0.25)]" aria-hidden="true"></span>
                             <x-litus-icon :name="$benefit['icon']" class="relative z-[1] h-5 w-5 text-[#d8902d] min-[651px]:h-[22px] min-[651px]:w-[22px]" />
                         </div>
-                        <h3 class="max-w-[155px] text-[13px] font-black leading-snug text-[#07152f] min-[651px]:max-w-[165px] min-[651px]:text-sm">
+                        <h3 class="max-w-[155px] text-[13px] font-bold leading-snug text-[#07152f] min-[651px]:max-w-[165px] min-[651px]:text-sm">
                             {{ $benefit['label'] }}
                         </h3>
                     </div>
@@ -238,7 +238,7 @@
         <div class="litus-container">
             <div class="mb-10 text-center">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Plans</span>
-                <h2 class="mt-2 font-display text-3xl font-black text-gray-900 lg:text-4xl">Our Ownership Plans</h2>
+                <h2 class="mt-2 font-montserrat text-3xl font-bold text-gray-900 lg:text-4xl">Our Ownership Plans</h2>
                 <p class="mt-2 text-gray-500">Choose the Ijara Plan that suits you best.</p>
             </div>
 
@@ -255,7 +255,7 @@
                                     Ijara Plan
                                 </span>
                             </div>
-                            <h3 class="text-2xl font-black text-gray-900">{{ $plan['name'] }}</h3>
+                            <h3 class="text-2xl font-bold text-gray-900">{{ $plan['name'] }}</h3>
                             <p class="mt-1 mb-3 text-xs font-semibold" style="color: {{ $plan['accent'] }}">{{ $plan['tagline'] }}</p>
                             <p class="text-sm leading-relaxed text-gray-500">{{ $plan['desc'] }}</p>
                         </div>
@@ -298,7 +298,7 @@
                     </div>
 
                     <div class="min-w-0">
-                        <h3 class="mb-2 text-lg font-black text-[#07152f]">Not sure which plan is right for you?</h3>
+                        <h3 class="mb-2 text-lg font-bold text-[#07152f]">Not sure which plan is right for you?</h3>
                         <p class="text-[15px] font-semibold leading-[1.45] text-[#4e5969] min-[701px]:max-w-none">
                             Our team can help you choose the ownership plan that best fits your budget and requirements.
                         </p>
@@ -319,7 +319,7 @@
         <div class="litus-container">
             <div class="mb-5 text-center">
                 <span class="mb-2 block text-[13px] font-black uppercase tracking-[0.6px] text-[#0065ef] min-[769px]:text-[15px]">Compare Plans</span>
-                <h2 class="font-display text-[28px] font-black leading-[1.1] tracking-[-0.5px] text-[#07152f] min-[769px]:text-4xl">Find the Right Ownership Option</h2>
+                <h2 class="font-montserrat text-[28px] font-bold leading-[1.1] tracking-[-0.5px] text-[#07152f] min-[769px]:text-4xl">Find the Right Ownership Option</h2>
             </div>
 
             <p class="mb-2 hidden text-center text-xs font-semibold text-[#667085] max-md:block">Swipe sideways to compare plans →</p>
@@ -374,7 +374,7 @@
         <div class="litus-container">
             <div class="mb-[25px] text-center">
                 <span class="mb-[7px] block text-sm font-black uppercase tracking-[0.6px] text-[#0065ef]">How Ownership Plans Work</span>
-                <h2 class="font-display text-[28px] font-black leading-[1.1] tracking-[-0.5px] text-[#07152f] min-[651px]:text-4xl">Simple. Transparent. Hassle-Free.</h2>
+                <h2 class="font-montserrat text-[28px] font-bold leading-[1.1] tracking-[-0.5px] text-[#07152f] min-[651px]:text-4xl">Simple. Transparent. Hassle-Free.</h2>
             </div>
 
             <div class="mb-10 grid grid-cols-1 gap-[18px] min-[1151px]:grid-cols-[1fr_40px_1fr_40px_1fr] min-[1151px]:items-center min-[1151px]:gap-0">
@@ -387,7 +387,7 @@
                             {{ $i + 1 }}
                         </div>
                         <div>
-                            <h3 class="mb-1.5 text-base font-black text-[#07152f] min-[651px]:text-lg">{{ $step['title'] }}</h3>
+                            <h3 class="mb-1.5 text-base font-bold text-[#07152f] min-[651px]:text-lg">{{ $step['title'] }}</h3>
                             <p class="mx-auto max-w-[290px] text-[13px] font-semibold leading-snug text-[#4d5869] min-[651px]:mx-0 min-[651px]:text-sm">{{ $step['desc'] }}</p>
                         </div>
                     </div>
@@ -406,7 +406,7 @@
                 </div>
 
                 <div class="text-center min-[1151px]:text-left">
-                    <h2 class="mb-3 text-[25px] font-black tracking-[-0.3px] text-white min-[651px]:text-[29px]">Need Help Choosing?</h2>
+                    <h2 class="font-montserrat mb-3 text-[25px] font-bold tracking-[-0.3px] text-white min-[651px]:text-[29px]">Need Help Choosing?</h2>
                     <p class="mx-auto max-w-[560px] text-base font-semibold leading-[1.55] text-[#d9e2ef] min-[1151px]:mx-0">
                         Our team is here to help you find the ownership plan that best fits your needs.
                     </p>
@@ -445,7 +445,7 @@
                     </div>
                     <span data-drawer-badge class="text-xs font-bold uppercase tracking-widest text-litus-red">Ijara Plan</span>
                 </div>
-                <h2 data-drawer-title class="text-2xl font-black text-gray-900">Plan</h2>
+                <h2 data-drawer-title class="font-montserrat text-2xl font-bold text-gray-900">Plan</h2>
                 <p data-drawer-subtitle class="mt-0.5 text-sm font-semibold text-litus-red"></p>
             </div>
             <button type="button"
@@ -460,27 +460,27 @@
             <p data-drawer-desc class="text-sm leading-relaxed text-gray-600"></p>
 
             <div>
-                <h4 class="mb-3 text-sm font-black uppercase tracking-wider text-gray-900">Key Benefits</h4>
+                <h4 class="mb-3 text-sm font-bold uppercase tracking-wider text-gray-900">Key Benefits</h4>
                 <ul data-drawer-benefits class="space-y-2"></ul>
             </div>
 
             <div data-drawer-eligibility-box class="rounded-xl p-4" style="background: rgba(227,30,37,0.08)">
-                <h4 class="mb-2 text-sm font-black uppercase tracking-wider text-gray-900">Eligibility</h4>
+                <h4 class="mb-2 text-sm font-bold uppercase tracking-wider text-gray-900">Eligibility</h4>
                 <p data-drawer-eligibility class="text-sm leading-relaxed text-gray-700"></p>
             </div>
 
             <div>
-                <h4 class="mb-3 text-sm font-black uppercase tracking-wider text-gray-900">Required Documents</h4>
+                <h4 class="mb-3 text-sm font-bold uppercase tracking-wider text-gray-900">Required Documents</h4>
                 <ul data-drawer-docs class="space-y-2"></ul>
             </div>
 
             <div class="rounded-xl bg-gray-50 p-4">
-                <h4 class="mb-2 text-sm font-black uppercase tracking-wider text-gray-900">Who Is It For?</h4>
+                <h4 class="mb-2 text-sm font-bold uppercase tracking-wider text-gray-900">Who Is It For?</h4>
                 <p data-drawer-who-for class="text-sm leading-relaxed text-gray-600"></p>
             </div>
 
             <div data-drawer-important-wrap class="hidden rounded-xl border border-orange-200 bg-orange-50 p-4">
-                <h4 class="mb-2 text-xs font-black uppercase tracking-wider text-orange-800">Important Information</h4>
+                <h4 class="mb-2 text-xs font-bold uppercase tracking-wider text-orange-800">Important Information</h4>
                 <p data-drawer-important class="text-xs leading-relaxed text-orange-700"></p>
             </div>
         </div>
