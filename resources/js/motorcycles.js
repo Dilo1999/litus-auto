@@ -2,15 +2,18 @@ function initMotorcyclesFilter() {
     const root = document.querySelector('[data-motorcycles-page]');
     if (!root) return;
 
-    const searchInputs = root.querySelectorAll('[data-motorcycle-search]');
-    const tabs = root.querySelectorAll('[data-motorcycle-brand]');
-    const brandOptions = root.querySelectorAll('[data-motorcycle-brand-option]');
-    const cards = root.querySelectorAll('[data-motorcycle-card]');
+    const searchInputs = [...root.querySelectorAll('[data-motorcycle-search]')];
+    const tabs = [...root.querySelectorAll('[data-motorcycle-brand]')];
+    const brandOptions = [...root.querySelectorAll('[data-motorcycle-brand-option]')];
+    const engineSelects = [...root.querySelectorAll('[data-motorcycle-engine]')];
+    const priceSelects = [...root.querySelectorAll('[data-motorcycle-price]')];
+    const availabilitySelects = [...root.querySelectorAll('[data-motorcycle-availability]')];
+    const sortSelects = [...root.querySelectorAll('[data-motorcycle-sort]')];
+    const grid = root.querySelector('[data-motorcycle-grid]');
     const countEl = root.querySelector('[data-motorcycle-count]');
     const brandWrap = root.querySelector('[data-motorcycle-brand-wrap]');
     const brandLabel = root.querySelector('[data-motorcycle-brand-label]');
     const emptyState = root.querySelector('[data-motorcycle-empty]');
-    const grid = root.querySelector('[data-motorcycle-grid]');
     const badge = root.querySelector('[data-motorcycle-filter-badge]');
 
     const drawer = root.querySelector('[data-motorcycle-filter-drawer]');
@@ -25,10 +28,22 @@ function initMotorcyclesFilter() {
     let drawerOpen = false;
     let closeTimer = null;
 
+    const cards = () => [...root.querySelectorAll('[data-motorcycle-card]')];
+
+    function syncGroup(selects, value, source) {
+        selects.forEach((select) => {
+            if (select !== source) select.value = value;
+        });
+    }
+
     function syncSearch(value, source) {
         searchInputs.forEach((input) => {
             if (input !== source) input.value = value;
         });
+    }
+
+    function currentValue(selects) {
+        return selects[0]?.value || '';
     }
 
     function setBrandUI(brand) {
@@ -46,15 +61,53 @@ function initMotorcyclesFilter() {
         });
     }
 
+    function matchesEngine(cc, filter) {
+        if (!filter) return true;
+        if (!cc) return false;
+
+        switch (filter) {
+            case '110':
+                return cc <= 110;
+            case '125':
+                return cc >= 111 && cc <= 125;
+            case '150':
+                return cc >= 126 && cc <= 150;
+            case '200':
+                return cc >= 151;
+            default:
+                return true;
+        }
+    }
+
+    function matchesPrice(price, filter) {
+        if (!filter) return true;
+        if (Number.isNaN(price)) return false;
+
+        switch (filter) {
+            case 'low':
+                return price < 40000;
+            case 'mid':
+                return price >= 40000 && price <= 70000;
+            case 'high':
+                return price > 70000;
+            default:
+                return true;
+        }
+    }
+
+    function matchesAvailability(isPromotion, filter) {
+        if (!filter) return true;
+        if (filter === 'promotion') return isPromotion;
+        if (filter === 'in-stock') return true;
+        return true;
+    }
+
     function activeFilterCount() {
         let count = 0;
         if (activeBrand !== 'All') count += 1;
-        const engine = root.querySelector('[data-motorcycle-engine]')?.value;
-        const price = root.querySelector('[data-motorcycle-price]')?.value;
-        const availability = root.querySelector('[data-motorcycle-availability]')?.value;
-        if (engine) count += 1;
-        if (price) count += 1;
-        if (availability) count += 1;
+        if (currentValue(engineSelects)) count += 1;
+        if (currentValue(priceSelects)) count += 1;
+        if (currentValue(availabilitySelects)) count += 1;
         return count;
     }
 
@@ -66,30 +119,72 @@ function initMotorcyclesFilter() {
         badge.classList.toggle('flex', count > 0);
     }
 
-    function filter() {
-        const search = (searchInputs[0]?.value || '').toLowerCase().trim();
-        let count = 0;
+    function sortCards(visibleCards) {
+        const sort = currentValue(sortSelects) || 'latest';
 
-        cards.forEach((card) => {
-            const brand = card.dataset.brand;
-            const name = (card.dataset.name || '').toLowerCase();
-            const matchBrand = activeBrand === 'All' || brand === activeBrand;
-            const matchSearch = !search || name.includes(search);
-            const show = matchBrand && matchSearch;
+        visibleCards.sort((a, b) => {
+            const priceA = Number(a.dataset.price || 0);
+            const priceB = Number(b.dataset.price || 0);
+            const sortA = Number(a.dataset.sort || 0);
+            const sortB = Number(b.dataset.sort || 0);
+            const idA = Number(a.dataset.id || 0);
+            const idB = Number(b.dataset.id || 0);
+            const popularA = a.dataset.popular === '1' ? 1 : 0;
+            const popularB = b.dataset.popular === '1' ? 1 : 0;
 
-            card.classList.toggle('hidden', !show);
-            if (show) count++;
+            if (sort === 'price') {
+                return priceA - priceB || sortA - sortB || idA - idB;
+            }
+
+            if (sort === 'popular') {
+                return popularB - popularA || sortA - sortB || idA - idB;
+            }
+
+            // latest: lower sort_order first, then newer id
+            return sortA - sortB || idB - idA;
         });
 
-        if (countEl) countEl.textContent = String(count);
+        if (!grid) return;
+        visibleCards.forEach((card) => grid.appendChild(card));
+    }
+
+    function filter() {
+        const search = (searchInputs[0]?.value || '').toLowerCase().trim();
+        const engine = currentValue(engineSelects);
+        const price = currentValue(priceSelects);
+        const availability = currentValue(availabilitySelects);
+        const allCards = cards();
+        const visible = [];
+
+        allCards.forEach((card) => {
+            const brand = card.dataset.brand || '';
+            const name = (card.dataset.name || '').toLowerCase();
+            const cc = Number(card.dataset.cc || 0);
+            const cardPrice = Number(card.dataset.price || 0);
+            const isPromotion = card.dataset.promotion === '1';
+
+            const matchBrand = activeBrand === 'All' || brand === activeBrand;
+            const matchSearch = !search || name.includes(search);
+            const matchEngine = matchesEngine(cc, engine);
+            const matchPrice = matchesPrice(cardPrice, price);
+            const matchAvailability = matchesAvailability(isPromotion, availability);
+            const show = matchBrand && matchSearch && matchEngine && matchPrice && matchAvailability;
+
+            card.classList.toggle('hidden', !show);
+            if (show) visible.push(card);
+        });
+
+        sortCards(visible);
+
+        if (countEl) countEl.textContent = String(visible.length);
         if (brandWrap && brandLabel) {
             const showBrand = activeBrand !== 'All';
             brandWrap.classList.toggle('hidden', !showBrand);
             if (showBrand) brandLabel.textContent = activeBrand;
         }
         if (emptyState && grid) {
-            emptyState.classList.toggle('hidden', count > 0);
-            grid.classList.toggle('hidden', count === 0);
+            emptyState.classList.toggle('hidden', visible.length > 0);
+            grid.classList.toggle('hidden', visible.length === 0);
         }
 
         updateBadge();
@@ -137,16 +232,10 @@ function initMotorcyclesFilter() {
 
     function clearFilters() {
         setBrandUI('All');
-        const engine = root.querySelector('[data-motorcycle-engine]');
-        const price = root.querySelector('[data-motorcycle-price]');
-        const availability = root.querySelector('[data-motorcycle-availability]');
-        const sorts = root.querySelectorAll('[data-motorcycle-sort]');
-        if (engine) engine.value = '';
-        if (price) price.value = '';
-        if (availability) availability.value = '';
-        sorts.forEach((select) => {
-            select.value = 'latest';
-        });
+        syncGroup(engineSelects, '');
+        syncGroup(priceSelects, '');
+        syncGroup(availabilitySelects, '');
+        syncGroup(sortSelects, 'latest');
         searchInputs.forEach((input) => {
             input.value = '';
         });
@@ -175,6 +264,34 @@ function initMotorcyclesFilter() {
         });
     });
 
+    engineSelects.forEach((select) => {
+        select.addEventListener('change', () => {
+            syncGroup(engineSelects, select.value, select);
+            filter();
+        });
+    });
+
+    priceSelects.forEach((select) => {
+        select.addEventListener('change', () => {
+            syncGroup(priceSelects, select.value, select);
+            filter();
+        });
+    });
+
+    availabilitySelects.forEach((select) => {
+        select.addEventListener('change', () => {
+            syncGroup(availabilitySelects, select.value, select);
+            filter();
+        });
+    });
+
+    sortSelects.forEach((select) => {
+        select.addEventListener('change', () => {
+            syncGroup(sortSelects, select.value, select);
+            filter();
+        });
+    });
+
     openBtn?.addEventListener('click', openDrawer);
     closeBtn?.addEventListener('click', closeDrawer);
     backdrop?.addEventListener('click', closeDrawer);
@@ -190,7 +307,7 @@ function initMotorcyclesFilter() {
         if (event.key === 'Escape' && drawerOpen) closeDrawer();
     });
 
-    updateBadge();
+    filter();
 }
 
 if (document.readyState === 'loading') {
@@ -198,5 +315,3 @@ if (document.readyState === 'loading') {
 } else {
     initMotorcyclesFilter();
 }
-
-

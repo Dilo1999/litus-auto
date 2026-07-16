@@ -3,7 +3,13 @@
 <div {{ $attributes->merge(['class' => 'group flex flex-col overflow-hidden rounded-[18px] border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:border-blue-100 hover:shadow-xl max-md:rounded-2xl']) }}
      data-motorcycle-card
      data-brand="{{ $motorcycle->brand }}"
-     data-name="{{ $motorcycle->name }}">
+     data-name="{{ $motorcycle->name }}"
+     data-cc="{{ (int) preg_replace('/\D+/', '', (string) ($motorcycle->engineCapacity() ?? '0')) }}"
+     data-price="{{ $motorcycle->hasPromotion() ? (float) $motorcycle->sale_price : (float) $motorcycle->original_price }}"
+     data-promotion="{{ $motorcycle->hasPromotion() ? '1' : '0' }}"
+     data-popular="{{ $motorcycle->is_top_selling ? '1' : '0' }}"
+     data-sort="{{ (int) $motorcycle->sort_order }}"
+     data-id="{{ $motorcycle->id }}">
     <div class="relative overflow-hidden bg-white px-2 py-3 max-md:px-1.5 max-md:py-2">
         <img src="{{ $motorcycle->listImageUrl() }}"
              alt="{{ $motorcycle->name }}"

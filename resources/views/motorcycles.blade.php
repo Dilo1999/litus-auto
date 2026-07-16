@@ -119,12 +119,27 @@
                 </div>
 
                 <div class="flex shrink-0 flex-wrap gap-2">
-                    @foreach (['Engine Capacity', 'Price Range', 'Availability'] as $filter)
-                        <button type="button" class="flex items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-600 transition-colors hover:border-gray-400">
-                            {{ $filter }}
-                            <x-litus-icon name="chevron-down" class="h-[13px] w-[13px]" />
-                        </button>
-                    @endforeach
+                    <div class="relative">
+                        <select data-motorcycle-engine
+                                class="cursor-pointer appearance-none rounded-xl border border-gray-200 bg-white py-2 pl-3 pr-8 text-sm text-gray-600 outline-none transition-colors hover:border-gray-400 focus:border-[#0065ef]">
+                            <option value="">Engine Capacity</option>
+                            <option value="110">Up to 110cc</option>
+                            <option value="125">111cc – 125cc</option>
+                            <option value="150">126cc – 150cc</option>
+                            <option value="200">151cc+</option>
+                        </select>
+                        <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-2.5 top-1/2 h-[13px] w-[13px] -translate-y-1/2 text-gray-400" />
+                    </div>
+                    <div class="relative">
+                        <select data-motorcycle-price
+                                class="cursor-pointer appearance-none rounded-xl border border-gray-200 bg-white py-2 pl-3 pr-8 text-sm text-gray-600 outline-none transition-colors hover:border-gray-400 focus:border-[#0065ef]">
+                            <option value="">Price Range</option>
+                            <option value="low">Under MVR 40,000</option>
+                            <option value="mid">MVR 40,000 – 70,000</option>
+                            <option value="high">Above MVR 70,000</option>
+                        </select>
+                        <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-2.5 top-1/2 h-[13px] w-[13px] -translate-y-1/2 text-gray-400" />
+                    </div>
                     <div class="relative">
                         <select data-motorcycle-sort class="cursor-pointer appearance-none rounded-xl border border-gray-200 bg-white py-2 pl-3 pr-8 text-sm text-gray-600 outline-none">
                             <option value="latest">Sort by Latest</option>
