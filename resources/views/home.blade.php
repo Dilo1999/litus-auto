@@ -117,39 +117,39 @@
              style="background-image: linear-gradient(30deg, rgba(6,21,48,0.035) 12%, transparent 12.5%, transparent 87%, rgba(6,21,48,0.035) 87.5%, rgba(6,21,48,0.035)), linear-gradient(150deg, rgba(6,21,48,0.035) 12%, transparent 12.5%, transparent 87%, rgba(6,21,48,0.035) 87.5%, rgba(6,21,48,0.035)); background-size: 55px 95px;"></div>
 
         <div class="relative z-[2] litus-container max-md:!px-0">
-            <div class="mb-9 flex flex-col items-start justify-between gap-5 max-md:mb-5 max-md:gap-3 max-md:px-4 min-[651px]:mb-[35px] min-[651px]:flex-row min-[651px]:gap-5">
-                <div class="max-md:w-full">
-                    <div class="mb-2 flex items-center justify-between gap-3 max-md:mb-1.5">
-                        <span class="block text-sm font-black uppercase tracking-wide text-[#0065ef] max-md:text-[11px] max-md:tracking-[0.14em]">Special Deals</span>
+            <div class="mb-8 flex flex-col items-start justify-between gap-5 max-md:mb-5 max-md:gap-3 max-md:px-4 min-[651px]:mb-10 min-[651px]:flex-row min-[651px]:items-end">
+                <div class="max-w-[560px] max-md:w-full">
+                    <div class="mb-1.5 flex items-center justify-between gap-3">
+                        <span class="block text-[13px] font-black uppercase tracking-[0.14em] text-[#0065ef] max-md:text-[11px]">Special Deals</span>
                         <a href="{{ route('motorcycles') }}"
                            class="hidden items-center gap-1.5 text-[12px] font-black text-[#0065ef] max-md:inline-flex">
                             View all
                             <x-litus-icon name="arrow-right" class="h-3.5 w-3.5" />
                         </a>
                     </div>
-                    <h2 class="font-montserrat mb-3.5 text-[30px] font-bold leading-tight tracking-[-0.5px] text-[#07152f] max-md:mb-1.5 max-md:text-[24px] min-[651px]:text-4xl">Ongoing Promotions</h2>
-                    <p class="text-[15px] font-semibold text-[#424c5e] max-md:max-w-[32ch] max-md:text-[13px] max-md:leading-snug">Limited-time deals on selected motorcycles and scooters.</p>
+                    <h2 class="font-montserrat mb-2.5 text-[30px] font-bold leading-tight tracking-[-0.6px] text-[#07152f] max-md:mb-2 max-md:text-[26px] min-[651px]:text-[38px]">Ongoing Promotions</h2>
+                    <p class="text-sm font-semibold leading-normal text-[#4f5b6c] max-md:max-w-[32ch] max-md:text-[13px] max-md:leading-snug min-[651px]:text-[15px]">Limited-time deals on selected motorcycles and scooters.</p>
                 </div>
                 <a href="{{ route('motorcycles') }}"
-                   class="group/viewall inline-flex min-h-11 items-center gap-2.5 text-[15px] font-black text-[#07152f] transition-all duration-300 hover:gap-4 hover:text-[#0065ef] max-md:hidden min-[651px]:mt-[58px]">
+                   class="group/viewall inline-flex min-h-11 items-center gap-2.5 text-[15px] font-black text-[#07152f] transition-all duration-300 hover:gap-4 hover:text-[#0065ef] max-md:hidden">
                     View All Promotions
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
             </div>
 
-            <div class="relative min-[1101px]:px-[42px]">
+            <div class="relative">
                 <button type="button"
-                        class="absolute left-0 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-3xl leading-none text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#0065ef] hover:text-white min-[1101px]:flex"
+                        class="absolute -left-3 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#dfe3ea] bg-white text-[#07152f] shadow-[0_8px_20px_rgba(7,21,47,0.12)] transition-all duration-300 hover:border-[#0065ef] hover:bg-[#0065ef] hover:text-white max-md:left-2 max-md:h-10 max-md:w-10 max-md:bg-white/90 min-[1101px]:-left-5 min-[1101px]:flex"
                         aria-label="Previous promotions">
-                    <x-litus-icon name="chevron-left" class="h-6 w-6" />
+                    <x-litus-icon name="chevron-left" class="h-5 w-5" />
                 </button>
                 <button type="button"
-                        class="absolute right-0 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-3xl leading-none text-[#07152f] shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[#0065ef] hover:text-white min-[1101px]:flex"
+                        class="absolute -right-3 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#dfe3ea] bg-white text-[#07152f] shadow-[0_8px_20px_rgba(7,21,47,0.12)] transition-all duration-300 hover:border-[#0065ef] hover:bg-[#0065ef] hover:text-white max-md:right-2 max-md:h-10 max-md:w-10 max-md:bg-white/90 min-[1101px]:-right-5 min-[1101px]:flex"
                         aria-label="Next promotions">
-                    <x-litus-icon name="chevron-right" class="h-6 w-6" />
+                    <x-litus-icon name="chevron-right" class="h-5 w-5" />
                 </button>
 
-                <div class="grid grid-cols-1 gap-x-7 gap-y-6 max-[650px]:flex max-[650px]:snap-x max-[650px]:snap-mandatory max-[650px]:gap-3.5 max-[650px]:overflow-x-auto max-[650px]:scroll-smooth max-[650px]:px-4 max-[650px]:pb-1 max-[650px]:[scrollbar-width:none] max-[650px]:[&::-webkit-scrollbar]:hidden min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4"
+                <div class="grid grid-cols-1 gap-x-4 gap-y-5 max-[650px]:flex max-[650px]:snap-x max-[650px]:snap-mandatory max-[650px]:gap-3.5 max-[650px]:overflow-x-auto max-[650px]:scroll-smooth max-[650px]:px-4 max-[650px]:pb-1 max-[650px]:[scrollbar-width:none] max-[650px]:[&::-webkit-scrollbar]:hidden min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4 min-[1101px]:gap-x-4"
                      data-promo-slider>
                     @forelse ($promoMotorcycles as $motorcycle)
                         <div class="max-[650px]:w-[86%] max-[650px]:shrink-0 max-[650px]:snap-center min-[651px]:contents">
@@ -164,7 +164,7 @@
                 </div>
 
                 @if ($promoMotorcycles->isNotEmpty())
-                    <div class="mt-4 hidden items-center justify-center gap-1.5 max-[650px]:flex" aria-hidden="true">
+                    <div class="mt-3.5 hidden items-center justify-center gap-1.5 max-[650px]:flex" aria-hidden="true">
                         @foreach ($promoMotorcycles as $index => $motorcycle)
                             <span @class([
                                 'h-1.5 rounded-full transition-all',
