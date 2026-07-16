@@ -196,7 +196,7 @@
                 </a>
             </div>
 
-            <div class="grid grid-cols-1 gap-[22px] max-[720px]:gap-4 min-[721px]:gap-[38px] min-[1101px]:grid-cols-3 max-[1100px]:min-[721px]:grid-cols-2">
+            <div class="grid grid-cols-1 gap-4 max-[720px]:gap-3.5 min-[721px]:grid-cols-2 min-[721px]:gap-5 min-[1101px]:grid-cols-4">
                 @foreach ($topRides as $ride)
                     <x-card.litus-ride-card
                         :model="$ride['model']"

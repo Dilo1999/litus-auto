@@ -26,7 +26,7 @@ class HomeController extends Controller
             ->with(['colorVariants' => fn ($q) => $q->orderBy('sort_order')])
             ->orderBy('sort_order')
             ->orderBy('name')
-            ->limit(6)
+            ->limit(4)
             ->get()
             ->map(fn (Motorcycle $motorcycle) => [
                 'model' => $motorcycle->name,

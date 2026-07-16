@@ -35,11 +35,11 @@
     };
 @endphp
 
-<div {{ $attributes->merge(['class' => 'group relative min-h-[520px] overflow-hidden rounded-xl border border-[#07152f]/5 bg-white shadow-[0_18px_45px_rgba(7,21,47,0.08)] transition-all duration-350 hover:-translate-y-2.5 hover:shadow-[0_28px_65px_rgba(7,21,47,0.13)] max-[720px]:min-h-0 max-[720px]:rounded-2xl']) }}>
+<div {{ $attributes->merge(['class' => 'group relative flex h-full min-h-0 flex-col overflow-hidden rounded-xl border border-[#07152f]/5 bg-white shadow-none transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(7,21,47,0.12)] max-[720px]:rounded-2xl']) }}>
     <div class="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(135deg,transparent_0_58%,rgba(7,21,47,0.035)_58%_72%,transparent_72%)]"></div>
 
     @if ($badge)
-        <div class="absolute left-7 top-[26px] z-[4] inline-flex h-9 items-center gap-2 rounded-[22px] px-[18px] text-xs font-black uppercase text-white shadow-[0_10px_22px_rgba(0,0,0,0.15)] max-[720px]:left-4 max-[720px]:top-4 max-[720px]:h-8 max-[720px]:px-3.5 max-[720px]:text-[10px] {{ $styles['badge'] }}">
+        <div class="absolute left-4 top-4 z-[4] inline-flex h-7 items-center gap-1.5 rounded-full px-3 text-[10px] font-black uppercase text-white shadow-[0_8px_16px_rgba(0,0,0,0.12)] max-[720px]:left-3.5 max-[720px]:top-3.5 {{ $styles['badge'] }}">
             {{ $badge }}
         </div>
     @endif
@@ -48,35 +48,35 @@
        class="absolute inset-0 z-[2]"
        aria-label="View {{ $model }}"></a>
 
-    <div class="pointer-events-none relative z-[3] flex h-[285px] items-center justify-center overflow-hidden px-6 pb-2 pt-9 max-[720px]:h-[220px] max-[720px]:px-4 max-[720px]:pt-8">
+    <div class="pointer-events-none relative z-[3] flex h-[245px] items-center justify-center overflow-hidden px-4 pb-1 pt-8 max-[720px]:h-[240px] max-[720px]:px-4 max-[720px]:pt-8 min-[1101px]:h-[230px]">
         <img src="{{ $img }}"
              alt="{{ $model }}"
-             class="h-[106%] w-[106%] max-h-none max-w-none object-contain drop-shadow-[0_22px_16px_rgba(0,0,0,0.18)] transition-transform duration-350 group-hover:scale-[1.1]">
+             class="h-[102%] w-[102%] max-h-none max-w-none object-contain drop-shadow-[0_16px_12px_rgba(0,0,0,0.16)] transition-transform duration-300 group-hover:scale-[1.06]">
     </div>
 
-    <div class="pointer-events-none relative z-[3] px-[30px] pb-0 pt-3 text-center max-[720px]:px-5">
-        <div class="mx-auto mb-[26px] h-[3px] w-11 rounded-[10px] max-[720px]:mb-4 {{ $styles['line'] }}"></div>
+    <div class="pointer-events-none relative z-[3] flex-1 px-4 pb-0 pt-3.5 text-center max-[720px]:px-4">
+        <div class="mx-auto mb-4.5 h-[3px] w-9 rounded-[10px] max-[720px]:mb-3.5 {{ $styles['line'] }}"></div>
 
-        <h3 class="mb-6 text-[23px] font-bold text-[#07152f] max-[720px]:mb-4 max-[720px]:text-[20px]">{{ $model }}</h3>
+        <h3 class="mb-4 text-[17px] font-bold leading-snug text-[#07152f] max-[720px]:mb-3 max-[720px]:text-[18px] min-[1101px]:text-[16px]">{{ $model }}</h3>
 
-        <div class="flex items-center justify-center gap-[18px] text-[15px] font-extrabold text-[#344054] max-[720px]:gap-3 max-[720px]:text-[13px]">
-            <span class="inline-flex items-center gap-2">
-                <x-litus-icon name="gauge" class="h-4 w-4 text-[#344054]" />
+        <div class="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-[12px] font-extrabold text-[#344054] max-[720px]:text-[13px] min-[1101px]:text-[11px]">
+            <span class="inline-flex items-center gap-1.5">
+                <x-litus-icon name="gauge" class="h-3.5 w-3.5 text-[#344054]" />
                 {{ $cc }}
             </span>
-            <span class="h-[22px] w-px bg-[#dce3ed]" aria-hidden="true"></span>
-            <span class="inline-flex items-center gap-2">
-                <x-litus-icon name="fuel" class="h-4 w-4 text-[#344054]" />
+            <span class="h-4 w-px bg-[#dce3ed]" aria-hidden="true"></span>
+            <span class="inline-flex items-center gap-1.5">
+                <x-litus-icon name="fuel" class="h-3.5 w-3.5 text-[#344054]" />
                 Capacity {{ $capacity }}
             </span>
         </div>
     </div>
 
-    <div class="relative z-[4] mt-[26px] flex h-[68px] items-center justify-center max-[720px]:mt-5 max-[720px]:h-14 {{ $styles['footer'] }}">
+    <div class="relative z-[4] mt-6 flex h-[60px] items-center justify-center max-[720px]:mt-5 max-[720px]:h-14 {{ $styles['footer'] }}">
         <a href="{{ $exploreHref }}"
-           class="group/btn inline-flex min-h-11 items-center gap-[18px] text-[17px] font-black transition-all duration-300 group-hover/btn:gap-[26px] max-[720px]:text-[15px] {{ $styles['btn'] }}">
+           class="group/btn inline-flex min-h-10 items-center gap-3 text-[14px] font-black transition-all duration-300 group-hover/btn:gap-4 max-[720px]:text-[15px] min-[1101px]:text-[13px] {{ $styles['btn'] }}">
             {{ $exploreLabel }}
-            <x-litus-icon name="arrow-right" class="h-4 w-4" />
+            <x-litus-icon name="arrow-right" class="h-3.5 w-3.5" />
         </a>
     </div>
 </div>
