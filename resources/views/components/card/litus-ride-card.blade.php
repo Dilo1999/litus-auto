@@ -12,6 +12,7 @@
 
 @php
     $exploreHref = $exploreHref ?? route('motorcycles');
+    $engineIcon = asset('images/details_page/' . rawurlencode('icons8-engine-50 (2).png'));
 
     $styles = match ($variant) {
         'red' => [
@@ -51,22 +52,25 @@
     <div class="pointer-events-none relative z-[3] flex h-[245px] items-center justify-center overflow-hidden px-4 pb-1 pt-8 max-[720px]:h-[240px] max-[720px]:px-4 max-[720px]:pt-8 min-[1101px]:h-[230px]">
         <img src="{{ $img }}"
              alt="{{ $model }}"
-             class="h-[102%] w-[102%] max-h-none max-w-none object-contain drop-shadow-[0_16px_12px_rgba(0,0,0,0.16)] transition-transform duration-300 group-hover:scale-[1.06]">
+             class="h-[112%] w-[112%] max-h-none max-w-none object-contain drop-shadow-[0_16px_12px_rgba(0,0,0,0.16)] transition-transform duration-300 group-hover:scale-[1.06]">
     </div>
 
     <div class="pointer-events-none relative z-[3] flex-1 px-4 pb-0 pt-3.5 text-center max-[720px]:px-4">
         <div class="mx-auto mb-4.5 h-[3px] w-9 rounded-[10px] max-[720px]:mb-3.5 {{ $styles['line'] }}"></div>
 
-        <h3 class="mb-4 text-[17px] font-bold leading-snug text-[#07152f] max-[720px]:mb-3 max-[720px]:text-[18px] min-[1101px]:text-[16px]">{{ $model }}</h3>
+        <h3 class="mb-4 text-[18px] font-bold leading-snug text-[#07152f] max-[720px]:mb-3 max-[720px]:text-[19px] min-[1101px]:text-[18px]">{{ $model }}</h3>
 
-        <div class="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-[12px] font-extrabold text-[#344054] max-[720px]:text-[13px] min-[1101px]:text-[11px]">
+        <div class="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-[13px] font-extrabold text-[#344054] max-[720px]:text-[14px] min-[1101px]:text-[13px]">
             <span class="inline-flex items-center gap-1.5">
-                <x-litus-icon name="gauge" class="h-3.5 w-3.5 text-[#344054]" />
+                <img src="{{ $engineIcon }}"
+                     alt=""
+                     class="h-4 w-4 shrink-0 object-contain"
+                     aria-hidden="true">
                 {{ $cc }}
             </span>
             <span class="h-4 w-px bg-[#dce3ed]" aria-hidden="true"></span>
             <span class="inline-flex items-center gap-1.5">
-                <x-litus-icon name="fuel" class="h-3.5 w-3.5 text-[#344054]" />
+                <x-litus-icon name="fuel" class="h-4 w-4 text-[#344054]" />
                 Capacity {{ $capacity }}
             </span>
         </div>

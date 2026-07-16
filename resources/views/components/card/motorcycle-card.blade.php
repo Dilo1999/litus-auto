@@ -11,9 +11,11 @@
      data-sort="{{ (int) $motorcycle->sort_order }}"
      data-id="{{ $motorcycle->id }}">
     <div class="relative overflow-hidden bg-white px-2 py-3 max-md:px-1.5 max-md:py-2">
-        <img src="{{ $motorcycle->listImageUrl() }}"
-             alt="{{ $motorcycle->name }}"
-             class="h-48 w-full object-contain transition-transform duration-500 group-hover:scale-105 max-md:h-28">
+        <div class="flex h-48 items-center justify-center max-md:h-28">
+            <img src="{{ $motorcycle->listImageUrl() }}"
+                 alt="{{ $motorcycle->name }}"
+                 class="h-[112%] w-[112%] max-h-none max-w-none object-contain transition-transform duration-500 group-hover:scale-[1.06]">
+        </div>
         @if ($motorcycle->hasPromotion())
             <span class="absolute left-3 top-3 rounded-md bg-litus-red px-2.5 py-1 text-xs font-black text-white shadow max-md:left-1.5 max-md:top-1.5 max-md:rounded max-md:px-1.5 max-md:py-0.5 max-md:text-[9px]">{{ $motorcycle->offerLabel() }}</span>
         @endif

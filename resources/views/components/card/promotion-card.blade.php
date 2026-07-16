@@ -23,10 +23,10 @@
     </div>
 
     {{-- Product image --}}
-    <div class="relative z-[2] flex h-[140px] items-center justify-center max-[650px]:h-[150px] min-[651px]:h-[160px] min-[1101px]:h-[175px]">
+    <div class="relative z-[2] flex h-[140px] items-center justify-center overflow-hidden max-[650px]:h-[150px] min-[651px]:h-[160px] min-[1101px]:h-[175px]">
         <img src="{{ $motorcycle->listImageUrl() }}"
              alt="{{ $motorcycle->name }}"
-             class="h-full w-full object-contain drop-shadow-[0_20px_14px_rgba(0,0,0,0.2)] max-[650px]:drop-shadow-[0_12px_10px_rgba(0,0,0,0.16)]">
+             class="h-[112%] w-[112%] max-h-none max-w-none object-contain drop-shadow-[0_20px_14px_rgba(0,0,0,0.2)] max-[650px]:drop-shadow-[0_12px_10px_rgba(0,0,0,0.16)]">
     </div>
 
     {{-- Product info --}}
