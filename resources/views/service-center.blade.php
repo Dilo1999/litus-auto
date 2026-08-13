@@ -50,7 +50,7 @@
 
 <div class="font-sans" data-service-center-page>
 
-    <x-litus-header active="Service Center" />
+    <x-litus-header active="Service" />
 
     {{-- HERO --}}
     <section class="relative min-h-[680px] overflow-hidden border border-[rgba(27,74,120,0.45)] bg-[#06101c] pb-[82px] max-md:min-h-0 max-md:pb-0 max-[1100px]:min-h-0 max-[1100px]:pb-8">

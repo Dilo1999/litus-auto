@@ -28,15 +28,31 @@ class HomeController extends Controller
             ->orderBy('name')
             ->limit(4)
             ->get()
-            ->map(fn (Motorcycle $motorcycle) => [
-                'model' => $motorcycle->name,
-                'slug' => $motorcycle->slug,
-                'cc' => $motorcycle->engineCapacity() ?: '—',
-                'capacity' => $motorcycle->fuelTankCapacity() ?: '—',
-                'img' => $motorcycle->listImageUrl(),
-                'variant' => 'blue',
-                'badge' => '★ Best Seller',
-            ])
+            ->map(function (Motorcycle $motorcycle) {
+                $hasPromo = $motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0;
+                $activePrice = $hasPromo
+                    ? (float) $motorcycle->sale_price
+                    : (float) $motorcycle->original_price;
+                $monthly = $activePrice > 0
+                    ? 'MVR ' . number_format((int) (round(($activePrice / 60) / 10) * 10))
+                    : null;
+
+                return [
+                    'model' => $motorcycle->name,
+                    'slug' => $motorcycle->slug,
+                    'brand' => $motorcycle->brand,
+                    'cc' => $motorcycle->engineCapacity() ?: '—',
+                    'capacity' => $motorcycle->fuelTankCapacity() ?: '—',
+                    'img' => $motorcycle->listImageUrl(),
+                    'price' => $motorcycle->formattedOriginalPrice(),
+                    'salePrice' => $hasPromo ? $motorcycle->formattedSalePrice() : null,
+                    'discount' => $hasPromo ? $motorcycle->formattedDiscount() : null,
+                    'hasPromotion' => $hasPromo,
+                    'monthly' => $monthly,
+                    'variant' => 'blue',
+                    'badge' => 'Top seller',
+                ];
+            })
             ->all();
 
         $galleryImages = GalleryImage::query()

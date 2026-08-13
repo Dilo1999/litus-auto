@@ -63,7 +63,7 @@
 
 <div class="font-sans" data-contact-page>
 
-    <x-litus-header active="Contact Us" />
+    <x-litus-header active="Contact" />
 
     {{-- HERO --}}
     <section class="relative min-h-[680px] overflow-hidden border border-[rgba(31,80,130,0.4)] bg-[#061326] bg-cover bg-center pb-[82px] max-md:min-h-0 max-md:overflow-visible max-md:border-0 max-md:bg-[#07152f] max-md:pb-0 max-[1100px]:min-h-0 max-[1100px]:pb-8"

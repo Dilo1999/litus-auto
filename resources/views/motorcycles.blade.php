@@ -4,20 +4,36 @@
 
 @section('content')
 @php
+    $motorcycles = $motorcycles ?? collect();
+    $brands = $brands ?? collect();
+    $categories = $categories ?? collect();
+    $promoCount = $promoCount ?? 0;
+    $modelCount = $motorcycles->count();
     $heroBg = asset('images/motorcycles/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
 
-    $heroFeatures = [
-        ['icon' => 'star', 'title' => 'Limited Offers', 'desc' => 'Seasonal deals on top models'],
-        ['icon' => 'package', 'title' => 'Flexible Plans', 'desc' => 'Ownership for every budget'],
-        ['icon' => 'check-circle', 'title' => 'Genuine Brands', 'desc' => 'Honda & Yamaha certified'],
-        ['icon' => 'wrench', 'title' => 'Service Support', 'desc' => 'Expert after-sales care'],
+    $heroStrip = [
+        ['icon' => 'bike', 'title' => $modelCount.' Models', 'sub' => 'Honda, Yamaha and more'],
+        ['icon' => 'shopping-bag', 'title' => $promoCount.' In Campaigns', 'sub' => 'Covered by a promotion now'],
+        ['icon' => 'shield', 'title' => 'Genuine Units', 'sub' => 'Factory-built, fully supported'],
+        ['icon' => 'file-text', 'title' => 'Ijara Ready', 'sub' => 'Every model, six plans'],
     ];
 
-    $whyLitus = [
-        ['icon' => 'check-circle', 'title' => 'Genuine Motorcycles', 'desc' => 'Every bike is 100% brand-authentic and quality-verified.'],
-        ['icon' => 'package', 'title' => 'Easy Applications', 'desc' => 'Simple ID-based lease process via social media platforms.'],
-        ['icon' => 'star', 'title' => 'Flexible Ownership', 'desc' => 'Upfront or installment plans tailored for every budget.'],
-        ['icon' => 'wrench', 'title' => 'Reliable After-Sales', 'desc' => 'Experienced mechanics and genuine spare parts always ready.'],
+    $buyingGuide = [
+        [
+            'title' => '110cc – 125cc',
+            'text' => 'Right for daily riding inside Malé and Hulhumalé. Light, easy to park, cheapest to run. If most journeys are under fifteen minutes, start here.',
+            'models' => ['Scoopy', 'Vision', 'Fazzio'],
+        ],
+        [
+            'title' => '155cc – 160cc',
+            'text' => 'Right if you use the link road regularly, carry a passenger often, or want ABS. More comfortable at speed, heavier to manoeuvre.',
+            'models' => ['Air Blade', 'PCX', 'N Max'],
+        ],
+        [
+            'title' => 'Adventure & Sport',
+            'text' => 'Right if road surfaces are rough where you ride, or you want the sharper handling and suspension travel. A specialist choice.',
+            'models' => ['ADV 160', 'Aerox 155'],
+        ],
     ];
 @endphp
 
@@ -26,281 +42,134 @@
     <x-litus-header active="Motorcycles" />
 
     {{-- HERO --}}
-    <section class="relative min-h-[680px] overflow-hidden border border-[rgba(27,74,120,0.45)] bg-[#06101c] pb-[82px] max-md:min-h-0 max-md:pb-0 max-[1100px]:min-h-0 max-[1100px]:pb-8">
+    <section class="relative overflow-hidden bg-litus-ink text-white">
         <img src="{{ $heroBg }}"
              alt=""
              class="absolute inset-0 h-full w-full object-cover object-[center_right] max-md:object-[center_30%]"
              aria-hidden="true">
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,24,0.96)_0%,rgba(5,11,24,0.88)_34%,rgba(5,11,24,0.55)_62%,rgba(5,11,24,0.35)_100%)] max-md:bg-[linear-gradient(180deg,rgba(5,11,24,0.55)_0%,rgba(5,11,24,0.78)_42%,rgba(5,11,24,0.94)_100%)]"></div>
+        <div class="pointer-events-none absolute inset-0"
+             style="background:
+                radial-gradient(900px 520px at 82% 6%, rgba(46,116,238,.28), transparent 62%),
+                radial-gradient(680px 460px at 2% 96%, rgba(90,184,255,.12), transparent 60%),
+                linear-gradient(180deg, transparent 40%, rgba(5,11,24,.55) 100%);"></div>
+        <div class="pointer-events-none absolute inset-0 opacity-[0.28]"
+             style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px; mask-image: radial-gradient(700px 500px at 30% 30%, #000, transparent 78%);"></div>
 
-        <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,11,22,0.98)_0%,rgba(3,11,22,0.88)_32%,rgba(3,11,22,0.48)_58%,rgba(3,11,22,0.25)_100%)] max-md:bg-[linear-gradient(180deg,rgba(11,22,40,0.55)_0%,rgba(11,22,40,0.78)_42%,rgba(11,22,40,0.92)_100%)]"></div>
-        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(255,255,255,0.08),transparent_28%)]"></div>
-        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.1),rgba(2,10,19,0.95))]"></div>
-
-        <div class="relative z-[2] litus-container pb-12 pt-16 max-md:pb-5 max-md:pt-16 sm:pt-20">
-            <div class="max-w-[720px] text-left">
-                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#0065ef] max-md:mb-1.5 max-md:text-[10px] max-md:tracking-[0.18em] sm:text-lg">
-                    Explore Our Collection
-                </p>
-
-                <h1 class="mb-4 font-montserrat text-[clamp(2.25rem,4.2vw,4.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
-                    Find the Perfect Ride<br>
-                    <span class="text-litus-red">for Your Journey</span>
+        <div class="relative z-[3] litus-container py-[clamp(70px,9vw,124px)] pb-[clamp(56px,7vw,96px)]">
+            <div class="max-w-[820px]">
+                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky">The Range</span>
+                <h1 class="font-display text-[clamp(32px,4.6vw,56px)] font-bold leading-[1.08] tracking-[-0.032em] drop-shadow-[0_6px_20px_rgba(0,0,0,0.45)]">
+                    Find the ride<br>for your journey.
                 </h1>
-
-                <p class="mb-6 max-w-[620px] text-base font-medium leading-[1.5] text-[#e6edf5] max-md:mb-3.5 max-md:max-w-[34ch] max-md:text-[13px] max-md:leading-snug sm:text-lg sm:leading-[1.55]">
-                    Browse the latest motorcycles and scooters from LITUS Automobiles, with limited-time offers, flexible ownership plans, and trusted after-sales support.
+                <p class="mt-5 max-w-[560px] text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.78]">
+                    Honda and Yamaha models, from 110cc city scooters to 160cc adventure machines. Filter by brand, budget or engine size — every card shows which campaigns that motorcycle is currently in.
                 </p>
-
-                <div class="flex flex-col items-stretch justify-start gap-2.5 max-md:w-full max-md:flex-row max-md:gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-7">
-                    <a href="#inventory"
-                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-2 rounded-[9px] bg-[#0065ef] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(0,101,239,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] max-md:h-11 max-md:min-h-11 max-md:min-w-0 max-md:flex-1 max-md:rounded-xl max-md:px-3 max-md:text-[13px] sm:h-[60px] sm:min-w-[220px] sm:text-lg">
-                        View Motorcycles
-                        <x-litus-icon name="arrow-right" class="h-4 w-4 max-md:h-3.5 max-md:w-3.5 sm:h-5 sm:w-5" />
-                    </a>
-                    <a href="tel:+9603331234"
-                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-2 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.15)] max-md:h-11 max-md:min-h-11 max-md:min-w-0 max-md:flex-1 max-md:rounded-xl max-md:border-white/35 max-md:bg-white/[0.06] max-md:px-3 max-md:text-[13px] sm:h-[60px] sm:min-w-[220px] sm:text-lg">
-                        Contact Sales Team
-                        <x-litus-icon name="arrow-right" class="h-4 w-4 max-md:h-3.5 max-md:w-3.5 sm:h-5 sm:w-5" />
-                    </a>
-                </div>
             </div>
         </div>
 
-        <x-litus-hero-features :features="$heroFeatures" />
+        <div class="relative z-[3] border-t border-white/11 bg-black/35 backdrop-blur-sm">
+            <div class="litus-container grid grid-cols-1 gap-4 py-[22px] sm:grid-cols-2 lg:grid-cols-4 lg:gap-2.5">
+                @foreach ($heroStrip as $item)
+                    <div class="flex items-center gap-[13px]">
+                        <div class="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[10px] bg-[rgba(90,184,255,0.15)] text-litus-sky">
+                            <x-litus-icon :name="$item['icon']" class="h-4 w-4" />
+                        </div>
+                        <div>
+                            <b class="block text-sm font-semibold leading-snug text-white">{{ $item['title'] }}</b>
+                            <span class="block text-[12.5px] leading-snug text-white/60">{{ $item['sub'] }}</span>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </section>
 
     {{-- FILTER BAR --}}
-    <section class="border-b border-gray-200 bg-gray-50 py-8 max-md:py-5">
-        <div class="litus-container">
-
-            {{-- Mobile: search + filter trigger --}}
-            <div class="mb-3 flex items-center gap-2.5 lg:hidden">
-                <div class="relative min-w-0 flex-1">
-                    <x-litus-icon name="search" class="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                    <input type="text"
-                           data-motorcycle-search
-                           placeholder="Search motorcycles..."
-                           class="w-full rounded-xl border border-gray-200 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-700 placeholder-gray-400 outline-none transition-all focus:border-[#0065ef] focus:ring-2 focus:ring-[#0065ef]/15">
-                </div>
+    <section class="sticky top-[72px] z-[100] border-b border-litus-line bg-white/[0.97] py-[15px] backdrop-blur-[12px] max-[820px]:static"
+             id="inventory">
+        <div class="litus-container flex flex-wrap items-center gap-3.5">
+            <div class="flex flex-wrap gap-2 max-[820px]:w-full max-[820px]:flex-nowrap max-[820px]:overflow-x-auto max-[820px]:pb-1 max-[820px]:[scrollbar-width:none] max-[820px]:[&::-webkit-scrollbar]:hidden"
+                 data-motorcycle-chips
+                 role="group"
+                 aria-label="Filter by category">
                 <button type="button"
-                        data-motorcycle-filter-open
-                        class="relative inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-3.5 text-sm font-bold text-[#07152f] shadow-sm transition-colors active:bg-gray-50"
-                        aria-label="Open filters">
-                    <x-litus-icon name="sliders" class="h-4 w-4 text-[#0065ef]" />
-                    <span>Filters</span>
-                    <span data-motorcycle-filter-badge
-                          class="absolute -right-1.5 -top-1.5 hidden min-w-[18px] items-center justify-center rounded-full bg-[#0065ef] px-1 text-[10px] font-black leading-[18px] text-white"></span>
+                        data-motorcycle-category="all"
+                        aria-pressed="true"
+                        class="inline-flex shrink-0 items-center gap-2 rounded-full border-[1.5px] border-litus-ink bg-litus-ink px-4 py-2 text-[13.5px] font-semibold text-white transition">
+                    All Models
+                    <span class="rounded-full bg-white/20 px-1.5 py-px text-[11px] font-bold" data-motorcycle-chip-count>{{ $modelCount }}</span>
                 </button>
-            </div>
-
-            {{-- Desktop: inline filter bar --}}
-            <div class="hidden flex-col items-start gap-4 rounded-2xl bg-white p-5 shadow-md lg:flex lg:flex-row lg:items-center">
-                <div class="relative w-full flex-1">
-                    <x-litus-icon name="search" class="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                    <input type="text"
-                           data-motorcycle-search
-                           placeholder="Search motorcycles..."
-                           class="w-full rounded-xl border border-gray-200 py-2.5 pl-10 pr-4 text-sm text-gray-700 placeholder-gray-400 outline-none transition-all focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
-                </div>
-
-                <div class="flex shrink-0 items-center gap-1 rounded-xl bg-gray-100 p-1">
+                @foreach ($categories as $category)
                     <button type="button"
-                            data-motorcycle-brand="All"
-                            class="rounded-lg px-4 py-2 text-sm font-bold transition-all bg-litus-red text-white">
-                        All
+                            data-motorcycle-category="{{ $category }}"
+                            aria-pressed="false"
+                            class="inline-flex shrink-0 items-center gap-2 rounded-full border-[1.5px] border-litus-line-2 bg-white px-4 py-2 text-[13.5px] font-semibold text-litus-text-2 transition hover:border-litus-primary-light hover:text-litus-primary">
+                        {{ $category }}
+                        <span class="rounded-full bg-litus-paper-3 px-1.5 py-px text-[11px] font-bold text-litus-text-2">
+                            {{ $motorcycles->where('category', $category)->count() }}
+                        </span>
                     </button>
-                    @foreach ($brands as $brand)
-                        <button type="button"
-                                data-motorcycle-brand="{{ $brand }}"
-                                class="rounded-lg px-4 py-2 text-sm font-bold text-gray-500 transition-all">
-                            {{ $brand }}
-                        </button>
-                    @endforeach
-                </div>
-
-                <div class="flex shrink-0 flex-wrap gap-2">
-                    <div class="relative">
-                        <select data-motorcycle-engine
-                                class="cursor-pointer appearance-none rounded-xl border border-gray-200 bg-white py-2 pl-3 pr-8 text-sm text-gray-600 outline-none transition-colors hover:border-gray-400 focus:border-[#0065ef]">
-                            <option value="">Engine Capacity</option>
-                            <option value="110">Up to 110cc</option>
-                            <option value="125">111cc – 125cc</option>
-                            <option value="150">126cc – 150cc</option>
-                            <option value="200">151cc+</option>
-                        </select>
-                        <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-2.5 top-1/2 h-[13px] w-[13px] -translate-y-1/2 text-gray-400" />
-                    </div>
-                    <div class="relative">
-                        <select data-motorcycle-price
-                                class="cursor-pointer appearance-none rounded-xl border border-gray-200 bg-white py-2 pl-3 pr-8 text-sm text-gray-600 outline-none transition-colors hover:border-gray-400 focus:border-[#0065ef]">
-                            <option value="">Price Range</option>
-                            <option value="low">Under MVR 40,000</option>
-                            <option value="mid">MVR 40,000 – 70,000</option>
-                            <option value="high">Above MVR 70,000</option>
-                        </select>
-                        <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-2.5 top-1/2 h-[13px] w-[13px] -translate-y-1/2 text-gray-400" />
-                    </div>
-                    <div class="relative">
-                        <select data-motorcycle-sort class="cursor-pointer appearance-none rounded-xl border border-gray-200 bg-white py-2 pl-3 pr-8 text-sm text-gray-600 outline-none">
-                            <option value="latest">Sort by Latest</option>
-                            <option value="price">Sort by Price</option>
-                            <option value="popular">Sort by Popular</option>
-                        </select>
-                        <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-2.5 top-1/2 h-[13px] w-[13px] -translate-y-1/2 text-gray-400" />
-                    </div>
-                </div>
+                @endforeach
             </div>
 
-            <p class="mt-3 pl-1 text-sm text-gray-500 max-md:mt-2 max-md:pl-0">
-                Showing <span class="font-bold text-gray-800" data-motorcycle-count>{{ $motorcycles->count() }}</span> motorcycles
-                <span data-motorcycle-brand-wrap class="hidden">in <span class="font-bold text-gray-800" data-motorcycle-brand-label></span></span>
-            </p>
+            <div class="ml-auto flex flex-wrap gap-2.5 max-[820px]:ml-0 max-[820px]:w-full max-[820px]:grid max-[820px]:grid-cols-2">
+                <select data-motorcycle-brand
+                        class="cursor-pointer rounded-[9px] border-[1.5px] border-litus-line-2 bg-white py-2.5 pl-3.5 pr-9 text-[13.5px] font-medium text-litus-text outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)] max-[820px]:w-full">
+                    <option value="all">All Brands</option>
+                    @foreach ($brands as $brand)
+                        <option value="{{ $brand }}">{{ $brand }}</option>
+                    @endforeach
+                </select>
+
+                <select data-motorcycle-engine
+                        class="cursor-pointer rounded-[9px] border-[1.5px] border-litus-line-2 bg-white py-2.5 pl-3.5 pr-9 text-[13.5px] font-medium text-litus-text outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)] max-[820px]:w-full">
+                    <option value="all">Any Engine Size</option>
+                    <option value="110">Up to 110cc</option>
+                    <option value="125">Up to 125cc</option>
+                    <option value="160">Up to 160cc</option>
+                </select>
+
+                <select data-motorcycle-sort
+                        class="cursor-pointer rounded-[9px] border-[1.5px] border-litus-line-2 bg-white py-2.5 pl-3.5 pr-9 text-[13.5px] font-medium text-litus-text outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)] max-[820px]:col-span-2 max-[820px]:w-full">
+                    <option value="popular">Sort: Popularity</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="promotion">In Campaigns First</option>
+                    <option value="latest">Sort: Latest</option>
+                </select>
+            </div>
         </div>
     </section>
 
-    {{-- Mobile filter drawer --}}
-    <div class="fixed inset-0 z-[80] lg:hidden"
-         data-motorcycle-filter-drawer
-         hidden
-         aria-hidden="true">
-        <button type="button"
-                class="absolute inset-0 bg-black/45 opacity-0 transition-opacity duration-300"
-                data-motorcycle-filter-backdrop
-                aria-label="Close filters"></button>
-
-        <aside class="absolute inset-y-0 left-0 flex w-[min(100%,340px)] -translate-x-full flex-col bg-[#f7f8fa] shadow-[8px_0_32px_rgba(7,21,47,0.18)] transition-transform duration-300 ease-out"
-               data-motorcycle-filter-panel
-               role="dialog"
-               aria-modal="true"
-               aria-labelledby="motorcycle-filters-title">
-            <div class="flex items-center justify-between border-b border-[#e6eaf0] bg-white px-5 py-4">
-                <h2 id="motorcycle-filters-title" class="font-montserrat text-lg font-bold text-[#07152f]">Filters</h2>
-                <button type="button"
-                        data-motorcycle-filter-close
-                        class="flex h-9 w-9 items-center justify-center rounded-full text-[#5b6575] transition-colors hover:bg-gray-100"
-                        aria-label="Close filters">
-                    <x-litus-icon name="x" class="h-5 w-5" />
-                </button>
-            </div>
-
-            <div class="flex-1 overflow-y-auto px-5 py-5">
-                <div class="mb-6">
-                    <h3 class="mb-3 text-sm font-bold text-[#0065ef]">Brand</h3>
-                    <div class="space-y-2.5">
-                        <label class="flex cursor-pointer items-center gap-3 text-sm font-semibold text-[#4d5566]">
-                            <input type="radio"
-                                   name="motorcycle-brand-drawer"
-                                   value="All"
-                                   data-motorcycle-brand-option
-                                   checked
-                                   class="h-4 w-4 accent-[#0065ef]">
-                            All brands
-                        </label>
-                        @foreach ($brands as $brand)
-                            <label class="flex cursor-pointer items-center gap-3 text-sm font-semibold text-[#4d5566]">
-                                <input type="radio"
-                                       name="motorcycle-brand-drawer"
-                                       value="{{ $brand }}"
-                                       data-motorcycle-brand-option
-                                       class="h-4 w-4 accent-[#0065ef]">
-                                {{ $brand }}
-                            </label>
-                        @endforeach
-                    </div>
-                </div>
-
-                <div class="mb-6">
-                    <h3 class="mb-3 text-sm font-bold text-[#0065ef]">Engine Capacity</h3>
-                    <div class="relative">
-                        <select data-motorcycle-engine
-                                class="w-full cursor-pointer appearance-none rounded-xl border border-[#dce2ea] bg-white px-3.5 py-3 pr-10 text-sm font-semibold text-[#4d5566] outline-none focus:border-[#0065ef]">
-                            <option value="">Any capacity</option>
-                            <option value="110">Up to 110cc</option>
-                            <option value="125">111cc – 125cc</option>
-                            <option value="150">126cc – 150cc</option>
-                            <option value="200">151cc+</option>
-                        </select>
-                        <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                    </div>
-                </div>
-
-                <div class="mb-6">
-                    <h3 class="mb-3 text-sm font-bold text-[#0065ef]">Price Range</h3>
-                    <div class="relative">
-                        <select data-motorcycle-price
-                                class="w-full cursor-pointer appearance-none rounded-xl border border-[#dce2ea] bg-white px-3.5 py-3 pr-10 text-sm font-semibold text-[#4d5566] outline-none focus:border-[#0065ef]">
-                            <option value="">Any price</option>
-                            <option value="low">Under MVR 40,000</option>
-                            <option value="mid">MVR 40,000 – 70,000</option>
-                            <option value="high">Above MVR 70,000</option>
-                        </select>
-                        <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                    </div>
-                </div>
-
-                <div class="mb-6">
-                    <h3 class="mb-3 text-sm font-bold text-[#0065ef]">Availability</h3>
-                    <div class="relative">
-                        <select data-motorcycle-availability
-                                class="w-full cursor-pointer appearance-none rounded-xl border border-[#dce2ea] bg-white px-3.5 py-3 pr-10 text-sm font-semibold text-[#4d5566] outline-none focus:border-[#0065ef]">
-                            <option value="">All</option>
-                            <option value="in-stock">In stock</option>
-                            <option value="promotion">On promotion</option>
-                        </select>
-                        <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                    </div>
-                </div>
-
-                <div class="mb-2">
-                    <h3 class="mb-3 text-sm font-bold text-[#0065ef]">Sort By</h3>
-                    <div class="relative">
-                        <select data-motorcycle-sort
-                                class="w-full cursor-pointer appearance-none rounded-xl border border-[#dce2ea] bg-white px-3.5 py-3 pr-10 text-sm font-semibold text-[#4d5566] outline-none focus:border-[#0065ef]">
-                            <option value="latest">Latest</option>
-                            <option value="price">Price</option>
-                            <option value="popular">Popular</option>
-                        </select>
-                        <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                    </div>
-                </div>
-            </div>
-
-            <div class="border-t border-[#e6eaf0] bg-white px-5 py-4">
-                <button type="button"
-                        data-motorcycle-filter-apply
-                        class="mb-2.5 flex h-12 w-full items-center justify-center rounded-full bg-[#0065ef] text-[15px] font-black text-white transition-colors hover:bg-[#0052cc]">
-                    Show results
-                </button>
-                <button type="button"
-                        data-motorcycle-filter-clear
-                        class="flex h-12 w-full items-center justify-center rounded-full border border-[#d5dbe5] bg-white text-[15px] font-bold text-[#07152f] transition-colors hover:bg-gray-50">
-                    Clear all filters
-                </button>
-            </div>
-        </aside>
-    </div>
-
     {{-- PRODUCT GRID --}}
-    <section id="inventory" class="bg-gray-50 py-14">
+    <section class="bg-white pb-[clamp(62px,7.5vw,116px)] pt-0">
         <div class="litus-container">
-            <div class="mb-10 text-center">
-                <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Inventory</span>
-                <h2 class="mt-2 font-montserrat text-3xl font-bold text-gray-900 lg:text-4xl">Explore Our Ride Collection</h2>
-                <p class="mt-2 text-gray-500">Choose from our latest motorcycles and scooters with exclusive promotional offers.</p>
+            <div class="flex flex-wrap items-center justify-between gap-3 pb-1.5 pt-[26px]">
+                <b class="text-[15px] text-litus-text">
+                    Showing <span data-motorcycle-count>{{ $modelCount }}</span> model<span data-motorcycle-count-suffix>{{ $modelCount === 1 ? '' : 's' }}</span>
+                </b>
+                <button type="button"
+                        data-motorcycle-reset
+                        class="hidden items-center gap-2 rounded-full border-[1.5px] border-litus-line-2 bg-white px-4 py-2 text-[13.5px] font-semibold text-litus-text-2 transition hover:border-litus-primary-light hover:text-litus-primary">
+                    ✕ Clear filters
+                </button>
             </div>
 
-            <div class="hidden py-20 text-center text-gray-400" data-motorcycle-empty>
+            <div class="hidden rounded-[18px] border-[1.5px] border-dashed border-litus-line-2 px-6 py-16 text-center text-litus-text-2"
+                 data-motorcycle-empty>
                 <x-litus-icon name="search" class="mx-auto mb-3 h-10 w-10 opacity-40" />
-                <p class="font-semibold">No motorcycles found</p>
-                <p class="mt-1 text-sm">Try a different search or filter.</p>
+                <p class="font-semibold text-litus-text">No motorcycles found</p>
+                <p class="mt-1 text-sm">Try a different brand, category, or engine size.</p>
             </div>
 
-            <div class="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4" data-motorcycle-grid>
+            <div class="grid grid-cols-1 gap-[22px] pt-5 sm:grid-cols-2 xl:grid-cols-4"
+                 data-motorcycle-grid>
                 @forelse ($motorcycles as $motorcycle)
                     <x-card.motorcycle-card :motorcycle="$motorcycle" />
                 @empty
-                    <div class="col-span-full py-16 text-center text-gray-500">
-                        <p class="font-semibold">No motorcycles available yet.</p>
+                    <div class="col-span-full rounded-[18px] border border-dashed border-litus-line-2 px-6 py-16 text-center text-litus-text-2">
+                        <p class="font-semibold text-litus-text">No motorcycles available yet.</p>
                         <p class="mt-1 text-sm">Check back soon or contact our sales team.</p>
                     </div>
                 @endforelse
@@ -308,47 +177,57 @@
         </div>
     </section>
 
-    {{-- CTA BAND --}}
-    <section class="bg-litus-navy py-16">
-        <div class="mx-auto flex max-w-5xl flex-col items-center gap-8 px-4 sm:px-6 lg:flex-row lg:gap-16">
-            <div class="flex-1 text-center lg:text-left">
-                <h2 class="mb-3 font-montserrat text-3xl font-bold text-white lg:text-4xl">
-                    Need Help Choosing the<br>
-                    <span class="text-litus-red">Right Motorcycle?</span>
-                </h2>
-                <p class="leading-relaxed text-gray-400">
-                    Our sales team can help you compare models, understand ownership plans, and choose the best ride for your lifestyle.
+    {{-- BUYING GUIDE --}}
+    <section class="litus-sec bg-litus-paper-2">
+        <div class="litus-container">
+            <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
+                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Buying Guide</span>
+                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Not sure which size you need?</h2>
+                <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
+                    A short, honest guide to picking the right engine size for how you actually ride.
                 </p>
             </div>
-            <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
-                <a href="tel:+9603331234" class="rounded-full bg-litus-red px-8 py-3.5 text-sm font-bold text-white">Talk to Sales</a>
-                <a href="{{ route('ownership-plans') }}" class="rounded-full border border-white/30 px-8 py-3.5 text-sm font-bold text-white transition-all hover:border-white/60 hover:bg-white/5">View Ownership Plans</a>
-            </div>
-        </div>
-    </section>
-
-    {{-- WHY LITUS --}}
-    <section class="bg-white py-14">
-        <div class="litus-container">
-            <div class="mb-10 text-center">
-                <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Our Promise</span>
-                <h2 class="mt-2 font-montserrat text-2xl font-bold text-gray-900 lg:text-3xl">Why Buy from LITUS Automobiles?</h2>
-            </div>
-            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                @foreach ($whyLitus as $item)
-                    <div class="rounded-2xl border border-gray-100 p-6 text-center transition-all hover:border-blue-100 hover:shadow-md">
-                        <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-litus-red/10">
-                            <x-litus-icon :name="$item['icon']" class="h-[22px] w-[22px] text-litus-red" />
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                @foreach ($buyingGuide as $guide)
+                    <div class="rounded-[18px] border border-litus-line bg-white px-[26px] py-[30px] transition duration-200 hover:border-litus-line-2 hover:shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)]">
+                        <h4 class="mb-2.5 font-display text-[clamp(20px,2.2vw,26px)] font-semibold tracking-[-0.02em] text-litus-text">{{ $guide['title'] }}</h4>
+                        <p class="mb-4 text-[14.5px] text-litus-text-2">{{ $guide['text'] }}</p>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach ($guide['models'] as $model)
+                                <span class="rounded-full bg-litus-paper-3 px-3.5 py-1.5 text-[12.5px] font-semibold text-litus-text-2">{{ $model }}</span>
+                            @endforeach
                         </div>
-                        <h3 class="mb-2 text-base font-bold text-gray-900">{{ $item['title'] }}</h3>
-                        <p class="text-sm leading-relaxed text-gray-500">{{ $item['desc'] }}</p>
                     </div>
                 @endforeach
             </div>
         </div>
     </section>
 
-    <x-litus-footer />
+    {{-- IJARA BAND --}}
+    <x-litus-ijara-band />
 
+    {{-- CTA BAND --}}
+    <section class="litus-sec-tight bg-litus-ink text-white">
+        <div class="litus-container flex flex-wrap items-center justify-between gap-7">
+            <div class="max-w-[560px]">
+                <h3 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]">Still deciding between two models?</h3>
+                <p class="mt-3 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.72]">
+                    Our sales team compares them with you honestly — including the reasons you might want the cheaper one.
+                </p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+                <a href="{{ route('contact') }}"
+                   class="inline-flex items-center justify-center rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
+                    Talk to Sales
+                </a>
+                <a href="{{ route('home') }}#offers"
+                   class="inline-flex items-center justify-center rounded-lg border-[1.5px] border-white/32 px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10">
+                    See Current Campaigns
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <x-litus-footer />
 </div>
 @endsection

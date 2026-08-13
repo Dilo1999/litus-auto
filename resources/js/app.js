@@ -12,4 +12,5 @@ import './service-center';
 import './ownership-plans';
 import './gallery';
 import './home-gallery';
+import './home';
 import './showroom-slider';

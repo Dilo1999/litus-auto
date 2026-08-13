@@ -17,8 +17,10 @@ class MotorcycleController extends Controller
             ->get();
 
         $brands = $motorcycles->pluck('brand')->filter()->unique()->sort()->values();
+        $categories = $motorcycles->pluck('category')->filter()->unique()->sort()->values();
+        $promoCount = $motorcycles->filter(fn (Motorcycle $motorcycle) => $motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0)->count();
 
-        return view('motorcycles', compact('motorcycles', 'brands'));
+        return view('motorcycles', compact('motorcycles', 'brands', 'categories', 'promoCount'));
     }
 
     public function show(string $slug): View

@@ -1,202 +1,308 @@
 @extends('layouts.litus')
 
-@section('title', 'LITUS Automobiles — Premium Motorcycles in the Maldives')
+@section('title', 'LITUS Automobiles — Motorcycles, Scooters & Ijara Ownership Plans in the Maldives')
 
 @section('content')
 @php
+    $promoMotorcycles = $promoMotorcycles ?? collect();
     $topRides = $topRides ?? [];
+    $campaignCount = $promoMotorcycles->count();
 
-    $galleryImages = $galleryImages ?? [];
-
-    $services = [
+    $whyLitus = [
         [
-            'title' => 'Application Made Easy',
-            'icon' => 'check-circle',
-            'img' => asset('images/homepage/' . rawurlencode('Application Made Easy.webp')),
-            'text' => 'LITUS Automobiles simplifies the process of leasing a motorcycle by eliminating bureaucracy. A simple ID card is required for verification and applications can be made via social media platforms. Customers can choose from upfront or installment options.',
+            'icon' => 'file-text',
+            'title' => 'Application made easy',
+            'text' => 'We removed the bureaucracy from motorcycle leasing. Most applications need fewer documents and less waiting than customers expect.',
         ],
         [
-            'title' => 'Genuine Parts',
-            'icon' => 'package',
-            'img' => asset('images/homepage/' . rawurlencode('Genuine Parts.webp')),
-            'text' => 'LITUS Automobiles provides genuine parts to take care of your beloved motorbike for durability and performance quality. Visit our Service Center for professional service.',
+            'icon' => 'shield',
+            'title' => 'Genuine parts only',
+            'text' => 'Every part we fit is genuine and traceable. It protects your warranty, your resale value and — with brakes and tyres — your safety.',
         ],
         [
-            'title' => 'Reliable Service',
             'icon' => 'wrench',
-            'img' => asset('images/homepage/' . rawurlencode('Reliable Service.webp')),
-            'text' => 'LITUS Automobiles provides dependable motorcycle servicing at our Service Centers staffed with experienced mechanics and state-of-the-art tools and equipment. Our team aims to offer premium and reliable service to all customers.',
+            'title' => 'Service you can reach',
+            'text' => 'Full service centres in Malé, Hithadhoo and Fuvahmulah, with technicians trained on the specific engines we sell.',
+        ],
+        [
+            'icon' => 'users',
+            'title' => 'People who tell you straight',
+            'text' => 'If a bike is wrong for how you ride, our team will say so. We would rather sell you the right one than the expensive one.',
         ],
     ];
 
-    $features = [
-        ['icon' => 'package', 'label' => 'Genuine Parts', 'desc' => '100% authentic & quality assured'],
-        ['icon' => 'check-circle', 'label' => 'Easy Applications', 'desc' => 'Simple process, minimal documentation'],
-        ['icon' => 'wrench', 'label' => 'Reliable Service', 'desc' => 'Expert mechanics, trusted support'],
-        ['icon' => 'star', 'label' => 'Flexible Plans', 'desc' => 'Ownership options for everyone'],
+    $showroomImage = function (string ...$parts): string {
+        return asset('images/about_us/showrooms/' . implode('/', array_map('rawurlencode', $parts)));
+    };
+
+    $showrooms = [
+        [
+            'name' => 'Malé Showroom',
+            'address' => 'Chaandhanee Magu, Malé, Maldives',
+            'featured' => true,
+            'images' => [
+                $showroomImage("Male' Showroom", 'Malé Showroom.jpg'),
+                $showroomImage("Male' Showroom", "Male' Showroom1.webp"),
+                $showroomImage("Male' Showroom", "Male' Showroom2.jpg"),
+            ],
+        ],
+        [
+            'name' => 'Hithadhoo Showroom',
+            'address' => 'Fenfiyazmagu, S. Hithadhoo, Maldives',
+            'featured' => true,
+            'images' => [
+                $showroomImage('Hithadhoo Showroom', 'Hithadhoo Showroom.jpg'),
+                $showroomImage('Hithadhoo Showroom', 'Hithadhoo Showroom1.jpg'),
+                $showroomImage('Hithadhoo Showroom', 'Hithadhoo Showroom2.jpg'),
+            ],
+        ],
+        [
+            'name' => 'Kudahuvadhoo Showroom',
+            'address' => 'Izzudheen Magu, Dh. Kudahuvadhoo, Maldives',
+            'featured' => false,
+            'images' => [
+                $showroomImage('Kudahuvadhoo Showroom', 'Kudahuvadhoo Showroom.jpg'),
+                $showroomImage('Kudahuvadhoo Showroom', 'Kudahuvadhoo Showroom1.jpg'),
+            ],
+        ],
+        [
+            'name' => 'Naifaru Showroom',
+            'address' => 'Ifthithaahee Magu, Lh. Naifaru, Maldives',
+            'featured' => false,
+            'img' => $showroomImage('Naifaru Showroom', 'Naifaru Showroom.webp'),
+        ],
+        [
+            'name' => 'Villingili Showroom',
+            'address' => 'Ameenee Magu, GA. Villingili, Maldives',
+            'featured' => false,
+            'images' => [
+                $showroomImage('Villingili Showroom', 'Villingili Showroom.jpg'),
+                $showroomImage('Villingili Showroom', 'Villingili Showroom1.jpg'),
+                $showroomImage('Villingili Showroom', 'Villingili Showroom2.jpg'),
+            ],
+        ],
+        [
+            'name' => 'Feydhoo Showroom',
+            'address' => 'Maathila Magu, S. Feydhoo, Maldives',
+            'featured' => false,
+            'img' => $showroomImage('Feydhoo Showroom', 'Feydhoo Showroom.jpg'),
+        ],
+        [
+            'name' => 'Fonadhoo Showroom',
+            'address' => 'Sinajuddeen Magu, L. Fonadhoo, Maldives',
+            'featured' => false,
+            'images' => [
+                $showroomImage('Fonadhoo Showroom', 'Fonadhoo Showroom.jpg'),
+                $showroomImage('Fonadhoo Showroom', 'Fonadhoo Showroom1.jpg'),
+                $showroomImage('Fonadhoo Showroom', 'Fonadhoo Showroom2.jpg'),
+            ],
+        ],
+        [
+            'name' => 'Head Office',
+            'address' => 'Ma. Eyrum, Buruzu Magu, Malé, Maldives',
+            'featured' => false,
+            'img' => $showroomImage('Head Office', 'Head Office.webp'),
+        ],
+        [
+            'name' => 'Hulhumale Showroom',
+            'address' => 'Nirolhu Magu, Hulhumale, Maldives',
+            'featured' => false,
+            'images' => [
+                $showroomImage('Hulhumale Showroom', 'Hulhumale Showroom.webp'),
+                $showroomImage('Hulhumale Showroom', 'Hulhumale Showroom1.webp'),
+                $showroomImage('Hulhumale Showroom', 'Hulhumale Showroom2.webp'),
+            ],
+        ],
+        [
+            'name' => 'Thinadhoo Showroom',
+            'address' => 'Daisy Magu, Thinadhoo, Maldives',
+            'featured' => false,
+            'images' => [
+                $showroomImage('Thinadhoo Showroom', 'Thinadhoo Showroom.webp'),
+                $showroomImage('Thinadhoo Showroom', 'Thinadhoo Showroom1.webp'),
+                $showroomImage('Thinadhoo Showroom', 'Thinadhoo Showroom2.webp'),
+            ],
+        ],
     ];
 
-    $heroBg = asset('images/homepage/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_22_48 PM.png'));
+    $showroomCount = count($showrooms);
+    $testimonials = [
+        [
+            'quote' => 'I had been putting off buying a bike for two years because I could not pay it all at once. The Ijara plan was explained properly, the figure never changed, and I have been riding since March.',
+            'name' => 'Ahmed I.',
+            'location' => 'Malé',
+        ],
+        [
+            'quote' => 'Bought a Scoopy from the Hithadhoo showroom. What I appreciated most was being told the smaller bike was the right one for me instead of being pushed to the expensive one.',
+            'name' => 'Fathimath R.',
+            'location' => 'Addu City',
+        ],
+        [
+            'quote' => 'Service centre found a worn brake pad I had not noticed and showed me the old part. That is the kind of thing that keeps me coming back.',
+            'name' => 'Ibrahim S.',
+            'location' => 'Fuvahmulah',
+        ],
+    ];
+
+    $heroStrip = [
+        ['icon' => 'clock', 'title' => 'Since 2014', 'sub' => 'Twelve years serving Maldivian riders'],
+        ['icon' => 'map-pin', 'title' => $showroomCount.' Locations', 'sub' => 'Showrooms & service centers across the Maldives'],
+        ['icon' => 'shield', 'title' => 'Ijara Plans', 'sub' => 'Islamic leasing standards'],
+        ['icon' => 'wrench', 'title' => 'Full Service', 'sub' => 'Genuine parts, trained technicians'],
+    ];
 @endphp
 
-<div class="font-sans">
+<div class="font-sans" data-home-page>
 
     <x-litus-header active="Home" />
 
     {{-- HERO --}}
-    <section class="relative min-h-[580px] overflow-hidden max-md:min-h-0 lg:min-h-[660px]">
-        <img src="{{ $heroBg }}"
-             alt=""
-             class="absolute inset-0 h-full w-full object-cover object-center max-md:object-[center_30%]"
-             aria-hidden="true">
-        <div class="absolute inset-0 bg-[linear-gradient(110deg,rgba(0,65,180,0.55)_0%,rgba(11,22,40,0.85)_40%,rgba(11,22,40,0.45)_70%,rgba(11,22,40,0.2)_100%)] max-md:bg-[linear-gradient(180deg,rgba(11,22,40,0.55)_0%,rgba(11,22,40,0.78)_42%,rgba(11,22,40,0.92)_100%)]"></div>
+    <section class="relative overflow-hidden bg-litus-ink text-white">
+        <div class="pointer-events-none absolute inset-0"
+             style="background:
+                radial-gradient(900px 520px at 82% 6%, rgba(46,116,238,.34), transparent 62%),
+                radial-gradient(680px 460px at 2% 96%, rgba(90,184,255,.16), transparent 60%),
+                linear-gradient(180deg, transparent 40%, rgba(5,11,24,.9) 100%);"></div>
+        <div class="pointer-events-none absolute inset-0 opacity-[0.42]"
+             style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px; mask-image: radial-gradient(700px 500px at 30% 30%, #000, transparent 78%);"></div>
 
-        <div class="relative z-10 litus-container flex min-h-[580px] flex-col justify-center max-md:min-h-0 max-md:justify-end lg:min-h-[660px]">
-            <div class="max-w-xl py-14 text-left max-md:pb-8 max-md:pt-24 lg:py-16">
-                <p class="mb-4 text-sm font-bold uppercase tracking-widest text-litus-red max-md:mb-3 max-md:text-[11px] max-md:tracking-[0.18em] sm:text-base">Premium Bikes. Trusted Service.</p>
-                <h1 class="mb-6 font-montserrat text-[2.9rem] font-bold leading-[1.08] text-white max-md:mb-4 max-md:text-[2.35rem] max-md:leading-[1.05] sm:text-[3.25rem] lg:text-[3.85rem]">
-                    Ride Your Dream<br class="hidden sm:inline"><span class="sm:hidden"> </span>with<br>
-                    <span class="text-litus-red">LITUS Automobiles</span>
-                </h1>
-                <p class="mb-9 max-w-md text-base leading-relaxed text-gray-300 max-md:mb-6 max-md:text-[15px] max-md:leading-snug lg:text-lg">
-                    Discover premium motorcycles, flexible ownership plans, genuine parts, and trusted service across the Maldives.
-                </p>
-                <div class="flex flex-col justify-start gap-3 max-md:gap-2.5 sm:flex-row sm:gap-4">
-                    <a href="{{ route('motorcycles') }}"
-                       class="flex min-h-12 items-center justify-center gap-2 rounded-md bg-litus-red px-7 py-3.5 text-base font-bold text-white transition-opacity hover:opacity-90 max-md:w-full max-md:text-[15px]">
-                        Explore Motorcycles
-                        <x-litus-icon name="arrow-right" class="h-4 w-4" />
-                    </a>
-                    <a href="{{ route('ownership-plans') }}"
-                       class="flex min-h-12 items-center justify-center rounded-md border border-white/30 px-7 py-3.5 text-center text-base font-bold text-white transition-all hover:border-white/60 hover:bg-white/5 max-md:w-full max-md:border-white/40 max-md:bg-white/5 max-md:text-[15px]">
-                        View Ownership Plans
-                    </a>
+        <div class="relative z-[3] litus-container py-[clamp(70px,9vw,124px)] pb-[clamp(56px,7vw,96px)]">
+            <div class="grid items-center gap-[52px] max-[960px]:grid-cols-1 max-[960px]:gap-9 min-[961px]:grid-cols-[1.06fr_0.94fr]">
+                <div>
+                    <span class="mb-[22px] inline-flex items-center gap-2.5 rounded-full border border-white/16 bg-white/[0.08] px-4 py-2 text-[12.5px] font-semibold">
+                        <span class="litus-live-dot h-[7px] w-[7px] rounded-full bg-[#3DDC84] shadow-[0_0_0_0_rgba(61,220,132,0.7)]" aria-hidden="true"></span>
+                        {{ $campaignCount }} campaign{{ $campaignCount === 1 ? '' : 's' }} running now · Updated {{ now()->format('j M Y') }}
+                    </span>
+                    <h1 class="font-display text-[clamp(40px,6.2vw,78px)] font-extrabold leading-[1.08] tracking-[-0.035em]">
+                        Ride your own.<br>
+                        <span class="text-litus-sky">From MVR 1,340</span><br>
+                        a month.
+                    </h1>
+                    <p class="mt-[22px] max-w-[520px] text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.72]">
+                        Honda and Yamaha scooters, genuine parts and expert service — across five showrooms in the Maldives. Buy outright, or own it on a Shariah-compliant Ijara plan.
+                    </p>
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <a href="#offers"
+                           class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
+                            See This Month’s Campaigns
+                            <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                        </a>
+                        <a href="{{ route('ownership-plans') }}"
+                           class="inline-flex items-center justify-center rounded-lg border-[1.5px] border-white/32 px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10">
+                            How Ijara Works
+                        </a>
+                    </div>
+                </div>
+
+                <div class="rounded-[26px] border border-white/15 bg-white/[0.06] p-[clamp(26px,3vw,38px)] shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)] backdrop-blur-[10px]">
+                    <h4 class="mb-1.5 font-display text-[clamp(20px,2.2vw,26px)] font-semibold tracking-[-0.02em]">Find your ride</h4>
+                    <p class="mb-5 text-xs text-white/60">Three questions. We will show you what fits.</p>
+                    <form action="{{ route('motorcycles') }}" method="get" class="space-y-4" data-quick-find>
+                        <div>
+                            <label for="fBrand" class="mb-1.5 block text-[12.5px] font-semibold tracking-[0.02em] text-white/70">Brand</label>
+                            <select id="fBrand" name="brand"
+                                    class="w-full rounded-[9px] border-[1.5px] border-white/18 bg-white/[0.07] px-3.5 py-3 text-sm text-white outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)]">
+                                <option value="all" class="text-litus-text">Any brand</option>
+                                <option value="Honda" class="text-litus-text">Honda</option>
+                                <option value="Yamaha" class="text-litus-text">Yamaha</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="fBudget" class="mb-1.5 block text-[12.5px] font-semibold tracking-[0.02em] text-white/70">Budget</label>
+                            <select id="fBudget" name="budget"
+                                    class="w-full rounded-[9px] border-[1.5px] border-white/18 bg-white/[0.07] px-3.5 py-3 text-sm text-white outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)]">
+                                <option value="999999" class="text-litus-text">Any budget</option>
+                                <option value="60000" class="text-litus-text">Under MVR 60,000</option>
+                                <option value="80000" class="text-litus-text">Under MVR 80,000</option>
+                                <option value="110000" class="text-litus-text">Under MVR 110,000</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="fPay" class="mb-1.5 block text-[12.5px] font-semibold tracking-[0.02em] text-white/70">How you want to pay</label>
+                            <select id="fPay" name="pay"
+                                    class="w-full rounded-[9px] border-[1.5px] border-white/18 bg-white/[0.07] px-3.5 py-3 text-sm text-white outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)]">
+                                <option class="text-litus-text">Ijara monthly plan</option>
+                                <option class="text-litus-text">Full payment</option>
+                                <option class="text-litus-text">Not sure yet</option>
+                            </select>
+                        </div>
+                        <button type="submit"
+                                class="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-litus-primary px-6 py-3.5 text-[14.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
+                            Show Me Motorcycles
+                            <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
 
-        {{-- Feature bar --}}
-        <div class="relative z-10 border-t border-white/10 bg-black/35 backdrop-blur-sm max-md:bg-black/50">
-            <div class="litus-container">
-                <div class="grid min-h-[140px] grid-cols-1 items-center max-md:min-h-0 max-md:grid-cols-2 max-md:gap-0 min-[701px]:grid-cols-2 min-[1100px]:min-h-[155px] min-[1100px]:grid-cols-4">
-                    @foreach ($features as $index => $feature)
-                        <div @class([
-                            'flex items-center gap-3.5 pt-6 pb-11 sm:gap-4 sm:pt-7 sm:pb-12 lg:pt-8 lg:pb-14',
-                            'max-md:gap-2.5 max-md:px-1 max-md:pt-3 max-md:pb-7',
-                            'min-[1100px]:border-b-0',
-                            'border-b border-white/10 max-md:border-b' => $index < count($features) - 1,
-                            'max-md:last:border-b-0',
-                            'max-md:border-r max-md:border-white/10' => in_array($index, [0, 2]),
-                            'max-md:border-b-0' => in_array($index, [2, 3]),
-                            'min-[1100px]:border-r min-[1100px]:border-white/10 min-[1100px]:pr-6' => $index < count($features) - 1,
-                            'min-[1100px]:pl-0' => $index === 0,
-                            'min-[1100px]:pl-6' => $index > 0,
-                            'max-[1100px]:min-[701px]:border-r max-[1100px]:min-[701px]:border-white/10' => in_array($index, [0, 2]),
-                            'max-[1100px]:min-[701px]:border-b max-[1100px]:min-[701px]:border-white/10' => in_array($index, [0, 1]),
-                            'max-[1100px]:min-[701px]:border-r-0' => $index === 1,
-                        ])>
-                            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-litus-red/25 bg-litus-red/15 max-md:h-10 max-md:w-10 sm:h-[52px] sm:w-[52px]">
-                                <x-litus-icon :name="$feature['icon']" class="h-5 w-5 text-litus-red max-md:h-4 max-md:w-4 sm:h-[22px] sm:w-[22px]" />
-                            </div>
-                            <div class="min-w-0 text-left">
-                                <p class="text-sm font-bold leading-tight text-white max-md:text-[12px] sm:text-[15px]">{{ $feature['label'] }}</p>
-                                <p class="mt-1 text-xs leading-snug text-gray-400 max-md:mt-0.5 max-md:line-clamp-2 max-md:text-[10px] sm:text-[13px]">{{ $feature['desc'] }}</p>
-                            </div>
+        <div class="relative z-[3] border-t border-white/11 bg-black/26">
+            <div class="litus-container grid grid-cols-1 gap-4 py-[22px] sm:grid-cols-2 lg:grid-cols-4 lg:gap-2.5">
+                @foreach ($heroStrip as $item)
+                    <div class="flex items-center gap-[13px]">
+                        <div class="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[10px] bg-[rgba(90,184,255,0.15)] text-litus-sky">
+                            <x-litus-icon :name="$item['icon']" class="h-4 w-4" />
                         </div>
-                    @endforeach
-                </div>
+                        <div>
+                            <b class="block text-sm font-semibold leading-snug text-white">{{ $item['title'] }}</b>
+                            <span class="block text-[12.5px] leading-snug text-white/60">{{ $item['sub'] }}</span>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
 
     {{-- ONGOING PROMOTIONS --}}
-    <section class="relative overflow-hidden border border-[#dfe3ea] bg-[#f7f8fa] py-[38px] pb-7 max-md:border-0 max-md:py-8 max-md:pb-8 max-sm:py-7 min-[651px]:bg-white">
-        <div class="pointer-events-none absolute inset-0 hidden opacity-100 min-[651px]:block"
-             style="background: linear-gradient(rgba(255,255,255,0.94), rgba(255,255,255,0.94)), radial-gradient(circle at 10% 20%, rgba(6,21,48,0.08), transparent 25%);"></div>
-        <div class="pointer-events-none absolute inset-0 hidden opacity-40 min-[651px]:block"
-             style="background-image: linear-gradient(30deg, rgba(6,21,48,0.035) 12%, transparent 12.5%, transparent 87%, rgba(6,21,48,0.035) 87.5%, rgba(6,21,48,0.035)), linear-gradient(150deg, rgba(6,21,48,0.035) 12%, transparent 12.5%, transparent 87%, rgba(6,21,48,0.035) 87.5%, rgba(6,21,48,0.035)); background-size: 55px 95px;"></div>
-
-        <div class="relative z-[2] litus-container max-md:!px-0">
-            <div class="mb-8 flex flex-col items-start justify-between gap-5 max-md:mb-5 max-md:gap-3 max-md:px-4 min-[651px]:mb-10 min-[651px]:flex-row min-[651px]:items-end">
-                <div class="max-w-[560px] max-md:w-full">
-                    <div class="mb-1.5 flex items-center justify-between gap-3">
-                        <span class="block text-[13px] font-black uppercase tracking-[0.14em] text-[#0065ef] max-md:text-[11px]">Special Deals</span>
-                        <a href="{{ route('motorcycles') }}"
-                           class="hidden items-center gap-1.5 text-[12px] font-black text-[#0065ef] max-md:inline-flex">
-                            View all
-                            <x-litus-icon name="arrow-right" class="h-3.5 w-3.5" />
-                        </a>
-                    </div>
-                    <h2 class="font-montserrat mb-2.5 text-[30px] font-bold leading-tight tracking-[-0.6px] text-[#07152f] max-md:mb-2 max-md:text-[26px] min-[651px]:text-[38px]">Ongoing Promotions</h2>
-                    <p class="text-sm font-semibold leading-normal text-[#4f5b6c] max-md:max-w-[32ch] max-md:text-[13px] max-md:leading-snug min-[651px]:text-[15px]">Limited-time deals on selected motorcycles and scooters.</p>
+    <section id="offers" class="litus-sec scroll-mt-24">
+        <div class="litus-container">
+            <div class="mb-[38px] flex flex-wrap items-end justify-between gap-6">
+                <div class="max-w-[660px]">
+                    <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Ongoing Promotions</span>
+                    <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Live campaigns, with real end dates</h2>
+                    <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
+                        Each campaign covers selected motorcycles. Open one to see the model details and the price of each.
+                    </p>
                 </div>
                 <a href="{{ route('motorcycles') }}"
-                   class="group/viewall inline-flex min-h-11 items-center gap-2.5 text-[15px] font-black text-[#07152f] transition-all duration-300 hover:gap-4 hover:text-[#0065ef] max-md:hidden">
-                    View All Promotions
+                   class="inline-flex items-center justify-center gap-2 rounded-lg border-[1.5px] border-litus-line-2 bg-white px-6 py-3.5 text-[14.5px] font-semibold text-litus-ink transition hover:-translate-y-0.5 hover:border-litus-primary-light hover:text-litus-primary">
+                    All {{ $campaignCount }} Campaigns
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
             </div>
 
-            <div class="relative">
-                <button type="button"
-                        class="absolute -left-3 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#dfe3ea] bg-white text-[#07152f] shadow-[0_8px_20px_rgba(7,21,47,0.12)] transition-all duration-300 hover:border-[#0065ef] hover:bg-[#0065ef] hover:text-white max-md:left-2 max-md:h-10 max-md:w-10 max-md:bg-white/90 min-[1101px]:-left-5 min-[1101px]:flex"
-                        aria-label="Previous promotions">
-                    <x-litus-icon name="chevron-left" class="h-5 w-5" />
-                </button>
-                <button type="button"
-                        class="absolute -right-3 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#dfe3ea] bg-white text-[#07152f] shadow-[0_8px_20px_rgba(7,21,47,0.12)] transition-all duration-300 hover:border-[#0065ef] hover:bg-[#0065ef] hover:text-white max-md:right-2 max-md:h-10 max-md:w-10 max-md:bg-white/90 min-[1101px]:-right-5 min-[1101px]:flex"
-                        aria-label="Next promotions">
-                    <x-litus-icon name="chevron-right" class="h-5 w-5" />
-                </button>
-
-                <div class="grid grid-cols-1 gap-x-4 gap-y-5 max-[650px]:flex max-[650px]:snap-x max-[650px]:snap-mandatory max-[650px]:gap-3.5 max-[650px]:overflow-x-auto max-[650px]:scroll-smooth max-[650px]:px-4 max-[650px]:pb-1 max-[650px]:[scrollbar-width:none] max-[650px]:[&::-webkit-scrollbar]:hidden min-[651px]:grid-cols-2 min-[1101px]:grid-cols-4 min-[1101px]:gap-x-4"
-                     data-promo-slider>
-                    @forelse ($promoMotorcycles as $motorcycle)
-                        <div class="max-[650px]:w-[86%] max-[650px]:shrink-0 max-[650px]:snap-center min-[651px]:contents">
-                            <x-card.promotion-card :motorcycle="$motorcycle" />
-                        </div>
-                    @empty
-                        <div class="col-span-full rounded-[10px] border border-dashed border-[#dfe3ea] bg-white/80 px-6 py-12 text-center max-[650px]:mx-4 max-[650px]:w-auto">
-                            <p class="font-semibold text-[#424c5e]">No active promotions at the moment.</p>
-                            <p class="mt-1 text-sm text-[#667085]">Check back soon or browse our full motorcycle range.</p>
-                        </div>
-                    @endforelse
-                </div>
-
-                @if ($promoMotorcycles->isNotEmpty())
-                    <div class="mt-3.5 hidden items-center justify-center gap-1.5 max-[650px]:flex" aria-hidden="true">
-                        @foreach ($promoMotorcycles as $index => $motorcycle)
-                            <span @class([
-                                'h-1.5 rounded-full transition-all',
-                                'w-5 bg-[#0065ef]' => $index === 0,
-                                'w-1.5 bg-[#c5ccd6]' => $index !== 0,
-                            ])></span>
-                        @endforeach
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+                @forelse ($promoMotorcycles->take(3) as $motorcycle)
+                    <x-card.promotion-card :motorcycle="$motorcycle" />
+                @empty
+                    <div class="col-span-full rounded-[18px] border border-dashed border-litus-line-2 bg-litus-paper-2 px-6 py-16 text-center text-litus-text-2">
+                        <p class="font-semibold text-litus-text">No active campaigns at the moment.</p>
+                        <p class="mt-1 text-sm">Check back soon or browse our full motorcycle range.</p>
                     </div>
-                @endif
+                @endforelse
             </div>
         </div>
     </section>
 
     {{-- TOP SELLING RIDES --}}
-    <section class="border border-white/[0.08] py-[42px] pb-[50px] max-[720px]:py-8 max-[720px]:pb-10"
-             style="background: radial-gradient(circle at top left, rgba(14,61,111,0.35), transparent 35%), radial-gradient(circle at bottom right, rgba(14,61,111,0.25), transparent 35%), linear-gradient(135deg, #061326 0%, #071a33 45%, #061326 100%);">
+    <section class="litus-sec bg-litus-paper-2">
         <div class="litus-container">
-
-            <div class="mb-[30px] flex flex-col items-start justify-between gap-5 max-[720px]:mb-6 max-[720px]:gap-3 min-[721px]:flex-row max-[1100px]:gap-5">
-                <div>
-                    <span class="mb-2 block text-[15px] font-black uppercase tracking-wide text-[#0065ef] max-[720px]:mb-1.5 max-[720px]:text-[11px] max-[720px]:tracking-[0.14em]">Customer Favorites</span>
-                    <h2 class="font-montserrat mb-3 text-[32px] font-bold leading-tight tracking-[-0.5px] text-white max-[720px]:mb-2 max-[720px]:text-[26px] min-[721px]:text-[42px]">Top Selling Rides</h2>
-                    <p class="text-base font-semibold text-[#d6dee9] max-[720px]:text-sm">Explore our most popular motorcycles and scooters.</p>
+            <div class="mb-[38px] flex flex-wrap items-end justify-between gap-6">
+                <div class="max-w-[660px]">
+                    <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">The Range</span>
+                    <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Top selling rides</h2>
+                    <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
+                        The models Maldivian riders buy most, from 110cc city scooters to 160cc commuters.
+                    </p>
                 </div>
                 <a href="{{ route('motorcycles') }}"
-                   class="group/viewall inline-flex min-h-11 items-center gap-2.5 text-base font-black text-[#0065ef] transition-all duration-300 hover:gap-4 hover:text-white min-[721px]:mt-[55px]">
-                    View All Rides
+                   class="inline-flex items-center justify-center gap-2 rounded-lg border-[1.5px] border-litus-line-2 bg-white px-6 py-3.5 text-[14.5px] font-semibold text-litus-ink transition hover:-translate-y-0.5 hover:border-litus-primary-light hover:text-litus-primary">
+                    View All Models
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
             </div>
 
-            <div class="grid grid-cols-1 gap-4 max-[720px]:gap-3.5 min-[721px]:grid-cols-2 min-[721px]:gap-5 min-[1101px]:grid-cols-4">
+            <div class="grid grid-cols-1 gap-[22px] sm:grid-cols-2 xl:grid-cols-4">
                 @foreach ($topRides as $ride)
                     <x-card.litus-ride-card
                         :model="$ride['model']"
@@ -204,234 +310,193 @@
                         :cc="$ride['cc']"
                         :capacity="$ride['capacity']"
                         :img="$ride['img']"
-                        :variant="$ride['variant']"
-                        :badge="$ride['badge']"
+                        :brand="$ride['brand'] ?? null"
+                        :price="$ride['price'] ?? null"
+                        :salePrice="$ride['salePrice'] ?? null"
+                        :discount="$ride['discount'] ?? null"
+                        :hasPromotion="$ride['hasPromotion'] ?? false"
+                        :monthly="$ride['monthly'] ?? null"
+                        :badge="$ride['badge'] ?? null"
                     />
                 @endforeach
             </div>
-
         </div>
     </section>
 
-    {{-- WHAT'S NEW + WHAT WE OFFER --}}
-    <section class="border border-[#dfe3ea] bg-[#f8f9fb]">
+    {{-- IJARA BAND --}}
+    <x-litus-ijara-band />
 
-        {{-- Updates --}}
-        <div class="relative overflow-hidden py-12 max-md:py-9 sm:py-16 lg:py-20"
-             style="background-image: radial-gradient(circle, rgba(7, 21, 47, 0.10) 2px, transparent 2px); background-size: 24px 24px; background-color: #fafafa;">
-            <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(250,250,250,0.95)_0%,rgba(250,250,250,0.78)_25%,rgba(250,250,250,0.55)_50%,rgba(250,250,250,0.88)_100%)]"></div>
-
-            <div class="relative z-[2] litus-container grid grid-cols-1 items-center justify-between gap-10 max-md:gap-6 max-[950px]:text-center min-[951px]:grid-cols-[38%_52%] min-[951px]:gap-10">
-                <div>
-                    <span class="mb-2 block text-[13px] font-black uppercase tracking-wide text-[#0065ef] max-md:text-[11px] max-md:tracking-[0.14em]">Stay Updated</span>
-                    <h2 class="font-montserrat mb-[18px] text-[34px] font-bold leading-tight tracking-[-1px] text-[#07152f] max-md:mb-3 max-md:text-[26px] min-[601px]:text-[42px]">What's New?</h2>
-                    <p class="mb-7 max-w-[360px] text-[15px] font-semibold leading-snug text-[#384354] max-md:mb-5 max-md:text-sm max-[950px]:mx-auto">
-                        Stay updated with the latest launches, offers, and stories from LITUS Automobiles.
-                    </p>
-                    <a href="https://youtu.be/o8grf3wSwQU"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="inline-flex h-12 min-w-[190px] items-center justify-center gap-3 rounded-md bg-[#0065ef] px-6 text-sm font-black text-white shadow-[0_8px_20px_rgba(0,101,239,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] max-md:w-full max-md:max-w-[320px]">
-                        Watch Latest Updates
-                        <x-litus-icon name="play" class="h-3.5 w-3.5" />
-                    </a>
-                </div>
-
-                <div class="relative mx-auto w-full max-w-[700px] overflow-hidden rounded-[9px] border border-black/15 bg-[#101722] shadow-[0_12px_32px_rgba(0,0,0,0.22)] max-md:rounded-xl min-[951px]:mx-0 min-[951px]:max-w-none">
-                    <div class="relative aspect-video w-full">
-                        <iframe title="LITUS Automobiles – Latest Launches &amp; Offers"
-                                src="https://www.youtube.com/embed/o8grf3wSwQU"
-                                class="absolute inset-0 h-full w-full border-0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen
-                                loading="lazy"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- Services --}}
-        <div class="relative overflow-hidden border-t border-[#e3e6eb] py-10 max-md:py-8 sm:py-12 lg:py-14"
-             style="background: radial-gradient(circle at left 25%, rgba(0,101,239,0.06), transparent 22%), radial-gradient(circle at right 72%, rgba(0,101,239,0.05), transparent 22%), linear-gradient(135deg, #ffffff 0%, #f6f9fd 55%, #ffffff 100%);">
-            <div class="pointer-events-none absolute left-0 top-28 h-[180px] w-[140px] opacity-40 max-md:hidden"
-                 style="background-image: radial-gradient(rgba(0,101,239,0.18) 2px, transparent 2px); background-size: 18px 18px;"></div>
-            <div class="pointer-events-none absolute -right-[100px] bottom-6 h-[240px] w-[240px] max-md:hidden"
-                 style="background: linear-gradient(135deg, transparent 0 35%, rgba(7,21,47,0.035) 35% 47%, transparent 47%), linear-gradient(135deg, transparent 0 55%, rgba(7,21,47,0.035) 55% 68%, transparent 68%);"></div>
-
-            <div class="relative z-[2] litus-container">
-                <div class="mb-7 text-center max-md:mb-5 min-[651px]:mb-8">
-                    <div class="mb-2.5 inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.24em] text-[#0065ef] min-[651px]:gap-4 min-[651px]:text-xs min-[651px]:tracking-[0.28em]">
-                        <span class="inline-block h-0.5 w-3 bg-[#0065ef] min-[651px]:w-6"></span>
-                        Our Services
-                        <span class="inline-block h-0.5 w-3 bg-[#0065ef] min-[651px]:w-6"></span>
-                    </div>
-                    <h2 class="font-montserrat mb-2 text-[28px] font-bold leading-tight tracking-[-0.6px] text-[#07152f] max-md:text-[26px] min-[651px]:text-[34px]">
-                        What We Offer at LITUS
-                    </h2>
-                    <p class="mx-auto max-w-[640px] text-sm font-medium leading-normal text-[#667085] max-md:px-1 min-[651px]:text-[15px]">
-                        Quality service, genuine parts, and customer satisfaction — that’s the LITUS promise.
-                    </p>
-                </div>
-
-                <div class="mx-auto grid max-w-[560px] grid-cols-1 gap-5 max-md:-mx-4 max-md:flex max-md:max-w-none max-md:snap-x max-md:snap-mandatory max-md:gap-4 max-md:overflow-x-auto max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden min-[1101px]:max-w-none min-[1101px]:grid-cols-3">
-                    @foreach ($services as $service)
-                        <article class="group relative overflow-hidden rounded-xl border border-[rgba(7,21,47,0.05)] bg-white shadow-none transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(7,21,47,0.11)] max-md:w-[88%] max-md:shrink-0 max-md:snap-center max-md:rounded-2xl min-[1101px]:min-h-[520px]">
-                            <div class="relative">
-                                <div class="relative h-[200px] overflow-hidden bg-[#dce3ed] max-md:h-[210px] max-[650px]:h-[210px] min-[651px]:h-[230px] max-md:min-[651px]:h-[210px]">
-                                    <img src="{{ $service['img'] }}"
-                                         alt="{{ $service['title'] }}"
-                                         class="block h-full w-full object-cover transition-transform duration-[450ms] ease-out group-hover:scale-105"
-                                         loading="lazy">
-                                </div>
-                                <div class="pointer-events-none absolute -bottom-10 -left-[10%] -right-[10%] z-[2] h-[88px] rounded-t-[50%] bg-white max-md:-bottom-9 max-md:h-[80px] max-[650px]:-bottom-9 max-[650px]:h-[80px]"></div>
-                            </div>
-
-                            <div class="absolute left-1/2 top-[168px] z-[5] flex h-[64px] w-[64px] -translate-x-1/2 items-center justify-center rounded-full bg-white text-[#0065ef] shadow-[0_10px_22px_rgba(7,21,47,0.12)] max-md:top-[178px] max-md:h-[64px] max-md:w-[64px] max-[650px]:top-[178px] max-[650px]:h-[64px] max-[650px]:w-[64px] min-[651px]:top-[196px] min-[651px]:h-[70px] min-[651px]:w-[70px] max-md:min-[651px]:top-[178px] max-md:min-[651px]:h-[64px] max-md:min-[651px]:w-[64px]">
-                                <x-litus-icon :name="$service['icon']" class="h-8 w-8 max-md:h-8 max-md:w-8 max-[650px]:h-8 max-[650px]:w-8 min-[651px]:h-9 min-[651px]:w-9 max-md:min-[651px]:h-8 max-md:min-[651px]:w-8" />
-                            </div>
-
-                            <div class="relative z-[3] -mt-px bg-white px-5 pb-7 pt-14 text-center max-md:px-5 max-md:pb-6 max-md:pt-14 max-[650px]:px-5 max-[650px]:pb-6 max-[650px]:pt-14 min-[651px]:px-7 min-[651px]:pb-8 min-[651px]:pt-16 max-md:min-[651px]:px-5 max-md:min-[651px]:pb-6 max-md:min-[651px]:pt-14">
-                                <h3 class="mb-2.5 text-lg font-bold leading-tight text-[#07152f] max-md:mb-2.5 max-md:text-[18px] max-[650px]:mb-2.5 max-[650px]:text-[18px] min-[651px]:text-[20px] max-md:min-[651px]:mb-2.5 max-md:min-[651px]:text-[18px]">{{ $service['title'] }}</h3>
-                                <div class="mx-auto mb-3.5 h-0.5 w-9 rounded-full bg-[#0065ef] max-md:mb-3.5 max-[650px]:mb-3.5"></div>
-                                <p class="text-left text-[13px] font-medium leading-snug text-[#344054] max-md:line-clamp-5 max-md:text-center max-md:text-[13.5px] max-md:leading-relaxed max-[650px]:line-clamp-5 max-[650px]:text-center max-[650px]:text-[13.5px] min-[651px]:text-[13.5px] min-[651px]:leading-[1.55]">
-                                    {{ $service['text'] }}
-                                </p>
-                            </div>
-                        </article>
-                    @endforeach
-                </div>
-                <p class="mt-3 hidden text-center text-xs font-semibold text-[#8a94a6] max-md:block">Swipe for more services</p>
-            </div>
-        </div>
-
-    </section>
-
-    {{-- WHO WE ARE --}}
-    <section class="relative flex min-h-[360px] items-center overflow-hidden border border-white/12 bg-cover bg-center max-[900px]:min-h-0 max-[900px]:bg-[linear-gradient(90deg,rgba(3,12,28,0.88),rgba(3,12,28,0.94)),url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1800&q=80')] max-[900px]:bg-cover max-[900px]:bg-center"
-             style="background-image: linear-gradient(90deg, rgba(3,12,28,0.20) 0%, rgba(3,12,28,0.65) 36%, rgba(3,12,28,0.96) 68%, rgba(3,12,28,0.98) 100%), url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1800&q=80');">
-        <div class="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(3,12,28,0.08)_0%,rgba(3,12,28,0.35)_34%,rgba(3,12,28,0.88)_58%,rgba(3,12,28,0.96)_100%),radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.08),transparent_28%)] max-[900px]:bg-[linear-gradient(180deg,rgba(3,12,28,0.55)_0%,rgba(3,12,28,0.88)_45%,rgba(3,12,28,0.96)_100%)]"></div>
-
-        <div class="relative z-[2] litus-container grid w-full grid-cols-1 items-center px-[7%] py-[55px] min-[901px]:grid-cols-[48%_52%] max-[600px]:px-4 max-[600px]:py-10 max-[900px]:px-5 max-[900px]:py-12">
-            <div class="min-h-[250px] max-[900px]:hidden"></div>
-
-            <div class="max-w-[720px] max-[900px]:max-w-full">
-                <span class="mb-2 block text-[15px] font-black uppercase tracking-wide text-[#0065ef] max-md:text-[11px] max-md:tracking-[0.14em]">Our Story</span>
-                <h2 class="font-montserrat mb-4 text-[34px] font-bold leading-tight tracking-[-0.5px] text-white drop-shadow-[0_8px_20px_rgba(0,0,0,0.55)] max-md:mb-3 max-md:text-[28px] min-[601px]:text-[44px]">Who We Are</h2>
-                <p class="mb-7 max-w-[690px] text-sm font-semibold leading-[1.7] text-[#e3e9f2] drop-shadow-[0_4px_14px_rgba(0,0,0,0.45)] max-md:mb-5 max-md:line-clamp-6 max-md:text-[13.5px] max-md:leading-relaxed min-[601px]:text-base min-[601px]:leading-[1.65]">
-                    Established in 2014, LITUS Automobiles stands as the premier destination for motorcycles in the Maldives. As the largest motorcycle dealer, we specialize in the sale, lease, and service of top-notch motorcycles. Our commitment extends to providing genuine spare parts, ensuring every ride is a journey of excellence. At LITUS, we don't just sell motorcycles; we turn aspirations into reality and transform dreams of the open road into adventures that thrill. Join us and discover the joy of riding with LITUS Automobiles — where every adventure begins.
-                </p>
-                <a href="{{ route('about') }}"
-                   class="inline-flex h-[52px] min-w-[200px] items-center justify-center gap-3.5 rounded-md bg-[#0065ef] px-7 text-[15px] font-black text-white shadow-[0_10px_26px_rgba(0,101,239,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] max-[600px]:w-full">
-                    Find Out More
-                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
-                </a>
-            </div>
-        </div>
-    </section>
-
-    {{-- GALLERY --}}
-    <section class="relative overflow-hidden bg-[#f4f6f9] py-12 max-md:py-9 sm:py-16 lg:py-20"
-             data-home-gallery>
-        <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0065ef]/35 to-transparent"></div>
-
+    {{-- WHY LITUS --}}
+    <section class="litus-sec">
         <div class="litus-container">
-            <div class="mb-8 flex flex-col items-start justify-between gap-5 max-md:mb-5 max-md:gap-3 min-[651px]:mb-10 min-[651px]:flex-row min-[651px]:items-end">
-                <div class="max-w-[560px]">
-                    <span class="mb-1.5 block text-[13px] font-black uppercase tracking-[0.14em] text-[#0065ef] max-md:text-[11px]">Our Gallery</span>
-                    <h2 class="font-montserrat mb-2.5 text-[30px] font-bold leading-tight tracking-[-0.6px] text-[#07152f] max-md:mb-2 max-md:text-[26px] min-[651px]:text-[38px]">Ride the Visual Journey</h2>
-                    <p class="text-sm font-semibold leading-normal text-[#4f5b6c] min-[651px]:text-[15px]">
-                        Explore our collection of motorcycle rides and lifestyle moments.
-                    </p>
-                </div>
-                <a href="{{ route('gallery') }}"
-                   class="group/viewgallery inline-flex min-h-11 items-center gap-2.5 text-[15px] font-black text-[#07152f] transition-all duration-300 hover:gap-4 hover:text-[#0065ef] max-md:text-[#0065ef]">
-                    View Gallery
+            <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
+                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Why LITUS</span>
+                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Twelve years of getting people riding</h2>
+                <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
+                    We are not the only place to buy a scooter in the Maldives. These are the reasons people choose us.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 gap-[22px] sm:grid-cols-2 xl:grid-cols-4">
+                @foreach ($whyLitus as $item)
+                    <div class="rounded-[18px] border border-litus-line bg-white px-[26px] py-[30px] transition duration-200 hover:border-litus-line-2 hover:shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)]">
+                        <div class="mb-[18px] grid h-[46px] w-[46px] place-items-center rounded-[13px] bg-[#DCE8FF] text-[#0B47B0]">
+                            <x-litus-icon :name="$item['icon']" class="h-[17px] w-[17px]" />
+                        </div>
+                        <h4 class="mb-2 text-lg font-bold text-litus-text">{{ $item['title'] }}</h4>
+                        <p class="text-[14.5px] text-litus-text-2">{{ $item['text'] }}</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    {{-- SHOWROOMS --}}
+    <section id="showrooms" class="litus-sec scroll-mt-24 bg-litus-paper-2">
+        <div class="litus-container">
+            <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
+                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Our Locations</span>
+                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Our Showrooms &amp; Service Centers</h2>
+                <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
+                    Visit our showrooms and service centers across the Maldives for motorcycles, genuine parts, and trusted support.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+                @foreach ($showrooms as $showroom)
+                    @php
+                        $coverImage = $showroom['images'][0] ?? ($showroom['img'] ?? null);
+                    @endphp
+                    <div class="group flex flex-col overflow-hidden rounded-[18px] border border-litus-line bg-white transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
+                        <div class="relative h-[180px] overflow-hidden bg-litus-paper-3 sm:h-[200px]">
+                            @if ($coverImage)
+                                <img src="{{ $coverImage }}"
+                                     alt="{{ $showroom['name'] }}"
+                                     class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                                     loading="lazy">
+                            @else
+                                <div class="grid h-full place-items-center text-litus-primary">
+                                    <x-litus-icon name="map-pin" class="h-8 w-8" />
+                                </div>
+                            @endif
+                            @if (! empty($showroom['featured']))
+                                <span class="absolute left-3 top-3 rounded-md bg-litus-primary px-2.5 py-1 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-white">
+                                    Featured
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="flex flex-1 flex-col px-[26px] pb-[26px] pt-5">
+                            <div class="mb-3.5 grid h-[46px] w-[46px] place-items-center rounded-[13px] bg-[#DCE8FF] text-[#0B47B0]">
+                                <x-litus-icon name="map-pin" class="h-[17px] w-[17px]" />
+                            </div>
+                            <h4 class="mb-2 text-lg font-bold text-litus-text">{{ $showroom['name'] }}</h4>
+                            <p class="mb-5 flex-1 text-[14.5px] text-litus-text-2">{{ $showroom['address'] }}</p>
+                            <a href="{{ route('about') }}#locations"
+                               class="inline-flex w-full items-center justify-center gap-2 rounded-lg border-[1.5px] border-litus-line-2 bg-white px-4 py-2.5 text-[13.5px] font-semibold text-litus-ink transition hover:border-litus-primary-light hover:text-litus-primary">
+                                <x-litus-icon name="map-pin" class="h-4 w-4" />
+                                View Location
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="mt-8 text-center">
+                <a href="{{ route('about') }}#locations"
+                   class="inline-flex items-center justify-center gap-2 rounded-lg border-[1.5px] border-litus-line-2 bg-white px-6 py-3.5 text-[14.5px] font-semibold text-litus-ink transition hover:-translate-y-0.5 hover:border-litus-primary-light hover:text-litus-primary">
+                    View All {{ $showroomCount }} Locations
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
             </div>
+        </div>
+    </section>
 
-            <div class="relative" data-home-gallery-stage>
-                <button type="button"
-                        data-home-gallery-prev
-                        class="absolute -left-3 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#dfe3ea] bg-white text-[#07152f] shadow-[0_8px_20px_rgba(7,21,47,0.12)] transition-all duration-300 hover:border-[#0065ef] hover:bg-[#0065ef] hover:text-white max-md:left-2 max-md:flex max-md:h-10 max-md:w-10 max-md:bg-white/90 min-[1101px]:-left-5 min-[1101px]:flex"
-                        aria-label="Previous gallery images">
-                    <x-litus-icon name="chevron-left" class="h-5 w-5" />
-                </button>
-                <button type="button"
-                        data-home-gallery-next
-                        class="absolute -right-3 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#dfe3ea] bg-white text-[#07152f] shadow-[0_8px_20px_rgba(7,21,47,0.12)] transition-all duration-300 hover:border-[#0065ef] hover:bg-[#0065ef] hover:text-white max-md:right-2 max-md:flex max-md:h-10 max-md:w-10 max-md:bg-white/90 min-[1101px]:-right-5 min-[1101px]:flex"
-                        aria-label="Next gallery images">
-                    <x-litus-icon name="chevron-right" class="h-5 w-5" />
-                </button>
-
-                {{-- Mobile: fade / scale crossfade carousel --}}
-                <div class="relative hidden h-[290px] overflow-hidden rounded-xl max-md:block"
-                     data-home-gallery-fade>
-                    @forelse ($galleryImages as $index => $image)
-                        <a href="{{ route('gallery') }}"
-                           data-home-gallery-fade-slide
-                           @class([
-                               'home-gallery-fade-slide group absolute inset-0 overflow-hidden rounded-xl bg-[#0b1528]',
-                               'is-active' => $index === 0,
-                           ])>
-                            <img src="{{ $image['src'] }}"
-                                 alt="{{ $image['alt'] }}"
-                                 class="absolute inset-0 h-full w-full object-cover"
-                                 loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
-                            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#07152f]/60 via-transparent to-transparent"></div>
-                            <span class="pointer-events-none absolute bottom-3 left-3.5 right-3.5 text-[12px] font-bold text-white">
-                                View in gallery
-                            </span>
-                        </a>
-                    @empty
-                        <div class="flex h-full w-full items-center justify-center rounded-xl border border-dashed border-[#cfd6e0] bg-white text-sm font-semibold text-[#6b7788]">
-                            Gallery images coming soon.
+    {{-- TESTIMONIALS --}}
+    <section class="litus-sec">
+        <div class="litus-container">
+            <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
+                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">From Our Riders</span>
+                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">What customers say</h2>
+            </div>
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                @foreach ($testimonials as $item)
+                    <div class="rounded-[18px] border border-litus-line bg-white px-[26px] py-[30px]">
+                        <div class="mb-3.5 flex gap-0.5 text-[#F5A524]">
+                            @for ($i = 0; $i < 5; $i++)
+                                <x-litus-icon name="star" class="h-3.5 w-3.5 fill-current" fill="currentColor" />
+                            @endfor
                         </div>
-                    @endforelse
-                </div>
-
-                @if (count($galleryImages) > 1)
-                    <div class="mt-3.5 hidden items-center justify-center gap-1.5 max-md:flex" data-home-gallery-dots aria-hidden="true">
-                        @foreach ($galleryImages as $index => $image)
-                            <button type="button"
-                                    data-home-gallery-dot="{{ $index }}"
-                                    @class([
-                                        'h-1.5 rounded-full transition-all duration-300',
-                                        'w-5 bg-[#0065ef]' => $index === 0,
-                                        'w-1.5 bg-[#c5ccd6]' => $index !== 0,
-                                    ])
-                                    aria-label="Go to gallery image {{ $index + 1 }}"></button>
-                        @endforeach
+                        <p class="mb-[18px] text-[15px] text-litus-text">“{{ $item['quote'] }}”</p>
+                        <div class="flex items-center gap-3">
+                            <div class="grid h-[38px] w-[38px] place-items-center rounded-full bg-litus-paper-3 text-sm font-bold text-litus-text-2">
+                                {{ mb_substr($item['name'], 0, 1) }}
+                            </div>
+                            <div>
+                                <b class="block text-sm text-litus-text">{{ $item['name'] }}</b>
+                                <span class="text-xs text-litus-text-2">{{ $item['location'] }}</span>
+                            </div>
+                        </div>
                     </div>
-                @endif
+                @endforeach
+            </div>
+        </div>
+    </section>
 
-                {{-- Tablet / desktop: horizontal track --}}
-                <div class="-mx-1 hidden gap-3 overflow-x-auto px-1 pb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-[651px]:flex min-[1101px]:gap-4"
-                     data-home-gallery-track>
-                    @forelse ($galleryImages as $image)
-                        <a href="{{ route('gallery') }}"
-                           class="group relative aspect-[4/5] w-[46%] shrink-0 snap-start overflow-hidden rounded-2xl bg-[#0b1528] shadow-[0_14px_36px_rgba(7,21,47,0.14)] transition-transform duration-300 hover:-translate-y-1 min-[1101px]:w-[calc((100%-3rem)/4)]">
-                            <img src="{{ $image['src'] }}"
-                                 alt="{{ $image['alt'] }}"
-                                 class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                                 loading="lazy">
-                            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#07152f]/55 via-transparent to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-90"></div>
-                            <span class="pointer-events-none absolute bottom-4 left-4 right-4 translate-y-1 text-[13px] font-bold text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                                View in gallery
-                            </span>
-                        </a>
-                    @empty
-                        <div class="flex h-[290px] w-full items-center justify-center rounded-2xl border border-dashed border-[#cfd6e0] bg-white text-sm font-semibold text-[#6b7788]">
-                            Gallery images coming soon.
-                        </div>
-                    @endforelse
+    {{-- SERVICE + PARTS --}}
+    <section class="litus-sec-tight bg-litus-paper-2">
+        <div class="litus-container grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div class="rounded-[18px] border border-litus-line bg-white px-8 py-9">
+                <div class="mb-[18px] grid h-[46px] w-[46px] place-items-center rounded-[13px] bg-[#DCE8FF] text-[#0B47B0]">
+                    <x-litus-icon name="wrench" class="h-[17px] w-[17px]" />
                 </div>
+                <h4 class="mb-2.5 font-display text-[clamp(20px,2.2vw,26px)] font-semibold tracking-[-0.02em] text-litus-text">Service Centre</h4>
+                <p class="mb-[22px] text-[14.5px] text-litus-text-2">
+                    Periodic maintenance, accident repairs, engine overhaul and pick-and-drop. Book online and we confirm within 24 hours.
+                </p>
+                <a href="{{ route('service-center') }}"
+                   class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-ink px-6 py-3.5 text-[14.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-litus-ink-700">
+                    Book an Appointment
+                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                </a>
+            </div>
+            <div class="rounded-[18px] border border-litus-line bg-white px-8 py-9">
+                <div class="mb-[18px] grid h-[46px] w-[46px] place-items-center rounded-[13px] bg-[#DCE8FF] text-[#0B47B0]">
+                    <x-litus-icon name="zap" class="h-[17px] w-[17px]" />
+                </div>
+                <h4 class="mb-2.5 font-display text-[clamp(20px,2.2vw,26px)] font-semibold tracking-[-0.02em] text-litus-text">Genuine Parts</h4>
+                <p class="mb-[22px] text-[14.5px] text-litus-text-2">
+                    Body, engine, braking, electrical, chassis and wheels. Tell us your model and we will confirm the exact part you need.
+                </p>
+                <a href="{{ route('parts') }}"
+                   class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-ink px-6 py-3.5 text-[14.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-litus-ink-700">
+                    Request a Part
+                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {{-- CTA BAND --}}
+    <section class="litus-sec-tight bg-litus-ink text-white">
+        <div class="litus-container flex flex-wrap items-center justify-between gap-7">
+            <div class="max-w-[560px]">
+                <h3 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]">Not sure which bike or plan is right?</h3>
+                <p class="mt-3 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.72]">
+                    Tell our team your budget and how you want to pay. We will tell you honestly which option gets you the most for it.
+                </p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+                <a href="{{ route('contact') }}"
+                   class="inline-flex items-center justify-center rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
+                    Talk to Our Team
+                </a>
+                <a href="tel:+9607797442"
+                   class="inline-flex items-center justify-center rounded-lg border-[1.5px] border-white/32 px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10">
+                    Call 779 7442
+                </a>
             </div>
         </div>
     </section>
 
     <x-litus-footer />
-
 </div>
 @endsection

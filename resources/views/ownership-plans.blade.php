@@ -167,7 +167,7 @@
 <div class="font-sans" data-ownership-plans-page>
     <script type="application/json" id="ownership-plans-data">@json($plans)</script>
 
-    <x-litus-header active="Ownership Plans" />
+    <x-litus-header active="Ijara Plans" />
 
     {{-- HERO --}}
     <section class="relative min-h-[680px] overflow-hidden border border-[rgba(27,74,120,0.45)] bg-[#06101c] pb-[82px] max-md:min-h-0 max-md:pb-0 max-[1100px]:min-h-0 max-[1100px]:pb-8">
