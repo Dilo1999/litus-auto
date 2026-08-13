@@ -23,8 +23,9 @@ function initProductGallery() {
 
     const thumbActive = ['border-[#1f7bff]', 'shadow-[0_0_0_2px_rgba(31,123,255,0.12)]'];
     const thumbInactive = ['border-[#dce3ed]'];
-    const colorActive = ['border-[#1f7bff]', 'shadow-[0_0_0_2px_rgba(31,123,255,0.08)]'];
-    const colorInactive = ['border-[#dce3ed]'];
+    const colorActive = ['border-litus-sky', 'shadow-[0_0_0_3px_rgba(90,184,255,0.25)]'];
+    const colorInactive = ['border-white/30'];
+    const colorLabel = root.querySelector('[data-selected-color-label]');
 
     let activeIndex = 0;
 
@@ -134,6 +135,10 @@ function initProductGallery() {
             const label = btn.dataset.galleryColor;
             colorBtns.forEach((b) => setColorState(b, b === btn));
 
+            if (colorLabel && label) {
+                colorLabel.textContent = label;
+            }
+
             if (label && galleryByColor[label]) {
                 setImages(galleryByColor[label]);
             }
@@ -142,9 +147,11 @@ function initProductGallery() {
         });
     });
 
-    renderThumbs();
-    renderDots();
-    setActive(0);
+    if (thumbsWrap || dotsWrap || mainImg) {
+        renderThumbs();
+        renderDots();
+        setActive(0);
+    }
 }
 
 if (document.readyState === 'loading') {

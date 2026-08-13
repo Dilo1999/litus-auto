@@ -41,17 +41,19 @@ class MotorcycleController extends Controller
             ->with(['colorVariants' => fn ($q) => $q->orderBy('sort_order')])
             ->orderBy('sort_order')
             ->limit(3)
-            ->get()
-            ->map(function (Motorcycle $item) {
-                return [
-                    'name' => $item->name,
-                    'slug' => $item->slug,
-                    'discount' => $item->hasPromotion() && $item->discountAmount() > 0
-                        ? $item->formattedDiscount()
-                        : null,
-                    'img' => $item->listImageUrl(),
-                ];
-            });
+            ->get();
+
+        $showrooms = [
+            'Malé Showroom',
+            'Hulhumale Showroom',
+            'Hithadhoo Showroom',
+            'Fonadhoo Showroom',
+            'Thinadhoo Showroom',
+            'Kudahuvadhoo Showroom',
+            'Naifaru Showroom',
+            'Villingili Showroom',
+            'Feydhoo Showroom',
+        ];
 
         return view('motorcycle-detail', [
             'motorcycle' => $motorcycle,
@@ -66,6 +68,7 @@ class MotorcycleController extends Controller
                 'hex' => $v->hex_color,
             ])->all(),
             'related' => $related,
+            'showrooms' => $showrooms,
         ]);
     }
 }
