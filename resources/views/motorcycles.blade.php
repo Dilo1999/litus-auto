@@ -220,7 +220,7 @@
                    class="inline-flex items-center justify-center rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                     Talk to Sales
                 </a>
-                <a href="{{ route('home') }}#offers"
+                <a href="{{ route('promotions') }}"
                    class="inline-flex items-center justify-center rounded-lg border-[1.5px] border-white/32 px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10">
                     See Current Campaigns
                 </a>

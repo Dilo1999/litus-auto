@@ -1,7 +1,7 @@
 @php
     $exploreLinks = [
         'Motorcycles' => route('motorcycles'),
-        'Promotions' => route('home') . '#offers',
+        'Promotions' => route('promotions'),
         'Ijara Plans' => route('ownership-plans'),
         'About Us' => route('about'),
         'Gallery' => route('gallery'),

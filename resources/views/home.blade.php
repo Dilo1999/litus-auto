@@ -264,7 +264,7 @@
                         Each campaign covers selected motorcycles. Open one to see the model details and the price of each.
                     </p>
                 </div>
-                <a href="{{ route('motorcycles') }}"
+                <a href="{{ route('promotions') }}"
                    class="inline-flex items-center justify-center gap-2 rounded-lg border-[1.5px] border-litus-line-2 bg-white px-6 py-3.5 text-[14.5px] font-semibold text-litus-ink transition hover:-translate-y-0.5 hover:border-litus-primary-light hover:text-litus-primary">
                     All {{ $campaignCount }} Campaigns
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />

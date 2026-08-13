@@ -4,7 +4,7 @@
     $navLinks = [
         'Home' => route('home'),
         'Motorcycles' => route('motorcycles'),
-        'Promotions' => route('home') . '#offers',
+        'Promotions' => route('promotions'),
         'Ijara Plans' => route('ownership-plans'),
         'Service' => route('service-center'),
         'Parts' => route('parts'),

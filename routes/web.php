@@ -3,6 +3,7 @@
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MotorcycleController;
+use App\Http\Controllers\PromotionsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -35,6 +36,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about-us', fn () => view('about'))->name('about');
 Route::get('/motorcycles', [MotorcycleController::class, 'index'])->name('motorcycles');
 Route::get('/motorcycles/{slug}', [MotorcycleController::class, 'show'])->name('motorcycle.show');
+Route::get('/promotions', [PromotionsController::class, 'index'])->name('promotions');
 Route::get('/ownership-plans', fn () => view('ownership-plans'))->name('ownership-plans');
 Route::get('/parts', fn () => view('parts'))->name('parts');
 Route::get('/service-center', fn () => view('service-center'))->name('service-center');

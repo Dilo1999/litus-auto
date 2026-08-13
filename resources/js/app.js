@@ -13,4 +13,5 @@ import './ownership-plans';
 import './gallery';
 import './home-gallery';
 import './home';
+import './promotions';
 import './showroom-slider';
