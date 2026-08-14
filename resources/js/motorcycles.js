@@ -1,5 +1,5 @@
 /**
- * Motorcycles page — category chips, brand/engine/sort filters.
+ * Motorcycles page - category chips, brand/engine/sort filters.
  */
 
 function initMotorcyclesFilter() {

@@ -53,27 +53,6 @@ class GalleryImageSeeder extends Seeder
                 'sort_order' => 6,
             ],
             [
-                'category' => GalleryImage::CATEGORY_SHOWROOMS,
-                'title' => 'LITUS Showroom, Malé',
-                'image' => 'https://images.unsplash.com/photo-1560472355-536de3962603?auto=format&fit=crop&w=800&q=80',
-                'is_featured' => true,
-                'sort_order' => 1,
-            ],
-            [
-                'category' => GalleryImage::CATEGORY_SHOWROOMS,
-                'title' => 'Premium Display',
-                'image' => 'https://images.unsplash.com/photo-1676246751280-16f3d4d0db7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',
-                'is_featured' => false,
-                'sort_order' => 2,
-            ],
-            [
-                'category' => GalleryImage::CATEGORY_SHOWROOMS,
-                'title' => 'Showroom Floor',
-                'image' => 'https://images.unsplash.com/photo-1692201841147-3c1c5f87cb05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',
-                'is_featured' => false,
-                'sort_order' => 3,
-            ],
-            [
                 'category' => GalleryImage::CATEGORY_CUSTOMER_MOMENTS,
                 'title' => 'Ride with Confidence',
                 'image' => 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=700&q=80',

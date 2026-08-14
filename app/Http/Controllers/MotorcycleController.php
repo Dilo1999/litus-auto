@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Motorcycle;
+use App\Models\Showroom;
 use Illuminate\View\View;
 
 class MotorcycleController extends Controller
@@ -11,7 +12,10 @@ class MotorcycleController extends Controller
     {
         $motorcycles = Motorcycle::query()
             ->where('is_published', true)
-            ->with(['colorVariants' => fn ($q) => $q->orderBy('sort_order')])
+            ->with([
+                'colorVariants' => fn ($q) => $q->orderBy('sort_order'),
+                'promotions' => fn ($q) => $q->published()->currentlyActive()->ordered(),
+            ])
             ->orderBy('sort_order')
             ->orderBy('name')
             ->get();
@@ -28,7 +32,10 @@ class MotorcycleController extends Controller
         $motorcycle = Motorcycle::query()
             ->where('slug', $slug)
             ->where('is_published', true)
-            ->with(['colorVariants' => fn ($q) => $q->orderBy('sort_order')])
+            ->with([
+                'colorVariants' => fn ($q) => $q->orderBy('sort_order'),
+                'promotions' => fn ($q) => $q->published()->currentlyActive()->ordered(),
+            ])
             ->firstOrFail();
 
         $defaultVariant = $motorcycle->defaultColorVariant();
@@ -38,22 +45,19 @@ class MotorcycleController extends Controller
         $related = Motorcycle::query()
             ->where('is_published', true)
             ->where('id', '!=', $motorcycle->id)
-            ->with(['colorVariants' => fn ($q) => $q->orderBy('sort_order')])
+            ->with([
+                'colorVariants' => fn ($q) => $q->orderBy('sort_order'),
+                'promotions' => fn ($q) => $q->published()->currentlyActive()->ordered(),
+            ])
             ->orderBy('sort_order')
             ->limit(3)
             ->get();
 
-        $showrooms = [
-            'Malé Showroom',
-            'Hulhumale Showroom',
-            'Hithadhoo Showroom',
-            'Fonadhoo Showroom',
-            'Thinadhoo Showroom',
-            'Kudahuvadhoo Showroom',
-            'Naifaru Showroom',
-            'Villingili Showroom',
-            'Feydhoo Showroom',
-        ];
+        $showrooms = Showroom::query()
+            ->published()
+            ->ordered()
+            ->pluck('name')
+            ->all();
 
         return view('motorcycle-detail', [
             'motorcycle' => $motorcycle,

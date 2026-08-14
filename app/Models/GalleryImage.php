@@ -10,8 +10,6 @@ class GalleryImage extends Model
 {
     public const CATEGORY_MOTORCYCLES = 'motorcycles';
 
-    public const CATEGORY_SHOWROOMS = 'showrooms';
-
     public const CATEGORY_CUSTOMER_MOMENTS = 'customer_moments';
 
     protected $fillable = [
@@ -55,7 +53,6 @@ class GalleryImage extends Model
     {
         return [
             self::CATEGORY_MOTORCYCLES => 'Motorcycles',
-            self::CATEGORY_SHOWROOMS => 'Showrooms',
             self::CATEGORY_CUSTOMER_MOMENTS => 'Customer Moments',
         ];
     }
@@ -71,7 +68,6 @@ class GalleryImage extends Model
     public function frontendCategory(): string
     {
         return match ($this->category) {
-            self::CATEGORY_SHOWROOMS => 'Showroom',
             self::CATEGORY_CUSTOMER_MOMENTS => 'Customer Moments',
             default => 'Motorcycles',
         };
@@ -80,7 +76,6 @@ class GalleryImage extends Model
     public function badgeLabel(): string
     {
         return match ($this->category) {
-            self::CATEGORY_SHOWROOMS => 'Showroom',
             self::CATEGORY_CUSTOMER_MOMENTS => 'Customer Moment',
             default => 'Motorcycle',
         };

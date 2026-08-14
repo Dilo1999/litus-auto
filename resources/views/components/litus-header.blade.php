@@ -87,7 +87,7 @@
                         Call 779 7442
                     </a>
                     <p class="mt-2.5 text-center text-[11px] font-semibold text-white/45">
-                        Sun–Thu · 9:30 AM – 6:00 PM
+                        Sun-Thu · 9:30 AM - 6:00 PM
                     </p>
                 </div>
             </div>

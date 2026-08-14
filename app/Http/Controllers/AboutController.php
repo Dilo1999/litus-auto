@@ -5,17 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Showroom;
 use Illuminate\View\View;
 
-class ContactController extends Controller
+class AboutController extends Controller
 {
     public function index(): View
     {
-        $visitShowrooms = Showroom::query()
+        $showrooms = Showroom::query()
             ->published()
             ->ordered()
             ->get()
             ->map(fn (Showroom $showroom) => $showroom->toViewArray())
             ->all();
 
-        return view('contact', compact('visitShowrooms'));
+        return view('about', compact('showrooms'));
     }
 }

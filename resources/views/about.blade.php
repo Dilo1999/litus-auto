@@ -1,14 +1,21 @@
 @extends('layouts.litus')
 
-@section('title', 'About Us — LITUS Automobiles')
+@section('title', 'About Us - LITUS Automobiles')
 
 @section('content')
 @php
     $heroBg = asset('images/about_us/team-2.png');
 
+    $showroomImage = function (string ...$parts): string {
+        return asset('images/about_us/showrooms/' . implode('/', array_map('rawurlencode', $parts)));
+    };
+
+    $showrooms = $showrooms ?? [];
+    $showroomCount = count($showrooms);
+
     $heroStrip = [
         ['icon' => 'clock', 'title' => 'Est. 2014', 'sub' => 'Twelve years in the Maldives'],
-        ['icon' => 'map-pin', 'title' => '5 Showrooms', 'sub' => 'Across four islands'],
+        ['icon' => 'map-pin', 'title' => $showroomCount.' Showrooms', 'sub' => 'Across the Maldives'],
         ['icon' => 'users', 'title' => 'Thousands of riders', 'sub' => 'Served since we opened'],
         ['icon' => 'shield', 'title' => 'Genuine Units', 'sub' => 'Honda & Yamaha, factory-built'],
     ];
@@ -25,7 +32,7 @@
         [
             'icon' => 'zap',
             'title' => 'Our Mission',
-            'text' => 'To provide support and leadership in the automobile industry by offering easy and reliable services across the Maldives — so that owning a motorcycle is a decision about what you need, not only about what you can pay upfront.',
+            'text' => 'To provide support and leadership in the automobile industry by offering easy and reliable services across the Maldives - so that owning a motorcycle is a decision about what you need, not only about what you can pay upfront.',
         ],
         [
             'icon' => 'shield',
@@ -45,120 +52,6 @@
         ['name' => 'Iffath Ali', 'role' => 'Sales & Marketing Manager', 'dept' => 'Sales & Marketing', 'img' => asset('images/about_us/Iffath.png')],
         ['name' => 'Dhanushka', 'role' => 'Inventory Officer', 'dept' => 'Inventory Management', 'img' => asset('images/about_us/dhanushka.webp')],
         ['name' => 'Mohamed Nafiz', 'role' => 'Legal Team', 'dept' => 'Legal Affairs', 'img' => asset('images/about_us/nafiz.webp')],
-    ];
-
-    $showroomImage = function (string ...$parts): string {
-        return asset('images/about_us/showrooms/' . implode('/', array_map('rawurlencode', $parts)));
-    };
-
-    $showrooms = [
-        [
-            'name' => 'Malé Showroom',
-            'address' => 'Chaandhanee Magu, Malé, Maldives',
-            'featured' => true,
-            'services' => ['Sales', 'Service Centre', 'Parts'],
-            'phone' => '+960 779 7442',
-            'images' => [
-                $showroomImage("Male' Showroom", 'Malé Showroom.jpg'),
-                $showroomImage("Male' Showroom", "Male' Showroom1.webp"),
-                $showroomImage("Male' Showroom", "Male' Showroom2.jpg"),
-            ],
-        ],
-        [
-            'name' => 'Hithadhoo Showroom',
-            'address' => 'Fenfiyazmagu, S. Hithadhoo, Maldives',
-            'featured' => true,
-            'services' => ['Sales', 'Service Centre', 'Parts'],
-            'phone' => '+960 779 7444',
-            'images' => [
-                $showroomImage('Hithadhoo Showroom', 'Hithadhoo Showroom.jpg'),
-                $showroomImage('Hithadhoo Showroom', 'Hithadhoo Showroom1.jpg'),
-                $showroomImage('Hithadhoo Showroom', 'Hithadhoo Showroom2.jpg'),
-            ],
-        ],
-        [
-            'name' => 'Kudahuvadhoo Showroom',
-            'address' => 'Izzudheen Magu, Dh. Kudahuvadhoo, Maldives',
-            'featured' => false,
-            'services' => ['Sales', 'Parts'],
-            'phone' => '+960 779 7442',
-            'images' => [
-                $showroomImage('Kudahuvadhoo Showroom', 'Kudahuvadhoo Showroom.jpg'),
-                $showroomImage('Kudahuvadhoo Showroom', 'Kudahuvadhoo Showroom1.jpg'),
-            ],
-        ],
-        [
-            'name' => 'Naifaru Showroom',
-            'address' => 'Ifthithaahee Magu, Lh. Naifaru, Maldives',
-            'featured' => false,
-            'services' => ['Sales', 'Parts'],
-            'phone' => '+960 779 7442',
-            'img' => $showroomImage('Naifaru Showroom', 'Naifaru Showroom.webp'),
-        ],
-        [
-            'name' => 'Villingili Showroom',
-            'address' => 'Ameenee Magu, GA. Villingili, Maldives',
-            'featured' => false,
-            'services' => ['Sales', 'Parts'],
-            'phone' => '+960 779 7442',
-            'images' => [
-                $showroomImage('Villingili Showroom', 'Villingili Showroom.jpg'),
-                $showroomImage('Villingili Showroom', 'Villingili Showroom1.jpg'),
-                $showroomImage('Villingili Showroom', 'Villingili Showroom2.jpg'),
-            ],
-        ],
-        [
-            'name' => 'Feydhoo Showroom',
-            'address' => 'Maathila Magu, S. Feydhoo, Maldives',
-            'featured' => false,
-            'services' => ['Sales', 'Parts'],
-            'phone' => '+960 779 7442',
-            'img' => $showroomImage('Feydhoo Showroom', 'Feydhoo Showroom.jpg'),
-        ],
-        [
-            'name' => 'Fonadhoo Showroom',
-            'address' => 'Sinajuddeen Magu, L. Fonadhoo, Maldives',
-            'featured' => false,
-            'services' => ['Sales', 'Parts'],
-            'phone' => '+960 779 7446',
-            'images' => [
-                $showroomImage('Fonadhoo Showroom', 'Fonadhoo Showroom.jpg'),
-                $showroomImage('Fonadhoo Showroom', 'Fonadhoo Showroom1.jpg'),
-                $showroomImage('Fonadhoo Showroom', 'Fonadhoo Showroom2.jpg'),
-            ],
-        ],
-        [
-            'name' => 'Head Office',
-            'address' => 'Ma. Eyrum, Buruzu Magu, Malé, Maldives',
-            'featured' => false,
-            'services' => ['Sales', 'Support'],
-            'phone' => '+960 779 7442',
-            'img' => $showroomImage('Head Office', 'Head Office.webp'),
-        ],
-        [
-            'name' => 'Hulhumale Showroom',
-            'address' => 'Nirolhu Magu, Hulhumale, Maldives',
-            'featured' => false,
-            'services' => ['Sales', 'Parts'],
-            'phone' => '+960 779 7443',
-            'images' => [
-                $showroomImage('Hulhumale Showroom', 'Hulhumale Showroom.webp'),
-                $showroomImage('Hulhumale Showroom', 'Hulhumale Showroom1.webp'),
-                $showroomImage('Hulhumale Showroom', 'Hulhumale Showroom2.webp'),
-            ],
-        ],
-        [
-            'name' => 'Thinadhoo Showroom',
-            'address' => 'Avenue Magu, Thinadhoo, Maldives',
-            'featured' => false,
-            'services' => ['Sales', 'Parts'],
-            'phone' => '+960 779 7442',
-            'images' => [
-                $showroomImage('Thinadhoo Showroom', 'Thinadhoo Showroom.webp'),
-                $showroomImage('Thinadhoo Showroom', 'Thinadhoo Showroom1.webp'),
-                $showroomImage('Thinadhoo Showroom', 'Thinadhoo Showroom2.webp'),
-            ],
-        ],
     ];
 
     $galleryTiles = [
@@ -244,7 +137,7 @@
                         <strong class="font-semibold text-litus-text">LITUS Automobiles started in 2014 with a straightforward observation: plenty of people in the Maldives needed a motorcycle and could afford one monthly, but almost nobody was making that easy.</strong>
                     </p>
                     <p class="mb-[17px]">
-                        Buying a scooter outright means finding sixty thousand rufiyaa at once. For most working people that is not a realistic ask, and the alternatives available at the time were either unaffordable or structurally uncomfortable for customers who wanted a Shariah-compliant arrangement. So we built our ownership plans around Islamic leasing standards and named them Ijara Plans — a fixed lease price, agreed in writing at the start, paid monthly, with ownership transferring at the end.
+                        Buying a scooter outright means finding sixty thousand rufiyaa at once. For most working people that is not a realistic ask, and the alternatives available at the time were either unaffordable or structurally uncomfortable for customers who wanted a Shariah-compliant arrangement. So we built our ownership plans around Islamic leasing standards and named them Ijara Plans - a fixed lease price, agreed in writing at the start, paid monthly, with ownership transferring at the end.
                     </p>
                     <p class="mb-[17px]">
                         That decision shaped the company. Today the majority of the motorcycles leaving our showrooms leave on an Ijara plan, and we have built six variants of it so that a salaried employee in Malé, a fisherman in Laamu and a first-time rider with a family guarantor can each find a structure that works.
@@ -257,13 +150,13 @@
 
                     <h3 class="mb-3 mt-8 font-display text-[23px] font-bold tracking-[-0.028em] text-litus-text">What we sell, and how we stand behind it</h3>
                     <p class="mb-[17px]">
-                        We supply genuine Honda and Yamaha motorcycles — factory-built machines, the same models and the same specification sold across the region. Not replicas, not rebadged units, not something assembled to look like the real thing.
+                        We supply genuine Honda and Yamaha motorcycles - factory-built machines, the same models and the same specification sold across the region. Not replicas, not rebadged units, not something assembled to look like the real thing.
                     </p>
                     <p class="mb-[17px]">
-                        What we add is everything that happens after you ride out. Five showrooms across four islands. Service centres in Malé, Hithadhoo and Fuvahmulah. Genuine parts held in stock rather than ordered when something breaks. Technicians who work on these engines every day. And a LITUS warranty and after-sales commitment that we honour ourselves — so if something goes wrong with a bike you bought from us, you deal with us, in your own atoll.
+                        What we add is everything that happens after you ride out. Five showrooms across four islands. Service centres in Malé, Hithadhoo and Fuvahmulah. Genuine parts held in stock rather than ordered when something breaks. Technicians who work on these engines every day. And a LITUS warranty and after-sales commitment that we honour ourselves - so if something goes wrong with a bike you bought from us, you deal with us, in your own atoll.
                     </p>
                     <p>
-                        We have also carried Sunra electric bikes in the past. Sunra has been out of stock for over two years now — we would rather say so plainly than leave a listing up that goes nowhere — and we intend to bring it back when supply and pricing make sense.
+                        We have also carried Sunra electric bikes in the past. Sunra has been out of stock for over two years now - we would rather say so plainly than leave a listing up that goes nowhere - and we intend to bring it back when supply and pricing make sense.
                     </p>
                 </div>
             </div>

@@ -52,7 +52,7 @@ trait ManagesCategoryGalleryImages
                         TextInput::make('title')
                             ->label('Title / caption')
                             ->maxLength(255)
-                            ->placeholder('Optional — shown on featured moment cards')
+                            ->placeholder('Optional - shown on featured moment cards')
                             ->helperText('Leave blank if you do not want a title on the card.'),
                         FileUpload::make('image')
                             ->label('Image')
@@ -91,7 +91,7 @@ trait ManagesCategoryGalleryImages
                     ->height(56),
                 TextColumn::make('title')
                     ->label('Title')
-                    ->placeholder('—')
+                    ->placeholder('-')
                     ->searchable()
                     ->limit(40),
                 IconColumn::make('is_featured')

@@ -8,7 +8,6 @@ use App\Models\Motorcycle;
 use Filament\Forms;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
@@ -68,32 +67,15 @@ class MotorcycleResource extends Resource
                     ])
                     ->columns(2),
 
-                Forms\Components\Section::make('Pricing & offer')
+                Forms\Components\Section::make('Pricing')
+                    ->description('Promotional sale prices are managed under Catalog → Promotions.')
                     ->schema([
                         TextInput::make('original_price')
                             ->required()
                             ->numeric()
                             ->prefix('MVR')
                             ->step(0.01),
-                        Toggle::make('has_promotion')
-                            ->label('Promotion active')
-                            ->helperText('Enable to set a sale price and promotional offer for this product.')
-                            ->default(false)
-                            ->reactive()
-                            ->columnSpanFull(),
-                        TextInput::make('sale_price')
-                            ->numeric()
-                            ->prefix('MVR')
-                            ->step(0.01)
-                            ->required(fn (callable $get) => (bool) $get('has_promotion'))
-                            ->hidden(fn (callable $get) => ! $get('has_promotion')),
-                        Textarea::make('offer_note')
-                            ->rows(2)
-                            ->placeholder('e.g. This offer valid for Green, Brown Colors.')
-                            ->hidden(fn (callable $get) => ! $get('has_promotion'))
-                            ->columnSpanFull(),
-                    ])
-                    ->columns(2),
+                    ]),
 
                 Forms\Components\Section::make('Specifications')
                     ->description('Labels are fixed. Enter the value for each specification only. The first 4 appear as highlight cards on the product page.')
@@ -128,7 +110,6 @@ class MotorcycleResource extends Resource
             ->columns([
                 TextColumn::make('name')->searchable()->sortable(),
                 TextColumn::make('category')->searchable(),
-                ToggleColumn::make('has_promotion')->label('Promotion'),
                 ToggleColumn::make('is_top_selling')->label('Top Selling'),
                 TextColumn::make('colors')
                     ->label('Colors')
@@ -136,7 +117,7 @@ class MotorcycleResource extends Resource
                         $variants = $record->colorVariants;
 
                         if ($variants->isEmpty()) {
-                            return new \Illuminate\Support\HtmlString('<span style="color:#9ca3af;">—</span>');
+                            return new \Illuminate\Support\HtmlString('<span style="color:#9ca3af;">-</span>');
                         }
 
                         $swatches = $variants->map(function ($variant) {

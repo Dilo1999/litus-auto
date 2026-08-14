@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -46,20 +48,68 @@ class Motorcycle extends Model
             }
 
             $motorcycle->specs = self::normalizeSpecs($motorcycle->specs);
+        });
+    }
 
-            if (! $motorcycle->has_promotion) {
-                $motorcycle->sale_price = $motorcycle->original_price;
-                $motorcycle->offer_label = null;
-                $motorcycle->offer_note = null;
-            } else {
-                $motorcycle->offer_label = self::OFFER_LABEL;
-            }
+    public function promotions(): BelongsToMany
+    {
+        return $this->belongsToMany(Promotion::class, 'promotion_motorcycle')
+            ->withPivot(['sale_price'])
+            ->withTimestamps();
+    }
+
+    public function activePromotion(): ?Promotion
+    {
+        if ($this->relationLoaded('promotions')) {
+            return $this->promotions
+                ->filter(fn (Promotion $promotion) => $promotion->isCurrentlyActive())
+                ->sortBy([
+                    ['is_featured', 'desc'],
+                    ['sort_order', 'asc'],
+                    ['id', 'desc'],
+                ])
+                ->first();
+        }
+
+        return $this->promotions()
+            ->published()
+            ->currentlyActive()
+            ->ordered()
+            ->first();
+    }
+
+    public function scopeOnActivePromotion(Builder $query): Builder
+    {
+        return $query->whereHas('promotions', function (Builder $q) {
+            $q->published()->currentlyActive();
         });
     }
 
     public function hasPromotion(): bool
     {
-        return (bool) $this->has_promotion;
+        return $this->promotionalSalePrice() < (float) $this->original_price;
+    }
+
+    public function promotionalSalePrice(): float
+    {
+        $promotion = $this->activePromotion();
+
+        if (! $promotion) {
+            return (float) $this->original_price;
+        }
+
+        $pivotPrice = $promotion->pivot->sale_price ?? null;
+
+        if ($pivotPrice === null) {
+            return (float) $this->original_price;
+        }
+
+        return (float) $pivotPrice;
+    }
+
+    public function offerNote(): ?string
+    {
+        return $this->activePromotion()?->offer_note;
     }
 
     public function offerLabel(): string
@@ -133,7 +183,7 @@ class Motorcycle extends Model
 
     public function formattedSalePrice(): string
     {
-        return 'MVR ' . number_format((float) $this->sale_price, 2);
+        return 'MVR ' . number_format($this->promotionalSalePrice(), 2);
     }
 
     public function discountAmount(): float
@@ -142,7 +192,7 @@ class Motorcycle extends Model
             return 0;
         }
 
-        return max(0, (float) $this->original_price - (float) $this->sale_price);
+        return max(0, (float) $this->original_price - $this->promotionalSalePrice());
     }
 
     public function formattedDiscount(): string
@@ -176,16 +226,19 @@ class Motorcycle extends Model
     public static function specIconUrlForLabel(string $label): ?string
     {
         return match ($label) {
+            'Brand' => null,
+            'Category' => null,
             'Engine Capacity' => self::detailsPageIcon('icons8-engine-50 (2).png'),
             'Fuel Type' => self::detailsPageIcon('gasoline.png'),
             'Carburation' => self::detailsPageIcon('carburettor.png'),
             'Brakes Front', 'Brakes Rear' => self::detailsPageIcon('brakes.png'),
-            'Suspension Front' => self::detailsPageIcon('suspension.png'),
+            'Suspension Front', 'Seat Height' => self::detailsPageIcon('suspension.png'),
             'Wheels Front', 'Wheels Rear' => self::detailsPageIcon('tyre.png'),
             'Fuel Tank Capacity' => self::detailsPageIcon('fuel-gas.png'),
             'Ground Clearance' => self::detailsPageIcon('ground.png'),
             'Frame Type' => self::detailsPageIcon('frame.png'),
             'Net Weight' => self::detailsPageIcon('weight.png'),
+            'Clutch', 'Final Drive', 'Transmission Type' => self::detailsPageIcon('frame.png'),
             default => null,
         };
     }

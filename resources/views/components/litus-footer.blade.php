@@ -77,7 +77,7 @@
                     <li>
                         <a href="mailto:sales@litusgroup.mv" class="transition-colors hover:text-white">sales@litusgroup.mv</a>
                     </li>
-                    <li>Sun – Thu · 9:30 AM – 6:00 PM</li>
+                    <li>Sun - Thu · 9:30 AM - 6:00 PM</li>
                 </ul>
             </div>
         </div>

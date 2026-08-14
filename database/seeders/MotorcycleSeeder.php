@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Motorcycle;
 use App\Models\MotorcycleColorVariant;
+use App\Models\Promotion;
 use Illuminate\Database\Seeder;
 
 class MotorcycleSeeder extends Seeder
@@ -44,10 +45,8 @@ class MotorcycleSeeder extends Seeder
                 'category' => 'Touring Bikes',
                 'brand' => 'Honda',
                 'original_price' => 111750,
-                'has_promotion' => true,
-                'sale_price' => 95000,
-                'offer_label' => 'Limited Offer',
-                'offer_note' => 'This offer valid for Green, Brown Colors.',
+                'has_promotion' => false,
+                'sale_price' => 111750,
                 'specs' => $specs,
                 'hero_background' => 'images/motorcycles/details/ChatGPT Image Jul 4, 2026, 12_38_11 PM.png',
                 'is_published' => true,
@@ -84,5 +83,21 @@ class MotorcycleSeeder extends Seeder
                 'sort_order' => 2,
             ]
         );
+
+        $promotion = Promotion::updateOrCreate(
+            ['title' => 'Current Campaign'],
+            [
+                'offer_note' => 'This offer valid for Green, Brown Colors.',
+                'starts_at' => now()->startOfMonth(),
+                'ends_at' => now()->endOfMonth(),
+                'is_featured' => true,
+                'is_published' => true,
+                'sort_order' => 1,
+            ]
+        );
+
+        $promotion->motorcycles()->syncWithoutDetaching([
+            $motorcycle->id => ['sale_price' => 95000],
+        ]);
     }
 }

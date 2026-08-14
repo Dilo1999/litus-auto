@@ -1,6 +1,6 @@
 @extends('layouts.litus')
 
-@section('title', 'Gallery — LITUS Automobiles')
+@section('title', 'Gallery - LITUS Automobiles')
 
 @section('content')
 <div class="font-sans" data-gallery-page>
@@ -151,7 +151,7 @@
                             <x-litus-icon name="play" class="ml-1.5 h-7 w-7 text-white" fill="currentColor" />
                         </div>
                         <div class="absolute bottom-0 left-0 right-0 z-[1] bg-gradient-to-t from-[rgba(6,14,28,0.9)] to-transparent px-5 py-4">
-                            <p class="text-sm font-bold text-white">LITUS Automobiles — Latest Launches & Offers 2026</p>
+                            <p class="text-sm font-bold text-white">LITUS Automobiles - Latest Launches & Offers 2026</p>
                             <p class="mt-0.5 text-xs text-gray-400">Watch on YouTube · LITUS Official</p>
                         </div>
                     </button>

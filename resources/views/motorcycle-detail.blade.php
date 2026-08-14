@@ -1,20 +1,27 @@
 @extends('layouts.litus')
 
-@section('title', $motorcycle->name . ' — LITUS Automobiles')
+@section('title', $motorcycle->name . ' - LITUS Automobiles')
 
 @section('content')
 @php
-    $specs = collect($motorcycle->specs ?? [])
+    $specRows = collect($motorcycle->specs ?? [])
         ->filter(fn ($spec) => filled($spec['value'] ?? null))
-        ->values();
+        ->values()
+        ->map(fn ($spec) => [
+            ...$spec,
+            'icon' => \App\Models\Motorcycle::iconForSpecLabel($spec['label'] ?? ''),
+            'icon_url' => \App\Models\Motorcycle::specIconUrlForLabel($spec['label'] ?? ''),
+        ])
+        ->all();
+
     $highlights = $motorcycle->highlights();
     $heroBg = $motorcycle->heroBackgroundUrl();
     $hasPromo = $motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0;
-    $activePrice = $hasPromo ? (float) $motorcycle->sale_price : (float) $motorcycle->original_price;
+    $activePrice = $hasPromo ? $motorcycle->promotionalSalePrice() : (float) $motorcycle->original_price;
     $monthly = $activePrice > 0 ? (int) (round(($activePrice / 60) / 10) * 10) : null;
     $engine = $motorcycle->engineCapacity();
     $keyTech = $highlights[1]['value'] ?? ($highlights[0]['value'] ?? 'LITUS Support');
-    $blurb = $motorcycle->offer_note
+    $blurb = $motorcycle->offerNote()
         ?: 'Premium build, genuine parts support, and Ijara-ready ownership options across LITUS showrooms in the Maldives.';
 
     $heroStrip = [
@@ -47,8 +54,8 @@
                 radial-gradient(680px 460px at 2% 96%, rgba(90,184,255,.12), transparent 60%),
                 linear-gradient(180deg, transparent 40%, rgba(5,11,24,.5) 100%);"></div>
 
-        <div class="relative z-[3] litus-container py-[clamp(64px,8vw,110px)] pb-[clamp(48px,6vw,84px)]">
-            <div class="grid items-center gap-10 max-[960px]:grid-cols-1 min-[961px]:grid-cols-[1.06fr_0.94fr]">
+        <div class="relative z-[3] litus-container py-[clamp(40px,5vw,72px)] pb-[clamp(28px,4vw,52px)]">
+            <div class="grid items-center gap-7 max-[960px]:grid-cols-1 min-[961px]:grid-cols-[1.06fr_0.94fr]">
                 <div>
                     <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky">
                         {{ trim(($motorcycle->brand ? $motorcycle->brand.' · ' : '').($motorcycle->category ?: 'Motorcycle')) }}
@@ -94,21 +101,21 @@
                 <div class="flex flex-col gap-4"
                      data-product-gallery
                      data-images='@json($galleryImages)'>
-                    <div class="relative aspect-[4/3] overflow-hidden rounded-[18px] border border-white/12 bg-white/[0.06]">
+                    <div class="relative z-0 aspect-[4/3] overflow-visible">
                         <x-product-360-viewer
                             :frames="$spinImages"
                             alt="{{ $motorcycle->name }}"
-                            img-class="mx-auto h-full max-h-[420px] w-full object-contain drop-shadow-[0_18px_20px_rgba(0,0,0,0.35)]"
-                            class="relative z-[2] flex h-full cursor-grab select-none items-center justify-center px-4 py-6" />
+                            img-class="mx-auto h-full max-h-[420px] w-full origin-center scale-[1.35] object-contain drop-shadow-[0_18px_20px_rgba(0,0,0,0.35)] max-lg:max-h-[360px] max-lg:scale-[1.2]"
+                            class="relative z-0 flex h-full cursor-grab select-none items-center justify-center px-0 py-0" />
                         @if (empty($spinImages))
                             <img src="{{ $motorcycle->listImageUrl() }}"
                                  alt="{{ $motorcycle->name }}"
-                                 class="absolute inset-0 z-[1] m-auto max-h-[88%] max-w-[88%] object-contain">
+                                 class="pointer-events-none absolute inset-0 z-0 m-auto max-h-[88%] max-w-[88%] origin-center scale-[1.35] object-contain max-lg:scale-[1.2]">
                         @endif
                     </div>
 
                     @if (count($colors))
-                        <div class="flex flex-wrap items-center justify-center gap-3 px-1 pt-1">
+                        <div class="relative z-20 mt-4 flex flex-wrap items-center justify-center gap-3 px-1 pt-2 sm:mt-5 sm:pt-3">
                             @foreach ($colors as $index => $color)
                                 <button type="button"
                                         data-gallery-color="{{ $color['label'] }}"
@@ -150,7 +157,7 @@
             <div class="litus-container flex flex-wrap items-center justify-between gap-5 py-5">
                 <div class="flex flex-wrap items-center gap-3.5">
                     <span class="inline-block rounded-md bg-[#F2ECFF] px-[11px] py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-[#6941C6] ring-1 ring-[#6941C6]/20">Live Offer</span>
-                    <b class="text-[15px] text-litus-text">{{ $motorcycle->offerLabel() }} on {{ $motorcycle->name }} — save {{ $motorcycle->formattedDiscount() }}</b>
+                    <b class="text-[15px] text-litus-text">{{ $motorcycle->offerLabel() }} on {{ $motorcycle->name }} - save {{ $motorcycle->formattedDiscount() }}</b>
                 </div>
                 <a href="#enquire"
                    class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-[17px] py-2.5 text-[13.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
@@ -179,21 +186,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-t border-litus-line bg-white">
-                                <td class="px-4 py-3.5 text-litus-text">Brand</td>
-                                <td class="px-4 py-3.5 font-semibold text-litus-text">{{ $motorcycle->brand ?: '—' }}</td>
-                            </tr>
-                            <tr class="border-t border-litus-line bg-litus-paper-2">
-                                <td class="px-4 py-3.5 text-litus-text">Category</td>
-                                <td class="px-4 py-3.5 font-semibold text-litus-text">{{ $motorcycle->category ?: '—' }}</td>
-                            </tr>
-                            @foreach ($specs as $index => $spec)
+                            @foreach ($specRows as $index => $spec)
                                 <tr @class([
                                     'border-t border-litus-line',
                                     'bg-white' => $index % 2 === 0,
                                     'bg-litus-paper-2' => $index % 2 === 1,
                                 ])>
-                                    <td class="px-4 py-3.5 text-litus-text">{{ $spec['label'] }}</td>
+                                    <td class="px-4 py-3.5 text-litus-text">
+                                        <span class="inline-flex items-center gap-2.5">
+                                            <span class="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-litus-paper-3 text-litus-primary">
+                                                <x-spec-icon
+                                                    :icon="$spec['icon'] ?? 'gauge'"
+                                                    :icon-url="$spec['icon_url'] ?? null"
+                                                    class="h-4 w-4" />
+                                            </span>
+                                            <span>{{ $spec['label'] }}</span>
+                                        </span>
+                                    </td>
                                     <td class="px-4 py-3.5 font-semibold text-litus-text">{{ $spec['value'] }}</td>
                                 </tr>
                             @endforeach

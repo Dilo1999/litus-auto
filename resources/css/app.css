@@ -13,7 +13,7 @@
   font-display: swap;
 }
 
-/* LITUS Automobiles brand — Design System v2 */
+/* LITUS Automobiles brand - Design System v2 */
 @theme {
   --color-litus-navy: #050B18;
   --color-litus-ink: #050B18;
@@ -83,7 +83,7 @@
   animation: litus-pulse-dot 2.2s infinite;
 }
 
-/* Scroll & load animations (Framer Motion–style) */
+/* Scroll & load animations (Framer Motion-style) */
 @keyframes fadeInUp {
   from {
     opacity: 0;

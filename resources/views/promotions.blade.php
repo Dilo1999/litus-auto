@@ -1,6 +1,6 @@
 @extends('layouts.litus')
 
-@section('title', 'Promotions — LITUS Automobiles')
+@section('title', 'Promotions - LITUS Automobiles')
 
 @section('content')
 @php
@@ -159,7 +159,7 @@
                         The 2 Payment Plan covers six models. The August Price Drop covers five. Some campaigns, like our Ijara advance reduction, cover every motorcycle we have in stock.
                     </p>
                     <p class="mb-[17px]">
-                        That means the question is never just “is this bike on offer?” but “which campaign is it in, and what does that campaign give me?” Every campaign page on this site answers both: it lists the exact motorcycles included, the price of each one under that campaign, and precisely how the campaign works — the payment structure, whether a guarantor is needed, what is waived, and what is not.
+                        That means the question is never just “is this bike on offer?” but “which campaign is it in, and what does that campaign give me?” Every campaign page on this site answers both: it lists the exact motorcycles included, the price of each one under that campaign, and precisely how the campaign works - the payment structure, whether a guarantor is needed, what is waived, and what is not.
                     </p>
 
                     <h3 class="mb-3 mt-8 font-display text-[23px] font-bold tracking-[-0.028em] text-litus-text">Why every campaign carries a real end date</h3>
@@ -172,17 +172,17 @@
 
                     <h3 class="mb-3 mt-8 font-display text-[23px] font-bold tracking-[-0.028em] text-litus-text">Campaigns and Ijara plans work together</h3>
                     <p class="mb-[17px]">
-                        A price campaign reduces the amount your ownership plan is calculated from — so if you buy on an Ijara plan, the saving reaches you as a lower monthly amount rather than a lower lump sum. You are not penalised for paying monthly. Our plan campaigns work the other way round: they change the terms rather than the price, and most of them stack with a price campaign on the same bike.
+                        A price campaign reduces the amount your ownership plan is calculated from - so if you buy on an Ijara plan, the saving reaches you as a lower monthly amount rather than a lower lump sum. You are not penalised for paying monthly. Our plan campaigns work the other way round: they change the terms rather than the price, and most of them stack with a price campaign on the same bike.
                     </p>
 
                     <h3 class="mb-3 mt-8 font-display text-[23px] font-bold tracking-[-0.028em] text-litus-text">One campaign per motorcycle</h3>
                     <p class="mb-[17px]">
-                        A motorcycle can appear in several campaigns at once, but only one applies to your purchase. Where you have a choice, our team will work out which leaves you better off on the model you want — and tell you, even when it is the one that earns us less.
+                        A motorcycle can appear in several campaigns at once, but only one applies to your purchase. Where you have a choice, our team will work out which leaves you better off on the model you want - and tell you, even when it is the one that earns us less.
                     </p>
 
                     <h3 class="mb-3 mt-8 font-display text-[23px] font-bold tracking-[-0.028em] text-litus-text">Campaigns differ by showroom</h3>
                     <p>
-                        We hold stock separately at Malé, Hulhumalé, Hithadhoo, Fuvahmulah and L. Fonadhoo, and a campaign only applies where the stock actually is. Use the showroom filter below to see what you can act on near you. If something you want is on another island, contact us — a transfer is usually possible, and we will tell you the cost and timing upfront rather than after you have committed.
+                        We hold stock separately at Malé, Hulhumalé, Hithadhoo, Fuvahmulah and L. Fonadhoo, and a campaign only applies where the stock actually is. Use the showroom filter below to see what you can act on near you. If something you want is on another island, contact us - a transfer is usually possible, and we will tell you the cost and timing upfront rather than after you have committed.
                     </p>
                 </div>
             </div>
@@ -214,11 +214,10 @@
     </section>
 
     {{-- FEATURED --}}
-    @if ($featured)
+    @if ($featured && $count > 0)
         @php
             $campaignEnds = now()->endOfMonth();
             $campaignStarts = now()->startOfMonth();
-            $featuredModels = $promotions->take(6);
         @endphp
         <section class="litus-sec-tight bg-litus-paper-2">
             <div class="litus-container">
@@ -226,22 +225,29 @@
                      style="background: linear-gradient(115deg, #0B1526, #1B3260 58%, #1D4CBB);">
                     <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_340px_at_76%_6%,rgba(90,184,255,.3),transparent_62%)]"></div>
 
-                    <div class="relative z-[3] p-[clamp(30px,4vw,52px)]">
+                    <div class="relative z-[3] p-[clamp(30px,4vw,52px)]"
+                         data-promo-campaign-copy>
                         <span class="inline-block rounded-md bg-[#F2ECFF] px-[11px] py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-[#6941C6]">★ Campaign of the Month</span>
-                        <h3 class="mt-4 font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]">{{ $featured->name }}</h3>
-                        <p class="mt-3 max-w-[520px] text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.76]">
-                            {{ $featured->offer_note ?: 'Limited-time campaign pricing on this model. Save now and ride sooner on cash or Ijara terms.' }}
+                        <h3 class="mt-4 font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]"
+                            data-promo-campaign-title>{{ $featured->name }}</h3>
+                        <p class="mt-3 max-w-[520px] text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.76]"
+                           data-promo-campaign-note>
+                            {{ $featured->offerNote() ?: 'Limited-time campaign pricing on this model. Save now and ride sooner on cash or Ijara terms.' }}
                         </p>
 
                         <div class="mt-6 flex flex-wrap items-baseline gap-3.5">
                             <span class="font-display text-[38px] font-extrabold tracking-[-0.035em]">
-                                Save up to {{ $featured->formattedDiscount() }}
+                                Save up to {{ $stats['formattedMaxSave'] }}
                             </span>
                         </div>
 
-                        <div class="mb-1.5 mt-2 flex flex-wrap gap-2">
-                            @foreach ($featuredModels as $model)
-                                <span class="rounded-md bg-white/12 px-2.5 py-1.5 text-[11.5px] font-semibold text-white/88">{{ $model->name }}</span>
+                        <div class="mb-1.5 mt-2 flex flex-wrap gap-2" data-promo-campaign-chips>
+                            @foreach ($promotions as $index => $model)
+                                <button type="button"
+                                        data-promo-campaign-chip="{{ $index }}"
+                                        class="rounded-md px-2.5 py-1.5 text-[11.5px] font-semibold transition {{ $index === 0 ? 'bg-white text-litus-ink' : 'bg-white/12 text-white/88 hover:bg-white/20' }}">
+                                    {{ $model->name }}
+                                </button>
                             @endforeach
                         </div>
 
@@ -269,6 +275,7 @@
                             <a href="https://wa.me/9607797442?text={{ urlencode('Hi LITUS, I want to reserve the '.$featured->name.' campaign offer.') }}"
                                target="_blank"
                                rel="noopener noreferrer"
+                               data-promo-campaign-wa
                                class="inline-flex items-center justify-center gap-2 rounded-lg border-[1.5px] border-white/32 px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10">
                                 <x-litus-icon name="message-circle" class="h-4 w-4" />
                                 Reserve on WhatsApp
@@ -280,7 +287,9 @@
                     </div>
 
                     <div class="relative z-[3] grid place-items-center bg-black/[0.18] p-[clamp(22px,3vw,40px)] max-[940px]:order-first">
-                        <div class="relative w-full max-w-[330px] overflow-hidden rounded-[26px] border border-white/14 bg-gradient-to-br from-[#061029] via-[#0E2A64] to-[#1B49B8] p-7 shadow-none min-[941px]:aspect-[3/4]">
+                        <div class="relative w-full max-w-[330px] overflow-hidden rounded-[26px] border border-white/14 bg-gradient-to-br from-[#061029] via-[#0E2A64] to-[#1B49B8] p-7 shadow-none min-[941px]:aspect-[3/4]"
+                             data-promo-campaign-slider
+                             data-interval="4000">
                             <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(420px_260px_at_68%_18%,rgba(90,184,255,.34),transparent_66%)]"></div>
                             <div class="relative z-[2] flex h-full flex-col">
                                 <div class="font-display text-[13px] font-bold tracking-[0.24em] text-white">
@@ -288,13 +297,42 @@
                                 </div>
                                 <span class="mt-6 text-[11.5px] font-bold uppercase tracking-[0.16em] text-litus-sky">Limited time campaign</span>
                                 <div class="mt-2.5 font-display text-[clamp(24px,2.4vw,32px)] font-extrabold leading-[1.05] tracking-[-0.03em]">
-                                    Save up to<br>{{ $featured->formattedDiscount() }}
+                                    Save up to<br>{{ $stats['formattedMaxSave'] }}
                                 </div>
-                                <p class="mt-2.5 text-sm text-white/70">{{ $featured->name }}</p>
-                                <img src="{{ $featured->listImageUrl() }}"
-                                     alt="{{ $featured->name }}"
-                                     class="mx-auto mt-auto max-h-[180px] w-auto object-contain drop-shadow-[0_20px_18px_rgba(0,0,0,0.35)]"
-                                     loading="lazy">
+                                <p class="mt-2.5 text-sm text-white/70" data-promo-campaign-slide-name>{{ $featured->name }}</p>
+
+                                <div class="relative mt-auto flex min-h-[180px] flex-1 items-center justify-center">
+                                    @foreach ($promotions as $index => $model)
+                                        <img src="{{ $model->listImageUrl() }}"
+                                             alt="{{ $model->name }}"
+                                             data-promo-campaign-slide
+                                             data-name="{{ $model->name }}"
+                                             data-note="{{ $model->offerNote() ?: 'Limited-time campaign pricing on this model. Save now and ride sooner on cash or Ijara terms.' }}"
+                                             data-discount="{{ $model->formattedDiscount() }}"
+                                             @class([
+                                                 'absolute inset-x-0 mx-auto max-h-[180px] w-auto object-contain drop-shadow-[0_20px_18px_rgba(0,0,0,0.35)] transition-opacity duration-700',
+                                                 'z-[1] opacity-100' => $index === 0,
+                                                 'z-0 opacity-0' => $index !== 0,
+                                             ])
+                                             loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
+                                    @endforeach
+                                </div>
+
+                                @if ($count > 1)
+                                    <div class="mt-3 flex justify-center gap-1.5">
+                                        @foreach ($promotions as $index => $model)
+                                            <button type="button"
+                                                    data-promo-campaign-dot="{{ $index }}"
+                                                    aria-label="Show {{ $model->name }}"
+                                                    @class([
+                                                        'h-1.5 rounded-full transition-all duration-300',
+                                                        'w-5 bg-white' => $index === 0,
+                                                        'w-1.5 bg-white/50' => $index !== 0,
+                                                    ])></button>
+                                        @endforeach
+                                    </div>
+                                @endif
+
                                 <p class="mt-4 border-t border-white/18 pt-3.5 text-[11px] tracking-[0.06em] text-white/62">
                                     {{ $count }} models · Campaign prices from {{ $stats['formattedMinPrice'] }}
                                 </p>
@@ -377,7 +415,7 @@
                 @forelse ($promotions as $motorcycle)
                     <div data-promo-card
                          data-brand="{{ $motorcycle->brand }}"
-                         data-price="{{ (float) $motorcycle->sale_price }}"
+                         data-price="{{ $motorcycle->promotionalSalePrice() }}"
                          data-saving="{{ $motorcycle->discountAmount() }}"
                          data-sort="{{ (int) $motorcycle->sort_order }}"
                          data-id="{{ $motorcycle->id }}">
@@ -448,7 +486,7 @@
                         <summary class="flex cursor-pointer list-none items-center justify-between gap-[18px] px-6 py-[19px] text-[15.5px] font-semibold text-litus-text marker:content-none [&::-webkit-details-marker]:hidden group-open:text-litus-primary">
                             <span>{{ $faq['q'] }}</span>
                             <span class="shrink-0 text-[23px] font-light leading-none text-litus-primary group-open:hidden">+</span>
-                            <span class="hidden shrink-0 text-[23px] font-light leading-none text-litus-primary group-open:inline">–</span>
+                            <span class="hidden shrink-0 text-[23px] font-light leading-none text-litus-primary group-open:inline">-</span>
                         </summary>
                         <div class="px-6 pb-[22px] text-[14.5px] text-litus-text-2">
                             {!! $faq['a'] !!}

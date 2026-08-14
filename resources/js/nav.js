@@ -1,5 +1,5 @@
 /**
- * LITUS Automobiles — mobile navigation toggle.
+ * LITUS Automobiles - mobile navigation toggle.
  */
 function initLitusNav() {
   const header = document.querySelector('[data-litus-header]');

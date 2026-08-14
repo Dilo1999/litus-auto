@@ -2,7 +2,7 @@
 
 @php
     $hasPromo = $motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0;
-    $price = $hasPromo ? (float) $motorcycle->sale_price : (float) $motorcycle->original_price;
+    $price = $hasPromo ? $motorcycle->promotionalSalePrice() : (float) $motorcycle->original_price;
     $monthly = $price > 0 ? (int) (round(($price / 60) / 10) * 10) : null;
     $category = $motorcycle->category ?: 'Model';
 @endphp

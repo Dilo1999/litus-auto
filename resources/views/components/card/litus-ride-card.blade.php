@@ -43,7 +43,7 @@
             <a href="{{ route('motorcycle.show', $slug) }}">{{ $model }}</a>
         </h3>
         <p class="mb-[15px] text-[13.5px] text-litus-text-2">
-            {{ $cc !== '—' ? $cc : '' }}{{ $cc !== '—' && $capacity !== '—' ? ' · ' : '' }}{{ $capacity !== '—' ? 'Tank '.$capacity : '' }}
+            {{ $cc !== '-' ? $cc : '' }}{{ $cc !== '-' && $capacity !== '-' ? ' · ' : '' }}{{ $capacity !== '-' ? 'Tank '.$capacity : '' }}
         </p>
 
         @if ($showSale)

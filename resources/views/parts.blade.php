@@ -1,6 +1,6 @@
 @extends('layouts.litus')
 
-@section('title', 'Genuine Parts — LITUS Automobiles')
+@section('title', 'Genuine Parts - LITUS Automobiles')
 
 @section('content')
 @php
@@ -68,7 +68,7 @@
                     Find genuine parts<br><span class="text-litus-sky">for every ride.</span>
                 </h1>
                 <p class="mt-4 max-w-[520px] text-[clamp(16px,1.4vw,18px)] leading-[1.66] text-white/[0.78]">
-                    A full range of genuine motorcycle parts built for quality, reliability, safety and performance — engineered to keep your ride at its best.
+                    A full range of genuine motorcycle parts built for quality, reliability, safety and performance - engineered to keep your ride at its best.
                 </p>
                 <div class="mt-6 flex flex-wrap gap-3">
                     <a href="#request"

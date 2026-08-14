@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MotorcycleController;
@@ -33,12 +35,12 @@ Route::match(['get', 'head'], 'storage/{path}', function () {
 })->where('path', '.*')->name('storage.serve');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/about-us', fn () => view('about'))->name('about');
+Route::get('/about-us', [AboutController::class, 'index'])->name('about');
 Route::get('/motorcycles', [MotorcycleController::class, 'index'])->name('motorcycles');
 Route::get('/motorcycles/{slug}', [MotorcycleController::class, 'show'])->name('motorcycle.show');
 Route::get('/promotions', [PromotionsController::class, 'index'])->name('promotions');
 Route::get('/ownership-plans', fn () => view('ownership-plans'))->name('ownership-plans');
 Route::get('/parts', fn () => view('parts'))->name('parts');
 Route::get('/service-center', fn () => view('service-center'))->name('service-center');
-Route::get('/contact-us', fn () => view('contact'))->name('contact');
+Route::get('/contact-us', [ContactController::class, 'index'])->name('contact');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');

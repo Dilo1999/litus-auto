@@ -1,5 +1,5 @@
 /**
- * Scroll-triggered and load animations (Framer Motion–style).
+ * Scroll-triggered and load animations (Framer Motion-style).
  * Add .animate-on-scroll + data-animate="fadeInUp" (or fadeIn, slideLeft, slideRight, scaleIn).
  * Optional: data-delay="0.2" for stagger. JS adds .in-view when element enters viewport.
  * For above-the-fold content use .animate-now + data-animate; .played is added after a tick.

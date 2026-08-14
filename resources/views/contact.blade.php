@@ -1,6 +1,6 @@
 @extends('layouts.litus')
 
-@section('title', 'Contact Us — LITUS Automobiles')
+@section('title', 'Contact Us - LITUS Automobiles')
 
 @section('content')
 @php
@@ -46,69 +46,8 @@
         'Something else',
     ];
 
-    // Same locations as About — text only (no images)
-    $visitShowrooms = [
-        [
-            'name' => 'Malé Showroom',
-            'address' => 'Chaandhanee Magu, Malé, Maldives',
-            'services' => ['Sales', 'Service Centre', 'Parts'],
-            'phone' => '+960 779 7442',
-        ],
-        [
-            'name' => 'Hithadhoo Showroom',
-            'address' => 'Fenfiyazmagu, S. Hithadhoo, Maldives',
-            'services' => ['Sales', 'Service Centre', 'Parts'],
-            'phone' => '+960 779 7444',
-        ],
-        [
-            'name' => 'Kudahuvadhoo Showroom',
-            'address' => 'Izzudheen Magu, Dh. Kudahuvadhoo, Maldives',
-            'services' => ['Sales', 'Parts'],
-            'phone' => '+960 779 7442',
-        ],
-        [
-            'name' => 'Naifaru Showroom',
-            'address' => 'Ifthithaahee Magu, Lh. Naifaru, Maldives',
-            'services' => ['Sales', 'Parts'],
-            'phone' => '+960 779 7442',
-        ],
-        [
-            'name' => 'Villingili Showroom',
-            'address' => 'Ameenee Magu, GA. Villingili, Maldives',
-            'services' => ['Sales', 'Parts'],
-            'phone' => '+960 779 7442',
-        ],
-        [
-            'name' => 'Feydhoo Showroom',
-            'address' => 'Maathila Magu, S. Feydhoo, Maldives',
-            'services' => ['Sales', 'Parts'],
-            'phone' => '+960 779 7442',
-        ],
-        [
-            'name' => 'Fonadhoo Showroom',
-            'address' => 'Sinajuddeen Magu, L. Fonadhoo, Maldives',
-            'services' => ['Sales', 'Parts'],
-            'phone' => '+960 779 7446',
-        ],
-        [
-            'name' => 'Head Office',
-            'address' => 'Ma. Eyrum, Buruzu Magu, Malé, Maldives',
-            'services' => ['Sales', 'Support'],
-            'phone' => '+960 779 7442',
-        ],
-        [
-            'name' => 'Hulhumale Showroom',
-            'address' => 'Nirolhu Magu, Hulhumale, Maldives',
-            'services' => ['Sales', 'Parts'],
-            'phone' => '+960 779 7443',
-        ],
-        [
-            'name' => 'Thinadhoo Showroom',
-            'address' => 'Avenue Magu, Thinadhoo, Maldives',
-            'services' => ['Sales', 'Parts'],
-            'phone' => '+960 779 7442',
-        ],
-    ];
+    // Locations come from Filament / showrooms table via ContactController
+    $visitShowrooms = $visitShowrooms ?? [];
 
     $showrooms = collect($visitShowrooms)->map(fn ($s) => [
         'name' => $s['name'],
@@ -116,8 +55,8 @@
     ])->all();
 
     $hours = [
-        ['label' => 'Sales support', 'value' => 'Sun–Thu · 9:30 AM – 6:00 PM'],
-        ['label' => 'Service centre', 'value' => 'Sun–Thu · 9:30 AM – 6:00 PM'],
+        ['label' => 'Sales support', 'value' => 'Sun-Thu · 9:30 AM - 6:00 PM'],
+        ['label' => 'Service centre', 'value' => 'Sun-Thu · 9:30 AM - 6:00 PM'],
         ['label' => 'Online inquiry', 'value' => 'Anytime'],
     ];
 
@@ -157,7 +96,7 @@
                     We are here to help<br><span class="text-litus-sky">you ride better.</span>
                 </h1>
                 <p class="mt-3 max-w-[560px] text-[clamp(15px,1.3vw,17px)] leading-[1.66] text-white/[0.78]">
-                    Questions about motorcycles, ownership plans, parts or service? Our team is ready to help — by phone, WhatsApp, email, or in person at any of our showrooms.
+                    Questions about motorcycles, ownership plans, parts or service? Our team is ready to help - by phone, WhatsApp, email, or in person at any of our showrooms.
                 </p>
                 <div class="mt-5 flex flex-wrap gap-3">
                     <a href="#contact-form"
@@ -230,9 +169,9 @@
 
     {{-- FORM + MAP --}}
     <section id="contact-form" class="litus-sec scroll-mt-24 bg-litus-paper-2">
-        <div class="litus-container grid grid-cols-1 items-start gap-[34px] min-[1000px]:grid-cols-2">
-            <div class="rounded-[26px] border border-litus-line bg-white p-[clamp(22px,3vw,32px)] shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)]">
-                <div class="hidden py-10 text-center" data-contact-success>
+        <div class="litus-container grid grid-cols-1 items-stretch gap-[34px] min-[1000px]:grid-cols-2">
+            <div class="flex min-h-full flex-col rounded-[26px] border border-litus-line bg-white p-[clamp(26px,3.2vw,40px)] shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)]">
+                <div class="hidden flex-1 py-10 text-center" data-contact-success>
                     <div class="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-full bg-[rgba(18,87,214,0.1)] text-litus-primary">
                         <x-litus-icon name="check-circle" class="h-8 w-8" />
                     </div>
@@ -247,7 +186,7 @@
                     </button>
                 </div>
 
-                <form data-contact-form action="#" method="post" class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <form data-contact-form action="#" method="post" class="grid flex-1 grid-cols-1 content-start gap-5 sm:grid-cols-2">
                     @csrf
                     <div class="sm:col-span-2">
                         <h3 class="font-display text-[clamp(20px,2.2vw,26px)] font-semibold tracking-[-0.02em] text-litus-text">Send us a message</h3>
@@ -281,11 +220,11 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="sm:col-span-2">
+                    <div class="flex min-h-0 flex-col sm:col-span-2">
                         <label class="{{ $fieldLabel }}">Message</label>
-                        <textarea name="message" rows="4" placeholder="How can we help you?" required class="{{ $fieldControl }} min-h-[110px] resize-y"></textarea>
+                        <textarea name="message" rows="7" placeholder="How can we help you?" required class="{{ $fieldControl }} min-h-[180px] flex-1 resize-y"></textarea>
                     </div>
-                    <div class="sm:col-span-2">
+                    <div class="mt-auto sm:col-span-2">
                         <button type="submit"
                                 class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                             Send Message
@@ -334,7 +273,7 @@
                         @endforeach
                     </div>
                     <p class="mt-3.5 text-xs text-litus-text-3">
-                        Send your inquiry anytime — our team will respond as soon as possible.
+                        Send your inquiry anytime - our team will respond as soon as possible.
                     </p>
                 </div>
             </div>

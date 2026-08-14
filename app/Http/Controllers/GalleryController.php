@@ -11,6 +11,10 @@ class GalleryController extends Controller
     {
         $images = GalleryImage::query()
             ->published()
+            ->whereIn('category', [
+                GalleryImage::CATEGORY_MOTORCYCLES,
+                GalleryImage::CATEGORY_CUSTOMER_MOMENTS,
+            ])
             ->ordered()
             ->get();
 
@@ -21,14 +25,13 @@ class GalleryController extends Controller
 
         $featuredPool = $images->where('is_featured', true)->values();
 
-        // Prefer a balanced mix across the three categories, then shuffle and keep 5.
+        // Prefer a balanced mix across categories, then shuffle and keep 5.
         $featuredMoments = collect([
             GalleryImage::CATEGORY_MOTORCYCLES,
-            GalleryImage::CATEGORY_SHOWROOMS,
             GalleryImage::CATEGORY_CUSTOMER_MOMENTS,
         ])
             ->flatMap(function (string $category) use ($featuredPool) {
-                return $featuredPool->where('category', $category)->shuffle()->take(2);
+                return $featuredPool->where('category', $category)->shuffle()->take(3);
             })
             ->unique('id')
             ->shuffle()
@@ -53,15 +56,13 @@ class GalleryController extends Controller
 
         $catColors = [
             'Motorcycles' => '#E31E25',
-            'Showroom' => '#7C3AED',
             'Customer Moments' => '#16A34A',
         ];
 
-        $momentCategories = ['All', 'Motorcycles', 'Showrooms', 'Customer Moments', 'Videos'];
+        $momentCategories = ['All', 'Motorcycles', 'Customer Moments', 'Videos'];
 
         $heroFeatures = [
             ['icon' => 'bike', 'title' => 'Motorcycles', 'desc' => 'Adventure & street ride moments'],
-            ['icon' => 'eye', 'title' => 'Showroom', 'desc' => 'Premium display & launch highlights'],
             ['icon' => 'users', 'title' => 'Customer Moments', 'desc' => 'Real experiences from our riders'],
             ['icon' => 'images', 'title' => 'Full Gallery', 'desc' => 'Browse every published moment'],
         ];

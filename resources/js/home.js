@@ -1,5 +1,5 @@
 /**
- * Home page — Ijara estimator + quick-find helpers.
+ * Home page - Ijara estimator + quick-find helpers.
  */
 
 function formatMvr(value) {

@@ -1,6 +1,6 @@
 @extends('layouts.litus')
 
-@section('title', 'Motorcycles — LITUS Automobiles')
+@section('title', 'Motorcycles - LITUS Automobiles')
 
 @section('content')
 @php
@@ -20,12 +20,12 @@
 
     $buyingGuide = [
         [
-            'title' => '110cc – 125cc',
+            'title' => '110cc - 125cc',
             'text' => 'Right for daily riding inside Malé and Hulhumalé. Light, easy to park, cheapest to run. If most journeys are under fifteen minutes, start here.',
             'models' => ['Scoopy', 'Vision', 'Fazzio'],
         ],
         [
-            'title' => '155cc – 160cc',
+            'title' => '155cc - 160cc',
             'text' => 'Right if you use the link road regularly, carry a passenger often, or want ABS. More comfortable at speed, heavier to manoeuvre.',
             'models' => ['Air Blade', 'PCX', 'N Max'],
         ],
@@ -63,7 +63,7 @@
                     Find the ride<br>for your journey.
                 </h1>
                 <p class="mt-5 max-w-[560px] text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.78]">
-                    Honda and Yamaha models, from 110cc city scooters to 160cc adventure machines. Filter by brand, budget or engine size — every card shows which campaigns that motorcycle is currently in.
+                    Honda and Yamaha models, from 110cc city scooters to 160cc adventure machines. Filter by brand, budget or engine size - every card shows which campaigns that motorcycle is currently in.
                 </p>
             </div>
         </div>
@@ -212,7 +212,7 @@
             <div class="max-w-[560px]">
                 <h3 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]">Still deciding between two models?</h3>
                 <p class="mt-3 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.72]">
-                    Our sales team compares them with you honestly — including the reasons you might want the cheaper one.
+                    Our sales team compares them with you honestly - including the reasons you might want the cheaper one.
                 </p>
             </div>
             <div class="flex flex-wrap gap-3">

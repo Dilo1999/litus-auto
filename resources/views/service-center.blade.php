@@ -1,6 +1,6 @@
 @extends('layouts.litus')
 
-@section('title', 'Service Centre — LITUS Automobiles')
+@section('title', 'Service Centre - LITUS Automobiles')
 
 @section('content')
 @php
@@ -17,7 +17,7 @@
         [
             'icon' => 'wrench',
             'title' => 'Periodic Maintenance',
-            'text' => 'Scheduled servicing at the manufacturer’s intervals — typically 1,000 km, then every 6,000 km. This is what keeps a scooter running properly past year three.',
+            'text' => 'Scheduled servicing at the manufacturer’s intervals - typically 1,000 km, then every 6,000 km. This is what keeps a scooter running properly past year three.',
         ],
         [
             'icon' => 'shield',
@@ -39,7 +39,7 @@
     $bookingPoints = [
         [
             'title' => 'Trained on your engine',
-            'text' => 'Our technicians work on Honda and Yamaha every day — not on whatever comes through the door.',
+            'text' => 'Our technicians work on Honda and Yamaha every day - not on whatever comes through the door.',
         ],
         [
             'title' => 'Genuine parts, shown to you',
@@ -59,7 +59,7 @@
         ],
         [
             'q' => 'Irregular Maintenance',
-            'a' => 'Maintenance made outside of the recommended periodic schedule. This addresses issues noticed while riding, and is most commonly required when periodic maintenance has been neglected. It is entirely fixable — the sooner it is looked at, the less it costs.',
+            'a' => 'Maintenance made outside of the recommended periodic schedule. This addresses issues noticed while riding, and is most commonly required when periodic maintenance has been neglected. It is entirely fixable - the sooner it is looked at, the less it costs.',
         ],
         [
             'q' => 'Accident Repairs',
@@ -71,7 +71,7 @@
         ],
         [
             'q' => 'Pick & Drop Service',
-            'a' => 'A LITUS service centre mechanic goes to the location of the vehicle, brings it to the service centre for inspection and repairs, and returns it — a hassle-free experience from start to finish. Availability varies by island; ask when you book.',
+            'a' => 'A LITUS service centre mechanic goes to the location of the vehicle, brings it to the service centre for inspection and repairs, and returns it - a hassle-free experience from start to finish. Availability varies by island; ask when you book.',
         ],
     ];
 
@@ -86,7 +86,7 @@
         'Irregular maintenance',
         'Accident repair',
         'Engine overhaul',
-        'Not sure — please advise',
+        'Not sure - please advise',
     ];
 
     $fieldLabel = 'mb-1.5 block text-[12.5px] font-semibold text-white/70';
@@ -119,7 +119,7 @@
                     Expert care for<br><span class="text-litus-sky">every motorcycle.</span>
                 </h1>
                 <p class="mt-4 max-w-[520px] text-[clamp(16px,1.4vw,18px)] leading-[1.66] text-white/[0.78]">
-                    Scheduled maintenance, inspections, accident repairs and engine work — carried out by technicians trained on the exact engines we sell, using genuine parts.
+                    Scheduled maintenance, inspections, accident repairs and engine work - carried out by technicians trained on the exact engines we sell, using genuine parts.
                 </p>
                 <div class="mt-6 flex flex-wrap gap-3">
                     <a href="#book"

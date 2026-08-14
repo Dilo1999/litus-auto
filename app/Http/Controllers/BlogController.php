@@ -15,7 +15,7 @@ class BlogController extends Controller
     public function index(SeoService $seo): View
     {
         $seo->applyForPage('blogs.index', [
-            'meta_title' => 'Blog – Insights on Sourcing & Supply Chain',
+            'meta_title' => 'Blog - Insights on Sourcing & Supply Chain',
             'meta_description' => 'Read insights on sourcing, supply chain, logistics, and procurement from Al Zaha. Industry updates and best practices.',
         ]);
 
@@ -31,7 +31,7 @@ class BlogController extends Controller
     {
         $post = BlogPost::where('slug', $slug)->firstOrFail();
 
-        $title = $post->meta_title ?: ($post->title.' – Al Zaha');
+        $title = $post->meta_title ?: ($post->title.' - Al Zaha');
         $textParts = array_filter(array_column($post->content ?? [], 'text'));
         $description = $post->meta_description ?: ($post->intro ?? \Illuminate\Support\Str::limit(strip_tags(implode(' ', $textParts)), 155));
         $image = $post->og_image_url ?? asset('images/content/cta2.jpg');

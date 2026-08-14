@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SuperAdminSeeder::class);
         $this->call(MotorcycleSeeder::class);
         $this->call(GalleryImageSeeder::class);
+        $this->call(ShowroomSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

@@ -1,6 +1,6 @@
 @extends('layouts.litus')
 
-@section('title', 'LITUS Automobiles — Motorcycles, Scooters & Ijara Ownership Plans in the Maldives')
+@section('title', 'LITUS Automobiles - Motorcycles, Scooters & Ijara Ownership Plans in the Maldives')
 
 @section('content')
 @php
@@ -17,7 +17,7 @@
         [
             'icon' => 'shield',
             'title' => 'Genuine parts only',
-            'text' => 'Every part we fit is genuine and traceable. It protects your warranty, your resale value and — with brakes and tyres — your safety.',
+            'text' => 'Every part we fit is genuine and traceable. It protects your warranty, your resale value and - with brakes and tyres - your safety.',
         ],
         [
             'icon' => 'wrench',
@@ -31,100 +31,7 @@
         ],
     ];
 
-    $showroomImage = function (string ...$parts): string {
-        return asset('images/about_us/showrooms/' . implode('/', array_map('rawurlencode', $parts)));
-    };
-
-    $showrooms = [
-        [
-            'name' => 'Malé Showroom',
-            'address' => 'Chaandhanee Magu, Malé, Maldives',
-            'featured' => true,
-            'images' => [
-                $showroomImage("Male' Showroom", 'Malé Showroom.jpg'),
-                $showroomImage("Male' Showroom", "Male' Showroom1.webp"),
-                $showroomImage("Male' Showroom", "Male' Showroom2.jpg"),
-            ],
-        ],
-        [
-            'name' => 'Hithadhoo Showroom',
-            'address' => 'Fenfiyazmagu, S. Hithadhoo, Maldives',
-            'featured' => true,
-            'images' => [
-                $showroomImage('Hithadhoo Showroom', 'Hithadhoo Showroom.jpg'),
-                $showroomImage('Hithadhoo Showroom', 'Hithadhoo Showroom1.jpg'),
-                $showroomImage('Hithadhoo Showroom', 'Hithadhoo Showroom2.jpg'),
-            ],
-        ],
-        [
-            'name' => 'Kudahuvadhoo Showroom',
-            'address' => 'Izzudheen Magu, Dh. Kudahuvadhoo, Maldives',
-            'featured' => false,
-            'images' => [
-                $showroomImage('Kudahuvadhoo Showroom', 'Kudahuvadhoo Showroom.jpg'),
-                $showroomImage('Kudahuvadhoo Showroom', 'Kudahuvadhoo Showroom1.jpg'),
-            ],
-        ],
-        [
-            'name' => 'Naifaru Showroom',
-            'address' => 'Ifthithaahee Magu, Lh. Naifaru, Maldives',
-            'featured' => false,
-            'img' => $showroomImage('Naifaru Showroom', 'Naifaru Showroom.webp'),
-        ],
-        [
-            'name' => 'Villingili Showroom',
-            'address' => 'Ameenee Magu, GA. Villingili, Maldives',
-            'featured' => false,
-            'images' => [
-                $showroomImage('Villingili Showroom', 'Villingili Showroom.jpg'),
-                $showroomImage('Villingili Showroom', 'Villingili Showroom1.jpg'),
-                $showroomImage('Villingili Showroom', 'Villingili Showroom2.jpg'),
-            ],
-        ],
-        [
-            'name' => 'Feydhoo Showroom',
-            'address' => 'Maathila Magu, S. Feydhoo, Maldives',
-            'featured' => false,
-            'img' => $showroomImage('Feydhoo Showroom', 'Feydhoo Showroom.jpg'),
-        ],
-        [
-            'name' => 'Fonadhoo Showroom',
-            'address' => 'Sinajuddeen Magu, L. Fonadhoo, Maldives',
-            'featured' => false,
-            'images' => [
-                $showroomImage('Fonadhoo Showroom', 'Fonadhoo Showroom.jpg'),
-                $showroomImage('Fonadhoo Showroom', 'Fonadhoo Showroom1.jpg'),
-                $showroomImage('Fonadhoo Showroom', 'Fonadhoo Showroom2.jpg'),
-            ],
-        ],
-        [
-            'name' => 'Head Office',
-            'address' => 'Ma. Eyrum, Buruzu Magu, Malé, Maldives',
-            'featured' => false,
-            'img' => $showroomImage('Head Office', 'Head Office.webp'),
-        ],
-        [
-            'name' => 'Hulhumale Showroom',
-            'address' => 'Nirolhu Magu, Hulhumale, Maldives',
-            'featured' => false,
-            'images' => [
-                $showroomImage('Hulhumale Showroom', 'Hulhumale Showroom.webp'),
-                $showroomImage('Hulhumale Showroom', 'Hulhumale Showroom1.webp'),
-                $showroomImage('Hulhumale Showroom', 'Hulhumale Showroom2.webp'),
-            ],
-        ],
-        [
-            'name' => 'Thinadhoo Showroom',
-            'address' => 'Daisy Magu, Thinadhoo, Maldives',
-            'featured' => false,
-            'images' => [
-                $showroomImage('Thinadhoo Showroom', 'Thinadhoo Showroom.webp'),
-                $showroomImage('Thinadhoo Showroom', 'Thinadhoo Showroom1.webp'),
-                $showroomImage('Thinadhoo Showroom', 'Thinadhoo Showroom2.webp'),
-            ],
-        ],
-    ];
-
+    $showrooms = $showrooms ?? [];
     $showroomCount = count($showrooms);
     $testimonials = [
         [
@@ -179,7 +86,7 @@
                         a month.
                     </h1>
                     <p class="mt-[22px] max-w-[520px] text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.72]">
-                        Honda and Yamaha scooters, genuine parts and expert service — across five showrooms in the Maldives. Buy outright, or own it on a Shariah-compliant Ijara plan.
+                        Honda and Yamaha scooters, genuine parts and expert service - across five showrooms in the Maldives. Buy outright, or own it on a Shariah-compliant Ijara plan.
                     </p>
                     <div class="mt-8 flex flex-wrap gap-3">
                         <a href="#offers"
@@ -203,8 +110,9 @@
                             <select id="fBrand" name="brand"
                                     class="w-full rounded-[9px] border-[1.5px] border-white/18 bg-white/[0.07] px-3.5 py-3 text-sm text-white outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)]">
                                 <option value="all" class="text-litus-text">Any brand</option>
-                                <option value="Honda" class="text-litus-text">Honda</option>
-                                <option value="Yamaha" class="text-litus-text">Yamaha</option>
+                                @foreach (($brands ?? []) as $brand)
+                                    <option value="{{ $brand }}" class="text-litus-text">{{ $brand }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div>
@@ -363,11 +271,40 @@
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
                 @foreach ($showrooms as $showroom)
                     @php
-                        $coverImage = $showroom['images'][0] ?? ($showroom['img'] ?? null);
+                        $imageCollection = collect($showroom['images'] ?? [])->filter()->values();
+                        if ($imageCollection->count() > 1) {
+                            $imageCollection = $imageCollection->shuffle()->values();
+                        }
+                        $images = $imageCollection->all();
+                        $coverImage = $images[0] ?? ($showroom['img'] ?? null);
+                        $hasSlider = count($images) > 1;
                     @endphp
                     <div class="group flex flex-col overflow-hidden rounded-[18px] border border-litus-line bg-white transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
-                        <div class="relative h-[180px] overflow-hidden bg-litus-paper-3 sm:h-[200px]">
-                            @if ($coverImage)
+                        <div class="relative h-[180px] overflow-hidden bg-litus-paper-3 sm:h-[200px]"
+                             @if ($hasSlider) data-showroom-slider data-interval="4000" @endif>
+                            @if ($hasSlider)
+                                @foreach ($images as $index => $image)
+                                    <img src="{{ $image }}"
+                                         alt="{{ $showroom['name'] }}"
+                                         data-showroom-slide
+                                         @class([
+                                             'absolute inset-0 h-full w-full object-cover transition-opacity duration-700',
+                                             'z-[1] opacity-100' => $index === 0,
+                                             'z-0 opacity-0' => $index !== 0,
+                                         ])
+                                         loading="lazy">
+                                @endforeach
+                                <div class="absolute bottom-2.5 left-1/2 z-[2] flex -translate-x-1/2 gap-1.5">
+                                    @foreach ($images as $index => $image)
+                                        <span data-showroom-dot
+                                              @class([
+                                                  'h-1.5 rounded-full bg-white/50 transition-all duration-300',
+                                                  'w-5 bg-white' => $index === 0,
+                                                  'w-1.5' => $index !== 0,
+                                              ])></span>
+                                    @endforeach
+                                </div>
+                            @elseif ($coverImage)
                                 <img src="{{ $coverImage }}"
                                      alt="{{ $showroom['name'] }}"
                                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
@@ -378,7 +315,7 @@
                                 </div>
                             @endif
                             @if (! empty($showroom['featured']))
-                                <span class="absolute left-3 top-3 rounded-md bg-litus-primary px-2.5 py-1 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-white">
+                                <span class="absolute left-3 top-3 z-[3] rounded-md bg-litus-primary px-2.5 py-1 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-white">
                                     Featured
                                 </span>
                             @endif

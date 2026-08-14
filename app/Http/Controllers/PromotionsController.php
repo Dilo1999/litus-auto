@@ -11,8 +11,11 @@ class PromotionsController extends Controller
     {
         $promotions = Motorcycle::query()
             ->where('is_published', true)
-            ->where('has_promotion', true)
-            ->with(['colorVariants' => fn ($q) => $q->orderBy('sort_order')])
+            ->onActivePromotion()
+            ->with([
+                'colorVariants' => fn ($q) => $q->orderBy('sort_order'),
+                'promotions' => fn ($q) => $q->published()->currentlyActive()->ordered(),
+            ])
             ->orderBy('sort_order')
             ->orderBy('name')
             ->get()
@@ -26,7 +29,7 @@ class PromotionsController extends Controller
             ->first();
 
         $maxSave = $promotions->max(fn (Motorcycle $motorcycle) => $motorcycle->discountAmount()) ?: 0;
-        $minPrice = $promotions->min(fn (Motorcycle $motorcycle) => (float) $motorcycle->sale_price) ?: 0;
+        $minPrice = $promotions->min(fn (Motorcycle $motorcycle) => $motorcycle->promotionalSalePrice()) ?: 0;
 
         $stats = [
             'campaignCount' => $promotions->count(),

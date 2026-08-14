@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\GalleryImage;
 use App\Models\Motorcycle;
+use App\Models\Showroom;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -12,8 +13,11 @@ class HomeController extends Controller
     {
         $promoMotorcycles = Motorcycle::query()
             ->where('is_published', true)
-            ->where('has_promotion', true)
-            ->with(['colorVariants' => fn ($q) => $q->orderBy('sort_order')])
+            ->onActivePromotion()
+            ->with([
+                'colorVariants' => fn ($q) => $q->orderBy('sort_order'),
+                'promotions' => fn ($q) => $q->published()->currentlyActive()->ordered(),
+            ])
             ->orderBy('sort_order')
             ->orderBy('name')
             ->get()
@@ -23,7 +27,10 @@ class HomeController extends Controller
         $topRides = Motorcycle::query()
             ->where('is_published', true)
             ->where('is_top_selling', true)
-            ->with(['colorVariants' => fn ($q) => $q->orderBy('sort_order')])
+            ->with([
+                'colorVariants' => fn ($q) => $q->orderBy('sort_order'),
+                'promotions' => fn ($q) => $q->published()->currentlyActive()->ordered(),
+            ])
             ->orderBy('sort_order')
             ->orderBy('name')
             ->limit(4)
@@ -31,7 +38,7 @@ class HomeController extends Controller
             ->map(function (Motorcycle $motorcycle) {
                 $hasPromo = $motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0;
                 $activePrice = $hasPromo
-                    ? (float) $motorcycle->sale_price
+                    ? $motorcycle->promotionalSalePrice()
                     : (float) $motorcycle->original_price;
                 $monthly = $activePrice > 0
                     ? 'MVR ' . number_format((int) (round(($activePrice / 60) / 10) * 10))
@@ -41,8 +48,8 @@ class HomeController extends Controller
                     'model' => $motorcycle->name,
                     'slug' => $motorcycle->slug,
                     'brand' => $motorcycle->brand,
-                    'cc' => $motorcycle->engineCapacity() ?: '—',
-                    'capacity' => $motorcycle->fuelTankCapacity() ?: '—',
+                    'cc' => $motorcycle->engineCapacity() ?: '-',
+                    'capacity' => $motorcycle->fuelTankCapacity() ?: '-',
                     'img' => $motorcycle->listImageUrl(),
                     'price' => $motorcycle->formattedOriginalPrice(),
                     'salePrice' => $hasPromo ? $motorcycle->formattedSalePrice() : null,
@@ -68,6 +75,22 @@ class HomeController extends Controller
             ])
             ->all();
 
-        return view('home', compact('promoMotorcycles', 'topRides', 'galleryImages'));
+        $showrooms = Showroom::query()
+            ->published()
+            ->ordered()
+            ->get()
+            ->map(fn (Showroom $showroom) => $showroom->toViewArray())
+            ->all();
+
+        $brands = Motorcycle::query()
+            ->where('is_published', true)
+            ->whereNotNull('brand')
+            ->where('brand', '!=', '')
+            ->orderBy('brand')
+            ->distinct()
+            ->pluck('brand')
+            ->values();
+
+        return view('home', compact('promoMotorcycles', 'topRides', 'galleryImages', 'showrooms', 'brands'));
     }
 }

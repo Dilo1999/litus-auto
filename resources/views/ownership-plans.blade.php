@@ -1,6 +1,6 @@
 @extends('layouts.litus')
 
-@section('title', 'Ijara Plans — LITUS Automobiles')
+@section('title', 'Ijara Plans - LITUS Automobiles')
 
 @section('content')
 @php
@@ -177,11 +177,11 @@
         ],
         [
             'q' => 'How long does approval take?',
-            'a' => 'Usually a few working days once your documents are complete — longer if anything is missing. If you are applying against a promotion deadline, start early and we will tell you honestly whether it is likely to clear in time.',
+            'a' => 'Usually a few working days once your documents are complete - longer if anything is missing. If you are applying against a promotion deadline, start early and we will tell you honestly whether it is likely to clear in time.',
         ],
         [
             'q' => 'What if my income varies month to month?',
-            'a' => 'The Flexi plan is built for exactly that — customers whose income comes from more than one source or changes seasonally. Fishermen, freelancers and small business owners most often use it.',
+            'a' => 'The Flexi plan is built for exactly that - customers whose income comes from more than one source or changes seasonally. Fishermen, freelancers and small business owners most often use it.',
         ],
     ];
 
@@ -190,7 +190,7 @@
         ['label' => 'Proof of income', 'value' => 'Most plans'],
         ['label' => 'Guarantor', 'value' => 'Plan dependent'],
         ['label' => 'Advance payment', 'value' => 'From 15%'],
-        ['label' => 'Plan period', 'value' => '12–48 months'],
+        ['label' => 'Plan period', 'value' => '12-48 months'],
     ];
 @endphp
 
@@ -221,7 +221,7 @@
                     Any bike. Any budget.<br><span class="text-litus-sky">Anyone can own.</span>
                 </h1>
                 <p class="mt-4 max-w-[600px] text-[clamp(16px,1.4vw,18px)] leading-[1.66] text-white/[0.78]">
-                    Our Ijara Plans are structured to Islamic leasing standards and designed to make motorcycle ownership reachable — whether you are salaried, self-employed, a fisherman, a business owner, or buying your first bike.
+                    Our Ijara Plans are structured to Islamic leasing standards and designed to make motorcycle ownership reachable - whether you are salaried, self-employed, a fisherman, a business owner, or buying your first bike.
                 </p>
                 <div class="mt-6 flex flex-wrap gap-3">
                     <a href="#compare"
@@ -265,13 +265,13 @@
                 <div class="max-w-[720px] text-[16.5px] leading-[1.78] text-[#26324A]">
                     <p class="mb-[17px]">
                         <strong class="font-semibold text-litus-text">There is no interest and no interest rate.</strong>
-                        Instead we agree a total lease price with you at the start — one figure, in writing, before anything is signed — and you pay it in equal monthly amounts over an agreed period. That figure never changes. It does not compound, and it does not increase if a payment is late.
+                        Instead we agree a total lease price with you at the start - one figure, in writing, before anything is signed - and you pay it in equal monthly amounts over an agreed period. That figure never changes. It does not compound, and it does not increase if a payment is late.
                     </p>
                     <p class="mb-[17px]">
                         At the end of the plan, ownership of the motorcycle transfers to you. If you want to settle early at any point, you can, and there is no additional charge for doing so.
                     </p>
                     <p class="mb-[17px]">
-                        We built six plans rather than one because the Maldives does not have one kind of buyer. A salaried employee in Malé, a fisherman in Laamu with income that varies by season, and a first-time rider with a family guarantor all need different structures. The plan below that fits your situation is the one our team will steer you toward — including when that is the cheaper one.
+                        We built six plans rather than one because the Maldives does not have one kind of buyer. A salaried employee in Malé, a fisherman in Laamu with income that varies by season, and a first-time rider with a family guarantor all need different structures. The plan below that fits your situation is the one our team will steer you toward - including when that is the cheaper one.
                     </p>
                 </div>
 
@@ -357,7 +357,7 @@
             <div class="mx-auto mt-9 max-w-[900px] rounded-r-[12px] border-l-4 border-[#C89B3C] bg-[#FFF8EB] px-6 py-5">
                 <b class="mb-1.5 block text-[14.5px] text-litus-text">Not sure which plan is right?</b>
                 <p class="m-0 text-[14.5px] leading-relaxed text-[#2A3548]">
-                    Call us on 779 7442 or visit any showroom. Our team will look at your situation and tell you which of the six is the best fit — and which you are likely to be approved for.
+                    Call us on 779 7442 or visit any showroom. Our team will look at your situation and tell you which of the six is the best fit - and which you are likely to be approved for.
                 </p>
             </div>
         </div>
@@ -415,7 +415,7 @@
             <div class="max-w-[560px]">
                 <h3 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]">Ready to find your plan?</h3>
                 <p class="mt-3 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.72]">
-                    Our team will look at your situation and tell you which of the six plans fits — and what you will need to bring.
+                    Our team will look at your situation and tell you which of the six plans fits - and what you will need to bring.
                 </p>
             </div>
             <div class="flex flex-wrap gap-3">
@@ -445,7 +445,7 @@
         <div data-plan-drawer-backdrop class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
 
         <div data-plan-drawer
-             class="relative z-[1] flex max-h-[min(90vh,760px)] w-full max-w-[560px] flex-col overflow-hidden rounded-[22px] bg-white shadow-[0_24px_80px_rgba(9,17,32,.28)]">
+             class="relative z-[1] flex max-h-[min(90vh,760px)] w-full max-w-[640px] flex-col overflow-hidden rounded-[22px] bg-white shadow-[0_24px_80px_rgba(9,17,32,.28)]">
             <div data-drawer-header-stripe class="flex shrink-0 items-start justify-between border-b border-gray-100 px-6 pb-5 pt-6 max-md:px-4 max-md:pb-4 max-md:pt-5" style="border-top: 4px solid #1257D6">
                 <div>
                     <div class="mb-1 flex items-center gap-2">

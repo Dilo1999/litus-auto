@@ -1,5 +1,5 @@
 /**
- * Promotions page — brand chips + sort + featured countdown.
+ * Promotions page - brand chips + sort + featured countdown.
  */
 
 function initPromoCountdown() {
@@ -146,9 +146,101 @@ function initPromotionsFilter() {
     filter();
 }
 
+function initPromoCampaignSlider() {
+    const page = document.querySelector('[data-promotions-page]');
+    const slider = page?.querySelector('[data-promo-campaign-slider]');
+    if (!page || !slider) return;
+
+    const slides = [...slider.querySelectorAll('[data-promo-campaign-slide]')];
+    if (slides.length < 2) return;
+
+    const dots = [...slider.querySelectorAll('[data-promo-campaign-dot]')];
+    const chips = [...page.querySelectorAll('[data-promo-campaign-chip]')];
+    const titleEl = page.querySelector('[data-promo-campaign-title]');
+    const noteEl = page.querySelector('[data-promo-campaign-note]');
+    const nameEl = page.querySelector('[data-promo-campaign-slide-name]');
+    const waEl = page.querySelector('[data-promo-campaign-wa]');
+    const intervalMs = Number(slider.dataset.interval) || 4000;
+
+    let activeIndex = 0;
+    let timer = null;
+
+    const setActive = (index) => {
+        activeIndex = ((index % slides.length) + slides.length) % slides.length;
+        const slide = slides[activeIndex];
+
+        slides.forEach((item, i) => {
+            const isActive = i === activeIndex;
+            item.classList.toggle('opacity-100', isActive);
+            item.classList.toggle('opacity-0', !isActive);
+            item.classList.toggle('z-[1]', isActive);
+            item.classList.toggle('z-0', !isActive);
+        });
+
+        dots.forEach((dot, i) => {
+            const isActive = i === activeIndex;
+            dot.classList.toggle('w-5', isActive);
+            dot.classList.toggle('w-1.5', !isActive);
+            dot.classList.toggle('bg-white', isActive);
+            dot.classList.toggle('bg-white/50', !isActive);
+        });
+
+        chips.forEach((chip, i) => {
+            const isActive = i === activeIndex;
+            chip.classList.toggle('bg-white', isActive);
+            chip.classList.toggle('text-litus-ink', isActive);
+            chip.classList.toggle('bg-white/12', !isActive);
+            chip.classList.toggle('text-white/88', !isActive);
+        });
+
+        const name = slide.dataset.name || '';
+        const note = slide.dataset.note || '';
+
+        if (titleEl && name) titleEl.textContent = name;
+        if (nameEl && name) nameEl.textContent = name;
+        if (noteEl && note) noteEl.textContent = note;
+        if (waEl && name) {
+            waEl.href = `https://wa.me/9607797442?text=${encodeURIComponent(`Hi LITUS, I want to reserve the ${name} campaign offer.`)}`;
+        }
+    };
+
+    const start = () => {
+        stop();
+        timer = window.setInterval(() => setActive(activeIndex + 1), intervalMs);
+    };
+
+    const stop = () => {
+        if (timer) {
+            window.clearInterval(timer);
+            timer = null;
+        }
+    };
+
+    dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+            setActive(Number(dot.dataset.promoCampaignDot) || 0);
+            start();
+        });
+    });
+
+    chips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+            setActive(Number(chip.dataset.promoCampaignChip) || 0);
+            start();
+        });
+    });
+
+    slider.addEventListener('mouseenter', stop);
+    slider.addEventListener('mouseleave', start);
+
+    setActive(0);
+    start();
+}
+
 function initPromotionsPage() {
     initPromotionsFilter();
     initPromoCountdown();
+    initPromoCampaignSlider();
 }
 
 if (document.readyState === 'loading') {

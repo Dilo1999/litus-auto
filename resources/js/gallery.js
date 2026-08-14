@@ -9,7 +9,6 @@ function initGalleryPage() {
 
     const momentCatMap = {
         Scooters: 'Scooter',
-        Showrooms: 'Showroom',
     };
 
     let activeMomentCat = 'All';
