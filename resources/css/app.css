@@ -135,17 +135,17 @@
 
 @keyframes ownershipDrawerIn {
   from {
-    transform: translateX(100%);
+    transform: translateY(12px) scale(0.96);
     opacity: 0;
   }
   to {
-    transform: translateX(0);
+    transform: translateY(0) scale(1);
     opacity: 1;
   }
 }
 
 .ownership-drawer-open {
-  animation: ownershipDrawerIn 0.28s ease-out forwards;
+  animation: ownershipDrawerIn 0.24s ease-out forwards;
 }
 
 /* Home gallery mobile fade / scale crossfade */

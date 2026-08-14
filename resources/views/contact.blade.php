@@ -4,61 +4,128 @@
 
 @section('content')
 @php
-    $heroBg = 'https://images.unsplash.com/photo-1605902711622-cfb43c4437d2?auto=format&fit=crop&w=1800&q=80';
-    $heroAgentsImg = asset('images/contact us/' . rawurlencode('ChatGPT Image Jul 4, 2026, 11_35_33 AM.png'));
+    $heroBg = asset('images/contact us/' . rawurlencode('ChatGPT Image Jul 4, 2026, 11_35_33 AM.png'));
 
-    $heroFeatures = [
-        ['icon' => 'phone', 'title' => 'Fast Response', 'desc' => 'Quick answers when you need them.'],
-        ['icon' => 'headphones', 'title' => 'Friendly Help', 'desc' => 'A team that listens and cares.'],
-        ['icon' => 'mail', 'title' => 'Sales Assistance', 'desc' => 'Guidance for every purchase.'],
-        ['icon' => 'wrench', 'title' => 'Service Guidance', 'desc' => 'Expert support for your ride.'],
+    $heroStrip = [
+        ['icon' => 'clock', 'title' => 'Fast Response', 'sub' => 'Within one working day'],
+        ['icon' => 'users', 'title' => 'Friendly Help', 'sub' => 'A team that listens and cares'],
+        ['icon' => 'file-text', 'title' => 'Sales Assistance', 'sub' => 'Guidance for every purchase'],
+        ['icon' => 'wrench', 'title' => 'Service Guidance', 'sub' => 'Support for your ride'],
     ];
 
     $contactCards = [
         [
             'icon' => 'phone',
-            'title' => 'Call Us',
+            'title' => 'Call us',
             'value' => '+960 779 7442',
             'action' => 'Call Now',
             'href' => 'tel:+9607797442',
         ],
         [
+            'icon' => 'message-circle',
+            'title' => 'WhatsApp us',
+            'value' => '+960 779 7442',
+            'action' => 'Open WhatsApp',
+            'href' => 'https://wa.me/9607797442',
+        ],
+        [
             'icon' => 'mail',
-            'title' => 'Email Us',
+            'title' => 'Email us',
             'value' => 'sales@litusgroup.mv',
             'action' => 'Send Email',
             'href' => 'mailto:sales@litusgroup.mv',
         ],
+    ];
+
+    $inquiryTypes = [
+        'Buying a motorcycle',
+        'Ijara ownership plan',
+        'A current promotion',
+        'Parts',
+        'Service booking',
+        'Something else',
+    ];
+
+    // Same locations as About — text only (no images)
+    $visitShowrooms = [
         [
-            'icon' => 'map-pin',
-            'title' => 'Visit Us',
-            'value' => 'Ma. Elyzium, Buruzu Magu,<br>Malé, Maldives',
-            'value_html' => true,
-            'action' => 'View Location',
-            'href' => 'https://maps.google.com/?q=Male,Maldives',
+            'name' => 'Malé Showroom',
+            'address' => 'Chaandhanee Magu, Malé, Maldives',
+            'services' => ['Sales', 'Service Centre', 'Parts'],
+            'phone' => '+960 779 7442',
+        ],
+        [
+            'name' => 'Hithadhoo Showroom',
+            'address' => 'Fenfiyazmagu, S. Hithadhoo, Maldives',
+            'services' => ['Sales', 'Service Centre', 'Parts'],
+            'phone' => '+960 779 7444',
+        ],
+        [
+            'name' => 'Kudahuvadhoo Showroom',
+            'address' => 'Izzudheen Magu, Dh. Kudahuvadhoo, Maldives',
+            'services' => ['Sales', 'Parts'],
+            'phone' => '+960 779 7442',
+        ],
+        [
+            'name' => 'Naifaru Showroom',
+            'address' => 'Ifthithaahee Magu, Lh. Naifaru, Maldives',
+            'services' => ['Sales', 'Parts'],
+            'phone' => '+960 779 7442',
+        ],
+        [
+            'name' => 'Villingili Showroom',
+            'address' => 'Ameenee Magu, GA. Villingili, Maldives',
+            'services' => ['Sales', 'Parts'],
+            'phone' => '+960 779 7442',
+        ],
+        [
+            'name' => 'Feydhoo Showroom',
+            'address' => 'Maathila Magu, S. Feydhoo, Maldives',
+            'services' => ['Sales', 'Parts'],
+            'phone' => '+960 779 7442',
+        ],
+        [
+            'name' => 'Fonadhoo Showroom',
+            'address' => 'Sinajuddeen Magu, L. Fonadhoo, Maldives',
+            'services' => ['Sales', 'Parts'],
+            'phone' => '+960 779 7446',
+        ],
+        [
+            'name' => 'Head Office',
+            'address' => 'Ma. Eyrum, Buruzu Magu, Malé, Maldives',
+            'services' => ['Sales', 'Support'],
+            'phone' => '+960 779 7442',
+        ],
+        [
+            'name' => 'Hulhumale Showroom',
+            'address' => 'Nirolhu Magu, Hulhumale, Maldives',
+            'services' => ['Sales', 'Parts'],
+            'phone' => '+960 779 7443',
+        ],
+        [
+            'name' => 'Thinadhoo Showroom',
+            'address' => 'Avenue Magu, Thinadhoo, Maldives',
+            'services' => ['Sales', 'Parts'],
+            'phone' => '+960 779 7442',
         ],
     ];
 
-    $inquiryTypes = ['Motorcycle Availability', 'Ownership Plans', 'Parts Inquiry', 'Service Booking', 'General Inquiry'];
+    $showrooms = collect($visitShowrooms)->map(fn ($s) => [
+        'name' => $s['name'],
+        'label' => $s['name'],
+    ])->all();
 
-    $socials = [
-        ['icon' => 'facebook', 'href' => '#', 'bg' => 'bg-[#1877f2]', 'label' => 'Facebook'],
-        ['icon' => 'instagram', 'href' => '#', 'bg' => 'bg-gradient-to-br from-[#833ab4] via-[#fd1d1d] to-[#fcb045]', 'label' => 'Instagram'],
-        ['icon' => 'message-circle', 'href' => 'https://wa.me/9607797442', 'bg' => 'bg-[#25d366]', 'label' => 'WhatsApp'],
-        ['icon' => 'mail', 'href' => 'mailto:sales@litusgroup.mv', 'bg' => 'bg-[#f44336]', 'label' => 'Email'],
+    $hours = [
+        ['label' => 'Sales support', 'value' => 'Sun–Thu · 9:30 AM – 6:00 PM'],
+        ['label' => 'Service centre', 'value' => 'Sun–Thu · 9:30 AM – 6:00 PM'],
+        ['label' => 'Online inquiry', 'value' => 'Anytime'],
     ];
 
-    $quickAssistanceBg = 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1200&q=80';
-    $mapsEmbedUrl = 'https://www.google.com/maps?q=Ma.%20Elyzium%2C%20Buruzu%20Magu%2C%20Male%2C%20Maldives&output=embed';
-    $mapsLinkUrl = 'https://www.google.com/maps/search/?api=1&query=Ma.%20Elyzium%2C%20Buruzu%20Magu%2C%20Male%2C%20Maldives';
+    $mapsEmbedUrl = 'https://www.google.com/maps?q=Ma.%20Elysium%2C%20Buruzu%20Magu%2C%20Male%2C%20Maldives&output=embed';
+    $mapsLinkUrl = 'https://www.google.com/maps/search/?api=1&query=Ma.%20Elysium%2C%20Buruzu%20Magu%2C%20Male%2C%20Maldives';
 
-    $darkInputCls = 'w-full rounded-xl border border-white/[0.22] bg-[#061326] px-3.5 py-3.5 text-sm text-white placeholder-[#9ca8b7] outline-none transition-all duration-300 focus:border-[#0065ef] focus:shadow-[0_0_0_3px_rgba(0,101,239,0.15)] max-md:min-h-12';
-
-    $hoursCards = [
-        ['icon' => 'shopping-bag', 'title' => 'Sales Support', 'text' => 'Sun–Thu<br>8:30 AM – 6:00 PM'],
-        ['icon' => 'wrench', 'title' => 'Service Center Support', 'text' => 'Sun–Thu<br>8:30 AM – 6:00 PM'],
-        ['icon' => 'phone', 'title' => 'Online Inquiry', 'text' => 'Send your inquiry anytime.<br>Our team will respond as soon<br>as possible.'],
-    ];
+    $fieldLabel = 'mb-1.5 block text-[12.5px] font-semibold text-litus-text-2';
+    $fieldControl = 'w-full rounded-[10px] border border-litus-line-2 bg-white px-3.5 py-3 text-[14.5px] text-litus-text outline-none transition placeholder:text-litus-text-3 focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(18,87,214,0.12)]';
 @endphp
 
 <div class="font-sans" data-contact-page>
@@ -66,300 +133,271 @@
     <x-litus-header active="Contact" />
 
     {{-- HERO --}}
-    <section class="relative min-h-[680px] overflow-hidden border border-[rgba(31,80,130,0.4)] bg-[#061326] bg-cover bg-center pb-[82px] max-md:min-h-0 max-md:overflow-visible max-md:border-0 max-md:bg-[#07152f] max-md:pb-0 max-[1100px]:min-h-0 max-[1100px]:pb-8"
-             style="background-image: linear-gradient(90deg, rgba(2,14,32,0.95) 0%, rgba(3,18,40,0.92) 34%, rgba(3,18,40,0.82) 56%, rgba(3,18,40,0.90) 100%), url('{{ $heroBg }}');">
-        <div class="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_30%_45%,rgba(4,42,83,0.6),transparent_35%),radial-gradient(circle_at_75%_45%,rgba(4,33,67,0.55),transparent_38%),linear-gradient(to_bottom,rgba(0,0,0,0.15),rgba(2,10,25,0.96))] max-md:bg-[radial-gradient(ellipse_at_50%_0%,rgba(0,101,239,0.22),transparent_55%),linear-gradient(180deg,#0a1a38_0%,#07152f_55%,#061326_100%)]"></div>
+    <section class="relative overflow-hidden bg-litus-ink text-white">
+        {{-- Agents on the right; contain keeps both faces uncropped --}}
+        <div class="pointer-events-none absolute inset-y-0 right-[2%] z-[1] w-full max-md:right-0 max-md:opacity-[0.38] md:w-[58%] lg:w-[52%]"
+             aria-hidden="true">
+            <img src="{{ $heroBg }}"
+                 alt=""
+                 class="absolute inset-0 h-full w-full origin-bottom scale-105 object-contain object-[center_85%] md:object-[center_bottom]">
+        </div>
+        <div class="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(90deg,rgba(5,11,24,0.98)_0%,rgba(5,11,24,0.94)_42%,rgba(5,11,24,0.55)_68%,rgba(5,11,24,0.2)_100%)] max-md:bg-[linear-gradient(180deg,rgba(5,11,24,0.35)_0%,rgba(5,11,24,0.72)_48%,rgba(5,11,24,0.96)_100%)]"></div>
+        <div class="pointer-events-none absolute inset-0 z-[2]"
+             style="background:
+                radial-gradient(900px 520px at 82% 6%, rgba(46,116,238,.22), transparent 62%),
+                radial-gradient(680px 460px at 2% 96%, rgba(90,184,255,.12), transparent 60%),
+                linear-gradient(180deg, transparent 40%, rgba(5,11,24,.45) 100%);"></div>
+        <div class="pointer-events-none absolute inset-0 z-[2] opacity-[0.28]"
+             style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px; mask-image: radial-gradient(700px 500px at 30% 30%, #000, transparent 78%);"></div>
 
-        <img src="{{ $heroAgentsImg }}"
-             alt="LITUS customer support team"
-             class="pointer-events-none absolute z-[2] bottom-0 left-[max(1.25rem,calc((100vw-90rem)/2+1rem))] hidden h-auto max-h-[720px] w-auto max-w-[min(720px,43vw)] origin-bottom scale-[1.1] object-contain object-bottom min-[1100px]:block"
-             width="560"
-             height="400"
-             decoding="async">
-
-        <div class="relative z-[2] litus-container grid w-full grid-cols-1 gap-6 pb-10 pt-14 max-md:gap-0 max-md:px-0 max-md:pb-0 max-md:pt-3 sm:pt-16 min-[1100px]:grid-cols-[minmax(0,42%)_minmax(0,58%)] min-[1100px]:items-center min-[1100px]:gap-12 min-[1100px]:pb-14 min-[1100px]:pt-16">
-            <div class="relative mx-auto w-full max-w-[300px] min-[1100px]:hidden">
-                <div class="pointer-events-none absolute inset-x-4 bottom-2 h-16 rounded-full bg-[#0065ef]/28 blur-3xl"></div>
-                <img src="{{ $heroAgentsImg }}"
-                     alt="LITUS customer support team"
-                     class="relative z-[1] mx-auto block h-auto w-full max-h-[230px] object-contain object-bottom"
-                     width="560"
-                     height="400"
-                     decoding="async">
-                <div class="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-12 bg-gradient-to-t from-[#07152f] to-transparent"></div>
-            </div>
-
-            <div class="hidden min-[1100px]:block min-[1100px]:min-h-[500px]" aria-hidden="true"></div>
-
-            <div class="relative z-10 min-w-0 max-w-[760px] pl-0 text-center max-md:mx-auto max-md:w-full max-md:px-4 max-md:pb-3 max-md:pt-0 min-[1100px]:col-start-2 min-[1100px]:pl-4 min-[1100px]:text-left">
-                <p class="mb-4 text-base font-extrabold uppercase tracking-[2px] text-[#0065ef] max-md:mb-1 max-md:text-[10px] max-md:tracking-[0.18em] sm:text-lg">
-                    Customer Support
-                </p>
-
-                <h1 class="mb-4 font-montserrat text-[clamp(2.25rem,4.2vw,4.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] max-md:mb-2 max-md:text-[1.7rem] max-md:leading-[1.12]">
-                    We're Here to Help<br>
-                    You Ride Better
+        <div class="relative z-[3] litus-container py-[clamp(32px,4vw,56px)] pb-[clamp(28px,3.5vw,44px)]">
+            <div class="max-w-[560px] lg:max-w-[580px]">
+                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky">Customer Support</span>
+                <h1 class="font-display text-[clamp(28px,3.8vw,46px)] font-bold leading-[1.08] tracking-[-0.032em] drop-shadow-[0_6px_20px_rgba(0,0,0,0.45)]">
+                    We are here to help<br><span class="text-litus-sky">you ride better.</span>
                 </h1>
-
-                <p class="mx-auto mb-6 max-w-[620px] text-base font-medium leading-[1.5] text-[#e6edf5] max-md:mb-3 max-md:max-w-[30ch] max-md:text-[12px] max-md:leading-snug sm:text-lg sm:leading-[1.55] min-[1100px]:mx-0">
-                    Questions about motorcycles, ownership plans, parts, or service? Our team is ready to help.
+                <p class="mt-3 max-w-[560px] text-[clamp(15px,1.3vw,17px)] leading-[1.66] text-white/[0.78]">
+                    Questions about motorcycles, ownership plans, parts or service? Our team is ready to help — by phone, WhatsApp, email, or in person at any of our showrooms.
                 </p>
-
-                <div class="flex flex-col items-stretch justify-center gap-2.5 max-md:w-full max-md:flex-row max-md:gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-7 min-[1100px]:justify-start">
+                <div class="mt-5 flex flex-wrap gap-3">
                     <a href="#contact-form"
-                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-2 rounded-[9px] bg-[#0065ef] px-5 text-base font-extrabold text-white shadow-[0_8px_22px_rgba(0,101,239,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] max-md:h-11 max-md:min-h-11 max-md:min-w-0 max-md:flex-1 max-md:rounded-xl max-md:px-3 max-md:text-[13px] sm:h-[60px] sm:min-w-[220px] sm:text-lg">
-                        Contact Now
-                        <x-litus-icon name="arrow-right" class="h-4 w-4 max-md:h-3.5 max-md:w-3.5 sm:h-5 sm:w-5" />
+                       class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-7 py-[15px] text-[15px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
+                        Send a Message
+                        <x-litus-icon name="arrow-right" class="h-4 w-4" />
                     </a>
-                    <a href="https://maps.google.com/?q=Male+Maldives+Buruzu+Magu"
+                    <a href="{{ $mapsLinkUrl }}"
                        target="_blank"
                        rel="noopener noreferrer"
-                       class="inline-flex h-14 min-w-[200px] items-center justify-center gap-2 rounded-[9px] border-2 border-white/65 bg-[rgba(6,16,28,0.45)] px-5 text-base font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.15)] max-md:h-11 max-md:min-h-11 max-md:min-w-0 max-md:flex-1 max-md:rounded-xl max-md:border-white/35 max-md:bg-white/[0.06] max-md:px-3 max-md:text-[13px] sm:h-[60px] sm:min-w-[220px] sm:text-lg">
+                       class="inline-flex items-center justify-center rounded-lg border-[1.5px] border-white/32 px-7 py-[15px] text-[15px] font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10">
                         Get Directions
-                        <x-litus-icon name="navigation" class="h-4 w-4 max-md:h-3.5 max-md:w-3.5 sm:h-5 sm:w-5" />
                     </a>
                 </div>
             </div>
         </div>
 
-        <x-litus-hero-features :features="$heroFeatures" />
+        <div class="relative z-[3] border-t border-white/11 bg-black/35 backdrop-blur-sm">
+            <div class="litus-container grid grid-cols-2 gap-0 py-[14px] min-[960px]:grid-cols-4 min-[960px]:py-[18px]">
+                @foreach ($heroStrip as $index => $item)
+                    <div @class([
+                        'flex items-center gap-[13px] px-3 py-3.5 sm:px-4',
+                        'min-[960px]:border-r min-[960px]:border-white/16' => $index < count($heroStrip) - 1,
+                        'border-b border-white/12 min-[960px]:border-b-0' => $index < 2,
+                        'border-r border-white/16' => in_array($index, [0, 2], true),
+                    ])>
+                        <div class="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[10px] bg-[rgba(90,184,255,0.15)] text-litus-sky">
+                            <x-litus-icon :name="$item['icon']" class="h-4 w-4" />
+                        </div>
+                        <div class="min-w-0">
+                            <b class="block text-sm font-semibold leading-snug text-white">{{ $item['title'] }}</b>
+                            <span class="block text-[12.5px] leading-snug text-white/60">{{ $item['sub'] }}</span>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </section>
 
-    {{-- CONTACT CARDS --}}
-    <section class="border border-[#d8d8d8] bg-white py-11 pb-14 max-md:border-0 max-md:bg-[#f7f8fa] max-md:py-8 max-md:pb-8">
+    {{-- GET IN TOUCH --}}
+    <section class="litus-sec">
         <div class="litus-container">
-            <div class="mb-7 text-center max-md:mb-4">
-                <span class="mb-2.5 block text-sm font-black uppercase text-[#0065ef] max-md:mb-1.5 max-md:text-[11px] max-md:tracking-[0.16em]">Get In Touch</span>
-                <h2 class="mb-3 font-montserrat text-[28px] font-bold tracking-[-0.5px] text-[#07152f] max-md:mb-1.5 max-md:text-[22px] sm:text-[34px]">Contact LITUS Automobiles</h2>
-                <p class="text-[15px] font-medium leading-normal text-[#4d5566] max-md:mx-auto max-md:max-w-[32ch] max-md:text-[13px] sm:text-base">
-                    Reach our team through phone, email, or visit our office.
+            <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
+                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Get in Touch</span>
+                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Contact LITUS Automobiles</h2>
+                <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
+                    Reach our team through phone, WhatsApp, email, or visit our office.
                 </p>
             </div>
 
-            {{-- Mobile: compact action list --}}
-            <div class="overflow-hidden rounded-2xl border border-[#e6eaf0] bg-white shadow-none md:hidden">
-                @foreach ($contactCards as $index => $card)
-                    <a href="{{ $card['href'] }}"
-                       target="{{ str_starts_with($card['href'], 'http') ? '_blank' : '_self' }}"
-                       @if(str_starts_with($card['href'], 'http')) rel="noopener noreferrer" @endif
-                       @class([
-                           'flex items-center gap-3.5 px-4 py-3.5 active:bg-[#f3f6fa]',
-                           'border-t border-[#eef1f5]' => $index > 0,
-                       ])>
-                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#0065ef]/10 text-[#0065ef]">
-                            <x-litus-icon :name="$card['icon']" class="h-[18px] w-[18px]" />
-                        </div>
-                        <div class="min-w-0 flex-1 text-left">
-                            <p class="mb-0.5 text-[11px] font-bold uppercase tracking-[0.06em] text-[#7a8494]">{{ $card['title'] }}</p>
-                            <p class="truncate text-[14px] font-extrabold leading-snug text-[#07152f]">
-                                @if (!empty($card['value_html']))
-                                    {!! str_replace('<br>', ' ', $card['value']) !!}
-                                @else
-                                    {{ $card['value'] }}
-                                @endif
-                            </p>
-                        </div>
-                        <x-litus-icon name="chevron-right" class="h-4 w-4 shrink-0 text-[#9aa3b2]" />
-                    </a>
-                @endforeach
-            </div>
-
-            {{-- Desktop / tablet: original cards --}}
-            <div class="mx-auto hidden max-w-[650px] grid-cols-1 gap-3.5 md:grid lg:max-w-none lg:grid-cols-3 lg:gap-4">
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                 @foreach ($contactCards as $card)
-                    <a href="{{ $card['href'] }}"
-                       target="{{ str_starts_with($card['href'], 'http') ? '_blank' : '_self' }}"
-                       @if(str_starts_with($card['href'], 'http')) rel="noopener noreferrer" @endif
-                       class="group flex items-center gap-[22px] rounded-2xl border border-[#e8ecf2] bg-white p-6 shadow-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(7,21,47,0.1)] lg:min-h-[145px]">
-                        <div class="flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-full bg-[#061530] text-[#0065ef] shadow-[0_8px_18px_rgba(6,21,48,0.2)]">
-                            <x-litus-icon :name="$card['icon']" class="h-[30px] w-[30px]" />
+                    <article class="group rounded-[18px] border border-litus-line bg-white px-[26px] py-[30px] shadow-[0_1px_2px_rgba(9,17,32,.05)] transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
+                        <div class="mb-[18px] grid h-[42px] w-[42px] place-items-center rounded-[12px] bg-litus-paper-3 text-litus-primary transition duration-200 group-hover:bg-[rgba(18,87,214,0.12)]">
+                            <x-litus-icon :name="$card['icon']" class="h-5 w-5" />
                         </div>
-
-                        <div class="min-w-0 flex-1 text-left">
-                            <h3 class="mb-2.5 text-base font-extrabold text-[#07152f]">{{ $card['title'] }}</h3>
-                            <p class="mb-6 text-lg font-black leading-[1.35] text-[#07152f] sm:text-[19px]">
-                                @if (!empty($card['value_html']))
-                                    {!! $card['value'] !!}
-                                @else
-                                    {{ $card['value'] }}
-                                @endif
-                            </p>
-                            <span class="inline-flex items-center gap-2 text-sm font-black text-[#0065ef] transition-all duration-300 group-hover:gap-3">
-                                {{ $card['action'] }}
-                                <x-litus-icon name="arrow-right" class="h-3.5 w-3.5" />
-                            </span>
-                        </div>
-                    </a>
+                        <h4 class="mb-1.5 text-lg font-bold text-litus-text">{{ $card['title'] }}</h4>
+                        <p class="mb-4 text-base font-semibold text-litus-text">{{ $card['value'] }}</p>
+                        <a href="{{ $card['href'] }}"
+                           @if (str_starts_with($card['href'], 'http')) target="_blank" rel="noopener noreferrer" @endif
+                           class="inline-flex items-center gap-2 text-[14.5px] font-semibold text-litus-primary transition hover:gap-3">
+                            {{ $card['action'] }}
+                            <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                        </a>
+                    </article>
                 @endforeach
             </div>
         </div>
     </section>
 
     {{-- FORM + MAP --}}
-    <section class="bg-[#f8f8f8] py-14 min-[651px]:py-16" id="contact-form">
-        <div class="litus-container">
-
-            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch lg:gap-5">
-                {{-- Message form --}}
-                <div class="flex h-full flex-col overflow-hidden rounded-2xl bg-gradient-to-br from-[#06152d] to-[#010a18] p-5 text-white shadow-[0_12px_30px_rgba(0,0,0,0.08)] max-md:rounded-2xl sm:p-7 max-sm:p-5">
-                    <h2 class="font-montserrat mb-2 text-[22px] font-bold max-md:text-xl sm:mb-2.5 sm:text-2xl">Send Us a Message</h2>
-                    <p class="mb-5 text-sm text-[#b9c3d0] max-md:mb-4">Fill out the form and our team will contact you shortly.</p>
-
-                    <div class="hidden flex-col items-center justify-center py-12 text-center" data-contact-success>
-                        <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#0065ef]/15">
-                            <x-litus-icon name="check-circle" class="h-8 w-8 text-[#0065ef]" />
-                        </div>
-                        <h3 class="mb-2 text-xl font-bold text-white">Message Sent!</h3>
-                        <p class="max-w-xs text-sm text-[#b9c3d0]">Our team will get back to you within 24 hours.</p>
-                        <button type="button" data-contact-reset class="mt-5 min-h-11 text-sm font-bold text-[#0065ef] underline">Send another message</button>
+    <section id="contact-form" class="litus-sec scroll-mt-24 bg-litus-paper-2">
+        <div class="litus-container grid grid-cols-1 items-start gap-[34px] min-[1000px]:grid-cols-2">
+            <div class="rounded-[26px] border border-litus-line bg-white p-[clamp(22px,3vw,32px)] shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)]">
+                <div class="hidden py-10 text-center" data-contact-success>
+                    <div class="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-full bg-[rgba(18,87,214,0.1)] text-litus-primary">
+                        <x-litus-icon name="check-circle" class="h-8 w-8" />
                     </div>
+                    <h3 class="font-display text-2xl font-bold text-litus-text">Message sent</h3>
+                    <p class="mx-auto mt-3 max-w-sm text-[15px] leading-relaxed text-litus-text-2">
+                        Our team will get back to you within one working day.
+                    </p>
+                    <button type="button"
+                            data-contact-reset
+                            class="mt-6 text-[14.5px] font-semibold text-litus-primary underline">
+                        Send another message
+                    </button>
+                </div>
 
-                    <form data-contact-form action="#" method="post" class="flex flex-1 flex-col">
-                        @csrf
-                        <div class="mb-4 grid grid-cols-1 gap-4 sm:mb-[18px] sm:grid-cols-2">
-                            <div>
-                                <label class="mb-2 block text-[13px] font-bold text-white">Full Name</label>
-                                <input type="text" name="name" placeholder="Enter your name" class="{{ $darkInputCls }}" required>
-                            </div>
-                            <div>
-                                <label class="mb-2 block text-[13px] font-bold text-white">Mobile Number</label>
-                                <input type="tel" name="mobile" placeholder="Enter your mobile number" class="{{ $darkInputCls }}" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-4 sm:mb-[18px]">
-                            <label class="mb-2 block text-[13px] font-bold text-white">Email Address</label>
-                            <input type="email" name="email" placeholder="Enter your email address" class="{{ $darkInputCls }}" required>
-                        </div>
-
-                        <div class="mb-4 sm:mb-[18px]">
-                            <label class="mb-2 block text-[13px] font-bold text-white">Inquiry Type</label>
-                            <div class="relative">
-                                <select name="inquiry_type" class="{{ $darkInputCls }} cursor-pointer appearance-none pr-10" required>
-                                    <option value="" disabled selected>Select inquiry type</option>
-                                    @foreach ($inquiryTypes as $type)
-                                        <option value="{{ $type }}" class="bg-[#061326]">{{ $type }}</option>
-                                    @endforeach
-                                </select>
-                                <x-litus-icon name="chevron-down" class="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9ca8b7]" />
-                            </div>
-                        </div>
-
-                        <div class="mb-5 sm:mb-[18px]">
-                            <label class="mb-2 block text-[13px] font-bold text-white">Message</label>
-                            <textarea name="message" placeholder="How can we help you?" class="{{ $darkInputCls }} h-[110px] resize-none sm:h-[95px]" required></textarea>
-                        </div>
-
+                <form data-contact-form action="#" method="post" class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    @csrf
+                    <div class="sm:col-span-2">
+                        <h3 class="font-display text-[clamp(20px,2.2vw,26px)] font-semibold tracking-[-0.02em] text-litus-text">Send us a message</h3>
+                        <p class="mt-1.5 text-sm text-litus-text-2">Fill in the form and our team will contact you shortly.</p>
+                    </div>
+                    <div>
+                        <label class="{{ $fieldLabel }}">Full name</label>
+                        <input type="text" name="name" placeholder="Enter your name" required class="{{ $fieldControl }}">
+                    </div>
+                    <div>
+                        <label class="{{ $fieldLabel }}">Mobile number</label>
+                        <input type="tel" name="mobile" placeholder="7XXXXXX" required class="{{ $fieldControl }}">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="{{ $fieldLabel }}">Email address</label>
+                        <input type="email" name="email" placeholder="Enter your email" required class="{{ $fieldControl }}">
+                    </div>
+                    <div>
+                        <label class="{{ $fieldLabel }}">Inquiry type</label>
+                        <select name="inquiry_type" required class="{{ $fieldControl }}">
+                            @foreach ($inquiryTypes as $type)
+                                <option value="{{ $type }}">{{ $type }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label class="{{ $fieldLabel }}">Nearest showroom</label>
+                        <select name="showroom" class="{{ $fieldControl }}">
+                            @foreach ($showrooms as $showroom)
+                                <option value="{{ $showroom['name'] }}">{{ $showroom['label'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="{{ $fieldLabel }}">Message</label>
+                        <textarea name="message" rows="4" placeholder="How can we help you?" required class="{{ $fieldControl }} min-h-[110px] resize-y"></textarea>
+                    </div>
+                    <div class="sm:col-span-2">
                         <button type="submit"
-                                class="mt-auto flex h-12 w-full items-center justify-center gap-2.5 rounded-xl bg-[#0065ef] text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] sm:h-[52px] sm:rounded-md">
+                                class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                             Send Message
                             <x-litus-icon name="arrow-right" class="h-4 w-4" />
                         </button>
-                    </form>
-                </div>
+                    </div>
+                </form>
+            </div>
 
-                {{-- Map --}}
-                <div class="flex h-full min-h-0 flex-col overflow-hidden rounded-2xl bg-white p-2 shadow-[0_12px_30px_rgba(0,0,0,0.08)] sm:rounded-[10px] sm:p-2.5">
-                    <div class="min-h-[240px] flex-1 overflow-hidden rounded-xl bg-[#dde5ef] max-md:min-h-[220px] sm:min-h-[300px] sm:rounded-md">
-                        <iframe title="LITUS Group Head Office"
+            <div>
+                <div class="overflow-hidden rounded-[18px] border border-litus-line bg-litus-paper-3 shadow-[0_1px_2px_rgba(9,17,32,.05)]">
+                    <div class="relative aspect-[4/3] bg-[#DCE8FF]">
+                        <iframe title="LITUS Head Office map"
                                 src="{{ $mapsEmbedUrl }}"
-                                class="block h-full min-h-[240px] w-full border-0 max-md:min-h-[220px] sm:min-h-[300px]"
+                                class="absolute inset-0 h-full w-full border-0"
                                 loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <div class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 to-transparent px-5 pb-4 pt-10 text-white">
+                            <div class="flex items-start gap-2">
+                                <x-litus-icon name="map-pin" class="mt-0.5 h-4 w-4 shrink-0" />
+                                <div>
+                                    <b class="block font-display text-[15px]">Ma. Elysium, Buruzu Magu</b>
+                                    <span class="text-[13px] text-white/80">Malé, Maldives</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="shrink-0 rounded-b-xl bg-gradient-to-br from-[#06152d] to-[#010a18] p-4 text-center sm:rounded-b-[7px] sm:p-[18px]">
-                        <a href="{{ $mapsLinkUrl }}"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="inline-flex h-11 w-full min-w-0 items-center justify-center gap-2.5 rounded-xl border border-white/45 text-sm font-extrabold text-white transition-all duration-300 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] sm:min-w-[220px] sm:w-auto sm:rounded-[5px]">
-                            Open in Google Maps
-                            <x-litus-icon name="arrow-right" class="h-3.5 w-3.5" />
-                        </a>
+                </div>
+
+                <a href="{{ $mapsLinkUrl }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="mt-3.5 inline-flex w-full items-center justify-center gap-2 rounded-lg border-[1.5px] border-litus-line-2 bg-white px-5 py-3.5 text-[14.5px] font-semibold text-litus-ink transition hover:-translate-y-0.5 hover:border-litus-primary-light hover:text-litus-primary">
+                    Open in Google Maps
+                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                </a>
+
+                <div class="mt-[22px] rounded-[26px] border border-litus-line bg-white p-[26px] shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)]">
+                    <h4 class="mb-4 font-display text-[clamp(20px,2.2vw,24px)] font-semibold tracking-[-0.02em] text-litus-text">Business hours</h4>
+                    <div class="divide-y divide-litus-line text-[14.5px]">
+                        @foreach ($hours as $row)
+                            <div class="flex justify-between gap-4 py-3.5">
+                                <span class="text-litus-text-2">{{ $row['label'] }}</span>
+                                <b class="text-right text-litus-text">{{ $row['value'] }}</b>
+                            </div>
+                        @endforeach
                     </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    {{-- CONNECT WITH US --}}
-    <section class="border-t border-[#e6eaf0] bg-white py-12 min-[651px]:py-16">
-        <div class="litus-container">
-            <div class="flex flex-col items-center justify-between gap-5 overflow-hidden rounded-2xl border border-[#e8ecf2] bg-white px-6 py-8 shadow-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(7,21,47,0.1)] max-lg:text-center sm:gap-6 sm:px-10 sm:py-9 lg:flex-row lg:rounded-[10px] lg:px-12 lg:py-10">
-                <div>
-                    <h2 class="font-montserrat mb-1.5 text-xl font-bold text-[#07152f] sm:mb-2 sm:text-2xl">Connect With Us</h2>
-                    <p class="text-sm text-[#4f5b6c] sm:text-[15px]">Follow or message us through our social channels.</p>
-                </div>
-                <div class="flex items-center justify-center gap-4 max-md:w-full max-md:justify-between max-md:px-2 sm:gap-[25px]">
-                    @foreach ($socials as $social)
-                        <a href="{{ $social['href'] }}"
-                           @if(str_starts_with($social['href'], 'http')) target="_blank" rel="noopener noreferrer" @endif
-                           class="flex h-12 w-12 items-center justify-center rounded-full text-white transition-all duration-300 hover:-translate-y-1 max-md:h-14 max-md:w-14 sm:h-[55px] sm:w-[55px] {{ $social['bg'] }}"
-                           aria-label="{{ $social['label'] }}">
-                            <x-litus-icon :name="$social['icon']" class="h-6 w-6 max-md:h-6 max-md:w-6 sm:h-[25px] sm:w-[25px]" />
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- QUICK ASSISTANCE --}}
-    <section class="bg-white pb-11 max-md:pb-10 min-[651px]:pb-14">
-        <div class="litus-container">
-            <div class="grid grid-cols-1 items-center gap-5 overflow-hidden rounded-2xl bg-cover bg-right px-5 py-7 text-white shadow-[0_12px_30px_rgba(0,0,0,0.08)] max-lg:text-center sm:gap-7 sm:rounded-[10px] sm:px-[38px] sm:py-8 lg:grid-cols-[auto_1fr_auto]"
-                 style="background-image: linear-gradient(90deg, rgba(3,13,28,0.98), rgba(3,13,28,0.94)), url('{{ $quickAssistanceBg }}');">
-                <div class="mx-auto flex h-[72px] w-[72px] min-w-[72px] items-center justify-center rounded-full border border-white/75 sm:h-[90px] sm:w-[90px] sm:min-w-[90px] lg:mx-0">
-                    <x-litus-icon name="phone" class="h-8 w-8 text-white sm:h-10 sm:w-10" />
-                </div>
-
-                <div>
-                    <h2 class="font-montserrat mb-2 text-xl font-bold sm:mb-2.5 sm:text-2xl">Need Quick Assistance?</h2>
-                    <p class="mx-auto max-w-[580px] text-sm leading-relaxed text-[#d7dee9] max-md:max-w-[34ch] sm:text-[15px] lg:mx-0">
-                        Our team can help with motorcycle availability, ownership plans, parts, and service bookings.
+                    <p class="mt-3.5 text-xs text-litus-text-3">
+                        Send your inquiry anytime — our team will respond as soon as possible.
                     </p>
                 </div>
-
-                <div class="flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-[18px] lg:w-auto lg:justify-end">
-                    <a href="tel:+9607797442"
-                       class="inline-flex h-12 min-w-0 items-center justify-center gap-2.5 rounded-xl bg-[#0065ef] px-6 text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0052cc] sm:h-[52px] sm:min-w-[165px] sm:rounded-[7px]">
-                        Call Now
-                        <x-litus-icon name="arrow-right" class="h-4 w-4" />
-                    </a>
-                    <a href="https://wa.me/9607797442"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="inline-flex h-12 min-w-0 items-center justify-center gap-2.5 rounded-xl border border-white/55 bg-white/[0.03] px-6 text-[15px] font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0065ef] hover:bg-[rgba(0,101,239,0.12)] sm:h-[52px] sm:min-w-[165px] sm:rounded-[7px]">
-                        WhatsApp Us
-                        <x-litus-icon name="arrow-right" class="h-4 w-4" />
-                    </a>
-                </div>
             </div>
         </div>
     </section>
 
-    {{-- BUSINESS HOURS --}}
-    <section class="border border-[#d9d9d9] bg-[#fafafa] py-11 pb-14 max-md:border-0 max-md:py-9 max-md:pb-10">
+    {{-- VISIT US --}}
+    <section class="litus-sec">
         <div class="litus-container">
-            <h2 class="mb-7 text-center font-montserrat text-[24px] font-bold tracking-[-0.5px] text-[#07152f] max-md:mb-5 max-md:text-[22px] sm:text-[28px]">Business Hours</h2>
+            <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
+                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Visit Us</span>
+                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Our showrooms and service centres</h2>
+            </div>
 
-            <div class="mx-auto grid max-w-[650px] grid-cols-1 gap-3.5 max-md:gap-3 lg:max-w-none lg:grid-cols-3 lg:gap-4">
-                @foreach ($hoursCards as $card)
-                    <div class="group flex items-center gap-4 rounded-2xl border border-[#e8ecf2] bg-white p-4 shadow-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(7,21,47,0.1)] max-md:min-h-[92px] sm:gap-[22px] sm:p-6 lg:min-h-[145px]">
-                        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#061530] text-white shadow-[0_8px_18px_rgba(6,21,48,0.2)] sm:h-[68px] sm:w-[68px]">
-                            <x-litus-icon :name="$card['icon']" class="h-5 w-5 sm:h-[30px] sm:w-[30px]" />
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+                @foreach ($visitShowrooms as $showroom)
+                    <article class="group flex h-full flex-col rounded-[18px] border border-litus-line bg-white px-[26px] py-[28px] shadow-[0_1px_2px_rgba(9,17,32,.05)] transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
+                        <div class="mb-4 grid h-[42px] w-[42px] place-items-center rounded-[12px] bg-litus-paper-3 text-litus-primary transition duration-200 group-hover:bg-[rgba(18,87,214,0.12)]">
+                            <x-litus-icon name="map-pin" class="h-5 w-5" />
                         </div>
-                        <div class="min-w-0 text-left">
-                            <h3 class="mb-1 text-[13px] font-extrabold text-[#07152f] sm:mb-2 sm:text-sm">{{ $card['title'] }}</h3>
-                            <p class="text-[12px] font-semibold leading-snug text-[#4e5a6a] sm:text-[14px] sm:leading-[1.4]">{!! $card['text'] !!}</p>
+                        <h4 class="mb-2 text-lg font-bold text-litus-text">{{ $showroom['name'] }}</h4>
+                        <p class="mb-3.5 text-[14.5px] leading-relaxed text-litus-text-2">{{ $showroom['address'] }}</p>
+                        <div class="mb-4 flex flex-wrap gap-2">
+                            @foreach ($showroom['services'] as $service)
+                                <span class="rounded-full bg-litus-paper-3 px-3 py-1.5 text-[12.5px] font-semibold text-litus-text-2">{{ $service }}</span>
+                            @endforeach
                         </div>
-                    </div>
+                        <a href="tel:{{ preg_replace('/\s+/', '', $showroom['phone']) }}"
+                           class="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-lg border-[1.5px] border-litus-line-2 bg-white px-4 py-3 text-[13.5px] font-semibold text-litus-ink transition hover:-translate-y-0.5 hover:border-litus-primary-light hover:text-litus-primary">
+                            <x-litus-icon name="phone" class="h-4 w-4" />
+                            {{ $showroom['phone'] }}
+                        </a>
+                    </article>
                 @endforeach
             </div>
         </div>
     </section>
 
-    <x-litus-footer />
+    {{-- CTA --}}
+    <section class="litus-sec-tight bg-litus-ink text-white">
+        <div class="litus-container flex flex-wrap items-center justify-between gap-7">
+            <div class="max-w-[560px]">
+                <h3 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]">Need quick assistance?</h3>
+                <p class="mt-3 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.72]">
+                    Our team can help with motorcycle availability, ownership plans, parts and service bookings.
+                </p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+                <a href="tel:+9607797442"
+                   class="inline-flex items-center justify-center rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
+                    Call Now
+                </a>
+                <a href="https://wa.me/9607797442"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="inline-flex items-center justify-center gap-2 rounded-lg bg-[#1FA855] px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#178443]">
+                    <x-litus-icon name="message-circle" class="h-4 w-4" />
+                    WhatsApp Us
+                </a>
+            </div>
+        </div>
+    </section>
 
+    <x-litus-footer />
 </div>
 @endsection

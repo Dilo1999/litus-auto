@@ -4,6 +4,7 @@ function initOwnershipPlans() {
 
     const plansEl = document.getElementById('ownership-plans-data');
     const plans = plansEl ? JSON.parse(plansEl.textContent) : [];
+    const modal = root.querySelector('[data-plan-modal]');
     const backdrop = root.querySelector('[data-plan-drawer-backdrop]');
     const drawer = root.querySelector('[data-plan-drawer]');
     const closeBtn = root.querySelector('[data-plan-drawer-close]');
@@ -25,7 +26,6 @@ function initOwnershipPlans() {
     let activePlan = null;
 
     const setAccent = (accent, accentLight) => {
-        drawer.style.borderTopColor = accent;
         fields.badge.style.color = accent;
         fields.subtitle.style.color = accent;
         fields.icon.style.color = accent;
@@ -54,7 +54,7 @@ function initOwnershipPlans() {
 
     const openDrawer = (planId) => {
         const plan = plans.find((p) => p.id === planId);
-        if (!plan || !drawer || !backdrop) return;
+        if (!plan || !modal || !drawer) return;
 
         activePlan = plan;
         const d = plan.drawer;
@@ -90,16 +90,16 @@ function initOwnershipPlans() {
             fields.importantWrap?.classList.add('hidden');
         }
 
-        backdrop.classList.remove('hidden');
-        drawer.classList.remove('hidden');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
         drawer.classList.add('ownership-drawer-open');
         document.body.style.overflow = 'hidden';
     };
 
     const closeDrawer = () => {
         activePlan = null;
-        backdrop?.classList.add('hidden');
-        drawer?.classList.add('hidden');
+        modal?.classList.add('hidden');
+        modal?.classList.remove('flex');
         drawer?.classList.remove('ownership-drawer-open');
         document.body.style.overflow = '';
     };
@@ -113,11 +113,6 @@ function initOwnershipPlans() {
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && activePlan) closeDrawer();
-    });
-
-    root.querySelector('[data-scroll-plans]')?.addEventListener('click', (e) => {
-        e.preventDefault();
-        root.querySelector('#ownership-plans')?.scrollIntoView({ behavior: 'smooth' });
     });
 }
 

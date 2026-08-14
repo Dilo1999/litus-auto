@@ -21,7 +21,7 @@
         <a href="{{ route('home') }}" class="flex shrink-0 items-center">
             <img src="{{ $logo }}"
                  alt="LITUS Automobiles"
-                 class="h-9 w-auto sm:h-10">
+                 class="h-10 w-auto sm:h-11">
         </a>
 
         <nav class="ml-3 hidden items-center gap-1 xl:flex" aria-label="Main navigation">
