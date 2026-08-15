@@ -17,18 +17,19 @@
 
 <header class="sticky top-0 z-[200] w-full border-b border-white/[0.09] bg-[rgba(5,11,24,0.94)] backdrop-blur-[16px]"
         data-litus-header>
-    <div class="litus-container relative z-[60] flex h-[72px] items-center gap-[26px]">
-        <a href="{{ route('home') }}" class="flex shrink-0 items-center">
+    <div class="litus-container relative z-[60] flex h-[72px] items-center justify-between gap-4">
+        <a href="{{ route('home') }}" class="relative z-[1] flex shrink-0 items-center">
             <img src="{{ $logo }}"
                  alt="LITUS Automobiles"
                  class="h-10 w-auto sm:h-11">
         </a>
 
-        <nav class="ml-3 hidden items-center gap-1 xl:flex" aria-label="Main navigation">
+        <nav class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-3 xl:flex"
+             aria-label="Main navigation">
             @foreach ($navLinks as $label => $url)
                 <a href="{{ $url }}"
                    @class([
-                       'block rounded-[7px] px-[13px] py-[9px] text-sm font-medium transition-colors duration-150',
+                       'block whitespace-nowrap rounded-[7px] px-4 py-2.5 text-base font-medium transition-colors duration-150',
                        'bg-[rgba(46,116,238,0.24)] text-white' => $active === $label,
                        'text-white/75 hover:bg-white/[0.08] hover:text-white' => $active !== $label,
                    ])>
@@ -37,7 +38,7 @@
             @endforeach
         </nav>
 
-        <div class="ml-auto flex shrink-0 items-center gap-2.5">
+        <div class="relative z-[1] flex shrink-0 items-center gap-2.5">
             <a href="tel:+9607797442"
                class="hidden items-center gap-2 rounded-lg bg-litus-primary px-[19px] py-2.5 text-[13.5px] font-semibold text-white transition-colors hover:bg-litus-primary-hover sm:inline-flex">
                 <x-litus-icon name="phone" class="h-3.5 w-3.5" />
