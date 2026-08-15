@@ -256,7 +256,6 @@ function initGalleryPage() {
     };
 
     const renderMomentCard = (moment, isLarge) => {
-        const badgeClass = moment.badgeRed ? 'bg-[#0065ef]' : 'bg-[#061a45]';
         const titleClass = isLarge
             ? 'text-[18px] min-[651px]:text-[22px] min-[1051px]:text-[28px]'
             : 'text-[18px] min-[651px]:text-xl';
@@ -273,9 +272,6 @@ function initGalleryPage() {
                     data-label="${lightboxLabel}"
                     class="group relative h-[240px] w-full overflow-hidden rounded-[10px] border border-black/8 bg-[#dfe3ea] text-left shadow-[0_10px_26px_rgba(0,0,0,0.12)] min-[651px]:h-[280px] ${isLarge ? 'min-[1051px]:row-span-2 min-[1051px]:h-auto' : 'min-[1051px]:h-full'}">
                 <img src="${moment.img}" alt="${lightboxLabel}" class="h-full w-full object-cover transition-transform duration-[450ms] group-hover:scale-[1.07]">
-                <div class="absolute left-3.5 top-3.5 z-[3] inline-flex min-h-[32px] items-center rounded-full px-3 text-[12px] font-extrabold text-white shadow-[0_8px_18px_rgba(0,0,0,0.25)] min-[651px]:left-[18px] min-[651px]:top-[18px] min-[651px]:min-h-[38px] min-[651px]:px-4 min-[651px]:text-[13px] ${badgeClass}">
-                    ${moment.badge}
-                </div>
                 <div class="absolute bottom-3.5 left-3.5 right-3.5 z-[3] flex flex-col items-start justify-between gap-2 text-white min-[651px]:bottom-[18px] min-[651px]:left-5 min-[651px]:right-5 min-[651px]:flex-row min-[651px]:items-end min-[651px]:gap-3 ${label ? '' : 'min-[651px]:justify-end'}">
                     ${titleHtml}
                     <span class="inline-flex items-center gap-2 whitespace-nowrap text-[13px] font-extrabold opacity-95 min-[651px]:gap-2.5 min-[651px]:text-sm">
@@ -290,7 +286,7 @@ function initGalleryPage() {
     const renderMoments = () => {
         if (!momentsGrid) return;
 
-        if (activeMomentCat === 'Videos') {
+        if (activeMomentCat === 'Videos' || activeMomentCat === 'Customer Moments' || activeMomentCat === 'Motorcycles') {
             return;
         }
 
@@ -370,6 +366,16 @@ function initGalleryPage() {
                 return;
             }
 
+            if (activeMomentCat === 'Customer Moments') {
+                root.querySelector('#gallery-customer-moments')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+
+            if (activeMomentCat === 'Motorcycles') {
+                root.querySelector('#gallery-grid-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+
             renderMoments();
         });
     });
@@ -421,6 +427,7 @@ function initGalleryPage() {
 
     renderGrid();
     renderMoments();
+    bindLightboxOpeners(root.querySelector('[data-gallery-customer-grid]'));
 }
 
 if (document.readyState === 'loading') {

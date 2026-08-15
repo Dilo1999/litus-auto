@@ -54,6 +54,12 @@ class GalleryController extends Controller
             shuffle($featuredMoments);
         }
 
+        $customerMoments = $images
+            ->where('category', GalleryImage::CATEGORY_CUSTOMER_MOMENTS)
+            ->values()
+            ->map(fn (GalleryImage $image) => $image->toFrontendArray())
+            ->all();
+
         $catColors = [
             'Motorcycles' => '#E31E25',
             'Customer Moments' => '#16A34A',
@@ -75,6 +81,7 @@ class GalleryController extends Controller
         return view('gallery', compact(
             'allImages',
             'featuredMoments',
+            'customerMoments',
             'catColors',
             'momentCategories',
             'heroFeatures',
