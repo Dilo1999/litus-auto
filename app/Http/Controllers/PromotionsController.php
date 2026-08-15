@@ -29,6 +29,12 @@ class PromotionsController extends Controller
             ->sortByDesc(fn (Motorcycle $motorcycle) => $motorcycle->discountAmount())
             ->first();
 
+        if ($featured) {
+            $promotions = $promotions
+                ->sortByDesc(fn (Motorcycle $motorcycle) => $motorcycle->id === $featured->id ? 1 : 0)
+                ->values();
+        }
+
         $campaign = Promotion::query()
             ->published()
             ->currentlyActive()
