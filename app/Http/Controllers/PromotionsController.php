@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Motorcycle;
+use App\Models\Promotion;
 use Illuminate\View\View;
 
 class PromotionsController extends Controller
@@ -28,6 +29,14 @@ class PromotionsController extends Controller
             ->sortByDesc(fn (Motorcycle $motorcycle) => $motorcycle->discountAmount())
             ->first();
 
+        $campaign = Promotion::query()
+            ->published()
+            ->currentlyActive()
+            ->featured()
+            ->ordered()
+            ->first()
+            ?? $featured?->activePromotion();
+
         $maxSave = $promotions->max(fn (Motorcycle $motorcycle) => $motorcycle->discountAmount()) ?: 0;
         $minPrice = $promotions->min(fn (Motorcycle $motorcycle) => $motorcycle->promotionalSalePrice()) ?: 0;
 
@@ -39,6 +48,6 @@ class PromotionsController extends Controller
             'formattedMinPrice' => 'MVR ' . number_format($minPrice, 0),
         ];
 
-        return view('promotions', compact('promotions', 'brands', 'featured', 'stats'));
+        return view('promotions', compact('promotions', 'brands', 'featured', 'campaign', 'stats'));
     }
 }

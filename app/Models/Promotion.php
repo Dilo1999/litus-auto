@@ -32,6 +32,8 @@ class Promotion extends Model
             if (! filled($promotion->sort_order) || (int) $promotion->sort_order === 0) {
                 $promotion->sort_order = ((int) static::query()->max('sort_order')) + 1;
             }
+
+            $promotion->starts_at = now();
         });
     }
 

@@ -71,8 +71,8 @@
         <div class="relative z-[3] litus-container py-[clamp(48px,6.5vw,88px)] pb-[clamp(40px,5vw,68px)]">
             <div class="grid items-stretch gap-10 max-[960px]:grid-cols-1 max-[960px]:gap-8 min-[961px]:grid-cols-[1.06fr_0.94fr]">
                 <div class="flex flex-col justify-center">
-                    <span class="mb-4 inline-flex items-center gap-2.5 rounded-full border border-white/16 bg-white/[0.08] px-4 py-2 text-[12.5px] font-semibold">
-                        <span class="litus-live-dot h-[7px] w-[7px] rounded-full bg-[#3DDC84] shadow-[0_0_0_0_rgba(61,220,132,0.7)]" aria-hidden="true"></span>
+                    <span class="mb-4 inline-flex w-fit max-w-full items-center gap-2.5 rounded-full border border-white/16 bg-white/[0.08] px-4 py-2 text-[12.5px] font-semibold">
+                        <span class="litus-live-dot h-[7px] w-[7px] shrink-0 rounded-full bg-[#3DDC84] shadow-[0_0_0_0_rgba(61,220,132,0.7)]" aria-hidden="true"></span>
                         {{ $count }} campaign{{ $count === 1 ? '' : 's' }} running now · Updated {{ now()->format('j M Y') }}
                     </span>
                     <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky">Ongoing Promotions</span>
@@ -216,8 +216,8 @@
     {{-- FEATURED --}}
     @if ($featured && $count > 0)
         @php
-            $campaignEnds = now()->endOfMonth();
-            $campaignStarts = now()->startOfMonth();
+            $campaignStarts = $campaign?->starts_at ?? $campaign?->created_at ?? now();
+            $campaignEnds = $campaign?->ends_at;
         @endphp
         <section class="litus-sec-tight bg-litus-paper-2">
             <div class="litus-container">
@@ -255,16 +255,18 @@
                             {{ $count }} motorcycle{{ $count === 1 ? '' : 's' }} included · campaign prices from {{ $stats['formattedMinPrice'] }}
                         </p>
 
-                        <div class="my-[26px] flex flex-wrap gap-[11px]"
-                             data-promo-countdown
-                             data-ends-at="{{ $campaignEnds->toIso8601String() }}">
-                            @foreach (['Days', 'Hours', 'Mins', 'Secs'] as $i => $label)
-                                <div class="min-w-[70px] rounded-xl border border-white/17 bg-white/10 px-1.5 py-[11px] text-center">
-                                    <b class="block font-display text-[25px] font-bold leading-none" data-cd="{{ $i }}">--</b>
-                                    <span class="text-[9.5px] uppercase tracking-[0.13em] text-white/60">{{ $label }}</span>
-                                </div>
-                            @endforeach
-                        </div>
+                        @if ($campaignEnds)
+                            <div class="my-[26px] flex flex-wrap gap-[11px]"
+                                 data-promo-countdown
+                                 data-ends-at="{{ $campaignEnds->toIso8601String() }}">
+                                @foreach (['Days', 'Hours', 'Mins', 'Secs'] as $i => $label)
+                                    <div class="min-w-[70px] rounded-xl border border-white/17 bg-white/10 px-1.5 py-[11px] text-center">
+                                        <b class="block font-display text-[25px] font-bold leading-none" data-cd="{{ $i }}">--</b>
+                                        <span class="text-[9.5px] uppercase tracking-[0.13em] text-white/60">{{ $label }}</span>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
 
                         <div class="flex flex-wrap gap-3">
                             <a href="#offers"
@@ -282,7 +284,11 @@
                             </a>
                         </div>
                         <p class="mt-[18px] text-xs text-white/50">
-                            Campaign valid {{ $campaignStarts->format('j M Y') }} to {{ $campaignEnds->format('j M Y') }}. Subject to assessment and stock.
+                            @if ($campaignEnds)
+                                Campaign valid {{ $campaignStarts->format('j M Y') }} to {{ $campaignEnds->format('j M Y') }}. Subject to assessment and stock.
+                            @else
+                                Campaign started {{ $campaignStarts->format('j M Y') }}. Subject to assessment and stock.
+                            @endif
                         </p>
                     </div>
 

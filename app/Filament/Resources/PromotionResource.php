@@ -52,14 +52,10 @@ class PromotionResource extends Resource
                             ->rows(3)
                             ->placeholder('Shown on the promotions page and campaign cards.')
                             ->columnSpanFull(),
-                        DateTimePicker::make('starts_at')
-                            ->label('Starts at')
-                            ->helperText('Leave empty to start immediately.'),
                         DateTimePicker::make('ends_at')
                             ->label('Ends at')
-                            ->helperText('Leave empty for no end date.'),
-                    ])
-                    ->columns(2),
+                            ->helperText('Leave empty for no end date. The promotion starts on the date it is created.'),
+                    ]),
 
                 Forms\Components\Section::make('Display settings')
                     ->schema([
@@ -86,11 +82,12 @@ class PromotionResource extends Resource
                 TextColumn::make('motorcycles_count')
                     ->counts('motorcycles')
                     ->label('Products'),
-                TextColumn::make('starts_at')
+                TextColumn::make('created_at')
+                    ->label('Started')
                     ->dateTime()
-                    ->placeholder('Immediate')
                     ->sortable(),
                 TextColumn::make('ends_at')
+                    ->label('Ends at')
                     ->dateTime()
                     ->placeholder('No end')
                     ->sortable(),
