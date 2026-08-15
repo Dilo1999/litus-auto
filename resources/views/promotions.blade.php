@@ -96,63 +96,83 @@
                 </div>
 
                 @if ($count > 0)
-                    <div class="relative h-full overflow-hidden rounded-[22px] border border-white/14 bg-gradient-to-br from-[#061029] via-[#0E2A64] to-[#1B49B8] p-6 shadow-[0_4px_10px_rgba(9,17,32,.08),0_34px_70px_rgba(9,17,32,.16)] min-[961px]:p-7"
+                    <div class="relative flex min-h-[440px] h-full flex-col justify-end overflow-hidden rounded-[22px] border border-white/14 shadow-[0_4px_10px_rgba(9,17,32,.08),0_34px_70px_rgba(9,17,32,.16)] max-[960px]:min-h-[380px]"
+                         style="background: linear-gradient(155deg, #061029 0%, #0E2A64 48%, #1B49B8 100%);"
                          data-promo-hero-slider
                          data-interval="4200">
-                        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(420px_260px_at_68%_18%,rgba(90,184,255,.34),transparent_66%)]"></div>
-                        <div class="relative z-[2] flex h-full flex-col">
-                            <div class="font-display text-[13px] font-bold tracking-[0.24em] text-white">LITUS<span class="mt-[-2px] block text-[7px] font-medium tracking-[0.36em] text-white/60">AUTOMOBILES</span></div>
-                            <span class="mt-5 text-[11.5px] font-bold uppercase tracking-[0.16em] text-litus-sky">Limited time campaign</span>
-                            <div class="mt-2.5 font-display text-[clamp(26px,2.8vw,36px)] font-extrabold leading-[1.05] tracking-[-0.03em]"
-                                 data-promo-hero-saving>
-                                Save<br>{{ $featured->formattedDiscount() }}
-                            </div>
-                            <p class="mt-2.5 text-sm text-white/70" data-promo-hero-name>
-                                Featured: {{ $featured->name }}
-                            </p>
+                        <div class="pointer-events-none absolute inset-0"
+                             style="background:
+                                radial-gradient(480px 300px at 72% 20%, rgba(90,184,255,.36), transparent 62%),
+                                linear-gradient(180deg, rgba(6,16,41,.08) 0%, rgba(6,16,41,.35) 42%, rgba(6,16,41,.92) 100%);"></div>
 
-                            <div class="relative mx-auto mt-auto flex min-h-[160px] w-full flex-1 items-center justify-center">
-                                @foreach ($promotions as $index => $model)
-                                    <img src="{{ $model->listImageUrl() }}"
-                                         alt="{{ $model->name }}"
-                                         data-promo-hero-slide
-                                         data-name="{{ $model->name }}"
-                                         data-discount="{{ $model->formattedDiscount() }}"
-                                         @class([
-                                             'absolute inset-x-0 mx-auto max-h-[160px] w-auto object-contain drop-shadow-[0_20px_18px_rgba(0,0,0,0.35)] transition-opacity duration-700',
-                                             'z-[1] opacity-100' => $index === 0,
-                                             'z-0 opacity-0' => $index !== 0,
-                                         ])
-                                         loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
-                                @endforeach
-                            </div>
+                        <div class="absolute left-6 top-6 z-[4] font-display text-[13px] font-bold tracking-[0.24em] text-white min-[961px]:left-7 min-[961px]:top-7">
+                            LITUS<span class="mt-[-2px] block text-[7px] font-medium tracking-[0.36em] text-white/60">AUTOMOBILES</span>
+                        </div>
 
-                            @if ($count > 1)
-                                <div class="mt-3 flex justify-center gap-1.5">
-                                    @foreach ($promotions as $index => $model)
-                                        <button type="button"
-                                                data-promo-hero-dot="{{ $index }}"
-                                                aria-label="Show {{ $model->name }}"
-                                                @class([
-                                                    'h-1.5 rounded-full transition-all duration-300',
-                                                    'w-5 bg-white' => $index === 0,
-                                                    'w-1.5 bg-white/50' => $index !== 0,
-                                                ])></button>
-                                    @endforeach
+                        <div class="relative z-[2] flex min-h-[280px] flex-1 items-center justify-center px-3 pt-16 max-[960px]:min-h-[240px]">
+                            @foreach ($promotions as $index => $model)
+                                <img src="{{ $model->listImageUrl() }}"
+                                     alt="{{ $model->name }}"
+                                     data-promo-hero-slide
+                                     data-name="{{ $model->name }}"
+                                     data-discount="{{ $model->formattedDiscount() }}"
+                                     data-sale="{{ $model->formattedSalePrice() }}"
+                                     @class([
+                                         'absolute mx-auto max-h-[300px] w-[92%] object-contain drop-shadow-[0_28px_32px_rgba(0,0,0,0.45)] transition-opacity duration-700 max-[960px]:max-h-[240px]',
+                                         'z-[1] opacity-100' => $index === 0,
+                                         'z-0 opacity-0' => $index !== 0,
+                                     ])
+                                     loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
+                            @endforeach
+                        </div>
+
+                        <div class="relative z-[3] px-6 pb-6 pt-2 min-[961px]:px-7 min-[961px]:pb-7">
+                            <span class="text-[11px] font-bold uppercase tracking-[0.16em] text-litus-sky">Limited time campaign</span>
+
+                            <div class="mt-2 flex flex-wrap items-end justify-between gap-3">
+                                <div class="min-w-0">
+                                    <p class="font-display text-[clamp(22px,2.4vw,30px)] font-extrabold leading-none tracking-[-0.03em]"
+                                       data-promo-hero-name>{{ $featured->name }}</p>
+                                    <p class="mt-1.5 text-[13px] font-semibold text-white/70">
+                                        From <span data-promo-hero-sale>{{ $featured->formattedSalePrice() }}</span>
+                                    </p>
                                 </div>
-                            @endif
+                                <div class="text-right">
+                                    <span class="block text-[10.5px] font-semibold uppercase tracking-[0.12em] text-white/55">You save</span>
+                                    <span class="font-display text-[clamp(22px,2.4vw,30px)] font-extrabold tracking-[-0.03em]"
+                                          data-promo-hero-saving>{{ $featured->formattedDiscount() }}</span>
+                                </div>
+                            </div>
 
-                            <p class="mt-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/45">
-                                {{ $count }} models · All showrooms
-                            </p>
+                            <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-white/16 pt-3.5">
+                                <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/45">
+                                    {{ $count }} models · All showrooms
+                                </p>
+
+                                @if ($count > 1)
+                                    <div class="flex gap-1.5">
+                                        @foreach ($promotions as $index => $model)
+                                            <button type="button"
+                                                    data-promo-hero-dot="{{ $index }}"
+                                                    aria-label="Show {{ $model->name }}"
+                                                    @class([
+                                                        'h-1.5 rounded-full transition-all duration-300',
+                                                        'w-5 bg-white' => $index === 0,
+                                                        'w-1.5 bg-white/50' => $index !== 0,
+                                                    ])></button>
+                                        @endforeach
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 @else
-                    <div class="relative h-full overflow-hidden rounded-[22px] border border-white/14 bg-gradient-to-br from-[#061029] via-[#0E2A64] to-[#1B49B8] p-6 shadow-[0_4px_10px_rgba(9,17,32,.08),0_34px_70px_rgba(9,17,32,.16)] min-[961px]:p-7">
+                    <div class="relative flex min-h-[360px] h-full flex-col justify-end overflow-hidden rounded-[22px] border border-white/14 p-6 shadow-[0_4px_10px_rgba(9,17,32,.08),0_34px_70px_rgba(9,17,32,.16)] min-[961px]:p-7"
+                         style="background: linear-gradient(155deg, #061029 0%, #0E2A64 48%, #1B49B8 100%);">
                         <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(420px_260px_at_68%_18%,rgba(90,184,255,.34),transparent_66%)]"></div>
-                        <div class="relative z-[2] flex h-full flex-col">
+                        <div class="relative z-[2]">
                             <div class="font-display text-[13px] font-bold tracking-[0.24em] text-white">LITUS<span class="mt-[-2px] block text-[7px] font-medium tracking-[0.36em] text-white/60">AUTOMOBILES</span></div>
-                            <span class="mt-5 text-[11.5px] font-bold uppercase tracking-[0.16em] text-litus-sky">Limited time campaign</span>
+                            <span class="mt-5 block text-[11.5px] font-bold uppercase tracking-[0.16em] text-litus-sky">Limited time campaign</span>
                             <div class="mt-2.5 font-display text-[clamp(26px,2.8vw,36px)] font-extrabold leading-[1.05] tracking-[-0.03em]">
                                 Live offers<br>this month
                             </div>
@@ -332,42 +352,53 @@
                         </p>
                     </div>
 
-                    <div class="relative z-[3] grid place-items-center bg-black/[0.18] p-[clamp(22px,3vw,40px)] max-[940px]:order-first">
-                        <div class="relative w-full max-w-[330px] overflow-hidden rounded-[26px] border border-white/14 bg-gradient-to-br from-[#061029] via-[#0E2A64] to-[#1B49B8] p-7 shadow-none min-[941px]:aspect-[3/4]"
-                             data-promo-campaign-slider
-                             data-interval="4000">
-                            <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(420px_260px_at_68%_18%,rgba(90,184,255,.34),transparent_66%)]"></div>
-                            <div class="relative z-[2] flex h-full flex-col">
-                                <div class="font-display text-[13px] font-bold tracking-[0.24em] text-white">
-                                    LITUS<span class="mt-[-2px] block text-[7px] font-medium tracking-[0.36em] text-white/60">AUTOMOBILES</span>
-                                </div>
-                                <span class="mt-6 text-[11.5px] font-bold uppercase tracking-[0.16em] text-litus-sky">Limited time campaign</span>
-                                <div class="mt-2.5 font-display text-[clamp(24px,2.4vw,32px)] font-extrabold leading-[1.05] tracking-[-0.03em]"
-                                     data-promo-campaign-poster-saving>
-                                    Save<br>{{ $featured->formattedDiscount() }}
-                                </div>
-                                <p class="mt-2.5 text-sm text-white/70" data-promo-campaign-slide-name>{{ $featured->name }}</p>
+                    <div class="relative z-[3] flex min-h-[480px] flex-col justify-end overflow-hidden bg-black/[0.22] max-[940px]:order-first max-[940px]:min-h-[400px]"
+                         data-promo-campaign-slider
+                         data-interval="4000">
+                        <div class="pointer-events-none absolute inset-0"
+                             style="background:
+                                radial-gradient(520px 340px at 70% 18%, rgba(90,184,255,.28), transparent 62%),
+                                linear-gradient(180deg, rgba(6,16,41,.15) 0%, rgba(6,16,41,.55) 48%, rgba(6,16,41,.92) 100%);"></div>
 
-                                <div class="relative mt-auto flex min-h-[180px] flex-1 items-center justify-center">
-                                    @foreach ($promotions as $index => $model)
-                                        <img src="{{ $model->listImageUrl() }}"
-                                             alt="{{ $model->name }}"
-                                             data-promo-campaign-slide
-                                             data-name="{{ $model->name }}"
-                                             data-note="{{ $model->offerNote() ?: 'Limited-time campaign pricing on this model. Save now and ride sooner on cash or Ijara terms.' }}"
-                                             data-discount="{{ $model->formattedDiscount() }}"
-                                             data-sale="{{ $model->formattedSalePrice() }}"
-                                             @class([
-                                                 'absolute inset-x-0 mx-auto max-h-[180px] w-auto object-contain drop-shadow-[0_20px_18px_rgba(0,0,0,0.35)] transition-opacity duration-700',
-                                                 'z-[1] opacity-100' => $index === 0,
-                                                 'z-0 opacity-0' => $index !== 0,
-                                             ])
-                                             loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
-                                    @endforeach
+                        <div class="relative z-[2] flex min-h-[320px] flex-1 items-center justify-center px-2 pt-6 max-[940px]:min-h-[260px]">
+                            @foreach ($promotions as $index => $model)
+                                <img src="{{ $model->listImageUrl() }}"
+                                     alt="{{ $model->name }}"
+                                     data-promo-campaign-slide
+                                     data-name="{{ $model->name }}"
+                                     data-note="{{ $model->offerNote() ?: 'Limited-time campaign pricing on this model. Save now and ride sooner on cash or Ijara terms.' }}"
+                                     data-discount="{{ $model->formattedDiscount() }}"
+                                     data-sale="{{ $model->formattedSalePrice() }}"
+                                     @class([
+                                         'absolute mx-auto max-h-[420px] w-full object-contain drop-shadow-[0_28px_30px_rgba(0,0,0,0.45)] transition-opacity duration-700 max-[940px]:max-h-[300px]',
+                                         'z-[1] opacity-100' => $index === 0,
+                                         'z-0 opacity-0' => $index !== 0,
+                                     ])
+                                     loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
+                            @endforeach
+                        </div>
+
+                        <div class="relative z-[3] px-[clamp(22px,3vw,36px)] pb-[clamp(22px,3vw,34px)] pt-2">
+                            <div class="mb-3 flex items-end justify-between gap-3">
+                                <div>
+                                    <span class="text-[11px] font-bold uppercase tracking-[0.16em] text-litus-sky">Limited time campaign</span>
+                                    <p class="mt-1.5 font-display text-[clamp(22px,2.2vw,28px)] font-extrabold leading-none tracking-[-0.03em]"
+                                       data-promo-campaign-slide-name>{{ $featured->name }}</p>
                                 </div>
+                                <div class="text-right">
+                                    <span class="block text-[10.5px] font-semibold uppercase tracking-[0.12em] text-white/55">You save</span>
+                                    <span class="font-display text-[clamp(20px,2vw,26px)] font-extrabold tracking-[-0.03em]"
+                                          data-promo-campaign-poster-saving>{{ $featured->formattedDiscount() }}</span>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap items-center justify-between gap-3 border-t border-white/16 pt-3.5">
+                                <p class="text-[13px] font-semibold text-white/80">
+                                    From <span data-promo-campaign-poster-sale>{{ $featured->formattedSalePrice() }}</span>
+                                </p>
 
                                 @if ($count > 1)
-                                    <div class="mt-3 flex justify-center gap-1.5">
+                                    <div class="flex gap-1.5">
                                         @foreach ($promotions as $index => $model)
                                             <button type="button"
                                                     data-promo-campaign-dot="{{ $index }}"
@@ -379,11 +410,11 @@
                                                     ])></button>
                                         @endforeach
                                     </div>
+                                @else
+                                    <p class="text-[11px] tracking-[0.06em] text-white/55">
+                                        {{ $count }} model · All showrooms
+                                    </p>
                                 @endif
-
-                                <p class="mt-4 border-t border-white/18 pt-3.5 text-[11px] tracking-[0.06em] text-white/62">
-                                    {{ $count }} models · Campaign prices from {{ $stats['formattedMinPrice'] }}
-                                </p>
                             </div>
                         </div>
                     </div>

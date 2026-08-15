@@ -54,18 +54,6 @@ class ColorVariantsRelationManager extends RelationManager
                             ->maxFiles(72)
                             ->helperText('Order follows upload sequence. The product page drag-to-rotate uses this order.'),
                     ]),
-
-                Forms\Components\Section::make('Gallery images')
-                    ->schema([
-                        FileUpload::make('gallery_images')
-                            ->label('Gallery thumbnails')
-                            ->multiple()
-                            ->image()
-                            ->directory('motorcycles/gallery')
-                            ->preserveFilenames()
-                            ->maxFiles(12)
-                            ->helperText('Upload in display order. Shown when this color is selected.'),
-                    ]),
             ]);
     }
 
@@ -78,10 +66,6 @@ class ColorVariantsRelationManager extends RelationManager
                 TextColumn::make('spin_frames')
                     ->label('360 frames')
                     ->getStateUsing(fn ($record) => self::countUploadedImages($record->spin_frames))
-                    ->formatStateUsing(fn ($state) => self::formatImageCount((int) $state)),
-                TextColumn::make('gallery_images')
-                    ->label('Gallery')
-                    ->getStateUsing(fn ($record) => self::countUploadedImages($record->gallery_images))
                     ->formatStateUsing(fn ($state) => self::formatImageCount((int) $state)),
                 IconColumn::make('is_default')->boolean()->label('Default'),
             ])

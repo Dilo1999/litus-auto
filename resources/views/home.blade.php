@@ -6,6 +6,7 @@
 @php
     $promoMotorcycles = $promoMotorcycles ?? collect();
     $topRides = $topRides ?? [];
+    $galleryImages = $galleryImages ?? [];
     $campaignCount = $promoMotorcycles->count();
 
     $whyLitus = [
@@ -258,8 +259,104 @@
         </div>
     </section>
 
+    {{-- GALLERY --}}
+    <section class="litus-sec bg-litus-paper-2" data-home-gallery>
+        <div class="litus-container">
+            <div class="mb-[clamp(28px,3.5vw,42px)] flex flex-col items-start justify-between gap-5 min-[651px]:flex-row min-[651px]:items-end">
+                <div class="mx-auto max-w-[660px] text-center min-[651px]:mx-0 min-[651px]:text-left">
+                    <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Our Gallery</span>
+                    <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Ride the visual journey</h2>
+                    <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
+                        Explore motorcycle rides and lifestyle moments from across LITUS.
+                    </p>
+                </div>
+                <a href="{{ route('gallery') }}"
+                   class="inline-flex items-center gap-2 text-[15px] font-semibold text-litus-primary transition hover:gap-3">
+                    View Gallery
+                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                </a>
+            </div>
+
+            <div class="relative" data-home-gallery-stage>
+                <button type="button"
+                        data-home-gallery-prev
+                        class="absolute -left-3 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-litus-line bg-white text-litus-text shadow-[0_8px_20px_rgba(7,21,47,0.12)] transition duration-300 hover:border-litus-primary hover:bg-litus-primary hover:text-white max-md:left-2 max-md:flex max-md:h-10 max-md:w-10 max-md:bg-white/90 min-[1101px]:-left-5 min-[1101px]:flex"
+                        aria-label="Previous gallery images">
+                    <x-litus-icon name="chevron-left" class="h-5 w-5" />
+                </button>
+                <button type="button"
+                        data-home-gallery-next
+                        class="absolute -right-3 top-1/2 z-[5] hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-litus-line bg-white text-litus-text shadow-[0_8px_20px_rgba(7,21,47,0.12)] transition duration-300 hover:border-litus-primary hover:bg-litus-primary hover:text-white max-md:right-2 max-md:flex max-md:h-10 max-md:w-10 max-md:bg-white/90 min-[1101px]:-right-5 min-[1101px]:flex"
+                        aria-label="Next gallery images">
+                    <x-litus-icon name="chevron-right" class="h-5 w-5" />
+                </button>
+
+                <div class="relative hidden h-[290px] overflow-hidden rounded-[18px] max-md:block"
+                     data-home-gallery-fade>
+                    @forelse ($galleryImages as $index => $image)
+                        <a href="{{ route('gallery') }}"
+                           data-home-gallery-fade-slide
+                           @class([
+                               'home-gallery-fade-slide group absolute inset-0 overflow-hidden rounded-[18px] bg-litus-ink',
+                               'is-active' => $index === 0,
+                           ])>
+                            <img src="{{ $image['src'] }}"
+                                 alt="{{ $image['alt'] }}"
+                                 class="absolute inset-0 h-full w-full object-cover"
+                                 loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
+                            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-litus-ink/60 via-transparent to-transparent"></div>
+                            <span class="pointer-events-none absolute bottom-3 left-3.5 right-3.5 text-[12px] font-bold text-white">
+                                View in gallery
+                            </span>
+                        </a>
+                    @empty
+                        <div class="flex h-full w-full items-center justify-center rounded-[18px] border border-dashed border-litus-line-2 bg-white text-sm font-semibold text-litus-text-2">
+                            Gallery images coming soon.
+                        </div>
+                    @endforelse
+                </div>
+
+                @if (count($galleryImages) > 1)
+                    <div class="mt-3.5 hidden items-center justify-center gap-1.5 max-md:flex" data-home-gallery-dots aria-hidden="true">
+                        @foreach ($galleryImages as $index => $image)
+                            <button type="button"
+                                    data-home-gallery-dot="{{ $index }}"
+                                    @class([
+                                        'h-1.5 rounded-full transition-all duration-300',
+                                        'w-5 bg-litus-primary' => $index === 0,
+                                        'w-1.5 bg-[#c5ccd6]' => $index !== 0,
+                                    ])
+                                    aria-label="Go to gallery image {{ $index + 1 }}"></button>
+                        @endforeach
+                    </div>
+                @endif
+
+                <div class="-mx-1 hidden gap-3 overflow-x-auto px-1 pb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-[651px]:flex min-[1101px]:gap-4"
+                     data-home-gallery-track>
+                    @forelse ($galleryImages as $image)
+                        <a href="{{ route('gallery') }}"
+                           class="group relative aspect-[4/5] w-[46%] shrink-0 snap-start overflow-hidden rounded-[18px] bg-litus-ink shadow-[0_14px_36px_rgba(7,21,47,0.14)] transition-transform duration-300 hover:-translate-y-1 min-[1101px]:w-[calc((100%-3rem)/4)]">
+                            <img src="{{ $image['src'] }}"
+                                 alt="{{ $image['alt'] }}"
+                                 class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                                 loading="lazy">
+                            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-litus-ink/55 via-transparent to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-90"></div>
+                            <span class="pointer-events-none absolute bottom-4 left-4 right-4 translate-y-1 text-[13px] font-bold text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                                View in gallery
+                            </span>
+                        </a>
+                    @empty
+                        <div class="flex h-[290px] w-full items-center justify-center rounded-[18px] border border-dashed border-litus-line-2 bg-white text-sm font-semibold text-litus-text-2">
+                            Gallery images coming soon.
+                        </div>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+    </section>
+
     {{-- SHOWROOMS --}}
-    <section id="showrooms" class="litus-sec scroll-mt-24 bg-litus-paper-2">
+    <section id="showrooms" class="litus-sec scroll-mt-24 bg-litus-paper-2 !pt-0">
         <div class="litus-container">
             <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
                 <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Our Locations</span>
@@ -269,7 +366,7 @@
                 </p>
             </div>
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-                @foreach ($showrooms as $showroom)
+                @foreach (collect($showrooms)->take(6) as $showroom)
                     @php
                         $imageCollection = collect($showroom['images'] ?? [])->filter()->values();
                         if ($imageCollection->count() > 1) {
@@ -314,11 +411,6 @@
                                     <x-litus-icon name="map-pin" class="h-8 w-8" />
                                 </div>
                             @endif
-                            @if (! empty($showroom['featured']))
-                                <span class="absolute left-3 top-3 z-[3] rounded-md bg-litus-primary px-2.5 py-1 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-white">
-                                    Featured
-                                </span>
-                            @endif
                         </div>
 
                         <div class="flex flex-1 flex-col px-[26px] pb-[26px] pt-5">
@@ -337,13 +429,15 @@
                 @endforeach
             </div>
 
-            <div class="mt-8 text-center">
-                <a href="{{ route('about') }}#locations"
-                   class="inline-flex items-center justify-center gap-2 rounded-lg border-[1.5px] border-litus-line-2 bg-white px-6 py-3.5 text-[14.5px] font-semibold text-litus-ink transition hover:-translate-y-0.5 hover:border-litus-primary-light hover:text-litus-primary">
-                    View All {{ $showroomCount }} Locations
-                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
-                </a>
-            </div>
+            @if ($showroomCount > 6)
+                <div class="mt-8 text-center">
+                    <a href="{{ route('about') }}#locations"
+                       class="inline-flex items-center justify-center gap-2 text-[15px] font-semibold text-litus-primary transition hover:gap-3">
+                        More Showrooms
+                        <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                    </a>
+                </div>
+            @endif
         </div>
     </section>
 

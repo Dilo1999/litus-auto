@@ -82,26 +82,14 @@ class PromotionResource extends Resource
                 TextColumn::make('motorcycles_count')
                     ->counts('motorcycles')
                     ->label('Products'),
-                TextColumn::make('created_at')
-                    ->label('Started')
-                    ->dateTime()
-                    ->sortable(),
                 TextColumn::make('ends_at')
                     ->label('Ends at')
                     ->dateTime()
                     ->placeholder('No end')
                     ->sortable(),
-                IconColumn::make('is_featured')
-                    ->label('Featured')
-                    ->boolean()
-                    ->sortable(),
                 IconColumn::make('is_published')
                     ->label('Published')
                     ->boolean()
-                    ->sortable(),
-                TextColumn::make('updated_at')
-                    ->label('Updated')
-                    ->dateTime()
                     ->sortable(),
             ])
             ->filters([

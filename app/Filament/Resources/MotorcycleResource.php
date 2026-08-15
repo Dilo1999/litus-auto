@@ -16,7 +16,6 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
 
 class MotorcycleResource extends Resource
@@ -60,10 +59,6 @@ class MotorcycleResource extends Resource
                         Toggle::make('is_published')
                             ->label('Published')
                             ->default(true),
-                        Toggle::make('is_top_selling')
-                            ->label('Top Selling')
-                            ->helperText('Show this motorcycle in the Top Selling Rides section on the home page.')
-                            ->default(false),
                     ])
                     ->columns(2),
 
@@ -110,7 +105,6 @@ class MotorcycleResource extends Resource
             ->columns([
                 TextColumn::make('name')->searchable()->sortable(),
                 TextColumn::make('category')->searchable(),
-                ToggleColumn::make('is_top_selling')->label('Top Selling'),
                 TextColumn::make('colors')
                     ->label('Colors')
                     ->getStateUsing(function (Motorcycle $record): \Illuminate\Support\HtmlString {

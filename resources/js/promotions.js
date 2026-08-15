@@ -160,6 +160,7 @@ function initPromoCampaignSlider() {
     const noteEl = page.querySelector('[data-promo-campaign-note]');
     const savingEl = page.querySelector('[data-promo-campaign-saving]');
     const posterSavingEl = page.querySelector('[data-promo-campaign-poster-saving]');
+    const posterSaleEl = page.querySelector('[data-promo-campaign-poster-sale]');
     const nameEl = page.querySelector('[data-promo-campaign-slide-name]');
     const waEl = page.querySelector('[data-promo-campaign-wa]');
     const intervalMs = Number(slider.dataset.interval) || 4000;
@@ -206,14 +207,14 @@ function initPromoCampaignSlider() {
         const name = slide.dataset.name || chip?.dataset.name || '';
         const note = slide.dataset.note || chip?.dataset.note || '';
         const discount = slide.dataset.discount || chip?.dataset.discount || '';
+        const sale = slide.dataset.sale || chip?.dataset.sale || '';
 
         if (titleEl && name) titleEl.textContent = name;
         if (nameEl && name) nameEl.textContent = name;
         if (noteEl && note) noteEl.textContent = note;
         if (savingEl && discount) savingEl.textContent = `Save ${discount}`;
-        if (posterSavingEl && discount) {
-            posterSavingEl.innerHTML = `Save<br>${discount}`;
-        }
+        if (posterSavingEl && discount) posterSavingEl.textContent = discount;
+        if (posterSaleEl && sale) posterSaleEl.textContent = sale;
         if (waEl && name) {
             waEl.href = `https://wa.me/9607797442?text=${encodeURIComponent(`Hi LITUS, I want to reserve the ${name} campaign offer.`)}`;
         }
@@ -266,6 +267,7 @@ function initPromoHeroSlider() {
     const dots = [...slider.querySelectorAll('[data-promo-hero-dot]')];
     const savingEl = slider.querySelector('[data-promo-hero-saving]');
     const nameEl = slider.querySelector('[data-promo-hero-name]');
+    const saleEl = slider.querySelector('[data-promo-hero-sale]');
     const intervalMs = Number(slider.dataset.interval) || 4200;
 
     let activeIndex = 0;
@@ -298,12 +300,16 @@ function initPromoHeroSlider() {
 
         const name = slide.dataset.name || '';
         const discount = slide.dataset.discount || '';
+        const sale = slide.dataset.sale || '';
 
         if (savingEl && discount) {
-            savingEl.innerHTML = `Save<br>${discount}`;
+            savingEl.textContent = discount;
         }
         if (nameEl && name) {
-            nameEl.textContent = `Featured: ${name}`;
+            nameEl.textContent = name;
+        }
+        if (saleEl && sale) {
+            saleEl.textContent = sale;
         }
     };
 
