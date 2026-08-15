@@ -35,8 +35,6 @@ class MotorcycleGalleryResource extends Resource
     {
         return [
             'index' => Pages\ListMotorcycleGallery::route('/'),
-            'create' => Pages\CreateMotorcycleGallery::route('/create'),
-            'edit' => Pages\EditMotorcycleGallery::route('/{record}/edit'),
         ];
     }
 }

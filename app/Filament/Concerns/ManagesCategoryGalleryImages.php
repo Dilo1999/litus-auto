@@ -6,7 +6,6 @@ use App\Models\GalleryImage;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
@@ -39,46 +38,115 @@ trait ManagesCategoryGalleryImages
         return static::getCategoryLabel();
     }
 
+    public static function getCreateFormSchema(): array
+    {
+        return [
+            Forms\Components\Section::make(static::getCategoryLabel().' gallery')
+                ->description('Upload multiple images at once. They appear under “'.static::getCategoryLabel().'” on the Gallery page.')
+                ->schema([
+                    Hidden::make('category')
+                        ->default(static::getCategory())
+                        ->dehydrated(),
+                    FileUpload::make('images')
+                        ->label('Gallery images')
+                        ->image()
+                        ->multiple()
+                        ->directory('gallery/'.static::getCategory())
+                        ->disk('public')
+                        ->preserveFilenames()
+                        ->required()
+                        ->maxFiles(40)
+                        ->helperText('Select one or more images. Recommended: landscape photos, at least 1200px wide.')
+                        ->columnSpanFull(),
+                ])
+                ->columns(1),
+
+            Forms\Components\Section::make('Display settings')
+                ->description('These settings apply to every image uploaded in this batch.')
+                ->schema([
+                    Toggle::make('is_featured')
+                        ->label('Featured in Explore Moments')
+                        ->helperText('Featured images appear in the top “Explore LITUS Moments” section.')
+                        ->default(false),
+                    Toggle::make('is_published')
+                        ->label('Published')
+                        ->helperText('Unpublished images are hidden from the website.')
+                        ->default(true),
+                ])
+                ->columns(2),
+        ];
+    }
+
+    public static function getEditFormSchema(): array
+    {
+        return [
+            Forms\Components\Section::make(static::getCategoryLabel().' image')
+                ->description('Update this gallery image.')
+                ->schema([
+                    Hidden::make('category')
+                        ->default(static::getCategory())
+                        ->dehydrated(),
+                    FileUpload::make('image')
+                        ->label('Image')
+                        ->image()
+                        ->directory('gallery/'.static::getCategory())
+                        ->disk('public')
+                        ->preserveFilenames()
+                        ->required()
+                        ->helperText('Recommended: landscape photo, at least 1200px wide.')
+                        ->columnSpanFull(),
+                ])
+                ->columns(1),
+
+            Forms\Components\Section::make('Display settings')
+                ->schema([
+                    Toggle::make('is_featured')
+                        ->label('Featured in Explore Moments')
+                        ->helperText('Featured images appear in the top “Explore LITUS Moments” section.')
+                        ->default(false),
+                    Toggle::make('is_published')
+                        ->label('Published')
+                        ->helperText('Unpublished images are hidden from the website.')
+                        ->default(true),
+                ])
+                ->columns(2),
+        ];
+    }
+
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\Section::make(static::getCategoryLabel().' image')
-                    ->description('Images in this table appear under “'.static::getCategoryLabel().'” on the Gallery page.')
-                    ->schema([
-                        Hidden::make('category')
-                            ->default(static::getCategory())
-                            ->dehydrated(),
-                        TextInput::make('title')
-                            ->label('Title / caption')
-                            ->maxLength(255)
-                            ->placeholder('Optional - shown on featured moment cards')
-                            ->helperText('Leave blank if you do not want a title on the card.'),
-                        FileUpload::make('image')
-                            ->label('Image')
-                            ->image()
-                            ->directory('gallery/'.static::getCategory())
-                            ->disk('public')
-                            ->preserveFilenames()
-                            ->required()
-                            ->helperText('Recommended: landscape photo, at least 1200px wide.')
-                            ->columnSpanFull(),
-                    ])
-                    ->columns(1),
+        return $form->schema(static::getEditFormSchema());
+    }
 
-                Forms\Components\Section::make('Display settings')
-                    ->schema([
-                        Toggle::make('is_featured')
-                            ->label('Featured in Explore Moments')
-                            ->helperText('Featured images appear in the top “Explore LITUS Moments” section.')
-                            ->default(false),
-                        Toggle::make('is_published')
-                            ->label('Published')
-                            ->helperText('Unpublished images are hidden from the website.')
-                            ->default(true),
-                    ])
-                    ->columns(2),
+    public static function createGalleryRecords(array $data): GalleryImage
+    {
+        $images = collect($data['images'] ?? [])
+            ->filter(fn ($path) => filled($path))
+            ->values();
+
+        if ($images->isEmpty()) {
+            throw new \InvalidArgumentException('Please upload at least one image.');
+        }
+
+        $category = $data['category'] ?? static::getCategory();
+        $isFeatured = (bool) ($data['is_featured'] ?? false);
+        $isPublished = array_key_exists('is_published', $data) ? (bool) $data['is_published'] : true;
+
+        $first = null;
+
+        foreach ($images as $path) {
+            $record = GalleryImage::query()->create([
+                'category' => $category,
+                'title' => null,
+                'image' => $path,
+                'is_featured' => $isFeatured,
+                'is_published' => $isPublished,
             ]);
+
+            $first ??= $record;
+        }
+
+        return $first;
     }
 
     public static function table(Table $table): Table
@@ -89,11 +157,6 @@ trait ManagesCategoryGalleryImages
                     ->label('Preview')
                     ->getStateUsing(fn (GalleryImage $record): string => $record->imageUrl())
                     ->height(56),
-                TextColumn::make('title')
-                    ->label('Title')
-                    ->placeholder('-')
-                    ->searchable()
-                    ->limit(40),
                 IconColumn::make('is_featured')
                     ->label('Featured')
                     ->boolean()
@@ -115,7 +178,6 @@ trait ManagesCategoryGalleryImages
                     ->label('Published'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

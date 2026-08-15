@@ -35,8 +35,6 @@ class CustomerMomentGalleryResource extends Resource
     {
         return [
             'index' => Pages\ListCustomerMomentGallery::route('/'),
-            'create' => Pages\CreateCustomerMomentGallery::route('/create'),
-            'edit' => Pages\EditCustomerMomentGallery::route('/{record}/edit'),
         ];
     }
 }
