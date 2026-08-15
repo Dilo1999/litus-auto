@@ -12,5 +12,5 @@ class ListCustomerMomentGallery extends ListRecords
 
     protected static string $resource = CustomerMomentGalleryResource::class;
 
-    protected static string $view = 'filament.resources.gallery-images.list-customer-moments';
+    protected static string $view = 'filament.resources.gallery-images.list-gallery';
 }
