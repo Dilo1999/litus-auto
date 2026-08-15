@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MotorcycleController;
+use App\Http\Controllers\PartsController;
 use App\Http\Controllers\PromotionsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -40,7 +41,7 @@ Route::get('/motorcycles', [MotorcycleController::class, 'index'])->name('motorc
 Route::get('/motorcycles/{slug}', [MotorcycleController::class, 'show'])->name('motorcycle.show');
 Route::get('/promotions', [PromotionsController::class, 'index'])->name('promotions');
 Route::get('/ownership-plans', fn () => view('ownership-plans'))->name('ownership-plans');
-Route::get('/parts', fn () => view('parts'))->name('parts');
+Route::get('/parts', PartsController::class)->name('parts');
 Route::get('/service-center', fn () => view('service-center'))->name('service-center');
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');

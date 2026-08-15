@@ -58,6 +58,8 @@
         ['icon' => 'shield', 'title' => 'Ijara Plans', 'sub' => 'Islamic leasing standards'],
         ['icon' => 'wrench', 'title' => 'Full Service', 'sub' => 'Genuine parts, trained technicians'],
     ];
+
+    $heroBg = asset('images/homepage/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_22_48 PM.png'));
 @endphp
 
 <div class="font-sans" data-home-page>
@@ -66,12 +68,17 @@
 
     {{-- HERO --}}
     <section class="relative overflow-hidden bg-litus-ink text-white">
+        <img src="{{ $heroBg }}"
+             alt=""
+             class="absolute inset-0 h-full w-full object-cover object-[center_right] max-md:object-[center_35%]"
+             aria-hidden="true">
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,24,0.96)_0%,rgba(5,11,24,0.88)_34%,rgba(5,11,24,0.55)_62%,rgba(5,11,24,0.35)_100%)] max-md:bg-[linear-gradient(180deg,rgba(5,11,24,0.55)_0%,rgba(5,11,24,0.78)_42%,rgba(5,11,24,0.94)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0"
              style="background:
-                radial-gradient(900px 520px at 82% 6%, rgba(46,116,238,.34), transparent 62%),
-                radial-gradient(680px 460px at 2% 96%, rgba(90,184,255,.16), transparent 60%),
-                linear-gradient(180deg, transparent 40%, rgba(5,11,24,.9) 100%);"></div>
-        <div class="pointer-events-none absolute inset-0 opacity-[0.42]"
+                radial-gradient(900px 520px at 82% 6%, rgba(46,116,238,.28), transparent 62%),
+                radial-gradient(680px 460px at 2% 96%, rgba(90,184,255,.12), transparent 60%),
+                linear-gradient(180deg, transparent 40%, rgba(5,11,24,.55) 100%);"></div>
+        <div class="pointer-events-none absolute inset-0 opacity-[0.28]"
              style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px; mask-image: radial-gradient(700px 500px at 30% 30%, #000, transparent 78%);"></div>
 
         <div class="relative z-[3] litus-container py-[clamp(70px,9vw,124px)] pb-[clamp(56px,7vw,96px)]">
@@ -377,7 +384,7 @@
                         $hasSlider = count($images) > 1;
                     @endphp
                     <div class="group flex flex-col overflow-hidden rounded-[18px] border border-litus-line bg-white transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
-                        <div class="relative h-[180px] overflow-hidden bg-litus-paper-3 sm:h-[200px]"
+                        <div class="relative h-[240px] overflow-hidden bg-litus-paper-3 sm:h-[280px]"
                              @if ($hasSlider) data-showroom-slider data-interval="4000" @endif>
                             @if ($hasSlider)
                                 @foreach ($images as $index => $image)
@@ -414,12 +421,11 @@
                         </div>
 
                         <div class="flex flex-1 flex-col px-[26px] pb-[26px] pt-5">
-                            <div class="mb-3.5 grid h-[46px] w-[46px] place-items-center rounded-[13px] bg-[#DCE8FF] text-[#0B47B0]">
-                                <x-litus-icon name="map-pin" class="h-[17px] w-[17px]" />
-                            </div>
                             <h4 class="mb-2 text-lg font-bold text-litus-text">{{ $showroom['name'] }}</h4>
                             <p class="mb-5 flex-1 text-[14.5px] text-litus-text-2">{{ $showroom['address'] }}</p>
-                            <a href="{{ route('about') }}#locations"
+                            <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode(trim(($showroom['name'] ?? '').' '.($showroom['address'] ?? ''))) }}"
+                               target="_blank"
+                               rel="noopener noreferrer"
                                class="inline-flex w-full items-center justify-center gap-2 rounded-lg border-[1.5px] border-litus-line-2 bg-white px-4 py-2.5 text-[13.5px] font-semibold text-litus-ink transition hover:border-litus-primary-light hover:text-litus-primary">
                                 <x-litus-icon name="map-pin" class="h-4 w-4" />
                                 View Location

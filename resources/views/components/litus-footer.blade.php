@@ -28,7 +28,7 @@
                 <a href="{{ route('home') }}" class="mb-4 inline-flex">
                     <img src="{{ $logo }}"
                          alt="LITUS Automobiles"
-                         class="h-9 w-auto">
+                         class="h-14 w-auto">
                 </a>
                 <p class="max-w-[300px] leading-relaxed">
                     Premium motorcycles, genuine parts and reliable service across the Maldives. Serving riders since 2014 from five showrooms.
@@ -83,7 +83,7 @@
         </div>
 
         <div class="mt-[52px] flex flex-wrap justify-between gap-3.5 border-t border-white/10 py-5 text-[12.5px] text-white/45">
-            <span>© {{ date('Y') }} LITUS Automobiles. All rights reserved.</span>
+            <span>© {{ date('Y') }} LITUS Automobiles. All rights reserved. Developed by LITUS IT </span>
             <span>Ijara plans structured to Islamic leasing standards.</span>
         </div>
     </div>

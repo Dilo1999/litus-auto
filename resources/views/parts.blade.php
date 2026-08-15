@@ -36,7 +36,6 @@
     ];
 
     $categoryPills = ['Body', 'Engine', 'Braking', 'Electrical', 'Chassis', 'Wheels & Tyres'];
-    $brands = ['Honda', 'Yamaha', 'Sunra'];
 
     $fieldLabel = 'mb-1.5 block text-[12.5px] font-semibold text-white/70';
     $fieldControl = 'w-full rounded-[10px] border border-white/22 bg-white/[0.08] px-3.5 py-3 text-[14.5px] text-white outline-none transition placeholder:text-white/40 focus:border-litus-sky/60 focus:bg-white/[0.12]';
