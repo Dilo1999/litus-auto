@@ -22,7 +22,7 @@
         </div>
         <img src="{{ $motorcycle->listImageUrl() }}"
              alt="{{ $motorcycle->name }}"
-             class="relative z-[3] mx-auto h-full w-[86%] object-contain py-4 drop-shadow-[0_16px_12px_rgba(0,0,0,0.28)] transition-transform duration-300 group-hover:scale-[1.04]"
+             class="relative z-[3] mx-auto h-[108%] w-[108%] max-w-none object-contain drop-shadow-[0_16px_12px_rgba(0,0,0,0.28)] transition-transform duration-300 group-hover:scale-[1.04]"
              loading="lazy">
     </a>
 
@@ -36,12 +36,14 @@
         @endif
 
         @if ($hasPromo)
-            <div class="flex flex-wrap items-baseline gap-[11px]">
+            <div class="flex flex-wrap items-center gap-[11px]">
                 <span class="text-sm text-litus-text-3 line-through">{{ $motorcycle->formattedOriginalPrice() }}</span>
-                <span class="font-display text-[25px] font-bold tracking-[-0.03em] text-litus-text">{{ $motorcycle->formattedSalePrice() }}</span>
+                <div class="inline-flex w-fit items-center gap-1.5 rounded-[7px] bg-[#FFF1E6] px-3 py-1.5 text-[12.5px] font-bold text-[#C2410C]">
+                    You save {{ $motorcycle->formattedDiscount() }}
+                </div>
             </div>
-            <div class="mt-[11px] inline-flex w-fit items-center gap-1.5 rounded-[7px] bg-[#E6F7F0] px-3 py-1.5 text-[12.5px] font-bold text-[#07704E]">
-                You save {{ $motorcycle->formattedDiscount() }}
+            <div class="mt-[11px] font-display text-[25px] font-bold tracking-[-0.03em] text-litus-text">
+                {{ $motorcycle->formattedSalePrice() }}
             </div>
         @else
             <div class="flex flex-wrap items-baseline gap-[11px]">

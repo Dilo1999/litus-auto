@@ -19,32 +19,30 @@
      data-sort="{{ (int) $motorcycle->sort_order }}"
      data-id="{{ $motorcycle->id }}">
     <a href="{{ route('motorcycle.show', $motorcycle->slug) }}"
-       class="relative aspect-[16/11] overflow-hidden bg-gradient-to-br from-[#DFE9F7] to-[#B9CFEC]">
-        <div class="absolute left-[13px] right-[13px] top-[13px] z-[5] flex justify-between gap-2">
-            <span @class([
-                'inline-block rounded-md px-[11px] py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.08em]',
-                'bg-[#DCE8FF] text-[#0B47B0]' => $hasPromo,
-                'bg-black/50 text-white backdrop-blur-[5px]' => ! $hasPromo,
-            ])>
-                {{ $hasPromo ? 'In a campaign' : $category }}
-            </span>
-            @if ($motorcycle->brand)
-                <span class="inline-block rounded-md bg-black/50 px-[11px] py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-white backdrop-blur-[5px]">
-                    {{ $motorcycle->brand }}
-                </span>
+       class="relative aspect-[5/4] overflow-hidden bg-gradient-to-br from-[#DFE9F7] to-[#B9CFEC]">
+            @if ($hasPromo)
+                <div class="absolute left-[13px] right-[13px] top-[13px] z-[5] flex justify-start">
+                    <span class="inline-block rounded-md bg-[#DCE8FF] px-[11px] py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-[#0B47B0]">
+                        In a campaign
+                    </span>
+                </div>
             @endif
-        </div>
         <img src="{{ $motorcycle->listImageUrl() }}"
              alt="{{ $motorcycle->name }}"
-             class="relative z-[3] mx-auto h-full w-[88%] object-contain py-3 drop-shadow-[0_16px_12px_rgba(0,0,0,0.16)] transition-transform duration-300 group-hover:scale-[1.05]"
+             class="relative z-[3] mx-auto h-[108%] w-[108%] max-w-none object-contain drop-shadow-[0_16px_12px_rgba(0,0,0,0.16)] transition-transform duration-300 group-hover:scale-[1.05]"
              loading="lazy">
     </a>
 
-    <div class="flex flex-1 flex-col px-5 pb-0 pt-5">
+    <div class="flex flex-1 flex-col px-5 pb-0 pt-3">
+        @if ($motorcycle->brand)
+            <span class="mb-1 block text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#C45C5C]">
+                {{ $motorcycle->brand }}
+            </span>
+        @endif
         <h3 class="mb-1.5 text-[18.5px] font-bold leading-snug text-litus-text max-md:text-base">
             <a href="{{ route('motorcycle.show', $motorcycle->slug) }}">{{ $motorcycle->name }}</a>
         </h3>
-        <p class="mb-[15px] text-[13.5px] text-litus-text-2 max-md:text-[12px]">
+        <p class="mb-2 text-[13.5px] text-litus-text-2 max-md:text-[12px]">
             @if ($motorcycle->engineCapacity())
                 {{ $motorcycle->engineCapacity() }}
             @endif
@@ -78,9 +76,9 @@
         @endif
     </div>
 
-    <div class="p-5 pt-[17px]">
+    <div class="px-5 pb-4 pt-3">
         <a href="{{ route('motorcycle.show', $motorcycle->slug) }}"
-           class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-litus-primary px-3 py-3 text-[13.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover max-md:py-2.5 max-md:text-[12px]">
+           class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-litus-primary px-3 py-2.5 text-[13.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover max-md:text-[12px]">
             View Details
             <x-litus-icon name="arrow-right" class="h-3.5 w-3.5" />
         </a>

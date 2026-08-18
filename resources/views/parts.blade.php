@@ -125,27 +125,7 @@
         </div>
     </section>
 
-    {{-- WHY GENUINE --}}
-    <section class="litus-sec bg-litus-paper-2">
-        <div class="litus-container">
-            <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
-                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Why Genuine Parts?</span>
-                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Built for safety, performance and reliability</h2>
-            </div>
-
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
-                @foreach ($whyGenuine as $item)
-                    <article class="group rounded-[18px] border border-litus-line bg-white px-[26px] py-[30px] shadow-[0_1px_2px_rgba(9,17,32,.05)] transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
-                        <div class="mb-[18px] grid h-[42px] w-[42px] place-items-center rounded-[12px] bg-litus-paper-3 text-litus-primary transition duration-200 group-hover:bg-[rgba(18,87,214,0.12)]">
-                            <x-litus-icon :name="$item['icon']" class="h-5 w-5" />
-                        </div>
-                        <h4 class="mb-2 text-lg font-bold text-litus-text">{{ $item['title'] }}</h4>
-                        <p class="text-[14.5px] leading-relaxed text-litus-text-2">{{ $item['desc'] }}</p>
-                    </article>
-                @endforeach
-            </div>
-        </div>
-    </section>
+    
 
     {{-- REQUEST FORM --}}
     <section id="request" class="scroll-mt-24 overflow-hidden bg-litus-ink text-white">
@@ -244,6 +224,28 @@
                         </button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- WHY GENUINE --}}
+    <section class="litus-sec bg-litus-paper-2">
+        <div class="litus-container">
+            <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
+                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Why Genuine Parts?</span>
+                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Built for safety, performance and reliability</h2>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+                @foreach ($whyGenuine as $item)
+                    <article class="group rounded-[18px] border border-litus-line bg-white px-[26px] py-[30px] shadow-[0_1px_2px_rgba(9,17,32,.05)] transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
+                        <div class="mb-[18px] grid h-[42px] w-[42px] place-items-center rounded-[12px] bg-litus-paper-3 text-litus-primary transition duration-200 group-hover:bg-[rgba(18,87,214,0.12)]">
+                            <x-litus-icon :name="$item['icon']" class="h-5 w-5" />
+                        </div>
+                        <h4 class="mb-2 text-lg font-bold text-litus-text">{{ $item['title'] }}</h4>
+                        <p class="text-[14.5px] leading-relaxed text-litus-text-2">{{ $item['desc'] }}</p>
+                    </article>
+                @endforeach
             </div>
         </div>
     </section>

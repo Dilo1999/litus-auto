@@ -24,17 +24,19 @@
 <article class="group flex h-full flex-col overflow-hidden rounded-[18px] border border-litus-line bg-white transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
     <a href="{{ route('motorcycle.show', $slug) }}"
        class="relative aspect-[16/11] overflow-hidden bg-gradient-to-br from-[#DFE9F7] to-[#B9CFEC]">
-        <div class="absolute left-[13px] right-[13px] top-[13px] z-[5] flex justify-between gap-2">
-            <span class="inline-block rounded-md {{ $showSale ? 'bg-[#DCE8FF] text-[#0B47B0]' : 'bg-black/50 text-white backdrop-blur-[5px]' }} px-[11px] py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.08em]">
-                {{ $showSale ? 'In a campaign' : ($badge ?: 'Top seller') }}
-            </span>
+        <div class="absolute left-[13px] right-[13px] top-[13px] z-[5] flex gap-2 {{ $showSale ? 'justify-end' : 'justify-between' }}">
+            @unless ($showSale)
+                <span class="inline-block rounded-md bg-black/50 px-[11px] py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-white backdrop-blur-[5px]">
+                    {{ $badge ?: 'Top seller' }}
+                </span>
+            @endunless
             @if ($brand)
                 <span class="inline-block rounded-md bg-black/50 px-[11px] py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-white backdrop-blur-[5px]">{{ $brand }}</span>
             @endif
         </div>
         <img src="{{ $img }}"
              alt="{{ $model }}"
-             class="relative z-[3] mx-auto h-full w-[88%] object-contain py-3 drop-shadow-[0_16px_12px_rgba(0,0,0,0.16)] transition-transform duration-300 group-hover:scale-[1.05]"
+             class="relative z-[3] mx-auto h-[108%] w-[108%] max-w-none object-contain drop-shadow-[0_16px_12px_rgba(0,0,0,0.16)] transition-transform duration-300 group-hover:scale-[1.05]"
              loading="lazy">
     </a>
 
@@ -46,17 +48,7 @@
             {{ $cc !== '-' ? $cc : '' }}{{ $cc !== '-' && $capacity !== '-' ? ' · ' : '' }}{{ $capacity !== '-' ? 'Tank '.$capacity : '' }}
         </p>
 
-        @if ($showSale)
-            <div class="flex flex-wrap items-baseline gap-[11px]">
-                <span class="text-sm text-litus-text-3 line-through">{{ $price }}</span>
-                <span class="font-display text-[25px] font-bold tracking-[-0.03em] text-litus-text">{{ $salePrice }}</span>
-            </div>
-            @if ($discount)
-                <div class="mt-[11px] inline-flex w-fit items-center gap-1.5 rounded-[7px] bg-[#E6F7F0] px-3 py-1.5 text-[12.5px] font-bold text-[#07704E]">
-                    You save {{ $discount }}
-                </div>
-            @endif
-        @elseif ($price)
+        @if ($price)
             <div class="flex flex-wrap items-baseline gap-[11px]">
                 <span class="font-display text-[25px] font-bold tracking-[-0.03em] text-litus-text">{{ $price }}</span>
             </div>
