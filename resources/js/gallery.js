@@ -50,7 +50,7 @@ function initGalleryPage() {
     };
 
     const goToMomentSlide = (index, smooth = true) => {
-        const mq = window.matchMedia('(max-width: 650px)');
+        const mq = window.matchMedia('(max-width: 767px)');
         const { slides, dots } = momentsSliderState;
         if (!mq.matches || !slides.length || !momentsGrid) return;
 
@@ -69,7 +69,7 @@ function initGalleryPage() {
 
     const startMomentsSlider = () => {
         stopMomentsSlider();
-        const mq = window.matchMedia('(max-width: 650px)');
+        const mq = window.matchMedia('(max-width: 767px)');
         if (!mq.matches || momentsSliderState.slides.length < 2 || !momentsGrid) return;
 
         const intervalMs = Number(momentsGrid.dataset.interval) || 4000;
@@ -84,7 +84,7 @@ function initGalleryPage() {
     };
 
     const syncMomentsSliderFromScroll = () => {
-        const mq = window.matchMedia('(max-width: 650px)');
+        const mq = window.matchMedia('(max-width: 767px)');
         if (!mq.matches || momentsSliderState.scrolling || !momentsGrid) return;
 
         const center = momentsGrid.scrollLeft + momentsGrid.clientWidth / 2;
@@ -116,7 +116,7 @@ function initGalleryPage() {
         momentsGrid.addEventListener('touchend', scheduleMomentsSliderResume, { passive: true });
         momentsGrid.addEventListener('scroll', syncMomentsSliderFromScroll, { passive: true });
 
-        window.matchMedia('(max-width: 650px)').addEventListener('change', (event) => {
+        window.matchMedia('(max-width: 767px)').addEventListener('change', (event) => {
             if (event.matches) {
                 goToMomentSlide(momentsSliderState.activeIndex, false);
                 startMomentsSlider();
@@ -157,7 +157,7 @@ function initGalleryPage() {
         momentsSliderState.dots = Array.from(momentsDots.querySelectorAll('[data-gallery-moment-dot]'));
         bindMomentsSliderEvents();
 
-        if (window.matchMedia('(max-width: 650px)').matches) {
+        if (window.matchMedia('(max-width: 767px)').matches) {
             goToMomentSlide(0, false);
             startMomentsSlider();
         }
@@ -257,8 +257,8 @@ function initGalleryPage() {
 
     const renderMomentCard = (moment, isLarge) => {
         const titleClass = isLarge
-            ? 'text-[18px] min-[651px]:text-[22px] min-[1051px]:text-[28px]'
-            : 'text-[18px] min-[651px]:text-xl';
+            ? 'text-[18px] md:text-[22px] lg:text-[28px]'
+            : 'text-[18px] md:text-xl';
         const label = moment.label?.trim() || '';
         const lightboxLabel = label || moment.badge || 'Gallery image';
         const titleHtml = label
@@ -270,13 +270,13 @@ function initGalleryPage() {
                     data-gallery-open
                     data-img="${moment.img}"
                     data-label="${lightboxLabel}"
-                    class="group relative h-[240px] w-full overflow-hidden rounded-[10px] border border-black/8 bg-[#dfe3ea] text-left shadow-[0_10px_26px_rgba(0,0,0,0.12)] min-[651px]:h-[280px] ${isLarge ? 'min-[1051px]:row-span-2 min-[1051px]:h-auto' : 'min-[1051px]:h-full'}">
+                    class="group relative h-[240px] w-full overflow-hidden rounded-[10px] border border-black/8 bg-[#dfe3ea] text-left shadow-[0_10px_26px_rgba(0,0,0,0.12)] md:h-[280px] ${isLarge ? 'lg:row-span-2 lg:h-auto' : 'lg:h-full'}">
                 <img src="${moment.img}" alt="${lightboxLabel}" class="h-full w-full object-cover transition-transform duration-[450ms] group-hover:scale-[1.07]">
-                <div class="absolute bottom-3.5 left-3.5 right-3.5 z-[3] flex flex-col items-start justify-between gap-2 text-white min-[651px]:bottom-[18px] min-[651px]:left-5 min-[651px]:right-5 min-[651px]:flex-row min-[651px]:items-end min-[651px]:gap-3 ${label ? '' : 'min-[651px]:justify-end'}">
+                <div class="absolute bottom-3.5 left-3.5 right-3.5 z-[3] flex flex-col items-start justify-between gap-2 text-white md:bottom-[18px] md:left-5 md:right-5 md:flex-row md:items-end md:gap-3 ${label ? '' : 'md:justify-end'}">
                     ${titleHtml}
-                    <span class="inline-flex items-center gap-2 whitespace-nowrap text-[13px] font-extrabold opacity-95 min-[651px]:gap-2.5 min-[651px]:text-sm">
+                    <span class="inline-flex items-center gap-2 whitespace-nowrap text-[13px] font-extrabold opacity-95 md:gap-2.5 md:text-sm">
                         View Image
-                        <span class="inline-flex h-6 w-6 items-center justify-center rounded-md border border-white/45 bg-black/25 text-sm leading-none min-[651px]:h-[26px] min-[651px]:w-[26px] min-[651px]:text-[15px]">⛶</span>
+                        <span class="inline-flex h-6 w-6 items-center justify-center rounded-md border border-white/45 bg-black/25 text-sm leading-none md:h-[26px] md:w-[26px] md:text-[15px]">⛶</span>
                     </span>
                 </div>
             </button>
@@ -310,7 +310,7 @@ function initGalleryPage() {
         momentsGrid.innerHTML = ordered.map((moment, index) => {
             const isLarge = index === 0 && ordered.length > 1;
             return `
-                <div class="max-[650px]:w-[85%] max-[650px]:shrink-0 max-[650px]:snap-center min-[651px]:contents" data-gallery-moment-slide>
+                <div class="max-md:w-[85%] max-md:shrink-0 max-md:snap-center md:contents" data-gallery-moment-slide>
                     ${renderMomentCard(moment, isLarge)}
                 </div>
             `;

@@ -6,11 +6,11 @@
 @php
     $heroBg = asset('images/service_center/' . rawurlencode('ChatGPT Image Jul 10, 2026, 10_31_01 AM.png'));
 
-    $heroStrip = [
-        ['icon' => 'wrench', 'title' => 'Periodic Maintenance', 'sub' => 'Manufacturer schedules'],
-        ['icon' => 'shield', 'title' => 'Accident Repairs', 'sub' => 'Full collision & damage'],
-        ['icon' => 'zap', 'title' => 'Engine Overhaul', 'sub' => 'Complete restoration'],
-        ['icon' => 'bike', 'title' => 'Pick & Drop', 'sub' => 'We come to you'],
+    $heroFeatures = [
+        ['icon' => 'wrench', 'title' => 'Periodic Maintenance', 'desc' => 'Manufacturer schedules'],
+        ['icon' => 'shield', 'title' => 'Accident Repairs', 'desc' => 'Full collision & damage'],
+        ['icon' => 'zap', 'title' => 'Engine Overhaul', 'desc' => 'Complete restoration'],
+        ['icon' => 'bike', 'title' => 'Pick & Drop', 'desc' => 'We come to you'],
     ];
 
     $capabilities = [
@@ -89,21 +89,21 @@
         'Not sure - please advise',
     ];
 
-    $fieldLabel = 'mb-1.5 block text-[12.5px] font-semibold text-white/70';
-    $fieldControl = 'w-full rounded-[10px] border border-white/22 bg-white/[0.08] px-3.5 py-3 text-[14.5px] text-white outline-none transition placeholder:text-white/40 focus:border-litus-sky/60 focus:bg-white/[0.12]';
+    $fieldLabel = 'mb-1.5 block text-[12px] font-semibold text-white/70 sm:text-[12.5px]';
+    $fieldControl = 'w-full rounded-[10px] border border-white/22 bg-white/[0.08] px-3 py-2.5 text-[14px] text-white outline-none transition placeholder:text-white/40 focus:border-litus-sky/60 focus:bg-white/[0.12] sm:px-3.5 sm:py-3 sm:text-[14.5px]';
 @endphp
 
 <div class="font-sans" data-service-center-page>
 
     <x-litus-header active="Service" />
 
-    {{-- HERO --}}
-    <section class="relative overflow-hidden bg-litus-ink text-white">
+    {{-- HERO — desktop --}}
+    <section class="relative hidden overflow-hidden bg-litus-ink text-white min-[961px]:block">
         <img src="{{ $heroBg }}"
              alt=""
-             class="absolute inset-0 h-full w-full object-cover object-[center_right] max-md:object-[center_30%]"
+             class="absolute inset-0 h-full w-full object-cover object-[center_right]"
              aria-hidden="true">
-        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,24,0.96)_0%,rgba(5,11,24,0.88)_34%,rgba(5,11,24,0.55)_62%,rgba(5,11,24,0.35)_100%)] max-md:bg-[linear-gradient(180deg,rgba(5,11,24,0.55)_0%,rgba(5,11,24,0.78)_42%,rgba(5,11,24,0.94)_100%)]"></div>
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,24,0.96)_0%,rgba(5,11,24,0.88)_34%,rgba(5,11,24,0.55)_62%,rgba(5,11,24,0.35)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0"
              style="background:
                 radial-gradient(900px 520px at 82% 6%, rgba(46,116,238,.28), transparent 62%),
@@ -136,15 +136,15 @@
         </div>
 
         <div class="relative z-[3] border-t border-white/11 bg-black/35 backdrop-blur-sm">
-            <div class="litus-container grid grid-cols-1 gap-4 py-[22px] sm:grid-cols-2 lg:grid-cols-4 lg:gap-2.5">
-                @foreach ($heroStrip as $item)
+            <div class="litus-container grid grid-cols-2 gap-4 py-[22px] lg:grid-cols-4 lg:gap-2.5">
+                @foreach ($heroFeatures as $item)
                     <div class="flex items-center gap-[13px]">
                         <div class="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[10px] bg-[rgba(90,184,255,0.15)] text-litus-sky">
                             <x-litus-icon :name="$item['icon']" class="h-4 w-4" />
                         </div>
                         <div>
                             <b class="block text-sm font-semibold leading-snug text-white">{{ $item['title'] }}</b>
-                            <span class="block text-[12.5px] leading-snug text-white/60">{{ $item['sub'] }}</span>
+                            <span class="block text-[12.5px] leading-snug text-white/60">{{ $item['desc'] }}</span>
                         </div>
                     </div>
                 @endforeach
@@ -152,59 +152,120 @@
         </div>
     </section>
 
+    {{-- HERO — mobile --}}
+    <section class="relative overflow-hidden bg-litus-ink text-white min-[961px]:hidden">
+        <img src="{{ $heroBg }}"
+             alt=""
+             class="absolute inset-0 h-full w-full object-cover object-[center_30%]"
+             aria-hidden="true">
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,11,24,0.55)_0%,rgba(5,11,24,0.78)_42%,rgba(5,11,24,0.94)_100%)]"></div>
+        <div class="pointer-events-none absolute inset-0 opacity-[0.18]"
+             style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px;"></div>
+
+        <div class="relative z-[3] flex flex-col">
+            <div class="litus-container pt-12 pb-4">
+                <div class="max-w-[36rem]">
+                    <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky">LITUS Service Centre</span>
+                    <h1 class="max-w-[16ch] font-display text-[clamp(1.85rem,7.2vw,2.25rem)] font-extrabold leading-[1.1] tracking-[-0.032em]">
+                        Expert care for <span class="text-litus-sky">every motorcycle.</span>
+                    </h1>
+                    <p class="mt-3 line-clamp-4 max-w-[38ch] text-[14px] leading-[1.62] text-white/[0.72]">
+                        Maintenance, inspections, accident repairs and engine work by technicians trained on the engines we sell, using genuine parts.
+                    </p>
+                </div>
+            </div>
+
+            <div class="litus-container pb-4">
+                <div class="flex flex-row gap-2">
+                    <a href="#book"
+                       class="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-litus-primary px-3 text-[13px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:bg-litus-primary-hover">
+                        Book Now
+                        <x-litus-icon name="arrow-right" class="h-3.5 w-3.5 shrink-0" />
+                    </a>
+                    <a href="{{ route('contact') }}"
+                       class="inline-flex min-h-11 flex-1 items-center justify-center rounded-xl border-[1.5px] border-white/32 px-3 text-[13px] font-semibold text-white transition hover:border-white hover:bg-white/10">
+                        Contact
+                    </a>
+                </div>
+            </div>
+
+            <x-litus-hero-features :features="$heroFeatures" />
+        </div>
+    </section>
+
     {{-- CAPABILITIES --}}
-    <section class="litus-sec">
+    <section class="litus-sec max-md:!py-12">
         <div class="litus-container">
-            <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
-                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Our Capabilities</span>
-                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">What we do at our service centres</h2>
-                <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
+            <div class="mx-auto mb-6 max-w-[660px] text-center max-md:mb-5 sm:mb-[clamp(34px,4vw,54px)]">
+                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">Our Capabilities</span>
+                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">What we do at our service centres</h2>
+                <p class="mt-3 text-[15px] leading-[1.66] text-litus-text-2 sm:mt-4 sm:text-[clamp(16.5px,1.5vw,19px)]">
                     Precision tune-ups, inspections, repairs and diagnostics for optimal performance and safety.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
-                @foreach ($capabilities as $item)
-                    <article class="group rounded-[18px] border border-litus-line bg-white px-[26px] py-[30px] shadow-[0_1px_2px_rgba(9,17,32,.05)] transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
-                        <div class="mb-[18px] grid h-[42px] w-[42px] place-items-center rounded-[12px] bg-litus-paper-3 text-litus-primary transition duration-200 group-hover:bg-[rgba(18,87,214,0.12)]">
-                            <x-litus-icon :name="$item['icon']" class="h-5 w-5" />
+            <div data-home-card-slider-wrap>
+                <div
+                    data-home-card-slider
+                    data-interval="4500"
+                    class="grid grid-cols-1 gap-6 max-md:-mx-4 max-md:flex max-md:gap-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden sm:grid-cols-2 xl:grid-cols-4">
+                    @foreach ($capabilities as $item)
+                        <div data-home-card-slide class="max-md:w-[min(88%,340px)] max-md:shrink-0 max-md:snap-center">
+                            <article class="group h-full rounded-2xl border border-litus-line bg-white px-4 py-5 shadow-[0_1px_2px_rgba(9,17,32,0.04)] transition duration-200 sm:rounded-[18px] sm:px-[26px] sm:py-[30px] sm:shadow-[0_1px_2px_rgba(9,17,32,.05)] md:hover:-translate-y-1 md:hover:border-litus-line-2 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
+                                <div class="mb-3 grid h-10 w-10 place-items-center rounded-[12px] bg-litus-paper-3 text-litus-primary transition duration-200 group-hover:bg-[rgba(18,87,214,0.12)] sm:mb-[18px] sm:h-[42px] sm:w-[42px]">
+                                    <x-litus-icon :name="$item['icon']" class="h-4 w-4 sm:h-5 sm:w-5" />
+                                </div>
+                                <h4 class="mb-2 text-[16px] font-bold text-litus-text sm:text-lg">{{ $item['title'] }}</h4>
+                                <p class="text-[14px] leading-relaxed text-litus-text-2 sm:text-[14.5px]">{{ $item['text'] }}</p>
+                            </article>
                         </div>
-                        <h4 class="mb-2 text-lg font-bold text-litus-text">{{ $item['title'] }}</h4>
-                        <p class="text-[14.5px] leading-relaxed text-litus-text-2">{{ $item['text'] }}</p>
-                    </article>
-                @endforeach
+                    @endforeach
+                </div>
+
+                @if (count($capabilities) > 1)
+                    <div class="mt-4 hidden items-center justify-center gap-1.5 max-md:flex" data-home-card-dots aria-hidden="true">
+                        @foreach ($capabilities as $index => $item)
+                            <span @class([
+                                'h-1.5 rounded-full transition-all duration-300',
+                                'w-5 bg-litus-primary' => $index === 0,
+                                'w-1.5 bg-litus-line-2' => $index !== 0,
+                            ])
+                                  data-home-card-dot></span>
+                        @endforeach
+                    </div>
+                @endif
             </div>
         </div>
     </section>
 
     {{-- BOOKING --}}
     <section id="book" class="scroll-mt-24 overflow-hidden bg-litus-ink text-white">
-        <div class="litus-sec">
-            <div class="litus-container grid grid-cols-1 items-start gap-12 min-[1000px]:grid-cols-[0.85fr_1.15fr] min-[1000px]:gap-12">
-                <div>
-                    <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky">Book a Service</span>
-                    <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]">Book an appointment</h2>
-                    <p class="mt-3.5 max-w-[460px] text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.74]">
+        <div class="litus-sec max-md:!py-12">
+            <div class="litus-container grid grid-cols-1 items-start gap-8 min-[1000px]:grid-cols-[0.85fr_1.15fr] min-[1000px]:gap-12">
+                <div class="max-md:order-2">
+                    <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky sm:mb-3.5">Book a Service</span>
+                    <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em]">Book an appointment</h2>
+                    <p class="mt-3 max-w-[460px] text-[15px] leading-[1.66] text-white/[0.74] sm:mt-3.5 sm:text-[clamp(16.5px,1.5vw,19px)]">
                         We confirm every booking within 24 hours, and tell you what the service will involve before you bring the bike in.
                     </p>
 
-                    <ul class="mt-[30px] grid list-none gap-[18px]">
+                    <ul class="mt-6 grid list-none gap-4 sm:mt-[30px] sm:gap-[18px]">
                         @foreach ($bookingPoints as $index => $point)
-                            <li class="flex gap-[15px]">
-                                <div class="grid h-[34px] w-[34px] shrink-0 place-items-center rounded-[10px] bg-[rgba(90,184,255,0.16)] text-sm font-bold text-litus-sky">
+                            <li class="flex gap-3 sm:gap-[15px]">
+                                <div class="grid h-8 w-8 shrink-0 place-items-center rounded-[10px] bg-[rgba(90,184,255,0.16)] text-xs font-bold text-litus-sky sm:h-[34px] sm:w-[34px] sm:text-sm">
                                     {{ $index + 1 }}
                                 </div>
                                 <div>
-                                    <b class="mb-1 block text-[15.5px] text-white">{{ $point['title'] }}</b>
-                                    <span class="text-sm leading-relaxed text-white/65">{{ $point['text'] }}</span>
+                                    <b class="mb-1 block text-[14.5px] text-white sm:text-[15.5px]">{{ $point['title'] }}</b>
+                                    <span class="text-[13px] leading-relaxed text-white/65 sm:text-sm">{{ $point['text'] }}</span>
                                 </div>
                             </li>
                         @endforeach
                     </ul>
                 </div>
 
-                <div class="rounded-[26px] border border-white/15 bg-white/[0.06] p-[clamp(22px,3vw,32px)] backdrop-blur-[10px]">
-                    <form data-service-appointment-form class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div class="max-md:order-1 rounded-2xl border border-white/15 bg-white/[0.06] p-5 backdrop-blur-[10px] sm:rounded-[26px] sm:p-[clamp(22px,3vw,32px)]">
+                    <form data-service-appointment-form class="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-4">
                         <div>
                             <label class="{{ $fieldLabel }}">Your name</label>
                             <input type="text" name="name" placeholder="Full name" required class="{{ $fieldControl }}">
@@ -223,11 +284,14 @@
                         </div>
                         <div>
                             <label class="{{ $fieldLabel }}">Service centre</label>
-                            <select name="centre" class="{{ $fieldControl }} [color-scheme:dark]">
-                                @foreach ($centres as $centre)
-                                    <option value="{{ $centre }}" class="text-litus-text">{{ $centre }}</option>
-                                @endforeach
-                            </select>
+                            <div class="litus-select-wrap">
+                                <select name="centre" class="litus-select litus-select-glass {{ $fieldControl }} pr-10 [color-scheme:dark]">
+                                    @foreach ($centres as $centre)
+                                        <option value="{{ $centre }}">{{ $centre }}</option>
+                                    @endforeach
+                                </select>
+                                <x-litus-icon name="chevron-down" class="litus-select-chevron h-4 w-4 text-white/60" />
+                            </div>
                         </div>
                         <div>
                             <label class="{{ $fieldLabel }}">Preferred date</label>
@@ -235,23 +299,26 @@
                         </div>
                         <div class="sm:col-span-2">
                             <label class="{{ $fieldLabel }}">Type of service</label>
-                            <select name="service_type" class="{{ $fieldControl }} [color-scheme:dark]">
-                                @foreach ($serviceTypes as $type)
-                                    <option value="{{ $type }}" class="text-litus-text">{{ $type }}</option>
-                                @endforeach
-                            </select>
+                            <div class="litus-select-wrap">
+                                <select name="service_type" class="litus-select litus-select-glass {{ $fieldControl }} pr-10 [color-scheme:dark]">
+                                    @foreach ($serviceTypes as $type)
+                                        <option value="{{ $type }}">{{ $type }}</option>
+                                    @endforeach
+                                </select>
+                                <x-litus-icon name="chevron-down" class="litus-select-chevron h-4 w-4 text-white/60" />
+                            </div>
                         </div>
                         <div class="sm:col-span-2">
                             <label class="{{ $fieldLabel }}">Anything we should know?</label>
-                            <textarea name="notes" rows="3" placeholder="Noises, warning lights, when it started…" class="{{ $fieldControl }} min-h-[96px] resize-y"></textarea>
+                            <textarea name="notes" rows="3" placeholder="Noises, warning lights, when it started…" class="{{ $fieldControl }} min-h-[88px] resize-y sm:min-h-[96px]"></textarea>
                         </div>
                         <div class="sm:col-span-2">
                             <button type="submit"
-                                    class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
+                                    class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-litus-primary px-6 py-3 text-[14.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover sm:px-8 sm:py-[17px] sm:text-[15.5px]">
                                 Submit Appointment
                                 <x-litus-icon name="arrow-right" class="h-4 w-4" />
                             </button>
-                            <p class="mt-3.5 text-center text-xs text-white/50">
+                            <p class="mt-3 text-center text-xs text-white/50 sm:mt-3.5">
                                 Our service team will confirm your booking within 24 hours.
                             </p>
                         </div>
@@ -277,24 +344,24 @@
     </section>
 
     {{-- SERVICE PROGRAMS --}}
-    <section id="service-programs" class="litus-sec scroll-mt-24 bg-litus-paper-2">
+    <section id="service-programs" class="litus-sec scroll-mt-24 bg-litus-paper-2 max-md:!py-12">
         <div class="litus-container max-w-[880px]">
-            <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
-                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Our Service Programs</span>
-                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Understanding the right service for your motorcycle</h2>
-                <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
+            <div class="mx-auto mb-6 max-w-[660px] text-center max-md:mb-5 sm:mb-[clamp(34px,4vw,54px)]">
+                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">Our Service Programs</span>
+                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Understanding the right service for your motorcycle</h2>
+                <p class="mt-3 text-[15px] leading-[1.66] text-litus-text-2 sm:mt-4 sm:text-[clamp(16.5px,1.5vw,19px)]">
                     Choose the right service at the right time to keep your motorcycle running at its best.
                 </p>
             </div>
 
-            <div class="overflow-hidden rounded-[18px] border border-litus-line bg-white">
+            <div class="overflow-hidden rounded-2xl border border-litus-line bg-white sm:rounded-[18px]">
                 @foreach ($programs as $program)
                     <details class="group border-b border-litus-paper-3 last:border-b-0" @if (! empty($program['open'])) open @endif>
-                        <summary class="flex cursor-pointer list-none items-center justify-between gap-[18px] px-6 py-[19px] text-[15.5px] font-semibold text-litus-text marker:content-none [&::-webkit-details-marker]:hidden group-open:text-litus-primary">
+                        <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-4 text-[14.5px] font-semibold text-litus-text marker:content-none sm:gap-[18px] sm:px-6 sm:py-[19px] sm:text-[15.5px] [&::-webkit-details-marker]:hidden group-open:text-litus-primary">
                             <span>{{ $program['q'] }}</span>
                             <x-litus-icon name="chevron-down" class="h-4 w-4 shrink-0 transition group-open:rotate-180" />
                         </summary>
-                        <div class="px-6 pb-5 text-[14.5px] leading-relaxed text-litus-text-2">
+                        <div class="px-4 pb-4 text-[14px] leading-relaxed text-litus-text-2 sm:px-6 sm:pb-5 sm:text-[14.5px] sm:leading-normal">
                             <p>{{ $program['a'] }}</p>
                         </div>
                     </details>
@@ -304,7 +371,7 @@
     </section>
 
     {{-- CTA --}}
-    <section class="litus-sec-tight bg-litus-ink text-white">
+    <section class="litus-sec-tight bg-litus-ink text-white max-md:hidden">
         <div class="litus-container flex flex-wrap items-center justify-between gap-7">
             <div class="max-w-[560px]">
                 <h3 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]">Need motorcycle service support?</h3>

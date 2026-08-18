@@ -38,6 +38,9 @@ function initPromotionsFilter() {
     const brandButtons = [...root.querySelectorAll('[data-promo-brand]')];
     const sortSelect = root.querySelector('[data-promo-sort]');
     const grid = root.querySelector('[data-promo-grid]');
+    const sliderWrap = grid?.closest('[data-home-card-slider-wrap]');
+    const dotsRoot = sliderWrap?.querySelector('[data-home-card-dots]');
+    const dots = dotsRoot ? [...dotsRoot.querySelectorAll('[data-home-card-dot]')] : [];
     const countEl = root.querySelector('[data-promo-count]');
     const countSuffix = root.querySelector('[data-promo-count-suffix]');
     const emptyState = root.querySelector('[data-promo-empty]');
@@ -101,11 +104,27 @@ function initPromotionsFilter() {
         visibleCards.forEach((card) => grid.appendChild(card));
     }
 
+    function syncSliderDots(allCardsList, visibleCards) {
+        if (!dots.length) return;
+
+        const visibleCount = visibleCards.length;
+        dots.forEach((dot, index) => {
+            const card = allCardsList[index];
+            const show = card && visibleCards.includes(card);
+            dot.classList.toggle('hidden', !show);
+        });
+
+        if (dotsRoot) {
+            dotsRoot.classList.toggle('hidden', visibleCount <= 1);
+            dotsRoot.classList.toggle('max-md:flex', visibleCount > 1);
+        }
+    }
+
     function filter() {
-        const allCards = cards();
+        const allCardsList = cards();
         const visible = [];
 
-        allCards.forEach((card) => {
+        allCardsList.forEach((card) => {
             const brand = card.dataset.brand || '';
             const show = activeBrand === 'all' || brand === activeBrand;
             card.classList.toggle('hidden', !show);
@@ -113,12 +132,16 @@ function initPromotionsFilter() {
         });
 
         sortCards(visible);
+        syncSliderDots(allCardsList, visible);
 
         if (countEl) countEl.textContent = String(visible.length);
         if (countSuffix) countSuffix.textContent = visible.length === 1 ? '' : 's';
         if (emptyState && grid) {
             emptyState.classList.toggle('hidden', visible.length > 0);
             grid.classList.toggle('hidden', visible.length === 0);
+            if (sliderWrap) {
+                sliderWrap.classList.toggle('hidden', visible.length === 0);
+            }
         }
         if (resetBtn) {
             const showReset = hasActiveFilters();

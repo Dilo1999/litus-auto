@@ -16,11 +16,11 @@
     ];
     $count = $promotions->count();
 
-    $heroStrip = [
-        ['icon' => 'clock', 'title' => 'Dated & Verified', 'sub' => 'Every campaign shows its saving clearly'],
-        ['icon' => 'map-pin', 'title' => 'By Showroom', 'sub' => 'Ask us where stock is available'],
-        ['icon' => 'shield', 'title' => 'Ijara Eligible', 'sub' => 'Most campaigns work on a plan'],
-        ['icon' => 'file-text', 'title' => 'No Fine Print', 'sub' => 'Terms written in plain language'],
+    $heroFeatures = [
+        ['icon' => 'clock', 'title' => 'Dated & Verified', 'desc' => 'Every campaign shows its saving clearly'],
+        ['icon' => 'map-pin', 'title' => 'By Showroom', 'desc' => 'Ask us where stock is available'],
+        ['icon' => 'shield', 'title' => 'Ijara Eligible', 'desc' => 'Most campaigns work on a plan'],
+        ['icon' => 'file-text', 'title' => 'No Fine Print', 'desc' => 'Terms written in plain language'],
     ];
 
     $steps = [
@@ -68,21 +68,22 @@
         <div class="pointer-events-none absolute inset-0 opacity-[0.42]"
              style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px; mask-image: radial-gradient(700px 500px at 30% 30%, #000, transparent 78%);"></div>
 
-        <div class="relative z-[3] litus-container py-[clamp(48px,6.5vw,88px)] pb-[clamp(40px,5vw,68px)]">
-            <div class="grid items-stretch gap-10 max-[960px]:grid-cols-1 max-[960px]:gap-8 min-[961px]:grid-cols-[1.06fr_0.94fr]">
-                <div class="flex flex-col justify-center">
-                    <span class="mb-4 inline-flex w-fit max-w-full items-center gap-2.5 rounded-full border border-white/16 bg-white/[0.08] px-4 py-2 text-[12.5px] font-semibold">
-                        <span class="litus-live-dot h-[7px] w-[7px] shrink-0 rounded-full bg-[#3DDC84] shadow-[0_0_0_0_rgba(61,220,132,0.7)]" aria-hidden="true"></span>
-                        {{ $count }} campaign{{ $count === 1 ? '' : 's' }} running now · Updated {{ now()->format('j M Y') }}
+        <div class="relative z-[3] litus-container py-[clamp(48px,6.5vw,88px)] pb-[clamp(40px,5vw,68px)] max-[960px]:pt-12 max-[960px]:pb-4">
+            <div class="grid items-stretch gap-10 max-[960px]:grid-cols-1 max-[960px]:gap-6 min-[961px]:grid-cols-[1.06fr_0.94fr]">
+                <div class="flex flex-col justify-center max-[960px]:order-1">
+                    <span class="mb-3 inline-flex max-w-full items-center gap-2 rounded-full border border-white/16 bg-white/[0.08] px-3 py-1.5 text-[10.5px] font-semibold leading-snug min-[961px]:mb-4 min-[961px]:w-fit min-[961px]:gap-2.5 min-[961px]:px-4 min-[961px]:py-2 min-[961px]:text-[12.5px]">
+                        <span class="litus-live-dot h-[6px] w-[6px] shrink-0 rounded-full bg-[#3DDC84] min-[961px]:h-[7px] min-[961px]:w-[7px]" aria-hidden="true"></span>
+                        <span class="truncate">{{ $count }} live campaign{{ $count === 1 ? '' : 's' }} · {{ now()->format('j M Y') }}</span>
                     </span>
                     <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky">Ongoing Promotions</span>
-                    <h1 class="font-display text-[clamp(30px,4.2vw,50px)] font-bold leading-[1.08] tracking-[-0.032em]">
-                        Real offers.<br>Real savings. <span class="text-litus-sky">Right now.</span>
+                    <h1 class="font-display text-[clamp(1.85rem,7vw,50px)] font-extrabold leading-[1.1] tracking-[-0.032em] min-[961px]:font-bold min-[961px]:leading-[1.08]">
+                        Real offers.<br class="max-[960px]:hidden"> Real savings. <span class="text-litus-sky">Right now.</span>
                     </h1>
-                    <p class="mt-4 max-w-[540px] text-[clamp(16px,1.4vw,18px)] leading-[1.66] text-white/[0.72]">
+                    <p class="mt-3 max-w-[540px] text-[14px] leading-[1.62] text-white/[0.72] min-[961px]:mt-4 min-[961px]:text-[clamp(16px,1.4vw,18px)] min-[961px]:leading-[1.66]">
                         Every live campaign from LITUS in one place. Open a model to see the campaign price, how much you save, and how to reserve it.
                     </p>
-                    <div class="litus-cta-row mt-6">
+
+                    <div class="litus-cta-row mt-6 hidden min-[961px]:flex">
                         <a href="#offers"
                            class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-7 py-[15px] text-[15px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                             Browse All Campaigns
@@ -96,7 +97,7 @@
                 </div>
 
                 @if ($count > 0)
-                    <div class="relative flex min-h-[440px] h-full flex-col justify-end overflow-hidden rounded-[22px] border border-white/14 shadow-[0_4px_10px_rgba(9,17,32,.08),0_34px_70px_rgba(9,17,32,.16)] max-[960px]:min-h-[380px]"
+                    <div class="relative flex min-h-[440px] h-full flex-col justify-end overflow-hidden rounded-[22px] border border-white/14 shadow-[0_4px_10px_rgba(9,17,32,.08),0_34px_70px_rgba(9,17,32,.16)] max-[960px]:order-2 max-[960px]:min-h-[300px] min-[961px]:min-h-[440px]"
                          style="background: linear-gradient(155deg, #061029 0%, #0E2A64 48%, #1B49B8 100%);"
                          data-promo-hero-slider
                          data-interval="4200">
@@ -181,34 +182,50 @@
                     </div>
                 @endif
             </div>
+
+            <div class="mt-4 flex flex-row gap-2 min-[961px]:hidden">
+                <a href="#offers"
+                   class="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-litus-primary px-3 text-[13px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:bg-litus-primary-hover">
+                    Campaigns
+                    <x-litus-icon name="arrow-right" class="h-3.5 w-3.5 shrink-0" />
+                </a>
+                <a href="#alerts"
+                   class="inline-flex min-h-11 flex-1 items-center justify-center rounded-xl border-[1.5px] border-white/32 px-3 text-[13px] font-semibold text-white transition hover:border-white hover:bg-white/10">
+                    WhatsApp
+                </a>
+            </div>
         </div>
 
-        <div class="relative z-[3] border-t border-white/11 bg-black/26">
-            <div class="litus-container grid grid-cols-1 gap-4 py-[22px] sm:grid-cols-2 lg:grid-cols-4 lg:gap-2.5">
-                @foreach ($heroStrip as $item)
+        <div class="relative z-[3] border-t border-white/11 bg-black/26 hidden min-[961px]:block">
+            <div class="litus-container grid grid-cols-2 gap-4 py-[22px] lg:grid-cols-4 lg:gap-2.5">
+                @foreach ($heroFeatures as $item)
                     <div class="flex items-center gap-[13px]">
                         <div class="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[10px] bg-[rgba(90,184,255,0.15)] text-litus-sky">
                             <x-litus-icon :name="$item['icon']" class="h-4 w-4" />
                         </div>
                         <div>
                             <b class="block text-sm font-semibold leading-snug text-white">{{ $item['title'] }}</b>
-                            <span class="block text-[12.5px] leading-snug text-white/60">{{ $item['sub'] }}</span>
+                            <span class="block text-[12.5px] leading-snug text-white/60">{{ $item['desc'] }}</span>
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
+
+        <div class="relative z-[3] min-[961px]:hidden">
+            <x-litus-hero-features :features="$heroFeatures" />
+        </div>
     </section>
 
     {{-- ABOUT + GLANCE --}}
-    <section class="litus-sec">
-        <div class="litus-container grid grid-cols-1 gap-14 min-[1000px]:grid-cols-[1.35fr_0.65fr] min-[1000px]:gap-14">
+    <section class="litus-sec max-md:!py-12">
+        <div class="litus-container grid grid-cols-1 gap-8 min-[1000px]:grid-cols-[1.35fr_0.65fr] min-[1000px]:gap-14">
             <div>
-                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">About Our Promotions</span>
-                <h2 class="mb-6 font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">
+                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">About Our Promotions</span>
+                <h2 class="mb-5 font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text sm:mb-6">
                     How our campaigns work, and why we tell you when they end
                 </h2>
-                <div class="max-w-[720px] text-[16.5px] leading-[1.78] text-[#26324A]">
+                <div class="max-w-[720px] text-[15px] leading-[1.72] text-[#26324A] sm:text-[16.5px] sm:leading-[1.78]">
                     <p class="mb-[17px]">
                         <strong class="font-semibold text-litus-text">We do not run promotions on single motorcycles. We run named campaigns, and each campaign covers a group of bikes.</strong>
                         The 2 Payment Plan covers six models. The August Price Drop covers five. Some campaigns, like our Ijara advance reduction, cover every motorcycle we have in stock.
@@ -217,7 +234,7 @@
                         That means the question is never just “is this bike on offer?” but “which campaign is it in, and what does that campaign give me?” Every campaign page on this site answers both: it lists the exact motorcycles included, the price of each one under that campaign, and precisely how the campaign works - the payment structure, whether a guarantor is needed, what is waived, and what is not.
                     </p>
 
-                    <h3 class="mb-3 mt-8 font-display text-[23px] font-bold tracking-[-0.028em] text-litus-text">Why every campaign carries a real end date</h3>
+                    <h3 class="mb-3 mt-6 font-display text-[19px] font-bold tracking-[-0.028em] text-litus-text sm:mt-8 sm:text-[23px]">Why every campaign carries a real end date</h3>
                     <p class="mb-[17px]">
                         A “limited offer” badge that never expires is not a limited offer, and after a few months customers stop believing it. So every campaign we publish carries a real closing date. When that date passes, the campaign comes down and prices return to normal. We do not quietly extend a campaign and re-run it the following month under a new name.
                     </p>
@@ -225,17 +242,17 @@
                         Our campaigns come from three places: stock that has arrived ahead of schedule, model-year changeovers where we would rather clear the outgoing units, and seasonal campaigns around Ramadan, Eid and the school year. We will always tell you which kind you are looking at.
                     </p>
 
-                    <h3 class="mb-3 mt-8 font-display text-[23px] font-bold tracking-[-0.028em] text-litus-text">Campaigns and Ijara plans work together</h3>
+                    <h3 class="mb-3 mt-6 font-display text-[19px] font-bold tracking-[-0.028em] text-litus-text sm:mt-8 sm:text-[23px]">Campaigns and Ijara plans work together</h3>
                     <p class="mb-[17px]">
                         A price campaign reduces the amount your ownership plan is calculated from - so if you buy on an Ijara plan, the saving reaches you as a lower monthly amount rather than a lower lump sum. You are not penalised for paying monthly. Our plan campaigns work the other way round: they change the terms rather than the price, and most of them stack with a price campaign on the same bike.
                     </p>
 
-                    <h3 class="mb-3 mt-8 font-display text-[23px] font-bold tracking-[-0.028em] text-litus-text">One campaign per motorcycle</h3>
+                    <h3 class="mb-3 mt-6 font-display text-[19px] font-bold tracking-[-0.028em] text-litus-text sm:mt-8 sm:text-[23px]">One campaign per motorcycle</h3>
                     <p class="mb-[17px]">
                         A motorcycle can appear in several campaigns at once, but only one applies to your purchase. Where you have a choice, our team will work out which leaves you better off on the model you want - and tell you, even when it is the one that earns us less.
                     </p>
 
-                    <h3 class="mb-3 mt-8 font-display text-[23px] font-bold tracking-[-0.028em] text-litus-text">Campaigns differ by showroom</h3>
+                    <h3 class="mb-3 mt-6 font-display text-[19px] font-bold tracking-[-0.028em] text-litus-text sm:mt-8 sm:text-[23px]">Campaigns differ by showroom</h3>
                     <p>
                         We hold stock separately at Malé, Hulhumalé, Hithadhoo, Fuvahmulah and L. Fonadhoo, and a campaign only applies where the stock actually is. Use the showroom filter below to see what you can act on near you. If something you want is on another island, contact us - a transfer is usually possible, and we will tell you the cost and timing upfront rather than after you have committed.
                     </p>
@@ -243,7 +260,7 @@
             </div>
 
             <aside class="min-[1000px]:sticky min-[1000px]:top-[96px] min-[1000px]:self-start">
-                <div class="rounded-[26px] border border-litus-line bg-white p-[26px] shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)]">
+                <div class="rounded-2xl border border-litus-line bg-white p-5 shadow-[0_2px_8px_rgba(9,17,32,0.06)] sm:rounded-[26px] sm:p-[26px] sm:shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)]">
                     <h4 class="mb-4 font-display text-[clamp(20px,2.2vw,26px)] font-semibold tracking-[-0.02em] text-litus-text">This month at a glance</h4>
                     <div class="divide-y divide-litus-line text-[14.5px]">
                         <div class="flex justify-between gap-4 py-3.5"><span class="text-litus-text-2">Live campaigns</span><b class="text-litus-text">{{ $stats['campaignCount'] }}</b></div>
@@ -258,7 +275,7 @@
                         <x-litus-icon name="arrow-right" class="h-4 w-4" />
                     </a>
                 </div>
-                <div class="mt-[22px] rounded-r-[12px] border-l-4 border-litus-teal bg-[#E6F6F3] px-6 py-5">
+                <div class="mt-5 rounded-r-[12px] border-l-4 border-litus-teal bg-[#E6F6F3] px-4 py-4 sm:mt-[22px] sm:px-6 sm:py-5">
                     <b class="mb-1.5 block text-[14.5px] text-litus-text">Prices you can trust</b>
                     <p class="m-0 text-[14.5px] text-[#2A3548]">
                         Every “was” price on this page is the price we were genuinely selling at before the promotion. We do not inflate a price in order to advertise a bigger discount.
@@ -274,7 +291,7 @@
             $campaignStarts = $campaign?->starts_at ?? $campaign?->created_at ?? now();
             $campaignEnds = $campaign?->ends_at;
         @endphp
-        <section class="litus-sec-tight bg-litus-paper-2">
+        <section class="litus-sec-tight bg-litus-paper-2 max-md:hidden">
             <div class="litus-container">
                 <div class="relative grid overflow-hidden rounded-[22px] text-white shadow-[0_4px_10px_rgba(9,17,32,.08),0_34px_70px_rgba(9,17,32,.16)] max-[940px]:grid-cols-1 min-[941px]:grid-cols-[1.08fr_0.92fr] sm:rounded-[34px]"
                      style="background: linear-gradient(115deg, #0B1526, #1B3260 58%, #1D4CBB);">
@@ -426,23 +443,23 @@
     {{-- FILTERS + GRID --}}
     <section class="litus-sec-tight scroll-mt-24 pb-0" id="offers">
         <div class="litus-container">
-            <div class="mx-auto mb-[clamp(28px,3vw,42px)] max-w-[660px] text-center">
-                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">All Live Campaigns</span>
-                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Find the campaign that fits you</h2>
-                <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
+            <div class="mx-auto mb-6 max-w-[660px] text-center max-md:mb-5 sm:mb-[clamp(28px,3vw,42px)]">
+                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">All Live Campaigns</span>
+                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Find the campaign that fits you</h2>
+                <p class="mt-3 text-[15px] leading-[1.66] text-litus-text-2 sm:mt-4 sm:text-[clamp(16.5px,1.5vw,19px)]">
                     Filter by brand or sort by saving. Each card shows the campaign price and how much you save.
                 </p>
             </div>
         </div>
     </section>
 
-    <section class="sticky top-[72px] z-[100] border-b border-litus-line bg-white/[0.97] py-[15px] backdrop-blur-[12px] max-[820px]:static">
-        <div class="litus-container flex flex-wrap items-center gap-3.5">
-            <div class="flex flex-wrap gap-2 max-[820px]:w-full max-[820px]:flex-nowrap max-[820px]:overflow-x-auto max-[820px]:pb-1 max-[820px]:[scrollbar-width:none] max-[820px]:[&::-webkit-scrollbar]:hidden">
+    <section class="sticky top-[72px] z-[100] border-b border-litus-line bg-white/[0.97] py-3 backdrop-blur-[12px] sm:py-[15px]">
+        <div class="litus-container flex flex-wrap items-center gap-3 sm:gap-3.5">
+            <div class="flex w-full gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:overflow-visible sm:pb-0">
                 <button type="button"
                         data-promo-brand="all"
                         aria-pressed="true"
-                        class="inline-flex shrink-0 items-center gap-2 rounded-full border-[1.5px] border-litus-ink bg-litus-ink px-4 py-2 text-[13.5px] font-semibold text-white transition">
+                        class="inline-flex shrink-0 items-center gap-2 rounded-full border-[1.5px] border-litus-ink bg-litus-ink px-3.5 py-2 text-[13px] font-semibold text-white transition sm:px-4 sm:text-[13.5px]">
                     All Campaigns
                     <span class="rounded-full bg-white/20 px-1.5 py-px text-[11px] font-bold">{{ $count }}</span>
                 </button>
@@ -450,7 +467,7 @@
                     <button type="button"
                             data-promo-brand="{{ $brand }}"
                             aria-pressed="false"
-                            class="inline-flex shrink-0 items-center gap-2 rounded-full border-[1.5px] border-litus-line-2 bg-white px-4 py-2 text-[13.5px] font-semibold text-litus-text-2 transition hover:border-litus-primary-light hover:text-litus-primary">
+                            class="inline-flex shrink-0 items-center gap-2 rounded-full border-[1.5px] border-litus-line-2 bg-white px-3.5 py-2 text-[13px] font-semibold text-litus-text-2 transition hover:border-litus-primary-light hover:text-litus-primary sm:px-4 sm:text-[13.5px]">
                         {{ $brand }}
                         <span class="rounded-full bg-litus-paper-3 px-1.5 py-px text-[11px] font-bold text-litus-text-2">
                             {{ $promotions->where('brand', $brand)->count() }}
@@ -459,21 +476,24 @@
                 @endforeach
             </div>
 
-            <div class="ml-auto flex flex-wrap gap-2.5 max-[820px]:ml-0 max-[820px]:w-full">
-                <select data-promo-sort
-                        class="w-full cursor-pointer rounded-[9px] border-[1.5px] border-litus-line-2 bg-white py-2.5 pl-3.5 pr-9 text-[13.5px] font-medium text-litus-text outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)] min-[821px]:w-auto">
-                    <option value="saving">Sort: Biggest Saving</option>
-                    <option value="price">Sort: Lowest Price</option>
-                    <option value="latest">Sort: Latest</option>
-                </select>
+            <div class="w-full sm:ml-auto sm:w-auto">
+                <div class="litus-select-wrap">
+                    <select data-promo-sort
+                            class="litus-select w-full cursor-pointer rounded-[9px] border-[1.5px] border-litus-line-2 bg-white py-2.5 pl-3 pr-10 text-[13px] font-medium text-litus-text outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)] sm:pl-3.5 sm:text-[13.5px] sm:min-w-[200px]">
+                        <option value="saving">Sort: Biggest Saving</option>
+                        <option value="price">Sort: Lowest Price</option>
+                        <option value="latest">Sort: Latest</option>
+                    </select>
+                    <x-litus-icon name="chevron-down" class="litus-select-chevron h-4 w-4 text-litus-text-3" />
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-white pb-[clamp(62px,7.5vw,116px)] pt-0">
+    <section class="bg-white pb-[clamp(48px,7.5vw,116px)] pt-0">
         <div class="litus-container">
-            <div class="flex flex-wrap items-center justify-between gap-3 pb-1.5 pt-[26px]">
-                <b class="text-[15px] text-litus-text">
+            <div class="flex flex-wrap items-center justify-between gap-3 pb-1 pt-4 sm:pt-[26px]">
+                <b class="text-[14px] text-litus-text sm:text-[15px]">
                     Showing <span data-promo-count>{{ $count }}</span> offer<span data-promo-count-suffix>{{ $count === 1 ? '' : 's' }}</span>
                 </b>
                 <button type="button"
@@ -483,34 +503,54 @@
                 </button>
             </div>
 
+            <div data-home-card-slider-wrap>
+                <div
+                    data-home-card-slider
+                    data-interval="4500"
+                    class="grid grid-cols-1 gap-6 max-md:-mx-4 max-md:flex max-md:gap-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:grid-cols-2 xl:grid-cols-3"
+                    data-promo-grid>
+                    @forelse ($promotions as $motorcycle)
+                        <div data-home-card-slide
+                             class="max-md:w-[min(88%,340px)] max-md:shrink-0 max-md:snap-center"
+                             data-promo-card
+                             data-brand="{{ $motorcycle->brand }}"
+                             data-price="{{ $motorcycle->promotionalSalePrice() }}"
+                             data-saving="{{ $motorcycle->discountAmount() }}"
+                             data-sort="{{ (int) $motorcycle->sort_order }}"
+                             data-id="{{ $motorcycle->id }}">
+                            <x-card.promotion-card :motorcycle="$motorcycle" />
+                        </div>
+                    @empty
+                        <div class="col-span-full rounded-[18px] border border-dashed border-litus-line-2 px-6 py-16 text-center text-litus-text-2 max-md:w-full">
+                            <p class="font-semibold text-litus-text">No active campaigns at the moment.</p>
+                            <p class="mt-1 text-sm">Check back soon or browse our full motorcycle range.</p>
+                            <a href="{{ route('motorcycles') }}"
+                               class="mt-5 inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-6 py-3 text-[14.5px] font-semibold text-white">
+                                Browse Motorcycles
+                                <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                            </a>
+                        </div>
+                    @endforelse
+                </div>
+
+                @if ($count > 1)
+                    <div class="mt-4 hidden items-center justify-center gap-1.5 max-md:flex" data-home-card-dots aria-hidden="true">
+                        @foreach ($promotions as $index => $motorcycle)
+                            <span @class([
+                                'h-1.5 rounded-full transition-all duration-300',
+                                'w-5 bg-litus-primary' => $index === 0,
+                                'w-1.5 bg-litus-line-2' => $index !== 0,
+                            ])
+                                  data-home-card-dot></span>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+
             <div class="hidden rounded-[18px] border-[1.5px] border-dashed border-litus-line-2 px-6 py-16 text-center text-litus-text-2"
                  data-promo-empty>
                 <p class="font-semibold text-litus-text">No campaigns match these filters</p>
                 <p class="mt-1 text-sm">Try another brand or clear filters.</p>
-            </div>
-
-            <div class="grid grid-cols-1 gap-6 pt-5 md:grid-cols-2 xl:grid-cols-3"
-                 data-promo-grid>
-                @forelse ($promotions as $motorcycle)
-                    <div data-promo-card
-                         data-brand="{{ $motorcycle->brand }}"
-                         data-price="{{ $motorcycle->promotionalSalePrice() }}"
-                         data-saving="{{ $motorcycle->discountAmount() }}"
-                         data-sort="{{ (int) $motorcycle->sort_order }}"
-                         data-id="{{ $motorcycle->id }}">
-                        <x-card.promotion-card :motorcycle="$motorcycle" />
-                    </div>
-                @empty
-                    <div class="col-span-full rounded-[18px] border border-dashed border-litus-line-2 px-6 py-16 text-center text-litus-text-2">
-                        <p class="font-semibold text-litus-text">No active campaigns at the moment.</p>
-                        <p class="mt-1 text-sm">Check back soon or browse our full motorcycle range.</p>
-                        <a href="{{ route('motorcycles') }}"
-                           class="mt-5 inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-6 py-3 text-[14.5px] font-semibold text-white">
-                            Browse Motorcycles
-                            <x-litus-icon name="arrow-right" class="h-4 w-4" />
-                        </a>
-                    </div>
-                @endforelse
             </div>
         </div>
     </section>
@@ -518,29 +558,51 @@
     <x-litus-ijara-band />
 
     {{-- HOW TO JOIN --}}
-    <section class="litus-sec bg-litus-paper-2">
+    <section class="litus-sec bg-litus-paper-2 max-md:!py-12">
         <div class="litus-container">
-            <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
-                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Simple Process</span>
-                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">How to join a campaign</h2>
-                <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
+            <div class="mx-auto mb-6 max-w-[660px] text-center max-md:mb-5 sm:mb-[clamp(34px,4vw,54px)]">
+                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">Simple Process</span>
+                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">How to join a campaign</h2>
+                <p class="mt-3 text-[15px] leading-[1.66] text-litus-text-2 sm:mt-4 sm:text-[clamp(16.5px,1.5vw,19px)]">
                     Three steps from the campaign you see here to the keys in your hand.
                 </p>
             </div>
-            <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-                @foreach ($steps as $index => $step)
-                    <div class="rounded-[18px] border border-litus-line bg-white px-[26px] py-[30px]">
-                        <div class="mb-[18px] grid h-[42px] w-[42px] place-items-center rounded-[12px] bg-litus-ink font-display text-[17px] font-bold text-white">
-                            {{ $index + 1 }}
+
+            <div data-home-card-slider-wrap>
+                <div
+                    data-home-card-slider
+                    data-interval="5000"
+                    class="grid grid-cols-1 gap-6 max-md:-mx-4 max-md:flex max-md:gap-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:grid-cols-3">
+                    @foreach ($steps as $index => $step)
+                        <div data-home-card-slide class="max-md:w-[min(88%,340px)] max-md:shrink-0 max-md:snap-center">
+                            <article class="h-full rounded-2xl border border-litus-line bg-white px-4 py-5 shadow-[0_1px_2px_rgba(9,17,32,0.04)] sm:rounded-[18px] sm:px-[26px] sm:py-[30px] sm:shadow-none">
+                                <div class="mb-3 grid h-10 w-10 place-items-center rounded-[12px] bg-litus-ink font-display text-[16px] font-bold text-white sm:mb-[18px] sm:h-[42px] sm:w-[42px] sm:text-[17px]">
+                                    {{ $index + 1 }}
+                                </div>
+                                <h4 class="mb-2 text-[16px] font-bold text-litus-text sm:text-lg">{{ $step['title'] }}</h4>
+                                <p class="text-[14px] leading-relaxed text-litus-text-2 sm:text-[14.5px] sm:leading-normal">{{ $step['text'] }}</p>
+                            </article>
                         </div>
-                        <h4 class="mb-2 text-lg font-bold text-litus-text">{{ $step['title'] }}</h4>
-                        <p class="text-[14.5px] text-litus-text-2">{{ $step['text'] }}</p>
+                    @endforeach
+                </div>
+
+                @if (count($steps) > 1)
+                    <div class="mt-4 hidden items-center justify-center gap-1.5 max-md:flex" data-home-card-dots aria-hidden="true">
+                        @foreach ($steps as $index => $step)
+                            <span @class([
+                                'h-1.5 rounded-full transition-all duration-300',
+                                'w-5 bg-litus-primary' => $index === 0,
+                                'w-1.5 bg-litus-line-2' => $index !== 0,
+                            ])
+                                  data-home-card-dot></span>
+                        @endforeach
                     </div>
-                @endforeach
+                @endif
             </div>
-            <div class="mt-9 text-center">
+
+            <div class="mt-6 text-center sm:mt-9">
                 <a href="{{ route('contact') }}"
-                   class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
+                   class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-litus-primary px-6 py-3 text-[14.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover sm:px-8 sm:py-[17px] sm:text-[15.5px]">
                     Talk to Sales Team
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
@@ -549,25 +611,25 @@
     </section>
 
     {{-- FAQ --}}
-    <section class="litus-sec">
+    <section class="litus-sec max-md:!py-12">
         <div class="litus-container">
-            <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
-                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Good to Know</span>
-                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Campaign terms and common questions</h2>
-                <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
+            <div class="mx-auto mb-6 max-w-[660px] text-center max-md:mb-5 sm:mb-[clamp(34px,4vw,54px)]">
+                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">Good to Know</span>
+                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Campaign terms and common questions</h2>
+                <p class="mt-3 text-[15px] leading-[1.66] text-litus-text-2 sm:mt-4 sm:text-[clamp(16.5px,1.5vw,19px)]">
                     The details that stop surprises at the showroom counter.
                 </p>
             </div>
 
-            <div class="mx-auto max-w-[860px] overflow-hidden rounded-[18px] border border-litus-line bg-white">
+            <div class="mx-auto max-w-[860px] overflow-hidden rounded-2xl border border-litus-line bg-white sm:rounded-[18px]">
                 @foreach ($faqs as $faq)
                     <details class="group border-b border-litus-paper-3 last:border-b-0" @if (! empty($faq['open'])) open @endif>
-                        <summary class="flex cursor-pointer list-none items-center justify-between gap-[18px] px-6 py-[19px] text-[15.5px] font-semibold text-litus-text marker:content-none [&::-webkit-details-marker]:hidden group-open:text-litus-primary">
+                        <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-4 text-[14.5px] font-semibold text-litus-text marker:content-none sm:gap-[18px] sm:px-6 sm:py-[19px] sm:text-[15.5px] [&::-webkit-details-marker]:hidden group-open:text-litus-primary">
                             <span>{{ $faq['q'] }}</span>
-                            <span class="shrink-0 text-[23px] font-light leading-none text-litus-primary group-open:hidden">+</span>
-                            <span class="hidden shrink-0 text-[23px] font-light leading-none text-litus-primary group-open:inline">-</span>
+                            <span class="shrink-0 text-[20px] font-light leading-none text-litus-primary group-open:hidden sm:text-[23px]">+</span>
+                            <span class="hidden shrink-0 text-[20px] font-light leading-none text-litus-primary group-open:inline sm:text-[23px]">-</span>
                         </summary>
-                        <div class="px-6 pb-[22px] text-[14.5px] text-litus-text-2">
+                        <div class="px-4 pb-4 text-[14px] leading-relaxed text-litus-text-2 sm:px-6 sm:pb-[22px] sm:text-[14.5px] sm:leading-normal">
                             {!! $faq['a'] !!}
                         </div>
                     </details>
@@ -577,28 +639,28 @@
     </section>
 
     {{-- ALERTS --}}
-    <section id="alerts" class="litus-sec-tight scroll-mt-24 bg-litus-paper-2">
+    <section id="alerts" class="litus-sec-tight scroll-mt-24 bg-litus-paper-2 max-md:!py-10">
         <div class="litus-container">
-            <div class="relative grid items-center gap-9 overflow-hidden rounded-[22px] bg-litus-ink p-[clamp(22px,4vw,50px)] text-white max-[860px]:grid-cols-1 min-[861px]:grid-cols-[1.15fr_0.85fr] sm:rounded-[34px]">
+            <div class="relative grid items-center gap-6 overflow-hidden rounded-[22px] bg-litus-ink p-[clamp(20px,4vw,50px)] text-white max-[860px]:grid-cols-1 min-[861px]:grid-cols-[1.15fr_0.85fr] min-[861px]:gap-9 sm:rounded-[34px]">
                 <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(560px_300px_at_88%_18%,rgba(31,168,85,.26),transparent_62%)]"></div>
                 <div class="relative z-[2]">
-                    <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky">Never Miss an Offer</span>
-                    <h3 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]">Popular models sell out before the campaign ends.</h3>
-                    <p class="mt-3 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.74]">
+                    <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky sm:mb-3.5">Never Miss an Offer</span>
+                    <h3 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em]">Popular models sell out before the campaign ends.</h3>
+                    <p class="mt-3 text-[15px] leading-[1.66] text-white/[0.74] sm:text-[clamp(16.5px,1.5vw,19px)]">
                         Most LITUS campaigns run for a limited period, and the popular models inside them go early. Join our WhatsApp broadcast and you will hear about each new campaign the morning it goes live.
                     </p>
                 </div>
-                <div class="litus-cta-row relative z-[2] min-[861px]:justify-end">
+                <div class="relative z-[2] flex flex-row gap-2 min-[861px]:flex min-[861px]:flex-wrap min-[861px]:justify-end min-[861px]:gap-3">
                     <a href="https://wa.me/9607797442?text={{ urlencode('Hi LITUS, please add me to campaign WhatsApp alerts.') }}"
                        target="_blank"
                        rel="noopener noreferrer"
-                       class="inline-flex items-center justify-center gap-2 rounded-lg bg-[#1FA855] px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#178443]">
-                        <x-litus-icon name="message-circle" class="h-4 w-4" />
-                        Join WhatsApp Alerts
+                       class="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#1FA855] px-3 text-[13px] font-semibold text-white transition hover:bg-[#178443] min-[861px]:flex-none min-[861px]:gap-2 min-[861px]:px-8 min-[861px]:py-[17px] min-[861px]:text-[15.5px] min-[861px]:hover:-translate-y-0.5">
+                        <x-litus-icon name="message-circle" class="h-3.5 w-3.5 shrink-0 min-[861px]:h-4 min-[861px]:w-4" />
+                        WhatsApp
                     </a>
                     <a href="#"
-                       class="inline-flex items-center justify-center rounded-lg border-[1.5px] border-white/32 px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10">
-                        Follow on Facebook
+                       class="inline-flex min-h-11 flex-1 items-center justify-center rounded-lg border-[1.5px] border-white/32 px-3 text-[13px] font-semibold text-white transition hover:border-white hover:bg-white/10 min-[861px]:flex-none min-[861px]:px-8 min-[861px]:py-[17px] min-[861px]:text-[15.5px] min-[861px]:hover:-translate-y-0.5">
+                        Facebook
                     </a>
                 </div>
             </div>
@@ -606,7 +668,7 @@
     </section>
 
     {{-- CTA --}}
-    <section class="litus-sec-tight bg-litus-ink text-white">
+    <section class="litus-sec-tight bg-litus-ink text-white max-md:hidden">
         <div class="litus-container flex flex-wrap items-center justify-between gap-7">
             <div class="max-w-[560px]">
                 <h3 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]">Not sure which campaign is best for you?</h3>
