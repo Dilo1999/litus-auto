@@ -38,9 +38,9 @@
         @endif
 
         @if ($hasPromo)
-            <div class="flex flex-wrap items-center gap-[11px]">
-                <span class="text-sm text-litus-text-3 line-through">{{ $motorcycle->formattedOriginalPrice() }}</span>
-                <div class="inline-flex w-fit items-center gap-1.5 rounded-[7px] bg-[#FFF1E6] px-3 py-1.5 text-[12.5px] font-bold text-[#C2410C]">
+            <div class="flex flex-nowrap items-center gap-2">
+                <span class="shrink-0 whitespace-nowrap text-sm text-litus-text-3 line-through">{{ $motorcycle->formattedOriginalPrice() }}</span>
+                <div class="inline-flex min-w-0 shrink items-center gap-1 whitespace-nowrap rounded-[7px] bg-[#FFF1E6] px-2 py-1 text-[11.5px] font-bold text-[#C2410C]">
                     You save {{ $motorcycle->formattedDiscount() }}
                 </div>
             </div>

@@ -55,12 +55,14 @@
         </p>
 
         @if ($hasPromo)
-            <div class="flex flex-wrap items-baseline gap-[11px]">
-                <span class="text-sm text-litus-text-3 line-through">{{ $motorcycle->formattedOriginalPrice() }}</span>
-                <span class="font-display text-[25px] font-bold tracking-[-0.03em] text-litus-text max-md:text-[20px]">{{ $motorcycle->formattedSalePrice() }}</span>
+            <div class="flex flex-nowrap items-center gap-2">
+                <span class="shrink-0 whitespace-nowrap text-sm text-litus-text-3 line-through">{{ $motorcycle->formattedOriginalPrice() }}</span>
+                <div class="inline-flex min-w-0 shrink items-center gap-1 whitespace-nowrap rounded-[7px] bg-[#FFF1E6] px-2 py-1 text-[11.5px] font-bold text-[#C2410C]">
+                    You save {{ $motorcycle->formattedDiscount() }}
+                </div>
             </div>
-            <div class="mt-[11px] inline-flex w-fit items-center gap-1.5 rounded-[7px] bg-[#E6F7F0] px-3 py-1.5 text-[12.5px] font-bold text-[#07704E]">
-                You save {{ $motorcycle->formattedDiscount() }}
+            <div class="mt-[11px] font-display text-[25px] font-bold tracking-[-0.03em] text-litus-text max-md:text-[20px]">
+                {{ $motorcycle->formattedSalePrice() }}
             </div>
         @else
             <div class="flex flex-wrap items-baseline gap-[11px]">
