@@ -7,7 +7,7 @@
     $category = $motorcycle->category ?: 'Model';
 @endphp
 
-<article {{ $attributes->merge(['class' => 'group flex flex-col overflow-hidden rounded-[18px] border border-litus-line bg-white transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]']) }}
+<article {{ $attributes->merge(['class' => 'group relative flex flex-col overflow-visible rounded-[18px] border border-litus-line bg-white transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]']) }}
      data-motorcycle-card
      data-brand="{{ $motorcycle->brand }}"
      data-category="{{ $category }}"
@@ -18,15 +18,15 @@
      data-popular="{{ $motorcycle->is_top_selling ? '1' : '0' }}"
      data-sort="{{ (int) $motorcycle->sort_order }}"
      data-id="{{ $motorcycle->id }}">
+    @if ($hasPromo)
+        <div class="pointer-events-none absolute -left-3 top-1 z-10 flex h-[72px] w-[150px] items-center justify-center bg-[url('/images/badges/red-sale.png')] bg-[length:150px_auto] bg-left-top bg-no-repeat">
+            <span class="w-[78%] pb-1 text-center font-[Poppins,sans-serif] text-[11.5px] font-extrabold uppercase italic leading-[1.05] tracking-[0.04em] text-white">
+                Limited Offer
+            </span>
+        </div>
+    @endif
     <a href="{{ route('motorcycle.show', $motorcycle->slug) }}"
-       class="relative aspect-[5/4] overflow-hidden bg-gradient-to-br from-[#DFE9F7] to-[#B9CFEC]">
-            @if ($hasPromo)
-                <div class="absolute left-[13px] right-[13px] top-[13px] z-[5] flex justify-start">
-                    <span class="inline-block rounded-md bg-[#DCE8FF] px-[11px] py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-[#0B47B0]">
-                        In a campaign
-                    </span>
-                </div>
-            @endif
+       class="relative aspect-[5/4] overflow-hidden rounded-t-[18px] bg-gradient-to-br from-[#DFE9F7] to-[#B9CFEC]">
         <img src="{{ $motorcycle->listImageUrl() }}"
              alt="{{ $motorcycle->name }}"
              class="relative z-[3] mx-auto h-[108%] w-[108%] max-w-none object-contain drop-shadow-[0_16px_12px_rgba(0,0,0,0.16)] transition-transform duration-300 group-hover:scale-[1.05]"
