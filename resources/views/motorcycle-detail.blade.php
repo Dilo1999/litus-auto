@@ -237,9 +237,9 @@
         </div>
     </section>
 
-    {{-- LIVE OFFER --}}
+    {{-- LIVE OFFER — hidden on mobile (promo shown in hero) --}}
     @if ($hasPromo)
-        <div class="border-b border-[#E4D8FF] bg-[#F2ECFF]">
+        <div class="border-b border-[#E4D8FF] bg-[#F2ECFF] max-md:hidden">
             <div class="litus-container flex flex-col gap-3 py-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-5 sm:py-5">
                 <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3.5">
                     <span class="inline-block rounded-md bg-[#F2ECFF] px-[11px] py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-[#6941C6] ring-1 ring-[#6941C6]/20">Live Offer</span>

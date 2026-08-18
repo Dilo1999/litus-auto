@@ -201,6 +201,13 @@
   background-color: currentColor;
 }
 
+/* 360 spin — full-area touch, no browser swipe steal */
+[data-product-spin] {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 @media (max-width: 479px) {
   .litus-cta-row {
     flex-direction: column;

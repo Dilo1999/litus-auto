@@ -18,6 +18,9 @@ function initProductSpin() {
         const hint = root.querySelector('[data-product-spin-hint]');
         if (!img) return null;
 
+        const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+        const axisLockThreshold = isCoarsePointer ? 4 : 8;
+
         let frameIndex = 0;
         let isDragging = false;
         let startX = 0;
@@ -26,7 +29,13 @@ function initProductSpin() {
         let activePointerId = null;
         let lockAxis = null;
 
-        const pixelsPerFrame = () => Math.max(12, Math.min(30, 200 / Math.max(frames.length, 1)));
+        const pixelsPerFrame = () => {
+            const base = 200 / Math.max(frames.length, 1);
+            if (isCoarsePointer) {
+                return Math.max(5, Math.min(10, base * 0.45));
+            }
+            return Math.max(12, Math.min(30, base));
+        };
 
         const preload = (list) => {
             list.forEach((src) => {
@@ -60,7 +69,7 @@ function initProductSpin() {
             startFrame = frameIndex;
             root.classList.add('cursor-grabbing');
             hint?.classList.remove('opacity-0');
-            img.setPointerCapture?.(e.pointerId);
+            root.setPointerCapture?.(e.pointerId);
         };
 
         const onPointerMove = (e) => {
@@ -69,8 +78,17 @@ function initProductSpin() {
             const deltaX = e.clientX - startX;
             const deltaY = e.clientY - startY;
 
-            if (lockAxis === null && (Math.abs(deltaX) > 8 || Math.abs(deltaY) > 8)) {
+            if (lockAxis === null && (Math.abs(deltaX) > axisLockThreshold || Math.abs(deltaY) > axisLockThreshold)) {
                 lockAxis = Math.abs(deltaX) >= Math.abs(deltaY) ? 'x' : 'y';
+            }
+
+            if (lockAxis === 'y') {
+                isDragging = false;
+                activePointerId = null;
+                lockAxis = null;
+                root.classList.remove('cursor-grabbing');
+                root.releasePointerCapture?.(e.pointerId);
+                return;
             }
 
             if (lockAxis !== 'x') return;
@@ -86,14 +104,14 @@ function initProductSpin() {
             activePointerId = null;
             lockAxis = null;
             root.classList.remove('cursor-grabbing');
-            img.releasePointerCapture?.(e.pointerId);
+            root.releasePointerCapture?.(e.pointerId);
         };
 
-        img.addEventListener('pointerdown', onPointerDown);
-        img.addEventListener('pointermove', onPointerMove);
-        img.addEventListener('pointerup', onPointerUp);
-        img.addEventListener('pointercancel', onPointerUp);
-        img.addEventListener('dragstart', (e) => e.preventDefault());
+        root.addEventListener('pointerdown', onPointerDown);
+        root.addEventListener('pointermove', onPointerMove, { passive: false });
+        root.addEventListener('pointerup', onPointerUp);
+        root.addEventListener('pointercancel', onPointerUp);
+        root.addEventListener('dragstart', (e) => e.preventDefault());
 
         setFrame(0);
 

@@ -4,14 +4,14 @@
     'imgClass' => 'block object-contain',
 ])
 
-<div {{ $attributes->class(['group/spin']) }}
+<div {{ $attributes->class(['group/spin relative h-full w-full touch-none select-none']) }}
      data-product-spin
      data-frames='@json($frames)'>
     <img data-product-spin-img
          src="{{ $frames[0] ?? '' }}"
          alt="{{ $alt }}"
          draggable="false"
-         class="pointer-events-auto {{ $imgClass }}">
+         class="pointer-events-none {{ $imgClass }}">
 
     <div data-product-spin-hint
          class="pointer-events-none absolute bottom-3 left-1/2 z-[2] flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/20 bg-black/45 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wide text-white/90 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover/spin:opacity-100 max-[1099px]:opacity-100 sm:text-xs">
