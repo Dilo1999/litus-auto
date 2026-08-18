@@ -24,12 +24,12 @@
                  class="h-10 w-auto sm:h-11">
         </a>
 
-        <nav class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-3 xl:flex"
+        <nav class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1 xl:flex 2xl:gap-2.5"
              aria-label="Main navigation">
             @foreach ($navLinks as $label => $url)
                 <a href="{{ $url }}"
                    @class([
-                       'block whitespace-nowrap rounded-[7px] px-4 py-2.5 text-base font-medium transition-colors duration-150',
+                       'block whitespace-nowrap rounded-[7px] px-3 py-2 text-[14.5px] font-medium transition-colors duration-150 2xl:px-4 2xl:py-2.5 2xl:text-base',
                        'bg-[rgba(46,116,238,0.24)] text-white' => $active === $label,
                        'text-white/75 hover:bg-white/[0.08] hover:text-white' => $active !== $label,
                    ])>

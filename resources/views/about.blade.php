@@ -93,7 +93,7 @@
                 <p class="mt-4 max-w-[620px] text-[clamp(16px,1.4vw,18px)] leading-[1.66] text-white/[0.78]">
                     Established in 2014, LITUS Automobiles is a leading motorcycle supplier in the Maldives. We offer a wide range of mobility solutions to meet the needs of our customers, with quality products and after-sales service that people come back for.
                 </p>
-                <div class="mt-6 flex flex-wrap gap-3">
+                <div class="litus-cta-row mt-6">
                     <a href="#who-we-are"
                        class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-7 py-[15px] text-[15px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                         Explore Our Story
@@ -227,16 +227,16 @@
             <h3 class="mb-6 text-center font-display text-[clamp(20px,2.2vw,26px)] font-semibold tracking-[-0.02em] text-litus-text">Management &amp; Departments</h3>
             <div class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
                 @foreach ($teamMembers as $member)
-                    <article class="rounded-[18px] border border-litus-line bg-white px-5 py-6 text-center shadow-[0_1px_2px_rgba(9,17,32,.05)] transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
-                        <div class="mx-auto mb-3.5 h-[72px] w-[72px] overflow-hidden rounded-full bg-litus-paper-3 md:h-[84px] md:w-[84px]">
+                    <article class="rounded-[18px] border border-litus-line bg-white px-3 py-5 text-center shadow-[0_1px_2px_rgba(9,17,32,.05)] transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)] sm:px-5 sm:py-6">
+                        <div class="mx-auto mb-3.5 h-16 w-16 overflow-hidden rounded-full bg-litus-paper-3 sm:h-[72px] sm:w-[72px] md:h-[84px] md:w-[84px]">
                             <img src="{{ $member['img'] }}"
                                  alt="{{ $member['name'] }}"
                                  class="h-full w-full object-cover object-top"
                                  loading="lazy">
                         </div>
-                        <b class="mb-1 block text-[15px] text-litus-text">{{ $member['name'] }}</b>
-                        <span class="mb-1.5 block text-sm font-semibold text-litus-primary">{{ $member['role'] }}</span>
-                        <span class="block text-[11.5px] text-litus-text-3">{{ $member['dept'] }}</span>
+                        <b class="mb-1 block text-[13.5px] text-litus-text sm:text-[15px]">{{ $member['name'] }}</b>
+                        <span class="mb-1.5 block text-[12.5px] font-semibold leading-snug text-litus-primary sm:text-sm">{{ $member['role'] }}</span>
+                        <span class="block text-[11px] leading-snug text-litus-text-3 sm:text-[11.5px]">{{ $member['dept'] }}</span>
                     </article>
                 @endforeach
             </div>
@@ -362,7 +362,7 @@
                     Our team is ready to help you find the right motorcycle, parts, or service support.
                 </p>
             </div>
-            <div class="flex flex-wrap gap-3">
+            <div class="litus-cta-row">
                 <a href="{{ route('contact') }}"
                    class="inline-flex items-center justify-center rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                     Contact Us

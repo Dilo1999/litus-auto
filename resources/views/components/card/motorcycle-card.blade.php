@@ -33,7 +33,7 @@
              loading="lazy">
     </a>
 
-    <div class="flex flex-1 flex-col px-5 pb-0 pt-3">
+    <div class="flex flex-1 flex-col px-3.5 pb-0 pt-3 sm:px-5">
         @if ($motorcycle->brand)
             <span class="mb-1 block text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#C45C5C]">
                 {{ $motorcycle->brand }}
@@ -55,9 +55,9 @@
         </p>
 
         @if ($hasPromo)
-            <div class="flex flex-nowrap items-center gap-2">
-                <span class="shrink-0 whitespace-nowrap text-sm text-litus-text-3 line-through">{{ $motorcycle->formattedOriginalPrice() }}</span>
-                <div class="inline-flex min-w-0 shrink items-center gap-1 whitespace-nowrap rounded-[7px] bg-[#FFF1E6] px-2 py-1 text-[11.5px] font-bold text-[#C2410C]">
+            <div class="flex flex-wrap items-center gap-x-2 gap-y-1.5">
+                <span class="shrink-0 whitespace-nowrap text-[13px] text-litus-text-3 line-through sm:text-sm">{{ $motorcycle->formattedOriginalPrice() }}</span>
+                <div class="inline-flex items-center gap-1 whitespace-nowrap rounded-[7px] bg-[#FFF1E6] px-2 py-1 text-[11px] font-bold text-[#C2410C] sm:text-[11.5px]">
                     You save {{ $motorcycle->formattedDiscount() }}
                 </div>
             </div>
@@ -71,18 +71,18 @@
         @endif
 
         @if ($monthly)
-            <div class="mt-[11px] flex items-center gap-2 rounded-lg bg-[#E6F6F3] px-3 py-2.5 text-[13px] font-semibold text-litus-teal max-md:text-[12px]">
-                <span aria-hidden="true">◈</span>
+            <div class="mt-[11px] flex items-start gap-2 rounded-lg bg-[#E6F6F3] px-2.5 py-2 text-[11.5px] font-semibold leading-snug text-litus-teal sm:items-center sm:px-3 sm:py-2.5 sm:text-[13px]">
+                <span class="shrink-0" aria-hidden="true">◈</span>
                 From MVR {{ number_format($monthly) }}/month on an Ijara plan
             </div>
         @endif
     </div>
 
-    <div class="px-5 pb-4 pt-3">
+    <div class="px-3.5 pb-4 pt-3 sm:px-5">
         <a href="{{ route('motorcycle.show', $motorcycle->slug) }}"
-           class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-litus-primary px-3 py-2.5 text-[13.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover max-md:text-[12px]">
+           class="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-lg bg-litus-primary px-2 text-[12.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover sm:min-h-0 sm:gap-2 sm:px-3 sm:py-2.5 sm:text-[13.5px]">
             View Details
-            <x-litus-icon name="arrow-right" class="h-3.5 w-3.5" />
+            <x-litus-icon name="arrow-right" class="h-3.5 w-3.5 shrink-0" />
         </a>
     </div>
 </article>

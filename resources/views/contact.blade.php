@@ -98,7 +98,7 @@
                 <p class="mt-3 max-w-[560px] text-[clamp(15px,1.3vw,17px)] leading-[1.66] text-white/[0.78]">
                     Questions about motorcycles, ownership plans, parts or service? Our team is ready to help - by phone, WhatsApp, email, or in person at any of our showrooms.
                 </p>
-                <div class="mt-5 flex flex-wrap gap-3">
+                <div class="litus-cta-row mt-5">
                     <a href="#contact-form"
                        class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-7 py-[15px] text-[15px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                         Send a Message
@@ -115,13 +115,14 @@
         </div>
 
         <div class="relative z-[3] border-t border-white/11 bg-black/35 backdrop-blur-sm">
-            <div class="litus-container grid grid-cols-2 gap-0 py-[14px] min-[960px]:grid-cols-4 min-[960px]:py-[18px]">
+            <div class="litus-container grid grid-cols-1 gap-0 py-2 min-[480px]:grid-cols-2 min-[480px]:py-[14px] min-[960px]:grid-cols-4 min-[960px]:py-[18px]">
                 @foreach ($heroStrip as $index => $item)
                     <div @class([
-                        'flex items-center gap-[13px] px-3 py-3.5 sm:px-4',
+                        'flex items-center gap-3 py-3 min-[480px]:px-3 sm:gap-[13px] sm:px-4',
+                        'max-[479px]:border-b max-[479px]:border-white/12' => $index < count($heroStrip) - 1,
+                        'min-[480px]:max-[959px]:border-b min-[480px]:max-[959px]:border-white/12' => $index < 2,
+                        'min-[480px]:max-[959px]:border-r min-[480px]:max-[959px]:border-white/16' => in_array($index, [0, 2], true),
                         'min-[960px]:border-r min-[960px]:border-white/16' => $index < count($heroStrip) - 1,
-                        'border-b border-white/12 min-[960px]:border-b-0' => $index < 2,
-                        'border-r border-white/16' => in_array($index, [0, 2], true),
                     ])>
                         <div class="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[10px] bg-[rgba(90,184,255,0.15)] text-litus-sky">
                             <x-litus-icon :name="$item['icon']" class="h-4 w-4" />
@@ -170,7 +171,7 @@
     {{-- FORM + MAP --}}
     <section id="contact-form" class="litus-sec scroll-mt-24 bg-litus-paper-2">
         <div class="litus-container grid grid-cols-1 items-stretch gap-[34px] min-[1000px]:grid-cols-2">
-            <div class="flex min-h-full flex-col rounded-[26px] border border-litus-line bg-white p-[clamp(26px,3.2vw,40px)] shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)]">
+            <div class="flex min-h-full flex-col rounded-[22px] border border-litus-line bg-white p-[clamp(20px,3.2vw,40px)] shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)] sm:rounded-[26px]">
                 <div class="hidden flex-1 py-10 text-center" data-contact-success>
                     <div class="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-full bg-[rgba(18,87,214,0.1)] text-litus-primary">
                         <x-litus-icon name="check-circle" class="h-8 w-8" />
@@ -262,13 +263,13 @@
                     <x-litus-icon name="arrow-right" class="h-4 w-4" />
                 </a>
 
-                <div class="mt-[22px] rounded-[26px] border border-litus-line bg-white p-[26px] shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)]">
+                <div class="mt-[22px] rounded-[22px] border border-litus-line bg-white p-5 shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)] sm:rounded-[26px] sm:p-[26px]">
                     <h4 class="mb-4 font-display text-[clamp(20px,2.2vw,24px)] font-semibold tracking-[-0.02em] text-litus-text">Business hours</h4>
                     <div class="divide-y divide-litus-line text-[14.5px]">
                         @foreach ($hours as $row)
-                            <div class="flex justify-between gap-4 py-3.5">
+                            <div class="flex flex-col gap-0.5 py-3.5 min-[420px]:flex-row min-[420px]:justify-between min-[420px]:gap-4">
                                 <span class="text-litus-text-2">{{ $row['label'] }}</span>
-                                <b class="text-right text-litus-text">{{ $row['value'] }}</b>
+                                <b class="text-litus-text min-[420px]:text-right">{{ $row['value'] }}</b>
                             </div>
                         @endforeach
                     </div>
@@ -321,7 +322,7 @@
                     Our team can help with motorcycle availability, ownership plans, parts and service bookings.
                 </p>
             </div>
-            <div class="flex flex-wrap gap-3">
+            <div class="litus-cta-row">
                 <a href="tel:+9607797442"
                    class="inline-flex items-center justify-center rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                     Call Now

@@ -223,7 +223,7 @@
                 <p class="mt-4 max-w-[600px] text-[clamp(16px,1.4vw,18px)] leading-[1.66] text-white/[0.78]">
                     Our Ijara Plans are structured to Islamic leasing standards and designed to make motorcycle ownership reachable - whether you are salaried, self-employed, a fisherman, a business owner, or buying your first bike.
                 </p>
-                <div class="mt-6 flex flex-wrap gap-3">
+                <div class="litus-cta-row mt-6">
                     <a href="#compare"
                        class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-7 py-[15px] text-[15px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                         Compare the Six Plans
@@ -418,7 +418,7 @@
                     Our team will look at your situation and tell you which of the six plans fits - and what you will need to bring.
                 </p>
             </div>
-            <div class="flex flex-wrap gap-3">
+            <div class="litus-cta-row">
                 <a href="https://wa.me/9607797442?text={{ urlencode('Hi LITUS, I would like to check which Ijara plan fits me.') }}"
                    target="_blank"
                    rel="noopener noreferrer"

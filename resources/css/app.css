@@ -55,6 +55,8 @@
   body {
     line-height: 1.62;
     -webkit-font-smoothing: antialiased;
+    /* `clip` instead of `hidden` so the sticky header keeps working */
+    overflow-x: clip;
   }
 
   ::selection {
@@ -63,15 +65,66 @@
 }
 
 @utility litus-container {
-  @apply mx-auto w-full max-w-litus px-[26px];
+  @apply mx-auto w-full max-w-litus px-4 sm:px-5 md:px-6 lg:px-[26px];
 }
 
 @utility litus-sec {
-  padding-block: clamp(62px, 7.5vw, 116px);
+  padding-block: clamp(48px, 7.5vw, 116px);
 }
 
 @utility litus-sec-tight {
-  padding-block: clamp(37px, 4.5vw, 70px);
+  padding-block: clamp(34px, 4.5vw, 70px);
+}
+
+/* CTA button groups: stack full width on phones so long labels never overflow */
+@utility litus-cta-row {
+  @apply flex flex-wrap gap-3;
+}
+
+.litus-cta-row > a,
+.litus-cta-row > button {
+  min-height: 48px;
+}
+
+/* Native select — custom chevron; glass fields on dark heroes */
+.litus-select-wrap {
+  position: relative;
+}
+
+.litus-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: none;
+}
+
+.litus-select-glass {
+  color-scheme: light;
+}
+
+.litus-select-glass option {
+  color: #0c1524;
+  background-color: #ffffff;
+}
+
+.litus-select-chevron {
+  pointer-events: none;
+  position: absolute;
+  right: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 479px) {
+  .litus-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .litus-cta-row > a,
+  .litus-cta-row > button {
+    width: 100%;
+    padding-inline: 1rem;
+  }
 }
 
 @keyframes litus-pulse-dot {
@@ -188,6 +241,13 @@
 html {
   font-size: var(--font-size);
   scroll-behavior: smooth;
+  /* Keeps anchor targets clear of the sticky header */
+  scroll-padding-top: 88px;
+}
+
+body,
+h1, h2, h3, h4, h5, h6, p, li, td, th, span, b, strong {
+  overflow-wrap: break-word;
 }
 @layer base {
   h1 { @apply text-2xl font-medium leading-[1.5]; }

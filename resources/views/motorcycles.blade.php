@@ -59,10 +59,10 @@
         <div class="relative z-[3] litus-container py-[clamp(70px,9vw,124px)] pb-[clamp(56px,7vw,96px)]">
             <div class="max-w-[820px]">
                 <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky">The Range</span>
-                <h1 class="font-display text-[clamp(32px,4.6vw,56px)] font-bold leading-[1.08] tracking-[-0.032em] drop-shadow-[0_6px_20px_rgba(0,0,0,0.45)]">
+                <h1 class="font-display text-[clamp(29px,4.6vw,56px)] font-bold leading-[1.08] tracking-[-0.032em] drop-shadow-[0_6px_20px_rgba(0,0,0,0.45)]">
                     Find the ride<br>for your journey.
                 </h1>
-                <p class="mt-5 max-w-[560px] text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.78]">
+                <p class="mt-4 max-w-[560px] text-[clamp(15.5px,1.5vw,19px)] leading-[1.66] text-white/[0.78] sm:mt-5">
                     Honda and Yamaha models, from 110cc city scooters to 160cc adventure machines. Filter by brand, budget or engine size - every card shows which campaigns that motorcycle is currently in.
                 </p>
             </div>
@@ -163,7 +163,7 @@
                 <p class="mt-1 text-sm">Try a different brand, category, or engine size.</p>
             </div>
 
-            <div class="grid grid-cols-1 gap-[22px] pt-5 sm:grid-cols-2 xl:grid-cols-4"
+            <div class="grid grid-cols-1 gap-4 pt-5 min-[400px]:grid-cols-2 sm:gap-[22px] xl:grid-cols-4"
                  data-motorcycle-grid>
                 @forelse ($motorcycles as $motorcycle)
                     <x-card.motorcycle-card :motorcycle="$motorcycle" />
@@ -215,7 +215,7 @@
                     Our sales team compares them with you honestly - including the reasons you might want the cheaper one.
                 </p>
             </div>
-            <div class="flex flex-wrap gap-3">
+            <div class="litus-cta-row">
                 <a href="{{ route('contact') }}"
                    class="inline-flex items-center justify-center rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                     Talk to Sales

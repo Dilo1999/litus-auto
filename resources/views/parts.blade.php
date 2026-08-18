@@ -69,7 +69,7 @@
                 <p class="mt-4 max-w-[520px] text-[clamp(16px,1.4vw,18px)] leading-[1.66] text-white/[0.78]">
                     A full range of genuine motorcycle parts built for quality, reliability, safety and performance - engineered to keep your ride at its best.
                 </p>
-                <div class="mt-6 flex flex-wrap gap-3">
+                <div class="litus-cta-row mt-6">
                     <a href="#request"
                        class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-7 py-[15px] text-[15px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                         Request a Part
@@ -259,7 +259,7 @@
                     Our parts team can help you identify the correct component for your motorcycle model.
                 </p>
             </div>
-            <div class="flex flex-wrap gap-3">
+            <div class="litus-cta-row">
                 <a href="#request"
                    class="inline-flex items-center justify-center rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                     Talk to Parts Team

@@ -82,7 +82,7 @@
                     <p class="mt-4 max-w-[540px] text-[clamp(16px,1.4vw,18px)] leading-[1.66] text-white/[0.72]">
                         Every live campaign from LITUS in one place. Open a model to see the campaign price, how much you save, and how to reserve it.
                     </p>
-                    <div class="mt-6 flex flex-wrap gap-3">
+                    <div class="litus-cta-row mt-6">
                         <a href="#offers"
                            class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-7 py-[15px] text-[15px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                             Browse All Campaigns
@@ -276,22 +276,22 @@
         @endphp
         <section class="litus-sec-tight bg-litus-paper-2">
             <div class="litus-container">
-                <div class="relative grid overflow-hidden rounded-[34px] text-white shadow-[0_4px_10px_rgba(9,17,32,.08),0_34px_70px_rgba(9,17,32,.16)] max-[940px]:grid-cols-1 min-[941px]:grid-cols-[1.08fr_0.92fr]"
+                <div class="relative grid overflow-hidden rounded-[22px] text-white shadow-[0_4px_10px_rgba(9,17,32,.08),0_34px_70px_rgba(9,17,32,.16)] max-[940px]:grid-cols-1 min-[941px]:grid-cols-[1.08fr_0.92fr] sm:rounded-[34px]"
                      style="background: linear-gradient(115deg, #0B1526, #1B3260 58%, #1D4CBB);">
                     <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_340px_at_76%_6%,rgba(90,184,255,.3),transparent_62%)]"></div>
 
-                    <div class="relative z-[3] p-[clamp(30px,4vw,52px)]"
+                    <div class="relative z-[3] p-[clamp(20px,4vw,52px)]"
                          data-promo-campaign-copy>
                         <span class="inline-block rounded-md bg-[#F2ECFF] px-[11px] py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-[#6941C6]">★ Campaign of the Month</span>
                         <h3 class="mt-4 font-display text-[clamp(20px,2.6vw,30px)] font-bold tracking-[-0.028em]"
                             data-promo-campaign-title>{{ $featured->name }}</h3>
-                        <p class="mt-3 max-w-[520px] text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.76]"
+                        <p class="mt-3 max-w-[520px] text-[clamp(15.5px,1.5vw,19px)] leading-[1.66] text-white/[0.76]"
                            data-promo-campaign-note>
                             {{ $featured->offerNote() ?: 'Limited-time campaign pricing on this model. Save now and ride sooner on cash or Ijara terms.' }}
                         </p>
 
                         <div class="mt-6 flex flex-wrap items-baseline gap-3.5">
-                            <span class="font-display text-[48px] font-extrabold tracking-[-0.035em]"
+                            <span class="font-display text-[clamp(29px,6vw,48px)] font-extrabold tracking-[-0.035em]"
                                   data-promo-campaign-saving>
                                 Save {{ $featured->formattedDiscount() }}
                             </span>
@@ -316,19 +316,19 @@
                         </p>
 
                         @if ($campaignEnds)
-                            <div class="my-[26px] flex flex-wrap gap-[11px]"
+                            <div class="my-6 grid max-w-[340px] grid-cols-4 gap-2 sm:my-[26px] sm:flex sm:max-w-none sm:flex-wrap sm:gap-[11px]"
                                  data-promo-countdown
                                  data-ends-at="{{ $campaignEnds->toIso8601String() }}">
                                 @foreach (['Days', 'Hours', 'Mins', 'Secs'] as $i => $label)
-                                    <div class="min-w-[70px] rounded-xl border border-white/17 bg-white/10 px-1.5 py-[11px] text-center">
-                                        <b class="block font-display text-[25px] font-bold leading-none" data-cd="{{ $i }}">--</b>
-                                        <span class="text-[9.5px] uppercase tracking-[0.13em] text-white/60">{{ $label }}</span>
+                                    <div class="rounded-xl border border-white/17 bg-white/10 px-1 py-2.5 text-center sm:min-w-[70px] sm:px-1.5 sm:py-[11px]">
+                                        <b class="block font-display text-[21px] font-bold leading-none sm:text-[25px]" data-cd="{{ $i }}">--</b>
+                                        <span class="text-[9px] uppercase tracking-[0.1em] text-white/60 sm:text-[9.5px] sm:tracking-[0.13em]">{{ $label }}</span>
                                     </div>
                                 @endforeach
                             </div>
                         @endif
 
-                        <div class="flex flex-wrap gap-3">
+                        <div class="litus-cta-row">
                             <a href="#offers"
                                class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                                 See All {{ $count }} Models
@@ -579,7 +579,7 @@
     {{-- ALERTS --}}
     <section id="alerts" class="litus-sec-tight scroll-mt-24 bg-litus-paper-2">
         <div class="litus-container">
-            <div class="relative grid items-center gap-9 overflow-hidden rounded-[34px] bg-litus-ink p-[clamp(32px,4vw,50px)] text-white max-[860px]:grid-cols-1 min-[861px]:grid-cols-[1.15fr_0.85fr]">
+            <div class="relative grid items-center gap-9 overflow-hidden rounded-[22px] bg-litus-ink p-[clamp(22px,4vw,50px)] text-white max-[860px]:grid-cols-1 min-[861px]:grid-cols-[1.15fr_0.85fr] sm:rounded-[34px]">
                 <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(560px_300px_at_88%_18%,rgba(31,168,85,.26),transparent_62%)]"></div>
                 <div class="relative z-[2]">
                     <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky">Never Miss an Offer</span>
@@ -588,7 +588,7 @@
                         Most LITUS campaigns run for a limited period, and the popular models inside them go early. Join our WhatsApp broadcast and you will hear about each new campaign the morning it goes live.
                     </p>
                 </div>
-                <div class="relative z-[2] flex flex-wrap gap-3 min-[861px]:justify-end">
+                <div class="litus-cta-row relative z-[2] min-[861px]:justify-end">
                     <a href="https://wa.me/9607797442?text={{ urlencode('Hi LITUS, please add me to campaign WhatsApp alerts.') }}"
                        target="_blank"
                        rel="noopener noreferrer"
@@ -614,7 +614,7 @@
                     Tell our team your budget and how you want to pay. We will tell you honestly which campaign gets you the most bike for it.
                 </p>
             </div>
-            <div class="flex flex-wrap gap-3">
+            <div class="litus-cta-row">
                 <a href="{{ route('contact') }}"
                    class="inline-flex items-center justify-center rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                     Contact Sales Team

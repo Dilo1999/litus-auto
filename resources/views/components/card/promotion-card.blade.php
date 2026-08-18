@@ -28,49 +28,49 @@
              loading="lazy">
     </a>
 
-    <div class="flex flex-1 flex-col px-5 pb-0 pt-5">
+    <div class="flex flex-1 flex-col px-4 pb-0 pt-4 sm:px-5 sm:pt-5">
         <span class="mb-1.5 block text-[10.5px] font-extrabold uppercase tracking-[0.16em] text-litus-text-3">Promotion</span>
-        <h3 class="mb-1.5 text-[18.5px] font-bold leading-snug text-litus-text">
+        <h3 class="mb-1.5 text-[17px] font-bold leading-snug text-litus-text sm:text-[18.5px]">
             <a href="{{ route('motorcycle.show', $motorcycle->slug) }}">{{ $motorcycle->name }}</a>
         </h3>
         @if ($motorcycle->engineCapacity())
-            <p class="mb-[15px] text-[13.5px] text-litus-text-2">{{ $motorcycle->engineCapacity() }} engine · Limited-time deal</p>
+            <p class="mb-3 text-[13px] text-litus-text-2 sm:mb-[15px] sm:text-[13.5px]">{{ $motorcycle->engineCapacity() }} engine · Limited-time deal</p>
         @endif
 
         @if ($hasPromo)
-            <div class="flex flex-nowrap items-center gap-2">
-                <span class="shrink-0 whitespace-nowrap text-sm text-litus-text-3 line-through">{{ $motorcycle->formattedOriginalPrice() }}</span>
-                <div class="inline-flex min-w-0 shrink items-center gap-1 whitespace-nowrap rounded-[7px] bg-[#FFF1E6] px-2 py-1 text-[11.5px] font-bold text-[#C2410C]">
+            <div class="flex flex-wrap items-center gap-x-2 gap-y-1.5">
+                <span class="shrink-0 whitespace-nowrap text-[13px] text-litus-text-3 line-through sm:text-sm">{{ $motorcycle->formattedOriginalPrice() }}</span>
+                <div class="inline-flex items-center gap-1 whitespace-nowrap rounded-[7px] bg-[#FFF1E6] px-2 py-1 text-[11px] font-bold text-[#C2410C] sm:text-[11.5px]">
                     You save {{ $motorcycle->formattedDiscount() }}
                 </div>
             </div>
-            <div class="mt-[11px] font-display text-[25px] font-bold tracking-[-0.03em] text-litus-text">
+            <div class="mt-[11px] font-display text-[22px] font-bold tracking-[-0.03em] text-litus-text sm:text-[25px]">
                 {{ $motorcycle->formattedSalePrice() }}
             </div>
         @else
             <div class="flex flex-wrap items-baseline gap-[11px]">
-                <span class="font-display text-[25px] font-bold tracking-[-0.03em] text-litus-text">{{ $motorcycle->formattedOriginalPrice() }}</span>
+                <span class="font-display text-[22px] font-bold tracking-[-0.03em] text-litus-text sm:text-[25px]">{{ $motorcycle->formattedOriginalPrice() }}</span>
             </div>
         @endif
 
         @if ($monthly)
-            <div class="mt-[11px] flex items-center gap-2 rounded-lg bg-[#E6F6F3] px-3 py-2.5 text-[13px] font-semibold text-litus-teal">
-                <span aria-hidden="true">◈</span>
+            <div class="mt-[11px] flex items-start gap-2 rounded-lg bg-[#E6F6F3] px-2.5 py-2 text-xs font-semibold leading-snug text-litus-teal sm:items-center sm:px-3 sm:py-2.5 sm:text-[13px]">
+                <span class="shrink-0" aria-hidden="true">◈</span>
                 From MVR {{ number_format($monthly) }}/month on an Ijara plan
             </div>
         @endif
     </div>
 
-    <div class="flex gap-2.5 p-5 pt-[17px]">
+    <div class="flex flex-col gap-2.5 p-4 pt-4 min-[420px]:flex-row sm:p-5 sm:pt-[17px]">
         <a href="{{ route('motorcycle.show', $motorcycle->slug) }}"
-           class="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-litus-primary px-3 py-3 text-[13.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
+           class="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-litus-primary px-3 text-[13.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
             View Details
-            <x-litus-icon name="arrow-right" class="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+            <x-litus-icon name="arrow-right" class="h-3.5 w-3.5 shrink-0 transition group-hover:translate-x-0.5" />
         </a>
         <a href="https://wa.me/9607797442?text={{ urlencode('Hi LITUS, I am interested in ' . $motorcycle->name) }}"
            target="_blank"
            rel="noopener noreferrer"
-           class="inline-flex flex-1 items-center justify-center rounded-lg border-[1.5px] border-litus-line-2 bg-white px-3 py-3 text-[13.5px] font-semibold text-litus-ink transition hover:border-litus-primary-light hover:text-litus-primary">
+           class="inline-flex min-h-11 flex-1 items-center justify-center rounded-lg border-[1.5px] border-litus-line-2 bg-white px-3 text-[13.5px] font-semibold text-litus-ink transition hover:border-litus-primary-light hover:text-litus-primary">
             WhatsApp
         </a>
     </div>

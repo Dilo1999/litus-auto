@@ -56,16 +56,16 @@
     </section>
 
     {{-- EXPLORE MOMENTS --}}
-    <section class="border border-[#dfe3ea] bg-[#f8f9fb] px-5 py-[35px] pb-11 max-[650px]:px-3.5 max-[650px]:py-[30px] max-[650px]:pb-[38px]">
+    <section class="border-y border-[#dfe3ea] bg-[#f8f9fb] py-[35px] pb-11 max-[650px]:py-[30px] max-[650px]:pb-[38px] min-[651px]:px-5">
         <div class="litus-container">
             <div class="mb-[25px] grid grid-cols-1 items-start gap-[30px] min-[1051px]:grid-cols-[1fr_auto]">
                 <div>
-                    <h2 class="mb-2 font-montserrat text-[30px] font-bold tracking-[-0.7px] text-[#07152f] min-[651px]:text-[38px]">Explore LITUS Moments</h2>
+                    <h2 class="mb-2 font-montserrat text-[clamp(24px,6vw,30px)] font-bold tracking-[-0.7px] text-[#07152f] min-[651px]:text-[38px]">Explore LITUS Moments</h2>
                     <p class="max-w-[470px] text-sm font-semibold leading-normal text-[#667085] min-[651px]:text-base min-[651px]:leading-[1.5]">
                         Browse our collection of motorcycles, lifestyle shots, showroom images, and video highlights.
                     </p>
                 </div>
-                <div class="flex flex-wrap gap-2.5 min-[1051px]:justify-end max-[650px]:w-full max-[650px]:flex-nowrap max-[650px]:overflow-x-auto max-[650px]:pb-1">
+                <div class="flex flex-wrap gap-2.5 min-[1051px]:justify-end max-[650px]:-mx-4 max-[650px]:w-[calc(100%+2rem)] max-[650px]:flex-nowrap max-[650px]:overflow-x-auto max-[650px]:px-4 max-[650px]:pb-1 max-[650px]:[scrollbar-width:none] max-[650px]:[&::-webkit-scrollbar]:hidden">
                     @foreach ($momentCategories as $cat)
                         <button type="button"
                                 data-gallery-moment-cat="{{ $cat }}"
@@ -92,7 +92,7 @@
     </section>
 
     {{-- FULL GRID --}}
-    <section id="gallery-grid-section" class="bg-gray-50 py-16">
+    <section id="gallery-grid-section" class="bg-gray-50 py-12 sm:py-16">
         <div class="litus-container">
             <div class="mb-8 flex items-end justify-between">
                 <div>
@@ -116,7 +116,7 @@
     </section>
 
     {{-- VIDEO --}}
-    <section id="gallery-video" class="bg-white py-16">
+    <section id="gallery-video" class="bg-white py-12 sm:py-16">
         <div class="litus-container flex flex-col items-center gap-10 lg:flex-row lg:gap-16">
             <div class="text-center lg:w-2/5 lg:text-left">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Video Gallery</span>
@@ -161,7 +161,7 @@
     </section>
 
     {{-- CUSTOMER MOMENTS --}}
-    <section id="gallery-customer-moments" class="scroll-mt-24 bg-[#f8f9fb] py-16">
+    <section id="gallery-customer-moments" class="scroll-mt-24 bg-[#f8f9fb] py-12 sm:py-16">
         <div class="litus-container">
             <div class="mb-8 max-w-[640px]">
                 <span class="text-xs font-bold uppercase tracking-widest text-litus-red">Customer Moments</span>

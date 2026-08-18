@@ -16,7 +16,7 @@
     <div class="pointer-events-none absolute inset-0"
          style="background: radial-gradient(700px 380px at 84% 12%, rgba(45,212,191,.22), transparent 62%);"></div>
     <div class="relative z-[2] litus-sec">
-        <div class="litus-container grid items-center gap-[52px] max-[960px]:grid-cols-1 min-[961px]:grid-cols-[1.05fr_0.95fr]">
+        <div class="litus-container grid items-center gap-[52px] max-[960px]:grid-cols-1 max-[960px]:gap-9 min-[961px]:grid-cols-[1.05fr_0.95fr]">
             <div>
                 <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-[#5EEAD4]">Ijara Ownership Plans</span>
                 <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]">
@@ -35,7 +35,7 @@
                         </li>
                     @endforeach
                 </ul>
-                <div class="mt-8 flex flex-wrap gap-3">
+                <div class="litus-cta-row mt-8">
                     <a href="{{ route('ownership-plans') }}"
                        class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-teal px-6 py-3.5 text-[14.5px] font-semibold text-white shadow-[0_8px_22px_rgba(14,147,132,0.28)] transition hover:-translate-y-0.5">
                         Compare the Six Plans
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <div class="rounded-[26px] border border-white/16 bg-white/[0.07] p-[clamp(26px,3vw,38px)] backdrop-blur-[8px]"
+            <div class="rounded-[22px] border border-white/16 bg-white/[0.07] p-[clamp(20px,3vw,38px)] backdrop-blur-[8px] sm:rounded-[26px]"
                  data-ijara-estimator>
                 <h4 class="mb-1 font-display text-[clamp(20px,2.2vw,26px)] font-semibold tracking-[-0.02em]">Estimate your monthly payment</h4>
                 <p class="mb-[22px] text-xs text-white/60">Indicative only - your final plan is confirmed by our sales team.</p>

@@ -60,22 +60,22 @@
                     <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky">
                         {{ trim(($motorcycle->brand ? $motorcycle->brand.' · ' : '').($motorcycle->category ?: 'Motorcycle')) }}
                     </span>
-                    <h1 class="font-display text-[clamp(32px,4.6vw,56px)] font-bold leading-[1.08] tracking-[-0.032em] drop-shadow-[0_6px_20px_rgba(0,0,0,0.45)]">
+                    <h1 class="font-display text-[clamp(28px,4.6vw,56px)] font-bold leading-[1.08] tracking-[-0.032em] drop-shadow-[0_6px_20px_rgba(0,0,0,0.45)]">
                         {{ $motorcycle->name }}
                     </h1>
-                    <p class="mt-4 max-w-[520px] text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.72]">
+                    <p class="mt-4 max-w-[520px] text-[clamp(15.5px,1.5vw,19px)] leading-[1.66] text-white/[0.72]">
                         {{ $blurb }}
                     </p>
 
-                    <div class="mt-[26px]">
+                    <div class="mt-6 sm:mt-[26px]">
                         @if ($hasPromo)
-                            <div class="text-base text-white/50 line-through">{{ $motorcycle->formattedOriginalPrice() }}</div>
-                            <div class="mt-0.5 font-display text-[44px] font-extrabold tracking-[-0.035em]">{{ $motorcycle->formattedSalePrice() }}</div>
-                            <div class="mt-3 inline-flex items-center gap-2 rounded-full bg-litus-green px-[15px] py-[7px] text-[13px] font-bold text-white">
+                            <div class="text-[15px] text-white/50 line-through sm:text-base">{{ $motorcycle->formattedOriginalPrice() }}</div>
+                            <div class="mt-0.5 font-display text-[clamp(30px,7vw,44px)] font-extrabold tracking-[-0.035em]">{{ $motorcycle->formattedSalePrice() }}</div>
+                            <div class="mt-3 inline-flex items-center gap-2 rounded-full bg-litus-green px-[15px] py-[7px] text-[12.5px] font-bold text-white sm:text-[13px]">
                                 SAVE {{ $motorcycle->formattedDiscount() }}
                             </div>
                         @else
-                            <div class="font-display text-[44px] font-extrabold tracking-[-0.035em]">{{ $motorcycle->formattedOriginalPrice() }}</div>
+                            <div class="font-display text-[clamp(30px,7vw,44px)] font-extrabold tracking-[-0.035em]">{{ $motorcycle->formattedOriginalPrice() }}</div>
                         @endif
 
                         @if ($monthly)
@@ -85,7 +85,7 @@
                         @endif
                     </div>
 
-                    <div class="mt-7 flex flex-wrap gap-3">
+                    <div class="litus-cta-row mt-7">
                         <a href="#enquire"
                            class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                             Reserve This Bike
@@ -105,12 +105,12 @@
                         <x-product-360-viewer
                             :frames="$spinImages"
                             alt="{{ $motorcycle->name }}"
-                            img-class="mx-auto h-full max-h-[420px] w-full origin-center scale-[1.35] object-contain drop-shadow-[0_18px_20px_rgba(0,0,0,0.35)] max-lg:max-h-[360px] max-lg:scale-[1.2]"
+                            img-class="mx-auto h-full max-h-[420px] w-full origin-center scale-[1.35] object-contain drop-shadow-[0_18px_20px_rgba(0,0,0,0.35)] max-lg:max-h-[360px] max-lg:scale-[1.2] max-sm:max-h-[260px] max-sm:scale-100"
                             class="relative z-0 flex h-full cursor-grab select-none items-center justify-center px-0 py-0" />
                         @if (empty($spinImages))
                             <img src="{{ $motorcycle->listImageUrl() }}"
                                  alt="{{ $motorcycle->name }}"
-                                 class="pointer-events-none absolute inset-0 z-0 m-auto max-h-[88%] max-w-[88%] origin-center scale-[1.35] object-contain max-lg:scale-[1.2]">
+                                 class="pointer-events-none absolute inset-0 z-0 m-auto max-h-[88%] max-w-[88%] origin-center scale-[1.35] object-contain max-lg:scale-[1.2] max-sm:scale-100">
                         @endif
                     </div>
 
@@ -314,7 +314,7 @@
                     Tell us which showroom is nearest and we will confirm whether this model is on the floor before you travel.
                 </p>
             </div>
-            <div class="flex flex-wrap gap-3">
+            <div class="litus-cta-row">
                 <a href="{{ route('contact') }}"
                    class="inline-flex items-center justify-center rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                     Check Availability
