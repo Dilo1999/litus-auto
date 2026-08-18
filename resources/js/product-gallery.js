@@ -1,10 +1,4 @@
-function initProductGallery() {
-    const page = document.querySelector('[data-motorcycle-detail]');
-    const galleryByColor = page ? JSON.parse(page.getAttribute('data-gallery-by-color') || '{}') : {};
-
-    const root = document.querySelector('[data-product-gallery]');
-    if (!root) return;
-
+function initProductGalleryRoot(root, galleryByColor, page, syncColorButtons) {
     let images = [];
 
     try {
@@ -20,12 +14,10 @@ function initProductGallery() {
     const nextBtn = root.querySelector('[data-gallery-next]');
     const expandBtn = root.querySelector('[data-gallery-expand]');
     const colorBtns = root.querySelectorAll('[data-gallery-color]');
+    const colorLabel = root.querySelector('[data-selected-color-label]');
 
     const thumbActive = ['border-[#1f7bff]', 'shadow-[0_0_0_2px_rgba(31,123,255,0.12)]'];
     const thumbInactive = ['border-[#dce3ed]'];
-    const colorActive = ['border-litus-sky', 'shadow-[0_0_0_3px_rgba(90,184,255,0.25)]'];
-    const colorInactive = ['border-white/30'];
-    const colorLabel = root.querySelector('[data-selected-color-label]');
 
     let activeIndex = 0;
 
@@ -44,18 +36,6 @@ function initProductGallery() {
             }
         } else if (check) {
             check.remove();
-        }
-    }
-
-    function setColorState(btn, isActive) {
-        colorActive.forEach((cls) => btn.classList.toggle(cls, isActive));
-        colorInactive.forEach((cls) => btn.classList.toggle(cls, !isActive));
-        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-
-        const check = btn.querySelector('[data-color-check]');
-        if (check) {
-            check.classList.toggle('hidden', !isActive);
-            check.classList.toggle('flex', isActive);
         }
     }
 
@@ -133,14 +113,10 @@ function initProductGallery() {
     colorBtns.forEach((btn) => {
         btn.addEventListener('click', () => {
             const label = btn.dataset.galleryColor;
-            colorBtns.forEach((b) => setColorState(b, b === btn));
+            syncColorButtons(label);
 
             if (colorLabel && label) {
                 colorLabel.textContent = label;
-            }
-
-            if (label && galleryByColor[label]) {
-                setImages(galleryByColor[label]);
             }
 
             page?.dispatchEvent(new CustomEvent('motorcycle:color-change', { detail: { label } }));
@@ -152,6 +128,48 @@ function initProductGallery() {
         renderDots();
         setActive(0);
     }
+
+    return { setImages };
+}
+
+function initProductGallery() {
+    const page = document.querySelector('[data-motorcycle-detail]');
+    const galleryByColor = page ? JSON.parse(page.getAttribute('data-gallery-by-color') || '{}') : {};
+    const roots = [...document.querySelectorAll('[data-product-gallery]')];
+
+    if (!roots.length) return;
+
+    const colorActive = ['border-litus-sky', 'shadow-[0_0_0_3px_rgba(90,184,255,0.25)]'];
+    const colorInactive = ['border-white/30'];
+
+    const setColorState = (btn, isActive) => {
+        colorActive.forEach((cls) => btn.classList.toggle(cls, isActive));
+        colorInactive.forEach((cls) => btn.classList.toggle(cls, !isActive));
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+
+        const check = btn.querySelector('[data-color-check]');
+        if (check) {
+            check.classList.toggle('hidden', !isActive);
+            check.classList.toggle('flex', isActive);
+        }
+    };
+
+    const syncColorButtons = (activeLabel) => {
+        document.querySelectorAll('[data-gallery-color]').forEach((btn) => {
+            setColorState(btn, btn.dataset.galleryColor === activeLabel);
+        });
+    };
+
+    const instances = roots.map((root) => initProductGalleryRoot(root, galleryByColor, page, syncColorButtons));
+
+    page?.addEventListener('motorcycle:color-change', (event) => {
+        const label = event.detail?.label;
+        if (!label || !galleryByColor[label]) return;
+
+        instances.forEach((instance) => {
+            instance?.setImages(galleryByColor[label]);
+        });
+    });
 }
 
 if (document.readyState === 'loading') {
