@@ -78,7 +78,7 @@
              aria-hidden="true">
             <img src="{{ $heroBg }}"
                  alt=""
-                 class="absolute inset-0 h-full w-full origin-bottom scale-105 object-contain object-[center_85%] md:object-[center_bottom]">
+                 class="absolute inset-0 h-full w-full origin-bottom scale-[1.22] object-contain object-[center_85%] md:object-[center_bottom]">
         </div>
         <div class="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(90deg,rgba(5,11,24,0.98)_0%,rgba(5,11,24,0.94)_42%,rgba(5,11,24,0.55)_68%,rgba(5,11,24,0.2)_100%)] max-md:bg-[linear-gradient(180deg,rgba(5,11,24,0.35)_0%,rgba(5,11,24,0.72)_48%,rgba(5,11,24,0.96)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0 z-[2]"

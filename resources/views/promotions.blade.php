@@ -118,7 +118,7 @@
                                      data-discount="{{ $model->formattedDiscount() }}"
                                      data-sale="{{ $model->formattedSalePrice() }}"
                                      @class([
-                                         'absolute mx-auto max-h-[300px] w-[92%] object-contain drop-shadow-[0_28px_32px_rgba(0,0,0,0.45)] transition-opacity duration-700 max-[960px]:max-h-[240px]',
+                                         'absolute mx-auto max-h-[400px] w-[108%] object-contain drop-shadow-[0_28px_32px_rgba(0,0,0,0.45)] transition-opacity duration-700 max-[960px]:max-h-[300px]',
                                          'z-[1] opacity-100' => $index === 0,
                                          'z-0 opacity-0' => $index !== 0,
                                      ])
@@ -283,7 +283,7 @@
                     <div class="relative z-[3] p-[clamp(30px,4vw,52px)]"
                          data-promo-campaign-copy>
                         <span class="inline-block rounded-md bg-[#F2ECFF] px-[11px] py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-[#6941C6]">★ Campaign of the Month</span>
-                        <h3 class="mt-4 font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]"
+                        <h3 class="mt-4 font-display text-[clamp(20px,2.6vw,30px)] font-bold tracking-[-0.028em]"
                             data-promo-campaign-title>{{ $featured->name }}</h3>
                         <p class="mt-3 max-w-[520px] text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.76]"
                            data-promo-campaign-note>
@@ -291,7 +291,7 @@
                         </p>
 
                         <div class="mt-6 flex flex-wrap items-baseline gap-3.5">
-                            <span class="font-display text-[38px] font-extrabold tracking-[-0.035em]"
+                            <span class="font-display text-[48px] font-extrabold tracking-[-0.035em]"
                                   data-promo-campaign-saving>
                                 Save {{ $featured->formattedDiscount() }}
                             </span>
@@ -370,7 +370,7 @@
                                      data-discount="{{ $model->formattedDiscount() }}"
                                      data-sale="{{ $model->formattedSalePrice() }}"
                                      @class([
-                                         'absolute mx-auto max-h-[420px] w-full object-contain drop-shadow-[0_28px_30px_rgba(0,0,0,0.45)] transition-opacity duration-700 max-[940px]:max-h-[300px]',
+                                         'absolute mx-auto max-h-[560px] w-[118%] object-contain drop-shadow-[0_28px_30px_rgba(0,0,0,0.45)] transition-opacity duration-700 max-[940px]:max-h-[380px]',
                                          'z-[1] opacity-100' => $index === 0,
                                          'z-0 opacity-0' => $index !== 0,
                                      ])
