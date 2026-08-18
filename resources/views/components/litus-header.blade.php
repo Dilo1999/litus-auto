@@ -21,7 +21,7 @@
         <a href="{{ route('home') }}" class="relative z-[1] flex shrink-0 items-center">
             <img src="{{ $logo }}"
                  alt="LITUS Automobiles"
-                 class="h-10 w-auto sm:h-11">
+                 class="h-12 w-auto sm:h-14">
         </a>
 
         <nav class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1 xl:flex 2xl:gap-2.5"
