@@ -24,16 +24,6 @@
 <article class="group flex h-full flex-col overflow-hidden rounded-[18px] border border-litus-line bg-white transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
     <a href="{{ route('motorcycle.show', $slug) }}"
        class="relative aspect-[16/11] overflow-hidden bg-gradient-to-br from-[#DFE9F7] to-[#B9CFEC]">
-        <div class="absolute left-[13px] right-[13px] top-[13px] z-[5] flex gap-2 {{ $showSale ? 'justify-end' : 'justify-between' }}">
-            @unless ($showSale)
-                <span class="inline-block rounded-md bg-black/50 px-[11px] py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-white backdrop-blur-[5px]">
-                    {{ $badge ?: 'Top seller' }}
-                </span>
-            @endunless
-            @if ($brand)
-                <span class="inline-block rounded-md bg-black/50 px-[11px] py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-white backdrop-blur-[5px]">{{ $brand }}</span>
-            @endif
-        </div>
         <img src="{{ $img }}"
              alt="{{ $model }}"
              class="relative z-[3] mx-auto h-[108%] w-[108%] max-w-none object-contain drop-shadow-[0_16px_12px_rgba(0,0,0,0.16)] transition-transform duration-300 group-hover:scale-[1.05]"
@@ -41,6 +31,11 @@
     </a>
 
     <div class="flex flex-1 flex-col px-5 pb-0 pt-5">
+        @if ($brand)
+            <span class="mb-1 block text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#C45C5C]">
+                {{ $brand }}
+            </span>
+        @endif
         <h3 class="mb-1.5 text-[18.5px] font-bold leading-snug text-litus-text">
             <a href="{{ route('motorcycle.show', $slug) }}">{{ $model }}</a>
         </h3>
