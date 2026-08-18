@@ -60,6 +60,7 @@
     ];
 
     $heroBg = asset('images/homepage/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_22_48 PM.png'));
+    $heroBgMobile = asset('images/homepage/Website-Banner-mobile-1.webp');
 @endphp
 
 <div class="font-sans" data-home-page>
@@ -81,7 +82,7 @@
         <div class="pointer-events-none absolute inset-0 opacity-[0.28]"
              style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px; mask-image: radial-gradient(700px 500px at 30% 30%, #000, transparent 78%);"></div>
 
-        <div class="relative z-[3] litus-container py-[clamp(70px,9vw,124px)] pb-12">
+        <div class="relative z-[3] litus-container py-[clamp(48px,6vw,88px)] pb-10">
             <div class="grid items-center gap-[52px] min-[961px]:grid-cols-[1.06fr_0.94fr]">
                 <div>
                     <span class="mb-[22px] inline-flex w-fit max-w-full items-center gap-2.5 rounded-full border border-white/16 bg-white/[0.08] px-4 py-2 text-[12.5px] font-semibold">
@@ -117,53 +118,56 @@
     </section>
 
     {{-- HERO — mobile & tablet (optimised layout) --}}
-    <section class="relative overflow-hidden bg-litus-ink text-white min-[961px]:hidden">
-        <img src="{{ $heroBg }}"
-             alt=""
-             class="absolute inset-0 h-full w-full object-cover object-[center_20%]"
-             aria-hidden="true">
-        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,11,24,0.72)_0%,rgba(5,11,24,0.88)_38%,rgba(5,11,24,0.97)_100%)]"></div>
-        <div class="pointer-events-none absolute inset-0 opacity-[0.18]"
-             style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px;"></div>
+    <section class="overflow-hidden bg-litus-ink min-[961px]:hidden">
+        <div class="relative w-full overflow-hidden bg-litus-ink text-white">
+            <div class="relative w-full h-[clamp(240px,48vh,380px)] overflow-hidden sm:mx-auto sm:max-w-[720px]">
+                <img src="{{ $heroBgMobile }}"
+                     alt=""
+                     class="absolute inset-0 h-full w-full object-cover object-[center_42%]"
+                     aria-hidden="true"
+                     fetchpriority="high">
+                <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,11,24,0.62)_0%,rgba(5,11,24,0.28)_38%,rgba(5,11,24,0.72)_72%,rgba(5,11,24,0.92)_100%)]"></div>
+                <div class="pointer-events-none absolute inset-0 opacity-[0.14]"
+                     style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px;"></div>
 
-        <div class="relative z-[3] flex flex-col">
-            <div class="litus-container pt-24 pb-4">
-                <div class="max-w-[36rem]">
-                    <span class="mb-3 inline-flex max-w-full items-center gap-2 rounded-full border border-white/16 bg-white/[0.08] px-3 py-1.5 text-[10.5px] font-semibold leading-snug">
-                        <span class="litus-live-dot h-[6px] w-[6px] shrink-0 rounded-full bg-[#3DDC84]" aria-hidden="true"></span>
-                        <span class="truncate">{{ $campaignCount }} live campaign{{ $campaignCount === 1 ? '' : 's' }} · {{ now()->format('j M Y') }}</span>
-                    </span>
+                <div class="relative z-[3] flex min-h-full flex-col litus-container pt-10 pb-4">
+                    <div class="max-w-[36rem]">
+                        <span class="mb-3 inline-flex max-w-full items-center gap-2 rounded-full border border-white/16 bg-white/[0.08] px-3 py-1.5 text-[10.5px] font-semibold leading-snug backdrop-blur-[2px]">
+                            <span class="litus-live-dot h-[6px] w-[6px] shrink-0 rounded-full bg-[#3DDC84]" aria-hidden="true"></span>
+                            <span class="truncate">{{ $campaignCount }} live campaign{{ $campaignCount === 1 ? '' : 's' }} · {{ now()->format('j M Y') }}</span>
+                        </span>
 
-                    <h1 class="max-w-[14ch] font-display text-[clamp(1.85rem,7.2vw,2.25rem)] font-extrabold leading-[1.1] tracking-[-0.035em]">
-                        Ride your own.<br>
-                        <span class="text-litus-sky">From MVR 1,340</span> a month.
-                    </h1>
+                        <h1 class="max-w-[14ch] font-display text-[clamp(1.85rem,7.2vw,2.25rem)] font-extrabold leading-[1.1] tracking-[-0.035em] drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)]">
+                            Ride your own.<br>
+                            <span class="text-litus-sky">From MVR 1,340</span> a month.
+                        </h1>
 
-                    <p class="mt-3 line-clamp-3 max-w-[34ch] text-[14px] leading-[1.62] text-white/[0.72]">
-                        Honda and Yamaha scooters, genuine parts and expert service across the Maldives. Buy outright or on a Shariah-compliant Ijara plan.
-                    </p>
+                        <p class="mt-3 line-clamp-3 max-w-[34ch] text-[14px] leading-[1.62] text-white/[0.82] drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]">
+                            Honda and Yamaha scooters, genuine parts and expert service across the Maldives. Buy outright or on a Shariah-compliant Ijara plan.
+                        </p>
 
-                    <div class="mt-5 flex flex-row gap-2">
-                        <a href="#offers"
-                           class="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-litus-primary px-3 text-[13px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:bg-litus-primary-hover">
-                            Campaigns
-                            <x-litus-icon name="arrow-right" class="h-3.5 w-3.5 shrink-0" />
-                        </a>
-                        <a href="{{ route('ownership-plans') }}"
-                           class="inline-flex min-h-11 flex-1 items-center justify-center rounded-xl border-[1.5px] border-white/32 px-3 text-[13px] font-semibold text-white transition hover:border-white hover:bg-white/10">
-                            Ijara Plans
-                        </a>
+                        <div class="mt-5 flex flex-row gap-2">
+                            <a href="#offers"
+                               class="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-litus-primary px-3 text-[13px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:bg-litus-primary-hover">
+                                Campaigns
+                                <x-litus-icon name="arrow-right" class="h-3.5 w-3.5 shrink-0" />
+                            </a>
+                            <a href="{{ route('ownership-plans') }}"
+                               class="inline-flex min-h-11 flex-1 items-center justify-center rounded-xl border-[1.5px] border-white/32 bg-black/20 px-3 text-[13px] font-semibold text-white backdrop-blur-[2px] transition hover:border-white hover:bg-white/10">
+                                Ijara Plans
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <x-litus-hero-features :features="$heroFeatures" />
+        <x-litus-hero-features :features="$heroFeatures" />
 
-            <div class="bg-litus-paper-2 px-4 py-6">
-                <div class="litus-container !px-0">
-                    <div class="rounded-[20px] border border-litus-line bg-white p-5 shadow-[0_2px_8px_rgba(9,17,32,0.06)]">
-                        <x-home-quick-find-form variant="light" :brands="$brands" />
-                    </div>
+        <div class="bg-litus-paper-2 px-4 py-6">
+            <div class="litus-container !px-0">
+                <div class="rounded-[20px] border border-litus-line bg-white p-5 shadow-[0_2px_8px_rgba(9,17,32,0.06)]">
+                    <x-home-quick-find-form variant="light" :brands="$brands" />
                 </div>
             </div>
         </div>
