@@ -187,13 +187,13 @@
                 </a>
             </div>
 
-            <div data-home-promo-slider-wrap>
+            <div data-home-card-slider-wrap>
                 <div
-                    data-home-promo-slider
+                    data-home-card-slider
                     data-interval="4000"
                     class="grid grid-cols-1 gap-6 max-md:-mx-4 max-md:flex max-md:gap-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:grid-cols-2 xl:grid-cols-3">
                     @forelse ($promoMotorcycles->take(3) as $motorcycle)
-                        <div data-home-promo-slide class="max-md:w-[min(88%,340px)] max-md:shrink-0 max-md:snap-center">
+                        <div data-home-card-slide class="max-md:w-[min(88%,340px)] max-md:shrink-0 max-md:snap-center">
                             <x-card.promotion-card :motorcycle="$motorcycle" />
                         </div>
                     @empty
@@ -205,14 +205,14 @@
                 </div>
 
                 @if ($promoMotorcycles->count() > 1)
-                    <div class="mt-4 hidden items-center justify-center gap-1.5 max-md:flex" data-home-promo-dots aria-hidden="true">
+                    <div class="mt-4 hidden items-center justify-center gap-1.5 max-md:flex" data-home-card-dots aria-hidden="true">
                         @foreach ($promoMotorcycles->take(3) as $index => $motorcycle)
                             <span @class([
                                 'h-1.5 rounded-full transition-all duration-300',
                                 'w-5 bg-litus-primary' => $index === 0,
                                 'w-1.5 bg-litus-line-2' => $index !== 0,
                             ])
-                                  data-home-promo-dot></span>
+                                  data-home-card-dot></span>
                         @endforeach
                     </div>
                 @endif
@@ -265,22 +265,25 @@
     {{-- WHY LITUS --}}
     <section class="litus-sec">
         <div class="litus-container">
-            <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
-                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Why LITUS</span>
-                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Twelve years of getting people riding</h2>
-                <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
+            <div class="mx-auto mb-6 max-w-[660px] text-center max-md:mb-5 sm:mb-[clamp(34px,4vw,54px)]">
+                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">Why LITUS</span>
+                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Twelve years of getting people riding</h2>
+                <p class="mt-3 text-[15px] leading-[1.66] text-litus-text-2 sm:mt-4 sm:text-[clamp(16.5px,1.5vw,19px)]">
                     We are not the only place to buy a scooter in the Maldives. These are the reasons people choose us.
                 </p>
             </div>
-            <div class="grid grid-cols-1 gap-[22px] sm:grid-cols-2 xl:grid-cols-4">
+
+            <div class="flex flex-col gap-3 max-md:gap-3 md:grid md:grid-cols-2 md:gap-[22px] xl:grid-cols-4">
                 @foreach ($whyLitus as $item)
-                    <div class="rounded-[18px] border border-litus-line bg-white px-[26px] py-[30px] transition duration-200 hover:border-litus-line-2 hover:shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)]">
-                        <div class="mb-[18px] grid h-[46px] w-[46px] place-items-center rounded-[13px] bg-[#DCE8FF] text-[#0B47B0]">
+                    <article class="flex items-start gap-3.5 rounded-2xl border border-litus-line bg-white p-4 shadow-[0_1px_2px_rgba(9,17,32,0.04)] transition duration-200 max-md:active:scale-[0.99] md:flex-col md:items-stretch md:rounded-[18px] md:p-0 md:px-[26px] md:py-[30px] md:shadow-none md:hover:border-litus-line-2 md:hover:shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)]">
+                        <div class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#DCE8FF] text-[#0B47B0] md:mb-[18px] md:h-[46px] md:w-[46px] md:rounded-[13px]">
                             <x-litus-icon :name="$item['icon']" class="h-[17px] w-[17px]" />
                         </div>
-                        <h4 class="mb-2 text-lg font-bold text-litus-text">{{ $item['title'] }}</h4>
-                        <p class="text-[14.5px] text-litus-text-2">{{ $item['text'] }}</p>
-                    </div>
+                        <div class="min-w-0 flex-1 md:flex-none">
+                            <h4 class="mb-1 text-[15px] font-bold leading-snug text-litus-text md:mb-2 md:text-lg">{{ $item['title'] }}</h4>
+                            <p class="text-[13px] leading-relaxed text-litus-text-2 md:text-[14.5px] md:leading-normal">{{ $item['text'] }}</p>
+                        </div>
+                    </article>
                 @endforeach
             </div>
         </div>
@@ -385,78 +388,103 @@
     {{-- SHOWROOMS --}}
     <section id="showrooms" class="litus-sec scroll-mt-24 bg-litus-paper-2 !pt-0">
         <div class="litus-container">
-            <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
-                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Our Locations</span>
-                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Our Showrooms &amp; Service Centers</h2>
-                <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
+            <div class="mx-auto mb-8 max-w-[660px] text-center max-md:mb-6 sm:mb-[clamp(34px,4vw,54px)]">
+                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">Our Locations</span>
+                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Our Showrooms &amp; Service Centers</h2>
+                <p class="mt-3 text-[15px] leading-[1.66] text-litus-text-2 sm:mt-4 sm:text-[clamp(16.5px,1.5vw,19px)]">
                     Visit our showrooms and service centers across the Maldives for motorcycles, genuine parts, and trusted support.
                 </p>
             </div>
-            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-                @foreach (collect($showrooms)->take(6) as $showroom)
-                    @php
-                        $imageCollection = collect($showroom['images'] ?? [])->filter()->values();
-                        if ($imageCollection->count() > 1) {
-                            $imageCollection = $imageCollection->shuffle()->values();
-                        }
-                        $images = $imageCollection->all();
-                        $coverImage = $images[0] ?? ($showroom['img'] ?? null);
-                        $hasSlider = count($images) > 1;
-                    @endphp
-                    <div class="group flex flex-col overflow-hidden rounded-[18px] border border-litus-line bg-white transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
-                        <div class="relative h-[240px] overflow-hidden bg-litus-paper-3 sm:h-[280px]"
-                             @if ($hasSlider) data-showroom-slider data-interval="4000" @endif>
-                            @if ($hasSlider)
-                                @foreach ($images as $index => $image)
-                                    <img src="{{ $image }}"
-                                         alt="{{ $showroom['name'] }}"
-                                         data-showroom-slide
-                                         @class([
-                                             'absolute inset-0 h-full w-full object-cover transition-opacity duration-700',
-                                             'z-[1] opacity-100' => $index === 0,
-                                             'z-0 opacity-0' => $index !== 0,
-                                         ])
-                                         loading="lazy">
-                                @endforeach
-                                <div class="absolute bottom-2.5 left-1/2 z-[2] flex -translate-x-1/2 gap-1.5">
-                                    @foreach ($images as $index => $image)
-                                        <span data-showroom-dot
-                                              @class([
-                                                  'h-1.5 rounded-full bg-white/50 transition-all duration-300',
-                                                  'w-5 bg-white' => $index === 0,
-                                                  'w-1.5' => $index !== 0,
-                                              ])></span>
-                                    @endforeach
-                                </div>
-                            @elseif ($coverImage)
-                                <img src="{{ $coverImage }}"
-                                     alt="{{ $showroom['name'] }}"
-                                     class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                                     loading="lazy">
-                            @else
-                                <div class="grid h-full place-items-center text-litus-primary">
-                                    <x-litus-icon name="map-pin" class="h-8 w-8" />
-                                </div>
-                            @endif
-                        </div>
 
-                        <div class="flex flex-1 flex-col px-[26px] pb-[26px] pt-5">
-                            <h4 class="mb-2 text-lg font-bold text-litus-text">{{ $showroom['name'] }}</h4>
-                            <p class="mb-5 flex-1 text-[14.5px] text-litus-text-2">{{ $showroom['address'] }}</p>
-                            <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode(trim(($showroom['name'] ?? '').' '.($showroom['address'] ?? ''))) }}"
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               class="inline-flex w-full items-center justify-center gap-2 rounded-lg border-[1.5px] border-litus-line-2 bg-white px-4 py-2.5 text-[13.5px] font-semibold text-litus-ink transition hover:border-litus-primary-light hover:text-litus-primary">
-                                <x-litus-icon name="map-pin" class="h-4 w-4" />
-                                View Location
-                            </a>
+            @php
+                $homeShowrooms = collect($showrooms)->take(6);
+            @endphp
+
+            <div data-home-card-slider-wrap>
+                <div
+                    data-home-card-slider
+                    data-interval="4500"
+                    class="grid grid-cols-1 gap-6 max-md:-mx-4 max-md:flex max-md:gap-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:grid-cols-2 xl:grid-cols-3">
+                    @foreach ($homeShowrooms as $showroom)
+                        @php
+                            $imageCollection = collect($showroom['images'] ?? [])->filter()->values();
+                            if ($imageCollection->count() > 1) {
+                                $imageCollection = $imageCollection->shuffle()->values();
+                            }
+                            $images = $imageCollection->all();
+                            $coverImage = $images[0] ?? ($showroom['img'] ?? null);
+                            $hasSlider = count($images) > 1;
+                        @endphp
+                        <div data-home-card-slide class="max-md:w-[min(88%,340px)] max-md:shrink-0 max-md:snap-center">
+                            <article class="group flex h-full flex-col overflow-hidden rounded-[16px] border border-litus-line bg-white transition duration-200 max-md:shadow-[0_2px_8px_rgba(9,17,32,0.06)] sm:rounded-[18px] md:hover:-translate-y-1 md:hover:border-litus-line-2 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
+                                <div class="relative h-[200px] overflow-hidden bg-litus-paper-3 sm:h-[240px] md:h-[280px]"
+                                     @if ($hasSlider) data-showroom-slider data-interval="4000" @endif>
+                                    @if ($hasSlider)
+                                        @foreach ($images as $index => $image)
+                                            <img src="{{ $image }}"
+                                                 alt="{{ $showroom['name'] }}"
+                                                 data-showroom-slide
+                                                 @class([
+                                                     'absolute inset-0 h-full w-full object-cover transition-opacity duration-700',
+                                                     'z-[1] opacity-100' => $index === 0,
+                                                     'z-0 opacity-0' => $index !== 0,
+                                                 ])
+                                                 loading="lazy">
+                                        @endforeach
+                                        <div class="absolute bottom-2.5 left-1/2 z-[2] flex -translate-x-1/2 gap-1.5">
+                                            @foreach ($images as $index => $image)
+                                                <span data-showroom-dot
+                                                      @class([
+                                                          'h-1.5 rounded-full bg-white/50 transition-all duration-300',
+                                                          'w-5 bg-white' => $index === 0,
+                                                          'w-1.5' => $index !== 0,
+                                                      ])></span>
+                                            @endforeach
+                                        </div>
+                                    @elseif ($coverImage)
+                                        <img src="{{ $coverImage }}"
+                                             alt="{{ $showroom['name'] }}"
+                                             class="h-full w-full object-cover transition-transform duration-500 md:group-hover:scale-[1.04]"
+                                             loading="lazy">
+                                    @else
+                                        <div class="grid h-full place-items-center text-litus-primary">
+                                            <x-litus-icon name="map-pin" class="h-8 w-8" />
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <div class="flex flex-1 flex-col px-4 pb-4 pt-4 sm:px-[26px] sm:pb-[26px] sm:pt-5">
+                                    <h4 class="mb-1.5 text-[17px] font-bold leading-snug text-litus-text sm:mb-2 sm:text-lg">{{ $showroom['name'] }}</h4>
+                                    <p class="mb-4 flex-1 text-[13.5px] leading-relaxed text-litus-text-2 sm:mb-5 sm:text-[14.5px]">{{ $showroom['address'] }}</p>
+                                    <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode(trim(($showroom['name'] ?? '').' '.($showroom['address'] ?? ''))) }}"
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border-[1.5px] border-litus-line-2 bg-white px-4 py-2.5 text-[13.5px] font-semibold text-litus-ink transition hover:border-litus-primary-light hover:text-litus-primary">
+                                        <x-litus-icon name="map-pin" class="h-4 w-4 shrink-0" />
+                                        View Location
+                                    </a>
+                                </div>
+                            </article>
                         </div>
+                    @endforeach
+                </div>
+
+                @if ($homeShowrooms->count() > 1)
+                    <div class="mt-4 hidden items-center justify-center gap-1.5 max-md:flex" data-home-card-dots aria-hidden="true">
+                        @foreach ($homeShowrooms as $index => $showroom)
+                            <span @class([
+                                'h-1.5 rounded-full transition-all duration-300',
+                                'w-5 bg-litus-primary' => $index === 0,
+                                'w-1.5 bg-litus-line-2' => $index !== 0,
+                            ])
+                                  data-home-card-dot></span>
+                        @endforeach
                     </div>
-                @endforeach
+                @endif
             </div>
 
             @if ($showroomCount > 6)
-                <div class="mt-8 text-center">
+                <div class="mt-6 text-center sm:mt-8">
                     <a href="{{ route('about') }}#locations"
                        class="inline-flex items-center justify-center gap-2 text-[15px] font-semibold text-litus-primary transition hover:gap-3">
                         More Showrooms
@@ -470,70 +498,96 @@
     {{-- TESTIMONIALS --}}
     <section class="litus-sec">
         <div class="litus-container">
-            <div class="mx-auto mb-[clamp(34px,4vw,54px)] max-w-[660px] text-center">
-                <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">From Our Riders</span>
-                <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">What customers say</h2>
+            <div class="mx-auto mb-6 max-w-[660px] text-center max-md:mb-5 sm:mb-[clamp(34px,4vw,54px)]">
+                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">From Our Riders</span>
+                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">What customers say</h2>
             </div>
-            <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-                @foreach ($testimonials as $item)
-                    <div class="rounded-[18px] border border-litus-line bg-white px-[26px] py-[30px]">
-                        <div class="mb-3.5 flex gap-0.5 text-[#F5A524]">
-                            @for ($i = 0; $i < 5; $i++)
-                                <x-litus-icon name="star" class="h-3.5 w-3.5 fill-current" fill="currentColor" />
-                            @endfor
+
+            <div data-home-card-slider-wrap>
+                <div
+                    data-home-card-slider
+                    data-slider-effect="fade"
+                    data-interval="5000"
+                    class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                    @foreach ($testimonials as $index => $item)
+                        <div data-home-card-slide @class(['is-active' => $index === 0])>
+                            <article class="flex h-full flex-col rounded-2xl border border-litus-line bg-white px-4 py-5 shadow-[0_1px_2px_rgba(9,17,32,0.04)] sm:rounded-[18px] sm:px-[26px] sm:py-[30px] sm:shadow-none">
+                                <div class="mb-3 flex gap-0.5 text-[#F5A524] sm:mb-3.5">
+                                    @for ($i = 0; $i < 5; $i++)
+                                        <x-litus-icon name="star" class="h-3.5 w-3.5 fill-current" fill="currentColor" />
+                                    @endfor
+                                </div>
+                                <p class="mb-4 flex-1 text-[14px] leading-relaxed text-litus-text sm:mb-[18px] sm:text-[15px] sm:leading-normal">“{{ $item['quote'] }}”</p>
+                                <div class="flex items-center gap-3 border-t border-litus-line pt-4 sm:border-0 sm:pt-0">
+                                    <div class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-litus-paper-3 text-sm font-bold text-litus-text-2 sm:h-[38px] sm:w-[38px]">
+                                        {{ mb_substr($item['name'], 0, 1) }}
+                                    </div>
+                                    <div class="min-w-0">
+                                        <b class="block text-sm text-litus-text">{{ $item['name'] }}</b>
+                                        <span class="text-xs text-litus-text-2">{{ $item['location'] }}</span>
+                                    </div>
+                                </div>
+                            </article>
                         </div>
-                        <p class="mb-[18px] text-[15px] text-litus-text">“{{ $item['quote'] }}”</p>
-                        <div class="flex items-center gap-3">
-                            <div class="grid h-[38px] w-[38px] place-items-center rounded-full bg-litus-paper-3 text-sm font-bold text-litus-text-2">
-                                {{ mb_substr($item['name'], 0, 1) }}
-                            </div>
-                            <div>
-                                <b class="block text-sm text-litus-text">{{ $item['name'] }}</b>
-                                <span class="text-xs text-litus-text-2">{{ $item['location'] }}</span>
-                            </div>
-                        </div>
+                    @endforeach
+                </div>
+
+                @if (count($testimonials) > 1)
+                    <div class="mt-4 hidden items-center justify-center gap-1.5 max-md:flex" data-home-card-dots aria-hidden="true">
+                        @foreach ($testimonials as $index => $item)
+                            <button type="button"
+                                    @class([
+                                        'h-1.5 rounded-full transition-all duration-300',
+                                        'w-5 bg-litus-primary' => $index === 0,
+                                        'w-1.5 bg-litus-line-2' => $index !== 0,
+                                    ])
+                                    data-home-card-dot
+                                    aria-label="Show review {{ $index + 1 }}"></button>
+                        @endforeach
                     </div>
-                @endforeach
+                @endif
             </div>
         </div>
     </section>
 
     {{-- SERVICE + PARTS --}}
     <section class="litus-sec-tight bg-litus-paper-2">
-        <div class="litus-container grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div class="rounded-[18px] border border-litus-line bg-white px-8 py-9">
-                <div class="mb-[18px] grid h-[46px] w-[46px] place-items-center rounded-[13px] bg-[#DCE8FF] text-[#0B47B0]">
-                    <x-litus-icon name="wrench" class="h-[17px] w-[17px]" />
+        <div class="litus-container grid grid-cols-2 gap-3 sm:gap-6">
+            <article class="flex min-w-0 flex-col rounded-2xl border border-litus-line bg-white px-3.5 py-4 sm:rounded-[18px] sm:px-8 sm:py-9">
+                <div class="mb-3 grid h-10 w-10 place-items-center rounded-xl bg-[#DCE8FF] text-[#0B47B0] sm:mb-[18px] sm:h-[46px] sm:w-[46px] sm:rounded-[13px]">
+                    <x-litus-icon name="wrench" class="h-4 w-4 sm:h-[17px] sm:w-[17px]" />
                 </div>
-                <h4 class="mb-2.5 font-display text-[clamp(20px,2.2vw,26px)] font-semibold tracking-[-0.02em] text-litus-text">Service Centre</h4>
-                <p class="mb-[22px] text-[14.5px] text-litus-text-2">
+                <h4 class="mb-2 font-display text-[15px] font-semibold leading-snug tracking-[-0.02em] text-litus-text sm:mb-2.5 sm:text-[clamp(20px,2.2vw,26px)]">Service Centre</h4>
+                <p class="mb-3 flex-1 text-[11.5px] leading-snug text-litus-text-2 sm:mb-[22px] sm:text-[14.5px] sm:leading-normal">
                     Periodic maintenance, accident repairs, engine overhaul and pick-and-drop. Book online and we confirm within 24 hours.
                 </p>
                 <a href="{{ route('service-center') }}"
-                   class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-ink px-6 py-3.5 text-[14.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-litus-ink-700">
-                    Book an Appointment
-                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                   class="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-lg bg-litus-ink px-2.5 py-2.5 text-[11.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-litus-ink-700 sm:min-h-0 sm:w-auto sm:gap-2 sm:px-6 sm:py-3.5 sm:text-[14.5px]">
+                    <span class="sm:hidden">Book</span>
+                    <span class="hidden sm:inline">Book an Appointment</span>
+                    <x-litus-icon name="arrow-right" class="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
                 </a>
-            </div>
-            <div class="rounded-[18px] border border-litus-line bg-white px-8 py-9">
-                <div class="mb-[18px] grid h-[46px] w-[46px] place-items-center rounded-[13px] bg-[#DCE8FF] text-[#0B47B0]">
-                    <x-litus-icon name="zap" class="h-[17px] w-[17px]" />
+            </article>
+            <article class="flex min-w-0 flex-col rounded-2xl border border-litus-line bg-white px-3.5 py-4 sm:rounded-[18px] sm:px-8 sm:py-9">
+                <div class="mb-3 grid h-10 w-10 place-items-center rounded-xl bg-[#DCE8FF] text-[#0B47B0] sm:mb-[18px] sm:h-[46px] sm:w-[46px] sm:rounded-[13px]">
+                    <x-litus-icon name="zap" class="h-4 w-4 sm:h-[17px] sm:w-[17px]" />
                 </div>
-                <h4 class="mb-2.5 font-display text-[clamp(20px,2.2vw,26px)] font-semibold tracking-[-0.02em] text-litus-text">Genuine Parts</h4>
-                <p class="mb-[22px] text-[14.5px] text-litus-text-2">
+                <h4 class="mb-2 font-display text-[15px] font-semibold leading-snug tracking-[-0.02em] text-litus-text sm:mb-2.5 sm:text-[clamp(20px,2.2vw,26px)]">Genuine Parts</h4>
+                <p class="mb-3 flex-1 text-[11.5px] leading-snug text-litus-text-2 sm:mb-[22px] sm:text-[14.5px] sm:leading-normal">
                     Body, engine, braking, electrical, chassis and wheels. Tell us your model and we will confirm the exact part you need.
                 </p>
                 <a href="{{ route('parts') }}"
-                   class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-ink px-6 py-3.5 text-[14.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-litus-ink-700">
-                    Request a Part
-                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                   class="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-lg bg-litus-ink px-2.5 py-2.5 text-[11.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-litus-ink-700 sm:min-h-0 sm:w-auto sm:gap-2 sm:px-6 sm:py-3.5 sm:text-[14.5px]">
+                    <span class="sm:hidden">Request</span>
+                    <span class="hidden sm:inline">Request a Part</span>
+                    <x-litus-icon name="arrow-right" class="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
                 </a>
-            </div>
+            </article>
         </div>
     </section>
 
-    {{-- CTA BAND --}}
-    <section class="litus-sec-tight bg-litus-ink text-white">
+    {{-- CTA BAND — hidden on mobile (footer has call/WhatsApp actions) --}}
+    <section class="litus-sec-tight bg-litus-ink text-white max-md:hidden">
         <div class="litus-container flex flex-wrap items-center justify-between gap-7">
             <div class="max-w-[560px]">
                 <h3 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]">Not sure which bike or plan is right?</h3>

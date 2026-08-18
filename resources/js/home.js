@@ -1,5 +1,5 @@
 /**
- * Home page - Ijara estimator + quick-find helpers.
+ * Home page - Ijara estimator + mobile card sliders.
  */
 
 function formatMvr(value) {
@@ -40,18 +40,20 @@ function initIjaraEstimator() {
   update();
 }
 
-function initHomePage() {
-  initIjaraEstimator();
-  initHomePromoSlider();
+function initHomeCardSlider(track) {
+  if (track.dataset.sliderEffect === 'fade') {
+    initHomeFadeCardSlider(track);
+    return;
+  }
+
+  initHomeScrollCardSlider(track);
 }
 
-function initHomePromoSlider() {
-  const track = document.querySelector('[data-home-promo-slider]');
-  const dotsRoot = document.querySelector('[data-home-promo-dots]');
-  if (!track) return;
-
-  const slides = Array.from(track.querySelectorAll('[data-home-promo-slide]'));
-  const dots = dotsRoot ? Array.from(dotsRoot.querySelectorAll('[data-home-promo-dot]')) : [];
+function initHomeScrollCardSlider(track) {
+  const wrap = track.closest('[data-home-card-slider-wrap]');
+  const dotsRoot = wrap?.querySelector('[data-home-card-dots]');
+  const slides = Array.from(track.querySelectorAll('[data-home-card-slide]'));
+  const dots = dotsRoot ? Array.from(dotsRoot.querySelectorAll('[data-home-card-dot]')) : [];
 
   if (slides.length < 2) return;
 
@@ -152,6 +154,149 @@ function initHomePromoSlider() {
     goTo(0, false);
     start();
   }
+}
+
+function initHomeFadeCardSlider(track) {
+  const wrap = track.closest('[data-home-card-slider-wrap]');
+  const dotsRoot = wrap?.querySelector('[data-home-card-dots]');
+  const slides = Array.from(track.querySelectorAll('[data-home-card-slide]'));
+  const dots = dotsRoot ? Array.from(dotsRoot.querySelectorAll('[data-home-card-dot]')) : [];
+
+  if (slides.length < 2) return;
+
+  const mq = window.matchMedia('(max-width: 767px)');
+  const intervalMs = Number(track.dataset.interval) || 5000;
+
+  let activeIndex = slides.findIndex((slide) => slide.classList.contains('is-active'));
+  if (activeIndex < 0) activeIndex = 0;
+
+  let timer = null;
+  let resumeTimer = null;
+  let touchStartX = 0;
+
+  const setDots = (index) => {
+    dots.forEach((dot, i) => {
+      const isActive = i === index;
+      dot.classList.toggle('w-5', isActive);
+      dot.classList.toggle('w-1.5', !isActive);
+      dot.classList.toggle('bg-litus-primary', isActive);
+      dot.classList.toggle('bg-litus-line-2', !isActive);
+    });
+  };
+
+  const syncHeight = () => {
+    if (!mq.matches) {
+      track.style.minHeight = '';
+      return;
+    }
+
+    const activeSlide = slides[activeIndex];
+    track.style.minHeight = activeSlide ? `${activeSlide.offsetHeight}px` : '';
+  };
+
+  const setActive = (index) => {
+    activeIndex = (index + slides.length) % slides.length;
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('is-active', i === activeIndex);
+    });
+
+    setDots(activeIndex);
+    window.requestAnimationFrame(syncHeight);
+  };
+
+  const goTo = (index) => {
+    if (!mq.matches) return;
+    setActive(index);
+  };
+
+  const stop = () => {
+    if (timer) {
+      window.clearInterval(timer);
+      timer = null;
+    }
+  };
+
+  const start = () => {
+    stop();
+    if (!mq.matches) return;
+
+    timer = window.setInterval(() => {
+      goTo(activeIndex + 1);
+    }, intervalMs);
+  };
+
+  const scheduleResume = () => {
+    window.clearTimeout(resumeTimer);
+    resumeTimer = window.setTimeout(start, 4500);
+  };
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      if (!mq.matches) return;
+      stop();
+      goTo(i);
+      scheduleResume();
+    });
+  });
+
+  track.addEventListener(
+    'touchstart',
+    (event) => {
+      if (!mq.matches) return;
+      touchStartX = event.touches[0]?.clientX ?? 0;
+      stop();
+    },
+    { passive: true },
+  );
+
+  track.addEventListener(
+    'touchend',
+    (event) => {
+      if (!mq.matches) return;
+
+      const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX;
+      const delta = touchEndX - touchStartX;
+
+      if (delta < -48) {
+        goTo(activeIndex + 1);
+      } else if (delta > 48) {
+        goTo(activeIndex - 1);
+      }
+
+      scheduleResume();
+    },
+    { passive: true },
+  );
+
+  mq.addEventListener('change', () => {
+    if (mq.matches) {
+      setActive(activeIndex);
+      start();
+    } else {
+      stop();
+      slides.forEach((slide) => slide.classList.add('is-active'));
+      track.style.minHeight = '';
+    }
+  });
+
+  window.addEventListener('resize', syncHeight);
+
+  if (mq.matches) {
+    setActive(activeIndex);
+    start();
+  } else {
+    slides.forEach((slide) => slide.classList.add('is-active'));
+  }
+}
+
+function initHomeCardSliders() {
+  document.querySelectorAll('[data-home-card-slider]').forEach(initHomeCardSlider);
+}
+
+function initHomePage() {
+  initIjaraEstimator();
+  initHomeCardSliders();
 }
 
 if (document.readyState === 'loading') {
