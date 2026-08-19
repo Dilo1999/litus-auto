@@ -14,7 +14,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -130,8 +130,12 @@ class MotorcycleResource extends Resource
                         );
                     })
                     ->html(),
-                IconColumn::make('is_published')->boolean()->label('Published'),
-                IconColumn::make('is_top_selling')->boolean()->label('Top selling'),
+                ToggleColumn::make('is_published')
+                    ->label('Published')
+                    ->sortable(),
+                ToggleColumn::make('is_top_selling')
+                    ->label('Top selling')
+                    ->sortable(),
             ])
             ->defaultSort('name')
             ->actions([
