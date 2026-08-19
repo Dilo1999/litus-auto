@@ -59,6 +59,10 @@ class MotorcycleResource extends Resource
                         Toggle::make('is_published')
                             ->label('Published')
                             ->default(true),
+                        Toggle::make('is_top_selling')
+                            ->label('Top selling')
+                            ->helperText('Show this model in the home page “Top selling rides” section.')
+                            ->default(false),
                     ])
                     ->columns(2),
 
@@ -127,6 +131,7 @@ class MotorcycleResource extends Resource
                     })
                     ->html(),
                 IconColumn::make('is_published')->boolean()->label('Published'),
+                IconColumn::make('is_top_selling')->boolean()->label('Top selling'),
             ])
             ->defaultSort('name')
             ->actions([
