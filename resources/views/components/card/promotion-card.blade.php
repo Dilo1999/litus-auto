@@ -8,7 +8,7 @@
 
 <article class="group relative flex flex-col overflow-visible rounded-[18px] border border-litus-line bg-white transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
     @if ($hasPromo)
-        <div class="pointer-events-none absolute -left-3 top-1 z-10 flex h-[72px] w-[150px] items-center justify-center bg-[url('/images/badges/red-sale.png')] bg-[length:150px_auto] bg-left-top bg-no-repeat">
+        <div class="pointer-events-none absolute -left-[10px] top-1 z-10 flex h-[72px] w-[150px] items-center justify-center bg-[url('/images/badges/red-sale.png')] bg-[length:150px_auto] bg-left-top bg-no-repeat">
             <span class="w-[78%] pb-1 text-center font-[Poppins,sans-serif] text-[11.5px] font-extrabold uppercase italic leading-[1.05] tracking-[0.04em] text-white">
                 Limited Offer
             </span>
