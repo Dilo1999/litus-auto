@@ -78,10 +78,16 @@ class GalleryController extends Controller
 
         $heroBg = asset('images/motorcycles/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
 
-        $galleryVideos = [
-            $this->resolveTikTokVideo('https://www.tiktok.com/@litus.automobiles/video/7496836349077523719'),
-            $this->resolveTikTokVideo('https://www.tiktok.com/@litus.automobiles/video/7660491762992942344'),
-        ];
+        $galleryVideos = array_map(
+            fn (string $url) => $this->resolveTikTokVideo($url),
+            [
+                'https://www.tiktok.com/@litus.automobiles/video/7496836349077523719',
+                'https://www.tiktok.com/@litus.automobiles/video/7660491762992942344',
+                'https://www.tiktok.com/@litus.automobiles/video/7660407464843545863',
+                'https://www.tiktok.com/@litus.automobiles/video/7653814327799008520',
+                'https://www.tiktok.com/@litus.automobiles/video/7647059001359846674',
+            ]
+        );
 
         return view('gallery', compact(
             'allImages',

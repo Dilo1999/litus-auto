@@ -322,6 +322,28 @@ function initGalleryPage() {
     };
 
     const videoSection = root.querySelector('#gallery-video');
+    const videoCarousel = root.querySelector('[data-gallery-video-carousel]');
+    const videoViewport = root.querySelector('[data-gallery-video-viewport]');
+    const videoTrack = root.querySelector('[data-gallery-video-track]');
+    const videoSlides = [...root.querySelectorAll('[data-gallery-video-slide]')];
+    const videoDots = [...root.querySelectorAll('[data-gallery-video-dot]')];
+    const videoPrevBtn = root.querySelector('[data-gallery-video-prev]');
+    const videoNextBtn = root.querySelector('[data-gallery-video-next]');
+    const videoDesktopMq = window.matchMedia('(min-width: 640px)');
+
+    const getVideosPerView = () => (videoDesktopMq.matches ? 2 : 1);
+
+    const getMaxVideoIndex = () => Math.max(videoSlides.length - getVideosPerView(), 0);
+
+    const getSlideStep = () => {
+        const slide = videoSlides[0];
+        if (!slide) return 0;
+
+        const styles = window.getComputedStyle(videoTrack);
+        const gap = Number.parseFloat(styles.columnGap || styles.gap || '0') || 0;
+
+        return slide.getBoundingClientRect().width + gap;
+    };
 
     const buildEmbedUrl = (baseUrl, muted = false) => {
         try {
@@ -342,9 +364,35 @@ function initGalleryPage() {
         }
     };
 
+    const bindOverlayPlay = (videoWrap, play) => {
+        videoWrap.querySelectorAll('[data-gallery-video-play]').forEach((btn) => {
+            btn.addEventListener('click', () => play({ muted: false }));
+        });
+    };
+
     const initGalleryVideo = (videoWrap) => {
         const videoPlayer = videoWrap.querySelector('[data-gallery-video-player]');
+        const overlay = videoWrap.querySelector('[data-gallery-video-overlay]');
+        const overlayTemplate = overlay ? overlay.cloneNode(true) : null;
         let videoPlaying = false;
+
+        const restoreOverlay = () => {
+            if (!overlayTemplate || videoWrap.querySelector('[data-gallery-video-overlay]')) {
+                return;
+            }
+
+            const newOverlay = overlayTemplate.cloneNode(true);
+            videoWrap.appendChild(newOverlay);
+            bindOverlayPlay(videoWrap, play);
+        };
+
+        const reset = () => {
+            videoPlaying = false;
+            if (videoPlayer) {
+                videoPlayer.innerHTML = '';
+            }
+            restoreOverlay();
+        };
 
         const play = ({ muted = false } = {}) => {
             if (!videoPlayer || videoPlaying) return;
@@ -353,7 +401,7 @@ function initGalleryPage() {
             if (!embedUrl) return;
 
             videoPlaying = true;
-            videoWrap.querySelectorAll('[data-gallery-video-play]').forEach((btn) => btn.remove());
+            videoWrap.querySelector('[data-gallery-video-overlay]')?.remove();
 
             videoPlayer.innerHTML = `
                 <iframe src="${buildEmbedUrl(embedUrl, muted)}"
@@ -364,40 +412,122 @@ function initGalleryPage() {
             `;
         };
 
-        videoWrap.querySelectorAll('[data-gallery-video-play]').forEach((btn) => {
-            btn.addEventListener('click', () => play({ muted: false }));
-        });
+        bindOverlayPlay(videoWrap, play);
 
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    if (entries.some((entry) => entry.isIntersecting)) {
-                        play({ muted: true });
-                        observer.disconnect();
-                    }
-                },
-                { threshold: 0.45, rootMargin: '0px 0px -8% 0px' }
-            );
-
-            observer.observe(videoWrap);
-        }
-
-        return { play, videoWrap };
+        return { play, reset, videoWrap };
     };
 
     const galleryVideos = [...root.querySelectorAll('[data-gallery-video]')].map(initGalleryVideo);
+    let activeVideoIndex = 0;
+    let videoCarouselStarted = false;
+
+    const setVideoDots = (index) => {
+        videoDots.forEach((dot, i) => {
+            const isActive = i === index;
+            dot.classList.toggle('w-6', isActive);
+            dot.classList.toggle('w-2', !isActive);
+            dot.classList.toggle('bg-litus-red', isActive);
+            dot.classList.toggle('bg-gray-300', !isActive);
+        });
+    };
+
+    const goToVideoSlide = (index, { resetOthers = true } = {}) => {
+        if (!galleryVideos.length) return;
+
+        const maxIndex = getMaxVideoIndex();
+        activeVideoIndex = Math.max(0, Math.min(index, maxIndex));
+
+        if (videoTrack) {
+            videoTrack.style.transform = `translateX(-${activeVideoIndex * getSlideStep()}px)`;
+        }
+
+        setVideoDots(activeVideoIndex);
+
+        if (resetOthers) {
+            const perView = getVideosPerView();
+            galleryVideos.forEach((video, i) => {
+                if (i < activeVideoIndex || i >= activeVideoIndex + perView) {
+                    video.reset();
+                }
+            });
+        }
+    };
 
     const scrollToVideos = () => {
         videoSection?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
 
-    const playAllGalleryVideos = ({ scroll = false, muted = false } = {}) => {
+    const playActiveGalleryVideo = ({ scroll = false, muted = false } = {}) => {
         if (scroll) {
             scrollToVideos();
         }
 
-        galleryVideos.forEach(({ play }) => play({ muted }));
+        goToVideoSlide(activeVideoIndex, { resetOthers: true });
+
+        const perView = getVideosPerView();
+        for (let i = activeVideoIndex; i < activeVideoIndex + perView && i < galleryVideos.length; i += 1) {
+            galleryVideos[i]?.play({ muted });
+        }
     };
+
+    videoPrevBtn?.addEventListener('click', () => goToVideoSlide(activeVideoIndex - 1));
+    videoNextBtn?.addEventListener('click', () => goToVideoSlide(activeVideoIndex + 1));
+    videoDots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+            const index = Number(dot.dataset.galleryVideoDot);
+            if (!Number.isNaN(index)) {
+                goToVideoSlide(index);
+            }
+        });
+    });
+
+    if (videoSection && 'IntersectionObserver' in window) {
+        const videoObserver = new IntersectionObserver(
+            (entries) => {
+                if (!entries.some((entry) => entry.isIntersecting) || videoCarouselStarted) {
+                    return;
+                }
+
+                videoCarouselStarted = true;
+                playActiveGalleryVideo({ scroll: false, muted: true });
+                videoObserver.disconnect();
+            },
+            { threshold: 0.45, rootMargin: '0px 0px -8% 0px' }
+        );
+
+        videoObserver.observe(videoSection);
+    }
+
+    let videoTouchStartX = null;
+    videoCarousel?.addEventListener('touchstart', (event) => {
+        videoTouchStartX = event.touches[0]?.clientX ?? null;
+    }, { passive: true });
+    videoCarousel?.addEventListener('touchend', (event) => {
+        if (videoTouchStartX === null) return;
+
+        const endX = event.changedTouches[0]?.clientX ?? videoTouchStartX;
+        const deltaX = endX - videoTouchStartX;
+        videoTouchStartX = null;
+
+        if (Math.abs(deltaX) < 45) return;
+
+        if (deltaX > 0) {
+            goToVideoSlide(activeVideoIndex - 1);
+        } else {
+            goToVideoSlide(activeVideoIndex + 1);
+        }
+    }, { passive: true });
+
+    const handleVideoCarouselResize = () => {
+        const maxIndex = getMaxVideoIndex();
+        if (activeVideoIndex > maxIndex) {
+            activeVideoIndex = maxIndex;
+        }
+        goToVideoSlide(activeVideoIndex, { resetOthers: false });
+    };
+
+    window.addEventListener('resize', handleVideoCarouselResize);
+    videoDesktopMq.addEventListener?.('change', handleVideoCarouselResize);
 
     root.querySelectorAll('[data-gallery-moment-cat]').forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -413,7 +543,7 @@ function initGalleryPage() {
             });
 
             if (activeMomentCat === 'Videos') {
-                playAllGalleryVideos({ scroll: true, muted: true });
+                playActiveGalleryVideo({ scroll: true, muted: true });
                 return;
             }
 
@@ -477,7 +607,7 @@ function initGalleryPage() {
             return;
         }
 
-        btn.addEventListener('click', () => playAllGalleryVideos({ scroll: true, muted: false }));
+        btn.addEventListener('click', () => playActiveGalleryVideo({ scroll: true, muted: false }));
     });
 
     renderGrid();
