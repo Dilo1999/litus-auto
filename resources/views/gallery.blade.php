@@ -178,28 +178,30 @@
                 </button>
             </div>
 
-            <div class="w-full lg:w-3/5">
-                <div class="relative overflow-hidden rounded-xl bg-gray-900 shadow-2xl max-md:rounded-2xl"
-                     data-gallery-video
-                     data-video-embed="{{ $videoEmbedUrl }}">
-                    <div class="aspect-video w-full" data-gallery-video-player></div>
+            <div class="flex w-full flex-wrap justify-center gap-4 sm:gap-5 lg:w-3/5 lg:justify-end">
+                @foreach ($galleryVideos as $video)
+                    <div class="relative w-full max-w-[300px] overflow-hidden rounded-xl bg-black shadow-2xl sm:max-w-[340px] max-md:rounded-2xl"
+                         data-gallery-video
+                         data-video-embed="{{ $video['embed_url'] }}">
+                        <div class="aspect-[9/16] w-full" data-gallery-video-player></div>
 
-                    <button type="button"
-                            data-gallery-video-play
-                            class="group absolute inset-0 flex cursor-pointer flex-col items-center justify-center border-0 bg-transparent p-0 text-left"
-                            aria-label="Play LITUS ride experience video">
-                        <img src="{{ $videoThumb }}"
-                             alt="LITUS Ride Experience"
-                             class="absolute inset-0 h-full w-full object-cover opacity-80 transition-opacity duration-300 group-hover:opacity-70">
-                        <div class="relative z-[1] flex h-14 w-14 items-center justify-center rounded-full bg-litus-red shadow-2xl transition-transform duration-300 group-hover:scale-110 max-md:h-16 max-md:w-16 sm:h-20 sm:w-20">
-                            <x-litus-icon name="play" class="ml-1 h-5 w-5 text-white max-md:h-6 max-md:w-6 sm:ml-1.5 sm:h-7 sm:w-7" fill="currentColor" />
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 z-[1] bg-gradient-to-t from-[rgba(6,14,28,0.9)] to-transparent px-4 py-3 max-md:px-3 max-md:py-2.5 sm:px-5 sm:py-4">
-                            <p class="text-[12px] font-bold text-white max-md:line-clamp-2 sm:text-sm">LITUS Automobiles - Ride refined. Ride Scoopy</p>
-                            <p class="mt-0.5 text-[10px] text-gray-400 sm:text-xs">Watch on TikTok · @litus.automobiles</p>
-                        </div>
-                    </button>
-                </div>
+                        <button type="button"
+                                data-gallery-video-play
+                                class="group absolute inset-0 flex cursor-pointer flex-col items-center justify-center border-0 bg-transparent p-0 text-left"
+                                aria-label="Play LITUS ride experience video">
+                            <img src="{{ $video['thumb'] }}"
+                                 alt="{{ $video['title'] }}"
+                                 class="absolute inset-0 h-full w-full object-cover object-center opacity-80 transition-opacity duration-300 group-hover:opacity-70">
+                            <div class="relative z-[1] flex h-14 w-14 items-center justify-center rounded-full bg-litus-red shadow-2xl transition-transform duration-300 group-hover:scale-110 max-md:h-16 max-md:w-16 sm:h-20 sm:w-20">
+                                <x-litus-icon name="play" class="ml-1 h-5 w-5 text-white max-md:h-6 max-md:w-6 sm:ml-1.5 sm:h-7 sm:w-7" fill="currentColor" />
+                            </div>
+                            <div class="absolute bottom-0 left-0 right-0 z-[1] bg-gradient-to-t from-[rgba(6,14,28,0.9)] to-transparent px-4 py-3 max-md:px-3 max-md:py-2.5 sm:px-5 sm:py-4">
+                                <p class="text-[12px] font-bold text-white max-md:line-clamp-2 sm:text-sm">{{ $video['title'] }}</p>
+                                <p class="mt-0.5 text-[10px] text-gray-400 sm:text-xs">Watch on TikTok · @litus.automobiles</p>
+                            </div>
+                        </button>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>

@@ -321,23 +321,11 @@ function initGalleryPage() {
         refreshMomentsSlider();
     };
 
-    const videoWrap = root.querySelector('[data-gallery-video]');
-    const videoPlayer = root.querySelector('[data-gallery-video-player]');
     const videoSection = root.querySelector('#gallery-video');
-    let videoPlaying = false;
 
-    const playGalleryVideo = ({ scroll = false, muted = false } = {}) => {
-        if (scroll) {
-            videoSection?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        if (!videoWrap || !videoPlayer || videoPlaying) return;
-
-        let embedUrl = videoWrap.dataset.videoEmbed;
-        if (!embedUrl) return;
-
+    const buildEmbedUrl = (baseUrl, muted = false) => {
         try {
-            const url = new URL(embedUrl);
+            const url = new URL(baseUrl);
             url.searchParams.set('autoplay', '1');
 
             if (muted) {
@@ -346,38 +334,70 @@ function initGalleryPage() {
                 url.searchParams.delete('mute');
             }
 
-            embedUrl = url.toString();
+            return url.toString();
         } catch {
-            embedUrl = muted
-                ? `${embedUrl}${embedUrl.includes('?') ? '&' : '?'}autoplay=1&mute=1`
-                : embedUrl;
+            return muted
+                ? `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}autoplay=1&mute=1`
+                : baseUrl;
         }
-
-        videoPlaying = true;
-        videoWrap.querySelectorAll('[data-gallery-video-play]').forEach((btn) => btn.remove());
-
-        videoPlayer.innerHTML = `
-            <iframe src="${embedUrl}"
-                    title="LITUS Ride Experience"
-                    class="h-full w-full border-0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                    allowfullscreen></iframe>
-        `;
     };
 
-    if (videoSection && 'IntersectionObserver' in window) {
-        const videoObserver = new IntersectionObserver(
-            (entries) => {
-                if (entries.some((entry) => entry.isIntersecting)) {
-                    playGalleryVideo({ scroll: false, muted: true });
-                    videoObserver.disconnect();
-                }
-            },
-            { threshold: 0.45, rootMargin: '0px 0px -8% 0px' }
-        );
+    const initGalleryVideo = (videoWrap) => {
+        const videoPlayer = videoWrap.querySelector('[data-gallery-video-player]');
+        let videoPlaying = false;
 
-        videoObserver.observe(videoSection);
-    }
+        const play = ({ muted = false } = {}) => {
+            if (!videoPlayer || videoPlaying) return;
+
+            const embedUrl = videoWrap.dataset.videoEmbed;
+            if (!embedUrl) return;
+
+            videoPlaying = true;
+            videoWrap.querySelectorAll('[data-gallery-video-play]').forEach((btn) => btn.remove());
+
+            videoPlayer.innerHTML = `
+                <iframe src="${buildEmbedUrl(embedUrl, muted)}"
+                        title="LITUS Ride Experience"
+                        class="h-full w-full border-0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                        allowfullscreen></iframe>
+            `;
+        };
+
+        videoWrap.querySelectorAll('[data-gallery-video-play]').forEach((btn) => {
+            btn.addEventListener('click', () => play({ muted: false }));
+        });
+
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    if (entries.some((entry) => entry.isIntersecting)) {
+                        play({ muted: true });
+                        observer.disconnect();
+                    }
+                },
+                { threshold: 0.45, rootMargin: '0px 0px -8% 0px' }
+            );
+
+            observer.observe(videoWrap);
+        }
+
+        return { play, videoWrap };
+    };
+
+    const galleryVideos = [...root.querySelectorAll('[data-gallery-video]')].map(initGalleryVideo);
+
+    const scrollToVideos = () => {
+        videoSection?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+
+    const playAllGalleryVideos = ({ scroll = false, muted = false } = {}) => {
+        if (scroll) {
+            scrollToVideos();
+        }
+
+        galleryVideos.forEach(({ play }) => play({ muted }));
+    };
 
     root.querySelectorAll('[data-gallery-moment-cat]').forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -393,7 +413,7 @@ function initGalleryPage() {
             });
 
             if (activeMomentCat === 'Videos') {
-                playGalleryVideo({ scroll: true });
+                playAllGalleryVideos({ scroll: true, muted: true });
                 return;
             }
 
@@ -453,7 +473,11 @@ function initGalleryPage() {
     });
 
     root.querySelectorAll('[data-gallery-video-play]').forEach((btn) => {
-        btn.addEventListener('click', () => playGalleryVideo({ scroll: false }));
+        if (btn.closest('[data-gallery-video]')) {
+            return;
+        }
+
+        btn.addEventListener('click', () => playAllGalleryVideos({ scroll: true, muted: false }));
     });
 
     renderGrid();

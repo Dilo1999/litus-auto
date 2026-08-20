@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\GalleryImage;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class GalleryController extends Controller
@@ -77,23 +78,10 @@ class GalleryController extends Controller
 
         $heroBg = asset('images/motorcycles/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
 
-        $videoUrl = 'https://www.tiktok.com/@litus.automobiles/video/7496836349077523719';
-        $videoId = '7496836349077523719';
-        $videoEmbedUrl = 'https://www.tiktok.com/player/v1/' . $videoId . '?autoplay=1';
-        $videoThumb = Cache::remember('gallery.tiktok.thumbnail', now()->addHours(12), function () use ($videoUrl) {
-            try {
-                $response = Http::timeout(5)->get('https://www.tiktok.com/oembed', [
-                    'url' => $videoUrl,
-                ]);
-
-                if ($response->successful()) {
-                    return $response->json('thumbnail_url');
-                }
-            } catch (\Throwable) {
-            }
-
-            return null;
-        }) ?? asset('images/motorcycles/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
+        $galleryVideos = [
+            $this->resolveTikTokVideo('https://www.tiktok.com/@litus.automobiles/video/7496836349077523719'),
+            $this->resolveTikTokVideo('https://www.tiktok.com/@litus.automobiles/video/7660491762992942344'),
+        ];
 
         return view('gallery', compact(
             'allImages',
@@ -103,9 +91,43 @@ class GalleryController extends Controller
             'momentCategories',
             'heroFeatures',
             'heroBg',
-            'videoId',
-            'videoEmbedUrl',
-            'videoThumb',
+            'galleryVideos',
         ));
+    }
+
+    private function resolveTikTokVideo(string $url): array
+    {
+        preg_match('/video\/(\d+)/', $url, $matches);
+        $videoId = $matches[1] ?? null;
+
+        if (! $videoId) {
+            throw new \InvalidArgumentException('Invalid TikTok video URL.');
+        }
+
+        $meta = Cache::remember("gallery.tiktok.{$videoId}", now()->addHours(12), function () use ($url) {
+            try {
+                $response = Http::timeout(5)->get('https://www.tiktok.com/oembed', [
+                    'url' => $url,
+                ]);
+
+                if ($response->successful()) {
+                    return $response->json();
+                }
+            } catch (\Throwable) {
+            }
+
+            return null;
+        });
+
+        $fallbackThumb = asset('images/motorcycles/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
+
+        return [
+            'id' => $videoId,
+            'embed_url' => 'https://www.tiktok.com/player/v1/' . $videoId . '?autoplay=1',
+            'thumb' => is_array($meta) ? ($meta['thumbnail_url'] ?? $fallbackThumb) : $fallbackThumb,
+            'title' => is_array($meta) && filled($meta['title'] ?? null)
+                ? Str::limit($meta['title'], 90)
+                : 'LITUS Automobiles',
+        ];
     }
 }
