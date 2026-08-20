@@ -320,13 +320,14 @@ class Motorcycle extends Model
             'Fuel Type' => self::detailsPageIcon('gasoline.png'),
             'Carburation' => self::detailsPageIcon('carburettor.png'),
             'Brakes Front', 'Brakes Rear' => self::detailsPageIcon('brakes.png'),
-            'Suspension Front', 'Suspension Rear', 'Seat Height' => self::detailsPageIcon('suspension.png'),
+            'Suspension Front', 'Suspension Rear' => self::detailsPageIcon('suspension.png'),
+            'Seat Height' => self::detailsPageIcon('height (2).png'),
             'Wheels Front', 'Wheels Rear', 'Tyres Front', 'Tyres Rear' => self::detailsPageIcon('tyre.png'),
             'Fuel Tank Capacity' => self::detailsPageIcon('fuel-gas.png'),
             'Ground Clearance' => self::detailsPageIcon('ground.png'),
-            'Frame Type' => self::detailsPageIcon('frame.png'),
+            'Frame Type', 'Final Drive', 'Transmission Type' => self::detailsPageIcon('frame.png'),
             'Net Weight' => self::detailsPageIcon('weight.png'),
-            'Clutch', 'Final Drive', 'Transmission Type' => self::detailsPageIcon('frame.png'),
+            'Clutch' => self::detailsPageIcon('clutch (2).png'),
             default => null,
         };
     }
