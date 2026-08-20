@@ -19,6 +19,8 @@ class User extends Authenticatable implements FilamentUser
 
     public const ROLE_VIEWER = 'viewer';
 
+    public const SUPER_ADMIN_EMAIL = 'admin@gmail.com';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -59,6 +61,11 @@ class User extends Authenticatable implements FilamentUser
     public function isAdmin(): bool
     {
         return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return strcasecmp((string) $this->email, self::SUPER_ADMIN_EMAIL) === 0;
     }
 
     public function isEditor(): bool

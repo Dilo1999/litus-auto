@@ -13,7 +13,7 @@ class UserPolicy
 
     public function view(User $user, User $model): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() && $this->canAccessUser($user, $model);
     }
 
     public function create(User $user): bool
@@ -23,11 +23,20 @@ class UserPolicy
 
     public function update(User $user, User $model): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() && $this->canAccessUser($user, $model);
     }
 
     public function delete(User $user, User $model): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() && $this->canAccessUser($user, $model);
+    }
+
+    private function canAccessUser(User $user, User $model): bool
+    {
+        if ($model->isSuperAdmin() && ! $user->isSuperAdmin()) {
+            return false;
+        }
+
+        return true;
     }
 }

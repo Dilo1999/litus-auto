@@ -13,6 +13,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class UserResource extends Resource
 {
@@ -105,6 +106,14 @@ class UserResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery();
+        $query = parent::getEloquentQuery();
+
+        $user = Auth::user();
+
+        if ($user instanceof User && ! $user->isSuperAdmin()) {
+            $query->whereRaw('LOWER(email) != ?', [strtolower(User::SUPER_ADMIN_EMAIL)]);
+        }
+
+        return $query;
     }
 }

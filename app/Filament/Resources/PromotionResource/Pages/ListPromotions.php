@@ -13,8 +13,12 @@ class ListPromotions extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make()
-                ->label('Add promotion'),
+            Actions\Action::make('addPromotion')
+                ->label('Add promotion')
+                ->button()
+                ->color('primary')
+                ->disabled()
+                ->tooltip('Adding promotions is temporarily disabled.'),
         ];
     }
 }

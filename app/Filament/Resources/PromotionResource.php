@@ -36,6 +36,11 @@ class PromotionResource extends Resource
 
     protected static ?string $slug = 'promotions';
 
+    public static function canCreate(): bool
+    {
+        return false; // Temporarily disabled.
+    }
+
     public static function form(Form $form): Form
     {
         return $form
