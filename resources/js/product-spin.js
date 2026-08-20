@@ -18,6 +18,15 @@ function initProductSpin() {
         const hint = root.querySelector('[data-product-spin-hint]');
         if (!img) return null;
 
+        const canRotate = () => frames.length > 1;
+
+        const syncRotateUi = () => {
+            root.classList.toggle('cursor-grab', canRotate());
+            hint?.classList.toggle('hidden', !canRotate());
+        };
+
+        syncRotateUi();
+
         const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
         const axisLockThreshold = isCoarsePointer ? 4 : 8;
 
@@ -57,10 +66,11 @@ function initProductSpin() {
             frames = newFrames;
             preload(frames);
             setFrame(0);
+            syncRotateUi();
         };
 
         const onPointerDown = (e) => {
-            if (activePointerId !== null) return;
+            if (!canRotate() || activePointerId !== null) return;
             activePointerId = e.pointerId;
             isDragging = true;
             lockAxis = null;
