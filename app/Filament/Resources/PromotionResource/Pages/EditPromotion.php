@@ -13,7 +13,9 @@ class EditPromotion extends EditRecord
     protected function getActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()
+                ->disabled()
+                ->tooltip('Deleting promotions is temporarily disabled.'),
         ];
     }
 }

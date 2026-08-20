@@ -103,10 +103,13 @@ class PromotionResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->disabled()
+                    ->tooltip('Deleting promotions is temporarily disabled.'),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make()
+                    ->disabled(),
             ])
             ->defaultSort('sort_order');
     }
