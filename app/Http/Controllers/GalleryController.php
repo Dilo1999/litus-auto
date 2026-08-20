@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GalleryImage;
+use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -110,30 +111,96 @@ class GalleryController extends Controller
             throw new \InvalidArgumentException('Invalid TikTok video URL.');
         }
 
-        $meta = Cache::remember("gallery.tiktok.{$videoId}", now()->addHours(12), function () use ($url) {
-            try {
-                $response = Http::timeout(5)->get('https://www.tiktok.com/oembed', [
-                    'url' => $url,
-                ]);
+        $localThumb = $this->localTikTokThumbUrl($videoId);
+        $meta = Cache::get("gallery.tiktok.{$videoId}");
 
-                if ($response->successful()) {
-                    return $response->json();
-                }
-            } catch (\Throwable) {
+        if (! is_array($meta)) {
+            $meta = $this->fetchTikTokOembed($url);
+
+            if (is_array($meta)) {
+                Cache::put("gallery.tiktok.{$videoId}", $meta, now()->addHours(12));
             }
+        }
 
-            return null;
-        });
+        if ($localThumb === null && is_array($meta) && filled($meta['thumbnail_url'] ?? null)) {
+            $localThumb = $this->storeTikTokThumb($videoId, $meta['thumbnail_url']);
+        }
 
         $fallbackThumb = asset('images/motorcycles/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
 
         return [
             'id' => $videoId,
             'embed_url' => 'https://www.tiktok.com/player/v1/' . $videoId . '?autoplay=1',
-            'thumb' => is_array($meta) ? ($meta['thumbnail_url'] ?? $fallbackThumb) : $fallbackThumb,
+            'thumb' => $localThumb ?? (is_array($meta) ? ($meta['thumbnail_url'] ?? $fallbackThumb) : $fallbackThumb),
             'title' => is_array($meta) && filled($meta['title'] ?? null)
                 ? Str::limit($meta['title'], 90)
                 : 'LITUS Automobiles',
         ];
+    }
+
+    private function fetchTikTokOembed(string $url): ?array
+    {
+        try {
+            $response = $this->tikTokHttpClient()->get('https://www.tiktok.com/oembed', [
+                'url' => $url,
+            ]);
+
+            if ($response->successful()) {
+                return $response->json();
+            }
+        } catch (\Throwable) {
+        }
+
+        return null;
+    }
+
+    private function tikTokHttpClient(): PendingRequest
+    {
+        $client = Http::withHeaders([
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+            'Accept' => 'application/json',
+        ])->timeout(15);
+
+        if (app()->environment('local')) {
+            $client = $client->withoutVerifying();
+        }
+
+        return $client;
+    }
+
+    private function localTikTokThumbPath(string $videoId): string
+    {
+        return public_path('images/gallery/tiktok/' . $videoId . '.jpg');
+    }
+
+    private function localTikTokThumbUrl(string $videoId): ?string
+    {
+        if (! is_file($this->localTikTokThumbPath($videoId))) {
+            return null;
+        }
+
+        return asset('images/gallery/tiktok/' . $videoId . '.jpg');
+    }
+
+    private function storeTikTokThumb(string $videoId, string $remoteUrl): ?string
+    {
+        try {
+            $response = $this->tikTokHttpClient()->get($remoteUrl);
+
+            if (! $response->successful()) {
+                return null;
+            }
+
+            $directory = public_path('images/gallery/tiktok');
+            if (! is_dir($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            file_put_contents($this->localTikTokThumbPath($videoId), $response->body());
+
+            return $this->localTikTokThumbUrl($videoId);
+        } catch (\Throwable) {
+            return null;
+        }
     }
 }

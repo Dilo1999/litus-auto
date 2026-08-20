@@ -419,7 +419,6 @@ function initGalleryPage() {
 
     const galleryVideos = [...root.querySelectorAll('[data-gallery-video]')].map(initGalleryVideo);
     let activeVideoIndex = 0;
-    let videoCarouselStarted = false;
 
     const setVideoDots = (index) => {
         videoDots.forEach((dot, i) => {
@@ -457,17 +456,14 @@ function initGalleryPage() {
         videoSection?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
 
-    const playActiveGalleryVideo = ({ scroll = false, muted = false } = {}) => {
-        if (scroll) {
-            scrollToVideos();
-        }
-
-        goToVideoSlide(activeVideoIndex, { resetOthers: true });
-
-        const perView = getVideosPerView();
-        for (let i = activeVideoIndex; i < activeVideoIndex + perView && i < galleryVideos.length; i += 1) {
-            galleryVideos[i]?.play({ muted });
-        }
+    const playFirstGalleryVideo = () => {
+        goToVideoSlide(0);
+        galleryVideos.forEach((video, i) => {
+            if (i !== 0) {
+                video.reset();
+            }
+        });
+        galleryVideos[0]?.play();
     };
 
     videoPrevBtn?.addEventListener('click', () => goToVideoSlide(activeVideoIndex - 1));
@@ -480,23 +476,6 @@ function initGalleryPage() {
             }
         });
     });
-
-    if (videoSection && 'IntersectionObserver' in window) {
-        const videoObserver = new IntersectionObserver(
-            (entries) => {
-                if (!entries.some((entry) => entry.isIntersecting) || videoCarouselStarted) {
-                    return;
-                }
-
-                videoCarouselStarted = true;
-                playActiveGalleryVideo({ scroll: false, muted: true });
-                videoObserver.disconnect();
-            },
-            { threshold: 0.45, rootMargin: '0px 0px -8% 0px' }
-        );
-
-        videoObserver.observe(videoSection);
-    }
 
     let videoTouchStartX = null;
     videoCarousel?.addEventListener('touchstart', (event) => {
@@ -543,7 +522,7 @@ function initGalleryPage() {
             });
 
             if (activeMomentCat === 'Videos') {
-                playActiveGalleryVideo({ scroll: true, muted: true });
+                scrollToVideos();
                 return;
             }
 
@@ -607,7 +586,10 @@ function initGalleryPage() {
             return;
         }
 
-        btn.addEventListener('click', () => playActiveGalleryVideo({ scroll: true, muted: false }));
+        btn.addEventListener('click', () => {
+            scrollToVideos();
+            playFirstGalleryVideo();
+        });
     });
 
     renderGrid();
