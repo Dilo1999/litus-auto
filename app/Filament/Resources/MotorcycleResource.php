@@ -6,7 +6,6 @@ use App\Filament\Resources\MotorcycleResource\Pages;
 use App\Filament\Resources\MotorcycleResource\RelationManagers\ColorVariantsRelationManager;
 use App\Models\Motorcycle;
 use Filament\Forms;
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -79,28 +78,22 @@ class MotorcycleResource extends Resource
 
                 Forms\Components\Section::make('Specifications')
                     ->description('Labels are fixed. Enter the value for each specification only. The first 4 appear as highlight cards on the product page.')
-                    ->schema([
-                        Repeater::make('specs')
-                            ->schema([
-                                TextInput::make('label')
-                                    ->label('Specification')
-                                    ->disabled()
-                                    ->dehydrated(),
-                                TextInput::make('value')
-                                    ->label('Value')
-                                    ->maxLength(255),
-                            ])
-                            ->default(fn () => Motorcycle::defaultSpecsTemplate())
-                            ->afterStateHydrated(function (Repeater $component, ?array $state): void {
-                                $component->state(Motorcycle::normalizeSpecs($state));
+                    ->schema(
+                        collect(Motorcycle::specGroupDefinitions())
+                            ->map(function (array $group) {
+                                return Forms\Components\Section::make($group['title'])
+                                    ->schema(
+                                        collect($group['labels'])
+                                            ->map(fn (string $label) => TextInput::make('spec_values.'.$label)
+                                                ->label($label)
+                                                ->maxLength(255))
+                                            ->all()
+                                    )
+                                    ->columns(2)
+                                    ->collapsible();
                             })
-                            ->columns(2)
-                            ->collapsible()
-                            ->disableItemCreation()
-                            ->disableItemDeletion()
-                            ->disableItemMovement()
-                            ->itemLabel(fn (array $state): ?string => $state['label'] ?? null),
-                    ]),
+                            ->all()
+                    ),
             ]);
     }
 

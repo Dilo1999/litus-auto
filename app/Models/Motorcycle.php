@@ -119,24 +119,63 @@ class Motorcycle extends Model
 
     public static function defaultSpecLabels(): array
     {
+        return collect(self::specGroupDefinitions())
+            ->flatMap(fn (array $group) => $group['labels'])
+            ->values()
+            ->all();
+    }
+
+    public static function specGroupDefinitions(): array
+    {
         return [
-            'Engine Capacity',
-            'Fuel Type',
-            'Carburation',
-            'Brakes Front',
-            'Brakes Rear',
-            'Suspension Front',
-            'Wheels Front',
-            'Wheels Rear',
-            'Fuel Tank Capacity',
-            'Ground Clearance',
-            'Frame Type',
-            'Net Weight',
-            'Seat Height',
-            'Clutch',
-            'Final Drive',
-            'Transmission Type',
+            [
+                'title' => 'Performance',
+                'icon' => 'gauge',
+                'labels' => ['Engine Capacity', 'Fuel Type', 'Carburation', 'Transmission Type', 'Fuel Tank Capacity'],
+            ],
+            [
+                'title' => 'Safety & Braking',
+                'icon' => 'shield',
+                'labels' => ['Brakes Front', 'Brakes Rear', 'Tyres Front', 'Tyres Rear'],
+            ],
+            [
+                'title' => 'Suspension',
+                'icon' => 'arrow-up-down',
+                'labels' => ['Suspension Front', 'Suspension Rear'],
+            ],
+            [
+                'title' => 'Ride & Comfort',
+                'icon' => 'arrow-up-down',
+                'labels' => ['Seat Height', 'Ground Clearance', 'Net Weight'],
+            ],
+            [
+                'title' => 'Build & Drivetrain',
+                'icon' => 'settings',
+                'labels' => ['Frame Type', 'Clutch', 'Final Drive', 'Wheels Front', 'Wheels Rear'],
+            ],
         ];
+    }
+
+    public static function specsFromValues(array $values): array
+    {
+        return array_map(
+            fn (string $label) => [
+                'label' => $label,
+                'value' => (string) ($values[$label] ?? ''),
+            ],
+            self::defaultSpecLabels()
+        );
+    }
+
+    public static function specValuesFromSpecs(?array $specs): array
+    {
+        $values = [];
+
+        foreach (self::normalizeSpecs($specs) as $spec) {
+            $values[$spec['label']] = $spec['value'];
+        }
+
+        return $values;
     }
 
     public static function defaultSpecsTemplate(): array
@@ -281,8 +320,8 @@ class Motorcycle extends Model
             'Fuel Type' => self::detailsPageIcon('gasoline.png'),
             'Carburation' => self::detailsPageIcon('carburettor.png'),
             'Brakes Front', 'Brakes Rear' => self::detailsPageIcon('brakes.png'),
-            'Suspension Front', 'Seat Height' => self::detailsPageIcon('suspension.png'),
-            'Wheels Front', 'Wheels Rear' => self::detailsPageIcon('tyre.png'),
+            'Suspension Front', 'Suspension Rear', 'Seat Height' => self::detailsPageIcon('suspension.png'),
+            'Wheels Front', 'Wheels Rear', 'Tyres Front', 'Tyres Rear' => self::detailsPageIcon('tyre.png'),
             'Fuel Tank Capacity' => self::detailsPageIcon('fuel-gas.png'),
             'Ground Clearance' => self::detailsPageIcon('ground.png'),
             'Frame Type' => self::detailsPageIcon('frame.png'),
@@ -304,8 +343,8 @@ class Motorcycle extends Model
             'Fuel Type' => 'zap',
             'Carburation' => 'cpu',
             'Brakes Front', 'Brakes Rear' => 'disc',
-            'Suspension Front', 'Ground Clearance', 'Seat Height' => 'arrow-up-down',
-            'Wheels Front', 'Wheels Rear' => 'circle',
+            'Suspension Front', 'Suspension Rear', 'Ground Clearance', 'Seat Height' => 'arrow-up-down',
+            'Wheels Front', 'Wheels Rear', 'Tyres Front', 'Tyres Rear' => 'circle',
             'Fuel Tank Capacity' => 'fuel',
             'Frame Type' => 'shield',
             'Net Weight' => 'weight',
@@ -354,28 +393,7 @@ class Motorcycle extends Model
             ];
         }
 
-        $groups = [
-            [
-                'title' => 'Performance',
-                'icon' => 'gauge',
-                'labels' => ['Engine Capacity', 'Fuel Type', 'Carburation', 'Transmission Type', 'Fuel Tank Capacity'],
-            ],
-            [
-                'title' => 'Safety & Braking',
-                'icon' => 'shield',
-                'labels' => ['Brakes Front', 'Brakes Rear'],
-            ],
-            [
-                'title' => 'Ride & Comfort',
-                'icon' => 'arrow-up-down',
-                'labels' => ['Suspension Front', 'Seat Height', 'Ground Clearance', 'Net Weight'],
-            ],
-            [
-                'title' => 'Build & Drivetrain',
-                'icon' => 'settings',
-                'labels' => ['Frame Type', 'Clutch', 'Final Drive', 'Wheels Front', 'Wheels Rear'],
-            ],
-        ];
+        $groups = self::specGroupDefinitions();
 
         $result = [];
 
