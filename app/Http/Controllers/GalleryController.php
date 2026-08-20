@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\GalleryImage;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 
 class GalleryController extends Controller
@@ -74,9 +76,24 @@ class GalleryController extends Controller
         ];
 
         $heroBg = asset('images/motorcycles/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
-        $videoId = 'o8grf3wSwQU';
-        $videoEmbedUrl = 'https://www.youtube-nocookie.com/embed/' . $videoId . '?autoplay=1&rel=0';
-        $videoThumb = 'https://img.youtube.com/vi/' . $videoId . '/maxresdefault.jpg';
+
+        $videoUrl = 'https://www.tiktok.com/@litus.automobiles/video/7496836349077523719';
+        $videoId = '7496836349077523719';
+        $videoEmbedUrl = 'https://www.tiktok.com/player/v1/' . $videoId . '?autoplay=1';
+        $videoThumb = Cache::remember('gallery.tiktok.thumbnail', now()->addHours(12), function () use ($videoUrl) {
+            try {
+                $response = Http::timeout(5)->get('https://www.tiktok.com/oembed', [
+                    'url' => $videoUrl,
+                ]);
+
+                if ($response->successful()) {
+                    return $response->json('thumbnail_url');
+                }
+            } catch (\Throwable) {
+            }
+
+            return null;
+        }) ?? asset('images/motorcycles/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
 
         return view('gallery', compact(
             'allImages',

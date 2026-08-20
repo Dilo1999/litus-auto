@@ -195,8 +195,8 @@
                             <x-litus-icon name="play" class="ml-1 h-5 w-5 text-white max-md:h-6 max-md:w-6 sm:ml-1.5 sm:h-7 sm:w-7" fill="currentColor" />
                         </div>
                         <div class="absolute bottom-0 left-0 right-0 z-[1] bg-gradient-to-t from-[rgba(6,14,28,0.9)] to-transparent px-4 py-3 max-md:px-3 max-md:py-2.5 sm:px-5 sm:py-4">
-                            <p class="text-[12px] font-bold text-white max-md:line-clamp-2 sm:text-sm">LITUS Automobiles - Latest Launches & Offers 2026</p>
-                            <p class="mt-0.5 text-[10px] text-gray-400 sm:text-xs">Watch on YouTube · LITUS Official</p>
+                            <p class="text-[12px] font-bold text-white max-md:line-clamp-2 sm:text-sm">LITUS Automobiles - Ride refined. Ride Scoopy</p>
+                            <p class="mt-0.5 text-[10px] text-gray-400 sm:text-xs">Watch on TikTok · @litus.automobiles</p>
                         </div>
                     </button>
                 </div>

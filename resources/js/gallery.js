@@ -342,8 +342,8 @@ function initGalleryPage() {
         videoPlayer.innerHTML = `
             <iframe src="${embedUrl}"
                     title="LITUS Ride Experience"
-                    class="h-full w-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    class="h-full w-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                     allowfullscreen></iframe>
         `;
     };
