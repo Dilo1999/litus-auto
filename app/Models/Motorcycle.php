@@ -171,6 +171,55 @@ class Motorcycle extends Model
             ?? $this->colorVariants->first();
     }
 
+    public function cardImageUrl(): ?string
+    {
+        return self::resolveImageUrl($this->card_image);
+    }
+
+    public function heroProductImageUrl(): string
+    {
+        return $this->cardImageUrl() ?? $this->listImageUrl();
+    }
+
+    public function hasSpinFrames(): bool
+    {
+        $variants = $this->relationLoaded('colorVariants')
+            ? $this->colorVariants
+            : $this->colorVariants()->orderBy('sort_order')->get();
+
+        return $variants->contains(
+            fn (MotorcycleColorVariant $variant) => count($variant->spinFrameUrls()) > 0
+        );
+    }
+
+    public function primarySpinFrameUrls(): array
+    {
+        if (! $this->hasSpinFrames()) {
+            return [];
+        }
+
+        $variants = $this->relationLoaded('colorVariants')
+            ? $this->colorVariants
+            : $this->colorVariants()->orderBy('sort_order')->get();
+
+        $default = $variants->firstWhere('is_default', true) ?? $variants->first();
+        $frames = $default?->spinFrameUrls() ?? [];
+
+        if ($frames !== []) {
+            return $frames;
+        }
+
+        foreach ($variants as $variant) {
+            $frames = $variant->spinFrameUrls();
+
+            if ($frames !== []) {
+                return $frames;
+            }
+        }
+
+        return [];
+    }
+
     public function getRouteKeyName(): string
     {
         return 'slug';

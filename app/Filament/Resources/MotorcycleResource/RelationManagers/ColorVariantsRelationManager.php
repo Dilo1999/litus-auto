@@ -49,10 +49,11 @@ class ColorVariantsRelationManager extends RelationManager
                             ->label('360° frames')
                             ->multiple()
                             ->image()
+                            ->maxSize(700)
                             ->directory('motorcycles/spin')
                             ->preserveFilenames()
                             ->maxFiles(72)
-                            ->helperText('Order follows upload sequence. The product page drag-to-rotate uses this order.'),
+                            ->helperText('Order follows upload sequence. Maximum file size per image: 700KB.'),
                     ]),
             ]);
     }

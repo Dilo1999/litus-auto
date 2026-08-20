@@ -13,4 +13,9 @@ class ListMotorcycleGallery extends ListRecords
     protected static string $resource = MotorcycleGalleryResource::class;
 
     protected static string $view = 'filament.resources.gallery-images.list-gallery';
+
+    protected function maxGalleryUploadSizeKb(): int
+    {
+        return 700;
+    }
 }

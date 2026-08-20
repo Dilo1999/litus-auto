@@ -52,9 +52,10 @@ class MotorcycleResource extends Resource
                         FileUpload::make('card_image')
                             ->label('Card image')
                             ->image()
+                            ->maxSize(700)
                             ->directory('motorcycles/cards')
                             ->preserveFilenames()
-                            ->helperText('Shown on the motorcycles listing page. Recommended: square or landscape product shot on a white background.')
+                            ->helperText('Shown on the motorcycles listing page. Recommended: square or landscape product shot on a white background. Maximum file size: 700KB.')
                             ->columnSpanFull(),
                         Toggle::make('is_published')
                             ->label('Published')

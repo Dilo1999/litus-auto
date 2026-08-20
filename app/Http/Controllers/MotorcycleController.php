@@ -39,7 +39,9 @@ class MotorcycleController extends Controller
             ->firstOrFail();
 
         $defaultVariant = $motorcycle->defaultColorVariant();
-        $spinImages = $defaultVariant?->spinFrameUrls() ?? [];
+        $hasSpinView = $motorcycle->hasSpinFrames();
+        $spinImages = $hasSpinView ? $motorcycle->primarySpinFrameUrls() : [];
+        $heroProductImage = $motorcycle->heroProductImageUrl();
         $galleryImages = $defaultVariant?->galleryImageUrls() ?? [];
 
         $related = Motorcycle::query()
@@ -63,6 +65,8 @@ class MotorcycleController extends Controller
             'motorcycle' => $motorcycle,
             'defaultVariant' => $defaultVariant,
             'spinImages' => $spinImages,
+            'hasSpinView' => $hasSpinView,
+            'heroProductImage' => $heroProductImage,
             'galleryImages' => $galleryImages,
             'spinByColor' => $motorcycle->spinFramesByColor(),
             'galleryByColor' => $motorcycle->galleryByColor(),

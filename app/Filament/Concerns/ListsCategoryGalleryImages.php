@@ -32,6 +32,11 @@ trait ListsCategoryGalleryImages
         ];
     }
 
+    protected function maxGalleryUploadSizeKb(): int
+    {
+        return 500;
+    }
+
     public function updatedUploadImages(): void
     {
         $resource = static::getResource();
@@ -46,12 +51,14 @@ trait ListsCategoryGalleryImages
             return;
         }
 
+        $maxKb = $this->maxGalleryUploadSizeKb();
+
         try {
             $this->validate([
                 'uploadImages' => ['required', 'array', 'min:1', 'max:40'],
-                'uploadImages.*' => ['required', 'image', 'max:500'],
+                'uploadImages.*' => ['required', 'image', 'max:'.$maxKb],
             ], [
-                'uploadImages.*.max' => 'Each image must be 500KB or smaller.',
+                'uploadImages.*.max' => "Each image must be {$maxKb}KB or smaller.",
                 'uploadImages.*.image' => 'Only image files are allowed.',
             ]);
         } catch (\Illuminate\Validation\ValidationException $exception) {

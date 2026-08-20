@@ -102,15 +102,16 @@
                      data-product-gallery
                      data-images='@json($galleryImages)'>
                     <div class="relative z-0 aspect-[4/3] overflow-visible">
-                        <x-product-360-viewer
-                            :frames="$spinImages"
-                            alt="{{ $motorcycle->name }}"
-                            img-class="mx-auto h-full max-h-[420px] w-full origin-center scale-[1.35] object-contain drop-shadow-[0_18px_20px_rgba(0,0,0,0.35)]"
-                            class="relative z-0 flex h-full cursor-grab select-none items-center justify-center px-0 py-0" />
-                        @if (empty($spinImages))
-                            <img src="{{ $motorcycle->listImageUrl() }}"
+                        @if ($hasSpinView)
+                            <x-product-360-viewer
+                                :frames="$spinImages"
+                                alt="{{ $motorcycle->name }}"
+                                img-class="mx-auto h-full max-h-[420px] w-full origin-center scale-[1.35] object-contain drop-shadow-[0_18px_20px_rgba(0,0,0,0.35)]"
+                                class="relative z-0 flex h-full cursor-grab select-none items-center justify-center px-0 py-0" />
+                        @else
+                            <img src="{{ $heroProductImage }}"
                                  alt="{{ $motorcycle->name }}"
-                                 class="pointer-events-none absolute inset-0 z-0 m-auto max-h-[88%] max-w-[88%] origin-center scale-[1.35] object-contain">
+                                 class="relative z-0 mx-auto h-full max-h-[420px] w-full origin-center scale-[1.35] object-contain drop-shadow-[0_18px_20px_rgba(0,0,0,0.35)]">
                         @endif
                     </div>
 
@@ -191,15 +192,16 @@
                  data-product-gallery
                  data-images='@json($galleryImages)'>
                 <div class="relative z-0 h-[clamp(300px,58vw,380px)] overflow-visible">
-                    <x-product-360-viewer
-                        :frames="$spinImages"
-                        alt="{{ $motorcycle->name }}"
-                        img-class="mx-auto h-full max-h-full w-full max-w-[96%] origin-center object-contain drop-shadow-[0_18px_20px_rgba(0,0,0,0.35)]"
-                        class="relative z-0 flex h-full min-h-[300px] cursor-grab select-none items-center justify-center px-0 py-0" />
-                    @if (empty($spinImages))
-                        <img src="{{ $motorcycle->listImageUrl() }}"
+                    @if ($hasSpinView)
+                        <x-product-360-viewer
+                            :frames="$spinImages"
+                            alt="{{ $motorcycle->name }}"
+                            img-class="mx-auto h-full max-h-full w-full max-w-[96%] origin-center object-contain drop-shadow-[0_18px_20px_rgba(0,0,0,0.35)]"
+                            class="relative z-0 flex h-full min-h-[300px] cursor-grab select-none items-center justify-center px-0 py-0" />
+                    @else
+                        <img src="{{ $heroProductImage }}"
                              alt="{{ $motorcycle->name }}"
-                             class="pointer-events-none absolute inset-0 z-0 m-auto max-h-[96%] max-w-[96%] object-contain">
+                             class="relative z-0 mx-auto h-full max-h-full w-full max-w-[96%] object-contain drop-shadow-[0_18px_20px_rgba(0,0,0,0.35)]">
                     @endif
                 </div>
 
