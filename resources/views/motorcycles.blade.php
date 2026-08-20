@@ -27,12 +27,12 @@
         [
             'title' => '155cc - 160cc',
             'text' => 'Right if you use the link road regularly, carry a passenger often, or want ABS. More comfortable at speed, heavier to manoeuvre.',
-            'models' => ['Air Blade', 'PCX', 'N Max'],
+            'models' => ['Air Blade', 'PCX', 'N Max' , 'ADV 160', 'Aerox 155'],
         ],
         [
             'title' => 'Adventure & Sport',
             'text' => 'Right if road surfaces are rough where you ride, or you want the sharper handling and suspension travel. A specialist choice.',
-            'models' => ['ADV 160', 'Aerox 155'],
+            'models' => ['CL 300' , 'X Max', 'Forza'],
         ],
     ];
 @endphp

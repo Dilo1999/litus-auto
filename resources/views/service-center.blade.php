@@ -4,7 +4,7 @@
 
 @section('content')
 @php
-    $heroBg = asset('images/service_center/' . rawurlencode('ChatGPT Image Jul 10, 2026, 10_31_01 AM.png'));
+    $heroBg = asset('images/service_center/Image.webp');
 
     $heroFeatures = [
         ['icon' => 'wrench', 'title' => 'Periodic Maintenance', 'desc' => 'Manufacturer schedules'],
@@ -384,7 +384,7 @@
                    class="inline-flex items-center justify-center rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                     Book Now
                 </a>
-                <a href="{{ route('contact') }}"
+                <a href="tel:+9607792278"
                    class="inline-flex items-center justify-center rounded-lg border-[1.5px] border-white/32 px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10">
                     Contact Us
                 </a>

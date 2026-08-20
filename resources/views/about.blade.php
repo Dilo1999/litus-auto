@@ -4,7 +4,7 @@
 
 @section('content')
 @php
-    $heroBg = asset('images/about_us/team-2.png');
+    $heroBg = asset('images/about_us/img.webp');
 
     $showroomImage = function (string ...$parts): string {
         return asset('images/about_us/showrooms/' . implode('/', array_map('rawurlencode', $parts)));
@@ -73,7 +73,7 @@
     <section class="relative hidden overflow-hidden bg-litus-ink text-white min-[961px]:block">
         <img src="{{ $heroBg }}"
              alt=""
-             class="absolute inset-0 h-full w-full object-cover object-[center_30%]"
+             class="absolute inset-0 h-full w-full object-cover object-[center_22%]"
              aria-hidden="true">
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,24,0.96)_0%,rgba(5,11,24,0.88)_34%,rgba(5,11,24,0.55)_62%,rgba(5,11,24,0.35)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0"
@@ -88,7 +88,7 @@
             <div class="max-w-[820px]">
                 <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky">About LITUS Automobiles</span>
                 <h1 class="font-display text-[clamp(30px,4.2vw,50px)] font-bold leading-[1.08] tracking-[-0.032em] drop-shadow-[0_6px_20px_rgba(0,0,0,0.45)]">
-                    Driven by trust.<br><span class="text-litus-sky">Built for every ride.</span>
+                    Your Ride. Our Legacy.<br><span class="text-litus-sky">Since 2014</span>
                 </h1>
                 <p class="mt-4 max-w-[620px] text-[clamp(16px,1.4vw,18px)] leading-[1.66] text-white/[0.78]">
                     Established in 2014, LITUS Automobiles is a leading motorcycle supplier in the Maldives. We offer a wide range of mobility solutions to meet the needs of our customers, with quality products and after-sales service that people come back for.
@@ -128,7 +128,7 @@
     <section class="relative overflow-hidden bg-litus-ink text-white min-[961px]:hidden">
         <img src="{{ $heroBg }}"
              alt=""
-             class="absolute inset-0 h-full w-full object-cover object-[center_20%]"
+             class="absolute inset-0 h-full w-full object-cover object-[center_14%]"
              aria-hidden="true">
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,11,24,0.55)_0%,rgba(5,11,24,0.78)_42%,rgba(5,11,24,0.94)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0 opacity-[0.18]"
@@ -139,7 +139,7 @@
                 <div class="max-w-[36rem]">
                     <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky">About LITUS Automobiles</span>
                     <h1 class="max-w-[16ch] font-display text-[clamp(1.85rem,7.2vw,2.25rem)] font-extrabold leading-[1.1] tracking-[-0.032em]">
-                        Driven by trust. <span class="text-litus-sky">Built for every ride.</span>
+                        Your Ride. Our Legacy. <span class="text-litus-sky">Since 2014</span>
                     </h1>
                     <p class="mt-3 line-clamp-4 max-w-[38ch] text-[14px] leading-[1.62] text-white/[0.72]">
                         Since 2014, a leading motorcycle supplier in the Maldives with quality products and after-sales service people come back for.
