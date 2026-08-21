@@ -69,11 +69,13 @@
 
                     <div class="mt-6 sm:mt-[26px]">
                         @if ($hasPromo)
-                            <div class="text-[15px] text-white/50 line-through sm:text-base">{{ $motorcycle->formattedOriginalPrice() }}</div>
-                            <div class="mt-0.5 font-display text-[clamp(30px,7vw,44px)] font-extrabold tracking-[-0.035em]">{{ $motorcycle->formattedSalePrice() }}</div>
-                            <div class="mt-3 inline-flex items-center gap-2 rounded-full bg-litus-green px-[15px] py-[7px] text-[12.5px] font-bold text-white sm:text-[13px]">
-                                SAVE {{ $motorcycle->formattedDiscount() }}
+                            <div class="flex flex-wrap items-center gap-2.5 sm:gap-3">
+                                <div class="text-[15px] text-white/50 line-through sm:text-base">{{ $motorcycle->formattedOriginalPrice() }}</div>
+                                <div class="inline-flex items-center gap-2 rounded-full bg-litus-green px-[15px] py-[7px] text-[12.5px] font-bold text-white sm:text-[13px]">
+                                    SAVE {{ $motorcycle->formattedDiscount() }}
+                                </div>
                             </div>
+                            <div class="mt-3 font-display text-[clamp(30px,7vw,44px)] font-extrabold tracking-[-0.035em] sm:mt-3.5">{{ $motorcycle->formattedSalePrice() }}</div>
                         @else
                             <div class="font-display text-[clamp(30px,7vw,44px)] font-extrabold tracking-[-0.035em]">{{ $motorcycle->formattedOriginalPrice() }}</div>
                         @endif
@@ -171,11 +173,13 @@
 
                 <div class="mt-3">
                     @if ($hasPromo)
-                        <div class="text-[13px] text-white/50 line-through">{{ $motorcycle->formattedOriginalPrice() }}</div>
-                        <div class="font-display text-[clamp(1.75rem,7vw,2.25rem)] font-extrabold tracking-[-0.035em]">{{ $motorcycle->formattedSalePrice() }}</div>
-                        <div class="mt-2 inline-flex items-center gap-1.5 rounded-full bg-litus-green px-3 py-1 text-[11px] font-bold text-white">
-                            SAVE {{ $motorcycle->formattedDiscount() }}
+                        <div class="flex flex-wrap items-center gap-2">
+                            <div class="text-[13px] text-white/50 line-through">{{ $motorcycle->formattedOriginalPrice() }}</div>
+                            <div class="inline-flex items-center gap-1.5 rounded-full bg-litus-green px-3 py-1 text-[11px] font-bold text-white">
+                                SAVE {{ $motorcycle->formattedDiscount() }}
+                            </div>
                         </div>
+                        <div class="mt-2 font-display text-[clamp(1.75rem,7vw,2.25rem)] font-extrabold tracking-[-0.035em]">{{ $motorcycle->formattedSalePrice() }}</div>
                     @else
                         <div class="font-display text-[clamp(1.75rem,7vw,2.25rem)] font-extrabold tracking-[-0.035em]">{{ $motorcycle->formattedOriginalPrice() }}</div>
                     @endif
