@@ -43,6 +43,11 @@ class PageSeoResource extends Resource
         return $user instanceof User && $user->isSuperAdmin();
     }
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return static::canViewAny();
+    }
+
     public static function form(Form $form): Form
     {
         return $form

@@ -62,7 +62,7 @@ class UserResource extends Resource
                                 User::ROLE_VIEWER => 'Viewer',
                             ])
                             ->required()
-                            ->helperText('Admin: full access including Page SEO and Users. Editor: Blog Posts. Viewer: read-only.'),
+                            ->helperText('Admin: catalog and user management. Super Admin: full access including Super Settings. Editor/Viewer: limited access.'),
                     ])
                     ->columns(1),
             ]);
@@ -111,7 +111,7 @@ class UserResource extends Resource
         $user = Auth::user();
 
         if ($user instanceof User && ! $user->isSuperAdmin()) {
-            $query->whereRaw('LOWER(email) != ?', [strtolower(User::SUPER_ADMIN_EMAIL)]);
+            $query->where('role', '!=', User::ROLE_SUPER_ADMIN);
         }
 
         return $query;

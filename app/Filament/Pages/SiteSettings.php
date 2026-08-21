@@ -31,6 +31,11 @@ class SiteSettings extends Page
         return $user instanceof User && $user->isSuperAdmin();
     }
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return static::canAccess();
+    }
+
     public function mount(): void
     {
         $this->maintenanceEnabled = SiteSetting::maintenanceEnabled();

@@ -13,6 +13,8 @@ class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public const ROLE_SUPER_ADMIN = 'superadmin';
+
     public const ROLE_ADMIN = 'admin';
 
     public const ROLE_EDITOR = 'editor';
@@ -69,7 +71,7 @@ class User extends Authenticatable implements FilamentUser
 
     public function isSuperAdmin(): bool
     {
-        return strcasecmp((string) $this->email, self::SUPER_ADMIN_EMAIL) === 0;
+        return $this->role === self::ROLE_SUPER_ADMIN;
     }
 
     public function isEditor(): bool
