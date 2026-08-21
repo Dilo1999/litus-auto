@@ -38,6 +38,18 @@ class SiteSettings extends Page
 
     public function updatedMaintenanceEnabled(bool $value): void
     {
+        if (! SiteSetting::tableExists()) {
+            $this->maintenanceEnabled = false;
+
+            Notification::make()
+                ->title('Database setup required')
+                ->body('Run php artisan migrate on the server to enable maintenance mode.')
+                ->danger()
+                ->send();
+
+            return;
+        }
+
         SiteSetting::setMaintenanceEnabled($value);
 
         Notification::make()

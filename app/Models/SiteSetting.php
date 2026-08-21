@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Schema;
 
 class SiteSetting extends Model
 {
@@ -14,6 +15,15 @@ class SiteSetting extends Model
     protected $casts = [
         'maintenance_enabled' => 'boolean',
     ];
+
+    public static function tableExists(): bool
+    {
+        try {
+            return Schema::hasTable('site_settings');
+        } catch (\Throwable) {
+            return false;
+        }
+    }
 
     public static function instance(): self
     {
@@ -26,11 +36,23 @@ class SiteSetting extends Model
 
     public static function maintenanceEnabled(): bool
     {
-        return (bool) static::instance()->maintenance_enabled;
+        if (! static::tableExists()) {
+            return false;
+        }
+
+        try {
+            return (bool) static::instance()->maintenance_enabled;
+        } catch (\Throwable) {
+            return false;
+        }
     }
 
     public static function setMaintenanceEnabled(bool $enabled): void
     {
+        if (! static::tableExists()) {
+            return;
+        }
+
         $setting = static::query()->firstOrCreate([], [
             'maintenance_enabled' => false,
         ]);
