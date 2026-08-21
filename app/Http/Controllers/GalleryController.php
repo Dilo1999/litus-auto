@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Concerns\AppliesPageSeo;
 use App\Models\GalleryImage;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Cache;
@@ -11,8 +12,12 @@ use Illuminate\View\View;
 
 class GalleryController extends Controller
 {
+    use AppliesPageSeo;
+
     public function index(): View
     {
+        $this->applySeo('gallery');
+
         $images = GalleryImage::query()
             ->published()
             ->whereIn('category', [

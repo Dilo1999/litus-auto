@@ -28,7 +28,7 @@ class SiteSettings extends Page
     {
         $user = Auth::user();
 
-        return $user instanceof User && $user->isAdmin();
+        return $user instanceof User && $user->isSuperAdmin();
     }
 
     public function mount(): void

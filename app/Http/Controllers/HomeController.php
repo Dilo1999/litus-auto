@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Concerns\AppliesPageSeo;
 use App\Models\GalleryImage;
 use App\Models\Motorcycle;
 use App\Models\Showroom;
@@ -9,8 +10,12 @@ use Illuminate\View\View;
 
 class HomeController extends Controller
 {
+    use AppliesPageSeo;
+
     public function index(): View
     {
+        $this->applySeo('home');
+
         $promoMotorcycles = Motorcycle::query()
             ->where('is_published', true)
             ->onActivePromotion()

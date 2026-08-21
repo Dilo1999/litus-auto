@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MotorcycleController;
 use App\Http\Controllers\PartsController;
 use App\Http\Controllers\PromotionsController;
+use App\Services\SeoService;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -40,8 +41,16 @@ Route::get('/about-us', [AboutController::class, 'index'])->name('about');
 Route::get('/motorcycles', [MotorcycleController::class, 'index'])->name('motorcycles');
 Route::get('/motorcycles/{slug}', [MotorcycleController::class, 'show'])->name('motorcycle.show');
 Route::get('/promotions', [PromotionsController::class, 'index'])->name('promotions');
-Route::get('/ownership-plans', fn () => view('ownership-plans'))->name('ownership-plans');
+Route::get('/ownership-plans', function (SeoService $seo) {
+    $seo->applyForPage('ownership-plans');
+
+    return view('ownership-plans');
+})->name('ownership-plans');
 Route::get('/parts', PartsController::class)->name('parts');
-Route::get('/service-center', fn () => view('service-center'))->name('service-center');
+Route::get('/service-center', function (SeoService $seo) {
+    $seo->applyForPage('service-center');
+
+    return view('service-center');
+})->name('service-center');
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');

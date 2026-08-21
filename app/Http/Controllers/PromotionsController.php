@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Concerns\AppliesPageSeo;
 use App\Models\Motorcycle;
 use App\Models\Promotion;
 use Illuminate\View\View;
 
 class PromotionsController extends Controller
 {
+    use AppliesPageSeo;
+
     public function index(): View
     {
+        $this->applySeo('promotions');
+
         $promotions = Motorcycle::query()
             ->where('is_published', true)
             ->onActivePromotion()

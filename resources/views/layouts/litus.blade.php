@@ -3,8 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Honda and Yamaha scooters, genuine parts and expert service across five showrooms in the Maldives. Own from MVR 1,340 a month on a Shariah-compliant Ijara plan.">
-    <title>@yield('title', 'LITUS Automobiles - Motorcycles, Scooters & Ijara Ownership Plans in the Maldives')</title>
+    {!! SEOMeta::generate() !!}
+    {!! OpenGraph::generate() !!}
+    {!! Twitter::generate() !!}
     <link rel="icon" type="image/png" href="{{ asset('images/favicon/LA-Fav-2.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('images/favicon/LA-Fav-2.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">

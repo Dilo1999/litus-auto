@@ -13,54 +13,79 @@ class SeoService
 
     public function __construct()
     {
-        $this->defaultOgImage = asset('images/content/cta2.jpg');
+        $this->defaultOgImage = asset('images/homepage/Website-Banner-mobile-1.webp');
     }
 
     /**
-     * Apply SEO for a static page. Uses admin-configured PageSeo when available,
+     * Apply SEO for a page. Uses admin-configured PageSeo when available,
      * otherwise falls back to provided defaults.
+     *
+     * @param  array<string, mixed>  $defaults
+     * @param  array<string, string>  $replacements
      */
-    public function applyForPage(string $routeName, array $defaults = []): void
+    public function applyForPage(string $routeName, array $defaults = [], array $replacements = []): void
     {
         $pageSeo = PageSeo::forRoute($routeName);
         $url = url()->current();
 
-        $metaTitle = $pageSeo?->meta_title ?? $defaults['meta_title'] ?? null;
-        $metaDesc = $pageSeo?->meta_description ?? $defaults['meta_description'] ?? null;
-        $ogTitle = $pageSeo?->og_title ?? $defaults['og_title'] ?? $metaTitle;
-        $ogDesc = $pageSeo?->og_description ?? $defaults['og_description'] ?? $metaDesc;
-        $ogImage = $pageSeo?->og_image_url ?? $defaults['og_image'] ?? $this->defaultOgImage;
-        $twTitle = $pageSeo?->twitter_title ?? $defaults['twitter_title'] ?? $ogTitle;
-        $twDesc = $pageSeo?->twitter_description ?? $defaults['twitter_description'] ?? $ogDesc;
-        $twImage = $pageSeo?->twitter_image_url ?? $defaults['twitter_image'] ?? $ogImage;
-        $canonical = $pageSeo?->canonical_url ?? $defaults['canonical'] ?? $url;
+        $configured = $pageSeo?->applyPlaceholders($replacements) ?? [];
+
+        $metaTitle = $this->resolveValue(
+            $configured['meta_title'] ?? null,
+            $defaults['meta_title'] ?? null,
+            $replacements
+        );
+        $metaDesc = $this->resolveValue(
+            $configured['meta_description'] ?? null,
+            $defaults['meta_description'] ?? null,
+            $replacements
+        );
+
+        $ogImage = $pageSeo?->og_image_url
+            ?? $defaults['og_image']
+            ?? $this->homeShareImage()
+            ?? $this->defaultOgImage;
+
+        $canonical = $defaults['canonical'] ?? $url;
+        $robots = $pageSeo?->robots;
 
         if ($metaTitle) {
-            SEOMeta::setTitle($metaTitle);
+            SEOMeta::setTitle($metaTitle, false);
         }
         if ($metaDesc) {
             SEOMeta::setDescription($metaDesc);
         }
         SEOMeta::setCanonical($canonical);
-        if ($pageSeo?->robots) {
-            SEOMeta::setRobots($pageSeo->robots);
+        if ($robots) {
+            SEOMeta::setRobots($robots);
         }
 
-        if ($ogTitle) {
-            OpenGraph::setTitle($ogTitle);
-        }
-        if ($ogDesc) {
-            OpenGraph::setDescription($ogDesc);
+        OpenGraph::setTitle($metaTitle ?: config('app.name'));
+        if ($metaDesc) {
+            OpenGraph::setDescription($metaDesc);
         }
         OpenGraph::setUrl($url);
+        OpenGraph::addProperty('type', 'website');
+        OpenGraph::addProperty('site_name', 'LITUS Automobiles');
         OpenGraph::addImage($ogImage);
 
-        if ($twTitle) {
-            TwitterCard::setTitle($twTitle);
+        TwitterCard::setType('summary_large_image');
+        TwitterCard::setTitle($metaTitle ?: config('app.name'));
+        if ($metaDesc) {
+            TwitterCard::setDescription($metaDesc);
         }
-        if ($twDesc) {
-            TwitterCard::setDescription($twDesc);
-        }
-        TwitterCard::setImage($twImage);
+        TwitterCard::setImage($ogImage);
+    }
+
+    protected function homeShareImage(): ?string
+    {
+        return PageSeo::forRoute('home')?->og_image_url;
+    }
+
+    protected function resolveValue(?string $configured, ?string $fallback, array $replacements): ?string
+    {
+        $value = filled($configured) ? $configured : $fallback;
+
+        return PageSeo::replacePlaceholders($value, $replacements);
     }
 }

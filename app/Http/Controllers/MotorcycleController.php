@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Concerns\AppliesPageSeo;
 use App\Models\Motorcycle;
 use App\Models\Showroom;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class MotorcycleController extends Controller
 {
+    use AppliesPageSeo;
+
     public function index(): View
     {
+        $this->applySeo('motorcycles');
+
         $motorcycles = Motorcycle::query()
             ->where('is_published', true)
             ->with([
@@ -60,6 +66,16 @@ class MotorcycleController extends Controller
             ->ordered()
             ->pluck('name')
             ->all();
+
+        $this->applySeo('motorcycle.show', [
+            'meta_title' => $motorcycle->name.' - LITUS Automobiles',
+            'meta_description' => Str::limit(trim(($motorcycle->brand ? $motorcycle->brand.' ' : '').$motorcycle->name.' motorcycle available at LITUS Automobiles in the Maldives.'), 160, ''),
+            'og_image' => $motorcycle->cardImageUrl() ?? $motorcycle->listImageUrl(),
+        ], [
+            'name' => $motorcycle->name,
+            'brand' => $motorcycle->brand ?? '',
+            'category' => $motorcycle->category ?? '',
+        ]);
 
         return view('motorcycle-detail', [
             'motorcycle' => $motorcycle,
