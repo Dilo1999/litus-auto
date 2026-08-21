@@ -16,7 +16,7 @@ class SiteSettings extends Page
 
     protected static ?string $title = 'Site Settings';
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Super Settings';
 
     protected static ?int $navigationSort = 90;
 
