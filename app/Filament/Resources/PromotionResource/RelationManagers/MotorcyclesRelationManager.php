@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\PromotionResource\RelationManagers;
 
 use App\Models\Motorcycle;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -49,6 +50,12 @@ class MotorcyclesRelationManager extends RelationManager
 
                         return 'MVR '.number_format($save, 0);
                     }),
+                TextColumn::make('offer_note')
+                    ->label('Offer note')
+                    ->getStateUsing(fn (Motorcycle $record) => $record->pivot->offer_note)
+                    ->limit(40)
+                    ->placeholder('—')
+                    ->toggleable(),
             ])
             ->headerActions([
                 AttachAction::make()
@@ -64,11 +71,16 @@ class MotorcyclesRelationManager extends RelationManager
                             ->prefix('MVR')
                             ->step(0.01)
                             ->required(),
+                        Textarea::make('offer_note')
+                            ->label('Offer note')
+                            ->rows(2)
+                            ->maxLength(100)
+                            ->helperText('Shown on this motorcycle\'s detail page. Max 100 characters.'),
                     ]),
             ])
             ->actions([
                 Tables\Actions\Action::make('editSalePrice')
-                    ->label('Edit price')
+                    ->label('Edit product')
                     ->icon('heroicon-o-pencil')
                     ->form([
                         TextInput::make('sale_price')
@@ -77,6 +89,11 @@ class MotorcyclesRelationManager extends RelationManager
                             ->prefix('MVR')
                             ->step(0.01)
                             ->required(),
+                        Textarea::make('offer_note')
+                            ->label('Offer note')
+                            ->rows(2)
+                            ->maxLength(100)
+                            ->helperText('Shown on this motorcycle\'s detail page. Max 100 characters.'),
                     ])
                     ->mountUsing(function (Tables\Actions\Action $action, ?\Filament\Forms\ComponentContainer $form = null): void {
                         /** @var Motorcycle|null $record */
@@ -84,11 +101,15 @@ class MotorcyclesRelationManager extends RelationManager
 
                         $form?->fill([
                             'sale_price' => $record?->pivot?->sale_price,
+                            'offer_note' => $record?->pivot?->offer_note,
                         ]);
                     })
                     ->action(function (Motorcycle $record, array $data, RelationManager $livewire): void {
                         $livewire->getOwnerRecord()->motorcycles()->updateExistingPivot($record->id, [
                             'sale_price' => $data['sale_price'],
+                            'offer_note' => filled($data['offer_note'] ?? null)
+                                ? mb_substr((string) $data['offer_note'], 0, 100)
+                                : null,
                         ]);
                     }),
                 Tables\Actions\DetachAction::make()

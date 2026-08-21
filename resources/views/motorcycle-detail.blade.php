@@ -21,8 +21,8 @@
     $monthly = $activePrice > 0 ? (int) (round(($activePrice / 60) / 10) * 10) : null;
     $engine = $motorcycle->engineCapacity();
     $keyTech = $highlights[1]['value'] ?? ($highlights[0]['value'] ?? 'LITUS Support');
-    $blurb = $motorcycle->offerNote()
-        ?: 'Premium build, genuine parts support, and Ijara-ready ownership options across LITUS showrooms in the Maldives.';
+    $blurb = 'Premium build, genuine parts support, and Ijara-ready ownership options across LITUS showrooms in the Maldives.';
+    $offerNote = $motorcycle->offerNote();
 
     $heroFeatures = [
         ['icon' => 'bike', 'title' => $engine ?: 'Electric', 'desc' => 'Engine capacity'],
@@ -66,6 +66,11 @@
                     <p class="mt-4 max-w-[520px] text-[clamp(15.5px,1.5vw,19px)] leading-[1.66] text-white/[0.72]">
                         {{ $blurb }}
                     </p>
+                    @if (filled($offerNote))
+                        <p class="mt-3 max-w-[520px] text-[clamp(14px,1.4vw,17px)] leading-[1.6] text-[#E31E25]">
+                            {{ $offerNote }}
+                        </p>
+                    @endif
 
                     <div class="mt-6 sm:mt-[26px]">
                         @if ($hasPromo)
@@ -170,6 +175,15 @@
                 <h1 class="font-display text-[clamp(1.65rem,6.5vw,2rem)] font-extrabold leading-[1.1] tracking-[-0.032em]">
                     {{ $motorcycle->name }}
                 </h1>
+
+                <p class="mt-3 text-[14px] leading-[1.65] text-white/[0.72] sm:text-[15px]">
+                    {{ $blurb }}
+                </p>
+                @if (filled($offerNote))
+                    <p class="mt-2.5 text-[13px] leading-[1.6] text-[#E31E25] sm:text-[14px]">
+                        {{ $offerNote }}
+                    </p>
+                @endif
 
                 <div class="mt-3">
                     @if ($hasPromo)

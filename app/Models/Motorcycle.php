@@ -54,7 +54,7 @@ class Motorcycle extends Model
     public function promotions(): BelongsToMany
     {
         return $this->belongsToMany(Promotion::class, 'promotion_motorcycle')
-            ->withPivot(['sale_price'])
+            ->withPivot(['sale_price', 'offer_note'])
             ->withTimestamps();
     }
 
@@ -109,7 +109,15 @@ class Motorcycle extends Model
 
     public function offerNote(): ?string
     {
-        return $this->activePromotion()?->offer_note;
+        $promotion = $this->activePromotion();
+
+        if (! $promotion) {
+            return null;
+        }
+
+        $note = $promotion->pivot->offer_note ?? null;
+
+        return filled($note) ? (string) $note : null;
     }
 
     public function offerLabel(): string

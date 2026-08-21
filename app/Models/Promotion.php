@@ -40,7 +40,7 @@ class Promotion extends Model
     public function motorcycles(): BelongsToMany
     {
         return $this->belongsToMany(Motorcycle::class, 'promotion_motorcycle')
-            ->withPivot(['sale_price'])
+            ->withPivot(['sale_price', 'offer_note'])
             ->withTimestamps();
     }
 

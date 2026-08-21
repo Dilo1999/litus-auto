@@ -7,7 +7,6 @@ use App\Filament\Resources\PromotionResource\RelationManagers\MotorcyclesRelatio
 use App\Models\Promotion;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
@@ -52,11 +51,6 @@ class PromotionResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->placeholder('e.g. August Price Drop'),
-                        Textarea::make('offer_note')
-                            ->label('Offer note')
-                            ->rows(3)
-                            ->placeholder('Shown on the promotions page and campaign cards.')
-                            ->columnSpanFull(),
                         DateTimePicker::make('ends_at')
                             ->label('Ends at')
                             ->helperText('Leave empty for no end date. The promotion starts on the date it is created.'),
