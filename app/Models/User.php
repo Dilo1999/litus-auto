@@ -55,12 +55,16 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessFilament(): bool
     {
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
+
         return in_array($this->role, [self::ROLE_ADMIN, self::ROLE_EDITOR, self::ROLE_VIEWER], true);
     }
 
     public function isAdmin(): bool
     {
-        return $this->role === self::ROLE_ADMIN;
+        return $this->isSuperAdmin() || $this->role === self::ROLE_ADMIN;
     }
 
     public function isSuperAdmin(): bool
