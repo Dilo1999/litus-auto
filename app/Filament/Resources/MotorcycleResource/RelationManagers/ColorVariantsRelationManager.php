@@ -47,6 +47,8 @@ class ColorVariantsRelationManager extends RelationManager
                     ->schema([
                         FileUpload::make('spin_frames')
                             ->label('360° frames')
+                            ->disk('public')
+                            ->visibility('public')
                             ->multiple()
                             ->image()
                             ->maxSize(700)

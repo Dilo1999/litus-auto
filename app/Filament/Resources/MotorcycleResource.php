@@ -50,6 +50,8 @@ class MotorcycleResource extends Resource
                             ->placeholder('e.g. Honda'),
                         FileUpload::make('card_image')
                             ->label('Card image')
+                            ->disk('public')
+                            ->visibility('public')
                             ->image()
                             ->maxSize(700)
                             ->directory('motorcycles/cards')
