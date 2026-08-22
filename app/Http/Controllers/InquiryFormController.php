@@ -50,6 +50,13 @@ class InquiryFormController extends Controller
             ]);
         }
 
+        if (! $this->telegramNotifier->isServiceConfigured()) {
+            Log::warning('Service appointment submitted but Telegram service group is not configured.', [
+                'bot_token_set' => filled(config('services.telegram.bot_token')),
+                'service_chat_id' => config('services.telegram.service_chat_id'),
+            ]);
+        }
+
         if ($this->telegramNotifier->isServiceConfigured() && ! $telegramSent) {
             return response()->json([
                 'message' => 'Could not send your appointment request. Please try again.',

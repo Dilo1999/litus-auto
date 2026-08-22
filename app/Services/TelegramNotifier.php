@@ -118,14 +118,23 @@ class TelegramNotifier
     {
         $token = (string) config('services.telegram.bot_token');
 
-        $response = Http::timeout(15)
-            ->withOptions(['verify' => (bool) config('services.telegram.verify_ssl', true)])
-            ->post("https://api.telegram.org/bot{$token}/sendMessage", [
+        try {
+            $response = Http::timeout(20)
+                ->withOptions(['verify' => (bool) config('services.telegram.verify_ssl', false)])
+                ->post("https://api.telegram.org/bot{$token}/sendMessage", [
+                    'chat_id' => $chatId,
+                    'text' => $text,
+                    'parse_mode' => 'HTML',
+                    'disable_web_page_preview' => true,
+                ]);
+        } catch (\Throwable $e) {
+            Log::error("Telegram {$context} connection failed.", [
                 'chat_id' => $chatId,
-                'text' => $text,
-                'parse_mode' => 'HTML',
-                'disable_web_page_preview' => true,
+                'error' => $e->getMessage(),
             ]);
+
+            return false;
+        }
 
         if ($response->failed()) {
             Log::error("Telegram {$context} failed.", [

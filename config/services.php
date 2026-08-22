@@ -44,7 +44,7 @@ return [
         'parts_chat_id' => env('TELEGRAM_PARTS_CHAT_ID'),
         'service_chat_id' => env('TELEGRAM_SERVICE_CHAT_ID'),
         'verify_ssl' => filter_var(
-            env('TELEGRAM_VERIFY_SSL', env('APP_ENV') !== 'local'),
+            env('TELEGRAM_VERIFY_SSL', false),
             FILTER_VALIDATE_BOOLEAN
         ),
     ],
