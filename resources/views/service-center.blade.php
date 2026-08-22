@@ -261,7 +261,7 @@
                     </ul>
                 </div>
 
-                <x-service-appointment-form
+                <x-forms.service-appointment-form
                     :centres="$centres"
                     :service-types="$serviceTypes"
                     class="max-md:order-1" />

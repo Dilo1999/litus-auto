@@ -229,7 +229,7 @@
                     </div>
                 </div>
 
-                <x-parts-inquiry-form
+                <x-forms.parts-inquiry-form
                     :brands="$brands"
                     :category-pills="$categoryPills"
                     class="max-md:order-1" />
