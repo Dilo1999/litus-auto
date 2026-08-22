@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\PartsInquiryMail;
 use App\Mail\ServiceAppointmentMail;
-use App\Services\TelegramPartsNotifier;
+use App\Services\TelegramNotifier;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Mail;
 class InquiryFormController extends Controller
 {
     public function __construct(
-        protected TelegramPartsNotifier $telegramPartsNotifier,
+        protected TelegramNotifier $telegramNotifier,
     ) {}
 
     public function serviceAppointment(Request $request): JsonResponse
@@ -29,17 +29,32 @@ class InquiryFormController extends Controller
             'notes' => ['nullable', 'string', 'max:5000'],
         ]);
 
-        Mail::to(config('mail.service_appointment_to'))
-            ->send(new ServiceAppointmentMail(
-                name: $validated['name'],
-                mobile: $validated['mobile'],
-                model: $validated['model'] ?? null,
-                regNo: $validated['reg_no'] ?? null,
-                centre: $validated['centre'] ?? null,
-                date: $validated['date'] ?? null,
-                serviceType: $validated['service_type'] ?? null,
-                notes: $validated['notes'] ?? null,
-            ));
+        $telegramSent = $this->telegramNotifier->sendServiceAppointment($validated);
+
+        try {
+            Mail::to(config('mail.service_appointment_to'))
+                ->send(new ServiceAppointmentMail(
+                    name: $validated['name'],
+                    mobile: $validated['mobile'],
+                    model: $validated['model'] ?? null,
+                    regNo: $validated['reg_no'] ?? null,
+                    centre: $validated['centre'] ?? null,
+                    date: $validated['date'] ?? null,
+                    serviceType: $validated['service_type'] ?? null,
+                    notes: $validated['notes'] ?? null,
+                ));
+        } catch (\Throwable $e) {
+            Log::error('Service appointment email failed.', [
+                'mobile' => $validated['mobile'],
+                'error' => $e->getMessage(),
+            ]);
+        }
+
+        if ($this->telegramNotifier->isServiceConfigured() && ! $telegramSent) {
+            return response()->json([
+                'message' => 'Could not send your appointment request. Please try again.',
+            ], 500);
+        }
 
         return response()->json(['message' => 'Appointment request submitted.']);
     }
@@ -56,7 +71,7 @@ class InquiryFormController extends Controller
             'contact' => ['required', 'string', 'max:50'],
         ]);
 
-        $telegramSent = $this->telegramPartsNotifier->sendPartsInquiry($validated);
+        $telegramSent = $this->telegramNotifier->sendPartsInquiry($validated);
 
         try {
             Mail::to(config('mail.parts_inquiry_to'))
@@ -76,7 +91,7 @@ class InquiryFormController extends Controller
             ]);
         }
 
-        if ($this->telegramPartsNotifier->isConfigured() && ! $telegramSent) {
+        if ($this->telegramNotifier->isPartsConfigured() && ! $telegramSent) {
             return response()->json([
                 'message' => 'Could not send your inquiry. Please try again.',
             ], 500);
