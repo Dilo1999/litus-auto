@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Mail\PartsInquiryMail;
 use App\Mail\ServiceAppointmentMail;
+use App\Services\TelegramPartsNotifier;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class InquiryFormController extends Controller
 {
+    public function __construct(
+        protected TelegramPartsNotifier $telegramPartsNotifier,
+    ) {}
+
     public function serviceAppointment(Request $request): JsonResponse
     {
         $validated = $request->validate([
@@ -50,16 +56,31 @@ class InquiryFormController extends Controller
             'contact' => ['required', 'string', 'max:50'],
         ]);
 
-        Mail::to(config('mail.parts_inquiry_to'))
-            ->send(new PartsInquiryMail(
-                brand: $validated['brand'],
-                year: $validated['year'] ?? null,
-                model: $validated['model'] ?? null,
-                category: $validated['category'] ?? null,
-                parts: $validated['parts'] ?? null,
-                name: $validated['name'],
-                contact: $validated['contact'],
-            ));
+        $telegramSent = $this->telegramPartsNotifier->sendPartsInquiry($validated);
+
+        try {
+            Mail::to(config('mail.parts_inquiry_to'))
+                ->send(new PartsInquiryMail(
+                    brand: $validated['brand'],
+                    year: $validated['year'] ?? null,
+                    model: $validated['model'] ?? null,
+                    category: $validated['category'] ?? null,
+                    parts: $validated['parts'] ?? null,
+                    name: $validated['name'],
+                    contact: $validated['contact'],
+                ));
+        } catch (\Throwable $e) {
+            Log::error('Parts inquiry email failed.', [
+                'contact' => $validated['contact'],
+                'error' => $e->getMessage(),
+            ]);
+        }
+
+        if ($this->telegramPartsNotifier->isConfigured() && ! $telegramSent) {
+            return response()->json([
+                'message' => 'Could not send your inquiry. Please try again.',
+            ], 500);
+        }
 
         return response()->json(['message' => 'Parts inquiry submitted.']);
     }
