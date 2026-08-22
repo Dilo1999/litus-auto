@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Mail\Transport\BrevoTransport;
-use App\Support\StorageDirectories;
 use Illuminate\Foundation\Console\StorageLinkCommand;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
@@ -29,8 +28,6 @@ class AppServiceProvider extends ServiceProvider
         // MySQL (e.g. MariaDB / older MySQL) has a 1000-byte index limit with utf8mb4.
         // Default string length 191 keeps unique indexes under that limit.
         Schema::defaultStringLength(191);
-
-        StorageDirectories::ensure();
 
         Mail::extend('brevo', function (array $config = []) {
             return new BrevoTransport(

@@ -43,12 +43,43 @@ class Motorcycle extends Model
     protected static function booted(): void
     {
         static::saving(function (Motorcycle $motorcycle) {
-            if (empty($motorcycle->slug) && filled($motorcycle->name)) {
-                $motorcycle->slug = Str::slug($motorcycle->name);
+            if (filled($motorcycle->name) || filled($motorcycle->slug)) {
+                $source = filled($motorcycle->slug)
+                    ? $motorcycle->slug
+                    : $motorcycle->name;
+
+                if (empty($motorcycle->slug) || self::slugExists($motorcycle->slug, $motorcycle->id)) {
+                    $motorcycle->slug = self::uniqueSlug($source, $motorcycle->id);
+                }
             }
 
             $motorcycle->specs = self::normalizeSpecs($motorcycle->specs);
         });
+    }
+
+    protected static function uniqueSlug(string $source, ?int $ignoreId = null): string
+    {
+        $base = Str::slug($source);
+        $slug = $base;
+        $counter = 2;
+
+        while (self::slugExists($slug, $ignoreId)) {
+            $slug = "{$base}-{$counter}";
+            $counter++;
+        }
+
+        return $slug;
+    }
+
+    protected static function slugExists(string $slug, ?int $ignoreId = null): bool
+    {
+        $query = static::query()->where('slug', $slug);
+
+        if ($ignoreId) {
+            $query->whereKeyNot($ignoreId);
+        }
+
+        return $query->exists();
     }
 
     public function promotions(): BelongsToMany
