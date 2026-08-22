@@ -9,7 +9,11 @@
 @endphp
 
 <div {{ $attributes->class(['rounded-2xl border border-white/15 bg-white/[0.06] p-5 backdrop-blur-[10px] sm:rounded-[26px] sm:p-[clamp(22px,3vw,32px)]']) }}>
-    <form data-service-appointment-form class="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-4">
+    <form data-service-appointment-form
+          action="{{ route('forms.service-appointment') }}"
+          method="post"
+          class="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-4">
+        @csrf
         <div>
             <label class="{{ $fieldLabel }}">Your name</label>
             <input type="text" name="name" placeholder="Full name" required class="{{ $fieldControl }}">

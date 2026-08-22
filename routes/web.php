@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InquiryFormController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
@@ -54,3 +55,8 @@ Route::get('/service-center', function (SeoService $seo) {
 })->name('service-center');
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
+
+Route::post('/forms/service-appointment', [InquiryFormController::class, 'serviceAppointment'])
+    ->name('forms.service-appointment');
+Route::post('/forms/parts-inquiry', [InquiryFormController::class, 'partsInquiry'])
+    ->name('forms.parts-inquiry');

@@ -94,6 +94,12 @@ return [
                 'postmark',
             ],
         ],
+
+        'brevo' => [
+            'transport' => 'brevo',
+            'key' => env('BREVO_API_KEY'),
+            'verify_ssl' => filter_var(env('BREVO_VERIFY_SSL', env('MAIL_VERIFY_SSL', true)), FILTER_VALIDATE_BOOLEAN),
+        ],
     ],
 
     /*
@@ -123,6 +129,10 @@ return [
     */
 
     'contact_to' => env('MAIL_CONTACT_RECIPIENT') ?: env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+
+    'service_appointment_to' => env('MAIL_SERVICE_APPOINTMENT_TO', 'service@litusautomobiles.com'),
+
+    'parts_inquiry_to' => env('MAIL_PARTS_INQUIRY_TO', 'partss@litusautomobiles.com'),
 
     /*
     |--------------------------------------------------------------------------

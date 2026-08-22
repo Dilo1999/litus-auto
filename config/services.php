@@ -31,4 +31,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'brevo' => [
+        'key' => env('BREVO_API_KEY'),
+        'verify_ssl' => filter_var(
+            env('BREVO_VERIFY_SSL', env('APP_ENV') !== 'local'),
+            FILTER_VALIDATE_BOOLEAN
+        ),
+    ],
+
 ];
