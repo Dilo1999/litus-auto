@@ -110,7 +110,7 @@
                             LITUS<span class="mt-[-2px] block text-[7px] font-medium tracking-[0.36em] text-white/60">AUTOMOBILES</span>
                         </div>
 
-                        <div class="absolute inset-x-1 top-12 bottom-[9.5rem] z-[2] overflow-hidden max-[960px]:bottom-[8.5rem] min-[961px]:inset-x-2 min-[961px]:top-14 min-[961px]:bottom-[10rem]">
+                        <div class="relative z-[2] flex min-h-[220px] flex-1 items-center justify-center overflow-hidden px-1 pt-14 min-[961px]:min-h-[260px] min-[961px]:px-3 min-[961px]:pt-16">
                             @foreach ($promotions as $index => $model)
                                 <img src="{{ $model->listImageUrl() }}"
                                      alt="{{ $model->name }}"
@@ -119,7 +119,7 @@
                                      data-discount="{{ $model->formattedDiscount() }}"
                                      data-sale="{{ $model->formattedSalePrice() }}"
                                      @class([
-                                         'absolute left-1/2 top-1/2 h-full w-full max-h-[112%] max-w-[112%] -translate-x-1/2 -translate-y-1/2 object-contain object-center drop-shadow-[0_28px_32px_rgba(0,0,0,0.45)] transition-opacity duration-700',
+                                         'absolute left-1/2 top-1/2 max-h-[250px] max-w-[96%] -translate-x-1/2 -translate-y-1/2 object-contain object-center drop-shadow-[0_28px_32px_rgba(0,0,0,0.45)] transition-opacity duration-700 min-[961px]:max-h-[360px] min-[961px]:max-w-full',
                                          'z-[1] opacity-100' => $index === 0,
                                          'z-0 opacity-0' => $index !== 0,
                                      ])
@@ -127,7 +127,7 @@
                             @endforeach
                         </div>
 
-                        <div class="relative z-[3] px-6 pb-6 pt-2 min-[961px]:px-7 min-[961px]:pb-7">
+                        <div class="relative z-[10] shrink-0 bg-gradient-to-t from-[#050d1f] via-[#061029] to-[#061029]/75 px-6 pb-6 pt-3 min-[961px]:px-7 min-[961px]:pb-7 min-[961px]:pt-4">
                             <span class="text-[11px] font-bold uppercase tracking-[0.16em] text-litus-sky">Limited time campaign</span>
 
                             <div class="mt-2 flex flex-wrap items-end justify-between gap-3">
@@ -377,7 +377,7 @@
                                 radial-gradient(520px 340px at 70% 18%, rgba(90,184,255,.28), transparent 62%),
                                 linear-gradient(180deg, rgba(6,16,41,.15) 0%, rgba(6,16,41,.55) 48%, rgba(6,16,41,.92) 100%);"></div>
 
-                        <div class="absolute inset-x-0 top-6 bottom-[7.5rem] z-[2] overflow-hidden max-[940px]:bottom-[7rem] min-[941px]:bottom-[8rem]">
+                        <div class="relative z-[2] flex min-h-[240px] flex-1 items-center justify-center overflow-hidden px-1 pt-6 max-[940px]:min-h-[220px] min-[941px]:min-h-[320px] min-[941px]:px-2">
                             @foreach ($promotions as $index => $model)
                                 <img src="{{ $model->listImageUrl() }}"
                                      alt="{{ $model->name }}"
@@ -387,7 +387,7 @@
                                      data-discount="{{ $model->formattedDiscount() }}"
                                      data-sale="{{ $model->formattedSalePrice() }}"
                                      @class([
-                                         'absolute left-1/2 top-1/2 h-full w-full max-h-[115%] max-w-[115%] -translate-x-1/2 -translate-y-1/2 object-contain object-center drop-shadow-[0_28px_30px_rgba(0,0,0,0.45)] transition-opacity duration-700',
+                                         'absolute left-1/2 top-1/2 max-h-[280px] max-w-[96%] -translate-x-1/2 -translate-y-1/2 object-contain object-center drop-shadow-[0_28px_30px_rgba(0,0,0,0.45)] transition-opacity duration-700 max-[940px]:max-h-[240px] min-[941px]:max-h-[420px] min-[941px]:max-w-full',
                                          'z-[1] opacity-100' => $index === 0,
                                          'z-0 opacity-0' => $index !== 0,
                                      ])
@@ -395,7 +395,7 @@
                             @endforeach
                         </div>
 
-                        <div class="relative z-[3] px-[clamp(22px,3vw,36px)] pb-[clamp(22px,3vw,34px)] pt-2">
+                        <div class="relative z-[10] shrink-0 bg-gradient-to-t from-[#050d1f] via-[#061029] to-[#061029]/75 px-[clamp(22px,3vw,36px)] pb-[clamp(22px,3vw,34px)] pt-3">
                             <div class="mb-3 flex items-end justify-between gap-3">
                                 <div>
                                     <span class="text-[11px] font-bold uppercase tracking-[0.16em] text-litus-sky">Limited time campaign</span>
