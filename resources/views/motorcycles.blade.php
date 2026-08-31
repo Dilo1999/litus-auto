@@ -117,38 +117,39 @@
         </div>
     </section>
 
-    {{-- FILTER BAR --}}
-    <section class="sticky top-[72px] z-[100] border-b border-litus-line bg-white/[0.97] py-3 backdrop-blur-[12px] sm:py-[15px]"
-             id="inventory">
-        <div class="litus-container flex flex-wrap items-center gap-3 sm:gap-3.5">
-            <div class="flex w-full gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:overflow-visible sm:pb-0"
+    {{-- INVENTORY (filter sticks only while browsing models below) --}}
+    <div>
+        <section class="sticky top-[72px] z-[100] border-b border-litus-line bg-white/[0.97] py-2 backdrop-blur-[12px] sm:py-2.5"
+                 id="inventory">
+        <div class="litus-container flex flex-wrap items-center gap-2 sm:gap-2.5">
+            <div class="flex w-full gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:overflow-visible"
                  data-motorcycle-chips
                  role="group"
                  aria-label="Filter by category">
                 <button type="button"
                         data-motorcycle-category="all"
                         aria-pressed="true"
-                        class="inline-flex shrink-0 items-center gap-2 rounded-full border-[1.5px] border-litus-ink bg-litus-ink px-3.5 py-2 text-[13px] font-semibold text-white transition sm:px-4 sm:text-[13.5px]">
+                        class="inline-flex shrink-0 items-center gap-1.5 rounded-full border-[1.5px] border-litus-ink bg-litus-ink px-3 py-1.5 text-[12.5px] font-semibold text-white transition sm:px-3.5 sm:text-[13px]">
                     All Models
-                    <span class="rounded-full bg-white/20 px-1.5 py-px text-[11px] font-bold" data-motorcycle-chip-count>{{ $modelCount }}</span>
+                    <span class="rounded-full bg-white/20 px-1.5 py-px text-[10.5px] font-bold" data-motorcycle-chip-count>{{ $modelCount }}</span>
                 </button>
                 @foreach ($categories as $category)
                     <button type="button"
                             data-motorcycle-category="{{ $category }}"
                             aria-pressed="false"
-                            class="inline-flex shrink-0 items-center gap-2 rounded-full border-[1.5px] border-litus-line-2 bg-white px-3.5 py-2 text-[13px] font-semibold text-litus-text-2 transition hover:border-litus-primary-light hover:text-litus-primary sm:px-4 sm:text-[13.5px]">
+                            class="inline-flex shrink-0 items-center gap-1.5 rounded-full border-[1.5px] border-litus-line-2 bg-white px-3 py-1.5 text-[12.5px] font-semibold text-litus-text-2 transition hover:border-litus-primary-light hover:text-litus-primary sm:px-3.5 sm:text-[13px]">
                         {{ $category }}
-                        <span class="rounded-full bg-litus-paper-3 px-1.5 py-px text-[11px] font-bold text-litus-text-2">
+                        <span class="rounded-full bg-litus-paper-3 px-1.5 py-px text-[10.5px] font-bold text-litus-text-2">
                             {{ $motorcycles->where('category', $category)->count() }}
                         </span>
                     </button>
                 @endforeach
             </div>
 
-            <div class="grid w-full grid-cols-2 gap-2 sm:ml-auto sm:flex sm:w-auto sm:flex-wrap sm:gap-2.5">
+            <div class="grid w-full grid-cols-2 gap-1.5 sm:ml-auto sm:flex sm:w-auto sm:flex-wrap sm:gap-2">
                 <div class="litus-select-wrap min-w-0">
                     <select data-motorcycle-brand
-                            class="litus-select w-full cursor-pointer rounded-[9px] border-[1.5px] border-litus-line-2 bg-white py-2.5 pl-3 pr-10 text-[13px] font-medium text-litus-text outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)] sm:pl-3.5 sm:text-[13.5px]">
+                            class="litus-select w-full cursor-pointer rounded-[9px] border-[1.5px] border-litus-line-2 bg-white py-2 pl-3 pr-9 text-[12.5px] font-medium text-litus-text outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)] sm:pl-3.5 sm:pr-10 sm:text-[13px]">
                         <option value="all">All Brands</option>
                         @foreach ($brands as $brand)
                             <option value="{{ $brand }}">{{ $brand }}</option>
@@ -159,7 +160,7 @@
 
                 <div class="litus-select-wrap min-w-0">
                     <select data-motorcycle-engine
-                            class="litus-select w-full cursor-pointer rounded-[9px] border-[1.5px] border-litus-line-2 bg-white py-2.5 pl-3 pr-10 text-[13px] font-medium text-litus-text outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)] sm:pl-3.5 sm:text-[13.5px]">
+                            class="litus-select w-full cursor-pointer rounded-[9px] border-[1.5px] border-litus-line-2 bg-white py-2 pl-3 pr-9 text-[12.5px] font-medium text-litus-text outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)] sm:pl-3.5 sm:pr-10 sm:text-[13px]">
                         <option value="all">Any Engine Size</option>
                         <option value="110">Up to 110cc</option>
                         <option value="125">Up to 125cc</option>
@@ -170,7 +171,7 @@
 
                 <div class="litus-select-wrap col-span-2 min-w-0 sm:col-span-1">
                     <select data-motorcycle-sort
-                            class="litus-select w-full cursor-pointer rounded-[9px] border-[1.5px] border-litus-line-2 bg-white py-2.5 pl-3 pr-10 text-[13px] font-medium text-litus-text outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)] sm:pl-3.5 sm:text-[13.5px]">
+                            class="litus-select w-full cursor-pointer rounded-[9px] border-[1.5px] border-litus-line-2 bg-white py-2 pl-3 pr-9 text-[12.5px] font-medium text-litus-text outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)] sm:pl-3.5 sm:pr-10 sm:text-[13px]">
                         <option value="popular">Sort: Popularity</option>
                         <option value="price-asc">Price: Low to High</option>
                         <option value="price-desc">Price: High to Low</option>
@@ -186,7 +187,7 @@
     {{-- PRODUCT GRID --}}
     <section class="bg-white pb-[clamp(48px,7.5vw,116px)] pt-0">
         <div class="litus-container">
-            <div class="flex flex-wrap items-center justify-between gap-3 pb-1 pt-4 sm:pt-[26px]">
+            <div class="flex flex-wrap items-center justify-between gap-3 pb-1 pt-3 sm:pt-4">
                 <b class="text-[14px] text-litus-text sm:text-[15px]">
                     Showing <span data-motorcycle-count>{{ $modelCount }}</span> model<span data-motorcycle-count-suffix>{{ $modelCount === 1 ? '' : 's' }}</span>
                 </b>
@@ -204,7 +205,7 @@
                 <p class="mt-1 text-sm">Try a different brand, category, or engine size.</p>
             </div>
 
-            <div class="grid grid-cols-1 gap-4 pt-5 min-[400px]:grid-cols-2 sm:gap-[22px] xl:grid-cols-4"
+            <div class="grid grid-cols-1 gap-4 pt-3 min-[400px]:grid-cols-2 sm:gap-[22px] xl:grid-cols-4"
                  data-motorcycle-grid>
                 @forelse ($motorcycles as $motorcycle)
                     <x-card.motorcycle-card :motorcycle="$motorcycle" />
@@ -217,6 +218,7 @@
             </div>
         </div>
     </section>
+    </div>
 
     {{-- BUYING GUIDE --}}
     <section class="litus-sec bg-litus-paper-2">
