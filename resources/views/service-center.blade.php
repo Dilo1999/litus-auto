@@ -88,6 +88,29 @@
         'Engine overhaul',
         'Not sure - please advise',
     ];
+
+    $pickDropSteps = [
+        [
+            'icon' => 'calendar',
+            'title' => 'Book Your Request',
+            'text' => 'Schedule a pickup time that suits you.',
+        ],
+        [
+            'icon' => 'bike',
+            'title' => 'We Pick Your Bike',
+            'text' => 'Our team collects your motorcycle from your location.',
+        ],
+        [
+            'icon' => 'wrench',
+            'title' => 'We Service Your Bike',
+            'text' => 'Your bike is serviced by our expert technicians with quality care.',
+        ],
+        [
+            'icon' => 'map-pin',
+            'title' => 'We Drop It Back',
+            'text' => 'We deliver your bike back to you, safe and on time.',
+        ],
+    ];
 @endphp
 
 <div class="font-sans" data-service-center-page>
@@ -231,6 +254,141 @@
                         @endforeach
                     </div>
                 @endif
+            </div>
+        </div>
+    </section>
+
+    {{-- PICK & DROP — HOW IT WORKS --}}
+    <section class="litus-sec bg-litus-paper-2 max-md:!py-12">
+        <div class="litus-container">
+            {{-- Intro --}}
+            <header class="mx-auto max-w-[720px] text-center">
+                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">Pick &amp; Drop Service</span>
+                <h2 class="font-display text-[clamp(26px,5.8vw,44px)] font-bold leading-[1.1] tracking-[-0.028em] text-litus-text">
+                    We Pick. We Service.<br> We Drop.
+                </h2>
+                <p class="mx-auto mt-4 max-w-[640px] text-[15px] leading-[1.68] text-litus-text-2 sm:mt-5 sm:text-[clamp(16.5px,1.5vw,18.5px)]">
+                    Busy schedule? No time to visit the garage? Our Pick &amp; Drop Service makes motorcycle servicing easy and convenient. We pick up your bike, service it with care, and drop it back at your doorstep.
+                </p>
+            </header>
+
+            <div class="mx-auto my-8 h-px w-full max-w-3xl bg-litus-line sm:my-10"></div>
+
+            <div class="mb-6 text-center min-[900px]:mb-7 min-[900px]:text-left">
+                <span class="mb-2.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">How It Works</span>
+                <h3 class="font-display text-[clamp(20px,4.2vw,30px)] font-bold tracking-[-0.028em] text-litus-text">Simple Steps, Maximum Convenience</h3>
+            </div>
+
+            {{-- Steps + sidebar --}}
+            <div class="grid grid-cols-1 items-stretch gap-8 min-[900px]:grid-cols-[minmax(0,1fr)_300px] min-[900px]:gap-7">
+                <div class="min-w-0">
+                    {{-- 2×2 step grid (tablet & desktop) --}}
+                    <div class="hidden gap-4 sm:grid sm:grid-cols-2 sm:gap-5">
+                        @foreach ($pickDropSteps as $index => $step)
+                            <article class="relative flex min-h-[210px] flex-col rounded-[18px] border border-litus-line bg-white px-5 pb-6 pt-12 shadow-[0_2px_8px_rgba(9,17,32,0.05)]">
+                                <span class="absolute left-4 top-4 grid h-[30px] w-[30px] place-items-center rounded-full bg-litus-primary text-[13px] font-bold text-white">
+                                    {{ $index + 1 }}
+                                </span>
+                                <div class="mx-auto mb-4 grid h-[72px] w-[72px] shrink-0 place-items-center rounded-full bg-[rgba(18,87,214,0.09)] text-litus-primary">
+                                    <x-litus-icon :name="$step['icon']" class="h-7 w-7" />
+                                </div>
+                                <h4 class="mb-2 text-center text-[15px] font-bold leading-snug text-litus-text">{{ $step['title'] }}</h4>
+                                <p class="mt-auto text-center text-[13.5px] leading-relaxed text-litus-text-2">{{ $step['text'] }}</p>
+                            </article>
+                        @endforeach
+                    </div>
+
+                    {{-- Mobile: slider --}}
+                    <div data-home-card-slider-wrap class="sm:hidden">
+                        <div
+                            data-home-card-slider
+                            data-interval="5000"
+                            class="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                            @foreach ($pickDropSteps as $index => $step)
+                                <div data-home-card-slide class="w-[min(88%,300px)] shrink-0 snap-center">
+                                    <article class="relative flex min-h-[220px] flex-col rounded-[18px] border border-litus-line bg-white px-5 pb-6 pt-12 shadow-[0_2px_8px_rgba(9,17,32,0.05)]">
+                                        <span class="absolute left-4 top-4 grid h-[30px] w-[30px] place-items-center rounded-full bg-litus-primary text-[13px] font-bold text-white">
+                                            {{ $index + 1 }}
+                                        </span>
+                                        <div class="mx-auto mb-4 grid h-[72px] w-[72px] shrink-0 place-items-center rounded-full bg-[rgba(18,87,214,0.09)] text-litus-primary">
+                                            <x-litus-icon :name="$step['icon']" class="h-7 w-7" />
+                                        </div>
+                                        <h4 class="mb-2 text-center text-[15px] font-bold text-litus-text">{{ $step['title'] }}</h4>
+                                        <p class="mt-auto text-center text-[13.5px] leading-relaxed text-litus-text-2">{{ $step['text'] }}</p>
+                                    </article>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        @if (count($pickDropSteps) > 1)
+                            <div class="mt-4 flex items-center justify-center gap-1.5" data-home-card-dots aria-hidden="true">
+                                @foreach ($pickDropSteps as $index => $step)
+                                    <span @class([
+                                        'h-1.5 rounded-full transition-all duration-300',
+                                        'w-5 bg-litus-primary' => $index === 0,
+                                        'w-1.5 bg-litus-line-2' => $index !== 0,
+                                    ])
+                                          data-home-card-dot></span>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
+                <aside class="flex flex-col rounded-[18px] border border-litus-line bg-white p-5 shadow-[0_2px_12px_rgba(9,17,32,0.06)] sm:p-6 min-[900px]:h-full min-[900px]:self-stretch">
+                    <ul class="grid flex-1 list-none gap-0 divide-y divide-litus-paper-3">
+                        <li class="flex gap-3.5 py-4 first:pt-0">
+                            <div class="grid h-10 w-10 shrink-0 place-items-center rounded-[11px] bg-litus-paper-3 text-litus-primary">
+                                <x-litus-icon name="map-pin" class="h-4 w-4" />
+                            </div>
+                            <div class="min-w-0 pt-0.5">
+                                <b class="mb-1 block text-[14px] font-semibold text-litus-text">Service Areas</b>
+                                <span class="text-[13px] leading-relaxed text-litus-text-2">Available in Malé, Hulhumalé and nearby areas.</span>
+                            </div>
+                        </li>
+                        <li class="flex gap-3.5 py-4">
+                            <div class="grid h-10 w-10 shrink-0 place-items-center rounded-[11px] bg-litus-paper-3 text-litus-primary">
+                                <x-litus-icon name="clock" class="h-4 w-4" />
+                            </div>
+                            <div class="min-w-0 pt-0.5">
+                                <b class="mb-1 block text-[14px] font-semibold text-litus-text">Pickup Time</b>
+                                <span class="text-[13px] leading-relaxed text-litus-text-2">Monday – Saturday, 8:00 AM – 6:00 PM.</span>
+                            </div>
+                        </li>
+                        <li class="flex gap-3.5 py-4">
+                            <div class="grid h-10 w-10 shrink-0 place-items-center rounded-[11px] bg-litus-paper-3 text-litus-primary">
+                                <x-litus-icon name="credit-card" class="h-4 w-4" />
+                            </div>
+                            <div class="min-w-0 pt-0.5">
+                                <b class="mb-1 block text-[14px] font-semibold text-litus-text">Service Fee</b>
+                                <span class="text-[13px] leading-relaxed text-litus-text-2">Pick &amp; drop available from MVR 200 (conditions apply).</span>
+                            </div>
+                        </li>
+                        <li class="flex gap-3.5 py-4 last:pb-0">
+                            <div class="grid h-10 w-10 shrink-0 place-items-center rounded-[11px] bg-litus-paper-3 text-litus-primary">
+                                <x-litus-icon name="phone" class="h-4 w-4" />
+                            </div>
+                            <div class="min-w-0 pt-0.5">
+                                <b class="mb-1 block text-[14px] font-semibold text-litus-text">Book or Inquire</b>
+                                <div class="flex flex-wrap items-center gap-2.5">
+                                    <a href="tel:+9607792278" class="text-[13.5px] font-semibold text-litus-primary transition hover:text-litus-primary-hover">+960 779 2278</a>
+                                    <a href="https://wa.me/9607792278?text={{ urlencode('Hi LITUS, I would like to book a pick & drop service for my motorcycle.') }}"
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#1FA855] text-white transition hover:bg-[#178443]"
+                                       aria-label="WhatsApp">
+                                        <x-litus-icon name="message-circle" class="h-4 w-4" />
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a href="#book"
+                       class="mt-6 flex w-full items-center justify-center rounded-lg bg-litus-primary px-6 py-4 text-[13.5px] font-semibold uppercase tracking-[0.07em] text-white shadow-[0_8px_22px_rgba(18,87,214,0.28)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover min-[900px]:mt-auto">
+                        Book Pickup Now
+                    </a>
+                </aside>
             </div>
         </div>
     </section>
