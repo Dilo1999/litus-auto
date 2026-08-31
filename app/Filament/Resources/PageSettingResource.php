@@ -7,7 +7,6 @@ use App\Models\PageSetting;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Placeholder;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -49,17 +48,6 @@ class PageSettingResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Page')
-                    ->schema([
-                        Placeholder::make('page_label')
-                            ->label('Page')
-                            ->content(fn (?PageSetting $record) => $record?->page_label ?? '—'),
-                        Placeholder::make('route_name')
-                            ->label('Route')
-                            ->content(fn (?PageSetting $record) => $record?->route_name ?? '—'),
-                    ])
-                    ->columns(2),
-
                 Forms\Components\Section::make('Hero images')
                     ->description('Background images for the page hero section. Upload separate images for desktop (961px and wider) and mobile.')
                     ->schema([
