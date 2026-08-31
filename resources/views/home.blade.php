@@ -369,7 +369,7 @@
                      data-home-gallery-track>
                     @forelse ($galleryImages as $image)
                         <a href="{{ route('gallery') }}"
-                           class="group relative aspect-[4/5] w-[46%] shrink-0 snap-start overflow-hidden rounded-[18px] bg-litus-ink shadow-[0_14px_36px_rgba(7,21,47,0.14)] transition-transform duration-300 hover:-translate-y-1 min-[1101px]:w-[calc((100%-3rem)/4)]">
+                           class="group relative aspect-square w-[46%] shrink-0 snap-start overflow-hidden rounded-[18px] bg-litus-ink shadow-[0_14px_36px_rgba(7,21,47,0.14)] transition-transform duration-300 hover:-translate-y-1 min-[1101px]:w-[calc((100%-3rem)/4)]">
                             <img src="{{ $image['src'] }}"
                                  alt="{{ $image['alt'] }}"
                                  class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
