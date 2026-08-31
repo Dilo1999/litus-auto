@@ -4,6 +4,8 @@
     $hasPromo = $motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0;
     $price = $hasPromo ? $motorcycle->promotionalSalePrice() : (float) $motorcycle->original_price;
     $monthly = $price > 0 ? (int) (round(($price / 60) / 10) * 10) : null;
+    $validUntil = $motorcycle->activePromotion()?->formattedValidUntil();
+    $offerNote = $motorcycle->offerNote();
 @endphp
 
 <article class="group relative flex flex-col overflow-visible rounded-[18px] border border-litus-line bg-white transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
@@ -30,6 +32,11 @@
 
     <div class="flex flex-1 flex-col px-4 pb-0 pt-4 sm:px-5 sm:pt-5">
         <span class="mb-1.5 block text-[10.5px] font-extrabold uppercase tracking-[0.16em] text-litus-text-3">Promotion</span>
+
+        @if ($hasPromo && filled($offerNote))
+            <p class="mb-2 text-[13px] leading-snug text-litus-text-2 sm:mb-2.5 sm:text-[13.5px]">{{ $offerNote }}</p>
+        @endif
+
         <h3 class="mb-1.5 text-[17px] font-bold leading-snug text-litus-text sm:text-[18.5px]">
             <a href="{{ route('motorcycle.show', $motorcycle->slug) }}">{{ $motorcycle->name }}</a>
         </h3>
@@ -38,25 +45,22 @@
         @endif
 
         @if ($hasPromo)
-            <div class="flex flex-wrap items-center gap-x-2 gap-y-1.5">
-                <span class="shrink-0 whitespace-nowrap text-[13px] text-litus-text-3 line-through sm:text-sm">{{ $motorcycle->formattedOriginalPrice() }}</span>
-                <div class="inline-flex items-center gap-1 whitespace-nowrap rounded-[7px] bg-[#FFF1E6] px-2 py-1 text-[11px] font-bold text-[#C2410C] sm:text-[11.5px]">
-                    You save {{ $motorcycle->formattedDiscount() }}
-                </div>
-            </div>
-            <div class="mt-[11px] font-display text-[22px] font-bold tracking-[-0.03em] text-litus-text sm:text-[25px]">
-                {{ $motorcycle->formattedSalePrice() }}
-            </div>
-        @else
-            <div class="flex flex-wrap items-baseline gap-[11px]">
-                <span class="font-display text-[22px] font-bold tracking-[-0.03em] text-litus-text sm:text-[25px]">{{ $motorcycle->formattedOriginalPrice() }}</span>
+            <div class="inline-flex items-center gap-2 whitespace-nowrap rounded-xl bg-[#FFF1E6] px-4 py-2 text-[15px] font-extrabold text-[#C2410C] sm:px-5 sm:py-2.5 sm:text-base">
+                You save {{ $motorcycle->formattedDiscount() }}
             </div>
         @endif
 
         @if ($monthly)
-            <div class="mt-[11px] flex items-start gap-2 rounded-lg bg-[#E6F6F3] px-2.5 py-2 text-xs font-semibold leading-snug text-litus-teal sm:items-center sm:px-3 sm:py-2.5 sm:text-[13px]">
+            <div class="mt-[11px] flex items-start gap-2 rounded-lg px-2.5 py-2 text-xs font-semibold leading-snug text-litus-teal sm:items-center sm:px-3 sm:py-2.5 sm:text-[13px]">
                 <span class="shrink-0" aria-hidden="true">◈</span>
                 From MVR {{ number_format($monthly) }}/month on an Ijara plan
+            </div>
+        @endif
+
+        @if ($hasPromo && $validUntil)
+            <div class="mt-3 flex items-center gap-2 text-[13px] text-litus-text-2 sm:mt-3.5 sm:text-sm">
+                <x-litus-icon name="calendar" class="h-4 w-4 shrink-0 text-litus-text-3" />
+                <span>Valid until <strong class="font-bold text-litus-text">{{ $validUntil }}</strong></span>
             </div>
         @endif
     </div>

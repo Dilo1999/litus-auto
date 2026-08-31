@@ -117,4 +117,9 @@ class Promotion extends Model
     {
         return 'MVR '.number_format($this->minSalePrice(), 0);
     }
+
+    public function formattedValidUntil(): ?string
+    {
+        return $this->ends_at?->format('j M Y');
+    }
 }

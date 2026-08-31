@@ -146,9 +146,15 @@ class Motorcycle extends Model
             return null;
         }
 
-        $note = $promotion->pivot->offer_note ?? null;
+        $pivotNote = $promotion->pivot->offer_note ?? null;
 
-        return filled($note) ? (string) $note : null;
+        if (filled($pivotNote)) {
+            return (string) $pivotNote;
+        }
+
+        $promotionNote = $promotion->offer_note ?? null;
+
+        return filled($promotionNote) ? (string) $promotionNote : null;
     }
 
     public function offerLabel(): string
