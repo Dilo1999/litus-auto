@@ -226,7 +226,7 @@ function initGalleryPage() {
                     data-gallery-open
                     data-img="${item.img}"
                     data-label="${item.label}"
-                    class="group relative aspect-[4/3] overflow-hidden rounded-xl text-left">
+                    class="group relative aspect-square overflow-hidden rounded-xl text-left">
                 <img src="${item.img}" alt="${item.label}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
                 <div class="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-300 group-hover:bg-black/30 max-md:bg-black/20">
                     <div class="flex h-9 w-9 items-center justify-center rounded-full bg-white/30 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 max-md:opacity-100">
