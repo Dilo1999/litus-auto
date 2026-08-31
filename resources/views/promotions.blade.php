@@ -110,7 +110,7 @@
                             LITUS<span class="mt-[-2px] block text-[7px] font-medium tracking-[0.36em] text-white/60">AUTOMOBILES</span>
                         </div>
 
-                        <div class="relative z-[2] flex min-h-[280px] flex-1 items-center justify-center px-3 pt-16 max-[960px]:min-h-[240px]">
+                        <div class="relative z-[2] mx-3 mt-16 min-h-[180px] flex-1 overflow-hidden max-[960px]:max-h-[220px] min-[961px]:max-h-[300px]">
                             @foreach ($promotions as $index => $model)
                                 <img src="{{ $model->listImageUrl() }}"
                                      alt="{{ $model->name }}"
@@ -119,7 +119,7 @@
                                      data-discount="{{ $model->formattedDiscount() }}"
                                      data-sale="{{ $model->formattedSalePrice() }}"
                                      @class([
-                                         'absolute mx-auto max-h-[400px] w-[108%] object-contain drop-shadow-[0_28px_32px_rgba(0,0,0,0.45)] transition-opacity duration-700 max-[960px]:max-h-[300px]',
+                                         'absolute left-1/2 top-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2 object-contain object-center drop-shadow-[0_28px_32px_rgba(0,0,0,0.45)] transition-opacity duration-700',
                                          'z-[1] opacity-100' => $index === 0,
                                          'z-0 opacity-0' => $index !== 0,
                                      ])
@@ -377,7 +377,7 @@
                                 radial-gradient(520px 340px at 70% 18%, rgba(90,184,255,.28), transparent 62%),
                                 linear-gradient(180deg, rgba(6,16,41,.15) 0%, rgba(6,16,41,.55) 48%, rgba(6,16,41,.92) 100%);"></div>
 
-                        <div class="relative z-[2] flex min-h-[320px] flex-1 items-center justify-center px-2 pt-6 max-[940px]:min-h-[260px]">
+                        <div class="relative z-[2] mx-2 mt-6 min-h-[200px] flex-1 overflow-hidden max-[940px]:max-h-[280px] min-[941px]:max-h-[400px]">
                             @foreach ($promotions as $index => $model)
                                 <img src="{{ $model->listImageUrl() }}"
                                      alt="{{ $model->name }}"
@@ -387,7 +387,7 @@
                                      data-discount="{{ $model->formattedDiscount() }}"
                                      data-sale="{{ $model->formattedSalePrice() }}"
                                      @class([
-                                         'absolute mx-auto max-h-[560px] w-[118%] object-contain drop-shadow-[0_28px_30px_rgba(0,0,0,0.45)] transition-opacity duration-700 max-[940px]:max-h-[380px]',
+                                         'absolute left-1/2 top-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2 object-contain object-center drop-shadow-[0_28px_30px_rgba(0,0,0,0.45)] transition-opacity duration-700',
                                          'z-[1] opacity-100' => $index === 0,
                                          'z-0 opacity-0' => $index !== 0,
                                      ])
