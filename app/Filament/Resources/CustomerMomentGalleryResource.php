@@ -31,6 +31,16 @@ class CustomerMomentGalleryResource extends Resource
         return 'Customer Moments';
     }
 
+    public static function canViewAny(): bool
+    {
+        return (bool) config('gallery.customer_moments_visible', false);
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return static::canViewAny();
+    }
+
     public static function getPages(): array
     {
         return [

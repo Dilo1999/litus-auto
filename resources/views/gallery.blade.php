@@ -247,7 +247,11 @@
     </section>
 
     {{-- CUSTOMER MOMENTS --}}
-    <section id="gallery-customer-moments" class="scroll-mt-20 bg-[#f8f9fb] py-10 max-md:py-8 sm:py-16">
+    <section id="gallery-customer-moments"
+             @class([
+                 'scroll-mt-20 bg-[#f8f9fb] py-10 max-md:py-8 sm:py-16',
+                 'hidden' => ! ($showCustomerMoments ?? false),
+             ])>
         <div class="litus-container">
             <div class="mb-6 max-w-[640px] max-md:mb-5 sm:mb-8">
                 <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-litus-red md:text-xs md:tracking-widest">Customer Moments</span>
@@ -266,7 +270,7 @@
                                 data-gallery-open
                                 data-img="{{ $image['img'] }}"
                                 data-label="{{ $image['label'] ?: 'Customer Moment' }}"
-                                class="group relative aspect-square overflow-hidden rounded-xl bg-[#0b1528] text-left shadow-[0_10px_28px_rgba(7,21,47,0.12)] max-md:rounded-lg sm:rounded-2xl">
+                                class="group relative aspect-[4/5] overflow-hidden rounded-xl bg-[#0b1528] text-left shadow-[0_10px_28px_rgba(7,21,47,0.12)] max-md:rounded-lg sm:rounded-2xl">
                             <img src="{{ $image['img'] }}"
                                  alt="{{ $image['label'] ?? 'Customer moment' }}"
                                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"

@@ -18,12 +18,14 @@ class GalleryController extends Controller
     {
         $this->applySeo('gallery');
 
+        $showCustomerMoments = (bool) config('gallery.customer_moments_visible', false);
+
         $images = GalleryImage::query()
             ->published()
-            ->whereIn('category', [
+            ->whereIn('category', array_values(array_filter([
                 GalleryImage::CATEGORY_MOTORCYCLES,
-                GalleryImage::CATEGORY_CUSTOMER_MOMENTS,
-            ])
+                $showCustomerMoments ? GalleryImage::CATEGORY_CUSTOMER_MOMENTS : null,
+            ])))
             ->ordered()
             ->get();
 
@@ -35,10 +37,12 @@ class GalleryController extends Controller
         $featuredPool = $images->where('is_featured', true)->values();
 
         // Prefer a balanced mix across categories, then shuffle and keep 5.
-        $featuredMoments = collect([
+        $featuredCategories = array_values(array_filter([
             GalleryImage::CATEGORY_MOTORCYCLES,
-            GalleryImage::CATEGORY_CUSTOMER_MOMENTS,
-        ])
+            $showCustomerMoments ? GalleryImage::CATEGORY_CUSTOMER_MOMENTS : null,
+        ]));
+
+        $featuredMoments = collect($featuredCategories)
             ->flatMap(function (string $category) use ($featuredPool) {
                 return $featuredPool->where('category', $category)->shuffle()->take(3);
             })
@@ -69,18 +73,25 @@ class GalleryController extends Controller
             ->map(fn (GalleryImage $image) => $image->toFrontendArray())
             ->all();
 
-        $catColors = [
+        $catColors = array_filter([
             'Motorcycles' => '#E31E25',
-            'Customer Moments' => '#16A34A',
-        ];
+            'Customer Moments' => $showCustomerMoments ? '#16A34A' : null,
+        ], fn ($color) => $color !== null);
 
-        $momentCategories = ['All', 'Motorcycles', 'Customer Moments', 'Videos'];
+        $momentCategories = array_values(array_filter([
+            'All',
+            'Motorcycles',
+            $showCustomerMoments ? 'Customer Moments' : null,
+            'Videos',
+        ]));
 
-        $heroFeatures = [
+        $heroFeatures = array_values(array_filter([
             ['icon' => 'bike', 'title' => 'Motorcycles', 'desc' => 'Adventure & street ride moments'],
-            ['icon' => 'users', 'title' => 'Customer Moments', 'desc' => 'Real experiences from our riders'],
+            $showCustomerMoments
+                ? ['icon' => 'users', 'title' => 'Customer Moments', 'desc' => 'Real experiences from our riders']
+                : null,
             ['icon' => 'images', 'title' => 'Full Gallery', 'desc' => 'Browse every published moment'],
-        ];
+        ]));
 
         $heroBg = asset('images/motorcycles/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
 
@@ -104,6 +115,7 @@ class GalleryController extends Controller
             'heroFeatures',
             'heroBg',
             'galleryVideos',
+            'showCustomerMoments',
         ));
     }
 
