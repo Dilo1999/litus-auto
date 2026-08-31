@@ -312,19 +312,21 @@
                 <div
                     data-home-card-slider
                     data-interval="4500"
-                    class="grid grid-cols-2 gap-3 max-md:-mx-4 max-md:flex max-md:gap-3 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:grid-cols-4 md:gap-6">
+                    class="grid grid-cols-1 gap-6 max-md:-mx-4 max-md:flex max-md:gap-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:grid-cols-3">
                     @foreach ($teamMembers as $member)
-                        <div data-home-card-slide class="max-md:w-[min(72%,240px)] max-md:shrink-0 max-md:snap-center">
-                            <article class="h-full rounded-2xl border border-litus-line bg-white px-3 py-4 text-center shadow-[0_1px_2px_rgba(9,17,32,0.04)] transition duration-200 sm:rounded-[18px] sm:px-5 sm:py-6 sm:shadow-[0_1px_2px_rgba(9,17,32,.05)] md:hover:-translate-y-1 md:hover:border-litus-line-2 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
-                                <div class="mx-auto mb-3 h-14 w-14 overflow-hidden rounded-full bg-litus-paper-3 sm:mb-3.5 sm:h-16 sm:w-16 md:h-[72px] md:w-[72px] lg:h-[84px] lg:w-[84px]">
+                        <div data-home-card-slide class="max-md:w-[min(88%,300px)] max-md:shrink-0 max-md:snap-center">
+                            <article class="h-full overflow-hidden rounded-2xl border border-litus-line bg-white text-center shadow-[0_1px_2px_rgba(9,17,32,0.04)] transition duration-200 sm:rounded-[18px] sm:shadow-[0_1px_2px_rgba(9,17,32,.05)] md:hover:-translate-y-1 md:hover:border-litus-line-2 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
+                                <div class="aspect-[4/3] overflow-hidden bg-litus-paper-3">
                                     <img src="{{ $member['img'] }}"
                                          alt="{{ $member['name'] }}"
                                          class="h-full w-full object-cover object-top"
                                          loading="lazy">
                                 </div>
-                                <b class="mb-1 block text-[13px] text-litus-text sm:text-[15px]">{{ $member['name'] }}</b>
-                                <span class="mb-1 block text-[11.5px] font-semibold leading-snug text-litus-primary sm:mb-1.5 sm:text-sm">{{ $member['role'] }}</span>
-                                <span class="block text-[10.5px] leading-snug text-litus-text-3 sm:text-[11.5px]">{{ $member['dept'] }}</span>
+                                <div class="px-4 pb-5 pt-4 sm:px-5 sm:pb-7 sm:pt-[22px]">
+                                    <h4 class="font-display text-[18px] font-semibold tracking-[-0.02em] text-litus-text sm:text-[clamp(20px,2.2vw,24px)]">{{ $member['name'] }}</h4>
+                                    <p class="mt-1.5 text-[13px] font-semibold text-litus-primary sm:text-sm">{{ $member['role'] }}</p>
+                                    <p class="mt-1 text-[12px] leading-snug text-litus-text-2 sm:text-[13px]">{{ $member['dept'] }}</p>
+                                </div>
                             </article>
                         </div>
                     @endforeach
