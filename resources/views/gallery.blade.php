@@ -266,7 +266,7 @@
                                 data-gallery-open
                                 data-img="{{ $image['img'] }}"
                                 data-label="{{ $image['label'] ?: 'Customer Moment' }}"
-                                class="group relative aspect-[4/5] overflow-hidden rounded-xl bg-[#0b1528] text-left shadow-[0_10px_28px_rgba(7,21,47,0.12)] max-md:rounded-lg sm:rounded-2xl">
+                                class="group relative aspect-square overflow-hidden rounded-xl bg-[#0b1528] text-left shadow-[0_10px_28px_rgba(7,21,47,0.12)] max-md:rounded-lg sm:rounded-2xl">
                             <img src="{{ $image['img'] }}"
                                  alt="{{ $image['label'] ?? 'Customer moment' }}"
                                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
