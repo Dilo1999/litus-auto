@@ -9,12 +9,12 @@ class PageSettingPolicy
 {
     public function viewAny(User $user): bool
     {
-        return $user->isSuperAdmin();
+        return $user->canAccessFilament();
     }
 
     public function view(User $user, PageSetting $pageSetting): bool
     {
-        return $user->isSuperAdmin();
+        return $user->canAccessFilament();
     }
 
     public function create(User $user): bool
@@ -24,7 +24,7 @@ class PageSettingPolicy
 
     public function update(User $user, PageSetting $pageSetting): bool
     {
-        return $user->isSuperAdmin();
+        return $user->canAccessFilament();
     }
 
     public function delete(User $user, PageSetting $pageSetting): bool

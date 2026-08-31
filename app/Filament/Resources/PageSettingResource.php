@@ -36,7 +36,7 @@ class PageSettingResource extends Resource
     {
         $user = Auth::user();
 
-        return $user instanceof User && $user->isSuperAdmin();
+        return $user instanceof User && $user->canAccessFilament();
     }
 
     public static function shouldRegisterNavigation(): bool
