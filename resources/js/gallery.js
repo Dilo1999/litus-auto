@@ -270,8 +270,9 @@ function initGalleryPage() {
                     data-gallery-open
                     data-img="${moment.img}"
                     data-label="${lightboxLabel}"
-                    class="group relative h-[240px] w-full overflow-hidden rounded-[10px] border border-black/8 bg-[#dfe3ea] text-left shadow-[0_10px_26px_rgba(0,0,0,0.12)] md:h-[280px] ${isLarge ? 'lg:row-span-2 lg:h-auto' : 'lg:h-full'}">
-                <img src="${moment.img}" alt="${lightboxLabel}" class="h-full w-full object-cover transition-transform duration-[450ms] group-hover:scale-[1.07]">
+                    class="group relative aspect-square w-full overflow-hidden rounded-[10px] border border-black/8 bg-[#dfe3ea] text-left shadow-[0_10px_26px_rgba(0,0,0,0.12)]">
+                <img src="${moment.img}" alt="${lightboxLabel}" class="absolute inset-0 h-full w-full object-cover transition-transform duration-[450ms] group-hover:scale-[1.07]">
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#07152f]/75 via-[#07152f]/10 to-transparent"></div>
                 <div class="absolute bottom-3.5 left-3.5 right-3.5 z-[3] flex flex-col items-start justify-between gap-2 text-white md:bottom-[18px] md:left-5 md:right-5 md:flex-row md:items-end md:gap-3 ${label ? '' : 'md:justify-end'}">
                     ${titleHtml}
                     <span class="inline-flex items-center gap-2 whitespace-nowrap text-[13px] font-extrabold opacity-95 md:gap-2.5 md:text-sm">
@@ -310,7 +311,7 @@ function initGalleryPage() {
         momentsGrid.innerHTML = ordered.map((moment, index) => {
             const isLarge = index === 0 && ordered.length > 1;
             return `
-                <div class="max-md:w-[85%] max-md:shrink-0 max-md:snap-center md:contents" data-gallery-moment-slide>
+                <div class="max-md:aspect-square max-md:w-[85%] max-md:shrink-0 max-md:snap-center md:contents" data-gallery-moment-slide>
                     ${renderMomentCard(moment, isLarge)}
                 </div>
             `;

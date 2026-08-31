@@ -125,7 +125,7 @@
             </div>
 
             <div class="relative">
-                <div class="grid grid-cols-1 gap-4 max-md:flex max-md:snap-x max-md:snap-mandatory max-md:gap-3.5 max-md:overflow-x-auto max-md:scroll-smooth max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 lg:grid-cols-[1.1fr_0.75fr_1fr] lg:grid-rows-[260px_190px]"
+                <div class="grid grid-cols-1 gap-4 max-md:flex max-md:snap-x max-md:snap-mandatory max-md:gap-3.5 max-md:overflow-x-auto max-md:scroll-smooth max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
                      data-gallery-moments-grid
                      data-gallery-moments-slider
                      data-interval="4000"></div>
