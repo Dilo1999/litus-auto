@@ -4,7 +4,7 @@
 
 @section('content')
 @php
-    $heroBg = asset('images/contact us/' . rawurlencode('ChatGPT Image Jul 4, 2026, 11_35_33 AM.png'));
+    ['desktop' => $heroBg, 'mobile' => $heroBgMobile] = \App\Models\PageSetting::heroForRoute('contact');
 
     $heroFeatures = [
         ['icon' => 'clock', 'title' => 'Fast Response', 'desc' => 'Within one working day'],
@@ -135,7 +135,7 @@
 
     {{-- HERO — mobile --}}
     <section class="relative overflow-hidden bg-litus-ink text-white min-[961px]:hidden">
-        <img src="{{ $heroBg }}"
+        <img src="{{ $heroBgMobile }}"
              alt=""
              class="pointer-events-none absolute inset-0 h-full w-full object-cover object-[center_30%] opacity-[0.35]"
              aria-hidden="true">

@@ -157,15 +157,20 @@ class PageSeo extends Model
 
     public function getOgImageUrlAttribute(): ?string
     {
-        if (! filled($this->og_image)) {
+        return static::resolveImageUrl($this->og_image);
+    }
+
+    public static function resolveImageUrl(?string $path): ?string
+    {
+        if (! filled($path)) {
             return null;
         }
 
-        if (str_starts_with($this->og_image, 'http://') || str_starts_with($this->og_image, 'https://')) {
-            return $this->og_image;
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
         }
 
-        return asset('storage/' . ltrim($this->og_image, '/'));
+        return asset('storage/' . ltrim($path, '/'));
     }
 
     public function applyPlaceholders(array $replacements): array

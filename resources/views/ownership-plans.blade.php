@@ -4,7 +4,7 @@
 
 @section('content')
 @php
-    $heroBg = asset('images/ownership_plans/' . rawurlencode('ChatGPT Image Jul 4, 2026, 02_28_02 PM.png'));
+    ['desktop' => $heroBg, 'mobile' => $heroBgMobile] = \App\Models\PageSetting::heroForRoute('ownership-plans');
 
     $heroFeatures = [
         ['icon' => 'file-text', 'title' => '6 Plans', 'desc' => 'One will fit your situation'],
@@ -256,7 +256,7 @@
 
     {{-- HERO — mobile --}}
     <section class="relative overflow-hidden bg-litus-ink text-white min-[961px]:hidden">
-        <img src="{{ $heroBg }}"
+        <img src="{{ $heroBgMobile }}"
              alt=""
              class="absolute inset-0 h-full w-full object-cover object-[center_30%]"
              aria-hidden="true">

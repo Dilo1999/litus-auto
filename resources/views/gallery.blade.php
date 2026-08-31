@@ -3,6 +3,9 @@
 @section('title', 'Gallery - LITUS Automobiles')
 
 @section('content')
+@php
+    ['desktop' => $heroBg, 'mobile' => $heroBgMobile] = \App\Models\PageSetting::heroForRoute('gallery');
+@endphp
 <div class="font-sans" data-gallery-page>
     <script type="application/json" id="gallery-all-images">@json($allImages)</script>
     <script type="application/json" id="gallery-featured-moments">@json($featuredMoments)</script>
@@ -57,7 +60,7 @@
 
     {{-- HERO — mobile --}}
     <section class="relative overflow-hidden border-b border-[rgba(27,74,120,0.45)] bg-[#06101c] min-[961px]:hidden">
-        <img src="{{ $heroBg }}"
+        <img src="{{ $heroBgMobile }}"
              alt=""
              class="pointer-events-none absolute inset-0 h-full w-full object-cover object-[center_30%] opacity-[0.35]"
              aria-hidden="true">

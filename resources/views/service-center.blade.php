@@ -4,7 +4,7 @@
 
 @section('content')
 @php
-    $heroBg = asset('images/service_center/Image.webp');
+    ['desktop' => $heroBg, 'mobile' => $heroBgMobile] = \App\Models\PageSetting::heroForRoute('service-center');
 
     $heroFeatures = [
         ['icon' => 'wrench', 'title' => 'Periodic Maintenance', 'desc' => 'Manufacturer schedules'],
@@ -151,7 +151,7 @@
 
     {{-- HERO — mobile --}}
     <section class="relative overflow-hidden bg-litus-ink text-white min-[961px]:hidden">
-        <img src="{{ $heroBg }}"
+        <img src="{{ $heroBgMobile }}"
              alt=""
              class="absolute inset-0 h-full w-full object-cover object-[center_30%]"
              aria-hidden="true">

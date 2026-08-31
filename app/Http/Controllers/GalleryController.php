@@ -93,8 +93,6 @@ class GalleryController extends Controller
             ['icon' => 'images', 'title' => 'Full Gallery', 'desc' => 'Browse every published moment'],
         ]));
 
-        $heroBg = asset('images/motorcycles/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
-
         $galleryVideos = array_map(
             fn (string $url) => $this->resolveTikTokVideo($url),
             [
@@ -113,7 +111,6 @@ class GalleryController extends Controller
             'catColors',
             'momentCategories',
             'heroFeatures',
-            'heroBg',
             'galleryVideos',
             'showCustomerMoments',
         ));

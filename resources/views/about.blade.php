@@ -4,7 +4,7 @@
 
 @section('content')
 @php
-    $heroBg = asset('images/about_us/img.webp');
+    ['desktop' => $heroBg, 'mobile' => $heroBgMobile] = \App\Models\PageSetting::heroForRoute('about');
 
     $showroomImage = function (string ...$parts): string {
         return asset('images/about_us/showrooms/' . implode('/', array_map('rawurlencode', $parts)));
@@ -126,7 +126,7 @@
 
     {{-- HERO — mobile --}}
     <section class="relative overflow-hidden bg-litus-ink text-white min-[961px]:hidden">
-        <img src="{{ $heroBg }}"
+        <img src="{{ $heroBgMobile }}"
              alt=""
              class="absolute inset-0 h-full w-full object-cover object-[center_14%]"
              aria-hidden="true">

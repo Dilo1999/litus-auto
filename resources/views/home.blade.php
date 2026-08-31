@@ -59,8 +59,9 @@
         ['icon' => 'wrench', 'title' => 'Full Service', 'desc' => 'Genuine parts, trained technicians'],
     ];
 
-    $heroBg = asset('images/homepage/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_22_48 PM.png'));
-    $heroBgMobile = asset('images/homepage/Website-Banner-mobile-1.webp');
+    $hero = \App\Models\PageSetting::heroForRoute('home');
+    $heroBg = $hero['desktop'];
+    $heroBgMobile = $hero['mobile'];
 @endphp
 
 <div class="font-sans" data-home-page>

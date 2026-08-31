@@ -9,7 +9,9 @@
     $categories = $categories ?? collect();
     $promoCount = $promoCount ?? 0;
     $modelCount = $motorcycles->count();
-    $heroBg = asset('images/motorcycles/' . rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
+    $hero = \App\Models\PageSetting::heroForRoute('motorcycles');
+    $heroBg = $hero['desktop'];
+    $heroBgMobile = $hero['mobile'];
 
     $heroFeatures = [
         ['icon' => 'bike', 'title' => $modelCount.' Models', 'desc' => 'Honda, Yamaha and more'],
@@ -87,7 +89,7 @@
 
     {{-- HERO — mobile --}}
     <section class="relative overflow-hidden bg-litus-ink text-white min-[961px]:hidden">
-        <img src="{{ $heroBg }}"
+        <img src="{{ $heroBgMobile }}"
              alt=""
              class="absolute inset-0 h-full w-full object-cover object-[center_30%]"
              aria-hidden="true">

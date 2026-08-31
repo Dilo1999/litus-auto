@@ -4,7 +4,7 @@
 
 @section('content')
 @php
-    $heroBg = asset('images/parts/' . rawurlencode('ChatGPT Image Jul 3, 2026, 03_07_42 PM.png'));
+    ['desktop' => $heroBg, 'mobile' => $heroBgMobile] = \App\Models\PageSetting::heroForRoute('parts');
 
     $heroFeatures = [
         ['icon' => 'shield', 'title' => 'Genuine Components', 'desc' => '100% authentic parts'],
@@ -99,7 +99,7 @@
 
     {{-- HERO — mobile --}}
     <section class="relative overflow-hidden bg-litus-ink text-white min-[961px]:hidden">
-        <img src="{{ $heroBg }}"
+        <img src="{{ $heroBgMobile }}"
              alt=""
              class="absolute inset-0 h-full w-full object-cover object-[center_30%]"
              aria-hidden="true">

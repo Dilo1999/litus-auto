@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Models\BlogPost;
 use App\Models\PageSeo;
+use App\Models\PageSetting;
 use App\Models\User;
 use App\Policies\BlogPostPolicy;
 use App\Policies\PageSeoPolicy;
+use App\Policies\PageSettingPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         BlogPost::class => BlogPostPolicy::class,
         PageSeo::class => PageSeoPolicy::class,
+        PageSetting::class => PageSettingPolicy::class,
         User::class => UserPolicy::class,
     ];
 
