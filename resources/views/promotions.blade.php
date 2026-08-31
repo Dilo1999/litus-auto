@@ -68,8 +68,8 @@
         <div class="pointer-events-none absolute inset-0 opacity-[0.42]"
              style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px; mask-image: radial-gradient(700px 500px at 30% 30%, #000, transparent 78%);"></div>
 
-        <div class="relative z-[3] litus-container py-[clamp(48px,6.5vw,88px)] pb-[clamp(40px,5vw,68px)] max-[960px]:pt-12 max-[960px]:pb-4">
-            <div class="grid items-stretch gap-10 max-[960px]:grid-cols-1 max-[960px]:gap-6 min-[961px]:grid-cols-[1.06fr_0.94fr]">
+        <div class="relative z-[3] litus-container py-[clamp(56px,7vw,96px)] pb-[clamp(48px,5.5vw,76px)] max-[960px]:pt-12 max-[960px]:pb-6">
+            <div class="grid items-stretch gap-10 max-[960px]:grid-cols-1 max-[960px]:gap-6 min-[961px]:min-h-[540px] min-[961px]:grid-cols-[1.06fr_0.94fr]">
                 <div class="flex flex-col justify-center max-[960px]:order-1">
                     <span class="mb-3 inline-flex max-w-full items-center gap-2 rounded-full border border-white/16 bg-white/[0.08] px-3 py-1.5 text-[10.5px] font-semibold leading-snug min-[961px]:mb-4 min-[961px]:w-fit min-[961px]:gap-2.5 min-[961px]:px-4 min-[961px]:py-2 min-[961px]:text-[12.5px]">
                         <span class="litus-live-dot h-[6px] w-[6px] shrink-0 rounded-full bg-[#3DDC84] min-[961px]:h-[7px] min-[961px]:w-[7px]" aria-hidden="true"></span>
@@ -97,7 +97,7 @@
                 </div>
 
                 @if ($count > 0)
-                    <div class="relative flex min-h-[440px] h-full flex-col justify-end overflow-hidden rounded-[22px] border border-white/14 shadow-[0_4px_10px_rgba(9,17,32,.08),0_34px_70px_rgba(9,17,32,.16)] max-[960px]:order-2 max-[960px]:min-h-[300px] min-[961px]:min-h-[440px]"
+                    <div class="relative flex min-h-[380px] h-full flex-col justify-end overflow-hidden rounded-[22px] border border-white/14 shadow-[0_4px_10px_rgba(9,17,32,.08),0_34px_70px_rgba(9,17,32,.16)] max-[960px]:order-2 min-[961px]:min-h-[540px]"
                          style="background: linear-gradient(155deg, #061029 0%, #0E2A64 48%, #1B49B8 100%);"
                          data-promo-hero-slider
                          data-interval="4200">
@@ -110,7 +110,7 @@
                             LITUS<span class="mt-[-2px] block text-[7px] font-medium tracking-[0.36em] text-white/60">AUTOMOBILES</span>
                         </div>
 
-                        <div class="relative z-[2] flex min-h-[220px] flex-1 items-center justify-center overflow-hidden px-1 pt-14 min-[961px]:min-h-[260px] min-[961px]:px-3 min-[961px]:pt-16">
+                        <div class="relative z-[2] flex min-h-[260px] flex-1 items-center justify-center overflow-hidden px-1 pt-14 min-[961px]:min-h-[320px] min-[961px]:px-3 min-[961px]:pt-16">
                             @foreach ($promotions as $index => $model)
                                 <img src="{{ $model->listImageUrl() }}"
                                      alt="{{ $model->name }}"
@@ -119,7 +119,7 @@
                                      data-discount="{{ $model->formattedDiscount() }}"
                                      data-sale="{{ $model->formattedSalePrice() }}"
                                      @class([
-                                         'absolute left-1/2 top-1/2 max-h-[250px] max-w-[96%] -translate-x-1/2 -translate-y-1/2 object-contain object-center drop-shadow-[0_28px_32px_rgba(0,0,0,0.45)] transition-opacity duration-700 min-[961px]:max-h-[360px] min-[961px]:max-w-full',
+                                         'absolute left-1/2 top-1/2 max-h-[280px] max-w-[96%] -translate-x-1/2 -translate-y-1/2 object-contain object-center drop-shadow-[0_28px_32px_rgba(0,0,0,0.45)] transition-opacity duration-700 min-[961px]:max-h-[400px] min-[961px]:max-w-full',
                                          'z-[1] opacity-100' => $index === 0,
                                          'z-0 opacity-0' => $index !== 0,
                                      ])
