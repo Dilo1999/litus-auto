@@ -8,7 +8,7 @@
     $offerNote = $motorcycle->offerNote();
 @endphp
 
-<article class="group relative flex flex-col overflow-visible rounded-[18px] border border-litus-line bg-white transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
+<article class="group relative flex h-full flex-col overflow-visible rounded-[18px] border border-litus-line bg-white transition duration-200 hover:-translate-y-1 hover:border-litus-line-2 hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
     @if ($hasPromo)
         <div class="pointer-events-none absolute -left-[10px] top-1 z-10 flex h-[72px] w-[150px] items-center justify-center bg-[url('/images/badges/red-sale.png')] bg-[length:150px_auto] bg-left-top bg-no-repeat">
             <span class="w-[78%] pb-1 text-center font-[Poppins,sans-serif] text-[11.5px] font-extrabold uppercase italic leading-[1.05] tracking-[0.04em] text-white">
@@ -30,42 +30,53 @@
              loading="lazy">
     </a>
 
-    <div class="flex flex-1 flex-col px-4 pb-0 pt-4 sm:px-5 sm:pt-5">
-        <span class="mb-1.5 block text-[10.5px] font-extrabold uppercase tracking-[0.16em] text-litus-text-3">Promotion</span>
+    <div class="flex flex-1 flex-col px-4 pb-0 pt-3.5 sm:px-5 sm:pt-4">
+        <span class="mb-1 block text-[10.5px] font-extrabold uppercase tracking-[0.16em] text-litus-text-3">Promotion</span>
 
-        @if ($hasPromo && filled($offerNote))
-            <p class="mb-2 text-[13px] leading-snug text-litus-text-2 sm:mb-2.5 sm:text-[13.5px]">{{ $offerNote }}</p>
-        @endif
+        <div @class([
+            'mb-1',
+            'min-h-[1.25rem] sm:min-h-[1.35rem]' => $hasPromo && filled($offerNote),
+        ])>
+            @if ($hasPromo && filled($offerNote))
+                <p class="text-[13px] leading-tight text-litus-text-2 sm:text-[13.5px]">{{ $offerNote }}</p>
+            @endif
+        </div>
 
-        <h3 class="mb-1.5 text-[17px] font-bold leading-snug text-litus-text sm:text-[18.5px]">
+        <h3 class="mb-1 min-h-[2.4em] text-[17px] font-bold leading-snug text-litus-text line-clamp-2 sm:text-[18.5px]">
             <a href="{{ route('motorcycle.show', $motorcycle->slug) }}">{{ $motorcycle->name }}</a>
         </h3>
         @if ($motorcycle->engineCapacity())
-            <p class="mb-3 text-[13px] text-litus-text-2 sm:mb-[15px] sm:text-[13.5px]">{{ $motorcycle->engineCapacity() }} engine · Limited-time deal</p>
+            <p class="mb-2 text-[13px] text-litus-text-2 sm:mb-2.5 sm:text-[13.5px]">{{ $motorcycle->engineCapacity() }} engine · Limited-time deal</p>
+        @else
+            <div class="mb-2 sm:mb-2.5" aria-hidden="true"></div>
         @endif
 
         @if ($hasPromo)
-            <div class="inline-flex items-center gap-2 whitespace-nowrap rounded-xl bg-[#FFF1E6] px-4 py-2 text-[15px] font-extrabold text-[#C2410C] sm:px-5 sm:py-2.5 sm:text-base">
+            <div class="inline-flex items-center gap-2 whitespace-nowrap rounded-xl bg-[#FFF1E6] px-4 py-1.5 text-[15px] font-extrabold text-[#C2410C] sm:px-5 sm:py-2 sm:text-base">
                 You save {{ $motorcycle->formattedDiscount() }}
             </div>
         @endif
 
         @if ($monthly)
-            <div class="mt-[11px] flex items-start gap-2 rounded-lg px-2.5 py-2 text-xs font-semibold leading-snug text-litus-teal sm:items-center sm:px-3 sm:py-2.5 sm:text-[13px]">
+            <div class="mt-2 flex min-h-[2rem] items-start gap-2 px-1 py-1 text-xs font-semibold leading-snug text-litus-teal sm:items-center sm:text-[13px]">
                 <span class="shrink-0" aria-hidden="true">◈</span>
                 From MVR {{ number_format($monthly) }}/month on an Ijara plan
             </div>
+        @else
+            <div class="mt-2 min-h-[2rem]" aria-hidden="true"></div>
         @endif
 
-        @if ($hasPromo && $validUntil)
-            <div class="mt-3 flex items-center gap-2 text-[13px] text-litus-text-2 sm:mt-3.5 sm:text-sm">
-                <x-litus-icon name="calendar" class="h-4 w-4 shrink-0 text-litus-text-3" />
-                <span>Valid until <strong class="font-bold text-litus-text">{{ $validUntil }}</strong></span>
-            </div>
-        @endif
+        <div class="mt-1.5 min-h-[1.1rem] sm:min-h-[1.25rem]">
+            @if ($hasPromo && $validUntil)
+                <div class="flex items-center gap-2 text-[13px] text-litus-text-2 sm:text-sm">
+                    <x-litus-icon name="calendar" class="h-4 w-4 shrink-0 text-litus-text-3" />
+                    <span>Valid until <strong class="font-bold text-litus-text">{{ $validUntil }}</strong></span>
+                </div>
+            @endif
+        </div>
     </div>
 
-    <div class="flex flex-col gap-2.5 p-4 pt-4 min-[420px]:flex-row sm:p-5 sm:pt-[17px]">
+    <div class="mt-auto flex flex-col gap-2.5 p-4 pt-3 min-[420px]:flex-row sm:p-5 sm:pt-3.5">
         <a href="{{ route('motorcycle.show', $motorcycle->slug) }}"
            class="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-litus-primary px-3 text-[13.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
             View Details

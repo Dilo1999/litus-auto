@@ -148,13 +148,7 @@ class Motorcycle extends Model
 
         $pivotNote = $promotion->pivot->offer_note ?? null;
 
-        if (filled($pivotNote)) {
-            return (string) $pivotNote;
-        }
-
-        $promotionNote = $promotion->offer_note ?? null;
-
-        return filled($promotionNote) ? (string) $promotionNote : null;
+        return filled($pivotNote) ? (string) $pivotNote : null;
     }
 
     public function offerLabel(): string

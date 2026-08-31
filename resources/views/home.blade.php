@@ -197,7 +197,7 @@
                     data-interval="4000"
                     class="grid grid-cols-1 gap-6 max-md:-mx-4 max-md:flex max-md:gap-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:grid-cols-2 xl:grid-cols-3">
                     @forelse ($promoMotorcycles->take(3) as $motorcycle)
-                        <div data-home-card-slide class="max-md:w-[min(88%,340px)] max-md:shrink-0 max-md:snap-center">
+                        <div data-home-card-slide class="h-full max-md:w-[min(88%,340px)] max-md:shrink-0 max-md:snap-center">
                             <x-card.promotion-card :motorcycle="$motorcycle" />
                         </div>
                     @empty

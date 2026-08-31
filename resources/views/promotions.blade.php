@@ -304,7 +304,7 @@
                             data-promo-campaign-title>{{ $featured->name }}</h3>
                         <p class="mt-3 max-w-[520px] text-[clamp(15.5px,1.5vw,19px)] leading-[1.66] text-white/[0.76]"
                            data-promo-campaign-note>
-                            {{ $featured->offerNote() ?: 'Limited-time campaign pricing on this model. Save now and ride sooner on cash or Ijara terms.' }}
+                            {{ $featured->offerNote() }}
                         </p>
 
                         <div class="mt-6 flex flex-wrap items-baseline gap-3.5">
@@ -319,7 +319,7 @@
                                 <button type="button"
                                         data-promo-campaign-chip="{{ $index }}"
                                         data-name="{{ $model->name }}"
-                                        data-note="{{ $model->offerNote() ?: 'Limited-time campaign pricing on this model. Save now and ride sooner on cash or Ijara terms.' }}"
+                                        data-note="{{ $model->offerNote() }}"
                                         data-discount="{{ $model->formattedDiscount() }}"
                                         data-sale="{{ $model->formattedSalePrice() }}"
                                         class="rounded-md px-2.5 py-1.5 text-[11.5px] font-semibold transition {{ $index === 0 ? 'bg-white text-litus-ink' : 'bg-white/12 text-white/88 hover:bg-white/20' }}">
@@ -383,7 +383,7 @@
                                      alt="{{ $model->name }}"
                                      data-promo-campaign-slide
                                      data-name="{{ $model->name }}"
-                                     data-note="{{ $model->offerNote() ?: 'Limited-time campaign pricing on this model. Save now and ride sooner on cash or Ijara terms.' }}"
+                                     data-note="{{ $model->offerNote() }}"
                                      data-discount="{{ $model->formattedDiscount() }}"
                                      data-sale="{{ $model->formattedSalePrice() }}"
                                      @class([
@@ -511,7 +511,7 @@
                     data-promo-grid>
                     @forelse ($promotions as $motorcycle)
                         <div data-home-card-slide
-                             class="max-md:w-[min(88%,340px)] max-md:shrink-0 max-md:snap-center"
+                             class="h-full max-md:w-[min(88%,340px)] max-md:shrink-0 max-md:snap-center"
                              data-promo-card
                              data-brand="{{ $motorcycle->brand }}"
                              data-price="{{ $motorcycle->promotionalSalePrice() }}"
