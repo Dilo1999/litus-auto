@@ -127,8 +127,8 @@
 
     $pickDropSelectClass = 'litus-select w-full cursor-pointer rounded-[9px] border-[1.5px] border-litus-line-2 bg-litus-paper-2 px-3 py-2.5 pr-10 text-[13px] font-medium text-litus-text outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)]';
 
-    $pickDropCardClass = 'group relative flex flex-col rounded-[18px] border border-litus-line bg-white px-5 pb-6 pt-12 shadow-[0_2px_8px_rgba(9,17,32,0.05)] transition duration-200 md:hover:-translate-y-1 md:hover:border-litus-line-2 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]';
-    $pickDropIconClass = 'mx-auto mb-4 grid h-[72px] w-[72px] shrink-0 place-items-center rounded-full bg-[rgba(18,87,214,0.09)] text-litus-primary transition duration-200 group-hover:bg-[rgba(18,87,214,0.14)]';
+    $pickDropCardClass = 'group relative flex h-full flex-col rounded-[18px] border border-litus-line bg-white px-5 pb-6 pt-12 shadow-[0_2px_8px_rgba(9,17,32,0.05)] transition duration-200 min-[900px]:px-6 min-[900px]:pb-8 min-[900px]:pt-14 md:hover:-translate-y-1 md:hover:border-litus-line-2 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]';
+    $pickDropIconClass = 'mx-auto mb-4 grid h-[72px] w-[72px] shrink-0 place-items-center rounded-full bg-[rgba(18,87,214,0.09)] text-litus-primary transition duration-200 group-hover:bg-[rgba(18,87,214,0.14)] min-[900px]:mb-5 min-[900px]:h-20 min-[900px]:w-20';
 
     $defaultPickDropContact = $pickDropAreas[0] ?? null;
 @endphp
@@ -301,19 +301,19 @@
 
             {{-- Steps + sidebar --}}
             <div class="grid grid-cols-1 items-stretch gap-8 min-[900px]:grid-cols-[minmax(0,1fr)_300px] min-[900px]:gap-7">
-                <div class="min-w-0">
+                <div class="flex min-w-0 flex-col min-[900px]:h-full">
                     {{-- 2×2 step grid (tablet & desktop) --}}
-                    <div class="hidden gap-4 sm:grid sm:grid-cols-2 sm:gap-5">
+                    <div class="hidden h-full gap-4 sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:gap-5 min-[900px]:min-h-0 min-[900px]:flex-1">
                         @foreach ($pickDropSteps as $index => $step)
-                            <article class="{{ $pickDropCardClass }} min-h-[210px]">
-                                <span class="absolute left-4 top-4 grid h-[30px] w-[30px] place-items-center rounded-full bg-litus-primary text-[13px] font-bold text-white transition duration-200 group-hover:shadow-[0_4px_12px_rgba(18,87,214,0.35)]">
+                            <article class="{{ $pickDropCardClass }} min-h-[210px] min-[900px]:min-h-0">
+                                <span class="absolute left-4 top-4 grid h-[30px] w-[30px] place-items-center rounded-full bg-litus-primary text-[13px] font-bold text-white transition duration-200 group-hover:shadow-[0_4px_12px_rgba(18,87,214,0.35)] min-[900px]:left-5 min-[900px]:top-5">
                                     {{ $index + 1 }}
                                 </span>
                                 <div class="{{ $pickDropIconClass }}">
-                                    <x-litus-icon :name="$step['icon']" class="h-7 w-7" />
+                                    <x-litus-icon :name="$step['icon']" class="h-7 w-7 min-[900px]:h-8 min-[900px]:w-8" />
                                 </div>
-                                <h4 class="mb-2 text-center text-[15px] font-bold leading-snug text-litus-text">{{ $step['title'] }}</h4>
-                                <p class="mt-auto text-center text-[13.5px] leading-relaxed text-litus-text-2">{{ $step['text'] }}</p>
+                                <h4 class="mb-2 text-center text-[15px] font-bold leading-snug text-litus-text min-[900px]:text-[16px]">{{ $step['title'] }}</h4>
+                                <p class="mt-auto text-center text-[13.5px] leading-relaxed text-litus-text-2 min-[900px]:px-1 min-[900px]:text-[14px]">{{ $step['text'] }}</p>
                             </article>
                         @endforeach
                     </div>
