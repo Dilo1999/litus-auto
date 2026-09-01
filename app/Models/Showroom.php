@@ -20,8 +20,6 @@ class Showroom extends Model
         'address',
         'phone',
         'services',
-        'offers_pick_drop',
-        'pick_drop_label',
         'images',
         'is_featured',
         'is_published',
@@ -30,7 +28,6 @@ class Showroom extends Model
 
     protected $casts = [
         'services' => 'array',
-        'offers_pick_drop' => 'boolean',
         'images' => 'array',
         'is_featured' => 'boolean',
         'is_published' => 'boolean',
@@ -59,22 +56,6 @@ class Showroom extends Model
     public function scopeFeatured(Builder $query): Builder
     {
         return $query->where('is_featured', true);
-    }
-
-    public function scopePickDropAreas(Builder $query): Builder
-    {
-        return $query->where('offers_pick_drop', true);
-    }
-
-    public function pickDropLabel(): string
-    {
-        if (filled($this->pick_drop_label)) {
-            return $this->pick_drop_label;
-        }
-
-        $label = preg_replace('/\s+Showroom$/i', '', $this->name) ?? $this->name;
-
-        return filled($label) ? $label : $this->name;
     }
 
     /**
@@ -136,42 +117,5 @@ class Showroom extends Model
         return collect(explode('/', ltrim($path, '/')))
             ->map(fn (string $segment) => rawurlencode($segment))
             ->implode('/');
-    }
-
-    /**
-     * Pick & drop service areas for the Service Centre page.
-     * Managed in Filament under Showrooms & Centres (offers_pick_drop).
-     *
-     * @return list<array{label: string, phone: string, phone_digits: string}>
-     */
-    public static function pickDropAreaOptions(): array
-    {
-        return static::query()
-            ->published()
-            ->pickDropAreas()
-            ->ordered()
-            ->get()
-            ->map(function (self $showroom) {
-                $phone = trim((string) ($showroom->phone ?? ''));
-
-                if ($phone === '') {
-                    return null;
-                }
-
-                $digits = preg_replace('/\D+/', '', $phone) ?? '';
-
-                if ($digits === '') {
-                    return null;
-                }
-
-                return [
-                    'label' => $showroom->pickDropLabel(),
-                    'phone' => $phone,
-                    'phone_digits' => $digits,
-                ];
-            })
-            ->filter()
-            ->values()
-            ->all();
     }
 }

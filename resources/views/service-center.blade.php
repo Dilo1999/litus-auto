@@ -112,25 +112,8 @@
         ],
     ];
 
-    $pickDropTimeSlots = [
-        '8:00 AM',
-        '9:00 AM',
-        '10:00 AM',
-        '11:00 AM',
-        '12:00 PM',
-        '1:00 PM',
-        '2:00 PM',
-        '3:00 PM',
-        '4:00 PM',
-        '5:00 PM',
-    ];
-
-    $pickDropSelectClass = 'litus-select w-full cursor-pointer rounded-[9px] border-[1.5px] border-litus-line-2 bg-litus-paper-2 px-3 py-2.5 pr-10 text-[13px] font-medium text-litus-text outline-none transition focus:border-litus-primary-light focus:shadow-[0_0_0_3px_rgba(46,116,238,0.14)]';
-
     $pickDropCardClass = 'group relative flex h-full flex-col rounded-[18px] border border-litus-line bg-white px-5 pb-6 pt-12 shadow-[0_2px_8px_rgba(9,17,32,0.05)] transition duration-200 min-[900px]:px-6 min-[900px]:pb-8 min-[900px]:pt-14 md:hover:-translate-y-1 md:hover:border-litus-line-2 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]';
     $pickDropIconClass = 'mx-auto mb-4 grid h-[72px] w-[72px] shrink-0 place-items-center rounded-full bg-[rgba(18,87,214,0.09)] text-litus-primary transition duration-200 group-hover:bg-[rgba(18,87,214,0.14)] min-[900px]:mb-5 min-[900px]:h-20 min-[900px]:w-20';
-
-    $defaultPickDropContact = $pickDropAreas[0] ?? null;
 @endphp
 
 <div class="font-sans" data-service-center-page>
@@ -361,48 +344,18 @@
                             <div class="grid h-10 w-10 shrink-0 place-items-center rounded-[11px] bg-litus-paper-3 text-litus-primary">
                                 <x-litus-icon name="map-pin" class="h-4 w-4" />
                             </div>
-                            <div class="min-w-0 flex-1 pt-0.5">
-                                <label for="pick-drop-area" class="mb-1 block text-[14px] font-semibold text-litus-text">Service Areas</label>
-                                @if (count($pickDropAreas) > 0)
-                                    <p class="mb-2 text-[12.5px] leading-relaxed text-litus-text-2">
-                                        Available in {{ collect($pickDropAreas)->pluck('label')->join(', ', ' and ') }}.
-                                    </p>
-                                @endif
-                                <div class="litus-select-wrap">
-                                    <select id="pick-drop-area"
-                                            data-pick-drop-area
-                                            class="{{ $pickDropSelectClass }}">
-                                        <option value="" disabled selected>Select area</option>
-                                        @foreach ($pickDropAreas as $area)
-                                            <option value="{{ $area['label'] }}"
-                                                    data-phone="{{ $area['phone'] }}"
-                                                    data-phone-digits="{{ $area['phone_digits'] }}">
-                                                {{ $area['label'] }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <x-litus-icon name="chevron-down" class="litus-select-chevron h-4 w-4 text-litus-text-3" />
-                                </div>
+                            <div class="min-w-0 pt-0.5">
+                                <b class="mb-1 block text-[14px] font-semibold text-litus-text">Service Areas</b>
+                                <span class="text-[13px] leading-relaxed text-litus-text-2">Available in Malé, Hulhumalé and nearby areas.</span>
                             </div>
                         </li>
                         <li class="flex gap-3.5 py-4">
                             <div class="grid h-10 w-10 shrink-0 place-items-center rounded-[11px] bg-litus-paper-3 text-litus-primary">
                                 <x-litus-icon name="clock" class="h-4 w-4" />
                             </div>
-                            <div class="min-w-0 flex-1 pt-0.5">
-                                <label for="pick-drop-time" class="mb-1 block text-[14px] font-semibold text-litus-text">Pickup Time</label>
-                                <p class="mb-2 text-[12.5px] leading-relaxed text-litus-text-2">Monday – Saturday, 8:00 AM – 6:00 PM.</p>
-                                <div class="litus-select-wrap">
-                                    <select id="pick-drop-time"
-                                            data-pick-drop-time
-                                            class="{{ $pickDropSelectClass }}">
-                                        <option value="" disabled selected>Select time</option>
-                                        @foreach ($pickDropTimeSlots as $slot)
-                                            <option value="{{ $slot }}">{{ $slot }}</option>
-                                        @endforeach
-                                    </select>
-                                    <x-litus-icon name="chevron-down" class="litus-select-chevron h-4 w-4 text-litus-text-3" />
-                                </div>
+                            <div class="min-w-0 pt-0.5">
+                                <b class="mb-1 block text-[14px] font-semibold text-litus-text">Pickup Time</b>
+                                <span class="text-[13px] leading-relaxed text-litus-text-2">Monday – Saturday, 8:00 AM – 6:00 PM.</span>
                             </div>
                         </li>
                         <li class="flex gap-3.5 py-4">
@@ -420,21 +373,12 @@
                             </div>
                             <div class="min-w-0 pt-0.5">
                                 <b class="mb-1 block text-[14px] font-semibold text-litus-text">Book or Inquire</b>
-                                <div class="flex flex-wrap items-center gap-2.5">
-                                    @if ($defaultPickDropContact)
-                                        <a href="tel:+{{ $defaultPickDropContact['phone_digits'] }}"
-                                           data-pick-drop-phone
-                                           class="text-[13.5px] font-semibold text-litus-primary transition hover:text-litus-primary-hover">{{ $defaultPickDropContact['phone'] }}</a>
-                                    @else
-                                        <span class="text-[13px] text-litus-text-2">Contact details unavailable.</span>
-                                    @endif
-                                </div>
+                                <a href="tel:+9607792278" class="text-[13.5px] font-semibold text-litus-primary transition hover:text-litus-primary-hover">+960 779 2278</a>
                             </div>
                         </li>
                     </ul>
 
                     <a href="#book"
-                       data-pick-drop-book
                        class="mt-6 flex w-full items-center justify-center rounded-lg bg-litus-primary px-6 py-4 text-[13.5px] font-semibold uppercase tracking-[0.07em] text-white shadow-[0_8px_22px_rgba(18,87,214,0.28)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover min-[900px]:mt-auto">
                         Book Pickup Now
                     </a>

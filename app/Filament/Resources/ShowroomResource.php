@@ -59,18 +59,6 @@ class ShowroomResource extends Resource
                             ->columns(2)
                             ->helperText('Tags shown on the showroom card (Sales, Service Centre, Parts, Support).')
                             ->columnSpanFull(),
-                        Toggle::make('offers_pick_drop')
-                            ->label('Pick & drop service area')
-                            ->helperText('Show this location in the Service Areas dropdown on the Service Centre page.')
-                            ->reactive()
-                            ->columnSpanFull(),
-                        TextInput::make('pick_drop_label')
-                            ->label('Service area label')
-                            ->maxLength(120)
-                            ->placeholder('e.g. Malé')
-                            ->helperText('Short name shown in the pick & drop dropdown. Leave blank to use the location name.')
-                            ->visible(fn (callable $get): bool => (bool) $get('offers_pick_drop'))
-                            ->columnSpanFull(),
                     ])
                     ->columns(2),
 
@@ -113,10 +101,6 @@ class ShowroomResource extends Resource
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\IconColumn::make('offers_pick_drop')
-                    ->label('Pick & drop')
-                    ->boolean()
-                    ->sortable(),
                 TextColumn::make('updated_at')
                     ->label('Updated')
                     ->dateTime()
@@ -127,8 +111,6 @@ class ShowroomResource extends Resource
                     ->label('Published'),
                 TernaryFilter::make('is_featured')
                     ->label('Featured'),
-                TernaryFilter::make('offers_pick_drop')
-                    ->label('Pick & drop area'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

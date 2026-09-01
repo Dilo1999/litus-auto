@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Concerns\AppliesPageSeo;
-use App\Models\Showroom;
 use Illuminate\View\View;
 
 class ServiceCenterController extends Controller
@@ -14,8 +13,6 @@ class ServiceCenterController extends Controller
     {
         $this->applySeo('service-center');
 
-        $pickDropAreas = Showroom::pickDropAreaOptions();
-
-        return view('service-center', compact('pickDropAreas'));
+        return view('service-center');
     }
 }
