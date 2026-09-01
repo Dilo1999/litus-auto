@@ -425,14 +425,6 @@
                                         <a href="tel:+{{ $defaultPickDropContact['phone_digits'] }}"
                                            data-pick-drop-phone
                                            class="text-[13.5px] font-semibold text-litus-primary transition hover:text-litus-primary-hover">{{ $defaultPickDropContact['phone'] }}</a>
-                                        <a href="https://wa.me/{{ $defaultPickDropContact['phone_digits'] }}?text={{ urlencode('Hi LITUS, I would like to book a pick & drop service for my motorcycle.') }}"
-                                           data-pick-drop-whatsapp
-                                           target="_blank"
-                                           rel="noopener noreferrer"
-                                           class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#1FA855] text-white transition hover:bg-[#178443]"
-                                           aria-label="WhatsApp">
-                                            <x-litus-icon name="message-circle" class="h-4 w-4" />
-                                        </a>
                                     @else
                                         <span class="text-[13px] text-litus-text-2">Contact details unavailable.</span>
                                     @endif

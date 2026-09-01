@@ -47,49 +47,19 @@ function initServiceCenterPage() {
     const timeSelect = root.querySelector('[data-pick-drop-time]');
     const pickDropBook = root.querySelector('[data-pick-drop-book]');
     const phoneLink = root.querySelector('[data-pick-drop-phone]');
-    const whatsappLink = root.querySelector('[data-pick-drop-whatsapp]');
-
-    const buildPickDropWhatsAppMessage = (area = '', time = '') => {
-        let message = 'Hi LITUS, I would like to book a pick & drop service for my motorcycle.';
-
-        if (area) {
-            message += ` Area: ${area}.`;
-        }
-
-        if (time) {
-            message += ` Preferred time: ${time}.`;
-        }
-
-        return message;
-    };
 
     const updatePickDropContact = () => {
         const option = areaSelect?.selectedOptions?.[0];
 
-        if (!option || !option.dataset.phone || !option.dataset.phoneDigits) {
+        if (!option || !option.dataset.phone || !option.dataset.phoneDigits || !phoneLink) {
             return;
         }
 
-        if (phoneLink) {
-            phoneLink.textContent = option.dataset.phone;
-            phoneLink.href = `tel:+${option.dataset.phoneDigits}`;
-        }
-
-        if (whatsappLink) {
-            const area = areaSelect?.value?.trim() ?? '';
-            const time = timeSelect?.value?.trim() ?? '';
-            const message = buildPickDropWhatsAppMessage(area, time);
-
-            whatsappLink.href = `https://wa.me/${option.dataset.phoneDigits}?text=${encodeURIComponent(message)}`;
-        }
+        phoneLink.textContent = option.dataset.phone;
+        phoneLink.href = `tel:+${option.dataset.phoneDigits}`;
     };
 
     areaSelect?.addEventListener('change', updatePickDropContact);
-    timeSelect?.addEventListener('change', () => {
-        if (areaSelect?.value) {
-            updatePickDropContact();
-        }
-    });
 
     const applyPickDropToForm = () => {
         if (!form) return;
