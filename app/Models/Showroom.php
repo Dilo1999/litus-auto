@@ -20,6 +20,8 @@ class Showroom extends Model
         'address',
         'phone',
         'services',
+        'offers_pick_drop',
+        'pick_drop_label',
         'images',
         'is_featured',
         'is_published',
@@ -28,6 +30,7 @@ class Showroom extends Model
 
     protected $casts = [
         'services' => 'array',
+        'offers_pick_drop' => 'boolean',
         'images' => 'array',
         'is_featured' => 'boolean',
         'is_published' => 'boolean',
@@ -56,6 +59,22 @@ class Showroom extends Model
     public function scopeFeatured(Builder $query): Builder
     {
         return $query->where('is_featured', true);
+    }
+
+    public function scopePickDropAreas(Builder $query): Builder
+    {
+        return $query->where('offers_pick_drop', true);
+    }
+
+    public function pickDropLabel(): string
+    {
+        if (filled($this->pick_drop_label)) {
+            return $this->pick_drop_label;
+        }
+
+        $label = preg_replace('/\s+Showroom$/i', '', $this->name) ?? $this->name;
+
+        return filled($label) ? $label : $this->name;
     }
 
     /**
@@ -120,38 +139,20 @@ class Showroom extends Model
     }
 
     /**
-     * Pick & drop zones for the Service Centre page.
-     * Contact numbers are resolved from linked showroom records in the database.
+     * Pick & drop service areas for the Service Centre page.
+     * Managed in Filament under Showrooms & Centres (offers_pick_drop).
      *
      * @return list<array{label: string, phone: string, phone_digits: string}>
      */
     public static function pickDropAreaOptions(): array
     {
-        $zones = [
-            ['label' => 'Malé', 'showroom' => "Malé Showroom"],
-            ['label' => 'Hulhumalé', 'showroom' => 'Hulhumale Showroom'],
-            ['label' => 'Villimalé', 'showroom' => "Malé Showroom"],
-            ['label' => 'Other nearby areas', 'showroom' => "Malé Showroom"],
-        ];
-
-        $showroomNames = collect($zones)->pluck('showroom')->unique()->values()->all();
-
-        $showrooms = static::query()
+        return static::query()
             ->published()
-            ->whereIn('name', $showroomNames)
-            ->get()
-            ->keyBy('name');
-
-        $fallbackShowroom = static::query()
-            ->published()
+            ->pickDropAreas()
             ->ordered()
             ->get()
-            ->first(fn (self $showroom) => in_array('Service Centre', $showroom->services ?? [], true));
-
-        return collect($zones)
-            ->map(function (array $zone) use ($showrooms, $fallbackShowroom) {
-                $showroom = $showrooms->get($zone['showroom']) ?? $fallbackShowroom;
-                $phone = trim((string) ($showroom?->phone ?? ''));
+            ->map(function (self $showroom) {
+                $phone = trim((string) ($showroom->phone ?? ''));
 
                 if ($phone === '') {
                     return null;
@@ -164,7 +165,7 @@ class Showroom extends Model
                 }
 
                 return [
-                    'label' => $zone['label'],
+                    'label' => $showroom->pickDropLabel(),
                     'phone' => $phone,
                     'phone_digits' => $digits,
                 ];

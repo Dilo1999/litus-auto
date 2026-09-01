@@ -363,7 +363,11 @@
                             </div>
                             <div class="min-w-0 flex-1 pt-0.5">
                                 <label for="pick-drop-area" class="mb-1 block text-[14px] font-semibold text-litus-text">Service Areas</label>
-                                <p class="mb-2 text-[12.5px] leading-relaxed text-litus-text-2">Available in Malé, Hulhumalé and nearby areas.</p>
+                                @if (count($pickDropAreas) > 0)
+                                    <p class="mb-2 text-[12.5px] leading-relaxed text-litus-text-2">
+                                        Available in {{ collect($pickDropAreas)->pluck('label')->join(', ', ' and ') }}.
+                                    </p>
+                                @endif
                                 <div class="litus-select-wrap">
                                     <select id="pick-drop-area"
                                             data-pick-drop-area

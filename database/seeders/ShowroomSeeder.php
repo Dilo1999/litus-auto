@@ -15,6 +15,8 @@ class ShowroomSeeder extends Seeder
                 'address' => 'Chaandhanee Magu, Malé, Maldives',
                 'phone' => '+960 779 7442',
                 'services' => ['Sales', 'Service Centre', 'Parts'],
+                'offers_pick_drop' => true,
+                'pick_drop_label' => 'Malé',
                 'is_featured' => true,
                 'sort_order' => 1,
                 'images' => [
@@ -112,6 +114,8 @@ class ShowroomSeeder extends Seeder
                 'address' => 'Nirolhu Magu, Hulhumale, Maldives',
                 'phone' => '+960 779 7443',
                 'services' => ['Sales', 'Parts'],
+                'offers_pick_drop' => true,
+                'pick_drop_label' => 'Hulhumalé',
                 'is_featured' => false,
                 'sort_order' => 9,
                 'images' => [
