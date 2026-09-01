@@ -134,6 +134,8 @@ return [
 
     'parts_inquiry_to' => env('MAIL_PARTS_INQUIRY_TO', 'partss@litusautomobiles.com'),
 
+    'motorcycle_enquiry_to' => env('MAIL_MOTORCYCLE_ENQUIRY_TO', 'sales@litusgroup.mv'),
+
     /*
     |--------------------------------------------------------------------------
     | Markdown Mail Settings

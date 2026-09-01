@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MotorcycleEnquiryMail;
 use App\Mail\PartsInquiryMail;
 use App\Mail\ServiceAppointmentMail;
 use App\Services\TelegramNotifier;
@@ -118,6 +119,23 @@ class InquiryFormController extends Controller
         ]);
 
         $telegramSent = $this->telegramNotifier->sendMotorcycleEnquiry($validated);
+
+        try {
+            Mail::to(config('mail.motorcycle_enquiry_to'))
+                ->send(new MotorcycleEnquiryMail(
+                    name: $validated['name'],
+                    mobile: $validated['mobile'],
+                    model: $validated['model'],
+                    showroom: $validated['showroom'] ?? null,
+                    payment: $validated['payment'] ?? null,
+                ));
+        } catch (\Throwable $e) {
+            Log::error('Motorcycle enquiry email failed.', [
+                'mobile' => $validated['mobile'],
+                'model' => $validated['model'],
+                'error' => $e->getMessage(),
+            ]);
+        }
 
         if (! $this->telegramNotifier->isSalesConfigured()) {
             Log::warning('Motorcycle enquiry submitted but Telegram sales group is not configured.', [
