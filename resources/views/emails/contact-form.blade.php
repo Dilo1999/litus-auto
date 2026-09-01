@@ -33,6 +33,6 @@
     </table>
 
     <p style="margin: 20px 0 8px; font-weight: bold;">Message</p>
-    <p style="margin: 0; white-space: pre-wrap;">{{ $message }}</p>
+    <p style="margin: 0; white-space: pre-wrap;">{{ $messageBody }}</p>
 </body>
 </html>

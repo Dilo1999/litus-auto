@@ -173,7 +173,7 @@ class InquiryFormController extends Controller
                     email: $validated['email'],
                     inquiryType: $validated['inquiry_type'],
                     showroom: $validated['showroom'] ?? null,
-                    message: $validated['message'],
+                    messageBody: $validated['message'],
                 ));
         } catch (\Throwable $e) {
             Log::error('Contact form email failed.', [

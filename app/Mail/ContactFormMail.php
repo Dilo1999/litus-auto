@@ -19,7 +19,7 @@ class ContactFormMail extends Mailable
         public string $email,
         public string $inquiryType,
         public ?string $showroom,
-        public string $message,
+        public string $messageBody,
     ) {}
 
     public function envelope(): Envelope
