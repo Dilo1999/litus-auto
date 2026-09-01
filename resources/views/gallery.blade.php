@@ -163,6 +163,7 @@
     </section>
 
     {{-- VIDEO --}}
+    @if (count($galleryVideos) > 0)
     <section id="gallery-video" class="scroll-mt-20 bg-white py-10 max-md:py-8 sm:py-16">
         <div class="litus-container flex flex-col items-center gap-6 max-md:gap-7 lg:flex-row lg:gap-16">
             <div class="text-center lg:w-2/5 lg:text-left">
@@ -248,6 +249,7 @@
             </div>
         </div>
     </section>
+    @endif
 
     {{-- CUSTOMER MOMENTS --}}
     <section id="gallery-customer-moments"
