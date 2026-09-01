@@ -346,7 +346,7 @@
                             </div>
                             <div class="min-w-0 pt-0.5">
                                 <b class="mb-1 block text-[14px] font-semibold text-litus-text">Service Areas</b>
-                                <span class="text-[13px] leading-relaxed text-litus-text-2">Available in Malé, Hulhumalé and nearby areas.</span>
+                                <span class="text-[13px] leading-relaxed text-litus-text-2">Pick and drop service available across the Maldives</span>
                             </div>
                         </li>
                         <li class="flex gap-3.5 py-4">
@@ -355,7 +355,7 @@
                             </div>
                             <div class="min-w-0 pt-0.5">
                                 <b class="mb-1 block text-[14px] font-semibold text-litus-text">Pickup Time</b>
-                                <span class="text-[13px] leading-relaxed text-litus-text-2">Saturday – Thursday, 9:00 AM – 10:00 PM. Friday, 3:00 PM – 10:00 PM.</span>
+                                <span class="text-[13px] leading-relaxed text-litus-text-2">Saturday – Thursday, 9:00 AM – 10:00 PM</span>
                             </div>
                         </li>
                         <li class="flex gap-3.5 py-4">
@@ -364,7 +364,7 @@
                             </div>
                             <div class="min-w-0 pt-0.5">
                                 <b class="mb-1 block text-[14px] font-semibold text-litus-text">Service Fee</b>
-                                <span class="text-[13px] leading-relaxed text-litus-text-2">Pick &amp; drop available from MVR 200 (conditions apply).</span>
+                                <span class="text-[13px] leading-relaxed text-litus-text-2">Pick & drop service starting from MVR 100. Terms and conditions apply</span>
                             </div>
                         </li>
                         <li class="flex gap-3.5 py-4 last:pb-0">
@@ -378,7 +378,9 @@
                         </li>
                     </ul>
 
-                    <a href="#book"
+                    <a href="https://wa.me/9607792278?text={{ urlencode('Hi LITUS, I would like to book a pick & drop service for my motorcycle.') }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
                        class="mt-6 flex w-full items-center justify-center rounded-lg bg-litus-primary px-6 py-4 text-[13.5px] font-semibold uppercase tracking-[0.07em] text-white shadow-[0_8px_22px_rgba(18,87,214,0.28)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover min-[900px]:mt-auto">
                         Book Pickup Now
                     </a>
