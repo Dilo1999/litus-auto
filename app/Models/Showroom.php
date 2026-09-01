@@ -118,4 +118,59 @@ class Showroom extends Model
             ->map(fn (string $segment) => rawurlencode($segment))
             ->implode('/');
     }
+
+    /**
+     * Pick & drop zones for the Service Centre page.
+     * Contact numbers are resolved from linked showroom records in the database.
+     *
+     * @return list<array{label: string, phone: string, phone_digits: string}>
+     */
+    public static function pickDropAreaOptions(): array
+    {
+        $zones = [
+            ['label' => 'Malé', 'showroom' => "Malé Showroom"],
+            ['label' => 'Hulhumalé', 'showroom' => 'Hulhumale Showroom'],
+            ['label' => 'Villimalé', 'showroom' => "Malé Showroom"],
+            ['label' => 'Other nearby areas', 'showroom' => "Malé Showroom"],
+        ];
+
+        $showroomNames = collect($zones)->pluck('showroom')->unique()->values()->all();
+
+        $showrooms = static::query()
+            ->published()
+            ->whereIn('name', $showroomNames)
+            ->get()
+            ->keyBy('name');
+
+        $fallbackShowroom = static::query()
+            ->published()
+            ->ordered()
+            ->get()
+            ->first(fn (self $showroom) => in_array('Service Centre', $showroom->services ?? [], true));
+
+        return collect($zones)
+            ->map(function (array $zone) use ($showrooms, $fallbackShowroom) {
+                $showroom = $showrooms->get($zone['showroom']) ?? $fallbackShowroom;
+                $phone = trim((string) ($showroom?->phone ?? ''));
+
+                if ($phone === '') {
+                    return null;
+                }
+
+                $digits = preg_replace('/\D+/', '', $phone) ?? '';
+
+                if ($digits === '') {
+                    return null;
+                }
+
+                return [
+                    'label' => $zone['label'],
+                    'phone' => $phone,
+                    'phone_digits' => $digits,
+                ];
+            })
+            ->filter()
+            ->values()
+            ->all();
+    }
 }

@@ -7,7 +7,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MotorcycleController;
 use App\Http\Controllers\PartsController;
-use App\Http\Controllers\PromotionsController;
+use App\Http\Controllers\ServiceCenterController;
 use App\Services\SeoService;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -48,11 +48,7 @@ Route::get('/ownership-plans', function (SeoService $seo) {
     return view('ownership-plans');
 })->name('ownership-plans');
 Route::get('/parts', PartsController::class)->name('parts');
-Route::get('/service-center', function (SeoService $seo) {
-    $seo->applyForPage('service-center');
-
-    return view('service-center');
-})->name('service-center');
+Route::get('/service-center', ServiceCenterController::class)->name('service-center');
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
