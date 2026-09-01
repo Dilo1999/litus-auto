@@ -55,8 +55,8 @@
     ])->all();
 
     $hours = [
-        ['label' => 'Sales support', 'value' => 'Sun-Thu · 9:30 AM - 6:00 PM'],
-        ['label' => 'Service centre', 'value' => 'Sun-Thu · 9:30 AM - 6:00 PM'],
+        ['label' => 'Sales support', 'value' => 'Everyday - 8 AM - 11 PM'],
+        ['label' => 'Service centre', 'value' => ' Saturday to Thursday - 9 Am to 10 PM , Friday 3 Pm to 10 PM'],
         ['label' => 'Online inquiry', 'value' => 'Anytime'],
     ];
 
