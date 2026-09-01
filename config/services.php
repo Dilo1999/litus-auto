@@ -43,6 +43,7 @@ return [
         'bot_token' => env('TELEGRAM_BOT_TOKEN', env('TELEGRAM_PARTS_BOT_TOKEN')),
         'parts_chat_id' => env('TELEGRAM_PARTS_CHAT_ID'),
         'service_chat_id' => env('TELEGRAM_SERVICE_CHAT_ID'),
+        'sales_chat_id' => env('TELEGRAM_SALES_CHAT_ID'),
         'verify_ssl' => filter_var(
             env('TELEGRAM_VERIFY_SSL', false),
             FILTER_VALIDATE_BOOLEAN

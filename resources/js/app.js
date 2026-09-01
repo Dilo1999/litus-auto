@@ -6,6 +6,7 @@ import './parts';
 import './product-gallery';
 import './product-spin';
 import './motorcycle-specs';
+import './motorcycle-enquiry';
 import './contact';
 import './hero-features';
 import './service-center';

@@ -106,4 +106,32 @@ class InquiryFormController extends Controller
 
         return response()->json(['message' => 'Parts inquiry submitted.']);
     }
+
+    public function motorcycleEnquiry(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'mobile' => ['required', 'string', 'max:50'],
+            'model' => ['required', 'string', 'max:255'],
+            'showroom' => ['nullable', 'string', 'max:255'],
+            'payment' => ['nullable', 'string', 'max:255'],
+        ]);
+
+        $telegramSent = $this->telegramNotifier->sendMotorcycleEnquiry($validated);
+
+        if (! $this->telegramNotifier->isSalesConfigured()) {
+            Log::warning('Motorcycle enquiry submitted but Telegram sales group is not configured.', [
+                'bot_token_set' => filled(config('services.telegram.bot_token')),
+                'sales_chat_id' => config('services.telegram.sales_chat_id'),
+            ]);
+        }
+
+        if ($this->telegramNotifier->isSalesConfigured() && ! $telegramSent) {
+            return response()->json([
+                'message' => 'Could not send your enquiry. Please try again.',
+            ], 500);
+        }
+
+        return response()->json(['message' => 'Enquiry submitted.']);
+    }
 }

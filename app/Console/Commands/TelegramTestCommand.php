@@ -8,7 +8,7 @@ use Throwable;
 
 class TelegramTestCommand extends Command
 {
-    protected $signature = 'telegram:test {target=service : parts or service}';
+    protected $signature = 'telegram:test {target=service : parts, service, or sales}';
 
     protected $description = 'Send a test Telegram message (use on cPanel to verify bot + group setup)';
 
@@ -19,6 +19,7 @@ class TelegramTestCommand extends Command
         $this->info('bot_token_set='.(filled(config('services.telegram.bot_token')) ? 'yes' : 'no'));
         $this->info('parts_chat_id='.(config('services.telegram.parts_chat_id') ?: '(empty)'));
         $this->info('service_chat_id='.(config('services.telegram.service_chat_id') ?: '(empty)'));
+        $this->info('sales_chat_id='.(config('services.telegram.sales_chat_id') ?: '(empty)'));
         $this->info('verify_ssl='.(config('services.telegram.verify_ssl') ? 'true' : 'false'));
         $this->newLine();
 
@@ -43,11 +44,18 @@ class TelegramTestCommand extends Command
                     'service_type' => 'General Service',
                     'notes' => 'cPanel telegram test - please ignore',
                 ]),
+                'sales' => $notifier->sendMotorcycleEnquiry([
+                    'name' => 'Server Test',
+                    'mobile' => '770000000',
+                    'model' => 'Scoopy Prestige 2026',
+                    'showroom' => "Malé Showroom",
+                    'payment' => 'Ijara monthly plan',
+                ]),
                 default => null,
             };
 
             if ($ok === null) {
-                $this->error('Use: php artisan telegram:test parts  OR  php artisan telegram:test service');
+                $this->error('Use: php artisan telegram:test parts|service|sales');
 
                 return self::FAILURE;
             }

@@ -73,6 +73,7 @@ class TelegramChatIdCommand extends Command
         $this->newLine();
         $this->info('Use TELEGRAM_PARTS_CHAT_ID for the parts group.');
         $this->info('Use TELEGRAM_SERVICE_CHAT_ID for the service group.');
+        $this->info('Use TELEGRAM_SALES_CHAT_ID for motorcycle enquiries.');
 
         return self::SUCCESS;
     }

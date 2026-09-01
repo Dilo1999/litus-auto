@@ -7,6 +7,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MotorcycleController;
 use App\Http\Controllers\PartsController;
+use App\Http\Controllers\PromotionsController;
 use App\Http\Controllers\ServiceCenterController;
 use App\Services\SeoService;
 use Illuminate\Support\Facades\Route;
@@ -56,3 +57,5 @@ Route::post('/forms/service-appointment', [InquiryFormController::class, 'servic
     ->name('forms.service-appointment');
 Route::post('/forms/parts-inquiry', [InquiryFormController::class, 'partsInquiry'])
     ->name('forms.parts-inquiry');
+Route::post('/forms/motorcycle-enquiry', [InquiryFormController::class, 'motorcycleEnquiry'])
+    ->name('forms.motorcycle-enquiry');

@@ -17,6 +17,11 @@ class TelegramNotifier
         return $this->hasBotToken() && filled(config('services.telegram.service_chat_id'));
     }
 
+    public function isSalesConfigured(): bool
+    {
+        return $this->hasBotToken() && filled(config('services.telegram.sales_chat_id'));
+    }
+
     /**
      * @param  array{brand: string, year?: ?string, model?: ?string, category?: ?string, parts?: ?string, name: string, contact: string}  $data
      */
@@ -111,6 +116,40 @@ class TelegramNotifier
             (string) config('services.telegram.service_chat_id'),
             implode("\n", $lines),
             'service appointment'
+        );
+    }
+
+    /**
+     * @param  array{name: string, mobile: string, model: string, showroom?: ?string, payment?: ?string}  $data
+     */
+    public function sendMotorcycleEnquiry(array $data): bool
+    {
+        if (! $this->isSalesConfigured()) {
+            Log::warning('Telegram sales group is not configured.');
+
+            return false;
+        }
+
+        $lines = [
+            '<b>New Motorcycle Enquiry</b>',
+            '',
+            '<b>Name:</b> '.$this->escape($data['name']),
+            '<b>Mobile:</b> '.$this->escape($data['mobile']),
+            '<b>Model:</b> '.$this->escape($data['model']),
+        ];
+
+        if (filled($data['showroom'] ?? null)) {
+            $lines[] = '<b>Showroom:</b> '.$this->escape($data['showroom']);
+        }
+
+        if (filled($data['payment'] ?? null)) {
+            $lines[] = '<b>Payment:</b> '.$this->escape($data['payment']);
+        }
+
+        return $this->sendMessage(
+            (string) config('services.telegram.sales_chat_id'),
+            implode("\n", $lines),
+            'motorcycle enquiry'
         );
     }
 
