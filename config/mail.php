@@ -128,7 +128,7 @@ return [
     |
     */
 
-    'contact_to' => env('MAIL_CONTACT_RECIPIENT') ?: env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+    'contact_to' => env('MAIL_CONTACT_RECIPIENT', 'sales@litusgroup.mv'),
 
     'service_appointment_to' => env('MAIL_SERVICE_APPOINTMENT_TO', 'service@litusautomobiles.com'),
 

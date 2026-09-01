@@ -59,3 +59,5 @@ Route::post('/forms/parts-inquiry', [InquiryFormController::class, 'partsInquiry
     ->name('forms.parts-inquiry');
 Route::post('/forms/motorcycle-enquiry', [InquiryFormController::class, 'motorcycleEnquiry'])
     ->name('forms.motorcycle-enquiry');
+Route::post('/forms/contact', [InquiryFormController::class, 'contact'])
+    ->name('forms.contact');
