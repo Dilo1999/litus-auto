@@ -355,7 +355,7 @@
                             </div>
                             <div class="min-w-0 pt-0.5">
                                 <b class="mb-1 block text-[14px] font-semibold text-litus-text">Pickup Time</b>
-                                <span class="text-[13px] leading-relaxed text-litus-text-2">Monday – Saturday, 8:00 AM – 6:00 PM.</span>
+                                <span class="text-[13px] leading-relaxed text-litus-text-2">Saturday – Thursday, 9:00 AM – 10:00 PM. Friday, 3:00 PM – 10:00 PM.</span>
                             </div>
                         </li>
                         <li class="flex gap-3.5 py-4">
