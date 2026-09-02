@@ -102,26 +102,27 @@
             'icon' => 'calendar',
             'title' => 'Book Your Request',
             'text' => 'Schedule a pickup time that suits you.',
+            'image' => asset('images/service_center/pick-drop/'.rawurlencode('Book Your Request.webp')),
         ],
         [
             'icon' => 'bike',
             'title' => 'We Pick Your Bike',
             'text' => 'Our team collects your motorcycle from your location.',
+            'image' => asset('images/service_center/pick-drop/'.rawurlencode('We Pick Your Bike.webp')),
         ],
         [
             'icon' => 'wrench',
             'title' => 'We Service Your Bike',
             'text' => 'Your bike is serviced by our expert technicians with quality care.',
+            'image' => asset('images/service_center/pick-drop/'.rawurlencode('We Service Your Bike.webp')),
         ],
         [
             'icon' => 'map-pin',
             'title' => 'We Drop It Back',
             'text' => 'We deliver your bike back to you, safe and on time.',
+            'image' => asset('images/service_center/pick-drop/'.rawurlencode('We Drop It Back.webp')),
         ],
     ];
-
-    $pickDropCardClass = 'group relative flex h-full flex-col rounded-[18px] border border-litus-line bg-white px-5 pb-6 pt-12 shadow-[0_2px_8px_rgba(9,17,32,0.05)] transition duration-200 min-[900px]:px-6 min-[900px]:pb-8 min-[900px]:pt-14 md:hover:-translate-y-1 md:hover:border-litus-line-2 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]';
-    $pickDropIconClass = 'mx-auto mb-4 grid h-[72px] w-[72px] shrink-0 place-items-center rounded-full bg-[rgba(18,87,214,0.09)] text-litus-primary transition duration-200 group-hover:bg-[rgba(18,87,214,0.14)] min-[900px]:mb-5 min-[900px]:h-20 min-[900px]:w-20';
 @endphp
 
 <div class="font-sans" data-service-center-page>
@@ -307,21 +308,12 @@
             </div>
 
             {{-- Steps + sidebar --}}
-            <div class="grid grid-cols-1 items-stretch gap-8 min-[900px]:grid-cols-[minmax(0,1fr)_300px] min-[900px]:gap-7">
+            <div class="grid grid-cols-1 items-stretch gap-6 min-[900px]:grid-cols-[minmax(0,1fr)_260px] min-[900px]:gap-5">
                 <div class="flex min-w-0 flex-col min-[900px]:h-full">
                     {{-- 2×2 step grid (tablet & desktop) --}}
-                    <div class="hidden h-full gap-4 sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:gap-5 min-[900px]:min-h-0 min-[900px]:flex-1">
+                    <div class="hidden h-full gap-2.5 sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:gap-3 min-[900px]:min-h-0 min-[900px]:flex-1">
                         @foreach ($pickDropSteps as $index => $step)
-                            <article class="{{ $pickDropCardClass }} min-h-[210px] min-[900px]:min-h-0">
-                                <span class="absolute left-4 top-4 grid h-[30px] w-[30px] place-items-center rounded-full bg-litus-primary text-[13px] font-bold text-white transition duration-200 group-hover:shadow-[0_4px_12px_rgba(18,87,214,0.35)] min-[900px]:left-5 min-[900px]:top-5">
-                                    {{ $index + 1 }}
-                                </span>
-                                <div class="{{ $pickDropIconClass }}">
-                                    <x-litus-icon :name="$step['icon']" class="h-7 w-7 min-[900px]:h-8 min-[900px]:w-8" />
-                                </div>
-                                <h4 class="mb-2 text-center text-[15px] font-bold leading-snug text-litus-text min-[900px]:text-[16px]">{{ $step['title'] }}</h4>
-                                <p class="mt-auto text-center text-[13.5px] leading-relaxed text-litus-text-2 min-[900px]:px-1 min-[900px]:text-[14px]">{{ $step['text'] }}</p>
-                            </article>
+                            <x-service.pick-drop-step-card :step="$step" :index="$index" />
                         @endforeach
                     </div>
 
@@ -330,19 +322,10 @@
                         <div
                             data-home-card-slider
                             data-interval="5000"
-                            class="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                            class="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                             @foreach ($pickDropSteps as $index => $step)
-                                <div data-home-card-slide class="w-[min(88%,300px)] shrink-0 snap-center">
-                                    <article class="{{ $pickDropCardClass }} min-h-[220px]">
-                                        <span class="absolute left-4 top-4 grid h-[30px] w-[30px] place-items-center rounded-full bg-litus-primary text-[13px] font-bold text-white transition duration-200 group-hover:shadow-[0_4px_12px_rgba(18,87,214,0.35)]">
-                                            {{ $index + 1 }}
-                                        </span>
-                                        <div class="{{ $pickDropIconClass }}">
-                                            <x-litus-icon :name="$step['icon']" class="h-7 w-7" />
-                                        </div>
-                                        <h4 class="mb-2 text-center text-[15px] font-bold text-litus-text">{{ $step['title'] }}</h4>
-                                        <p class="mt-auto text-center text-[13.5px] leading-relaxed text-litus-text-2">{{ $step['text'] }}</p>
-                                    </article>
+                                <div data-home-card-slide class="w-[min(78%,220px)] shrink-0 snap-center">
+                                    <x-service.pick-drop-step-card :step="$step" :index="$index" />
                                 </div>
                             @endforeach
                         </div>
