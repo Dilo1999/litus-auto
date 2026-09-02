@@ -89,7 +89,7 @@
         'Not sure - please advise',
     ];
 
-    $pickDropHeroImage = asset('images/motorcycles/'.rawurlencode('ChatGPT Image Jul 3, 2026, 02_50_01 PM.png'));
+    $pickDropHeroImage = asset('images/service_center/pick-drop/'.rawurlencode('Main 2.webp'));
 
     $pickDropFeatures = [
         ['icon' => 'map-pin', 'text' => 'Across the Maldives'],
@@ -271,23 +271,39 @@
     </section>
 
     {{-- PICK & DROP HERO — full width --}}
-    <section class="relative min-h-[clamp(300px,42vw,460px)] overflow-hidden bg-litus-paper-3">
+    <section class="relative overflow-hidden bg-white min-[961px]:min-h-[clamp(300px,42vw,460px)] min-[961px]:bg-litus-paper-3">
         <img src="{{ $pickDropHeroImage }}"
              alt=""
-             class="absolute inset-0 h-full w-full object-cover object-[center_right]"
+             class="absolute inset-0 hidden h-full w-full object-cover object-[center_right] min-[961px]:block"
              aria-hidden="true">
-        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#ffffff_0%,rgba(255,255,255,0.97)_20%,rgba(255,255,255,0.82)_38%,rgba(255,255,255,0.45)_58%,rgba(255,255,255,0.12)_78%,transparent_100%)] max-[960px]:bg-[linear-gradient(180deg,#ffffff_0%,rgba(255,255,255,0.94)_32%,rgba(255,255,255,0.55)_58%,rgba(255,255,255,0.15)_100%)]"></div>
 
-        <div class="relative z-[2] litus-container py-[clamp(40px,6vw,80px)] pb-[clamp(36px,5vw,72px)]">
-            <header class="max-w-[620px] text-left">
-                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">Pick &amp; Drop Service</span>
-                <h2 class="font-display text-[clamp(26px,5.8vw,44px)] font-bold leading-[1.1] tracking-[-0.028em] text-litus-text">
+        {{-- Mobile: title over image --}}
+        <div class="relative h-[clamp(240px,56vw,320px)] overflow-hidden min-[961px]:hidden">
+            <img src="{{ $pickDropHeroImage }}"
+                 alt=""
+                 class="h-full w-full object-cover object-[center_35%]"
+                 aria-hidden="true">
+            <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.15)_0%,rgba(255,255,255,0.9)_62%,#ffffff_100%)]"></div>
+            <div class="absolute inset-x-0 bottom-0 litus-container pb-5">
+                <span class="mb-2.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Pick &amp; Drop Service</span>
+                <h2 class="max-w-[14ch] font-display text-[clamp(26px,7vw,34px)] font-bold leading-[1.1] tracking-[-0.028em] text-litus-text">
                     We Pick. We Service.<br> We Drop.
                 </h2>
-                <p class="mt-4 max-w-[640px] text-[15px] leading-[1.68] text-litus-text-2 sm:mt-5 sm:text-[clamp(16.5px,1.5vw,18.5px)]">
+            </div>
+        </div>
+
+        <div class="pointer-events-none absolute inset-0 hidden bg-[linear-gradient(90deg,#ffffff_0%,rgba(255,255,255,0.97)_20%,rgba(255,255,255,0.82)_38%,rgba(255,255,255,0.45)_58%,rgba(255,255,255,0.12)_78%,transparent_100%)] min-[961px]:block"></div>
+
+        <div class="relative z-[2] litus-container py-5 pb-7 min-[961px]:py-[clamp(40px,6vw,80px)] min-[961px]:pb-[clamp(36px,5vw,72px)]">
+            <header class="max-w-[620px] text-left">
+                <span class="mb-3 hidden text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary min-[961px]:mb-3.5 min-[961px]:block">Pick &amp; Drop Service</span>
+                <h2 class="hidden font-display text-[clamp(26px,5.8vw,44px)] font-bold leading-[1.1] tracking-[-0.028em] text-litus-text min-[961px]:block">
+                    We Pick. We Service.<br> We Drop.
+                </h2>
+                <p class="max-w-[640px] text-[15px] leading-[1.68] text-litus-text-2 min-[961px]:mt-5 min-[961px]:text-[clamp(16.5px,1.5vw,18.5px)]">
                     Busy schedule? No time to visit the garage? Our Pick &amp; Drop Service makes motorcycle servicing easy and convenient. We pick up your bike, service it with care, and drop it back at your doorstep.
                 </p>
-                <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-3 sm:mt-7 sm:gap-x-8">
+                <ul class="mt-5 flex flex-col gap-3 min-[961px]:mt-7 min-[961px]:flex-row min-[961px]:flex-wrap min-[961px]:gap-x-8 min-[961px]:gap-y-3">
                     @foreach ($pickDropFeatures as $feature)
                         <li class="flex items-center gap-2 text-[13.5px] font-semibold text-litus-text sm:text-[14px]">
                             <x-litus-icon :name="$feature['icon']" class="h-4 w-4 shrink-0 text-litus-primary" />
