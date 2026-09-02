@@ -117,7 +117,7 @@ class GalleryImage extends Model
 
     public function scopeOrdered(Builder $query): Builder
     {
-        return $query->orderBy('sort_order')->orderByDesc('id');
+        return $query->orderByDesc('sort_order')->orderByDesc('id');
     }
 
     public function toFrontendArray(): array

@@ -133,14 +133,17 @@ trait ManagesCategoryGalleryImages
         $isPublished = array_key_exists('is_published', $data) ? (bool) $data['is_published'] : true;
 
         $first = null;
+        $count = $images->count();
+        $baseSortOrder = GalleryImage::nextSortOrderForCategory($category);
 
-        foreach ($images as $path) {
+        foreach ($images as $index => $path) {
             $record = GalleryImage::query()->create([
                 'category' => $category,
                 'title' => null,
                 'image' => $path,
                 'is_featured' => $isFeatured,
                 'is_published' => $isPublished,
+                'sort_order' => $baseSortOrder + ($count - 1 - $index),
             ]);
 
             $first ??= $record;
@@ -170,7 +173,7 @@ trait ManagesCategoryGalleryImages
                     ->dateTime()
                     ->sortable(),
             ])
-            ->defaultSort('sort_order')
+            ->defaultSort('sort_order', 'desc')
             ->filters([
                 TernaryFilter::make('is_featured')
                     ->label('Featured'),
