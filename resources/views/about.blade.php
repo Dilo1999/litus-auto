@@ -6,10 +6,6 @@
 @php
     ['desktop' => $heroBg, 'mobile' => $heroBgMobile] = \App\Models\PageSetting::heroForRoute('about');
 
-    $showroomImage = function (string ...$parts): string {
-        return asset('images/about_us/showrooms/' . implode('/', array_map('rawurlencode', $parts)));
-    };
-
     $showrooms = $showrooms ?? [];
     $showroomCount = count($showrooms);
 
@@ -54,15 +50,6 @@
         ['name' => 'Mohamed Nafiz', 'role' => 'Legal Team', 'dept' => 'Legal Affairs', 'img' => asset('images/about_us/nafiz.webp')],
     ];
 
-    $galleryTiles = [
-        ['label' => 'Showroom', 'img' => $showroomImage("Male' Showroom", 'Malé Showroom.jpg'), 'span' => true],
-        ['label' => 'Showroom', 'img' => $showroomImage('Hithadhoo Showroom', 'Hithadhoo Showroom.jpg')],
-        ['label' => 'Service', 'img' => $showroomImage('Hulhumale Showroom', 'Hulhumale Showroom.webp')],
-        ['label' => 'Lifestyle', 'img' => $showroomImage('Fonadhoo Showroom', 'Fonadhoo Showroom.jpg')],
-        ['label' => 'Showroom', 'img' => $showroomImage('Villingili Showroom', 'Villingili Showroom.jpg')],
-        ['label' => 'Customer', 'img' => $showroomImage('Thinadhoo Showroom', 'Thinadhoo Showroom.webp')],
-        ['label' => 'Showroom', 'img' => $showroomImage('Kudahuvadhoo Showroom', 'Kudahuvadhoo Showroom.jpg')],
-    ];
 @endphp
 
 <div class="font-sans">
@@ -435,45 +422,6 @@
                         @endforeach
                     </div>
                 @endif
-            </div>
-        </div>
-    </section>
-
-    {{-- GALLERY --}}
-    <section id="gallery" class="litus-sec scroll-mt-24 max-md:!py-12">
-        <div class="litus-container">
-            <div class="mx-auto mb-6 max-w-[660px] text-center max-md:mb-5 sm:mb-[clamp(34px,4vw,54px)]">
-                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">LITUS Gallery</span>
-                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Ride the visual journey</h2>
-                <p class="mt-3 text-[15px] leading-[1.66] text-litus-text-2 sm:mt-4 sm:text-[clamp(16.5px,1.5vw,19px)]">
-                    Our collection of motorcycles, showroom moments, customer experiences and lifestyle photos.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-2 gap-2.5 sm:gap-4 md:grid-cols-4">
-                @foreach ($galleryTiles as $index => $tile)
-                    <div @class([
-                        'relative overflow-hidden rounded-xl bg-litus-paper-3 sm:rounded-[14px]',
-                        'col-span-2 aspect-[16/9] sm:aspect-[16/10] md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[320px]' => $index === 0,
-                        'aspect-square' => $index !== 0,
-                    ])>
-                        <img src="{{ $tile['img'] }}"
-                             alt="{{ $tile['label'] }}"
-                             class="h-full w-full object-cover"
-                             loading="lazy">
-                        <span class="absolute bottom-2 left-2.5 rounded-md bg-black/45 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.12em] text-white/90 sm:bottom-2.5 sm:left-3 sm:px-2 sm:py-1 sm:text-[10px]">
-                            {{ $tile['label'] }}
-                        </span>
-                    </div>
-                @endforeach
-            </div>
-
-            <div class="mt-6 text-center sm:mt-9">
-                <a href="{{ route('gallery') }}"
-                   class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-litus-primary px-6 py-3 text-[14.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover sm:px-8 sm:py-[17px] sm:text-[15.5px]">
-                    Open Full Gallery
-                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
-                </a>
             </div>
         </div>
     </section>
