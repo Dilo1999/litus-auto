@@ -308,10 +308,10 @@
             </div>
 
             {{-- Steps + sidebar --}}
-            <div class="grid grid-cols-1 items-stretch gap-6 min-[900px]:grid-cols-[minmax(0,1fr)_260px] min-[900px]:gap-5">
+            <div class="grid grid-cols-1 items-stretch gap-8 min-[900px]:grid-cols-[minmax(0,1fr)_300px] min-[900px]:gap-7">
                 <div class="flex min-w-0 flex-col min-[900px]:h-full">
                     {{-- 2×2 step grid (tablet & desktop) --}}
-                    <div class="hidden h-full gap-2.5 sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:gap-3 min-[900px]:min-h-0 min-[900px]:flex-1">
+                    <div class="hidden h-full gap-3 sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:gap-4 min-[900px]:min-h-0 min-[900px]:flex-1">
                         @foreach ($pickDropSteps as $index => $step)
                             <x-service.pick-drop-step-card :step="$step" :index="$index" />
                         @endforeach
@@ -322,9 +322,9 @@
                         <div
                             data-home-card-slider
                             data-interval="5000"
-                            class="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                            class="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                             @foreach ($pickDropSteps as $index => $step)
-                                <div data-home-card-slide class="w-[min(78%,220px)] shrink-0 snap-center">
+                                <div data-home-card-slide class="w-[min(82%,260px)] shrink-0 snap-center">
                                     <x-service.pick-drop-step-card :step="$step" :index="$index" />
                                 </div>
                             @endforeach
@@ -345,7 +345,7 @@
                     </div>
                 </div>
 
-                <aside class="flex flex-col rounded-[18px] border border-litus-line bg-white p-5 shadow-[0_2px_12px_rgba(9,17,32,0.06)] sm:p-6 min-[900px]:h-full min-[900px]:self-stretch">
+                <aside class="flex flex-col rounded-[18px] border border-litus-line bg-white p-5 shadow-[0_2px_12px_rgba(9,17,32,0.06)] sm:p-6 min-[900px]:sticky min-[900px]:top-[96px] min-[900px]:self-start">
                     <ul class="grid flex-1 list-none gap-0 divide-y divide-litus-paper-3">
                         <li class="flex gap-3.5 py-4 first:pt-0">
                             <div class="grid h-10 w-10 shrink-0 place-items-center rounded-[11px] bg-litus-paper-3 text-litus-primary">
