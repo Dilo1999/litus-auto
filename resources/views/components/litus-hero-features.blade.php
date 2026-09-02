@@ -31,8 +31,15 @@
                         'transition hover:bg-white/[0.04]' => (bool) $featureHref,
                     ])
                          data-hero-feature-slide>
-                        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-white/35 text-white shadow-[0_0_16px_rgba(255,255,255,0.06)] max-md:h-10 max-md:w-10 max-md:border-[#0065ef]/40 max-md:bg-[#0065ef]/15 sm:h-10 sm:w-10">
-                            <x-litus-icon :name="$feature['icon']" class="h-4 w-4 max-md:h-4 max-md:w-4 max-md:text-[#0065ef] sm:h-[18px] sm:w-[18px]" />
+                        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-white/35 shadow-[0_0_16px_rgba(255,255,255,0.06)] max-md:h-10 max-md:w-10 max-md:border-[#0065ef]/40 max-md:bg-[#0065ef]/15 sm:h-10 sm:w-10">
+                            @if (! empty($feature['image']))
+                                <img src="{{ $feature['image'] }}"
+                                     alt=""
+                                     class="h-7 w-7 object-contain brightness-0 invert max-md:h-8 max-md:w-8 sm:h-8 sm:w-8"
+                                     aria-hidden="true">
+                            @else
+                                <x-litus-icon :name="$feature['icon']" class="h-4 w-4 max-md:h-4 max-md:w-4 max-md:text-[#0065ef] sm:h-[18px] sm:w-[18px]" />
+                            @endif
                         </div>
                         <div class="min-w-0 text-left">
                             <h3 class="mb-0.5 text-sm font-extrabold leading-tight text-white max-md:mb-0.5 max-md:text-[13px] sm:text-[15px]">{{ $feature['title'] }}</h3>

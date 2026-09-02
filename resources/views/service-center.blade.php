@@ -6,11 +6,13 @@
 @php
     ['desktop' => $heroBg, 'mobile' => $heroBgMobile] = \App\Models\PageSetting::heroForRoute('service-center');
 
+    $serviceIcon = fn (string $filename): string => asset('images/service_center/pick-drop/icon/'.rawurlencode($filename));
+
     $heroFeatures = [
-        ['icon' => 'wrench', 'title' => 'Periodic Maintenance', 'desc' => 'Manufacturer schedules'],
-        ['icon' => 'shield', 'title' => 'Accident Repairs', 'desc' => 'Full collision & damage'],
-        ['icon' => 'zap', 'title' => 'Engine Overhaul', 'desc' => 'Complete restoration'],
-        ['icon' => 'bike', 'title' => 'Pick & Drop', 'desc' => 'We come to you'],
+        ['image' => $serviceIcon('Periodic Maintenance.png'), 'title' => 'Periodic Maintenance', 'desc' => 'Manufacturer schedules'],
+        ['image' => $serviceIcon('Accident.png'), 'title' => 'Accident Repairs', 'desc' => 'Full collision & damage'],
+        ['image' => $serviceIcon('Engine Overhaul.png'), 'title' => 'Engine Overhaul', 'desc' => 'Complete restoration'],
+        ['image' => $serviceIcon('Pick & Drop.png'), 'title' => 'Pick & Drop', 'desc' => 'We come to you'],
     ];
 
     $capabilities = [
@@ -171,9 +173,10 @@
             <div class="litus-container grid grid-cols-2 gap-4 py-[22px] lg:grid-cols-4 lg:gap-2.5">
                 @foreach ($heroFeatures as $item)
                     <div class="flex items-center gap-[13px]">
-                        <div class="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[10px] bg-[rgba(90,184,255,0.15)] text-litus-sky">
-                            <x-litus-icon :name="$item['icon']" class="h-4 w-4" />
-                        </div>
+                        <img src="{{ $item['image'] }}"
+                             alt=""
+                             class="h-[38px] w-[38px] shrink-0 object-contain brightness-0 invert"
+                             aria-hidden="true">
                         <div>
                             <b class="block text-sm font-semibold leading-snug text-white">{{ $item['title'] }}</b>
                             <span class="block text-[12.5px] leading-snug text-white/60">{{ $item['desc'] }}</span>
