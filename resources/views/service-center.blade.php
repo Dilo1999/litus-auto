@@ -12,29 +12,29 @@
         ['image' => $serviceIcon('Periodic Maintenance.png'), 'title' => 'Periodic Maintenance', 'desc' => 'Manufacturer schedules'],
         ['image' => $serviceIcon('Accident.png'), 'title' => 'Accident Repairs', 'desc' => 'Full collision & damage'],
         ['image' => $serviceIcon('Engine Overhaul.png'), 'title' => 'Engine Overhaul', 'desc' => 'Complete restoration'],
-        ['image' => $serviceIcon('Pick & Drop.png'), 'title' => 'Pick & Drop', 'desc' => 'We come to you'],
+        ['image' => $serviceIcon('Pick & Drop.png'), 'title' => 'Irregular Maintenance', 'desc' => 'Unusual faults'],
     ];
 
     $capabilities = [
         [
-            'icon' => 'wrench',
+            'image' => $serviceIcon('Periodic Maintenance.png'),
             'title' => 'Periodic Maintenance',
-            'text' => 'Scheduled servicing at the manufacturer’s intervals - typically 1,000 km, then every 6,000 km. This is what keeps a scooter running properly past year three.',
+            'text' => 'Maintenance that is done after driving a specific number of kilometers set by the manufacturer of the Motorcycle. These will help keep your motorcycle in top shape and ensure a longer life for the vehicle. Honda recommends first maintenance after 1000km, after which they recommend maintenance after every 6000km. Yamaha recommends a first service after 1000km and regular maintenance every 4000km.',
         ],
         [
-            'icon' => 'shield',
+            'image' => $serviceIcon('Accident.png'),
             'title' => 'Accident Repairs',
-            'text' => 'Collision and road damage repaired to the correct standard. We assess the machine fully and show you what we found before starting work.',
+            'text' => 'This encompasses any damage received due to collisions or other road accidents. Repairs will be made on the outer and inner workings of the motorcycle after sufficient observations have been made. The owner of the vehicle is required to bring the vehicle to a service center and the diagnosis will proceed from there.',
         ],
         [
-            'icon' => 'zap',
+            'image' => $serviceIcon('Engine Overhaul.png'),
             'title' => 'Engine Overhaul',
-            'text' => 'A full strip, inspection and rebuild, usually needed after six to seven years of riding. Any worn part is replaced with a genuine one.',
+            'text' => 'An engine overhaul is usually required after 6 to 7 years of driving. During the overhaul procedure, the engine will be fully disassembled and manually inspected for issues. Any and all parts of the motorcycle can be changed upon request.',
         ],
         [
-            'icon' => 'clock',
+            'image' => $serviceIcon('Pick & Drop.png'),
             'title' => 'Irregular Maintenance',
-            'text' => 'Catch-up servicing for bikes that have missed scheduled intervals. Common, fixable, and better addressed than ignored.',
+            'text' => 'Maintenance made outside of the recommended periodic maintenance. These will address issues noticed while driving and is most commonly required if periodic maintenance is neglected.',
         ],
     ];
 
@@ -56,20 +56,20 @@
     $programs = [
         [
             'q' => 'Periodic Maintenance',
-            'a' => 'Maintenance carried out at the intervals set by the manufacturer. These services keep your motorcycle in good shape and ensure a longer life. Honda recommends the first maintenance after 1,000 km, then every 6,000 km. Yamaha recommends a first service after 1,000 km and regular maintenance every 6,000 km thereafter.',
+            'a' => 'Maintenance that is done after driving a specific number of kilometers set by the manufacturer of the Motorcycle. These will help keep your motorcycle in top shape and ensure a longer life for the vehicle. Honda recommends first maintenance after 1000km, after which they recommend maintenance after every 6000km. Yamaha recommends a first service after 1000km and regular maintenance every 4000km.',
             'open' => true,
         ],
         [
             'q' => 'Irregular Maintenance',
-            'a' => 'Maintenance made outside of the recommended periodic schedule. This addresses issues noticed while riding, and is most commonly required when periodic maintenance has been neglected. It is entirely fixable - the sooner it is looked at, the less it costs.',
+            'a' => 'Maintenance made outside of the recommended periodic maintenance. These will address issues noticed while driving and is most commonly required if periodic maintenance is neglected.',
         ],
         [
             'q' => 'Accident Repairs',
-            'a' => 'Repairs for damage sustained in a collision or other road accident. Repairs are made to the standard set out by the manufacturer after sufficient observation. The owner is required to bring the vehicle to a service centre so the diagnosis can proceed properly.',
+            'a' => 'This encompasses any damage received due to collisions or other road accidents. Repairs will be made on the outer and inner workings of the motorcycle after sufficient observations have been made. The owner of the vehicle is required to bring the vehicle to a service center and the diagnosis will proceed from there.',
         ],
         [
             'q' => 'Engine Overhaul',
-            'a' => 'Usually required after six or seven years of riding. During the overhaul the engine is fully disassembled and inspected, and any worn part is replaced. We quote you before proceeding, not after.',
+            'a' => 'An engine overhaul is usually required after 6 to 7 years of driving. During the overhaul procedure, the engine will be fully disassembled and manually inspected for issues. Any and all parts of the motorcycle can be changed upon request.',
         ],
         [
             'q' => 'Pick & Drop Service',
@@ -247,8 +247,11 @@
                     @foreach ($capabilities as $item)
                         <div data-home-card-slide class="max-md:w-[min(88%,340px)] max-md:shrink-0 max-md:snap-center">
                             <article class="group h-full rounded-2xl border border-litus-line bg-white px-4 py-5 shadow-[0_1px_2px_rgba(9,17,32,0.04)] transition duration-200 sm:rounded-[18px] sm:px-[26px] sm:py-[30px] sm:shadow-[0_1px_2px_rgba(9,17,32,.05)] md:hover:-translate-y-1 md:hover:border-litus-line-2 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
-                                <div class="mb-3 grid h-10 w-10 place-items-center rounded-[12px] bg-litus-paper-3 text-litus-primary transition duration-200 group-hover:bg-[rgba(18,87,214,0.12)] sm:mb-[18px] sm:h-[42px] sm:w-[42px]">
-                                    <x-litus-icon :name="$item['icon']" class="h-4 w-4 sm:h-5 sm:w-5" />
+                                <div class="mb-3 grid h-10 w-10 place-items-center rounded-[12px] bg-litus-paper-3 transition duration-200 group-hover:bg-[rgba(18,87,214,0.12)] sm:mb-[18px] sm:h-[42px] sm:w-[42px]">
+                                    <img src="{{ $item['image'] }}"
+                                         alt=""
+                                         class="h-7 w-7 object-contain sm:h-8 sm:w-8"
+                                         aria-hidden="true">
                                 </div>
                                 <h4 class="mb-2 text-[16px] font-bold text-litus-text sm:text-lg">{{ $item['title'] }}</h4>
                                 <p class="text-[14px] leading-relaxed text-litus-text-2 sm:text-[14.5px]">{{ $item['text'] }}</p>

@@ -14,8 +14,9 @@
         'Find a Showroom' => route('about') . '#locations',
     ];
     $socialLinks = [
-        ['icon' => 'facebook', 'href' => '#', 'label' => 'Facebook'],
-        ['icon' => 'instagram', 'href' => '#', 'label' => 'Instagram'],
+        ['icon' => 'facebook', 'href' => 'https://www.facebook.com/share/1PVsXTRpay/?mibextid=wwXIfr', 'label' => 'Facebook'],
+        ['icon' => 'instagram', 'href' => 'https://www.instagram.com/litusautomobiles?igsi=eXE4OWhyaDl1amJ2', 'label' => 'Instagram'],
+        ['icon' => 'tiktok', 'href' => 'https://www.tiktok.com/@litus.automobiles?_r=1&_t=ZS-99PnVP3nKzq', 'label' => 'TikTok'],
         ['icon' => 'message-circle', 'href' => 'https://wa.me/9607797442', 'label' => 'WhatsApp'],
     ];
     $logo = asset('images/logo/' . rawurlencode('Litus-Automobiles-white (1).png'));

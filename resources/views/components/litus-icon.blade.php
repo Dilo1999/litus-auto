@@ -38,6 +38,9 @@ $attrs = $attributes->merge(['class' => $class, 'fill' => $fill, 'stroke' => 'cu
     @case('instagram')
         <svg {{ $attrs }}><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
         @break
+    @case('tiktok')
+        <svg {{ $attrs }}><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+        @break
     @case('message-circle')
         <svg {{ $attrs }}><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
         @break
