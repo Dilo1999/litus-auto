@@ -45,7 +45,7 @@
 
     $teamMembers = [
         ['name' => 'Mohamed Nazeer', 'role' => 'Manager', 'dept' => 'Parts & Service Center', 'img' => asset('images/about_us/nazeer.webp')],
-        ['name' => 'Iffath Ali', 'role' => 'Sales & Marketing Manager', 'dept' => 'Sales & Marketing', 'img' => asset('images/about_us/Iffath.png')],
+        ['name' => 'Iffath Ali', 'role' => 'Sales & Marketing Manager', 'dept' => 'Sales & Marketing', 'img' => asset('images/about_us/Iffath.png'), 'hidden' => true],
         ['name' => 'Dhanushka', 'role' => 'Inventory Officer', 'dept' => 'Inventory Management', 'img' => asset('images/about_us/dhanushka.webp')],
         ['name' => 'Mohamed Nafiz', 'role' => 'Legal Team', 'dept' => 'Legal Affairs', 'img' => asset('images/about_us/nafiz.webp')],
     ];
@@ -301,7 +301,10 @@
                     data-interval="4500"
                     class="grid grid-cols-1 gap-6 max-md:-mx-4 max-md:flex max-md:gap-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:grid-cols-3">
                     @foreach ($teamMembers as $member)
-                        <div data-home-card-slide class="max-md:w-[min(88%,300px)] max-md:shrink-0 max-md:snap-center">
+                        <div data-home-card-slide @class([
+                            'max-md:w-[min(88%,300px)] max-md:shrink-0 max-md:snap-center',
+                            'hidden' => $member['hidden'] ?? false,
+                        ])>
                             <article class="h-full overflow-hidden rounded-2xl border border-litus-line bg-white text-center shadow-[0_1px_2px_rgba(9,17,32,0.04)] transition duration-200 sm:rounded-[18px] sm:shadow-[0_1px_2px_rgba(9,17,32,.05)] md:hover:-translate-y-1 md:hover:border-litus-line-2 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
                                 <div class="aspect-[4/3] overflow-hidden bg-litus-paper-3">
                                     <img src="{{ $member['img'] }}"
@@ -319,9 +322,12 @@
                     @endforeach
                 </div>
 
-                @if (count($teamMembers) > 1)
+                @php
+                    $visibleTeamMembers = array_values(array_filter($teamMembers, fn ($member) => ! ($member['hidden'] ?? false)));
+                @endphp
+                @if (count($visibleTeamMembers) > 1)
                     <div class="mt-4 hidden items-center justify-center gap-1.5 max-md:flex" data-home-card-dots aria-hidden="true">
-                        @foreach ($teamMembers as $index => $member)
+                        @foreach ($visibleTeamMembers as $index => $member)
                             <span @class([
                                 'h-1.5 rounded-full transition-all duration-300',
                                 'w-5 bg-litus-primary' => $index === 0,
