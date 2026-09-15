@@ -49,11 +49,11 @@
         ['name' => 'Mariyam Rishmee', 'role' => 'Manager', 'dept' => 'Automobiles Operations', 'img' => $teamMemberImage('Mariyam Rishmee - Manager, Automobiles Operations.webp')],
         ['name' => 'Hassan Basil', 'role' => 'Product Manager', 'dept' => 'Sales & Marketing', 'img' => $teamMemberImage('Hassan Basil - Product Manager, Sales & Marketing.webp')],
         ['name' => 'Mohamed Nafiz', 'role' => 'Senior Legal Officer', 'dept' => 'Legal Affairs', 'img' => $teamMemberImage('Mohamed Nafiz - Senior Legal Officer, Legal Affairs.webp')],
-        ['name' => 'Aminath Liufa Ramzee', 'role' => 'Recovery Officer Gr3', 'dept' => 'Recovery Team', 'img' => $teamMemberImage('Aminath Liufa Ramzee - Recovery Officer Gr3, Recovery Team.webp')],
+        ['name' => 'Mohamed Faarih Ibrahim', 'role' => 'Head of Sales', 'dept' => 'Sales & Marketing', 'img' => $teamMemberImage('Mohamed Faarih Ibrahim - Head of Sales, Sales & Marketing.webp')],
         ['name' => 'Ibrahim Rasheed', 'role' => 'Manager', 'dept' => 'LITUS Service Center and Parts', 'img' => $teamMemberImage('Ibrahim Rasheed - Manager, LITUS Service Center and Parts.webp')],
         ['name' => 'Meesham Mamdhooh', 'role' => 'Asst. Manager', 'dept' => 'LITUS Service Center and Parts', 'img' => $teamMemberImage('Meesham Mamdhooh - Asst.webp')],
         ['name' => 'Adam Khuzaimath', 'role' => 'Supervisor', 'dept' => 'LITUS Parts', 'img' => $teamMemberImage('Adam Khuzaimath - Supervisor, LITUS Parts.webp')],
-        ['name' => 'Mohamed Faarih Ibrahim', 'role' => 'Head of Sales', 'dept' => 'Sales & Marketing', 'img' => $teamMemberImage('Mohamed Faarih Ibrahim - Head of Sales, Sales & Marketing.webp')],
+        ['name' => 'Aminath Liufa Ramzee', 'role' => 'Recovery Officer Gr3', 'dept' => 'Recovery Team', 'img' => $teamMemberImage('Aminath Liufa Ramzee - Recovery Officer Gr3, Recovery Team.webp')],
     ];
 
 @endphp
