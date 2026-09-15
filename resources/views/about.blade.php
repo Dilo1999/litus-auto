@@ -43,11 +43,17 @@
         ['name' => 'Ahmed Zahir', 'role' => 'Chief Operating Officer · Managing Director, LITUS Automobiles', 'img' => asset('images/about_us/ahmed.webp')],
     ];
 
+    $teamMemberImage = fn ($filename) => asset('images/about_us/member/' . rawurlencode($filename));
+
     $teamMembers = [
-        ['name' => 'Mohamed Nazeer', 'role' => 'Manager', 'dept' => 'Parts & Service Center', 'img' => asset('images/about_us/nazeer.webp')],
-        ['name' => 'Iffath Ali', 'role' => 'Sales & Marketing Manager', 'dept' => 'Sales & Marketing', 'img' => asset('images/about_us/Iffath.png'), 'hidden' => true],
-        ['name' => 'Dhanushka', 'role' => 'Inventory Officer', 'dept' => 'Inventory Management', 'img' => asset('images/about_us/dhanushka.webp')],
-        ['name' => 'Mohamed Nafiz', 'role' => 'Legal Team', 'dept' => 'Legal Affairs', 'img' => asset('images/about_us/nafiz.webp')],
+        ['name' => 'Mariyam Rishmee', 'role' => 'Manager', 'dept' => 'Automobiles Operations', 'img' => $teamMemberImage('Mariyam Rishmee - Manager, Automobiles Operations.webp')],
+        ['name' => 'Hassan Basil', 'role' => 'Product Manager', 'dept' => 'Sales & Marketing', 'img' => $teamMemberImage('Hassan Basil - Product Manager, Sales & Marketing.webp')],
+        ['name' => 'Mohamed Nafiz', 'role' => 'Senior Legal Officer', 'dept' => 'Legal Affairs', 'img' => $teamMemberImage('Mohamed Nafiz - Senior Legal Officer, Legal Affairs.webp')],
+        ['name' => 'Aminath Liufa Ramzee', 'role' => 'Recovery Officer Gr3', 'dept' => 'Recovery Team', 'img' => $teamMemberImage('Aminath Liufa Ramzee - Recovery Officer Gr3, Recovery Team.webp')],
+        ['name' => 'Ibrahim Rasheed', 'role' => 'Manager', 'dept' => 'LITUS Service Center and Parts', 'img' => $teamMemberImage('Ibrahim Rasheed - Manager, LITUS Service Center and Parts.webp')],
+        ['name' => 'Meesham Mamdhooh', 'role' => 'Asst. Manager', 'dept' => 'LITUS Service Center and Parts', 'img' => $teamMemberImage('Meesham Mamdhooh - Asst.webp')],
+        ['name' => 'Adam Khuzaimath', 'role' => 'Supervisor', 'dept' => 'LITUS Parts', 'img' => $teamMemberImage('Adam Khuzaimath - Supervisor, LITUS Parts.webp')],
+        ['name' => 'Mohamed Faarih Ibrahim', 'role' => 'Head of Sales', 'dept' => 'Sales & Marketing', 'img' => $teamMemberImage('Mohamed Faarih Ibrahim - Head of Sales, Sales & Marketing.webp')],
     ];
 
 @endphp
@@ -299,14 +305,14 @@
                 <div
                     data-home-card-slider
                     data-interval="4500"
-                    class="grid grid-cols-1 gap-6 max-md:-mx-4 max-md:flex max-md:gap-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:grid-cols-3">
+                    class="grid grid-cols-1 gap-6 max-md:-mx-4 max-md:flex max-md:gap-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden sm:grid-cols-3 md:grid-cols-4">
                     @foreach ($teamMembers as $member)
                         <div data-home-card-slide @class([
                             'max-md:w-[min(88%,300px)] max-md:shrink-0 max-md:snap-center',
                             'hidden' => $member['hidden'] ?? false,
                         ])>
                             <article class="h-full overflow-hidden rounded-2xl border border-litus-line bg-white text-center shadow-[0_1px_2px_rgba(9,17,32,0.04)] transition duration-200 sm:rounded-[18px] sm:shadow-[0_1px_2px_rgba(9,17,32,.05)] md:hover:-translate-y-1 md:hover:border-litus-line-2 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
-                                <div class="aspect-[4/3] overflow-hidden bg-litus-paper-3">
+                                <div class="aspect-[3/4] overflow-hidden bg-litus-paper-3">
                                     <img src="{{ $member['img'] }}"
                                          alt="{{ $member['name'] }}"
                                          class="h-full w-full object-cover object-top"
