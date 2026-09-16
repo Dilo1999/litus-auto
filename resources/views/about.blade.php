@@ -45,6 +45,8 @@
 
     $teamMemberImage = fn ($filename) => asset('images/about_us/member/' . rawurlencode($filename));
 
+    $teamManagingDirector = ['name' => 'Ahmed Zahir', 'role' => 'Managing Director', 'dept' => 'LITUS Automobiles', 'img' => asset('images/about_us/ahmed.webp')];
+
     $teamMembers = [
         ['name' => 'Mariyam Rishmee', 'role' => 'Manager', 'dept' => 'Automobiles Operations', 'img' => $teamMemberImage('Mariyam Rishmee - Manager, Automobiles Operations.webp')],
         ['name' => 'Hassan Basil', 'role' => 'Product Manager', 'dept' => 'Sales & Marketing', 'img' => $teamMemberImage('Hassan Basil - Product Manager, Sales & Marketing.webp')],
@@ -300,6 +302,21 @@
             </div>
 
             <h3 class="mb-5 text-center font-display text-[clamp(18px,4vw,26px)] font-semibold tracking-[-0.02em] text-litus-text sm:mb-6">Management &amp; Departments</h3>
+
+            <div class="mx-auto mb-6 w-[min(88%,300px)] sm:mb-8 sm:w-full sm:max-w-[380px]">
+                <article class="h-full overflow-hidden rounded-2xl border border-litus-line bg-white text-center shadow-[0_1px_2px_rgba(9,17,32,0.04)] transition duration-200 sm:rounded-[18px] sm:shadow-[0_1px_2px_rgba(9,17,32,.05)] md:hover:-translate-y-1 md:hover:border-litus-line-2 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
+                    <div class="aspect-[4/3] overflow-hidden bg-litus-paper-3">
+                        <img src="{{ $teamManagingDirector['img'] }}"
+                             alt="{{ $teamManagingDirector['name'] }}"
+                             class="h-full w-full object-cover object-top"
+                             loading="lazy">
+                    </div>
+                    <div class="px-4 pb-5 pt-4 sm:px-5 sm:pb-7 sm:pt-[22px]">
+                        <h4 class="font-display text-[18px] font-semibold tracking-[-0.02em] text-litus-text sm:text-[clamp(20px,2.2vw,24px)]">{{ $teamManagingDirector['name'] }}</h4>
+                        <p class="mt-1.5 text-[13px] font-semibold text-litus-primary sm:text-sm">{{ $teamManagingDirector['role'] }}, {{ $teamManagingDirector['dept'] }}</p>
+                    </div>
+                </article>
+            </div>
 
             <div data-home-card-slider-wrap>
                 <div
