@@ -301,10 +301,10 @@
                 @endif
             </div>
 
-            <h3 class="mb-5 text-center font-display text-[clamp(18px,4vw,26px)] font-semibold tracking-[-0.02em] text-litus-text sm:mb-6">Management &amp; Departments</h3>
+            <h3 class="mb-5 text-center font-display text-[clamp(22px,5vw,32px)] font-semibold tracking-[-0.02em] text-litus-text sm:mb-6">Management &amp; Departments</h3>
 
-            <div class="mx-auto mb-6 w-[min(88%,300px)] sm:mb-8 sm:w-full sm:max-w-[380px]">
-                <article class="h-full overflow-hidden rounded-2xl border border-litus-line bg-white text-center shadow-[0_1px_2px_rgba(9,17,32,0.04)] transition duration-200 sm:rounded-[18px] sm:shadow-[0_1px_2px_rgba(9,17,32,.05)] md:hover:-translate-y-1 md:hover:border-litus-line-2 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
+            <div class="mx-auto mb-10 w-[min(88%,300px)] sm:mb-12 sm:w-full sm:max-w-[380px]">
+                <article class="h-full overflow-hidden rounded-2xl border border-litus-line bg-white text-center shadow-[0_1px_2px_rgba(9,17,32,0.04)] ring-1 ring-litus-primary/12 transition duration-200 sm:rounded-[18px] sm:shadow-[0_1px_2px_rgba(9,17,32,.05)] md:hover:-translate-y-1 md:hover:border-litus-line-2 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
                     <div class="aspect-[4/3] overflow-hidden bg-litus-paper-3">
                         <img src="{{ $teamManagingDirector['img'] }}"
                              alt="{{ $teamManagingDirector['name'] }}"
@@ -322,7 +322,7 @@
                 <div
                     data-home-card-slider
                     data-interval="4500"
-                    class="grid grid-cols-1 gap-6 max-md:-mx-4 max-md:flex max-md:gap-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden sm:grid-cols-3 md:grid-cols-4">
+                    class="grid grid-cols-1 gap-6 max-md:-mx-4 max-md:flex max-md:gap-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden sm:grid-cols-3 sm:gap-7 md:grid-cols-4 lg:gap-8">
                     @foreach ($teamMembers as $member)
                         <div data-home-card-slide @class([
                             'max-md:w-[min(88%,300px)] max-md:shrink-0 max-md:snap-center',
