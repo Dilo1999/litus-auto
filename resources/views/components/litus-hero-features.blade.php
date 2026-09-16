@@ -12,6 +12,7 @@
                         $featureHref = match ($feature['title'] ?? '') {
                             'Motorcycles', 'Full Gallery' => '#gallery-grid-section',
                             'Customer Moments' => '#gallery-customer-moments',
+                            'Videos' => '#gallery-video',
                             default => null,
                         };
                         $featureTag = $featureHref ? 'a' : 'div';
@@ -38,7 +39,7 @@
                                      class="h-7 w-7 object-contain brightness-0 invert max-md:h-8 max-md:w-8 sm:h-8 sm:w-8"
                                      aria-hidden="true">
                             @else
-                                <x-litus-icon :name="$feature['icon']" class="h-4 w-4 max-md:h-4 max-md:w-4 max-md:text-[#0065ef] sm:h-[18px] sm:w-[18px]" />
+                                <x-litus-icon :name="$feature['icon']" class="h-4 w-4 text-white/80 max-md:h-4 max-md:w-4 max-md:text-[#0065ef] sm:h-[18px] sm:w-[18px]" />
                             @endif
                         </div>
                         <div class="min-w-0 text-left">

@@ -80,14 +80,6 @@ class GalleryController extends Controller
             'Videos',
         ]));
 
-        $heroFeatures = array_values(array_filter([
-            ['icon' => 'bike', 'title' => 'Motorcycles', 'desc' => 'Adventure & street ride moments'],
-            $showCustomerMoments
-                ? ['icon' => 'users', 'title' => 'Customer Moments', 'desc' => 'Real experiences from our riders']
-                : null,
-            ['icon' => 'images', 'title' => 'Full Gallery', 'desc' => 'Browse every published moment'],
-        ]));
-
         $galleryVideos = GalleryVideo::query()
             ->published()
             ->ordered()
@@ -96,6 +88,17 @@ class GalleryController extends Controller
             ->filter(fn (array $video) => filled($video['embed_url']))
             ->values()
             ->all();
+
+        $heroFeatures = array_values(array_filter([
+            ['icon' => 'bike', 'title' => 'Motorcycles', 'desc' => 'Adventure & street ride moments'],
+            $showCustomerMoments
+                ? ['icon' => 'users', 'title' => 'Customer Moments', 'desc' => 'Real experiences from our riders']
+                : null,
+            count($galleryVideos) > 0
+                ? ['icon' => 'play', 'title' => 'Videos', 'desc' => 'Watch our latest video moments']
+                : null,
+            ['icon' => 'images', 'title' => 'Full Gallery', 'desc' => 'Browse every published moment'],
+        ]));
 
         return view('gallery', compact(
             'allImages',
