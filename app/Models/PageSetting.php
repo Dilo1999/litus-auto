@@ -128,8 +128,8 @@ class PageSetting extends Model
                 'mobile' => 'images/motorcycles/ChatGPT Image Jul 3, 2026, 02_50_01 PM.png',
             ],
             'ownership-plans' => [
-                'desktop' => 'images/ownership_plans/ChatGPT Image Jul 4, 2026, 02_28_02 PM.png',
-                'mobile' => 'images/ownership_plans/ChatGPT Image Jul 4, 2026, 02_28_02 PM.png',
+                'desktop' => 'images/ownership_plans/IjiraHero2.webp',
+                'mobile' => 'images/ownership_plans/IjiraHero2.webp',
             ],
             'parts' => [
                 'desktop' => 'images/parts/ChatGPT Image Jul 3, 2026, 03_07_42 PM.png',
