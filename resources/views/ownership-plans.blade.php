@@ -258,7 +258,7 @@
     <section class="relative overflow-hidden bg-litus-ink text-white min-[961px]:hidden">
         <img src="{{ $heroBgMobile }}"
              alt=""
-             class="absolute inset-0 h-full w-full object-cover object-[center_30%]"
+             class="absolute inset-0 h-full w-full object-cover object-[90%_70%]"
              aria-hidden="true">
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,11,24,0.55)_0%,rgba(5,11,24,0.78)_42%,rgba(5,11,24,0.94)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0 opacity-[0.18]"
