@@ -12,14 +12,14 @@
 @endphp
 
 <section {{ $attributes->merge(['class' => 'relative overflow-hidden text-white']) }}
-         style="background: linear-gradient(118deg, #052B36, #0A4F55 52%, #0E7F74);">
+         style="background: linear-gradient(118deg, #061029, #0E2A64 52%, #1B49B8);">
     <div class="pointer-events-none absolute inset-0"
-         style="background: radial-gradient(700px 380px at 84% 12%, rgba(45,212,191,.22), transparent 62%);"></div>
+         style="background: radial-gradient(700px 380px at 84% 12%, rgba(90,184,255,.28), transparent 62%);"></div>
     <div class="relative z-[2] litus-sec max-md:!py-12">
         <div class="litus-container grid items-center gap-8 max-md:gap-7 min-[961px]:grid-cols-[1.05fr_0.95fr] min-[961px]:gap-[52px]">
             {{-- Content — below estimator on mobile for action-first UX --}}
             <div class="max-md:order-2">
-                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-[#5EEAD4] sm:mb-3.5">Ijara Ownership Plans</span>
+                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky sm:mb-3.5">Ijara Ownership Plans</span>
                 <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold leading-[1.12] tracking-[-0.028em]">
                     Own it this month.<br class="max-sm:hidden"> Pay for it over time.
                 </h2>
@@ -30,7 +30,7 @@
                 <ul class="mt-5 grid list-none gap-2.5 sm:mt-[26px] sm:gap-[13px] min-[400px]:max-md:grid-cols-2 min-[400px]:max-md:gap-3">
                     @foreach ($points as $point)
                         <li class="flex items-start gap-2.5 rounded-xl border border-white/10 bg-white/[0.06] p-3 text-[13px] leading-snug text-white/90 min-[961px]:border-0 min-[961px]:bg-transparent min-[961px]:p-0 min-[961px]:text-[15px] min-[961px]:leading-normal">
-                            <span class="mt-0.5 shrink-0 text-[#5EEAD4]">
+                            <span class="mt-0.5 shrink-0 text-litus-sky">
                                 <x-litus-icon name="check-circle" class="h-4 w-4 min-[961px]:h-[17px] min-[961px]:w-[17px]" />
                             </span>
                             <span>{{ $point }}</span>
@@ -40,7 +40,7 @@
 
                 <div class="mt-5 flex flex-row gap-2 sm:mt-8 min-[961px]:flex-wrap min-[961px]:gap-3">
                     <a href="{{ route('ownership-plans') }}"
-                       class="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-litus-teal px-3 py-3 text-[13px] font-semibold text-white shadow-[0_8px_22px_rgba(14,147,132,0.28)] transition hover:-translate-y-0.5 sm:gap-2 sm:rounded-lg sm:px-6 sm:py-3.5 sm:text-[14.5px] min-[961px]:flex-none">
+                       class="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-litus-primary px-3 py-3 text-[13px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.35)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover sm:gap-2 sm:rounded-lg sm:px-6 sm:py-3.5 sm:text-[14.5px] min-[961px]:flex-none">
                         <span class="min-[400px]:hidden">Compare Plans</span>
                         <span class="hidden min-[400px]:inline">Compare the Six Plans</span>
                         <x-litus-icon name="arrow-right" class="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
@@ -60,7 +60,7 @@
                  data-ijara-estimator>
                 <div class="order-1 mb-5 rounded-[14px] bg-black/26 px-4 py-4 text-center min-[961px]:order-4 min-[961px]:my-[22px] min-[961px]:mb-0 sm:px-5 sm:py-5">
                     <span class="text-[10.5px] uppercase tracking-[0.11em] text-white/60 sm:text-xs">Approx. monthly</span>
-                    <b class="mt-1 block font-display text-[clamp(28px,8vw,36px)] text-[#5EEAD4] min-[961px]:text-[36px]" data-ijara-monthly>MVR 1,760</b>
+                    <b class="mt-1 block font-display text-[clamp(28px,8vw,36px)] text-litus-sky min-[961px]:text-[36px]" data-ijara-monthly>MVR 1,760</b>
                 </div>
 
                 <h4 class="order-2 mb-1 font-display text-[clamp(18px,4.5vw,26px)] font-semibold tracking-[-0.02em] min-[961px]:order-1">Estimate your monthly payment</h4>

@@ -106,10 +106,6 @@
                                 radial-gradient(480px 300px at 72% 20%, rgba(90,184,255,.36), transparent 62%),
                                 linear-gradient(180deg, rgba(6,16,41,.08) 0%, rgba(6,16,41,.35) 42%, rgba(6,16,41,.92) 100%);"></div>
 
-                        <div class="absolute left-6 top-6 z-[4] font-display text-[13px] font-bold tracking-[0.24em] text-white min-[961px]:left-7 min-[961px]:top-7">
-                            LITUS<span class="mt-[-2px] block text-[7px] font-medium tracking-[0.36em] text-white/60">AUTOMOBILES</span>
-                        </div>
-
                         <div class="relative z-[2] flex min-h-[260px] flex-1 items-center justify-center overflow-hidden px-1 pt-14 min-[961px]:min-h-[320px] min-[961px]:px-3 min-[961px]:pt-16">
                             @foreach ($promotions as $index => $model)
                                 <img src="{{ $model->listImageUrl() }}"
