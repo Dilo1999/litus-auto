@@ -57,14 +57,14 @@ class PageSettingResource extends Resource
                             ->directory('heroes/desktop')
                             ->disk('public')
                             ->maxSize(4096)
-                            ->helperText('Shown on desktop and tablet landscape (min-width 961px). Wide landscape image recommended.'),
+                            ->helperText('Shown on desktop and tablet landscape (min-width 961px). Wide landscape image recommended — ideal size 1920×1080px (16:9), minimum 1600×900px.'),
                         FileUpload::make('hero_image_mobile')
                             ->label('Mobile hero image')
                             ->image()
                             ->directory('heroes/mobile')
                             ->disk('public')
                             ->maxSize(4096)
-                            ->helperText('Shown on mobile and small tablets. Portrait or square crop works best.'),
+                            ->helperText('Shown on mobile and small tablets. Portrait or square crop works best — ideal size 1080×1350px (4:5), minimum 800×1000px.'),
                     ])
                     ->columns(2),
             ]);
