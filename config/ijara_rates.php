@@ -22,6 +22,14 @@
 */
 
 return [
+    /*
+    | Lease (profit) rate used by the payment calculator, applied to the amount left after the advance.
+    | basis: 'year'  = percent per year, flat   -> financed x (1 + percent% x months/12)
+    |        'month' = percent per month, flat  -> financed x (1 + percent% x months)
+    |        'once'  = one-time percent          -> financed x (1 + percent%)
+    */
+    'rate' => ['percent' => 2.5, 'basis' => 'year'],
+
     'terms' => [6, 12, 24, 36, 48],
 
     'models' => [

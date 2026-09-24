@@ -7,49 +7,38 @@ use App\Models\Motorcycle;
 class IjaraRates
 {
     /**
-     * Calculator payload: only models with at least one approved rate,
-     * containing only approved terms.
+     * Calculator payload: every published model that is on Ijara, with its current
+     * price (promotional price when a promotion is active) and the plans it is offered on.
+     * Monthly payments are computed in the browser from price, advance, term and the lease rate.
      */
     public static function calculatorData(): array
     {
         $plans = IjaraPlans::calculatorPlans();
         $planTerms = collect($plans)->mapWithKeys(fn ($name, $key) => [$key => IjaraPlans::termsFor($key)])->all();
-        $rates = config('ijara_rates.models');
         $models = [];
 
         Motorcycle::query()->where('is_published', true)->where('ijara_enabled', true)->orderBy('name')->get()
-            ->each(function (Motorcycle $motorcycle) use (&$models, $plans, $planTerms, $rates) {
-                $modelPlans = [];
+            ->each(function (Motorcycle $motorcycle) use (&$models, $plans) {
+                $hasPromo = $motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0;
+                $price = $hasPromo ? $motorcycle->promotionalSalePrice() : (float) $motorcycle->original_price;
 
-                foreach ($plans as $planKey => $planName) {
-                    if (! in_array($planKey, $motorcycle->ijara_plans ?? [], true)) {
-                        continue;
-                    }
-
-                    $terms = [];
-
-                    foreach ($rates[$motorcycle->slug]['plans'][$planKey] ?? [] as $term => $rate) {
-                        if (in_array((int) $term, $planTerms[$planKey], true)
-                            && isset($rate['advance'], $rate['monthly'])) {
-                            $terms[(int) $term] = [
-                                'advance' => $rate['advance'],
-                                'monthly' => $rate['monthly'],
-                            ];
-                        }
-                    }
-
-                    // A plan selected for this bike is always listed; rates may still be missing for some terms.
-                    ksort($terms);
-                    $modelPlans[$planKey] = (object) $terms;
+                if ($price <= 0) {
+                    return;
                 }
 
-                // Models without approved rates are still listed; no result is shown for them.
-                $models[] = ['key' => $motorcycle->slug, 'name' => $motorcycle->name, 'plans' => $modelPlans];
+                $models[] = [
+                    'key' => $motorcycle->slug,
+                    'name' => $motorcycle->name,
+                    'image' => $motorcycle->cardImageUrl(),
+                    'price' => (int) round($price),
+                    'plans' => array_values(array_filter(array_keys($plans), fn ($key) => in_array($key, $motorcycle->ijara_plans ?? [], true))),
+                ];
             });
 
         return [
             'plans' => $plans,
             'planTerms' => $planTerms,
+            'rate' => config('ijara_rates.rate'),
             'models' => $models,
         ];
     }

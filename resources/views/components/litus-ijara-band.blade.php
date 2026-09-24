@@ -1,116 +1,115 @@
-@props([
-    'points' => null,
-])
-
 @php
-    $planWord = \App\Support\IjaraPlans::countWord();
-    $points = $points ?? [
-        ucfirst($planWord).' plans covering employed, self-employed and family-supported buyers',
-        'A fixed total price agreed in writing before you sign',
-        'Early settlement available at no extra charge',
-        'Applications handled at any of our showrooms',
-    ];
+    $terms = \App\Support\IjaraPlans::termsFor();
+    $btn = 'rounded-lg border border-litus-line-2 bg-white px-2 py-2.5 text-center text-[13px] font-semibold leading-tight text-litus-text transition hover:border-litus-primary disabled:cursor-not-allowed disabled:border-litus-line disabled:bg-litus-paper-3 disabled:text-litus-text-3 disabled:hover:border-litus-line aria-pressed:border-litus-primary aria-pressed:bg-litus-primary aria-pressed:text-white';
+    $badge = 'grid h-7 w-7 place-items-center rounded-full bg-litus-primary text-[13px] font-bold text-white';
 @endphp
 
-<section {{ $attributes->merge(['class' => 'relative overflow-hidden text-white']) }}
-         style="background: linear-gradient(118deg, #061029, #0E2A64 52%, #1B49B8);">
+<section {{ $attributes->merge(['class' => 'relative overflow-hidden bg-litus-paper-2 text-litus-text']) }}
+         data-ijara-estimator>
     <div class="pointer-events-none absolute inset-0"
-         style="background: radial-gradient(700px 380px at 84% 12%, rgba(90,184,255,.28), transparent 62%);"></div>
-    <div class="relative z-[2] litus-sec max-md:!py-12">
-        <div class="litus-container grid items-center gap-8 max-md:gap-7 min-[961px]:grid-cols-[1.05fr_0.95fr] min-[961px]:gap-[52px]">
-            {{-- Content — below estimator on mobile for action-first UX --}}
-            <div class="max-md:order-2">
-                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky sm:mb-3.5">Ijara Ownership Plans</span>
-                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold leading-[1.12] tracking-[-0.028em]">
-                    Own it this month.<br class="max-sm:hidden"> Pay for it over time.
-                </h2>
-                <p class="mt-3 text-[15px] leading-[1.66] text-white/[0.78] sm:mt-4 sm:text-[clamp(16.5px,1.5vw,19px)]">
-                    Our Ijara Plans are structured to Islamic leasing standards. You agree one fixed lease price at the start and it never changes - no interest, no compounding, and no penalty charges buried in the small print.
-                </p>
+         style="background: radial-gradient(760px 320px at 92% 0%, rgba(18,87,214,.08), transparent 65%);"></div>
 
-                <ul class="mt-5 grid list-none gap-2.5 sm:mt-[26px] sm:gap-[13px] min-[400px]:max-md:grid-cols-2 min-[400px]:max-md:gap-3">
-                    @foreach ($points as $point)
-                        <li class="flex items-start gap-2.5 rounded-xl border border-white/10 bg-white/[0.06] p-3 text-[13px] leading-snug text-white/90 min-[961px]:border-0 min-[961px]:bg-transparent min-[961px]:p-0 min-[961px]:text-[15px] min-[961px]:leading-normal">
-                            <span class="mt-0.5 shrink-0 text-litus-sky">
-                                <x-litus-icon name="check-circle" class="h-4 w-4 min-[961px]:h-[17px] min-[961px]:w-[17px]" />
-                            </span>
-                            <span>{{ $point }}</span>
-                        </li>
-                    @endforeach
-                </ul>
-
-                <div class="mt-5 flex flex-row gap-2 sm:mt-8 min-[961px]:flex-wrap min-[961px]:gap-3">
-                    <a href="{{ route('ownership-plans') }}"
-                       class="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-litus-primary px-3 py-3 text-[13px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.35)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover sm:gap-2 sm:rounded-lg sm:px-6 sm:py-3.5 sm:text-[14.5px] min-[961px]:flex-none">
-                        <span class="min-[400px]:hidden">Compare Plans</span>
-                        <span class="hidden min-[400px]:inline">Compare the {{ ucfirst($planWord) }} Plans</span>
-                        <x-litus-icon name="arrow-right" class="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
-                    </a>
-                    <a href="https://wa.me/9607797442?text={{ urlencode('Hi LITUS, I would like to check Ijara eligibility.') }}"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-[#1FA855] px-3 py-3 text-[13px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#178443] sm:gap-2 sm:rounded-lg sm:px-6 sm:py-3.5 sm:text-[14.5px] min-[961px]:flex-none">
-                        <x-litus-icon name="message-circle" class="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
-                        Check Eligibility
-                    </a>
-                </div>
-            </div>
-
-            {{-- Estimator — first on mobile so users can try numbers immediately --}}
-            <div class="flex max-md:order-1 flex-col rounded-[20px] border border-white/16 bg-white/[0.07] p-5 backdrop-blur-[8px] sm:rounded-[22px] sm:p-[clamp(20px,3vw,38px)] min-[961px]:rounded-[26px]"
-                 data-ijara-estimator>
-                <div class="order-1 mb-5 rounded-[14px] bg-black/26 px-4 py-4 text-center min-[961px]:order-4 min-[961px]:my-[22px] min-[961px]:mb-0 sm:px-5 sm:py-5">
-                    <div data-ijara-result hidden>
-                        <p class="text-[12px] font-semibold text-white/80" data-ijara-summary></p>
-                        <div class="mt-3 grid grid-cols-2 gap-3">
-                            <div>
-                                <span class="text-[10.5px] uppercase tracking-[0.11em] text-white/60 sm:text-xs">Minimum advance</span>
-                                <b class="mt-1 block font-display text-[clamp(20px,5.5vw,26px)] text-white" data-ijara-advance></b>
-                            </div>
-                            <div>
-                                <span class="text-[10.5px] uppercase tracking-[0.11em] text-white/60 sm:text-xs">Monthly payment</span>
-                                <b class="mt-1 block font-display text-[clamp(20px,5.5vw,26px)] text-litus-sky" data-ijara-monthly></b>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-[13px] text-white/70" data-ijara-empty>Select a model, plan and term to see your payment.</p>
-                </div>
-
-                <h4 class="order-2 mb-1 font-display text-[clamp(18px,4.5vw,26px)] font-semibold tracking-[-0.02em] min-[961px]:order-1">Check your monthly payment</h4>
-                <p class="order-3 mb-4 text-[11.5px] text-white/60 sm:mb-[22px] sm:text-xs min-[961px]:order-2">Approved minimum advance and monthly payment - final plan is confirmed by our sales team.</p>
-
-                <div class="order-4 space-y-4 min-[961px]:order-3 sm:space-y-0">
-                    @foreach ([['model', 'Vehicle model'], ['plan', 'Ijara plan']] as [$field, $label])
-                        <div class="sm:mb-4">
-                            <label class="mb-2 block text-[12.5px] font-semibold text-white/70" for="ijara-{{ $field }}">{{ $label }}</label>
-                            <select id="ijara-{{ $field }}" data-ijara-{{ $field }}
-                                    class="w-full rounded-lg border border-white/20 bg-[#0E2A64] px-3 py-2.5 text-sm text-white disabled:opacity-50">
-                            </select>
-                        </div>
-                    @endforeach
-                    <div class="sm:mb-4">
-                        <span class="mb-2 block text-[12.5px] font-semibold text-white/70" id="ijara-term-label">Repayment term</span>
-                        <div class="grid grid-cols-2 gap-2 min-[400px]:grid-cols-3" role="group" aria-labelledby="ijara-term-label" data-ijara-term>
-                            @foreach (\App\Support\IjaraPlans::termsFor() as $term)
-                                <button type="button" data-term="{{ $term }}" aria-pressed="false"
-                                        class="rounded-lg border border-white/20 bg-white px-2 py-2 text-center text-[13px] font-semibold leading-tight text-slate-800 transition disabled:cursor-not-allowed disabled:bg-white/25 disabled:text-white/50 aria-pressed:border-[#E31E25] aria-pressed:bg-[#E31E25] aria-pressed:text-white">
-                                    {{ $term }} months
-                                    <span class="hidden text-[10.5px] font-normal" data-unavailable>Unavailable</span>
-                                </button>
-                            @endforeach
-                        </div>
-                        <p class="mt-2 text-[11.5px] text-white/60">Available terms depend on your model and plan.</p>
-                    </div>
-                </div>
-                <script type="application/json" data-ijara-data>@json(\App\Support\IjaraRates::calculatorData())</script>
-
-                <p class="order-5 mt-4 text-[11px] leading-relaxed text-white/55 sm:text-[11.5px] min-[961px]:order-5 min-[961px]:mt-0 min-[961px]:hidden">
-                    Fixed Ijara lease illustration — not a quotation. Final amounts depend on plan, model and documents.
-                </p>
-                <p class="order-5 hidden text-[11.5px] leading-relaxed text-white/55 min-[961px]:order-5 min-[961px]:block min-[961px]:mt-0">
-                    Illustration based on a fixed Ijara lease price agreed upfront. This is not an interest calculation, and not a quotation or offer of finance. Final amounts depend on the plan, model and documents provided.
-                </p>
-            </div>
+    <div class="litus-container relative z-[2] litus-sec max-md:!py-12">
+        <div class="mb-7 max-w-[680px] sm:mb-9">
+            <span class="mb-2.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Payment Calculator</span>
+            <h2 class="font-display text-[clamp(30px,5.2vw,52px)] font-extrabold leading-[1.05] tracking-[-0.035em] text-litus-text">Plan your next ride</h2>
+            <p class="mt-3 text-[15px] leading-[1.6] text-litus-text-2 sm:text-[17px]">Choose your model, Ijara plan and repayment term.</p>
         </div>
+
+        <div class="grid items-start gap-5 min-[961px]:grid-cols-[1.6fr_1fr] min-[961px]:gap-6">
+            {{-- Steps --}}
+            <div class="rounded-2xl border border-litus-line bg-white p-5 shadow-[0_1px_2px_rgba(9,17,32,.05),0_8px_24px_rgba(9,17,32,.05)] sm:p-7">
+                {{-- 1. Model --}}
+                <div class="flex flex-col gap-4 border-b border-litus-line pb-6 sm:flex-row sm:items-center sm:justify-between">
+                    <div class="sm:w-[260px] sm:shrink-0">
+                        <div class="mb-3 flex items-center gap-3">
+                            <span class="{{ $badge }}">1</span>
+                            <label for="ijara-model" class="text-[15px] font-bold text-litus-text">Choose your model</label>
+                        </div>
+                        <select id="ijara-model" data-ijara-model
+                                class="w-full rounded-lg border border-litus-line-2 bg-white px-3 py-2.5 text-sm text-litus-text focus:border-litus-primary focus:outline-none focus:ring-1 focus:ring-litus-primary disabled:opacity-50"></select>
+                    </div>
+                    <div class="flex h-[150px] flex-1 items-center justify-center sm:h-[170px]">
+                        <img data-ijara-image src="" alt="" class="hidden max-h-full max-w-full object-contain">
+                    </div>
+                </div>
+
+                {{-- 2. Plan --}}
+                <div class="border-b border-litus-line py-6">
+                    <div class="mb-3 flex items-center gap-3">
+                        <span class="{{ $badge }}">2</span>
+                        <span class="text-[15px] font-bold text-litus-text" id="ijara-plan-label">Select your Ijara plan</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 min-[520px]:grid-cols-3 sm:grid-cols-5" role="group" aria-labelledby="ijara-plan-label" data-ijara-plan-group></div>
+                    <template data-ijara-plan-template>
+                        <button type="button" aria-pressed="false" class="{{ $btn }}"></button>
+                    </template>
+                </div>
+
+                {{-- 3. Term --}}
+                <div class="border-b border-litus-line py-6">
+                    <div class="mb-3 flex items-center gap-3">
+                        <span class="{{ $badge }}">3</span>
+                        <span class="text-[15px] font-bold text-litus-text" id="ijara-term-label">Repayment term</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 min-[520px]:grid-cols-3 sm:grid-cols-5" role="group" aria-labelledby="ijara-term-label" data-ijara-term>
+                        @foreach ($terms as $term)
+                            <button type="button" data-term="{{ $term }}" aria-pressed="false" class="{{ $btn }}">
+                                {{ $term }} months
+                                <span class="hidden text-[10.5px] font-normal" data-unavailable>Unavailable</span>
+                            </button>
+                        @endforeach
+                    </div>
+                    <p class="mt-2.5 text-[12px] text-litus-text-3">Available terms depend on your model and plan.</p>
+                </div>
+
+                {{-- 4. Advance --}}
+                <div class="pt-6">
+                    <div class="mb-3 flex items-center gap-3">
+                        <span class="{{ $badge }}">4</span>
+                        <label for="ijara-advance" class="text-[15px] font-bold text-litus-text">Advance payment</label>
+                    </div>
+                    <div class="flex items-center rounded-lg border border-litus-line-2 bg-white focus-within:border-litus-primary focus-within:ring-1 focus-within:ring-litus-primary">
+                        <span class="pl-4 text-[15px] font-semibold text-litus-text-3">MVR</span>
+                        <input id="ijara-advance" data-ijara-advance type="text" inputmode="numeric" autocomplete="off" placeholder="0"
+                               class="w-full rounded-lg border-0 bg-transparent px-3 py-3 text-[15px] font-bold text-litus-text placeholder:text-litus-text-3 focus:outline-none focus:ring-0 disabled:opacity-50">
+                    </div>
+                    <p class="mt-2 text-[12px] text-litus-text-3" data-ijara-advance-hint>Enter the amount you will pay upfront. It is deducted from the vehicle price.</p>
+                </div>
+            </div>
+
+            {{-- Summary --}}
+            <aside class="overflow-hidden rounded-2xl border border-litus-line bg-white shadow-[0_1px_2px_rgba(9,17,32,.05),0_8px_24px_rgba(9,17,32,.05)] min-[961px]:sticky min-[961px]:top-[96px]">
+                <div class="bg-litus-ink px-6 py-4 font-display text-[19px] font-bold text-white">Your payment summary</div>
+                <div class="px-6 pb-6 pt-2">
+                    <dl class="divide-y divide-litus-line text-[14px]">
+                        <div class="flex justify-between gap-4 py-3.5"><dt class="text-litus-text-2">Model</dt><dd class="text-right text-litus-text" data-ijara-summary-model>-</dd></div>
+                        <div class="flex justify-between gap-4 py-3.5"><dt class="text-litus-text-2">Ijara plan</dt><dd class="text-right text-litus-text" data-ijara-summary-plan>-</dd></div>
+                        <div class="flex justify-between gap-4 py-3.5"><dt class="text-litus-text-2">Term</dt><dd class="text-right text-litus-text" data-ijara-summary-term>-</dd></div>
+                        <div class="flex justify-between gap-4 py-3.5"><dt class="text-litus-text-2">Vehicle price</dt><dd class="text-right text-litus-text" data-ijara-summary-price>-</dd></div>
+                        <div class="flex justify-between gap-4 py-3.5"><dt class="text-litus-text-2">Advance payment</dt><dd class="text-right font-bold text-litus-text" data-ijara-summary-advance>-</dd></div>
+                        <div class="flex justify-between gap-4 py-3.5"><dt class="text-litus-text-2">Amount to lease</dt><dd class="text-right text-litus-text" data-ijara-summary-financed>-</dd></div>
+                    </dl>
+
+                    <div class="mt-3 border-t border-litus-line pt-5">
+                        <span class="text-[14px] text-litus-text-2">Monthly payment</span>
+                        <div class="mt-1 flex items-baseline gap-2">
+                            <b class="font-display text-[clamp(30px,4vw,42px)] font-extrabold leading-none tracking-[-0.03em] text-litus-text" data-ijara-monthly>-</b>
+                            <span class="text-[14px] text-litus-text-2" data-ijara-per-month hidden>/ month</span>
+                        </div>
+                        <p class="mt-3 text-[12px] leading-relaxed text-litus-text-3" data-ijara-note>Select a model, plan and term to see your payment.</p>
+                    </div>
+
+                    <a href="#" target="_blank" rel="noopener noreferrer" data-ijara-continue aria-disabled="true"
+                       class="mt-5 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-litus-primary px-6 py-3 text-[15px] font-bold text-white transition hover:bg-litus-primary-hover aria-disabled:pointer-events-none aria-disabled:opacity-40">
+                        Continue
+                        <x-litus-icon name="chevron-right" class="h-4 w-4" />
+                    </a>
+                    <p class="mt-3 text-center text-[12px] text-litus-text-3">Review your selection before proceeding.</p>
+                </div>
+            </aside>
+        </div>
+
+        <script type="application/json" data-ijara-data>@json(\App\Support\IjaraRates::calculatorData())</script>
     </div>
 </section>

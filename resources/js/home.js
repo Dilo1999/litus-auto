@@ -10,118 +10,166 @@ function initIjaraEstimator() {
   const root = document.querySelector('[data-ijara-estimator]');
   if (!root) return;
 
-  const modelSel = root.querySelector('[data-ijara-model]');
-  const planSel = root.querySelector('[data-ijara-plan]');
-  const termGroup = root.querySelector('[data-ijara-term]');
+  const q = (sel) => root.querySelector(sel);
+  const modelSel = q('[data-ijara-model]');
+  const image = q('[data-ijara-image]');
+  const planGroup = q('[data-ijara-plan-group]');
+  const planTemplate = q('[data-ijara-plan-template]');
+  const termGroup = q('[data-ijara-term]');
   const termButtons = termGroup ? [...termGroup.querySelectorAll('button[data-term]')] : [];
-  let selectedTerm = '';
-  const result = root.querySelector('[data-ijara-result]');
-  const empty = root.querySelector('[data-ijara-empty]');
-  const summary = root.querySelector('[data-ijara-summary]');
-  const advanceEl = root.querySelector('[data-ijara-advance]');
-  const monthlyEl = root.querySelector('[data-ijara-monthly]');
-  const dataEl = root.querySelector('[data-ijara-data]');
+  const advanceInput = q('[data-ijara-advance]');
+  const advanceHint = q('[data-ijara-advance-hint]');
+  const dataEl = q('[data-ijara-data]');
+  const out = {
+    model: q('[data-ijara-summary-model]'),
+    plan: q('[data-ijara-summary-plan]'),
+    term: q('[data-ijara-summary-term]'),
+    price: q('[data-ijara-summary-price]'),
+    advance: q('[data-ijara-summary-advance]'),
+    financed: q('[data-ijara-summary-financed]'),
+    monthly: q('[data-ijara-monthly]'),
+    perMonth: q('[data-ijara-per-month]'),
+    note: q('[data-ijara-note]'),
+    cta: q('[data-ijara-continue]'),
+  };
 
-  if (!modelSel || !planSel || !termGroup || !result || !dataEl) return;
+  if (!modelSel || !planGroup || !planTemplate || !termGroup || !advanceInput || !dataEl) return;
 
   let data;
   try {
     data = JSON.parse(dataEl.textContent);
   } catch (e) {
-    data = { plans: {}, models: [] };
+    data = { plans: {}, planTerms: {}, rate: null, models: [] };
   }
 
-  const setOptions = (select, options, placeholder) => {
-    select.innerHTML = '';
-    const first = document.createElement('option');
-    first.value = '';
-    first.textContent = placeholder;
-    select.appendChild(first);
-    options.forEach(({ value, label }) => {
-      const opt = document.createElement('option');
-      opt.value = value;
-      opt.textContent = label;
-      select.appendChild(opt);
-    });
-    select.disabled = options.length === 0;
-  };
+  const rate = data.rate || { percent: 0, basis: 'year' };
+  const rateLabel = `${rate.percent}% ${rate.basis === 'month' ? 'per month' : rate.basis === 'once' ? 'one-time' : 'per year'}`;
+
+  let selectedPlan = '';
+  let selectedTerm = '';
 
   const currentModel = () => data.models.find((m) => m.key === modelSel.value);
+  const advanceValue = () => Number(advanceInput.value.replace(/[^0-9]/g, '')) || 0;
 
-  function showEmpty(message) {
-    result.hidden = true;
-    empty.hidden = false;
-    empty.textContent = message;
-  }
+  // Total repayable = amount leased + flat lease rate for the chosen term; split evenly over the months.
+  const monthlyFor = (financed, months) => {
+    const factor = rate.basis === 'month' ? months : rate.basis === 'once' ? 1 : months / 12;
+    return Math.ceil((financed * (1 + (rate.percent / 100) * factor)) / months);
+  };
 
-  function update() {
+  const setModelOptions = () => {
+    modelSel.innerHTML = '';
+    const first = document.createElement('option');
+    first.value = '';
+    first.textContent = 'Select model';
+    modelSel.appendChild(first);
+    data.models.forEach((m) => {
+      const opt = document.createElement('option');
+      opt.value = m.key;
+      opt.textContent = m.name;
+      modelSel.appendChild(opt);
+    });
+    modelSel.disabled = data.models.length === 0;
+  };
+
+  const renderPlans = () => {
+    planGroup.innerHTML = '';
+    Object.keys(data.plans).forEach((key) => {
+      const btn = planTemplate.content.firstElementChild.cloneNode(true);
+      btn.textContent = data.plans[key];
+      btn.dataset.plan = key;
+      btn.addEventListener('click', () => {
+        selectedPlan = key;
+        refresh();
+      });
+      planGroup.appendChild(btn);
+    });
+  };
+
+  const refresh = () => {
     const model = currentModel();
-    const plan = model && model.plans[planSel.value];
-    const rate = plan && plan[selectedTerm];
+    const offered = model ? model.plans : [];
+    if (!offered.includes(selectedPlan)) selectedPlan = '';
 
-    if (!model || !planSel.value) {
-      showEmpty(
-        data.models.length
-          ? 'Select a model, plan and term to see your payment.'
-          : 'Rate data is not yet available.'
-      );
-      return;
-    }
+    planGroup.querySelectorAll('button').forEach((btn) => {
+      btn.disabled = !offered.includes(btn.dataset.plan);
+      btn.setAttribute('aria-pressed', String(btn.dataset.plan === selectedPlan));
+    });
 
-    if (!selectedTerm) {
-      showEmpty('Select a repayment term to see your payment.');
-      return;
-    }
-
-    if (!rate) {
-      showEmpty('The rate for this model, plan and term is not yet available.');
-      return;
-    }
-
-    summary.textContent = `${model.name} · ${data.plans[planSel.value]} plan · ${selectedTerm} months`;
-    advanceEl.textContent = formatMvr(rate.advance);
-    monthlyEl.textContent = formatMvr(rate.monthly);
-    empty.hidden = true;
-    result.hidden = false;
-  }
-
-  // Months offered by the selected plan (set per plan in the admin panel).
-  function refreshTerms() {
-    const planChosen = Boolean(planSel.value);
-    const allowed = (data.planTerms && data.planTerms[planSel.value] || []).map(String);
+    // Months offered by the selected plan (set per plan in the admin panel).
+    const allowed = ((data.planTerms && data.planTerms[selectedPlan]) || []).map(String);
     termButtons.forEach((btn) => {
-      const offered = allowed.includes(btn.dataset.term);
-      btn.classList.toggle('hidden', planChosen && !offered);
-      btn.disabled = !offered;
-      btn.querySelector('[data-unavailable]')?.classList.add('hidden');
+      const ok = allowed.includes(btn.dataset.term);
+      btn.disabled = !ok;
+      btn.querySelector('[data-unavailable]')?.classList.toggle('hidden', ok || !selectedPlan);
     });
     if (!allowed.includes(selectedTerm)) selectedTerm = '';
     termButtons.forEach((btn) => btn.setAttribute('aria-pressed', String(btn.dataset.term === selectedTerm)));
-  }
 
-  function refreshPlans() {
-    const model = currentModel();
-    const previous = planSel.value;
-    const plans = model ? Object.keys(model.plans) : [];
-    setOptions(planSel, plans.map((p) => ({ value: p, label: data.plans[p] })), 'Select plan');
-    if (plans.includes(previous)) planSel.value = previous;
-    refreshTerms();
-  }
+    if (model && model.image) {
+      image.src = model.image;
+      image.alt = model.name;
+      image.classList.remove('hidden');
+    } else {
+      image.classList.add('hidden');
+    }
 
-  setOptions(modelSel, data.models.map((m) => ({ value: m.key, label: m.name })), 'Select model');
-  refreshPlans();
+    advanceInput.disabled = !model;
+    const price = model ? model.price : 0;
+    const advance = advanceValue();
+    const tooHigh = Boolean(model) && advance >= price;
+    const financed = model && !tooHigh ? price - advance : 0;
+    const ready = Boolean(model && selectedPlan && selectedTerm && financed > 0);
+    const planName = selectedPlan ? data.plans[selectedPlan] : '';
 
-  modelSel.addEventListener('change', () => { refreshPlans(); update(); });
-  planSel.addEventListener('change', () => { refreshTerms(); update(); });
+    advanceHint.textContent = tooHigh
+      ? `The advance must be less than the vehicle price (${formatMvr(price)}).`
+      : model
+        ? `Vehicle price ${formatMvr(price)}. The advance is deducted from it before the monthly payment is worked out.`
+        : 'Select a model first, then enter the amount you will pay upfront.';
+    advanceHint.style.color = tooHigh ? '#C4151B' : '';
+
+    out.model.textContent = model ? model.name : '-';
+    out.plan.textContent = planName || '-';
+    out.term.textContent = selectedTerm ? `${selectedTerm} months` : '-';
+    out.price.textContent = model ? formatMvr(price) : '-';
+    out.advance.textContent = model && !tooHigh ? formatMvr(advance) : '-';
+    out.financed.textContent = model && !tooHigh ? formatMvr(financed) : '-';
+
+    const monthly = ready ? monthlyFor(financed, Number(selectedTerm)) : 0;
+    out.monthly.textContent = ready ? formatMvr(monthly) : '-';
+    out.perMonth.hidden = !ready;
+
+    if (ready) {
+      out.note.textContent = `Includes a ${rateLabel} lease rate on the amount leased. Illustrative - the final plan is confirmed by our sales team.`;
+      const msg = `Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${selectedTerm} months, advance ${formatMvr(advance)}, monthly ${formatMvr(monthly)}.`;
+      out.cta.href = `https://wa.me/9607797442?text=${encodeURIComponent(msg)}`;
+      out.cta.setAttribute('aria-disabled', 'false');
+    } else {
+      out.note.textContent = data.models.length
+        ? 'Select a model, plan and term to see your payment.'
+        : 'Payment calculator is not available yet.';
+      out.cta.href = '#';
+      out.cta.setAttribute('aria-disabled', 'true');
+    }
+  };
+
+  setModelOptions();
+  renderPlans();
   termButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
       selectedTerm = btn.dataset.term;
-      refreshTerms();
-      update();
+      refresh();
     });
   });
+  advanceInput.addEventListener('input', () => {
+    const digits = advanceInput.value.replace(/[^0-9]/g, '');
+    advanceInput.value = digits ? Number(digits).toLocaleString('en-US') : '';
+    refresh();
+  });
+  modelSel.addEventListener('change', refresh);
 
-  update();
+  refresh();
 }
 
 function initHomeCardSlider(track) {
