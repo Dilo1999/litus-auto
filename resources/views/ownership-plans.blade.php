@@ -6,142 +6,16 @@
 @php
     ['desktop' => $heroBg, 'mobile' => $heroBgMobile] = \App\Models\PageSetting::heroForRoute('ownership-plans');
 
+    $plans = \App\Support\IjaraPlans::all();
+    $planWord = \App\Support\IjaraPlans::countWord();
+
     $heroFeatures = [
-        ['icon' => 'file-text', 'title' => '6 Plans', 'desc' => 'One will fit your situation'],
+        ['icon' => 'file-text', 'title' => count($plans) . ' Plans', 'desc' => 'One will fit your situation'],
         ['icon' => 'shield', 'title' => 'Fixed Price', 'desc' => 'Agreed in writing upfront'],
         ['icon' => 'clock', 'title' => 'Fast Approval', 'desc' => 'Subject to assessment'],
         ['icon' => 'check-circle', 'title' => 'Early Settlement', 'desc' => 'No additional charge'],
     ];
 
-    $plans = [
-        [
-            'id' => 'prime',
-            'name' => 'Prime',
-            'tag' => 'Lowest advance',
-            'color' => '#C2650B',
-            'bg' => '#FFF3E4',
-            'accent' => '#C2650B',
-            'accentLight' => '#FFF3E4',
-            'icon' => 'star',
-            'desc' => 'For customers who can provide supporting documents or have a previous ownership history with us.',
-            'pts' => ['Lowest advance requirement', 'Fast approval pathway', 'Flexible early settlement'],
-            'best' => 'Customers with LITUS history',
-            'drawer' => [
-                'subtitle' => 'Lowest Advance Payment',
-                'fullDesc' => 'Prime Plan is designed for customers seeking the lowest possible advance payment while benefiting from our most competitive ownership structure.',
-                'benefits' => ['Lowest advance payment requirement', 'Faster approval process', 'Flexible early settlement option', 'Ideal for customers with strong repayment credentials'],
-                'eligibility' => 'Applicants may provide either a 6-month bank statement or a positive Ijara repayment history with LITUS Automobiles. An immediate family guarantor is also required.',
-                'docs' => ['Applicant ID card copy', 'Guarantor ID card copy', '6-month bank statement or qualifying Ijara repayment history', 'Supporting document confirming immediate family relationship, if required'],
-                'whoFor' => 'Customers looking for the lowest advance payment option, access to flexible early settlement, and who can provide additional supporting credentials.',
-            ],
-        ],
-        [
-            'id' => 'family',
-            'name' => 'Family',
-            'tag' => 'Family guarantor',
-            'color' => '#1257D6',
-            'bg' => '#DCE8FF',
-            'accent' => '#1257D6',
-            'accentLight' => '#DCE8FF',
-            'icon' => 'users',
-            'desc' => 'A practical route for customers supported by an immediate family guarantor.',
-            'pts' => ['Lower upfront commitment', 'Simple qualification pathway', 'Flexible early settlement'],
-            'best' => 'Family-supported buyers',
-            'drawer' => [
-                'subtitle' => 'Family Support Makes Ownership Easier',
-                'fullDesc' => 'Family Plan is designed for customers who have built a positive Ijara repayment history with us and can be supported by an immediate family guarantor.',
-                'benefits' => ['Lower advance payment requirement', 'Easier qualification pathway', 'Flexible early settlement option', 'Designed for returning customers'],
-                'eligibility' => 'Applicants should have a positive Ijara repayment history with LITUS Automobiles. An immediate family guarantor is also required.',
-                'docs' => ['Applicant ID card copy', 'Guarantor ID card copy', 'Qualifying Ijara repayment history with LITUS Automobiles', 'Supporting document confirming immediate family relationship, if required'],
-                'whoFor' => 'Customers who have demonstrated responsible repayment behaviour with us and would like to benefit from lower upfront costs and flexible early settlement options.',
-            ],
-        ],
-        [
-            'id' => 'secure',
-            'name' => 'Secure',
-            'tag' => 'Employer guarantee',
-            'color' => '#0E9384',
-            'bg' => '#E6F6F3',
-            'accent' => '#0E9384',
-            'accentLight' => '#E6F6F3',
-            'icon' => 'shield',
-            'desc' => 'A balanced option for customers whose employer will act as guarantor.',
-            'pts' => ['Reduced advance payment', 'Flexible ownership options', 'Flexible early settlement'],
-            'best' => 'Employed customers',
-            'drawer' => [
-                'subtitle' => 'Lower Advance With An Employed Guarantor',
-                'fullDesc' => 'Secure Plan offers a practical balance between affordability and accountability, making motorcycle ownership more accessible through the support of an employed guarantor.',
-                'benefits' => ['Reduced advance payment requirement', 'Flexible early settlement option', 'Suitable for a wide range of customers', 'Straightforward qualification process'],
-                'eligibility' => 'An employed guarantor is required. The guarantor should be employed for a minimum period of three months.',
-                'docs' => ['Applicant ID card copy', 'Guarantor ID card copy', 'Guarantor employment letter confirming minimum employment period'],
-                'whoFor' => 'Customers seeking a lower advance payment option and the flexibility of early settlement while being supported by an employed guarantor.',
-            ],
-        ],
-        [
-            'id' => 'flexi',
-            'name' => 'Flexi',
-            'tag' => 'For mixed incomes',
-            'color' => '#6941C6',
-            'bg' => '#F2ECFF',
-            'accent' => '#6941C6',
-            'accentLight' => '#F2ECFF',
-            'icon' => 'zap',
-            'desc' => 'Built for customers whose income comes from more than one source or varies month to month.',
-            'pts' => ['Flexible guarantor option', 'Accessible approval pathway', 'Flexible early settlement'],
-            'best' => 'Freelancers & fishermen',
-            'drawer' => [
-                'subtitle' => 'Designed For More Customers',
-                'fullDesc' => 'Flexi Plan is designed to make ownership accessible to a wider range of customers, including freelancers, self-employed individuals, business owners, fishermen, contractors and customers with non-traditional income sources.',
-                'benefits' => ['Flexible guarantor option', 'Flexible early settlement option', 'Accessible approval pathway', 'Designed for diverse income profiles'],
-                'eligibility' => 'Customers can nominate a guarantor without strict employment or family relationship requirements.',
-                'docs' => ['Applicant ID card copy', 'Guarantor ID card copy'],
-                'whoFor' => 'Customers who may not meet the requirements of other plans but are looking for a practical ownership solution with greater flexibility and early settlement options.',
-            ],
-        ],
-        [
-            'id' => 'freedom',
-            'name' => 'Freedom',
-            'tag' => 'No guarantor',
-            'color' => '#C4320A',
-            'bg' => '#FFECE5',
-            'accent' => '#C4320A',
-            'accentLight' => '#FFECE5',
-            'icon' => 'award',
-            'desc' => 'For customers who prefer a simpler application process with greater independence.',
-            'pts' => ['No guarantor required', 'Simpler approval process', 'Flexible early settlement'],
-            'best' => 'Independent customers',
-            'drawer' => [
-                'subtitle' => 'Own Your Bike Without A Guarantor',
-                'fullDesc' => 'Freedom Plan is designed for customers who prefer a simpler ownership process without the need for a guarantor.',
-                'benefits' => ['No guarantor required', 'Simple application process', 'Faster ownership pathway', 'Greater independence and flexibility', 'Flexible early settlement option available'],
-                'eligibility' => 'Freedom Plan requires a higher advance payment compared to other ownership plans, allowing customers to proceed without a guarantor.',
-                'docs' => ['Applicant ID card copy', 'Two alternative family contact numbers'],
-                'whoFor' => 'Customers who prefer a straightforward ownership process, value flexible early settlement, and can make a higher upfront contribution.',
-            ],
-        ],
-        [
-            'id' => 'premium',
-            'name' => 'Premium',
-            'tag' => 'Lowest total cost',
-            'color' => '#0E9F6E',
-            'bg' => '#E6F7F0',
-            'accent' => '#0E9F6E',
-            'accentLight' => '#E6F7F0',
-            'icon' => 'clipboard-list',
-            'desc' => 'Our shortest-term ownership route, designed for the lowest overall lease cost.',
-            'pts' => ['Highest advance, shortest term', 'Lowest total lease amount', 'Fastest ownership completion'],
-            'best' => 'Lowest cost & short term',
-            'drawer' => [
-                'subtitle' => 'Lower Total Payment. Faster Ownership.',
-                'fullDesc' => 'Premium Plan is designed for customers who want to complete ownership sooner while benefiting from a lower overall payable amount compared to longer-term ownership plans.',
-                'benefits' => ['Lower total payable amount', 'Faster ownership completion', 'Available in Premium 6, Premium 8 and Premium 12 options', 'Transparent fixed payment structure'],
-                'eligibility' => 'Premium Plan is available with a flexible guarantor requirement and is designed for customers comfortable making a higher upfront contribution in exchange for lower overall ownership costs.',
-                'docs' => ['Applicant ID card copy', 'Guarantor ID card copy'],
-                'whoFor' => 'Customers who prefer shorter ownership periods, lower overall costs and a faster path to full ownership.',
-                'important' => 'Unlike Prime, Family, Secure, Flexi and Freedom Plans, Premium Plans operate on a fixed ownership structure. Since the total ownership cost is already reduced and fixed at the start, flexible early settlement benefits are not applicable under Premium Plans.',
-            ],
-        ],
-    ];
 
     $steps = [
         [
@@ -165,7 +39,7 @@
         ],
         [
             'q' => 'What happens if I want to pay it off early?',
-            'a' => 'You can settle early on any of our six plans, at no additional charge. Speak to our team and they will confirm the settlement figure for your plan.',
+            'a' => 'You can settle early on any of our ' . $planWord . ' plans, at no additional charge. Speak to our team and they will confirm the settlement figure for your plan.',
         ],
         [
             'q' => 'Can I use a promotion discount with a plan?',
@@ -190,7 +64,7 @@
         ['label' => 'Proof of income', 'value' => 'Most plans'],
         ['label' => 'Guarantor', 'value' => 'Plan dependent'],
         ['label' => 'Advance payment', 'value' => 'From 15%'],
-        ['label' => 'Plan period', 'value' => '12-48 months'],
+        ['label' => 'Plan period', 'value' => \App\Support\IjaraPlans::termRange()],
     ];
 @endphp
 
@@ -226,7 +100,7 @@
                 <div class="litus-cta-row mt-6">
                     <a href="#compare"
                        class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-7 py-[15px] text-[15px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
-                        Compare the Six Plans
+                        Compare the {{ ucfirst($planWord) }} Plans
                         <x-litus-icon name="arrow-right" class="h-4 w-4" />
                     </a>
                     <a href="{{ route('contact') }}"
@@ -312,7 +186,7 @@
                         At the end of the plan, ownership of the motorcycle transfers to you. If you want to settle early at any point, you can, and there is no additional charge for doing so.
                     </p>
                     <p class="mb-[17px]">
-                        We built six plans rather than one because the Maldives does not have one kind of buyer. A salaried employee in Malé, a fisherman in Laamu with income that varies by season, and a first-time rider with a family guarantor all need different structures. The plan below that fits your situation is the one our team will steer you toward - including when that is the cheaper one.
+                        We built {{ $planWord }} plans rather than one because the Maldives does not have one kind of buyer. A salaried employee in Malé, a fisherman in Laamu with income that varies by season, and a first-time rider with a family guarantor all need different structures. The plan below that fits your situation is the one our team will steer you toward - including when that is the cheaper one.
                     </p>
                 </div>
 
@@ -350,7 +224,7 @@
         <div class="litus-container">
             <div class="mx-auto mb-6 max-w-[660px] text-center max-md:mb-5 sm:mb-[clamp(34px,4vw,54px)]">
                 <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">Our Plans</span>
-                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Six ways to own your motorcycle</h2>
+                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">{{ ucfirst($planWord) }} ways to own your motorcycle</h2>
                 <p class="mt-3 text-[15px] leading-[1.66] text-litus-text-2 sm:mt-4 sm:text-[clamp(16.5px,1.5vw,19px)]">
                     Choose the plan that fits your situation. Our team will confirm which you qualify for.
                 </p>
@@ -384,6 +258,12 @@
                                     @endforeach
                                 </ul>
                                 <div class="mt-auto border-t border-litus-line pt-3 sm:pt-3.5">
+                                    @if (! empty($plan['terms']))
+                                        <div class="mb-3 flex items-start justify-between gap-3">
+                                            <span class="text-[12px] text-litus-text-3 sm:text-[12.5px]">Available months</span>
+                                            <b class="text-right text-[12.5px] font-semibold text-litus-text sm:text-[13px]">{{ implode(', ', $plan['terms']) }}</b>
+                                        </div>
+                                    @endif
                                     <div class="mb-3 flex items-start justify-between gap-3 sm:mb-4">
                                         <span class="text-[12px] text-litus-text-3 sm:text-[12.5px]">Best for</span>
                                         <b class="text-right text-[12.5px] font-semibold text-litus-text sm:text-[13px]">{{ $plan['best'] }}</b>
@@ -418,7 +298,7 @@
             <div class="mx-auto mt-6 max-w-[900px] rounded-r-[12px] border-l-4 border-[#C89B3C] bg-[#FFF8EB] px-4 py-4 sm:mt-9 sm:px-6 sm:py-5">
                 <b class="mb-1.5 block text-[14.5px] text-litus-text">Not sure which plan is right?</b>
                 <p class="m-0 text-[14.5px] leading-relaxed text-[#2A3548]">
-                    Call us on 779 7442 or visit any showroom. Our team will look at your situation and tell you which of the six is the best fit - and which you are likely to be approved for.
+                    Call us on 779 7442 or visit any showroom. Our team will look at your situation and tell you which of the {{ $planWord }} is the best fit - and which you are likely to be approved for.
                 </p>
             </div>
         </div>
@@ -497,7 +377,7 @@
             <div class="max-w-[560px]">
                 <h3 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]">Ready to find your plan?</h3>
                 <p class="mt-3 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.72]">
-                    Our team will look at your situation and tell you which of the six plans fits - and what you will need to bring.
+                    Our team will look at your situation and tell you which of the {{ $planWord }} plans fits - and what you will need to bring.
                 </p>
             </div>
             <div class="litus-cta-row">
@@ -563,6 +443,11 @@
                 <div>
                     <h4 class="mb-3 text-sm font-bold uppercase tracking-wider text-gray-900">Required Documents</h4>
                     <ul data-drawer-docs class="space-y-2"></ul>
+                </div>
+
+                <div data-drawer-terms-wrap>
+                    <h4 class="mb-3 text-sm font-bold uppercase tracking-wider text-gray-900">Available Months</h4>
+                    <div data-drawer-terms class="flex flex-wrap gap-2"></div>
                 </div>
 
                 <div class="rounded-xl bg-gray-50 p-4">

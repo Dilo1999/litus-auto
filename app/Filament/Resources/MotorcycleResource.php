@@ -8,7 +8,9 @@ use App\Models\Motorcycle;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Toggle;
+use App\Models\IjaraPlan;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -65,6 +67,24 @@ class MotorcycleResource extends Resource
                             ->default(false),
                     ])
                     ->columns(2),
+
+                Forms\Components\Section::make('Ijara plans')
+                    ->description('Choose whether this model can be leased on an Ijara plan, and which plans it is offered on. This controls the payment calculator and the Ijara links on its page.')
+                    ->schema([
+                        Toggle::make('ijara_enabled')
+                            ->label('Available on Ijara plans')
+                            ->default(true)
+                            ->reactive(),
+                        CheckboxList::make('ijara_plans')
+                            ->label('Included in these plans')
+                            ->options(fn () => IjaraPlan::query()->orderBy('sort_order')->pluck('name', 'slug')->all())
+                            ->default(fn () => IjaraPlan::query()->orderBy('sort_order')->pluck('slug')->all())
+                            ->columns(3)
+                            ->visible(fn (\Closure $get) => (bool) $get('ijara_enabled'))
+                            ->required(fn (\Closure $get) => (bool) $get('ijara_enabled'))
+                            ->validationAttribute('Ijara plans')
+                            ->helperText('Select at least one plan.'),
+                    ]),
 
                 Forms\Components\Section::make('Pricing')
                     ->description('Promotional sale prices are managed under Catalog → Promotions.')
@@ -127,6 +147,8 @@ class MotorcycleResource extends Resource
                 ToggleColumn::make('is_published')
                     ->label('Published')
                     ->sortable(),
+                Tables\Columns\BooleanColumn::make('ijara_enabled')
+                    ->label('Ijara'),
                 ToggleColumn::make('is_top_selling')
                     ->label('Top selling')
                     ->sortable(),

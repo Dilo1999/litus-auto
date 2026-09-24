@@ -27,6 +27,8 @@ class Motorcycle extends Model
         'hero_background',
         'is_published',
         'is_top_selling',
+        'ijara_enabled',
+        'ijara_plans',
         'sort_order',
     ];
 
@@ -37,6 +39,8 @@ class Motorcycle extends Model
         'specs' => 'array',
         'is_published' => 'boolean',
         'is_top_selling' => 'boolean',
+        'ijara_enabled' => 'boolean',
+        'ijara_plans' => 'array',
         'sort_order' => 'integer',
     ];
 

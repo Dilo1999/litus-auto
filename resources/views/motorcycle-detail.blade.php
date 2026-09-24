@@ -18,7 +18,7 @@
     $heroBg = $motorcycle->heroBackgroundUrl();
     $hasPromo = $motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0;
     $activePrice = $hasPromo ? $motorcycle->promotionalSalePrice() : (float) $motorcycle->original_price;
-    $monthly = $activePrice > 0 ? (int) (round(($activePrice / 60) / 10) * 10) : null;
+    $monthly = $motorcycle->ijara_enabled && $activePrice > 0 ? (int) (round(($activePrice / 60) / 10) * 10) : null;
     $engine = $motorcycle->engineCapacity();
     $keyTech = $highlights[1]['value'] ?? ($highlights[0]['value'] ?? 'LITUS Support');
     $blurb = 'Premium build, genuine parts support, and Ijara-ready ownership options across LITUS showrooms in the Maldives.';
@@ -96,10 +96,12 @@
                             Reserve This Bike
                             <x-litus-icon name="arrow-right" class="h-4 w-4" />
                         </a>
-                        <a href="{{ route('ownership-plans') }}"
-                           class="inline-flex items-center justify-center rounded-lg border-[1.5px] border-white/32 px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10">
-                            See Ijara Plans
-                        </a>
+                        @if ($motorcycle->ijara_enabled)
+                            <a href="{{ route('ownership-plans') }}"
+                               class="inline-flex items-center justify-center rounded-lg border-[1.5px] border-white/32 px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10">
+                                See Ijara Plans
+                            </a>
+                        @endif
                     </div>
                 </div>
 
@@ -246,10 +248,12 @@
                         Reserve
                         <x-litus-icon name="arrow-right" class="h-3.5 w-3.5 shrink-0" />
                     </a>
-                    <a href="{{ route('ownership-plans') }}"
-                       class="inline-flex min-h-11 flex-1 items-center justify-center rounded-xl border-[1.5px] border-white/32 px-3 text-[13px] font-semibold text-white transition hover:border-white hover:bg-white/10">
-                        Ijara Plans
-                    </a>
+                    @if ($motorcycle->ijara_enabled)
+                        <a href="{{ route('ownership-plans') }}"
+                           class="inline-flex min-h-11 flex-1 items-center justify-center rounded-xl border-[1.5px] border-white/32 px-3 text-[13px] font-semibold text-white transition hover:border-white hover:bg-white/10">
+                            Ijara Plans
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

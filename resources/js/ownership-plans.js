@@ -47,6 +47,9 @@ function initOwnershipPlans() {
         });
     };
 
+    const escapeMap = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+    const esc = (value) => String(value).replace(/[&<>"']/g, (c) => escapeMap[c]);
+
     const renderList = (container, items, template) => {
         if (!container) return;
         container.innerHTML = items.map((item) => template(item)).join('');
@@ -70,7 +73,7 @@ function initOwnershipPlans() {
         renderList(fields.benefits, d.benefits, (b) => `
             <li class="flex items-start gap-2.5 text-sm text-gray-700">
                 <svg class="mt-0.5 h-[15px] w-[15px] shrink-0" data-drawer-accent fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-                ${b}
+                ${esc(b)}
             </li>
         `);
 
@@ -79,9 +82,17 @@ function initOwnershipPlans() {
                 <div class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded" data-drawer-doc-wrap>
                     <div class="h-1.5 w-1.5 rounded-full" data-drawer-doc-dot></div>
                 </div>
-                ${doc}
+                ${esc(doc)}
             </li>
         `);
+
+        const termsWrap = root.querySelector('[data-drawer-terms-wrap]');
+        const termsEl = root.querySelector('[data-drawer-terms]');
+        const terms = plan.terms || [];
+        termsWrap?.classList.toggle('hidden', terms.length === 0);
+        if (termsEl) {
+            termsEl.innerHTML = terms.map((m) => `<span class="rounded-lg px-3 py-1.5 text-xs font-bold" style="background:${esc(plan.accentLight)};color:${esc(plan.accent)}">${m} months</span>`).join('');
+        }
 
         if (d.important) {
             fields.importantWrap?.classList.remove('hidden');
