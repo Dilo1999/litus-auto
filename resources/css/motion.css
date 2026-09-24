@@ -1,0 +1,181 @@
+/* ==========================================================================
+   Site-wide motion system (see resources/js/motion.js)
+   Hidden states only apply once JS has added .js-motion to <html>, so content
+   is never lost if scripting fails. Individual transform properties
+   (translate / scale) are used so they never clash with Tailwind transforms.
+   ========================================================================== */
+:root {
+  --mx-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes mx-page-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes mx-fade-down {
+  from { opacity: 0; translate: 0 -8px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+body {
+  animation: mx-page-in 0.5s ease-out both;
+  transition: opacity 0.22s ease-in;
+}
+
+body.mx-leaving {
+  opacity: 0;
+}
+
+/* Scroll reveal ---------------------------------------------------------- */
+.js-motion .mx-reveal {
+  opacity: 0;
+  translate: 0 30px;
+  transition:
+    opacity 0.75s var(--mx-ease) var(--mx-d, 0s),
+    translate 0.75s var(--mx-ease) var(--mx-d, 0s),
+    scale 0.75s var(--mx-ease) var(--mx-d, 0s);
+  will-change: opacity, translate;
+}
+
+.js-motion .mx-reveal[data-mx="left"] { translate: -34px 0; }
+.js-motion .mx-reveal[data-mx="right"] { translate: 34px 0; }
+.js-motion .mx-reveal[data-mx="scale"] { translate: 0 0; scale: 0.94; }
+
+.js-motion .mx-reveal.mx-in {
+  opacity: 1;
+  translate: 0 0;
+  scale: 1;
+}
+
+/* Scroll progress + back to top ------------------------------------------ */
+.mx-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 300;
+  height: 3px;
+  pointer-events: none;
+  background: linear-gradient(90deg, #1257D6, #5AB8FF);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  box-shadow: 0 0 10px rgba(90, 184, 255, 0.6);
+}
+
+.mx-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 9999px;
+  background: #1257D6;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(18, 87, 214, 0.45);
+  opacity: 0;
+  translate: 0 16px;
+  pointer-events: none;
+  transition: opacity 0.3s ease, translate 0.3s var(--mx-ease), background-color 0.2s ease, scale 0.2s ease;
+}
+
+.mx-top.is-visible {
+  opacity: 1;
+  translate: 0 0;
+  pointer-events: auto;
+}
+
+.mx-top:hover { background: #0B47B0; scale: 1.08; }
+.mx-top:active { scale: 0.94; }
+.mx-top svg { width: 18px; height: 18px; }
+
+/* Header ----------------------------------------------------------------- */
+[data-litus-header] {
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+[data-litus-header] > .litus-container {
+  transition: height 0.3s var(--mx-ease);
+}
+
+[data-litus-header].is-scrolled {
+  background-color: rgba(5, 11, 24, 0.98);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+[data-litus-header].is-scrolled > .litus-container {
+  height: 62px;
+}
+
+/* Hero parallax ---------------------------------------------------------- */
+.mx-parallax {
+  scale: 1.1;
+  will-change: translate;
+}
+
+/* Primary buttons: shine sweep + press ----------------------------------- */
+:is(a, button)[class*="bg-litus-primary"]:not([class*="absolute"]):not([class*="fixed"]):not([class*="sticky"]) {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+:is(a, button)[class*="bg-litus-primary"]:not([class*="absolute"]):not([class*="fixed"]):not([class*="sticky"])::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -75%;
+  z-index: -1;
+  width: 50%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+:is(a, button)[class*="bg-litus-primary"]:not([class*="absolute"]):not([class*="fixed"]):not([class*="sticky"]):hover::after {
+  left: 130%;
+  transition: left 0.7s var(--mx-ease);
+}
+
+:is(a, button, [role="button"]):active {
+  scale: 0.97;
+}
+
+/* Cards: image zoom ------------------------------------------------------- */
+[data-motorcycle-card] img {
+  transition: scale 0.6s var(--mx-ease);
+}
+
+[data-motorcycle-card]:hover img {
+  scale: 1.04;
+}
+
+/* Form controls ---------------------------------------------------------- */
+input, select, textarea {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+/* Accordions ------------------------------------------------------------- */
+details[open] > :not(summary) {
+  animation: mx-fade-down 0.32s var(--mx-ease) both;
+}
+
+:focus-visible {
+  outline: 2px solid #5AB8FF;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  .mx-progress, .mx-top { display: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

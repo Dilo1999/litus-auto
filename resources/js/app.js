@@ -1,5 +1,6 @@
 import './bootstrap';
 import './animations';
+import './motion';
 import './nav';
 import './motorcycles';
 import './parts';

@@ -4,6 +4,7 @@
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
+@import "./motion.css";
 
 @font-face {
   font-family: 'A4SPEED';

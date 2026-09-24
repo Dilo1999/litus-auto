@@ -142,7 +142,7 @@
 
     {{-- ================= STICKY MINI BAR ================= --}}
     @if ($selected->isNotEmpty())
-        <div class="pointer-events-none fixed inset-x-0 top-[68px] z-[150] -translate-y-3 opacity-0 transition duration-300 data-[on=true]:pointer-events-auto data-[on=true]:translate-y-0 data-[on=true]:opacity-100" data-compare-mini>
+        <div class="pointer-events-none fixed inset-x-0 top-[62px] z-[150] -translate-y-3 opacity-0 transition duration-300 data-[on=true]:pointer-events-auto data-[on=true]:translate-y-0 data-[on=true]:opacity-100" data-compare-mini>
             <div class="litus-container">
                 <div class="grid grid-cols-[1fr_1fr] gap-3 rounded-2xl border border-litus-line bg-white/95 px-4 py-2.5 shadow-[0_12px_32px_rgba(5,11,24,0.16)] backdrop-blur sm:grid-cols-[1fr_1.4fr_1.4fr] sm:gap-x-6 sm:px-5">
                     <span class="hidden items-center text-[11px] font-bold uppercase tracking-[0.16em] text-litus-text-2 sm:flex">Comparing</span>

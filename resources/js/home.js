@@ -112,7 +112,9 @@ function initIjaraEstimator() {
     Object.keys(data.plans).forEach((key) => {
       const btn = planTemplate.content.firstElementChild.cloneNode(true);
       btn.querySelector('[data-plan-name]').textContent = data.plans[key];
-      btn.querySelector('[data-plan-tag]').textContent = (data.planTags && data.planTags[key]) || '';
+      const tag = (data.planTags && data.planTags[key]) || '';
+      btn.querySelector('[data-plan-tag]').textContent = tag;
+      btn.title = tag;
       btn.dataset.plan = key;
       btn.addEventListener('click', () => {
         selectedPlan = key;
@@ -154,8 +156,8 @@ function initIjaraEstimator() {
       btn.disabled = !ok;
       btn.setAttribute('aria-pressed', String(btn.dataset.term === selectedTerm));
       if (!note) return;
-      note.classList.toggle('text-litus-primary', ok);
-      note.classList.toggle('text-litus-text-3', !ok);
+      note.classList.toggle('text-litus-sky', ok);
+      note.classList.toggle('text-white/50', !ok);
       if (!selectedPlan) {
         note.textContent = '';
       } else if (!ok) {
@@ -198,7 +200,7 @@ function initIjaraEstimator() {
       : model
         ? 'The advance is deducted from the vehicle price before your monthly payment is worked out.'
         : 'Select a model first, then enter the amount you will pay upfront.';
-    advanceHint.style.color = tooHigh ? '#C4151B' : '';
+    advanceHint.style.color = tooHigh ? '#FF8A8A' : '';
 
     // Step badges
     setStepDone('model', Boolean(model));
