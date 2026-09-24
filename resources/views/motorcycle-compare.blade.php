@@ -50,39 +50,39 @@
                 radial-gradient(600px 400px at 0% 100%, rgba(90,184,255,.12), transparent 60%),
                 radial-gradient(600px 400px at 100% 100%, rgba(90,184,255,.12), transparent 60%);"></div>
 
-        <div class="relative litus-container pb-10 pt-9 sm:pb-14 sm:pt-12">
-            <nav class="mb-5 flex items-center justify-center gap-2 text-[12px] text-white/55" aria-label="Breadcrumb">
+        <div class="relative litus-container pb-6 pt-4 sm:pb-8 sm:pt-5">
+            <nav class="mb-2 flex items-center justify-center gap-2 text-[11.5px] text-white/55" aria-label="Breadcrumb">
                 <a href="{{ route('motorcycles') }}" class="transition hover:text-white">Motorcycles</a>
                 <span aria-hidden="true">/</span>
                 <span class="text-white/85">Compare</span>
             </nav>
 
-            <div class="mx-auto mb-8 max-w-[640px] text-center sm:mb-12">
-                <span class="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-litus-sky">
+            <div class="mx-auto mb-4 max-w-[760px] text-center sm:mb-5">
+                <span class="mb-2 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.18em] text-litus-sky">
                     <span class="h-1.5 w-1.5 rounded-full bg-litus-sky"></span> Vehicle Comparison
                 </span>
-                <h1 class="font-display text-[clamp(28px,5vw,52px)] font-bold leading-[1.08] tracking-[-0.032em]">Find the right ride, side by side</h1>
-                <p class="mt-3 text-[clamp(14px,1.5vw,17px)] leading-[1.65] text-white/65">Pick two models to compare price and specifications at a glance.</p>
+                <h1 class="font-display text-[clamp(22px,3vw,32px)] font-bold leading-[1.1] tracking-[-0.032em]">Find the right ride, side by side</h1>
+                <p class="mt-1.5 text-[13.5px] leading-[1.55] text-white/65 sm:text-[14.5px]">Pick two models to compare price and specifications at a glance.</p>
             </div>
 
-            <div class="grid grid-cols-1 items-stretch gap-4 md:grid-cols-[1fr_auto_1fr] md:gap-5 lg:gap-8">
+            <div class="mx-auto grid max-w-[980px] grid-cols-1 items-stretch gap-3 md:grid-cols-[1fr_auto_1fr] md:gap-4 lg:gap-5">
                 @foreach ($slots as $i => $m)
                     @if ($i === 1)
-                        <div class="relative z-10 flex items-center justify-center max-md:-my-6">
-                            <span class="grid h-14 w-14 place-items-center rounded-full bg-litus-primary font-display text-[17px] font-extrabold tracking-tight text-white shadow-[0_0_0_6px_rgba(18,87,214,0.28),0_12px_30px_rgba(18,87,214,0.5)] md:h-16 md:w-16 md:text-[19px]">VS</span>
+                        <div class="relative z-10 flex items-center justify-center max-md:-my-5">
+                            <span class="grid h-11 w-11 place-items-center rounded-full bg-litus-primary font-display text-[14px] font-extrabold tracking-tight text-white shadow-[0_0_0_5px_rgba(18,87,214,0.28),0_10px_24px_rgba(18,87,214,0.5)] md:h-12 md:w-12 md:text-[15px]">VS</span>
                         </div>
                     @endif
 
-                    <article class="relative flex min-w-0 flex-col overflow-hidden rounded-[22px] border border-white/10 bg-white/[0.05] p-3 shadow-[0_24px_60px_rgba(0,0,0,0.35)] backdrop-blur-sm sm:p-4">
+                    <article class="relative flex min-w-0 flex-col overflow-hidden rounded-[18px] border border-white/10 bg-white/[0.05] p-2.5 shadow-[0_18px_44px_rgba(0,0,0,0.35)] backdrop-blur-sm">
                         {{-- Image panel --}}
-                        <div class="relative aspect-[16/10] w-full overflow-hidden rounded-2xl {{ $m ? 'bg-[radial-gradient(ellipse_at_50%_35%,#ffffff_0%,#EEF1F6_55%,#DCE2EC_100%)]' : 'border-2 border-dashed border-white/20 bg-white/[0.04]' }}">
+                        <div class="relative aspect-[2/1] w-full overflow-hidden rounded-xl {{ $m ? 'bg-[radial-gradient(ellipse_at_50%_35%,#ffffff_0%,#EEF1F6_55%,#DCE2EC_100%)]' : 'border-2 border-dashed border-white/20 bg-white/[0.04]' }}">
                             @if ($m)
                                 @if ($m->hasPromotion() && $m->discountAmount() > 0)
                                     <span class="absolute left-3 top-3 z-10 rounded-full bg-litus-green px-3 py-1 text-[11px] font-bold text-white shadow">SAVE {{ $m->formattedDiscount() }}</span>
                                 @endif
                                 <a href="{{ route('motorcycle.show', $m->slug) }}" class="absolute inset-0 block" aria-label="View {{ $m->name }}">
                                     <img src="{{ $m->listImageUrl() }}" alt="{{ $m->name }}"
-                                         class="absolute inset-0 h-full w-full object-contain object-center p-4 drop-shadow-[0_16px_14px_rgba(5,11,24,0.28)] transition duration-500 hover:scale-[1.04] sm:p-8">
+                                         class="absolute inset-0 h-full w-full origin-center scale-[1.4] object-contain object-center p-2 drop-shadow-[0_16px_14px_rgba(5,11,24,0.28)] transition duration-500 hover:scale-[1.46] sm:p-4">
                                 </a>
                             @else
                                 <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-white/60">
@@ -93,27 +93,27 @@
                         </div>
 
                         {{-- Identity --}}
-                        <div class="px-1 pb-1 pt-4 sm:px-2">
+                        <div class="px-1 pb-0.5 pt-2.5 sm:px-1.5">
                             @if ($m)
                                 <span class="block text-[11px] font-bold uppercase tracking-[0.16em] text-litus-sky">{{ trim(($m->brand ? $m->brand.' · ' : '').($m->category ?: 'Motorcycle')) }}</span>
-                                <h2 class="mt-1 font-display text-[clamp(20px,2.3vw,28px)] font-bold leading-tight tracking-[-0.02em]">{{ $m->name }}</h2>
-                                <div class="mt-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
-                                    <span class="font-display text-[clamp(18px,2vw,24px)] font-extrabold">{{ $priceOf($m) }}</span>
+                                <h2 class="mt-0.5 font-display text-[clamp(16px,1.7vw,20px)] font-bold leading-tight tracking-[-0.02em]">{{ $m->name }}</h2>
+                                <div class="mt-0.5 flex flex-wrap items-baseline gap-x-2.5 gap-y-0">
+                                    <span class="font-display text-[clamp(15px,1.5vw,18px)] font-extrabold">{{ $priceOf($m) }}</span>
                                     @if ($m->hasPromotion() && $m->discountAmount() > 0)
                                         <span class="text-[13px] text-white/50 line-through">{{ $m->formattedOriginalPrice() }}</span>
                                     @endif
                                 </div>
                             @else
                                 <span class="block text-[11px] font-bold uppercase tracking-[0.16em] text-white/45">Slot {{ $i + 1 }}</span>
-                                <h2 class="mt-1 font-display text-[clamp(20px,2.3vw,28px)] font-bold leading-tight tracking-[-0.02em] text-white/60">Choose a model</h2>
+                                <h2 class="mt-0.5 font-display text-[clamp(16px,1.7vw,20px)] font-bold leading-tight tracking-[-0.02em] text-white/60">Choose a model</h2>
                             @endif
 
                             {{-- Selector --}}
-                            <div class="mt-4 flex items-center gap-2">
+                            <div class="mt-2.5 flex items-center gap-2">
                                 <div class="relative min-w-0 flex-1">
                                     <label class="sr-only" for="slot-{{ $i }}">{{ $m ? 'Change model' : 'Select motorcycle' }}</label>
                                     <select id="slot-{{ $i }}" data-compare-slot="{{ $i }}"
-                                            class="min-h-11 w-full min-w-0 cursor-pointer appearance-none rounded-xl border border-white/20 bg-white px-4 pr-10 text-[14px] font-semibold text-litus-text shadow-sm transition hover:border-litus-sky focus:border-litus-sky focus:outline-none focus:ring-4 focus:ring-litus-sky/25 sm:text-[15px]">
+                                            class="min-h-10 w-full min-w-0 cursor-pointer appearance-none rounded-lg border border-white/20 bg-white px-3.5 pr-9 text-[13.5px] font-semibold text-litus-text shadow-sm transition hover:border-litus-sky focus:border-litus-sky focus:outline-none focus:ring-4 focus:ring-litus-sky/25 sm:text-[15px]">
                                         @unless ($m)
                                             <option value="">Select motorcycle…</option>
                                         @endunless
@@ -128,7 +128,7 @@
                                 </div>
                                 @if ($m)
                                     <button type="button" data-compare-remove="{{ $i }}" aria-label="Remove {{ $m->name }}" title="Remove"
-                                            class="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-white/20 text-white/80 transition hover:border-[#FF6B6B] hover:bg-[#FF6B6B]/15 hover:text-white">
+                                            class="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-white/20 text-white/80 transition hover:border-[#FF6B6B] hover:bg-[#FF6B6B]/15 hover:text-white">
                                         <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
                                     </button>
                                 @endif
