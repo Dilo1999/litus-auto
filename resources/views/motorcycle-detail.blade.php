@@ -40,10 +40,10 @@
     <x-litus-header active="Motorcycles" />
 
     {{-- HERO — desktop --}}
-    <section class="relative hidden overflow-hidden bg-litus-ink text-white min-[961px]:block">
+    <section class="relative hidden overflow-hidden bg-litus-ink text-white min-[961px]:block hero-stage">
         <img src="{{ $heroBg }}"
              alt=""
-             class="absolute inset-0 h-full w-full object-cover object-[center_right]"
+             class="absolute inset-x-0 top-0 h-auto w-full max-w-none [-webkit-mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)] [mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)]"
              aria-hidden="true">
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,24,0.96)_0%,rgba(5,11,24,0.88)_36%,rgba(5,11,24,0.55)_64%,rgba(5,11,24,0.4)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0"

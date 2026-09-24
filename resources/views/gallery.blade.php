@@ -14,10 +14,10 @@
     <x-litus-header active="Gallery" />
 
     {{-- HERO — desktop --}}
-    <section class="relative hidden min-h-[680px] overflow-hidden border border-[rgba(27,74,120,0.45)] bg-[#06101c] pb-[82px] min-[961px]:block max-[1100px]:min-h-0 max-[1100px]:pb-8">
+    <section class="relative hidden min-h-[680px] overflow-hidden border border-[rgba(27,74,120,0.45)] bg-[#06101c] pb-[82px] min-[961px]:block max-[1100px]:min-h-0 max-[1100px]:pb-8 hero-stage">
         <img src="{{ $heroBg }}"
              alt=""
-             class="absolute inset-0 h-full w-full object-cover object-[center_right]"
+             class="absolute inset-x-0 top-0 h-auto w-full max-w-none [-webkit-mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)] [mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)]"
              aria-hidden="true">
 
         <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,11,22,0.98)_0%,rgba(3,11,22,0.88)_32%,rgba(3,11,22,0.48)_58%,rgba(3,11,22,0.25)_100%)]"></div>

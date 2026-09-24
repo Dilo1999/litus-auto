@@ -69,10 +69,10 @@
     <x-litus-header active="Home" />
 
     {{-- HERO — desktop (original layout, unchanged) --}}
-    <section class="relative hidden overflow-hidden bg-litus-ink pb-[82px] text-white max-[1100px]:pb-8 min-[961px]:block">
+    <section class="relative hidden overflow-hidden bg-litus-ink pb-[82px] text-white max-[1100px]:pb-8 min-[961px]:block hero-stage">
         <img src="{{ $heroBg }}"
              alt=""
-             class="absolute inset-0 h-full w-full object-cover object-[center_right]"
+             class="absolute inset-x-0 top-0 h-auto w-full max-w-none [-webkit-mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)] [mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)]"
              aria-hidden="true">
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,24,0.96)_0%,rgba(5,11,24,0.88)_34%,rgba(5,11,24,0.55)_62%,rgba(5,11,24,0.35)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0"

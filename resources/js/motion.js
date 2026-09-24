@@ -1,5 +1,5 @@
 /**
- * Site-wide motion: scroll reveal, hero entrance + parallax, header state,
+ * Site-wide motion: scroll reveal, hero entrance, header state,
  * scroll progress, back-to-top and soft page transitions.
  * Targets are discovered automatically, so no per-page markup is needed.
  * Skipped entirely when the visitor prefers reduced motion.
@@ -119,10 +119,6 @@ function initScrollEffects() {
   document.body.append(bar, top);
 
   const header = document.querySelector('[data-litus-header]');
-  const parallax = Array.from(document.querySelectorAll('section:first-of-type img[aria-hidden="true"]'))
-    .filter((img) => img.matches('[class*="absolute"][class*="inset-0"]'));
-  parallax.forEach((img) => img.classList.add('mx-parallax'));
-
   let ticking = false;
   const update = () => {
     ticking = false;
@@ -131,9 +127,6 @@ function initScrollEffects() {
     bar.style.transform = `scaleX(${max > 0 ? Math.min(y / max, 1) : 0})`;
     header?.classList.toggle('is-scrolled', y > 24);
     top.classList.toggle('is-visible', y > 700);
-    if (y < window.innerHeight * 1.2) {
-      parallax.forEach((img) => { img.style.translate = `0 ${(y * 0.16).toFixed(1)}px`; });
-    }
   };
 
   window.addEventListener('scroll', () => {

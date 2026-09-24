@@ -110,10 +110,32 @@ body.mx-leaving {
   height: 62px;
 }
 
-/* Hero parallax ---------------------------------------------------------- */
-.mx-parallax {
-  scale: 1.1;
-  will-change: translate;
+/* Hero background images keep a constant scale: the image always spans the full
+   width at its natural aspect ratio (top-anchored, faded at the bottom), and the
+   hero is never shorter than that image would be, so resizing the window never
+   zooms or re-crops it. */
+@layer components {
+  .hero-stage {
+    min-height: min(42vw, 900px);
+  }
+
+  .hero-stage.hero-stage-sm {
+    min-height: min(30vw, 620px);
+  }
+}
+
+/* When the hero is taller than its content, centre the content in the free space
+   and keep any feature strip pinned to the bottom edge. */
+@media (min-width: 961px) {
+  .hero-stage {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-stage > .litus-container {
+    width: 100%;
+    margin-block: auto;
+  }
 }
 
 /* Primary buttons: shine sweep + press ----------------------------------- */

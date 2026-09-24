@@ -65,10 +65,10 @@
     <x-litus-header active="About" />
 
     {{-- HERO — desktop --}}
-    <section class="relative hidden overflow-hidden bg-litus-ink text-white min-[961px]:block">
+    <section class="relative hidden overflow-hidden bg-litus-ink text-white min-[961px]:block hero-stage hero-stage-sm">
         <img src="{{ $heroBg }}"
              alt=""
-             class="absolute inset-0 h-full w-full object-cover object-[center_22%]"
+             class="absolute inset-x-0 top-0 h-auto w-full max-w-none [-webkit-mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)] [mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)]"
              aria-hidden="true">
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,24,0.96)_0%,rgba(5,11,24,0.88)_34%,rgba(5,11,24,0.55)_62%,rgba(5,11,24,0.35)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0"
@@ -79,7 +79,7 @@
         <div class="pointer-events-none absolute inset-0 opacity-[0.28]"
              style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px; mask-image: radial-gradient(700px 500px at 30% 30%, #000, transparent 78%);"></div>
 
-        <div class="relative z-[3] litus-container py-[clamp(48px,6.5vw,88px)] pb-[clamp(40px,5vw,68px)]">
+        <div class="relative z-[3] litus-container py-[clamp(32px,4vw,52px)] pb-[clamp(28px,3.5vw,44px)]">
             <div class="max-w-[820px]">
                 <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky">About LITUS Automobiles</span>
                 <h1 class="font-display text-[clamp(30px,4.2vw,50px)] font-bold leading-[1.08] tracking-[-0.032em] drop-shadow-[0_6px_20px_rgba(0,0,0,0.45)]">
