@@ -41,6 +41,7 @@ Route::match(['get', 'head'], 'storage/{path}', function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about-us', [AboutController::class, 'index'])->name('about');
 Route::get('/motorcycles', [MotorcycleController::class, 'index'])->name('motorcycles');
+Route::get('/compare', [MotorcycleController::class, 'compare'])->name('motorcycles.compare');
 Route::get('/motorcycles/{slug}', [MotorcycleController::class, 'show'])->name('motorcycle.show');
 Route::get('/promotions', [PromotionsController::class, 'index'])->name('promotions');
 Route::get('/ownership-plans', function (SeoService $seo) {

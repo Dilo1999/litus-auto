@@ -38,6 +38,7 @@ class IjaraRates
         return [
             'plans' => $plans,
             'planTerms' => $planTerms,
+            'planTags' => collect(IjaraPlans::all())->pluck('tag', 'id')->all(),
             'rate' => config('ijara_rates.rate'),
             'models' => $models,
         ];

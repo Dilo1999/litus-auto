@@ -102,6 +102,11 @@
                                 See Ijara Plans
                             </a>
                         @endif
+                        <a href="{{ route('motorcycles.compare', ['models' => $motorcycle->slug]) }}"
+                           data-compare-link="{{ $motorcycle->slug }}"
+                           class="inline-flex items-center justify-center rounded-lg border-[1.5px] border-white/32 px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10">
+                            Comparison
+                        </a>
                     </div>
                 </div>
 
@@ -254,6 +259,11 @@
                             Ijara Plans
                         </a>
                     @endif
+                    <a href="{{ route('motorcycles.compare', ['models' => $motorcycle->slug]) }}"
+                       data-compare-link="{{ $motorcycle->slug }}"
+                       class="inline-flex min-h-11 flex-1 items-center justify-center rounded-xl border-[1.5px] border-white/32 px-3 text-[13px] font-semibold text-white transition hover:border-white hover:bg-white/10">
+                        Comparison
+                    </a>
                 </div>
             </div>
         </div>
@@ -399,4 +409,17 @@
 
     <x-litus-footer />
 </div>
+
+<script>
+    (function () {
+        var KEY = 'litus-compare';
+        var stored = [];
+        try { stored = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) {}
+        document.querySelectorAll('[data-compare-link]').forEach(function (a) {
+            var cur = a.getAttribute('data-compare-link');
+            var list = [cur].concat(stored.filter(function (s) { return s !== cur; })).slice(0, 2);
+            a.href = a.href.split('?')[0] + '?models=' + encodeURIComponent(list.join(','));
+        });
+    })();
+</script>
 @endsection

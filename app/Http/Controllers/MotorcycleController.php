@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Concerns\AppliesPageSeo;
 use App\Models\Motorcycle;
 use App\Models\Showroom;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -31,6 +32,47 @@ class MotorcycleController extends Controller
         $promoCount = $motorcycles->filter(fn (Motorcycle $motorcycle) => $motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0)->count();
 
         return view('motorcycles', compact('motorcycles', 'brands', 'categories', 'promoCount'));
+    }
+
+    public function compare(Request $request): View
+    {
+        $this->applySeo('motorcycles');
+
+        $all = Motorcycle::query()
+            ->where('is_published', true)
+            ->with([
+                'colorVariants' => fn ($q) => $q->orderBy('sort_order'),
+                'promotions' => fn ($q) => $q->published()->currentlyActive()->ordered(),
+            ])
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get();
+
+        $slugs = collect(explode(',', (string) $request->query('models', '')))
+            ->map(fn ($s) => trim($s))
+            ->filter()
+            ->unique()
+            ->take(2);
+
+        $selected = $slugs
+            ->map(fn ($slug) => $all->firstWhere('slug', $slug))
+            ->filter()
+            ->values();
+
+        $labels = $selected
+            ->flatMap(fn (Motorcycle $m) => collect($m->specs ?? [])
+                ->filter(fn ($spec) => filled($spec['value'] ?? null))
+                ->pluck('label'))
+            ->filter()
+            ->unique()
+            ->values();
+
+        return view('motorcycle-compare', [
+            'all' => $all,
+            'selected' => $selected,
+            'labels' => $labels,
+            'maxModels' => 2,
+        ]);
     }
 
     public function show(string $slug): View
