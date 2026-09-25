@@ -16,7 +16,7 @@
             <p class="mt-2 text-[14px] leading-[1.55] text-litus-text-2 max-md:hidden sm:text-[15.5px]">Select a model, Ijara plan and lease term to request your quote.</p>
         </div>
 
-        <div class="grid items-start gap-4 min-[961px]:grid-cols-[1.6fr_1fr] min-[961px]:gap-5">
+        <div class="grid items-start gap-4 min-[961px]:items-stretch min-[961px]:grid-cols-[1.6fr_1fr] min-[961px]:gap-5">
             {{-- Steps --}}
             <div class="rounded-[18px] border border-litus-line bg-white p-4 shadow-[0_1px_2px_rgba(9,17,32,.04),0_14px_36px_rgba(9,17,32,.06)] sm:p-6">
                 {{-- 1. Bike --}}
@@ -92,7 +92,7 @@
             </div>
 
             {{-- Summary --}}
-            <aside class="rounded-[18px] border border-litus-line bg-white p-4 shadow-[0_1px_2px_rgba(9,17,32,.04),0_14px_36px_rgba(9,17,32,.06)] sm:p-5 min-[961px]:sticky min-[961px]:top-[96px]">
+            <aside class="rounded-[18px] border border-litus-line bg-white p-4 shadow-[0_1px_2px_rgba(9,17,32,.04),0_14px_36px_rgba(9,17,32,.06)] flex flex-col sm:p-5">
                 <div class="flex items-center justify-between gap-3">
                     <h3 class="font-display text-[18px] font-bold tracking-[-0.02em] text-litus-ink">Your Ijara summary</h3>
                     <span class="litus-ijara-status" data-ijara-status data-state="idle">Select options</span>
@@ -119,7 +119,7 @@
                     </div>
                 </dl>
 
-                <div class="mt-3.5 flex items-start gap-3 rounded-xl bg-[#EAF2FF] px-3.5 py-3 max-md:hidden">
+                <div class="mt-3.5 flex items-start gap-3 rounded-xl bg-[#EAF2FF] px-3.5 py-3 max-md:hidden min-[961px]:flex-1 min-[961px]:items-center">
                     <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[#D6E5FF] text-litus-primary"><x-litus-icon name="file-text" class="h-[18px] w-[18px]" /></span>
                     <div class="min-w-0">
                         <p class="text-[13.5px] font-bold text-litus-ink" data-ijara-quote-title>Choose your options</p>
