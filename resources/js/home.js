@@ -36,8 +36,40 @@ function initIjaraEstimator() {
     quoteTitle: q('[data-ijara-quote-title]'),
     quoteText: q('[data-ijara-quote-text]'),
     note: q('[data-ijara-note]'),
-    cta: q('[data-ijara-continue]'),
-    ctaLabel: q('[data-ijara-continue-label]'),
+  };
+  // Mobile summary rows, the sticky action bar and its button live alongside the desktop ones.
+  const mob = {
+    model: q('[data-ijara-m-model]'),
+    plan: q('[data-ijara-m-plan]'),
+    term: q('[data-ijara-m-term]'),
+  };
+  const ctas = [...root.querySelectorAll('[data-ijara-continue]')];
+  const ctaLabels = [...root.querySelectorAll('[data-ijara-continue-label]')];
+  const bar = q('[data-ijara-bar]');
+  const barText = q('[data-ijara-bar-text]');
+
+  // The bar is position:fixed; scroll-reveal transforms on ancestors would trap it, so it lives on <body>.
+  if (bar) {
+    document.body.appendChild(bar);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(
+        ([entry]) => {
+          bar.classList.toggle('translate-y-full', !entry.isIntersecting);
+          bar.classList.toggle('pointer-events-none', !entry.isIntersecting);
+        },
+        { threshold: 0.05 }
+      ).observe(root);
+    }
+  }
+
+  const setCta = (label, href, disabled) => {
+    ctaLabels.forEach((el) => {
+      el.textContent = label;
+    });
+    ctas.forEach((el) => {
+      el.href = href;
+      el.setAttribute('aria-disabled', String(disabled));
+    });
   };
 
   if (!modelSel || !planGroup || !planTemplate || !termGroup || !dataEl) return;
@@ -157,6 +189,10 @@ function initIjaraEstimator() {
     const picked = Boolean(model && selectedPlan && months);
 
     setText(out.model, model ? model.name : 'No model selected');
+    setText(mob.model, model ? model.name : '-');
+    setText(mob.plan, planName || '-');
+    setText(mob.term, months ? `${months} months` : '-');
+    setText(barText, [planName ? `${planName} plan` : '', months ? `${months} months` : ''].filter(Boolean).join(' · ') || 'Choose your options');
     setText(out.modelPrice, model && model.price ? formatMvr(model.price) : '-');
     setText(out.plan, planName || '-');
     setText(out.planTag, planTag);
@@ -170,18 +206,14 @@ function initIjaraEstimator() {
       setStatus('ready', 'Approved figures');
       out.quoteTitle.textContent = `${months} months on the ${planName} plan`;
       out.quoteText.textContent = 'Approved figures. Your final plan is confirmed by our sales team.';
-      out.ctaLabel.textContent = 'Continue';
       out.note.textContent = 'Continue on WhatsApp and our team will confirm your plan.';
-      out.cta.href = whatsapp(`Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${formatMvr(rate.down)}, monthly lease ${formatMvr(rate.monthly)}).`);
-      out.cta.setAttribute('aria-disabled', 'false');
+      setCta('Continue', whatsapp(`Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${formatMvr(rate.down)}, monthly lease ${formatMvr(rate.monthly)}).`), false);
     } else if (picked) {
       setStatus('quote', 'Quote required');
       out.quoteTitle.textContent = 'Get your personalised quote';
       out.quoteText.textContent = 'Pricing for this combination is not available online yet.';
-      out.ctaLabel.textContent = 'Request a quote';
       out.note.textContent = 'Send your selection to our team for pricing and next steps.';
-      out.cta.href = whatsapp(`Hi LITUS, please confirm the Ijara down payment and monthly lease for: ${model.name}, ${planName} plan, ${months} months.`);
-      out.cta.setAttribute('aria-disabled', 'false');
+      setCta('Request a quote', whatsapp(`Hi LITUS, please confirm the Ijara down payment and monthly lease for: ${model.name}, ${planName} plan, ${months} months.`), false);
     } else {
       let next = 'Select a model, plan and lease term to see your figures.';
       if (!data.models.length) next = 'The calculator is not available yet.';
@@ -191,10 +223,8 @@ function initIjaraEstimator() {
       setStatus('idle', 'Select options');
       out.quoteTitle.textContent = 'Choose your options';
       out.quoteText.textContent = next;
-      out.ctaLabel.textContent = 'Request a quote';
       out.note.textContent = 'Send your selection to our team for pricing and next steps.';
-      out.cta.href = '#';
-      out.cta.setAttribute('aria-disabled', 'true');
+      setCta('Request a quote', '#', true);
     }
   };
 
