@@ -51,7 +51,7 @@
                         <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-litus-primary/10 blur-2xl"></div>
                         <img data-ijara-image src="" alt="" class="relative hidden max-h-[100%] max-w-[86%] object-contain drop-shadow-[0_14px_16px_rgba(9,17,32,.18)]">
                         <div data-ijara-image-empty class="relative px-6 text-center text-[13px] font-medium text-litus-text-3">Your motorcycle preview appears here</div>
-                        <span data-ijara-price-chip hidden class="absolute bottom-3 left-3 rounded-full bg-white/95 px-3 py-1.5 text-[12px] font-bold text-litus-text shadow-[0_2px_8px_rgba(9,17,32,.12)]"></span>
+                        <span data-ijara-price-chip hidden class="absolute bottom-2 left-2 rounded-full bg-white/95 px-2 py-0.5 text-[10px] font-semibold leading-tight text-litus-text shadow-[0_1px_4px_rgba(9,17,32,.12)]"></span>
                     </div>
                 </div>
 
