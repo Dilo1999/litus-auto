@@ -65,7 +65,7 @@
                 <p class="mt-1.5 text-[13.5px] leading-[1.55] text-white/65 sm:text-[14.5px]">Pick two models to compare price and specifications at a glance.</p>
             </div>
 
-            <div class="mx-auto grid max-w-[1120px] grid-cols-1 items-stretch gap-3 md:grid-cols-[1fr_auto_1fr] md:gap-4 lg:gap-6">
+            <div class="mx-auto grid max-w-[980px] grid-cols-1 items-stretch gap-3 md:grid-cols-[1fr_auto_1fr] md:gap-4 lg:gap-5">
                 @foreach ($slots as $i => $m)
                     @if ($i === 1)
                         <div class="relative z-10 flex items-center justify-center max-md:-my-5">
@@ -73,9 +73,9 @@
                         </div>
                     @endif
 
-                    <article class="relative flex min-w-0 flex-col overflow-hidden rounded-[18px] border border-white/10 bg-white/[0.05] p-3 shadow-[0_18px_44px_rgba(0,0,0,0.35)] backdrop-blur-sm">
+                    <article class="relative flex min-w-0 flex-col overflow-hidden rounded-[18px] border border-white/10 bg-white/[0.05] p-2.5 shadow-[0_18px_44px_rgba(0,0,0,0.35)] backdrop-blur-sm">
                         {{-- Image panel --}}
-                        <div class="relative aspect-[2/1] w-full overflow-hidden rounded-xl {{ $m ? 'bg-[radial-gradient(ellipse_at_50%_35%,#ffffff_0%,#EEF1F6_55%,#DCE2EC_100%)]' : 'border-2 border-dashed border-white/20 bg-white/[0.04]' }}">
+                        <div class="relative aspect-[8/5] w-full overflow-hidden rounded-xl {{ $m ? 'bg-[radial-gradient(ellipse_at_50%_35%,#ffffff_0%,#EEF1F6_55%,#DCE2EC_100%)]' : 'border-2 border-dashed border-white/20 bg-white/[0.04]' }}">
                             @if ($m)
                                 @if ($m->hasPromotion() && $m->discountAmount() > 0)
                                     <span class="absolute left-3 top-3 z-10 rounded-full bg-litus-green px-3 py-1 text-[11px] font-bold text-white shadow">SAVE {{ $m->formattedDiscount() }}</span>
