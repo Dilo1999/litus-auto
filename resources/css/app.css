@@ -577,16 +577,6 @@ h1, h2, h3, h4, h5, h6, p, li, td, th, span, b, strong {
   position: relative;
 }
 
-/* Ijara calculator on the home page: vivid blue backdrop, light heading */
-.litus-ijara-vivid .litus-ijara-head h2 { color: #fff; }
-.litus-ijara-vivid .litus-ijara-head > div > p { color: rgba(255, 255, 255, 0.82); }
-.litus-ijara-vivid .litus-ijara-head > div > span {
-  background: rgba(255, 255, 255, 0.16);
-  color: #fff;
-  backdrop-filter: blur(6px);
-}
-.litus-ijara-vivid .litus-ijara-head > div > span > span { background: #4ff0d0; }
-
 /* Colourful feature card (why-us / service / parts) */
 .litus-feature {
   position: relative;
@@ -659,3 +649,45 @@ h1, h2, h3, h4, h5, h6, p, li, td, th, span, b, strong {
 @media (prefers-reduced-motion: reduce) {
   .litus-orb { animation: none; }
 }
+
+/* ---------- Ijara calculator (radio cards + status pill) ---------- */
+.litus-radio {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  border: 1.5px solid #9fb0c8;
+  background: #fff;
+  transition: border-color 0.15s ease;
+}
+.litus-radio::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 9999px;
+  background: var(--color-litus-primary);
+  transform: scale(0);
+  transition: transform 0.15s ease;
+}
+.litus-radio-card[aria-pressed='true'] .litus-radio {
+  border-color: var(--color-litus-primary);
+}
+.litus-radio-card[aria-pressed='true'] .litus-radio::after {
+  transform: scale(1);
+}
+
+.litus-ijara-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.litus-ijara-status[data-state='idle'] { background: #eef2f8; color: #586880; }
+.litus-ijara-status[data-state='quote'] { background: #fff3e4; color: #b45309; border-color: #fbd9a8; }
+.litus-ijara-status[data-state='ready'] { background: #e3f8ef; color: #0b7a55; border-color: #b7ebd5; }

@@ -267,7 +267,7 @@
     </section>
 
     {{-- IJARA BAND --}}
-    <x-litus-ijara-band class="litus-ijara-vivid litus-sec-vivid" />
+    <x-litus-ijara-band />
 
     {{-- WHY LITUS --}}
     <section class="litus-sec litus-sec-navy">

@@ -13,24 +13,28 @@ function initIjaraEstimator() {
   const q = (sel) => root.querySelector(sel);
   const modelSel = q('[data-ijara-model]');
   const modelHint = q('[data-ijara-model-hint]');
+  const modelName = q('[data-ijara-model-name]');
+  const vehiclePrice = q('[data-ijara-vehicle-price]');
   const image = q('[data-ijara-image]');
   const imageEmpty = q('[data-ijara-image-empty]');
-  const priceChip = q('[data-ijara-price-chip]');
+  const thumb = q('[data-ijara-thumb]');
   const planGroup = q('[data-ijara-plan-group]');
   const planTemplate = q('[data-ijara-plan-template]');
+  const planInfo = q('[data-ijara-plan-info]');
   const termGroup = q('[data-ijara-term]');
   const termButtons = termGroup ? [...termGroup.querySelectorAll('button[data-term]')] : [];
   const dataEl = q('[data-ijara-data]');
   const out = {
     model: q('[data-ijara-summary-model]'),
+    modelPrice: q('[data-ijara-summary-price]'),
     plan: q('[data-ijara-summary-plan]'),
+    planTag: q('[data-ijara-summary-plan-tag]'),
     term: q('[data-ijara-summary-term]'),
-    down: q('[data-ijara-summary-down]'),
-    monthlyRow: q('[data-ijara-summary-monthly]'),
-    downBig: q('[data-ijara-down]'),
     monthly: q('[data-ijara-monthly]'),
-    perMonth: q('[data-ijara-per-month]'),
-    headline: q('[data-ijara-headline]'),
+    down: q('[data-ijara-down]'),
+    status: q('[data-ijara-status]'),
+    quoteTitle: q('[data-ijara-quote-title]'),
+    quoteText: q('[data-ijara-quote-text]'),
     note: q('[data-ijara-note]'),
     cta: q('[data-ijara-continue]'),
     ctaLabel: q('[data-ijara-continue-label]'),
@@ -49,6 +53,7 @@ function initIjaraEstimator() {
   let selectedTerm = '';
 
   const currentModel = () => data.models.find((m) => m.key === modelSel.value);
+  const tagFor = (key) => (data.planTags && data.planTags[key]) || '';
 
   // Small fade-in whenever a figure changes.
   const setText = (el, text) => {
@@ -62,11 +67,10 @@ function initIjaraEstimator() {
     }
   };
 
-  const setStepDone = (step, done) => {
-    const wrap = q(`[data-step="${step}"]`);
-    if (!wrap) return;
-    wrap.querySelector('[data-num]')?.classList.toggle('hidden', done);
-    wrap.querySelector('[data-check]')?.classList.toggle('hidden', !done);
+  const setStatus = (state, label) => {
+    if (!out.status) return;
+    out.status.dataset.state = state;
+    out.status.textContent = label;
   };
 
   const setModelOptions = () => {
@@ -89,7 +93,7 @@ function initIjaraEstimator() {
     Object.keys(data.plans).forEach((key) => {
       const btn = planTemplate.content.firstElementChild.cloneNode(true);
       btn.querySelector('[data-plan-name]').textContent = data.plans[key];
-      btn.querySelector('[data-plan-tag]').textContent = (data.planTags && data.planTags[key]) || '';
+      btn.querySelector('[data-plan-tag]').textContent = tagFor(key);
       btn.dataset.plan = key;
       btn.addEventListener('click', () => {
         selectedPlan = key;
@@ -99,111 +103,96 @@ function initIjaraEstimator() {
     });
   };
 
-  // Lowest approved down payment for a bike + plan, shown on the plan card.
-  const lowestDown = (model, planKey) => {
-    const rates = model && model.plans[planKey] ? Object.values(model.plans[planKey]) : [];
-    return rates.length ? Math.min(...rates.map((r) => Number(r.down))) : null;
-  };
-
   const refresh = () => {
     const model = currentModel();
-    const offered = model ? Object.keys(model.plans) : [];
-    if (!offered.includes(selectedPlan)) selectedPlan = '';
+    // Until a bike is chosen every plan stays selectable; afterwards only the plans offered for it.
+    const offered = model ? Object.keys(model.plans) : Object.keys(data.plans);
+    if (selectedPlan && !offered.includes(selectedPlan)) selectedPlan = '';
 
-    // Plans
     planGroup.querySelectorAll('button').forEach((btn) => {
-      const key = btn.dataset.plan;
-      const low = lowestDown(model, key);
-      btn.disabled = !offered.includes(key);
-      btn.setAttribute('aria-pressed', String(key === selectedPlan));
-      btn.querySelector('[data-plan-from]').textContent = low === null ? '' : `Down from ${formatMvr(low)}`;
+      btn.disabled = !offered.includes(btn.dataset.plan);
+      btn.setAttribute('aria-pressed', String(btn.dataset.plan === selectedPlan));
     });
 
     // Months offered by the selected plan come from the admin panel; figures come from the approved rate table.
-    const allowed = ((data.planTerms && data.planTerms[selectedPlan]) || []).map(String);
-    if (!allowed.includes(selectedTerm)) selectedTerm = '';
-    const planRates = model && selectedPlan ? model.plans[selectedPlan] : null;
+    const allowed = selectedPlan
+      ? ((data.planTerms && data.planTerms[selectedPlan]) || []).map(String)
+      : termButtons.map((btn) => btn.dataset.term);
+    if (selectedTerm && !allowed.includes(selectedTerm)) selectedTerm = '';
 
     termButtons.forEach((btn) => {
-      const ok = allowed.includes(btn.dataset.term);
-      const rate = planRates && planRates[btn.dataset.term];
-      const monthlyEl = btn.querySelector('[data-term-monthly]');
-      const downEl = btn.querySelector('[data-term-down]');
-      btn.disabled = !ok;
+      btn.disabled = !allowed.includes(btn.dataset.term);
       btn.setAttribute('aria-pressed', String(btn.dataset.term === selectedTerm));
-      if (!selectedPlan) {
-        monthlyEl.textContent = '';
-        downEl.textContent = '';
-      } else if (!ok) {
-        monthlyEl.textContent = 'Not offered';
-        downEl.textContent = '';
-      } else if (rate) {
-        monthlyEl.textContent = `${formatMvr(rate.monthly)}/mo`;
-        downEl.textContent = `Down ${formatMvr(rate.down)}`;
-      } else {
-        monthlyEl.textContent = 'Rate coming soon';
-        downEl.textContent = '';
-      }
     });
 
-    // Model preview
-    if (model && model.image) {
-      image.src = model.image;
-      image.alt = model.name;
-      image.classList.remove('hidden');
-      imageEmpty.classList.add('hidden');
-    } else {
-      image.classList.add('hidden');
-      imageEmpty.classList.remove('hidden');
-    }
-    priceChip.hidden = !(model && model.price);
-    priceChip.textContent = model && model.price ? `${model.name} · ${formatMvr(model.price)}` : '';
+    // Bike panel
+    const hasImage = Boolean(model && model.image);
+    [image, thumb].forEach((img) => {
+      if (!img) return;
+      if (hasImage) {
+        img.src = model.image;
+        img.alt = model.name;
+      }
+      img.classList.toggle('hidden', !hasImage);
+    });
+    imageEmpty?.classList.toggle('hidden', hasImage);
+    setText(modelName, model ? model.name : 'Select a model');
+    setText(vehiclePrice, model && model.price ? formatMvr(model.price) : '-');
     modelHint.textContent = model
       ? `${offered.length} plan${offered.length === 1 ? '' : 's'} offered for this model.`
       : 'Pick a motorcycle to see the plans offered for it.';
 
-    // Step badges
-    setStepDone('model', Boolean(model));
-    setStepDone('plan', Boolean(selectedPlan));
-    setStepDone('term', Boolean(selectedTerm));
+    const planName = selectedPlan ? data.plans[selectedPlan] : '';
+    const planTag = selectedPlan ? tagFor(selectedPlan) : '';
+    if (planInfo) {
+      planInfo.textContent = selectedPlan
+        ? `${planName} plan selected${planTag ? ` · ${planTag}` : ''}.`
+        : 'Select a plan to see who it suits.';
+    }
 
     // Summary
-    const planName = selectedPlan ? data.plans[selectedPlan] : '';
     const months = Number(selectedTerm) || 0;
+    const planRates = model && selectedPlan ? model.plans[selectedPlan] : null;
     const rate = planRates && months ? planRates[selectedTerm] : null;
     const picked = Boolean(model && selectedPlan && months);
 
-    setText(out.model, model ? model.name : '-');
+    setText(out.model, model ? model.name : 'No model selected');
+    setText(out.modelPrice, model && model.price ? formatMvr(model.price) : '-');
     setText(out.plan, planName || '-');
+    setText(out.planTag, planTag);
     setText(out.term, months ? `${months} months` : '-');
-    setText(out.down, rate ? formatMvr(rate.down) : '-');
-    setText(out.downBig, rate ? formatMvr(rate.down) : 'MVR -');
-    setText(out.monthlyRow, rate ? formatMvr(rate.monthly) : '-');
-    setText(out.monthly, rate ? formatMvr(rate.monthly) : 'MVR -');
-    out.perMonth.hidden = !rate;
+    setText(out.monthly, rate ? formatMvr(rate.monthly) : 'To be confirmed');
+    setText(out.down, rate ? formatMvr(rate.down) : 'To be confirmed');
+
+    const whatsapp = (msg) => `https://wa.me/9607797442?text=${encodeURIComponent(msg)}`;
 
     if (rate) {
-      out.headline.textContent = `${months} months on the ${planName} plan for the ${model.name}.`;
-      out.note.textContent = 'Approved figures. Your final plan is confirmed by our sales team.';
+      setStatus('ready', 'Approved figures');
+      out.quoteTitle.textContent = `${months} months on the ${planName} plan`;
+      out.quoteText.textContent = 'Approved figures. Your final plan is confirmed by our sales team.';
       out.ctaLabel.textContent = 'Continue';
-      const msg = `Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${formatMvr(rate.down)}, monthly lease ${formatMvr(rate.monthly)}).`;
-      out.cta.href = `https://wa.me/9607797442?text=${encodeURIComponent(msg)}`;
+      out.note.textContent = 'Continue on WhatsApp and our team will confirm your plan.';
+      out.cta.href = whatsapp(`Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${formatMvr(rate.down)}, monthly lease ${formatMvr(rate.monthly)}).`);
       out.cta.setAttribute('aria-disabled', 'false');
     } else if (picked) {
-      out.headline.textContent = 'The figures for this combination are not published yet.';
-      out.note.textContent = 'Message our team and we will confirm the down payment and monthly lease for you.';
-      out.ctaLabel.textContent = 'Ask our team';
-      const msg = `Hi LITUS, please confirm the Ijara down payment and monthly lease for: ${model.name}, ${planName} plan, ${months} months.`;
-      out.cta.href = `https://wa.me/9607797442?text=${encodeURIComponent(msg)}`;
+      setStatus('quote', 'Quote required');
+      out.quoteTitle.textContent = 'Get your personalised quote';
+      out.quoteText.textContent = 'Pricing for this combination is not available online yet.';
+      out.ctaLabel.textContent = 'Request a quote';
+      out.note.textContent = 'Send your selection to our team for pricing and next steps.';
+      out.cta.href = whatsapp(`Hi LITUS, please confirm the Ijara down payment and monthly lease for: ${model.name}, ${planName} plan, ${months} months.`);
       out.cta.setAttribute('aria-disabled', 'false');
     } else {
-      let next = 'Choose a model, plan and number of months.';
+      let next = 'Select a model, plan and lease term to see your figures.';
       if (!data.models.length) next = 'The calculator is not available yet.';
-      else if (model && !selectedPlan) next = 'Now choose an Ijara plan.';
-      else if (model && selectedPlan) next = 'Now choose the number of months.';
-      out.headline.textContent = next;
-      out.note.textContent = 'Review your selection before proceeding.';
-      out.ctaLabel.textContent = 'Continue';
+      else if (!model) next = 'Start by choosing your bike.';
+      else if (!selectedPlan) next = 'Now choose an Ijara plan.';
+      else if (!months) next = 'Now choose your lease term.';
+      setStatus('idle', 'Select options');
+      out.quoteTitle.textContent = 'Choose your options';
+      out.quoteText.textContent = next;
+      out.ctaLabel.textContent = 'Request a quote';
+      out.note.textContent = 'Send your selection to our team for pricing and next steps.';
       out.cta.href = '#';
       out.cta.setAttribute('aria-disabled', 'true');
     }
