@@ -13,21 +13,21 @@
             radial-gradient(720px 380px at 96% -4%, rgba(46,116,238,.13), transparent 66%),
             radial-gradient(560px 320px at -4% 100%, rgba(18,87,214,.07), transparent 64%);"></div>
 
-    <div class="litus-container relative z-[2] litus-sec-tight max-md:!py-8">
+    <div class="litus-container relative z-[2] litus-sec-tight max-md:!py-6">
         {{-- Heading --}}
-        <div class="litus-ijara-head mb-5 flex flex-wrap items-end justify-between gap-x-10 gap-y-3 sm:mb-6">
+        <div class="litus-ijara-head mb-4 flex flex-wrap items-end justify-between gap-x-10 gap-y-3 sm:mb-6">
             <div class="max-w-[640px]">
                 <span class="mb-2 inline-flex items-center gap-2 rounded-full bg-[#E4EDFF] px-2.5 py-0.5 text-[10.5px] font-bold uppercase tracking-[0.16em] text-litus-primary">
                     <span class="h-1.5 w-1.5 rounded-full bg-litus-primary"></span>Ijara Payment Calculator
                 </span>
-                <h2 class="font-display text-[clamp(24px,3.4vw,34px)] font-extrabold leading-[1.05] tracking-[-0.035em] text-litus-text">Plan your next ride</h2>
-                <p class="mt-1.5 text-[13.5px] leading-[1.5] text-litus-text-2 sm:text-[14.5px]">Choose your model, Ijara plan and number of months to see the down payment and monthly lease for that exact combination.</p>
+                <h2 class="font-display text-[clamp(22px,3.4vw,34px)] font-extrabold leading-[1.05] tracking-[-0.035em] text-litus-text">Plan your next ride</h2>
+                <p class="mt-1.5 max-md:hidden text-[13.5px] leading-[1.5] text-litus-text-2 sm:text-[14.5px]">Choose your model, Ijara plan and number of months to see the down payment and monthly lease for that exact combination.</p>
             </div>
-            <ul class="flex flex-wrap gap-2 text-[12px] font-semibold text-litus-text-2">
-                <li class="inline-flex items-center gap-2 rounded-full border border-litus-line bg-white px-3 py-1.5 shadow-[0_1px_2px_rgba(9,17,32,.04)]">
+            <ul class="flex flex-wrap gap-2 max-sm:hidden text-[11.5px] font-semibold text-litus-text-2 sm:text-[12px]">
+                <li class="inline-flex items-center gap-2 rounded-full border border-litus-line bg-white px-2.5 py-1 shadow-[0_1px_2px_rgba(9,17,32,.04)] sm:px-3 sm:py-1.5">
                     <x-litus-icon name="shield" class="h-4 w-4 text-litus-primary" /> Fixed price, agreed upfront
                 </li>
-                <li class="inline-flex items-center gap-2 rounded-full border border-litus-line bg-white px-3 py-1.5 shadow-[0_1px_2px_rgba(9,17,32,.04)]">
+                <li class="inline-flex items-center gap-2 rounded-full border border-litus-line bg-white px-2.5 py-1 shadow-[0_1px_2px_rgba(9,17,32,.04)] sm:px-3 sm:py-1.5">
                     <x-litus-icon name="check-circle" class="h-4 w-4 text-litus-primary" /> Early settlement, no extra charge
                 </li>
             </ul>
@@ -35,7 +35,7 @@
 
         <div class="grid items-start gap-4 min-[961px]:grid-cols-[1.6fr_1fr] min-[961px]:gap-5">
             {{-- Steps --}}
-            <div class="rounded-[18px] border border-litus-line bg-white p-4 shadow-[0_1px_2px_rgba(9,17,32,.05),0_18px_44px_rgba(9,17,32,.07)] sm:p-5">
+            <div class="rounded-[18px] border border-litus-line bg-white p-3.5 shadow-[0_1px_2px_rgba(9,17,32,.05),0_18px_44px_rgba(9,17,32,.07)] sm:p-5">
                 {{-- 1. Model --}}
                 <div data-step="model" class="grid gap-4 border-b border-litus-line pb-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:items-center">
                     <div>
@@ -47,11 +47,11 @@
                                 class="w-full rounded-xl border-[1.5px] border-litus-line-2 bg-white px-3.5 py-2 text-[14px] font-medium text-litus-text shadow-[0_1px_2px_rgba(9,17,32,.04)] transition focus:border-litus-primary focus:outline-none focus:ring-2 focus:ring-litus-primary/25 disabled:opacity-50"></select>
                         <p class="mt-1.5 text-[12px] text-litus-text-3" data-ijara-model-hint>Pick a motorcycle to see the plans offered for it.</p>
                     </div>
-                    <div class="relative flex h-[120px] items-center justify-center overflow-hidden rounded-2xl border border-litus-line bg-[linear-gradient(140deg,#F4F8FF_0%,#E7EFFC_100%)]">
+                    <div class="relative max-md:hidden flex h-[170px] items-center md:h-[120px] justify-center overflow-hidden rounded-2xl border border-litus-line bg-[linear-gradient(140deg,#F4F8FF_0%,#E7EFFC_100%)]">
                         <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-litus-primary/10 blur-2xl"></div>
-                        <img data-ijara-image src="" alt="" class="relative hidden max-h-[100%] max-w-[86%] object-contain drop-shadow-[0_14px_16px_rgba(9,17,32,.18)]">
+                        <img data-ijara-image src="" alt="" class="relative hidden max-h-[100%] max-w-[86%] max-md:mt-6 max-md:max-h-[80%] object-contain drop-shadow-[0_14px_16px_rgba(9,17,32,.18)]">
                         <div data-ijara-image-empty class="relative px-6 text-center text-[13px] font-medium text-litus-text-3">Your motorcycle preview appears here</div>
-                        <span data-ijara-price-chip hidden class="absolute bottom-2 left-2 rounded-full bg-white/95 px-2 py-0.5 text-[10px] font-semibold leading-tight text-litus-text shadow-[0_1px_4px_rgba(9,17,32,.12)]"></span>
+                        <span data-ijara-price-chip hidden class="absolute left-2 top-2 rounded-full md:bottom-2 md:top-auto bg-white/95 px-2 py-0.5 text-[10px] font-semibold leading-tight text-litus-text shadow-[0_1px_4px_rgba(9,17,32,.12)]"></span>
                     </div>
                 </div>
 
@@ -61,14 +61,14 @@
                         <span class="{{ $stepBadge }}"><span data-num>2</span>{!! $tick !!}</span>
                         <span class="text-[14.5px] font-bold text-litus-text" id="ijara-plan-label">Select your Ijara plan</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-2 min-[560px]:grid-cols-3 lg:grid-cols-5" role="group" aria-labelledby="ijara-plan-label" data-ijara-plan-group></div>
+                    <div class="grid grid-cols-2 gap-2 min-[560px]:grid-cols-3 lg:grid-cols-5 [&>button:last-child:nth-child(odd)]:col-span-2 min-[560px]:[&>button:last-child:nth-child(odd)]:col-span-1" role="group" aria-labelledby="ijara-plan-label" data-ijara-plan-group></div>
                     <template data-ijara-plan-template>
-                        <button type="button" aria-pressed="false" class="{{ $choice }} min-h-[64px]">
+                        <button type="button" aria-pressed="false" class="{{ $choice }} min-h-[64px] max-sm:min-h-0">
                             <span class="flex items-start justify-between gap-1.5">
                                 <b class="text-[14.5px] font-bold leading-tight text-litus-text" data-plan-name></b>
                                 {!! $check !!}
                             </span>
-                            <span class="mt-1 block text-[11.5px] leading-snug text-litus-text-3" data-plan-tag></span>
+                            <span class="mt-1 block text-[11.5px] leading-snug text-litus-text-3 max-sm:hidden" data-plan-tag></span>
                             <span class="mt-1.5 block text-[11.5px] font-semibold leading-snug text-litus-primary" data-plan-from></span>
                         </button>
                     </template>
@@ -80,19 +80,19 @@
                         <span class="{{ $stepBadge }}"><span data-num>3</span>{!! $tick !!}</span>
                         <span class="text-[14.5px] font-bold text-litus-text" id="ijara-term-label">Number of months</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-2 min-[560px]:grid-cols-3 lg:grid-cols-5" role="group" aria-labelledby="ijara-term-label" data-ijara-term>
+                    <div class="grid grid-cols-3 gap-2 lg:grid-cols-5" role="group" aria-labelledby="ijara-term-label" data-ijara-term>
                         @foreach ($terms as $term)
-                            <button type="button" data-term="{{ $term }}" aria-pressed="false" class="{{ $choice }} min-h-[68px]">
+                            <button type="button" data-term="{{ $term }}" aria-pressed="false" class="{{ $choice }} min-h-[68px] max-sm:min-h-[58px]">
                                 <span class="flex items-start justify-between gap-1.5">
-                                    <span class="text-litus-text"><b class="font-display text-[19px] font-extrabold leading-none tracking-[-0.02em]">{{ $term }}</b> <span class="text-[12px] font-semibold text-litus-text-2">months</span></span>
+                                    <span class="text-litus-text"><b class="font-display text-[19px] font-extrabold leading-none tracking-[-0.02em]">{{ $term }}</b> <span class="text-[12px] font-semibold text-litus-text-2 max-sm:hidden">months</span></span>
                                     {!! $check !!}
                                 </span>
-                                <span class="mt-1 block whitespace-nowrap text-[11px] font-bold leading-snug text-litus-primary" data-term-monthly></span>
-                                <span class="block text-[11px] leading-snug text-litus-text-3" data-term-down></span>
+                                <span class="mt-1 block whitespace-nowrap text-[11px] max-sm:whitespace-normal max-sm:text-[10.5px] max-sm:leading-tight font-bold leading-snug text-litus-primary" data-term-monthly></span>
+                                <span class="block text-[11px] leading-snug text-litus-text-3 max-sm:hidden" data-term-down></span>
                             </button>
                         @endforeach
                     </div>
-                    <p class="mt-2 text-[11.5px] text-litus-text-3">Down payment and monthly lease change with the bike, the plan and the number of months.</p>
+                    <p class="mt-2 text-[11.5px] text-litus-text-3 max-md:hidden">Down payment and monthly lease change with the bike, the plan and the number of months.</p>
                 </div>
             </div>
 
@@ -115,7 +115,7 @@
                         <b class="mt-0.5 block font-display text-[21px] font-extrabold leading-tight tracking-[-0.025em] text-litus-text" data-ijara-down>MVR -</b>
                     </div>
 
-                    <dl class="mt-1.5 divide-y divide-litus-line text-[13px]">
+                    <dl class="mt-1.5 max-md:hidden divide-y divide-litus-line text-[13px]">
                         <div class="flex justify-between gap-4 py-2"><dt class="text-litus-text-2">Model</dt><dd class="text-right font-semibold text-litus-text" data-ijara-summary-model>-</dd></div>
                         <div class="flex justify-between gap-4 py-2"><dt class="text-litus-text-2">Ijara plan</dt><dd class="text-right font-semibold text-litus-text" data-ijara-summary-plan>-</dd></div>
                         <div class="flex justify-between gap-4 py-2"><dt class="text-litus-text-2">Number of months</dt><dd class="text-right font-semibold text-litus-text" data-ijara-summary-term>-</dd></div>
@@ -126,7 +126,7 @@
                         <span data-ijara-continue-label>Continue</span>
                         <x-litus-icon name="arrow-right" class="h-4 w-4" />
                     </a>
-                    <p class="mt-2 text-center text-[11.5px] leading-snug text-litus-text-3" data-ijara-note>Review your selection before proceeding.</p>
+                    <p class="mt-2 text-center text-[11.5px] leading-snug text-litus-text-3 max-md:hidden" data-ijara-note>Review your selection before proceeding.</p>
                 </div>
             </aside>
         </div>
