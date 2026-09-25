@@ -99,8 +99,8 @@
                 </div>
 
                 <div class="mt-4 flex items-center gap-3.5 max-md:hidden">
-                    <div class="grid h-[64px] w-[84px] shrink-0 place-items-center overflow-hidden rounded-lg bg-[linear-gradient(140deg,#F1F5FB_0%,#E3EBF7_100%)]">
-                        <img data-ijara-thumb src="" alt="" class="hidden h-full w-full object-contain p-1">
+                    <div class="relative h-[72px] w-[96px] shrink-0 overflow-hidden rounded-lg bg-[linear-gradient(140deg,#F1F5FB_0%,#E3EBF7_100%)]">
+                        <img data-ijara-thumb src="" alt="" class="absolute inset-0 hidden h-full w-full scale-[1.15] object-contain">
                     </div>
                     <div class="min-w-0">
                         <p class="truncate text-[15px] font-bold text-litus-ink" data-ijara-summary-model>No model selected</p>
