@@ -15,7 +15,6 @@
 
     $heroFeatures = [
         ['icon' => 'bike', 'title' => $modelCount.' Models', 'desc' => 'Honda, Yamaha and more'],
-        ['icon' => 'shopping-bag', 'title' => $promoCount.' In Campaigns', 'desc' => 'Covered by a promotion now'],
         ['icon' => 'shield', 'title' => 'Genuine Units', 'desc' => 'Factory-built, fully supported'],
         ['icon' => 'file-text', 'title' => 'Ijara Ready', 'desc' => 'Every model, six plans'],
     ];
@@ -65,7 +64,7 @@
                     Find the ride<br>for your journey.
                 </h1>
                 <p class="mt-4 max-w-[560px] text-[clamp(15.5px,1.5vw,19px)] leading-[1.66] text-white/[0.78] sm:mt-5">
-                    Honda and Yamaha models, from 110cc city scooters to 160cc adventure machines. Filter by brand, budget or engine size - every card shows which campaigns that motorcycle is currently in.
+                    Honda and Yamaha models, from 110cc city scooters to 160cc adventure machines. Filter by brand, budget or engine size.
                 </p>
             </div>
         </div>
@@ -177,7 +176,6 @@
                         <option value="popular">Sort: Popularity</option>
                         <option value="price-asc">Price: Low to High</option>
                         <option value="price-desc">Price: High to Low</option>
-                        <option value="promotion">In Campaigns First</option>
                         <option value="latest">Sort: Latest</option>
                     </select>
                     <x-litus-icon name="chevron-down" class="litus-select-chevron h-4 w-4 text-litus-text-3" />
