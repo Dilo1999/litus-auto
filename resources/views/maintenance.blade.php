@@ -22,7 +22,7 @@
             color: #fff;
             background:
                 radial-gradient(circle at top, rgba(18, 87, 214, 0.28), transparent 42%),
-                linear-gradient(180deg, #050b18 0%, #0c1524 55%, #050b18 100%);
+                linear-gradient(180deg, #07132B 0%, #0c1524 55%, #07132B 100%);
         }
         .card {
             width: min(100%, 560px);

@@ -45,12 +45,12 @@
              alt=""
              class="absolute inset-x-0 top-0 h-auto w-full max-w-none [-webkit-mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)] [mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)]"
              aria-hidden="true">
-        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,24,0.96)_0%,rgba(5,11,24,0.88)_36%,rgba(5,11,24,0.55)_64%,rgba(5,11,24,0.4)_100%)]"></div>
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(7,19,43,0.96)_0%,rgba(7,19,43,0.88)_36%,rgba(7,19,43,0.55)_64%,rgba(7,19,43,0.4)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0"
              style="background:
                 radial-gradient(900px 520px at 82% 6%, rgba(46,116,238,.28), transparent 62%),
                 radial-gradient(680px 460px at 2% 96%, rgba(90,184,255,.12), transparent 60%),
-                linear-gradient(180deg, transparent 40%, rgba(5,11,24,.5) 100%);"></div>
+                linear-gradient(180deg, transparent 40%, rgba(7,19,43,.5) 100%);"></div>
 
         <div class="relative z-[3] litus-container py-[clamp(40px,5vw,72px)] pb-[clamp(28px,4vw,52px)]">
             <div class="grid items-center gap-7 min-[961px]:grid-cols-[1.06fr_0.94fr]">
@@ -170,7 +170,7 @@
              alt=""
              class="absolute inset-0 h-full w-full object-cover object-[center_30%]"
              aria-hidden="true">
-        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,11,24,0.55)_0%,rgba(5,11,24,0.78)_42%,rgba(5,11,24,0.94)_100%)]"></div>
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(7,19,43,0.55)_0%,rgba(7,19,43,0.78)_42%,rgba(7,19,43,0.94)_100%)]"></div>
 
         <div class="relative z-[3] flex flex-col">
             <div class="litus-container pt-12 pb-3">

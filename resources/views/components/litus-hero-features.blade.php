@@ -1,7 +1,7 @@
 @props(['features' => []])
 
 @if (count($features))
-    <div class="absolute bottom-0 left-0 right-0 z-[3] border-t border-white/12 bg-[rgba(3,13,25,0.78)] backdrop-blur-sm max-md:relative max-md:mt-0 max-md:border-t-0 max-md:bg-transparent max-md:px-0 max-md:pb-4 max-[1100px]:relative max-[1100px]:mt-5 max-md:max-[1100px]:mt-0"
+    <div class="absolute bottom-0 left-0 right-0 z-[3] border-t border-white/12 bg-[rgba(7,19,43,0.78)] backdrop-blur-sm max-md:relative max-md:mt-0 max-md:border-t-0 max-md:bg-transparent max-md:px-0 max-md:pb-4 max-[1100px]:relative max-[1100px]:mt-5 max-md:max-[1100px]:mt-0"
          data-hero-features>
         <div class="litus-container max-md:!px-0">
             <div data-hero-feature-slider
@@ -32,14 +32,14 @@
                         'transition hover:bg-white/[0.04]' => (bool) $featureHref,
                     ])
                          data-hero-feature-slide>
-                        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-white/35 shadow-[0_0_16px_rgba(255,255,255,0.06)] max-md:h-10 max-md:w-10 max-md:border-[#0065ef]/40 max-md:bg-[#0065ef]/15 sm:h-10 sm:w-10">
+                        <div class="{{ $feature['acc'] ?? 'acc-sky' }} acc-tile flex h-9 w-9 shrink-0 items-center justify-center rounded-full max-md:h-10 max-md:w-10 sm:h-10 sm:w-10">
                             @if (! empty($feature['image']))
                                 <img src="{{ $feature['image'] }}"
                                      alt=""
                                      class="h-7 w-7 object-contain brightness-0 invert max-md:h-8 max-md:w-8 sm:h-8 sm:w-8"
                                      aria-hidden="true">
                             @else
-                                <x-litus-icon :name="$feature['icon']" class="h-4 w-4 text-white/80 max-md:h-4 max-md:w-4 max-md:text-[#0065ef] sm:h-[18px] sm:w-[18px]" />
+                                <x-litus-icon :name="$feature['icon']" class="h-4 w-4 text-white max-md:h-4 max-md:w-4 sm:h-[18px] sm:w-[18px]" />
                             @endif
                         </div>
                         <div class="min-w-0 text-left">
@@ -54,7 +54,7 @@
                 @foreach ($features as $index => $feature)
                     <span @class([
                         'h-1.5 rounded-full transition-all duration-300',
-                        'w-5 bg-[#0065ef]' => $index === 0,
+                        'w-5 bg-[#5AB8FF]' => $index === 0,
                         'w-1.5 bg-white/35' => $index !== 0,
                     ])
                           data-hero-feature-dot></span>

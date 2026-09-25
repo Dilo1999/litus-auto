@@ -16,8 +16,8 @@
 
 /* LITUS Automobiles brand - Design System v2 */
 @theme {
-  --color-litus-navy: #050B18;
-  --color-litus-ink: #050B18;
+  --color-litus-navy: #07132B;
+  --color-litus-ink: #07132B;
   --color-litus-ink-700: #122240;
   --color-litus-red: #1257D6;
   --color-litus-primary: #1257D6;
@@ -35,8 +35,8 @@
   --color-litus-text: #0C1524;
   --color-litus-text-2: #586880;
   --color-litus-text-3: #8593AA;
-  --color-litus-footer: #050B18;
-  --color-litus-header: #050B18;
+  --color-litus-footer: #07132B;
+  --color-litus-header: #07132B;
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Sora', 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-montserrat: 'Sora', 'Inter', ui-sans-serif, system-ui, sans-serif;
@@ -426,4 +426,236 @@ h1, h2, h3, h4, h5, h6, p, li, td, th, span, b, strong {
 }
 @utility bg-dots-lighter {
     background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(255,255,255,0.07)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Home page: section rhythm & shared patterns ---------- */
+
+/* Eyebrow label with accent bar */
+.litus-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+  color: var(--color-litus-primary);
+}
+.litus-eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--color-litus-primary), var(--color-litus-sky));
+}
+.litus-eyebrow-light {
+  color: var(--color-litus-sky);
+}
+.litus-eyebrow-center {
+  justify-content: center;
+}
+.litus-eyebrow-center::after {
+  content: '';
+  width: 22px;
+  height: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(270deg, var(--color-litus-primary), var(--color-litus-sky));
+}
+.litus-eyebrow-light::before {
+  background: linear-gradient(90deg, var(--color-litus-sky), transparent);
+}
+.litus-eyebrow-light.litus-eyebrow-center::after {
+  background: linear-gradient(270deg, var(--color-litus-sky), transparent);
+}
+
+/* Navy section that continues the hero's look */
+.litus-sec-navy {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(760px 420px at 88% 0%, rgba(46, 116, 238, 0.26), transparent 62%),
+    radial-gradient(620px 420px at 0% 100%, rgba(90, 184, 255, 0.12), transparent 60%),
+    linear-gradient(180deg, #0B1C40 0%, #07132B 100%);
+}
+.litus-sec-navy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 76px 76px;
+  -webkit-mask-image: radial-gradient(800px 480px at 20% 0%, #000, transparent 75%);
+  mask-image: radial-gradient(800px 480px at 20% 0%, #000, transparent 75%);
+}
+.litus-sec-navy > * {
+  position: relative;
+}
+
+/* Soft blue-tinted section (replaces flat grey) */
+.litus-sec-tint {
+  background:
+    radial-gradient(700px 320px at 100% 0%, rgba(46, 116, 238, 0.09), transparent 65%),
+    linear-gradient(180deg, #f3f7ff 0%, #eaf1fc 100%);
+  border-block: 1px solid rgba(18, 87, 214, 0.08);
+}
+
+/* Cards that lift with a blue glow */
+.litus-card-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.litus-card-lift:hover {
+  transform: translateY(-4px);
+  border-color: rgba(46, 116, 238, 0.45);
+  box-shadow: 0 2px 6px rgba(9, 17, 32, 0.06), 0 22px 44px rgba(18, 87, 214, 0.14);
+}
+
+/* ---------- Home page: vivid / colourful layer ---------- */
+
+/* Accent palettes (set --acc-a / --acc-b / --acc-glow on any element) */
+.acc-blue  { --acc-a: #2E74EE; --acc-b: #1257D6; --acc-glow: rgba(46, 116, 238, 0.45); }
+.acc-sky   { --acc-a: #5AB8FF; --acc-b: #2E74EE; --acc-glow: rgba(90, 184, 255, 0.45); }
+.acc-teal  { --acc-a: #22D3C0; --acc-b: #0E9384; --acc-glow: rgba(14, 147, 132, 0.45); }
+.acc-green { --acc-a: #4ADE9A; --acc-b: #0E9F6E; --acc-glow: rgba(14, 159, 110, 0.45); }
+.acc-amber { --acc-a: #FFC24B; --acc-b: #F5871F; --acc-glow: rgba(245, 135, 31, 0.45); }
+.acc-violet{ --acc-a: #9B8CFF; --acc-b: #5B47E0; --acc-glow: rgba(91, 71, 224, 0.45); }
+
+.acc-tile {
+  background: linear-gradient(135deg, var(--acc-a), var(--acc-b));
+  box-shadow: 0 10px 24px var(--acc-glow);
+  color: #fff;
+}
+.acc-text {
+  background: linear-gradient(135deg, var(--acc-a), var(--acc-b));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gradient headline text */
+.litus-text-gradient {
+  background: linear-gradient(100deg, #5ab8ff 0%, #4ff0d0 55%, #9bf5b8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.litus-text-gradient-blue {
+  background: linear-gradient(100deg, #1257d6 0%, #2e9bff 60%, #14b8a6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Vivid blue band with floating colour orbs */
+.litus-sec-vivid {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(520px 320px at 8% 0%, rgba(34, 211, 192, 0.35), transparent 65%),
+    radial-gradient(620px 380px at 96% 100%, rgba(155, 140, 255, 0.32), transparent 65%),
+    linear-gradient(120deg, #07132B 0%, #0B3CC4 48%, #2e8bff 100%);
+}
+.litus-sec-vivid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(900px 500px at 50% 0%, #000, transparent 78%);
+  mask-image: radial-gradient(900px 500px at 50% 0%, #000, transparent 78%);
+}
+.litus-sec-vivid > * {
+  position: relative;
+}
+
+/* Ijara calculator on the home page: vivid blue backdrop, light heading */
+.litus-ijara-vivid .litus-ijara-head h2 { color: #fff; }
+.litus-ijara-vivid .litus-ijara-head > div > p { color: rgba(255, 255, 255, 0.82); }
+.litus-ijara-vivid .litus-ijara-head > div > span {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+.litus-ijara-vivid .litus-ijara-head > div > span > span { background: #4ff0d0; }
+
+/* Colourful feature card (why-us / service / parts) */
+.litus-feature {
+  position: relative;
+  overflow: hidden;
+}
+.litus-feature::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--acc-a), var(--acc-b));
+}
+.litus-feature::before {
+  content: '';
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 140px;
+  height: 140px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, var(--acc-glow), transparent 70%);
+  opacity: 0.55;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.litus-feature:hover::before {
+  opacity: 0.95;
+  transform: scale(1.25);
+}
+
+/* Floating ambient orbs for hero */
+@keyframes litus-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -18px, 0); }
+}
+.litus-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  pointer-events: none;
+  animation: litus-float 9s ease-in-out infinite;
+}
+
+/* Gradient-bordered glass card (quick-find) */
+.litus-glow-border {
+  position: relative;
+}
+.litus-glow-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(140deg, rgba(90, 184, 255, 0.9), rgba(79, 240, 208, 0.5) 45%, rgba(155, 140, 255, 0.7));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Stat strip */
+.litus-stat-num {
+  font-family: 'Sora', 'Inter', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .litus-orb { animation: none; }
 }

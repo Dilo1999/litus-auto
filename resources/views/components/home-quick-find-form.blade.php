@@ -10,7 +10,7 @@
 
     $cardClass = $isLight
         ? ''
-        : 'rounded-[26px] border border-white/15 bg-white/[0.06] p-[clamp(26px,3vw,38px)] shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)] backdrop-blur-[10px] overflow-visible';
+        : 'litus-glow-border rounded-[26px] border border-transparent bg-white/[0.06] p-[clamp(26px,3vw,38px)] shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)] backdrop-blur-[10px] overflow-visible';
 
     $titleClass = $isLight ? 'text-litus-text' : 'text-white';
     $subtitleClass = $isLight ? 'text-litus-text-2' : 'text-white/60';

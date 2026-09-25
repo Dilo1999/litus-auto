@@ -11,22 +11,22 @@
 
     $whyLitus = [
         [
-            'icon' => 'file-text',
+            'icon' => 'file-text', 'acc' => 'acc-blue',
             'title' => 'Application made easy',
             'text' => 'We removed the bureaucracy from motorcycle leasing. Most applications need fewer documents and less waiting than customers expect.',
         ],
         [
-            'icon' => 'shield',
+            'icon' => 'shield', 'acc' => 'acc-teal',
             'title' => 'Genuine parts only',
             'text' => 'Every part we fit is genuine and traceable. It protects your warranty, your resale value and - with brakes and tyres - your safety.',
         ],
         [
-            'icon' => 'wrench',
+            'icon' => 'wrench', 'acc' => 'acc-amber',
             'title' => 'Service you can reach',
             'text' => 'Full service centres in Malé, Hithadhoo and Fuvahmulah, with technicians trained on the specific engines we sell.',
         ],
         [
-            'icon' => 'users',
+            'icon' => 'users', 'acc' => 'acc-violet',
             'title' => 'People who tell you straight',
             'text' => 'If a bike is wrong for how you ride, our team will say so. We would rather sell you the right one than the expensive one.',
         ],
@@ -53,10 +53,10 @@
     ];
 
     $heroFeatures = [
-        ['icon' => 'clock', 'title' => 'Since 2014', 'desc' => 'Twelve years serving Maldivian riders'],
-        ['icon' => 'map-pin', 'title' => $showroomCount.' Locations', 'desc' => 'Showrooms & service centers across the Maldives'],
-        ['icon' => 'shield', 'title' => 'Ijara Plans', 'desc' => 'Islamic leasing standards'],
-        ['icon' => 'wrench', 'title' => 'Full Service', 'desc' => 'Genuine parts, trained technicians'],
+        ['icon' => 'clock', 'acc' => 'acc-sky', 'title' => 'Since 2014', 'desc' => 'Twelve years serving Maldivian riders'],
+        ['icon' => 'map-pin', 'acc' => 'acc-teal', 'title' => $showroomCount.' Locations', 'desc' => 'Showrooms & service centers across the Maldives'],
+        ['icon' => 'shield', 'acc' => 'acc-green', 'title' => 'Ijara Plans', 'desc' => 'Islamic leasing standards'],
+        ['icon' => 'wrench', 'acc' => 'acc-amber', 'title' => 'Full Service', 'desc' => 'Genuine parts, trained technicians'],
     ];
 
     $hero = \App\Models\PageSetting::heroForRoute('home');
@@ -74,12 +74,14 @@
              alt=""
              class="absolute inset-x-0 top-0 h-auto w-full max-w-none [-webkit-mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)] [mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)]"
              aria-hidden="true">
-        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,24,0.96)_0%,rgba(5,11,24,0.88)_34%,rgba(5,11,24,0.55)_62%,rgba(5,11,24,0.35)_100%)]"></div>
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(7,19,43,0.96)_0%,rgba(7,19,43,0.88)_34%,rgba(7,19,43,0.55)_62%,rgba(7,19,43,0.35)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0"
              style="background:
                 radial-gradient(900px 520px at 82% 6%, rgba(46,116,238,.28), transparent 62%),
                 radial-gradient(680px 460px at 2% 96%, rgba(90,184,255,.12), transparent 60%),
-                linear-gradient(180deg, transparent 40%, rgba(5,11,24,.55) 100%);"></div>
+                linear-gradient(180deg, transparent 40%, rgba(7,19,43,.55) 100%);"></div>
+        <div class="litus-orb -right-24 top-10 h-[360px] w-[360px] bg-[#2E74EE]/40"></div>
+        <div class="litus-orb left-[38%] bottom-24 h-[260px] w-[260px] bg-[#14b8a6]/25" style="animation-delay:-4s"></div>
         <div class="pointer-events-none absolute inset-0 opacity-[0.28]"
              style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px; mask-image: radial-gradient(700px 500px at 30% 30%, #000, transparent 78%);"></div>
 
@@ -92,7 +94,7 @@
                     </span>
                     <h1 class="font-display text-[clamp(40px,6.2vw,78px)] font-extrabold leading-[1.08] tracking-[-0.035em]">
                         Ride your own.<br>
-                        <span class="text-litus-sky">From MVR 1,340</span><br>
+                        <span class="litus-text-gradient">From MVR 1,340</span><br>
                         a month.
                     </h1>
                     <p class="mt-[22px] max-w-[520px] text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.72]">
@@ -100,7 +102,7 @@
                     </p>
                     <div class="litus-cta-row mt-8">
                         <a href="#offers"
-                           class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
+                           class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
                             See This Month’s Campaigns
                             <x-litus-icon name="arrow-right" class="h-4 w-4" />
                         </a>
@@ -127,7 +129,7 @@
                      class="absolute inset-0 h-full w-full object-cover object-[center_42%]"
                      aria-hidden="true"
                      fetchpriority="high">
-                <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,11,24,0.62)_0%,rgba(5,11,24,0.28)_38%,rgba(5,11,24,0.72)_72%,rgba(5,11,24,0.92)_100%)]"></div>
+                <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(7,19,43,0.62)_0%,rgba(7,19,43,0.28)_38%,rgba(7,19,43,0.72)_72%,rgba(7,19,43,0.92)_100%)]"></div>
                 <div class="pointer-events-none absolute inset-0 opacity-[0.14]"
                      style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px;"></div>
 
@@ -140,7 +142,7 @@
 
                         <h1 class="max-w-[14ch] font-display text-[clamp(1.85rem,7.2vw,2.25rem)] font-extrabold leading-[1.1] tracking-[-0.035em] drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)]">
                             Ride your own.<br>
-                            <span class="text-litus-sky">From MVR 1,340</span> a month.
+                            <span class="litus-text-gradient">From MVR 1,340</span> a month.
                         </h1>
 
                         <p class="mt-3 line-clamp-3 max-w-[34ch] text-[14px] leading-[1.62] text-white/[0.82] drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]">
@@ -165,7 +167,7 @@
 
         <x-litus-hero-features :features="$heroFeatures" />
 
-        <div class="bg-litus-paper-2 px-4 py-6">
+        <div class="bg-litus-paper-3 px-4 py-6">
             <div class="litus-container !px-0">
                 <div class="rounded-[20px] border border-litus-line bg-white p-5 shadow-[0_2px_8px_rgba(9,17,32,0.06)]">
                     <x-home-quick-find-form variant="light" :brands="$brands" />
@@ -175,12 +177,12 @@
     </section>
 
     {{-- ONGOING PROMOTIONS --}}
-    <section id="offers" class="litus-sec scroll-mt-24">
+    <section id="offers" class="litus-sec scroll-mt-24 bg-[linear-gradient(180deg,#eef4ff_0%,#fff_38%)]">
         <div class="litus-container">
             <div class="mb-[38px] flex flex-wrap items-end justify-between gap-6">
                 <div class="max-w-[660px]">
-                    <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Ongoing Promotions</span>
-                    <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Live campaigns, with real end dates</h2>
+                    <span class="litus-eyebrow">Ongoing Promotions</span>
+                    <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Live campaigns, with <span class="litus-text-gradient-blue">real end dates</span></h2>
                     <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
                         Each campaign covers selected motorcycles. Open one to see the model details and the price of each.
                     </p>
@@ -202,7 +204,7 @@
                             <x-card.promotion-card :motorcycle="$motorcycle" />
                         </div>
                     @empty
-                        <div class="col-span-full rounded-[18px] border border-dashed border-litus-line-2 bg-litus-paper-2 px-6 py-16 text-center text-litus-text-2 max-md:w-full">
+                        <div class="col-span-full rounded-[20px] border border-dashed border-litus-primary-light/40 bg-white/70 px-6 py-14 text-center text-litus-text-2 shadow-[0_1px_2px_rgba(9,17,32,0.04)] max-md:w-full"><div class="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-litus-primary-light to-litus-primary text-white shadow-[0_8px_20px_rgba(18,87,214,0.3)]"><x-litus-icon name="zap" class="h-5 w-5" /></div>
                             <p class="font-semibold text-litus-text">No active campaigns at the moment.</p>
                             <p class="mt-1 text-sm">Check back soon or browse our full motorcycle range.</p>
                         </div>
@@ -226,12 +228,12 @@
     </section>
 
     {{-- TOP SELLING RIDES --}}
-    <section class="litus-sec bg-litus-paper-2">
+    <section class="litus-sec litus-sec-tint">
         <div class="litus-container">
             <div class="mb-[38px] flex flex-wrap items-end justify-between gap-6">
                 <div class="max-w-[660px]">
-                    <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">The Range</span>
-                    <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Top selling rides</h2>
+                    <span class="litus-eyebrow">The Range</span>
+                    <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Top selling <span class="litus-text-gradient-blue">rides</span></h2>
                     <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
                         The models Maldivian riders buy most, from 110cc city scooters to 160cc commuters.
                     </p>
@@ -265,28 +267,28 @@
     </section>
 
     {{-- IJARA BAND --}}
-    <x-litus-ijara-band />
+    <x-litus-ijara-band class="litus-ijara-vivid litus-sec-vivid" />
 
     {{-- WHY LITUS --}}
-    <section class="litus-sec">
+    <section class="litus-sec litus-sec-navy">
         <div class="litus-container">
             <div class="mx-auto mb-6 max-w-[660px] text-center max-md:mb-5 sm:mb-[clamp(34px,4vw,54px)]">
-                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">Why LITUS</span>
-                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Twelve years of getting people riding</h2>
-                <p class="mt-3 text-[15px] leading-[1.66] text-litus-text-2 sm:mt-4 sm:text-[clamp(16.5px,1.5vw,19px)]">
+                <span class="litus-eyebrow litus-eyebrow-light litus-eyebrow-center">Why LITUS</span>
+                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-white">Twelve years of getting people <span class="litus-text-gradient">riding</span></h2>
+                <p class="mt-3 text-[15px] leading-[1.66] text-white/70 sm:mt-4 sm:text-[clamp(16.5px,1.5vw,19px)]">
                     We are not the only place to buy a scooter in the Maldives. These are the reasons people choose us.
                 </p>
             </div>
 
             <div class="flex flex-col gap-3 max-md:gap-3 md:grid md:grid-cols-2 md:gap-[22px] xl:grid-cols-4">
                 @foreach ($whyLitus as $item)
-                    <article class="flex items-start gap-3.5 rounded-2xl border border-litus-line bg-white p-4 shadow-[0_1px_2px_rgba(9,17,32,0.04)] transition duration-200 max-md:active:scale-[0.99] md:flex-col md:items-stretch md:rounded-[18px] md:p-0 md:px-[26px] md:py-[30px] md:shadow-none md:hover:border-litus-line-2 md:hover:shadow-[0_1px_2px_rgba(9,17,32,.05),0_6px_16px_rgba(9,17,32,.05)]">
-                        <div class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#DCE8FF] text-[#0B47B0] md:mb-[18px] md:h-[46px] md:w-[46px] md:rounded-[13px]">
+                    <article class="litus-feature {{ $item['acc'] }} group flex items-start gap-3.5 rounded-2xl border border-white/12 bg-white/[0.05] p-4 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.09] md:flex-col md:items-stretch md:rounded-[20px] md:px-[26px] md:py-[30px]">
+                        <div class="grid h-11 w-11 shrink-0 place-items-center acc-tile relative z-[1] rounded-xl md:mb-[18px] md:h-[46px] md:w-[46px] md:rounded-[13px]">
                             <x-litus-icon :name="$item['icon']" class="h-[17px] w-[17px]" />
                         </div>
                         <div class="min-w-0 flex-1 md:flex-none">
-                            <h4 class="mb-1 text-[15px] font-bold leading-snug text-litus-text md:mb-2 md:text-lg">{{ $item['title'] }}</h4>
-                            <p class="text-[13px] leading-relaxed text-litus-text-2 md:text-[14.5px] md:leading-normal">{{ $item['text'] }}</p>
+                            <h4 class="mb-1 text-[15px] font-bold leading-snug text-white md:mb-2 md:text-lg">{{ $item['title'] }}</h4>
+                            <p class="text-[13px] leading-relaxed text-white/65 md:text-[14.5px] md:leading-normal">{{ $item['text'] }}</p>
                         </div>
                     </article>
                 @endforeach
@@ -295,12 +297,12 @@
     </section>
 
     {{-- GALLERY --}}
-    <section class="litus-sec bg-litus-paper-2" data-home-gallery>
+    <section class="litus-sec" data-home-gallery>
         <div class="litus-container">
             <div class="mb-[clamp(28px,3.5vw,42px)] flex flex-col items-start justify-between gap-5 min-[651px]:flex-row min-[651px]:items-end">
                 <div class="mx-auto max-w-[660px] text-center min-[651px]:mx-0 min-[651px]:text-left">
-                    <span class="mb-3.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Our Gallery</span>
-                    <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Ride the visual journey</h2>
+                    <span class="litus-eyebrow">Our Gallery</span>
+                    <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Ride the <span class="litus-text-gradient-blue">visual journey</span></h2>
                     <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
                         Explore motorcycle rides and lifestyle moments from across LITUS.
                     </p>
@@ -391,10 +393,10 @@
     </section>
 
     {{-- SHOWROOMS --}}
-    <section id="showrooms" class="litus-sec scroll-mt-24 bg-litus-paper-2 !pt-0">
+    <section id="showrooms" class="litus-sec litus-sec-tint scroll-mt-24">
         <div class="litus-container">
             <div class="mx-auto mb-8 max-w-[660px] text-center max-md:mb-6 sm:mb-[clamp(34px,4vw,54px)]">
-                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">Our Locations</span>
+                <span class="litus-eyebrow litus-eyebrow-center">Our Locations</span>
                 <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Our Showrooms &amp; Service Centers</h2>
                 <p class="mt-3 text-[15px] leading-[1.66] text-litus-text-2 sm:mt-4 sm:text-[clamp(16.5px,1.5vw,19px)]">
                     Visit our showrooms and service centers across the Maldives for motorcycles, genuine parts, and trusted support.
@@ -421,7 +423,7 @@
                             $hasSlider = count($images) > 1;
                         @endphp
                         <div data-home-card-slide class="max-md:w-[min(88%,340px)] max-md:shrink-0 max-md:snap-center">
-                            <article class="group flex h-full flex-col overflow-hidden rounded-[16px] border border-litus-line bg-white transition duration-200 max-md:shadow-[0_2px_8px_rgba(9,17,32,0.06)] sm:rounded-[18px] md:hover:-translate-y-1 md:hover:border-litus-line-2 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_18px_42px_rgba(9,17,32,0.10)]">
+                            <article class="group flex h-full flex-col overflow-hidden rounded-[16px] border border-litus-line bg-white transition duration-200 max-md:shadow-[0_2px_8px_rgba(9,17,32,0.06)] sm:rounded-[18px] md:hover:-translate-y-1 md:hover:border-litus-primary-light/50 md:hover:shadow-[0_2px_6px_rgba(9,17,32,0.06),0_22px_44px_rgba(18,87,214,0.14)]">
                                 <div class="relative h-[200px] overflow-hidden bg-litus-paper-3 sm:h-[240px] md:h-[280px]"
                                      @if ($hasSlider) data-showroom-slider data-interval="4000" @endif>
                                     @if ($hasSlider)
@@ -504,8 +506,8 @@
     <section class="litus-sec">
         <div class="litus-container">
             <div class="mx-auto mb-6 max-w-[660px] text-center max-md:mb-5 sm:mb-[clamp(34px,4vw,54px)]">
-                <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary sm:mb-3.5">From Our Riders</span>
-                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">What customers say</h2>
+                <span class="litus-eyebrow litus-eyebrow-center">From Our Riders</span>
+                <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">What <span class="litus-text-gradient-blue">customers</span> say</h2>
             </div>
 
             <div data-home-card-slider-wrap>
@@ -515,8 +517,9 @@
                     data-interval="5000"
                     class="grid grid-cols-1 gap-6 md:grid-cols-3">
                     @foreach ($testimonials as $index => $item)
+                        @php $tAcc = ['acc-blue', 'acc-teal', 'acc-violet'][$index % 3]; @endphp
                         <div data-home-card-slide @class(['is-active' => $index === 0])>
-                            <article class="flex h-full flex-col rounded-2xl border border-litus-line bg-white px-4 py-5 shadow-[0_1px_2px_rgba(9,17,32,0.04)] sm:rounded-[18px] sm:px-[26px] sm:py-[30px] sm:shadow-none">
+                            <article class="litus-feature {{ $tAcc }} litus-card-lift relative flex h-full flex-col overflow-hidden rounded-2xl border border-litus-line bg-gradient-to-b from-white to-[#F3F7FF] px-4 py-5 shadow-[0_1px_2px_rgba(9,17,32,0.04)] sm:rounded-[20px] sm:px-[28px] sm:py-[32px]"><span class="pointer-events-none absolute right-5 top-1 font-display text-[88px] font-extrabold leading-none acc-text opacity-25" aria-hidden="true">&rdquo;</span>
                                 <div class="mb-3 flex gap-0.5 text-[#F5A524] sm:mb-3.5">
                                     @for ($i = 0; $i < 5; $i++)
                                         <x-litus-icon name="star" class="h-3.5 w-3.5 fill-current" fill="currentColor" />
@@ -524,7 +527,7 @@
                                 </div>
                                 <p class="mb-4 flex-1 text-[14px] leading-relaxed text-litus-text sm:mb-[18px] sm:text-[15px] sm:leading-normal">“{{ $item['quote'] }}”</p>
                                 <div class="flex items-center gap-3 border-t border-litus-line pt-4 sm:border-0 sm:pt-0">
-                                    <div class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-litus-paper-3 text-sm font-bold text-litus-text-2 sm:h-[38px] sm:w-[38px]">
+                                    <div class="grid h-10 w-10 shrink-0 place-items-center rounded-full acc-tile text-sm font-bold text-white sm:h-[38px] sm:w-[38px]">
                                         {{ mb_substr($item['name'], 0, 1) }}
                                     </div>
                                     <div class="min-w-0">
@@ -556,33 +559,33 @@
     </section>
 
     {{-- SERVICE + PARTS --}}
-    <section class="litus-sec-tight bg-litus-paper-2">
+    <section class="litus-sec-tight litus-sec-tint">
         <div class="litus-container grid grid-cols-2 gap-3 sm:gap-6">
-            <article class="flex min-w-0 flex-col rounded-2xl border border-litus-line bg-white px-3.5 py-4 sm:rounded-[18px] sm:px-8 sm:py-9">
-                <div class="mb-3 grid h-10 w-10 place-items-center rounded-xl bg-[#DCE8FF] text-[#0B47B0] sm:mb-[18px] sm:h-[46px] sm:w-[46px] sm:rounded-[13px]">
+            <article class="litus-card-lift acc-sky relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-white/10 px-3.5 py-4 text-white shadow-[0_18px_44px_rgba(9,17,32,0.18)] sm:rounded-[22px] sm:px-8 sm:py-9" style="background: radial-gradient(360px 220px at 100% 0%, var(--acc-a), transparent 70%), linear-gradient(135deg, #0a1a3a, #07132B);">
+                <div class="mb-3 grid h-10 w-10 place-items-center acc-tile rounded-xl sm:mb-[18px] sm:h-[46px] sm:w-[46px] sm:rounded-[13px]">
                     <x-litus-icon name="wrench" class="h-4 w-4 sm:h-[17px] sm:w-[17px]" />
                 </div>
-                <h4 class="mb-2 font-display text-[15px] font-semibold leading-snug tracking-[-0.02em] text-litus-text sm:mb-2.5 sm:text-[clamp(20px,2.2vw,26px)]">Service Centre</h4>
-                <p class="mb-3 flex-1 text-[11.5px] leading-snug text-litus-text-2 sm:mb-[22px] sm:text-[14.5px] sm:leading-normal">
+                <h4 class="mb-2 font-display text-[15px] font-semibold leading-snug tracking-[-0.02em] text-white sm:mb-2.5 sm:text-[clamp(20px,2.2vw,26px)]">Service Centre</h4>
+                <p class="mb-3 flex-1 text-[11.5px] leading-snug text-white/70 sm:mb-[22px] sm:text-[14.5px] sm:leading-normal">
                     Periodic maintenance, accident repairs, engine overhaul and pick-and-drop. Book online and we confirm within 24 hours.
                 </p>
                 <a href="{{ route('service-center') }}"
-                   class="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-lg bg-litus-ink px-2.5 py-2.5 text-[11.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-litus-ink-700 sm:min-h-0 sm:w-auto sm:gap-2 sm:px-6 sm:py-3.5 sm:text-[14.5px]">
+                   class="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-lg bg-white px-2.5 py-2.5 text-[11.5px] font-bold text-litus-ink shadow-[0_8px_22px_rgba(0,0,0,0.25)] transition hover:-translate-y-0.5 hover:bg-white/90 sm:min-h-0 sm:w-auto sm:gap-2 sm:px-6 sm:py-3.5 sm:text-[14.5px]">
                     <span class="sm:hidden">Book</span>
                     <span class="hidden sm:inline">Book an Appointment</span>
                     <x-litus-icon name="arrow-right" class="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
                 </a>
             </article>
-            <article class="flex min-w-0 flex-col rounded-2xl border border-litus-line bg-white px-3.5 py-4 sm:rounded-[18px] sm:px-8 sm:py-9">
-                <div class="mb-3 grid h-10 w-10 place-items-center rounded-xl bg-[#DCE8FF] text-[#0B47B0] sm:mb-[18px] sm:h-[46px] sm:w-[46px] sm:rounded-[13px]">
+            <article class="litus-card-lift acc-teal relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-white/10 px-3.5 py-4 text-white shadow-[0_18px_44px_rgba(9,17,32,0.18)] sm:rounded-[22px] sm:px-8 sm:py-9" style="background: radial-gradient(360px 220px at 100% 0%, var(--acc-a), transparent 70%), linear-gradient(135deg, #0a1a3a, #07132B);">
+                <div class="mb-3 grid h-10 w-10 place-items-center acc-tile rounded-xl sm:mb-[18px] sm:h-[46px] sm:w-[46px] sm:rounded-[13px]">
                     <x-litus-icon name="zap" class="h-4 w-4 sm:h-[17px] sm:w-[17px]" />
                 </div>
-                <h4 class="mb-2 font-display text-[15px] font-semibold leading-snug tracking-[-0.02em] text-litus-text sm:mb-2.5 sm:text-[clamp(20px,2.2vw,26px)]">Genuine Parts</h4>
-                <p class="mb-3 flex-1 text-[11.5px] leading-snug text-litus-text-2 sm:mb-[22px] sm:text-[14.5px] sm:leading-normal">
+                <h4 class="mb-2 font-display text-[15px] font-semibold leading-snug tracking-[-0.02em] text-white sm:mb-2.5 sm:text-[clamp(20px,2.2vw,26px)]">Genuine Parts</h4>
+                <p class="mb-3 flex-1 text-[11.5px] leading-snug text-white/70 sm:mb-[22px] sm:text-[14.5px] sm:leading-normal">
                     Body, engine, braking, electrical, chassis and wheels. Tell us your model and we will confirm the exact part you need.
                 </p>
                 <a href="{{ route('parts') }}"
-                   class="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-lg bg-litus-ink px-2.5 py-2.5 text-[11.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-litus-ink-700 sm:min-h-0 sm:w-auto sm:gap-2 sm:px-6 sm:py-3.5 sm:text-[14.5px]">
+                   class="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-lg bg-white px-2.5 py-2.5 text-[11.5px] font-bold text-litus-ink shadow-[0_8px_22px_rgba(0,0,0,0.25)] transition hover:-translate-y-0.5 hover:bg-white/90 sm:min-h-0 sm:w-auto sm:gap-2 sm:px-6 sm:py-3.5 sm:text-[14.5px]">
                     <span class="sm:hidden">Request</span>
                     <span class="hidden sm:inline">Request a Part</span>
                     <x-litus-icon name="arrow-right" class="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
@@ -592,7 +595,7 @@
     </section>
 
     {{-- CTA BAND — hidden on mobile (footer has call/WhatsApp actions) --}}
-    <section class="litus-sec-tight bg-litus-ink text-white max-md:hidden">
+    <section class="litus-sec-tight litus-sec-vivid max-md:hidden">
         <div class="litus-container flex flex-wrap items-center justify-between gap-7">
             <div class="max-w-[560px]">
                 <h3 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em]">Not sure which bike or plan is right?</h3>
@@ -602,7 +605,7 @@
             </div>
             <div class="litus-cta-row">
                 <a href="{{ route('contact') }}"
-                   class="inline-flex items-center justify-center rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
+                   class="inline-flex items-center justify-center rounded-lg bg-white px-8 py-[17px] text-[15.5px] font-bold text-litus-primary shadow-[0_10px_28px_rgba(7,19,43,0.3)] transition hover:-translate-y-0.5 hover:bg-white/90">
                     Talk to Our Team
                 </a>
                 <a href="tel:+9607797442"

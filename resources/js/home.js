@@ -11,7 +11,6 @@ function initIjaraEstimator() {
   if (!root) return;
 
   const q = (sel) => root.querySelector(sel);
-  const qa = (sel) => [...root.querySelectorAll(sel)];
   const modelSel = q('[data-ijara-model]');
   const modelHint = q('[data-ijara-model-hint]');
   const image = q('[data-ijara-image]');
@@ -21,57 +20,35 @@ function initIjaraEstimator() {
   const planTemplate = q('[data-ijara-plan-template]');
   const termGroup = q('[data-ijara-term]');
   const termButtons = termGroup ? [...termGroup.querySelectorAll('button[data-term]')] : [];
-  const advanceInput = q('[data-ijara-advance]');
-  const advancePct = q('[data-ijara-advance-pct]');
-  const advanceHint = q('[data-ijara-advance-hint]');
-  const slider = q('[data-ijara-slider]');
-  const presets = qa('[data-preset]');
   const dataEl = q('[data-ijara-data]');
   const out = {
     model: q('[data-ijara-summary-model]'),
     plan: q('[data-ijara-summary-plan]'),
     term: q('[data-ijara-summary-term]'),
-    price: q('[data-ijara-summary-price]'),
-    advance: q('[data-ijara-summary-advance]'),
-    financed: q('[data-ijara-summary-financed]'),
-    charge: q('[data-ijara-summary-charge]'),
-    total: q('[data-ijara-summary-total]'),
-    rateLabel: q('[data-ijara-rate-label]'),
+    down: q('[data-ijara-summary-down]'),
+    monthlyRow: q('[data-ijara-summary-monthly]'),
+    downBig: q('[data-ijara-down]'),
     monthly: q('[data-ijara-monthly]'),
     perMonth: q('[data-ijara-per-month]'),
     headline: q('[data-ijara-headline]'),
     note: q('[data-ijara-note]'),
     cta: q('[data-ijara-continue]'),
-    barAdvance: q('[data-bar-advance]'),
-    barLeased: q('[data-bar-leased]'),
-    barAdvanceLabel: q('[data-bar-advance-label]'),
-    barLeasedLabel: q('[data-bar-leased-label]'),
+    ctaLabel: q('[data-ijara-continue-label]'),
   };
 
-  if (!modelSel || !planGroup || !planTemplate || !termGroup || !advanceInput || !dataEl) return;
+  if (!modelSel || !planGroup || !planTemplate || !termGroup || !dataEl) return;
 
   let data;
   try {
     data = JSON.parse(dataEl.textContent);
   } catch (e) {
-    data = { plans: {}, planTerms: {}, planTags: {}, rate: null, models: [] };
+    data = { plans: {}, planTerms: {}, planTags: {}, models: [] };
   }
-
-  const rate = data.rate || { percent: 0, basis: 'year' };
-  const rateLabel = `${rate.percent}% ${rate.basis === 'month' ? 'per month' : rate.basis === 'once' ? 'one-time' : 'per year'}`;
 
   let selectedPlan = '';
   let selectedTerm = '';
 
   const currentModel = () => data.models.find((m) => m.key === modelSel.value);
-  const advanceValue = () => Number(advanceInput.value.replace(/[^0-9]/g, '')) || 0;
-  const pctOf = (amount, price) => (price > 0 ? (amount / price) * 100 : 0);
-
-  // Total repayable = amount leased + flat lease rate for the chosen term; split evenly over the months.
-  const monthlyFor = (financed, months) => {
-    const factor = rate.basis === 'month' ? months : rate.basis === 'once' ? 1 : months / 12;
-    return Math.ceil((financed * (1 + (rate.percent / 100) * factor)) / months);
-  };
 
   // Small fade-in whenever a figure changes.
   const setText = (el, text) => {
@@ -112,9 +89,7 @@ function initIjaraEstimator() {
     Object.keys(data.plans).forEach((key) => {
       const btn = planTemplate.content.firstElementChild.cloneNode(true);
       btn.querySelector('[data-plan-name]').textContent = data.plans[key];
-      const tag = (data.planTags && data.planTags[key]) || '';
-      btn.querySelector('[data-plan-tag]').textContent = tag;
-      btn.title = tag;
+      btn.querySelector('[data-plan-tag]').textContent = (data.planTags && data.planTags[key]) || '';
       btn.dataset.plan = key;
       btn.addEventListener('click', () => {
         selectedPlan = key;
@@ -124,48 +99,50 @@ function initIjaraEstimator() {
     });
   };
 
-  const setAdvance = (amount) => {
-    advanceInput.value = amount > 0 ? amount.toLocaleString('en-US') : '0';
-    refresh();
+  // Lowest approved down payment for a bike + plan, shown on the plan card.
+  const lowestDown = (model, planKey) => {
+    const rates = model && model.plans[planKey] ? Object.values(model.plans[planKey]) : [];
+    return rates.length ? Math.min(...rates.map((r) => Number(r.down))) : null;
   };
 
   const refresh = () => {
     const model = currentModel();
-    const offered = model ? model.plans : [];
+    const offered = model ? Object.keys(model.plans) : [];
     if (!offered.includes(selectedPlan)) selectedPlan = '';
 
     // Plans
     planGroup.querySelectorAll('button').forEach((btn) => {
-      btn.disabled = !offered.includes(btn.dataset.plan);
-      btn.setAttribute('aria-pressed', String(btn.dataset.plan === selectedPlan));
+      const key = btn.dataset.plan;
+      const low = lowestDown(model, key);
+      btn.disabled = !offered.includes(key);
+      btn.setAttribute('aria-pressed', String(key === selectedPlan));
+      btn.querySelector('[data-plan-from]').textContent = low === null ? '' : `Down from ${formatMvr(low)}`;
     });
 
-    // Money
-    const price = model ? model.price : 0;
-    const entered = advanceInput.value.trim() !== '';
-    const advance = advanceValue();
-    const tooHigh = Boolean(model) && advance >= price;
-    const financed = model && !tooHigh ? price - advance : 0;
-
-    // Terms (months offered by the selected plan come from the admin panel)
+    // Months offered by the selected plan come from the admin panel; figures come from the approved rate table.
     const allowed = ((data.planTerms && data.planTerms[selectedPlan]) || []).map(String);
     if (!allowed.includes(selectedTerm)) selectedTerm = '';
+    const planRates = model && selectedPlan ? model.plans[selectedPlan] : null;
+
     termButtons.forEach((btn) => {
       const ok = allowed.includes(btn.dataset.term);
-      const note = btn.querySelector('[data-term-note]');
+      const rate = planRates && planRates[btn.dataset.term];
+      const monthlyEl = btn.querySelector('[data-term-monthly]');
+      const downEl = btn.querySelector('[data-term-down]');
       btn.disabled = !ok;
       btn.setAttribute('aria-pressed', String(btn.dataset.term === selectedTerm));
-      if (!note) return;
-      note.classList.toggle('text-litus-sky', ok);
-      note.classList.toggle('text-white/50', !ok);
       if (!selectedPlan) {
-        note.textContent = '';
+        monthlyEl.textContent = '';
+        downEl.textContent = '';
       } else if (!ok) {
-        note.textContent = 'Not offered';
-      } else if (financed > 0) {
-        note.textContent = `${formatMvr(monthlyFor(financed, Number(btn.dataset.term)))} / mo`;
+        monthlyEl.textContent = 'Not offered';
+        downEl.textContent = '';
+      } else if (rate) {
+        monthlyEl.textContent = `${formatMvr(rate.monthly)}/mo`;
+        downEl.textContent = `Down ${formatMvr(rate.down)}`;
       } else {
-        note.textContent = 'Available';
+        monthlyEl.textContent = 'Rate coming soon';
+        downEl.textContent = '';
       }
     });
 
@@ -179,74 +156,54 @@ function initIjaraEstimator() {
       image.classList.add('hidden');
       imageEmpty.classList.remove('hidden');
     }
-    priceChip.hidden = !model;
-    priceChip.textContent = model ? `${model.name} · ${formatMvr(price)}` : '';
+    priceChip.hidden = !(model && model.price);
+    priceChip.textContent = model && model.price ? `${model.name} · ${formatMvr(model.price)}` : '';
     modelHint.textContent = model
-      ? `${model.plans.length} plan${model.plans.length === 1 ? '' : 's'} available for this model.`
-      : 'Pick a motorcycle to see its price and available plans.';
-
-    // Advance controls
-    advanceInput.disabled = !model;
-    slider.disabled = !model;
-    presets.forEach((btn) => {
-      btn.disabled = !model;
-      btn.setAttribute('aria-pressed', String(Boolean(model) && entered && Math.abs(pctOf(advance, price) - Number(btn.dataset.preset)) < 0.6));
-    });
-    slider.value = String(Math.min(70, Math.round(pctOf(advance, price))));
-    advancePct.textContent = model && advance > 0 && !tooHigh ? `${Math.round(pctOf(advance, price))}% of price` : '';
-
-    advanceHint.textContent = tooHigh
-      ? `The advance must be less than the vehicle price (${formatMvr(price)}).`
-      : model
-        ? 'The advance is deducted from the vehicle price before your monthly payment is worked out.'
-        : 'Select a model first, then enter the amount you will pay upfront.';
-    advanceHint.style.color = tooHigh ? '#FF8A8A' : '';
+      ? `${offered.length} plan${offered.length === 1 ? '' : 's'} offered for this model.`
+      : 'Pick a motorcycle to see the plans offered for it.';
 
     // Step badges
     setStepDone('model', Boolean(model));
     setStepDone('plan', Boolean(selectedPlan));
     setStepDone('term', Boolean(selectedTerm));
-    setStepDone('advance', Boolean(model) && entered && !tooHigh);
 
     // Summary
-    const ready = Boolean(model && selectedPlan && selectedTerm && financed > 0);
     const planName = selectedPlan ? data.plans[selectedPlan] : '';
     const months = Number(selectedTerm) || 0;
-    const monthly = ready ? monthlyFor(financed, months) : 0;
-    const total = ready ? monthly * months : 0;
+    const rate = planRates && months ? planRates[selectedTerm] : null;
+    const picked = Boolean(model && selectedPlan && months);
 
     setText(out.model, model ? model.name : '-');
     setText(out.plan, planName || '-');
     setText(out.term, months ? `${months} months` : '-');
-    setText(out.price, model ? formatMvr(price) : '-');
-    setText(out.advance, model && !tooHigh ? formatMvr(advance) : '-');
-    setText(out.financed, model && !tooHigh ? formatMvr(financed) : '-');
-    setText(out.charge, ready ? formatMvr(total - financed) : '-');
-    setText(out.total, ready ? formatMvr(total) : '-');
-    out.rateLabel.textContent = `(${rateLabel})`;
-    setText(out.monthly, ready ? formatMvr(monthly) : 'MVR -');
-    out.perMonth.hidden = !ready;
+    setText(out.down, rate ? formatMvr(rate.down) : '-');
+    setText(out.downBig, rate ? formatMvr(rate.down) : 'MVR -');
+    setText(out.monthlyRow, rate ? formatMvr(rate.monthly) : '-');
+    setText(out.monthly, rate ? formatMvr(rate.monthly) : 'MVR -');
+    out.perMonth.hidden = !rate;
 
-    const advShare = model && !tooHigh ? pctOf(advance, price) : 0;
-    out.barAdvance.style.width = `${advShare}%`;
-    out.barLeased.style.width = model && !tooHigh ? `${100 - advShare}%` : '0%';
-    out.barAdvanceLabel.textContent = model && !tooHigh ? `${Math.round(advShare)}%` : '-';
-    out.barLeasedLabel.textContent = model && !tooHigh ? `${Math.round(100 - advShare)}%` : '-';
-
-    if (ready) {
+    if (rate) {
       out.headline.textContent = `${months} months on the ${planName} plan for the ${model.name}.`;
-      out.note.textContent = 'Illustrative estimate. Your final plan is confirmed by our sales team.';
-      const msg = `Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months, advance ${formatMvr(advance)}, monthly ${formatMvr(monthly)}.`;
+      out.note.textContent = 'Approved figures. Your final plan is confirmed by our sales team.';
+      out.ctaLabel.textContent = 'Continue';
+      const msg = `Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${formatMvr(rate.down)}, monthly lease ${formatMvr(rate.monthly)}).`;
+      out.cta.href = `https://wa.me/9607797442?text=${encodeURIComponent(msg)}`;
+      out.cta.setAttribute('aria-disabled', 'false');
+    } else if (picked) {
+      out.headline.textContent = 'The figures for this combination are not published yet.';
+      out.note.textContent = 'Message our team and we will confirm the down payment and monthly lease for you.';
+      out.ctaLabel.textContent = 'Ask our team';
+      const msg = `Hi LITUS, please confirm the Ijara down payment and monthly lease for: ${model.name}, ${planName} plan, ${months} months.`;
       out.cta.href = `https://wa.me/9607797442?text=${encodeURIComponent(msg)}`;
       out.cta.setAttribute('aria-disabled', 'false');
     } else {
-      let next = 'Choose a model, plan and term to see your monthly payment.';
-      if (!data.models.length) next = 'The payment calculator is not available yet.';
+      let next = 'Choose a model, plan and number of months.';
+      if (!data.models.length) next = 'The calculator is not available yet.';
       else if (model && !selectedPlan) next = 'Now choose an Ijara plan.';
-      else if (model && selectedPlan && !selectedTerm) next = 'Now choose a repayment term.';
-      else if (tooHigh) next = 'Lower the advance to see your monthly payment.';
+      else if (model && selectedPlan) next = 'Now choose the number of months.';
       out.headline.textContent = next;
       out.note.textContent = 'Review your selection before proceeding.';
+      out.ctaLabel.textContent = 'Continue';
       out.cta.href = '#';
       out.cta.setAttribute('aria-disabled', 'true');
     }
@@ -258,21 +215,6 @@ function initIjaraEstimator() {
     btn.addEventListener('click', () => {
       selectedTerm = btn.dataset.term;
       refresh();
-    });
-  });
-  advanceInput.addEventListener('input', () => {
-    const digits = advanceInput.value.replace(/[^0-9]/g, '');
-    advanceInput.value = digits ? Number(digits).toLocaleString('en-US') : '';
-    refresh();
-  });
-  slider.addEventListener('input', () => {
-    const model = currentModel();
-    if (model) setAdvance(Math.round((model.price * Number(slider.value)) / 100 / 100) * 100);
-  });
-  presets.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const model = currentModel();
-      if (model) setAdvance(Math.round((model.price * Number(btn.dataset.preset)) / 100 / 100) * 100);
     });
   });
   modelSel.addEventListener('change', refresh);

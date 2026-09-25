@@ -64,7 +64,7 @@
              style="background:
                 radial-gradient(900px 520px at 82% 6%, rgba(46,116,238,.34), transparent 62%),
                 radial-gradient(680px 460px at 2% 96%, rgba(90,184,255,.16), transparent 60%),
-                linear-gradient(180deg, transparent 40%, rgba(5,11,24,.9) 100%);"></div>
+                linear-gradient(180deg, transparent 40%, rgba(7,19,43,.9) 100%);"></div>
         <div class="pointer-events-none absolute inset-0 opacity-[0.42]"
              style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px; mask-image: radial-gradient(700px 500px at 30% 30%, #000, transparent 78%);"></div>
 

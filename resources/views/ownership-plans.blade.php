@@ -79,12 +79,12 @@
              alt=""
              class="absolute inset-x-0 top-0 h-auto w-full max-w-none [-webkit-mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)] [mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)]"
              aria-hidden="true">
-        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,24,0.96)_0%,rgba(5,11,24,0.88)_34%,rgba(5,11,24,0.55)_62%,rgba(5,11,24,0.35)_100%)]"></div>
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(7,19,43,0.96)_0%,rgba(7,19,43,0.88)_34%,rgba(7,19,43,0.55)_62%,rgba(7,19,43,0.35)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0"
              style="background:
                 radial-gradient(900px 520px at 82% 6%, rgba(46,116,238,.28), transparent 62%),
                 radial-gradient(680px 460px at 2% 96%, rgba(90,184,255,.12), transparent 60%),
-                linear-gradient(180deg, transparent 40%, rgba(5,11,24,.55) 100%);"></div>
+                linear-gradient(180deg, transparent 40%, rgba(7,19,43,.55) 100%);"></div>
         <div class="pointer-events-none absolute inset-0 opacity-[0.28]"
              style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px; mask-image: radial-gradient(700px 500px at 30% 30%, #000, transparent 78%);"></div>
 
@@ -134,7 +134,7 @@
              alt=""
              class="absolute inset-0 h-full w-full object-cover object-[90%_70%]"
              aria-hidden="true">
-        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,11,24,0.55)_0%,rgba(5,11,24,0.78)_42%,rgba(5,11,24,0.94)_100%)]"></div>
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(7,19,43,0.55)_0%,rgba(7,19,43,0.78)_42%,rgba(7,19,43,0.94)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0 opacity-[0.18]"
              style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px;"></div>
 

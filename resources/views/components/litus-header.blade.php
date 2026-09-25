@@ -15,7 +15,7 @@
     $logo = asset('images/logo/' . rawurlencode('Litus-Automobiles-white (1).png'));
 @endphp
 
-<header class="sticky top-0 z-[200] w-full border-b border-white/[0.09] bg-[rgba(5,11,24,0.94)] backdrop-blur-[16px]"
+<header class="sticky top-0 z-[200] w-full border-b border-white/[0.09] bg-[rgba(7,19,43,0.94)] backdrop-blur-[16px]"
         data-litus-header>
     <div class="litus-container relative z-[60] flex h-[72px] items-center justify-between gap-4">
         <a href="{{ route('home') }}" class="relative z-[1] flex shrink-0 items-center">

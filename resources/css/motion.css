@@ -102,7 +102,7 @@ body.mx-leaving {
 }
 
 [data-litus-header].is-scrolled {
-  background-color: rgba(5, 11, 24, 0.98);
+  background-color: rgba(7,19,43, 0.98);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
 }
 

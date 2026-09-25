@@ -82,7 +82,7 @@
                                 @endif
                                 <a href="{{ route('motorcycle.show', $m->slug) }}" class="absolute inset-0 block" aria-label="View {{ $m->name }}">
                                     <img src="{{ $m->listImageUrl() }}" alt="{{ $m->name }}"
-                                         class="absolute inset-0 h-full w-full origin-center scale-100 object-contain object-center p-2 drop-shadow-[0_16px_14px_rgba(5,11,24,0.28)] transition duration-500 hover:scale-[1.04] sm:p-4">
+                                         class="absolute inset-0 h-full w-full origin-center scale-100 object-contain object-center p-2 drop-shadow-[0_16px_14px_rgba(7,19,43,0.28)] transition duration-500 hover:scale-[1.04] sm:p-4">
                                 </a>
                             @else
                                 <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-white/60">
@@ -144,7 +144,7 @@
     @if ($selected->isNotEmpty())
         <div class="pointer-events-none fixed inset-x-0 top-[62px] z-[150] -translate-y-3 opacity-0 transition duration-300 data-[on=true]:pointer-events-auto data-[on=true]:translate-y-0 data-[on=true]:opacity-100" data-compare-mini>
             <div class="litus-container">
-                <div class="grid grid-cols-[1fr_1fr] gap-3 rounded-2xl border border-litus-line bg-white/95 px-4 py-2.5 shadow-[0_12px_32px_rgba(5,11,24,0.16)] backdrop-blur sm:grid-cols-[1fr_1.4fr_1.4fr] sm:gap-x-6 sm:px-5">
+                <div class="grid grid-cols-[1fr_1fr] gap-3 rounded-2xl border border-litus-line bg-white/95 px-4 py-2.5 shadow-[0_12px_32px_rgba(7,19,43,0.16)] backdrop-blur sm:grid-cols-[1fr_1.4fr_1.4fr] sm:gap-x-6 sm:px-5">
                     <span class="hidden items-center text-[11px] font-bold uppercase tracking-[0.16em] text-litus-text-2 sm:flex">Comparing</span>
                     @foreach ($slots as $m)
                         <div class="flex min-w-0 items-center gap-3">
@@ -207,7 +207,7 @@
                 </div>
 
                 {{-- Price card --}}
-                <div class="mb-4 overflow-hidden rounded-2xl border border-litus-line bg-white shadow-[0_2px_10px_rgba(5,11,24,0.04)]">
+                <div class="mb-4 overflow-hidden rounded-2xl border border-litus-line bg-white shadow-[0_2px_10px_rgba(7,19,43,0.04)]">
                     <div class="grid grid-cols-2 items-start gap-x-3 px-4 py-5 sm:grid-cols-[1fr_1.4fr_1.4fr] sm:gap-x-6 sm:px-6">
                         <div class="col-span-2 mb-2 flex items-center gap-3 sm:col-span-1 sm:mb-0">
                             <span class="grid h-9 w-9 place-items-center rounded-[10px] bg-litus-paper-3 text-litus-primary"><x-litus-icon name="credit-card" class="h-[18px] w-[18px]" /></span>
@@ -235,7 +235,7 @@
                 {{-- Category accordions --}}
                 <div class="space-y-4">
                     @foreach ($groups as $gi => $group)
-                        <details class="group overflow-hidden rounded-2xl border border-litus-line bg-white shadow-[0_2px_10px_rgba(5,11,24,0.04)]" data-compare-group open>
+                        <details class="group overflow-hidden rounded-2xl border border-litus-line bg-white shadow-[0_2px_10px_rgba(7,19,43,0.04)]" data-compare-group open>
                             <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-4 transition hover:bg-litus-paper-2 sm:px-6 [&::-webkit-details-marker]:hidden">
                                 <span class="flex min-w-0 items-center gap-3">
                                     <span class="grid h-9 w-9 shrink-0 place-items-center rounded-[10px] bg-litus-primary text-white"><x-litus-icon :name="$group['icon']" class="h-[18px] w-[18px]" /></span>

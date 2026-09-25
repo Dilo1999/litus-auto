@@ -76,12 +76,12 @@
                  alt=""
                  class="absolute inset-0 h-full w-full origin-bottom scale-[1.22] object-contain object-[center_bottom]">
         </div>
-        <div class="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(90deg,rgba(5,11,24,0.98)_0%,rgba(5,11,24,0.94)_42%,rgba(5,11,24,0.55)_68%,rgba(5,11,24,0.2)_100%)]"></div>
+        <div class="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(90deg,rgba(7,19,43,0.98)_0%,rgba(7,19,43,0.94)_42%,rgba(7,19,43,0.55)_68%,rgba(7,19,43,0.2)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0 z-[2]"
              style="background:
                 radial-gradient(900px 520px at 82% 6%, rgba(46,116,238,.22), transparent 62%),
                 radial-gradient(680px 460px at 2% 96%, rgba(90,184,255,.12), transparent 60%),
-                linear-gradient(180deg, transparent 40%, rgba(5,11,24,.45) 100%);"></div>
+                linear-gradient(180deg, transparent 40%, rgba(7,19,43,.45) 100%);"></div>
         <div class="pointer-events-none absolute inset-0 z-[2] opacity-[0.28]"
              style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px; mask-image: radial-gradient(700px 500px at 30% 30%, #000, transparent 78%);"></div>
 
@@ -136,7 +136,7 @@
              alt=""
              class="pointer-events-none absolute inset-0 h-full w-full object-cover object-[center_30%] opacity-[0.35]"
              aria-hidden="true">
-        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,11,24,0.55)_0%,rgba(5,11,24,0.78)_42%,rgba(5,11,24,0.94)_100%)]"></div>
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(7,19,43,0.55)_0%,rgba(7,19,43,0.78)_42%,rgba(7,19,43,0.94)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0 opacity-[0.18]"
              style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px;"></div>
 
