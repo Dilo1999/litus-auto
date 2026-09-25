@@ -82,7 +82,7 @@
                                 @endif
                                 <a href="{{ route('motorcycle.show', $m->slug) }}" class="absolute inset-0 block" aria-label="View {{ $m->name }}">
                                     <img src="{{ $m->listImageUrl() }}" alt="{{ $m->name }}"
-                                         class="absolute inset-0 h-full w-full origin-center scale-[1.4] object-contain object-center p-2 drop-shadow-[0_16px_14px_rgba(5,11,24,0.28)] transition duration-500 hover:scale-[1.46] sm:p-4">
+                                         class="absolute inset-0 h-full w-full origin-center scale-100 object-contain object-center p-2 drop-shadow-[0_16px_14px_rgba(5,11,24,0.28)] transition duration-500 hover:scale-[1.04] sm:p-4">
                                 </a>
                             @else
                                 <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-white/60">
