@@ -7,44 +7,32 @@ use App\Models\Motorcycle;
 class IjaraRates
 {
     /**
-     * Approved figures for one bike on one plan.
-     *
-     * Entered on the motorcycle's admin page (down payment per plan, monthly lease per month count);
-     * anything missing there falls back to config/ijara_rates.php. Values are used exactly as entered.
-     *
-     * @param  list<int>  $terms  months offered by the plan
-     * @return array{down: int|float|null, rates: array<int, array{down: int|float|null, monthly: int|float}>}
+     * Down payment (advance) for one bike on one plan: entered on the motorcycle's admin page,
+     * with config/ijara_rates.php as a fallback. Returned exactly as entered.
      */
-    public static function planRates(Motorcycle $motorcycle, string $planKey, array $terms): array
+    public static function planDown(Motorcycle $motorcycle, string $planKey): int|float|null
     {
-        $stored = $motorcycle->ijara_rates[$planKey] ?? [];
-        $config = config("ijara_rates.models.{$motorcycle->slug}.plans.{$planKey}", []);
+        $stored = $motorcycle->ijara_rates[$planKey]['down'] ?? null;
 
-        $configDowns = collect($config)->pluck('advance')->filter(fn ($v) => is_numeric($v));
-        $storedDown = is_numeric($stored['down'] ?? null) ? $stored['down'] + 0 : null;
-        $planDown = $storedDown ?? ($configDowns->isNotEmpty() ? $configDowns->min() : null);
-
-        $rates = [];
-
-        foreach ($terms as $term) {
-            $monthly = $stored['months'][$term] ?? $config[$term]['monthly'] ?? null;
-
-            if (! is_numeric($monthly)) {
-                continue;
-            }
-
-            $rates[$term] = [
-                'down' => $storedDown ?? ($config[$term]['advance'] ?? $planDown),
-                'monthly' => $monthly + 0,
-            ];
+        if (is_numeric($stored)) {
+            return $stored + 0;
         }
 
-        return ['down' => $planDown, 'rates' => $rates];
+        $configDowns = collect(config("ijara_rates.models.{$motorcycle->slug}.plans.{$planKey}", []))
+            ->pluck('advance')
+            ->filter(fn ($v) => is_numeric($v));
+
+        return $configDowns->isNotEmpty() ? $configDowns->min() + 0 : null;
     }
 
     /**
-     * Calculator payload: every published model that is on Ijara, the plans it is offered on, and for each
-     * plan the down payment and the monthly lease per month count.
+     * Calculator payload: every published model that is on Ijara with its current price (the promotional
+     * price while a promotion is active) and, for each plan it is offered on, the down payment.
+     *
+     * The monthly payment is worked out in the browser:
+     *   financial charge = (price - advance) x rate x months
+     *   monthly payment  = (price - advance + financial charge) / months
+     * where the rate (% per month) is set per plan and per option (Plan A / Plan B) in the admin panel.
      */
     public static function calculatorData(): array
     {
@@ -53,18 +41,14 @@ class IjaraRates
         $models = [];
 
         Motorcycle::query()->where('is_published', true)->where('ijara_enabled', true)->orderBy('name')->get()
-            ->each(function (Motorcycle $motorcycle) use (&$models, $plans, $planTerms) {
+            ->each(function (Motorcycle $motorcycle) use (&$models, $plans) {
                 $modelPlans = [];
 
                 foreach ($plans as $planKey => $planName) {
-                    if (! in_array($planKey, $motorcycle->ijara_plans ?? [], true)) {
-                        continue;
+                    if (in_array($planKey, $motorcycle->ijara_plans ?? [], true)) {
+                        // A plan offered on this bike is always listed, even before its down payment is entered.
+                        $modelPlans[$planKey] = ['down' => self::planDown($motorcycle, $planKey)];
                     }
-
-                    $found = self::planRates($motorcycle, $planKey, $planTerms[$planKey]);
-
-                    // A plan offered on this bike is always listed, even before its figures are entered.
-                    $modelPlans[$planKey] = ['down' => $found['down'], 'rates' => (object) $found['rates']];
                 }
 
                 $hasPromo = $motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0;
@@ -93,7 +77,7 @@ class IjaraRates
     }
 
     /**
-     * Missing figures for bikes that are on Ijara, for the pre-launch audit.
+     * Bikes that are on Ijara but cannot be calculated yet (no price or no down payment), for the pre-launch audit.
      *
      * @return list<string>
      */
@@ -103,22 +87,13 @@ class IjaraRates
 
         Motorcycle::query()->where('is_published', true)->where('ijara_enabled', true)->orderBy('name')->get()
             ->each(function (Motorcycle $motorcycle) use (&$gaps) {
+                if ((float) $motorcycle->original_price <= 0) {
+                    $gaps[] = "{$motorcycle->name}: no price set";
+                }
+
                 foreach (IjaraPlans::calculatorPlans() as $planKey => $planName) {
-                    if (! in_array($planKey, $motorcycle->ijara_plans ?? [], true)) {
-                        continue;
-                    }
-
-                    $terms = IjaraPlans::termsFor($planKey);
-                    $found = self::planRates($motorcycle, $planKey, $terms);
-
-                    if ($found['down'] === null) {
+                    if (in_array($planKey, $motorcycle->ijara_plans ?? [], true) && self::planDown($motorcycle, $planKey) === null) {
                         $gaps[] = "{$motorcycle->name} / {$planName}: no down payment";
-                    }
-
-                    foreach ($terms as $term) {
-                        if (! isset($found['rates'][$term])) {
-                            $gaps[] = "{$motorcycle->name} / {$planName} / {$term} months: no monthly lease (shows 'to be confirmed')";
-                        }
                     }
                 }
             });

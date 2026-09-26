@@ -35,8 +35,8 @@ class IjaraPlans
         return array_map(fn (array $plan) => $plan + [
             'terms' => $plan['id'] === 'premium' ? [6, 12] : [6, 12, 24, 36, 48],
             'termGroups' => $plan['id'] === 'premium'
-                ? [['label' => 'Plan A', 'months' => [6, 12]]]
-                : [['label' => 'Plan A', 'months' => self::PLAN_A_MONTHS], ['label' => 'Plan B', 'months' => self::PLAN_B_MONTHS]],
+                ? [['label' => 'Plan A', 'months' => [6, 12], 'rate' => 2.5]]
+                : [['label' => 'Plan A', 'months' => self::PLAN_A_MONTHS, 'rate' => 2.5], ['label' => 'Plan B', 'months' => self::PLAN_B_MONTHS, 'rate' => 2.5]],
             'calculator' => $plan['id'] !== 'premium',
         ], self::defaults());
     }

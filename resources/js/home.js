@@ -229,11 +229,22 @@ function initIjaraEstimator() {
     // Summary
     const months = Number(selectedTerm) || 0;
     const planData = model && selectedPlan ? model.plans[selectedPlan] : null;
-    const rate = planData && months ? planData.rates[selectedTerm] : null;
-    // The down payment is set per bike and plan, so it shows as soon as a plan is chosen.
-    const planDown = planData && planData.down !== null && planData.down !== undefined ? Number(planData.down) : null;
-    const down = rate && rate.down !== null && rate.down !== undefined ? Number(rate.down) : planDown;
+    // The down payment (advance) is set per bike and plan, so it shows as soon as a plan is chosen.
+    const down = planData && planData.down !== null && planData.down !== undefined ? Number(planData.down) : null;
     const picked = Boolean(model && selectedPlan && months);
+
+    // Financial charge = (price - advance) x rate x months; monthly payment = (price - advance + charge) / months.
+    // The rate (% per month) is set per plan and per option (Plan A / Plan B) in the admin panel.
+    const chosenGroup = selectedGroup >= 0 ? groups[selectedGroup] : null;
+    const option = chosenGroup ? ((data.planGroups && data.planGroups[selectedPlan]) || []).find((g) => g.label === chosenGroup.label) : null;
+    const ratePct = option && option.rate !== undefined && option.rate !== null ? Number(option.rate) : null;
+    const price = model && model.price ? Number(model.price) : null;
+    const financed = price !== null && down !== null ? price - down : null;
+    let rate = null;
+    if (picked && ratePct !== null && financed !== null && financed > 0) {
+      const charge = financed * (ratePct / 100) * months;
+      rate = { monthly: Math.ceil((financed + charge) / months), charge, pct: ratePct };
+    }
 
     setText(out.model, model ? model.name : 'No model selected');
     setText(mob.model, model ? model.name : '-');
@@ -250,10 +261,10 @@ function initIjaraEstimator() {
     const whatsapp = (msg) => `https://wa.me/9607797442?text=${encodeURIComponent(msg)}`;
 
     if (rate) {
-      setStatus('ready', 'Approved figures');
+      setStatus('ready', 'Calculated');
       if (out.quoteTitle) out.quoteTitle.textContent = `${months} months on the ${planName} plan`;
-      if (out.quoteText) out.quoteText.textContent = 'Approved figures. Your final plan is confirmed by our sales team.';
-      out.note.textContent = 'Approved figures. Your final plan is confirmed by our sales team.';
+      if (out.quoteText) out.quoteText.textContent = `Includes a financial charge of ${rate.pct}% per month on the amount after your advance.`;
+      out.note.textContent = `Includes a ${rate.pct}% per month financial charge on the amount after your advance. Your final plan is confirmed by our sales team.`;
       setCta('Continue', whatsapp(`Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${down !== null ? formatMvr(down) : "to be confirmed"}, monthly lease ${formatMvr(rate.monthly)}).`), false);
     } else if (picked) {
       setStatus('quote', 'Quote required');
