@@ -81,6 +81,19 @@
                         <span class="{{ $stepBadge }}">3</span>
                         <h3 class="{{ $stepTitle }}" id="ijara-term-label">Choose your lease term</h3>
                     </div>
+                    {{-- Plan options (Plan A / Plan B ...) - shown only when the chosen plan has more than one --}}
+                    <div class="mb-3.5" data-ijara-group-wrap>
+                        <p class="mb-2 text-[12.5px] font-semibold text-litus-text-2">Choose Plan A or Plan B</p>
+                        <div class="flex flex-wrap gap-2" role="group" aria-label="Plan option" data-ijara-group></div>
+                        <template data-ijara-group-template>
+                            <button type="button" aria-pressed="false"
+                                    class="flex flex-col rounded-xl border-[1.5px] border-litus-line bg-white px-4 py-2 text-left transition hover:border-litus-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-litus-primary/40 aria-pressed:border-litus-primary aria-pressed:bg-litus-primary aria-pressed:text-white aria-pressed:shadow-[0_6px_16px_rgba(18,87,214,.22)]">
+                                <b class="text-[14px] font-bold leading-tight" data-group-label></b>
+                                <span class="mt-0.5 text-[11.5px] font-medium opacity-75" data-group-months></span>
+                            </button>
+                        </template>
+                    </div>
+                    <p class="rounded-lg bg-[#EAF2FF] px-3 py-2 text-[12.5px] text-litus-text-2" data-ijara-term-empty>Choose Plan A or Plan B to see the months you can pick.</p>
                     <div class="grid grid-cols-3 gap-2 lg:grid-cols-5" role="group" aria-labelledby="ijara-term-label" data-ijara-term>
                         @foreach ($terms as $term)
                             <button type="button" data-term="{{ $term }}" aria-pressed="false" class="{{ $choice }} min-h-[46px] !flex-row !items-center !justify-start gap-2.5 max-sm:!gap-1.5 max-sm:!px-2">

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\IjaraPlans;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
@@ -26,6 +27,7 @@ class IjaraPlan extends Model
         'who_for',
         'important_note',
         'terms',
+        'term_groups',
         'show_in_calculator',
         'is_published',
         'sort_order',
@@ -36,6 +38,7 @@ class IjaraPlan extends Model
         'benefits' => 'array',
         'documents' => 'array',
         'terms' => 'array',
+        'term_groups' => 'array',
         'show_in_calculator' => 'boolean',
         'is_published' => 'boolean',
         'sort_order' => 'integer',
@@ -62,6 +65,13 @@ class IjaraPlan extends Model
 
     protected static function booted(): void
     {
+        // 'terms' is always the combined list of the months across all options (Plan A, Plan B ...).
+        static::saving(function (self $plan) {
+            if (is_array($plan->term_groups)) {
+                $plan->terms = collect($plan->normalizedGroups())->pluck('months')->flatten()->unique()->sort()->values()->all();
+            }
+        });
+
         // New plans go to the end of the list.
         static::creating(function (self $plan) {
             if (! $plan->sort_order) {
@@ -84,10 +94,35 @@ class IjaraPlan extends Model
             ->all();
     }
 
+    /**
+     * The plan's options: always "Plan A" and, optionally, "Plan B", each with its months. An option
+     * with no months is left out. Plans saved before options existed are a single Plan A holding all their months.
+     *
+     * @return list<array{label: string, months: list<int>}>
+     */
+    public function normalizedGroups(): array
+    {
+        // Plan A can only hold 6 / 12 / 24 months and Plan B only 36 / 48, so the split follows the month itself.
+        $stored = collect($this->term_groups)->pluck('months')->flatten();
+
+        if ($stored->isEmpty()) {
+            $stored = collect($this->terms);
+        }
+
+        $months = $stored->map(fn ($m) => (int) $m)->unique()->sort()->values();
+
+        return collect(['Plan A' => IjaraPlans::PLAN_A_MONTHS, 'Plan B' => IjaraPlans::PLAN_B_MONTHS])
+            ->map(fn (array $allowed, string $label) => ['label' => $label, 'months' => $months->filter(fn ($m) => in_array($m, $allowed, true))->values()->all()])
+            ->filter(fn ($g) => $g['months'])
+            ->values()
+            ->all();
+    }
+
     /** Shape used by the public Ijara Plans page and its details modal. */
     public function toPageArray(): array
     {
-        $terms = collect($this->terms)->map(fn ($t) => (int) $t)->unique()->sort()->values()->all();
+        $groups = $this->normalizedGroups();
+        $terms = collect($groups)->pluck('months')->flatten()->unique()->sort()->values()->all();
 
         return [
             'id' => $this->slug,
@@ -102,6 +137,7 @@ class IjaraPlan extends Model
             'pts' => static::flattenList($this->points),
             'best' => (string) $this->best_for,
             'terms' => $terms,
+            'termGroups' => $groups,
             'calculator' => (bool) $this->show_in_calculator,
             'drawer' => array_filter([
                 'subtitle' => (string) $this->drawer_subtitle,

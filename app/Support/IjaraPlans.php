@@ -7,7 +7,12 @@ use App\Models\IjaraPlan;
 class IjaraPlans
 {
     /** Repayment terms (months) an admin can enable per plan. */
-    public const TERM_OPTIONS = [3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48];
+    public const TERM_OPTIONS = [6, 12, 24, 36, 48];
+
+    /** Plan A offers only these months; Plan B offers only the ones below. */
+    public const PLAN_A_MONTHS = [6, 12, 24];
+
+    public const PLAN_B_MONTHS = [36, 48];
 
     /**
      * Published plans for the website: managed in the admin panel (Ijara Plans),
@@ -29,6 +34,9 @@ class IjaraPlans
 
         return array_map(fn (array $plan) => $plan + [
             'terms' => $plan['id'] === 'premium' ? [6, 12] : [6, 12, 24, 36, 48],
+            'termGroups' => $plan['id'] === 'premium'
+                ? [['label' => 'Plan A', 'months' => [6, 12]]]
+                : [['label' => 'Plan A', 'months' => self::PLAN_A_MONTHS], ['label' => 'Plan B', 'months' => self::PLAN_B_MONTHS]],
             'calculator' => $plan['id'] !== 'premium',
         ], self::defaults());
     }

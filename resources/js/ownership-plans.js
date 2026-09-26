@@ -91,7 +91,12 @@ function initOwnershipPlans() {
         const terms = plan.terms || [];
         termsWrap?.classList.toggle('hidden', terms.length === 0);
         if (termsEl) {
-            termsEl.innerHTML = terms.map((m) => `<span class="rounded-lg px-3 py-1.5 text-xs font-bold" style="background:${esc(plan.accentLight)};color:${esc(plan.accent)}">${m} months</span>`).join('');
+            const chip = (m) => `<span class="rounded-lg px-3 py-1.5 text-xs font-bold" style="background:${esc(plan.accentLight)};color:${esc(plan.accent)}">${m} months</span>`;
+            const groups = plan.termGroups || [];
+            // Plans with several options (Plan A, Plan B ...) list the months under each option.
+            termsEl.innerHTML = groups.length > 1
+                ? groups.map((g) => `<div class="w-full"><p class="mb-1.5 text-xs font-semibold text-gray-600">${esc(g.label)}</p><div class="flex flex-wrap gap-2">${g.months.map(chip).join('')}</div></div>`).join('')
+                : terms.map(chip).join('');
         }
 
         if (d.important) {

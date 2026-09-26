@@ -82,6 +82,11 @@ class IjaraRates
         return [
             'plans' => $plans,
             'planTerms' => $planTerms,
+            'groups' => [
+                ['label' => 'Plan A', 'months' => IjaraPlans::PLAN_A_MONTHS],
+                ['label' => 'Plan B', 'months' => IjaraPlans::PLAN_B_MONTHS],
+            ],
+            'planGroups' => collect(IjaraPlans::all())->mapWithKeys(fn ($plan) => [$plan['id'] => $plan['termGroups'] ?? []])->all(),
             'planTags' => collect(IjaraPlans::all())->pluck('tag', 'id')->all(),
             'models' => $models,
         ];

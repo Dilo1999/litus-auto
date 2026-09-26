@@ -109,16 +109,21 @@ class IjaraPlanResource extends Resource
                     ->columns(2),
 
                 Forms\Components\Section::make('Available months')
-                    ->description('Repayment terms offered on this plan. They appear on the plan card, in its details, and in the payment calculator (a term becomes selectable in the calculator once its rate is entered).')
+                    ->description('Plan A offers 6, 12 and 24 months. Plan B offers 36 and 48 months. In the payment calculator the customer picks Plan A or Plan B first and then sees only that option\'s months. Tick what this plan offers; leave Plan B empty if it offers neither 36 nor 48.')
                     ->schema([
-                        CheckboxList::make('terms')
-                            ->label('Terms')
-                            ->options(collect(IjaraPlans::TERM_OPTIONS)->mapWithKeys(fn (int $m) => [$m => "{$m} months"])->all())
-                            ->columns(4)
+                        CheckboxList::make('term_groups.0.months')
+                            ->label('Plan A - months')
+                            ->options(collect(IjaraPlans::PLAN_A_MONTHS)->mapWithKeys(fn (int $m) => [$m => "{$m} months"])->all())
+                            ->columns(3)
                             ->required()
-                            ->rules(['array', 'min:1'])
-                            ->validationAttribute('available months')
-                            ->dehydrateStateUsing(fn ($state) => collect($state)->map(fn ($m) => (int) $m)->sort()->values()->all()),
+                            ->validationAttribute('Plan A months')
+                            ->columnSpanFull(),
+                        CheckboxList::make('term_groups.1.months')
+                            ->label('Plan B - months (optional)')
+                            ->options(collect(IjaraPlans::PLAN_B_MONTHS)->mapWithKeys(fn (int $m) => [$m => "{$m} months"])->all())
+                            ->columns(3)
+                            ->validationAttribute('Plan B months')
+                            ->columnSpanFull(),
                         Toggle::make('show_in_calculator')
                             ->label('Include in the payment calculator')
                             ->helperText('Turn off for plans that have no rate data (for example Premium).')

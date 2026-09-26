@@ -82,7 +82,20 @@ function initIjaraEstimator() {
   }
 
   let selectedPlan = '';
+  let selectedGroup = -1; // index into data.groups: 0 = Plan A (6 / 12 / 24 months), 1 = Plan B (36 / 48 months)
   let selectedTerm = '';
+  const groupWrap = q('[data-ijara-group-wrap]');
+  const groupBox = q('[data-ijara-group]');
+  const groupTemplate = q('[data-ijara-group-template]');
+  const termEmpty = q('[data-ijara-term-empty]');
+  const groups = data.groups || [];
+
+  // Months a plan offers in one option; before a plan is chosen, the option's standard months.
+  const optionMonths = (planKey, index) => {
+    if (!planKey) return groups[index].months;
+    const found = ((data.planGroups && data.planGroups[planKey]) || []).find((g) => g.label === groups[index].label);
+    return found ? found.months : [];
+  };
 
   const currentModel = () => data.models.find((m) => m.key === modelSel.value);
   const tagFor = (key) => (data.planTags && data.planTags[key]) || '';
@@ -129,6 +142,7 @@ function initIjaraEstimator() {
       btn.dataset.plan = key;
       btn.addEventListener('click', () => {
         selectedPlan = key;
+        selectedGroup = -1;
         refresh();
       });
       planGroup.appendChild(btn);
@@ -146,14 +160,40 @@ function initIjaraEstimator() {
       btn.setAttribute('aria-pressed', String(btn.dataset.plan === selectedPlan));
     });
 
-    // Months offered by the selected plan come from the admin panel; figures come from the approved rate table.
-    const allowed = selectedPlan
-      ? ((data.planTerms && data.planTerms[selectedPlan]) || []).map(String)
-      : termButtons.map((btn) => btn.dataset.term);
+    // Plan A / Plan B: the customer picks an option first and then sees only that option's months.
+    const available = groups.map((g, i) => optionMonths(selectedPlan, i));
+    const usable = available.map((months, i) => (months.length ? i : -1)).filter((i) => i >= 0);
+    if (selectedGroup >= 0 && !usable.includes(selectedGroup)) selectedGroup = -1;
+    if (selectedGroup < 0 && selectedPlan && usable.length === 1) selectedGroup = usable[0];
+    const group = selectedGroup >= 0 && usable.length > 1 ? groups[selectedGroup] : null;
+
+    if (groupBox && groupTemplate) {
+      if (!groupBox.children.length) {
+        groups.forEach((g, i) => {
+          const btn = groupTemplate.content.firstElementChild.cloneNode(true);
+          btn.querySelector('[data-group-label]').textContent = g.label;
+          btn.addEventListener('click', () => {
+            selectedGroup = i;
+            refresh();
+          });
+          groupBox.appendChild(btn);
+        });
+      }
+      [...groupBox.children].forEach((btn, i) => {
+        btn.disabled = !available[i].length;
+        btn.querySelector('[data-group-months]').textContent = available[i].length ? available[i].join(', ') + ' months' : 'Not offered';
+        btn.setAttribute('aria-pressed', String(i === selectedGroup));
+      });
+    }
+
+    const allowed = selectedGroup >= 0 ? available[selectedGroup].map(String) : [];
     if (selectedTerm && !allowed.includes(selectedTerm)) selectedTerm = '';
+    termEmpty?.classList.toggle('hidden', selectedGroup >= 0);
 
     termButtons.forEach((btn) => {
-      btn.disabled = !allowed.includes(btn.dataset.term);
+      const ok = allowed.includes(btn.dataset.term);
+      btn.disabled = !ok;
+      btn.style.display = ok ? '' : 'none';
       btn.setAttribute('aria-pressed', String(btn.dataset.term === selectedTerm));
     });
 
@@ -174,11 +214,12 @@ function initIjaraEstimator() {
       ? `${offered.length} plan${offered.length === 1 ? '' : 's'} offered for this model.`
       : 'Pick a motorcycle to see the plans offered for it.';
 
-    const planName = selectedPlan ? data.plans[selectedPlan] : '';
+    const basePlanName = selectedPlan ? data.plans[selectedPlan] : '';
+    const planName = group ? `${basePlanName} (${group.label})` : basePlanName;
     const planTag = selectedPlan ? tagFor(selectedPlan) : '';
     if (planInfo) {
       planInfo.textContent = selectedPlan
-        ? `${planName} plan selected${planTag ? ` · ${planTag}` : ''}.`
+        ? `${basePlanName} plan selected${planTag ? ` · ${planTag}` : ''}.`
         : 'Select a plan to see who it suits.';
     }
 

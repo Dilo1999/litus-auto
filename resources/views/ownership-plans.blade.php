@@ -261,7 +261,15 @@
                                     @if (! empty($plan['terms']))
                                         <div class="mb-3 flex items-start justify-between gap-3">
                                             <span class="text-[12px] text-litus-text-3 sm:text-[12.5px]">Available months</span>
-                                            <b class="text-right text-[12.5px] font-semibold text-litus-text sm:text-[13px]">{{ implode(', ', $plan['terms']) }}</b>
+                                            @if (count($plan['termGroups'] ?? []) > 1)
+                                                <span class="grid gap-0.5 text-right text-[12.5px] sm:text-[13px]">
+                                                    @foreach ($plan['termGroups'] as $group)
+                                                        <span><span class="text-litus-text-3">{{ $group['label'] }}:</span> <b class="font-semibold text-litus-text">{{ implode(', ', $group['months']) }}</b></span>
+                                                    @endforeach
+                                                </span>
+                                            @else
+                                                <b class="text-right text-[12.5px] font-semibold text-litus-text sm:text-[13px]">{{ implode(', ', $plan['terms']) }}</b>
+                                            @endif
                                         </div>
                                     @endif
                                     <div class="mb-3 flex items-start justify-between gap-3 sm:mb-4">
