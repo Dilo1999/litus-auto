@@ -184,8 +184,11 @@ function initIjaraEstimator() {
 
     // Summary
     const months = Number(selectedTerm) || 0;
-    const planRates = model && selectedPlan ? model.plans[selectedPlan] : null;
-    const rate = planRates && months ? planRates[selectedTerm] : null;
+    const planData = model && selectedPlan ? model.plans[selectedPlan] : null;
+    const rate = planData && months ? planData.rates[selectedTerm] : null;
+    // The down payment is set per bike and plan, so it shows as soon as a plan is chosen.
+    const planDown = planData && planData.down !== null && planData.down !== undefined ? Number(planData.down) : null;
+    const down = rate && rate.down !== null && rate.down !== undefined ? Number(rate.down) : planDown;
     const picked = Boolean(model && selectedPlan && months);
 
     setText(out.model, model ? model.name : 'No model selected');
@@ -198,7 +201,7 @@ function initIjaraEstimator() {
     setText(out.planTag, planTag);
     setText(out.term, months ? `${months} months` : '-');
     setText(out.monthly, rate ? formatMvr(rate.monthly) : 'To be confirmed');
-    setText(out.down, rate ? formatMvr(rate.down) : 'To be confirmed');
+    setText(out.down, down !== null ? formatMvr(down) : 'To be confirmed');
 
     const whatsapp = (msg) => `https://wa.me/9607797442?text=${encodeURIComponent(msg)}`;
 
@@ -207,7 +210,7 @@ function initIjaraEstimator() {
       out.quoteTitle.textContent = `${months} months on the ${planName} plan`;
       out.quoteText.textContent = 'Approved figures. Your final plan is confirmed by our sales team.';
       out.note.textContent = 'Continue on WhatsApp and our team will confirm your plan.';
-      setCta('Continue', whatsapp(`Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${formatMvr(rate.down)}, monthly lease ${formatMvr(rate.monthly)}).`), false);
+      setCta('Continue', whatsapp(`Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${down !== null ? formatMvr(down) : "to be confirmed"}, monthly lease ${formatMvr(rate.monthly)}).`), false);
     } else if (picked) {
       setStatus('quote', 'Quote required');
       out.quoteTitle.textContent = 'Get your personalised quote';

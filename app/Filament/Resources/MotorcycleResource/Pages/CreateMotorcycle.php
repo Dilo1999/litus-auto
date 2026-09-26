@@ -11,12 +11,25 @@ class CreateMotorcycle extends CreateRecord
 {
     protected static string $resource = MotorcycleResource::class;
 
+    protected function beforeCreate(): void
+    {
+        if (MotorcycleResource::ijaraMissingPlan($this->data)) {
+            Notification::make()
+                ->title('Switch on at least one Ijara plan')
+                ->body('Or turn off "Available on Ijara plans" for this bike.')
+                ->danger()
+                ->send();
+
+            $this->halt();
+        }
+    }
+
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['specs'] = Motorcycle::specsFromValues($data['spec_values'] ?? []);
         unset($data['spec_values']);
 
-        return $data;
+        return MotorcycleResource::ijaraDataForSave($data);
     }
 
     protected function getRedirectUrl(): string

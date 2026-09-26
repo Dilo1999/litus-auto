@@ -29,6 +29,7 @@ class Motorcycle extends Model
         'is_top_selling',
         'ijara_enabled',
         'ijara_plans',
+        'ijara_rates',
         'sort_order',
     ];
 
@@ -41,6 +42,7 @@ class Motorcycle extends Model
         'is_top_selling' => 'boolean',
         'ijara_enabled' => 'boolean',
         'ijara_plans' => 'array',
+        'ijara_rates' => 'array',
         'sort_order' => 'integer',
     ];
 

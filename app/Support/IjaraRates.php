@@ -7,19 +7,53 @@ use App\Models\Motorcycle;
 class IjaraRates
 {
     /**
-     * Calculator payload: every published model that is on Ijara, the plans it is offered on, and the
-     * approved down payment and monthly lease for each plan / month combination (config/ijara_rates.php).
-     * Figures are passed through exactly as approved - nothing is calculated or rounded.
+     * Approved figures for one bike on one plan.
+     *
+     * Entered on the motorcycle's admin page (down payment per plan, monthly lease per month count);
+     * anything missing there falls back to config/ijara_rates.php. Values are used exactly as entered.
+     *
+     * @param  list<int>  $terms  months offered by the plan
+     * @return array{down: int|float|null, rates: array<int, array{down: int|float|null, monthly: int|float}>}
+     */
+    public static function planRates(Motorcycle $motorcycle, string $planKey, array $terms): array
+    {
+        $stored = $motorcycle->ijara_rates[$planKey] ?? [];
+        $config = config("ijara_rates.models.{$motorcycle->slug}.plans.{$planKey}", []);
+
+        $configDowns = collect($config)->pluck('advance')->filter(fn ($v) => is_numeric($v));
+        $storedDown = is_numeric($stored['down'] ?? null) ? $stored['down'] + 0 : null;
+        $planDown = $storedDown ?? ($configDowns->isNotEmpty() ? $configDowns->min() : null);
+
+        $rates = [];
+
+        foreach ($terms as $term) {
+            $monthly = $stored['months'][$term] ?? $config[$term]['monthly'] ?? null;
+
+            if (! is_numeric($monthly)) {
+                continue;
+            }
+
+            $rates[$term] = [
+                'down' => $storedDown ?? ($config[$term]['advance'] ?? $planDown),
+                'monthly' => $monthly + 0,
+            ];
+        }
+
+        return ['down' => $planDown, 'rates' => $rates];
+    }
+
+    /**
+     * Calculator payload: every published model that is on Ijara, the plans it is offered on, and for each
+     * plan the down payment and the monthly lease per month count.
      */
     public static function calculatorData(): array
     {
         $plans = IjaraPlans::calculatorPlans();
         $planTerms = collect($plans)->mapWithKeys(fn ($name, $key) => [$key => IjaraPlans::termsFor($key)])->all();
-        $rates = config('ijara_rates.models');
         $models = [];
 
         Motorcycle::query()->where('is_published', true)->where('ijara_enabled', true)->orderBy('name')->get()
-            ->each(function (Motorcycle $motorcycle) use (&$models, $plans, $planTerms, $rates) {
+            ->each(function (Motorcycle $motorcycle) use (&$models, $plans, $planTerms) {
                 $modelPlans = [];
 
                 foreach ($plans as $planKey => $planName) {
@@ -27,17 +61,10 @@ class IjaraRates
                         continue;
                     }
 
-                    $terms = [];
+                    $found = self::planRates($motorcycle, $planKey, $planTerms[$planKey]);
 
-                    foreach ($rates[$motorcycle->slug]['plans'][$planKey] ?? [] as $term => $rate) {
-                        if (in_array((int) $term, $planTerms[$planKey], true) && isset($rate['advance'], $rate['monthly'])) {
-                            $terms[(int) $term] = ['down' => $rate['advance'], 'monthly' => $rate['monthly']];
-                        }
-                    }
-
-                    ksort($terms);
-                    // A plan offered on this bike is always listed; terms without an approved rate stay empty.
-                    $modelPlans[$planKey] = (object) $terms;
+                    // A plan offered on this bike is always listed, even before its figures are entered.
+                    $modelPlans[$planKey] = ['down' => $found['down'], 'rates' => (object) $found['rates']];
                 }
 
                 $hasPromo = $motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0;
@@ -61,40 +88,35 @@ class IjaraRates
     }
 
     /**
-     * Missing model / plan / term combinations, for the pre-launch audit.
+     * Missing figures for bikes that are on Ijara, for the pre-launch audit.
      *
      * @return list<string>
      */
     public static function gaps(): array
     {
         $gaps = [];
-        $rates = config('ijara_rates.models');
 
         Motorcycle::query()->where('is_published', true)->where('ijara_enabled', true)->orderBy('name')->get()
-            ->each(function (Motorcycle $motorcycle) use (&$gaps, $rates) {
-                if (! isset($rates[$motorcycle->slug])) {
-                    $gaps[] = "{$motorcycle->name} [{$motorcycle->slug}]: no rate data at all";
-                }
-            });
+            ->each(function (Motorcycle $motorcycle) use (&$gaps) {
+                foreach (IjaraPlans::calculatorPlans() as $planKey => $planName) {
+                    if (! in_array($planKey, $motorcycle->ijara_plans ?? [], true)) {
+                        continue;
+                    }
 
-        $bikes = Motorcycle::query()->where('ijara_enabled', true)->get()->keyBy('slug');
+                    $terms = IjaraPlans::termsFor($planKey);
+                    $found = self::planRates($motorcycle, $planKey, $terms);
 
-        foreach ($rates as $slug => $model) {
-            if (! $bikes->has($slug)) {
-                continue;
-            }
+                    if ($found['down'] === null) {
+                        $gaps[] = "{$motorcycle->name} / {$planName}: no down payment";
+                    }
 
-            foreach (IjaraPlans::calculatorPlans() as $planKey => $planName) {
-                if (! in_array($planKey, $bikes[$slug]->ijara_plans ?? [], true)) {
-                    continue;
-                }
-                foreach (IjaraPlans::termsFor($planKey) as $term) {
-                    if (! isset($model['plans'][$planKey][$term]['advance'], $model['plans'][$planKey][$term]['monthly'])) {
-                        $gaps[] = "{$slug} / {$planName} / {$term} months: missing (not selectable until supplied)";
+                    foreach ($terms as $term) {
+                        if (! isset($found['rates'][$term])) {
+                            $gaps[] = "{$motorcycle->name} / {$planName} / {$term} months: no monthly lease (shows 'to be confirmed')";
+                        }
                     }
                 }
-            }
-        }
+            });
 
         return $gaps;
     }

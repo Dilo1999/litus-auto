@@ -8,7 +8,6 @@ use App\Models\Motorcycle;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Toggle;
 use App\Models\IjaraPlan;
 use Filament\Resources\Form;
@@ -69,21 +68,15 @@ class MotorcycleResource extends Resource
                     ->columns(2),
 
                 Forms\Components\Section::make('Ijara plans')
-                    ->description('Choose whether this model can be leased on an Ijara plan, and which plans it is offered on. This controls the payment calculator and the Ijara links on its page.')
+                    ->description('Choose whether this model can be leased on an Ijara plan, and which plans it is offered on. Switch a plan on to enter the down payment for this bike on that plan. This controls the payment calculator and the Ijara links on its page.')
                     ->schema([
                         Toggle::make('ijara_enabled')
                             ->label('Available on Ijara plans')
                             ->default(true)
                             ->reactive(),
-                        CheckboxList::make('ijara_plans')
-                            ->label('Included in these plans')
-                            ->options(fn () => IjaraPlan::query()->orderBy('sort_order')->pluck('name', 'slug')->all())
-                            ->default(fn () => IjaraPlan::query()->orderBy('sort_order')->pluck('slug')->all())
-                            ->columns(3)
+                        Forms\Components\Group::make(static::ijaraPlanFields())
                             ->visible(fn (\Closure $get) => (bool) $get('ijara_enabled'))
-                            ->required(fn (\Closure $get) => (bool) $get('ijara_enabled'))
-                            ->validationAttribute('Ijara plans')
-                            ->helperText('Select at least one plan.'),
+                            ->columnSpanFull(),
                     ]),
 
                 Forms\Components\Section::make('Pricing')
@@ -115,6 +108,87 @@ class MotorcycleResource extends Resource
                             ->all()
                     ),
             ]);
+    }
+
+    /**
+     * One row per Ijara plan: a switch for the plan and, only while it is on, this bike's down payment for it.
+     * Stored in motorcycles.ijara_rates as [plan => ['down' => amount]]; the switches also drive ijara_plans
+     * (see ijaraDataForSave / ijaraDataForForm).
+     *
+     * @return array<int, Forms\Components\Component>
+     */
+    protected static function ijaraPlanFields(): array
+    {
+        try {
+            $plans = IjaraPlan::query()->orderBy('sort_order')->get();
+        } catch (\Throwable) {
+            return [];
+        }
+
+        return $plans->map(function (IjaraPlan $plan) {
+            $enabled = "ijara_rates.{$plan->slug}.enabled";
+
+            return Forms\Components\Grid::make(['default' => 1, 'md' => 2])
+                ->extraAttributes(['class' => 'rounded-lg border border-gray-200 p-4'])
+                ->schema([
+                    Toggle::make($enabled)
+                        ->label($plan->name.($plan->tag ? " - {$plan->tag}" : ''))
+                        ->default(false)
+                        ->reactive(),
+                    TextInput::make("ijara_rates.{$plan->slug}.down")
+                        ->label('Down payment')
+                        ->prefix('MVR')
+                        ->numeric()
+                        ->minValue(0)
+                        ->required()
+                        ->visible(fn (\Closure $get) => (bool) $get($enabled)),
+                ]);
+        })->all();
+    }
+
+    /** Form state -> database: the plan switches become the ijara_plans list, and only switched-on plans keep a down payment. */
+    public static function ijaraDataForSave(array $data): array
+    {
+        $rates = (array) ($data['ijara_rates'] ?? []);
+        $plans = [];
+        $clean = [];
+
+        foreach ($rates as $slug => $row) {
+            if (! empty($row['enabled'])) {
+                $plans[] = $slug;
+                $clean[$slug] = ['down' => $row['down'] ?? null];
+            }
+        }
+
+        $data['ijara_plans'] = $plans;
+        $data['ijara_rates'] = $clean;
+
+        return $data;
+    }
+
+    /** Database -> form state: switch on every plan the bike is offered on. */
+    public static function ijaraDataForForm(array $data): array
+    {
+        $plans = (array) ($data['ijara_plans'] ?? []);
+        $rates = (array) ($data['ijara_rates'] ?? []);
+
+        foreach (IjaraPlan::query()->pluck('slug') as $slug) {
+            $rates[$slug]['enabled'] = in_array($slug, $plans, true);
+        }
+
+        $data['ijara_rates'] = $rates;
+
+        return $data;
+    }
+
+    /** True when the bike is on Ijara but no plan is switched on. */
+    public static function ijaraMissingPlan(array $data): bool
+    {
+        if (empty($data['ijara_enabled'])) {
+            return false;
+        }
+
+        return collect((array) ($data['ijara_rates'] ?? []))->doesntContain(fn ($row) => ! empty($row['enabled']));
     }
 
     public static function table(Table $table): Table
