@@ -1,0 +1,307 @@
+/* ==========================================================================
+   Litus Admin — soft-dark navy palette. Loaded after admin-theme.css.
+   Unregister this file in AppServiceProvider to return to the light theme.
+   ========================================================================== */
+:root {
+    --ad-bg: #0e1322;
+    --ad-surface: #161c31;
+    --ad-surface-2: #1c2440;
+    --ad-border: #262f4d;
+    --ad-border-strong: #333e63;
+    --ad-text: #e8ebf7;
+    --ad-muted: #97a3c1;
+    --ad-accent-soft: rgba(245, 158, 11, 0.18);
+    --ad-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+    --ad-shadow-md: 0 8px 20px -6px rgba(0, 0, 0, 0.5);
+    --ad-shadow-lg: 0 20px 45px -12px rgba(0, 0, 0, 0.7);
+    --ad-side: #080c18;
+    --ad-side-2: #0c1122;
+    color-scheme: dark;
+}
+
+body.filament-body, .filament-body,
+.filament-main, .filament-app-layout { background: var(--ad-bg); color: var(--ad-text); }
+
+/* Neutralise Tailwind light utilities */
+.filament-body .bg-white,
+.filament-body .bg-white\/50 { background-color: var(--ad-surface); }
+.filament-body .bg-gray-50,
+.filament-body .bg-gray-100 { background-color: var(--ad-surface-2); }
+.filament-body .hover\:bg-gray-50:hover,
+.filament-body .hover\:bg-gray-100:hover { background-color: var(--ad-surface-2); }
+.filament-body .text-gray-900,
+.filament-body .text-gray-800,
+.filament-body .text-gray-700,
+.filament-body .text-black { color: var(--ad-text); }
+.filament-body .text-gray-600,
+.filament-body .text-gray-500 { color: var(--ad-muted); }
+.filament-body .text-gray-400 { color: #7482a6; }
+.filament-body .border-gray-100,
+.filament-body .border-gray-200,
+.filament-body .border-gray-300,
+.filament-body .divide-gray-200 > :not([hidden]) ~ :not([hidden]),
+.filament-body .divide-gray-300 > :not([hidden]) ~ :not([hidden]),
+.filament-body .border,
+.filament-body .border-t,
+.filament-body .border-b { border-color: var(--ad-border); }
+
+/* Top bar */
+.filament-main-topbar {
+    background: rgba(14, 19, 34, 0.8);
+    border-bottom-color: var(--ad-border);
+}
+.filament-global-search-input input,
+.filament-global-search input { background: var(--ad-surface); color: var(--ad-text); }
+.filament-global-search-input input:focus,
+.filament-global-search input:focus { background: var(--ad-surface-2); }
+.filament-breadcrumbs a { color: var(--ad-muted); }
+.filament-breadcrumbs li:last-child a,
+.filament-breadcrumbs li:last-child span { color: var(--ad-text); }
+.filament-sidebar-open-button, .filament-icon-button { color: var(--ad-muted); }
+
+/* Cards, sections */
+.filament-forms-card-component,
+.filament-widget > div,
+.filament-stats-card,
+.filament-stats-overview-widget-card,
+.filament-tables-container,
+.filament-account-widget,
+.filament-info-widget > div,
+.filament-forms-section-component,
+.filament-forms-tabs-component {
+    background: var(--ad-surface);
+    border-color: var(--ad-border);
+}
+.filament-account-widget {
+    background:
+        radial-gradient(90% 160% at 100% 0%, rgba(245, 158, 11, 0.14), transparent 60%),
+        var(--ad-surface);
+}
+.filament-user-avatar, .filament-account-widget .rounded-full {
+    box-shadow: 0 0 0 3px var(--ad-surface), 0 0 0 5px var(--ad-accent-soft);
+}
+.filament-forms-section-header-wrapper,
+.filament-forms-section-content-wrapper,
+.filament-forms-section-component > div:last-child { background: var(--ad-surface); border-color: var(--ad-border); }
+.filament-forms-tabs-component > div:first-child { background: var(--ad-surface-2); border-color: var(--ad-border); }
+.filament-forms-tabs-component [role='tab'][aria-selected='true'] { background: var(--ad-surface); }
+.filament-header-heading,
+.filament-forms-section-header h3,
+.filament-forms-field-wrapper-label,
+.filament-forms-field-wrapper label span,
+.filament-forms-field-wrapper label > span { color: var(--ad-text); }
+.filament-header-subheading,
+.filament-forms-section-header p { color: var(--ad-muted); }
+
+/* Inputs */
+.filament-forms-input,
+.filament-forms-field-wrapper input,
+.filament-forms-field-wrapper select,
+.filament-forms-field-wrapper textarea,
+.filament-tables-search-input input,
+.filament-tables-filters-form select,
+.filament-tables-filters-form input {
+    background-color: var(--ad-surface-2);
+    border-color: var(--ad-border-strong);
+    color: var(--ad-text);
+}
+.filament-forms-field-wrapper input::placeholder,
+.filament-forms-field-wrapper textarea::placeholder,
+.filament-tables-search-input input::placeholder { color: #6b789b; }
+.filament-forms-field-wrapper input:hover:not(:focus),
+.filament-forms-field-wrapper select:hover:not(:focus),
+.filament-forms-field-wrapper textarea:hover:not(:focus) { border-color: #46538a; }
+.filament-forms-field-wrapper input:focus,
+.filament-forms-field-wrapper select:focus,
+.filament-forms-field-wrapper textarea:focus,
+.filament-tables-search-input input:focus { background-color: #212a4a; }
+.filament-forms-field-wrapper input[type='checkbox']:checked,
+.filament-forms-field-wrapper input[type='radio']:checked { background-color: var(--ad-accent); }
+.filament-forms-field-wrapper .filament-forms-affix-component { background: var(--ad-surface-2); color: var(--ad-muted); border-color: var(--ad-border-strong); }
+
+/* Toggle off state */
+.filament-forms-toggle-component button[role='switch'].bg-gray-200 { background: #2b3557; }
+
+/* Selects / dropdowns / choices */
+.choices__list--dropdown, .filament-forms-select-component [role='listbox'],
+.filament-dropdown-panel, .filament-global-search-results-container {
+    background: var(--ad-surface-2);
+    border-color: var(--ad-border-strong);
+    color: var(--ad-text);
+}
+.filament-dropdown-list-item:hover,
+.choices__list--dropdown .choices__item--selectable.is-highlighted { background: rgba(255, 255, 255, 0.06); }
+.filament-dropdown-list-item-label { color: var(--ad-text); }
+
+/* File upload */
+.filament-forms-file-upload-component .filepond--panel-root { background: var(--ad-surface-2); border-color: var(--ad-border-strong); }
+.filament-forms-file-upload-component .filepond--root:hover .filepond--panel-root { background: #262232; border-color: var(--ad-accent); }
+.filament-forms-file-upload-component .filepond--drop-label { color: var(--ad-muted); }
+
+/* Tables */
+.filament-tables-table thead tr { background: var(--ad-surface-2); }
+.filament-tables-header-cell { color: var(--ad-muted); }
+.filament-tables-table tbody tr { background: transparent; }
+.filament-tables-table tbody tr:hover { background: rgba(255, 255, 255, 0.035); }
+.filament-tables-table tbody tr td,
+.filament-tables-table thead tr th,
+.filament-tables-header-container,
+.filament-tables-header-toolbar,
+.filament-tables-pagination-container,
+.filament-tables-pagination { border-color: var(--ad-border); }
+.filament-tables-table td { color: var(--ad-text); }
+.filament-tables-image-column img { box-shadow: 0 0 0 1px var(--ad-border-strong); }
+.filament-tables-pagination-item { color: var(--ad-muted); }
+.filament-tables-pagination-item:hover { background: rgba(255, 255, 255, 0.06); }
+.filament-tables-pagination-item-active { color: #fbbf24; }
+
+/* Secondary buttons */
+.filament-button.bg-white {
+    background: var(--ad-surface-2);
+    border-color: var(--ad-border-strong);
+    color: var(--ad-text);
+}
+.filament-button.bg-white:hover { background: #232c4d; }
+
+/* Modals & notifications */
+.filament-modal-window, .filament-notifications-notification {
+    background: var(--ad-surface);
+    border-color: var(--ad-border-strong);
+    color: var(--ad-text);
+}
+.filament-modal-header, .filament-modal-footer { border-color: var(--ad-border); }
+
+/* Editors, repeaters */
+.filament-forms-rich-editor-component > div,
+.filament-forms-markdown-editor-component > div { background: var(--ad-surface-2); border-color: var(--ad-border-strong); color: var(--ad-text); }
+.filament-forms-repeater-component > ul > li,
+.filament-forms-builder-component > ul > li { background: var(--ad-surface-2); border-color: var(--ad-border); }
+
+/* Scrollbars */
+.filament-body *::-webkit-scrollbar-thumb { background: #2f3a5f; }
+.filament-body *::-webkit-scrollbar-thumb:hover { background: #46538a; }
+
+/* Login: dark card on its dark canvas */
+.filament-login-page > div > div {
+    background: rgba(22, 28, 49, 0.92);
+    border-color: var(--ad-border-strong);
+}
+.filament-login-page > div > div h2,
+.filament-login-page .filament-brand { color: var(--ad-text); }
+
+/* ---- Fixes: table dividers, per-page select, native option lists ---- */
+.filament-body .divide-y > :not([hidden]) ~ :not([hidden]),
+.filament-body .divide-x > :not([hidden]) ~ :not([hidden]),
+.filament-tables-table tbody,
+.filament-tables-table tbody tr,
+.filament-tables-table tbody tr td { border-color: var(--ad-border) !important; }
+.filament-tables-table tbody tr { border-top-color: var(--ad-border) !important; }
+.filament-tables-container, .filament-tables-container * { --tw-divide-opacity: 1; }
+.filament-tables-container .divide-y > :not([hidden]) ~ :not([hidden]) { border-color: var(--ad-border); }
+
+/* Every select in the panel (per-page, filters, pagination) */
+.filament-body select {
+    background-color: var(--ad-surface-2);
+    border: 1px solid var(--ad-border-strong);
+    border-radius: 10px;
+    color: var(--ad-text);
+    color-scheme: dark;
+    font-weight: 500;
+}
+.filament-body select:focus {
+    border-color: var(--ad-accent);
+    box-shadow: 0 0 0 3px var(--ad-accent-soft);
+    outline: none;
+}
+.filament-body select option {
+    background-color: #1c2440;
+    color: #e8ebf7;
+}
+.filament-body select option:checked,
+.filament-body select option:hover { background-color: #b45309; color: #fff; }
+
+.filament-tables-pagination-records-per-page-selector { color: var(--ad-muted); }
+.filament-tables-pagination-records-per-page-selector select { min-width: 4.25rem; padding-right: 2rem; }
+
+/* Checkboxes in tables */
+.filament-body input[type='checkbox'] {
+    background-color: var(--ad-surface-2);
+    border-color: #46538a;
+}
+.filament-body input[type='checkbox']:checked { background-color: var(--ad-accent); border-color: var(--ad-accent); }
+
+/* Table text clarity */
+.filament-tables-table td,
+.filament-tables-table td * { color: inherit; }
+.filament-tables-table td { color: #e8ebf7; font-weight: 500; }
+.filament-tables-table td .text-gray-500,
+.filament-tables-table td .text-gray-400 { color: var(--ad-muted); }
+.filament-tables-header-cell, .filament-tables-header-cell button { color: var(--ad-muted); }
+.filament-tables-container > div:last-child,
+.filament-tables-pagination-container { color: var(--ad-muted); }
+.filament-tables-pagination-container p, .filament-tables-pagination-container span { color: var(--ad-muted); }
+.filament-tables-pagination-container .font-medium { color: var(--ad-text); }
+
+/* ---- Fix: inputs stayed white (light-theme selectors were more specific) ---- */
+.filament-body input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='color']),
+.filament-body textarea,
+.filament-body select,
+.filament-body .filament-forms-input {
+    background-color: var(--ad-surface-2) !important;
+    border-color: var(--ad-border-strong) !important;
+    color: var(--ad-text) !important;
+    -webkit-text-fill-color: var(--ad-text);
+}
+.filament-body input::placeholder,
+.filament-body textarea::placeholder { color: #6b789b !important; -webkit-text-fill-color: #6b789b; opacity: 1; }
+.filament-body input:focus:not([type='checkbox']):not([type='radio']),
+.filament-body textarea:focus,
+.filament-body select:focus {
+    background-color: #212a4a !important;
+    border-color: var(--ad-accent) !important;
+}
+.filament-body input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 40px #1c2440 inset !important;
+    -webkit-text-fill-color: #e8ebf7 !important;
+}
+.filament-body input:disabled, .filament-body textarea:disabled, .filament-body select:disabled { opacity: 0.6; }
+
+/* Wrappers that draw their own white box (affixes, select/date/tag inputs) */
+.filament-body .filament-forms-text-input-component > div,
+.filament-body .filament-forms-select-component > div,
+.filament-body .filament-forms-date-time-picker-component > div,
+.filament-body .filament-forms-tags-input-component > div,
+.filament-body .filament-forms-key-value-component > div,
+.filament-body .choices__inner,
+.filament-body .ts-control {
+    background-color: var(--ad-surface-2);
+    border-color: var(--ad-border-strong);
+    color: var(--ad-text);
+}
+.filament-body .filament-forms-text-input-component > div input { border-color: transparent !important; }
+
+/* ---- Fix: toggle switches ---- */
+.filament-body button[role='switch'] {
+    background: #2f3a5f !important;               /* off track */
+    border: 1px solid #46538a;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+.filament-body button[role='switch'][aria-checked='true'] {
+    background: linear-gradient(180deg, #fbbf24, #f59e0b) !important; /* on track */
+    border-color: #f59e0b;
+    box-shadow: 0 4px 12px -3px rgba(245, 158, 11, 0.55);
+}
+.filament-body button[role='switch'] > span:first-of-type,
+.filament-body button[role='switch'] .bg-white {
+    background-color: #ffffff !important;         /* knob always white */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.45);
+}
+.filament-body button[role='switch'] svg { color: #46538a; }
+.filament-body button[role='switch'][aria-checked='true'] svg { color: #d97706; }
+.filament-body button[role='switch']:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--ad-accent-soft);
+}
+
+/* Toggle row cards (Ijara plan rows) */
+.filament-forms-toggle-component + *, .filament-forms-toggle-component { color: var(--ad-text); }

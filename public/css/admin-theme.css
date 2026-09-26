@@ -1,0 +1,574 @@
+/* ==========================================================================
+   Litus Admin — modern theme for Filament v2 (visual only, no behaviour)
+   ========================================================================== */
+
+:root {
+    --ad-bg: #f5f6fa;
+    --ad-surface: #ffffff;
+    --ad-border: #e8eaf0;
+    --ad-border-strong: #d9dce6;
+    --ad-text: #0f172a;
+    --ad-muted: #64748b;
+    --ad-accent: #f59e0b;
+    --ad-accent-strong: #d97706;
+    --ad-accent-soft: rgba(245, 158, 11, 0.14);
+    --ad-side: #0b1020;
+    --ad-side-2: #111830;
+    --ad-side-text: #a3adc2;
+    --ad-side-hover: rgba(255, 255, 255, 0.06);
+    --ad-radius: 14px;
+    --ad-radius-sm: 10px;
+    --ad-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.05);
+    --ad-shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.08), 0 2px 4px rgba(15, 23, 42, 0.04);
+    --ad-shadow-lg: 0 18px 40px -12px rgba(15, 23, 42, 0.25);
+    --sidebar-width: 17rem;
+}
+
+html { scroll-behavior: smooth; }
+
+body.filament-body,
+.filament-body {
+    font-family: 'Inter', 'DM Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background: var(--ad-bg);
+    color: var(--ad-text);
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.006em;
+}
+
+.filament-body ::selection { background: var(--ad-accent-soft); }
+
+/* Slim scrollbars */
+.filament-body *::-webkit-scrollbar { width: 8px; height: 8px; }
+.filament-body *::-webkit-scrollbar-thumb { background: #cbd2e0; border-radius: 99px; }
+.filament-body *::-webkit-scrollbar-thumb:hover { background: #a9b2c6; }
+.filament-body *::-webkit-scrollbar-track { background: transparent; }
+
+/* ---------- Sidebar ---------- */
+.filament-sidebar {
+    background: linear-gradient(180deg, var(--ad-side) 0%, var(--ad-side-2) 100%);
+    border-right: 0;
+    box-shadow: 4px 0 24px -8px rgba(11, 16, 32, 0.35);
+}
+
+.filament-sidebar-header {
+    height: 4.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    justify-content: flex-start;
+    background:
+        radial-gradient(120% 140% at 0% 0%, rgba(245, 158, 11, 0.16), transparent 60%);
+}
+
+/* Brand logo (config brand is empty, so we paint the site logo here) */
+.filament-sidebar-header::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url('/images/logo/Litus-Automobiles-white%20(1).png') left 1.5rem center / auto 34px no-repeat;
+}
+.filament-sidebar-header > div { position: absolute; inset: 0; }
+.filament-sidebar-header a { display: block; width: 100%; height: 100%; }
+
+.filament-sidebar-nav { padding: 1rem 0 2rem; }
+.filament-sidebar-nav > ul { padding: 0 0.85rem; row-gap: 0.25rem; }
+
+/* group dividers */
+.filament-sidebar-nav > ul > li > div.border-t {
+    border-color: transparent;
+    margin: 0.25rem 0;
+}
+
+/* group heading */
+.filament-sidebar-group > button {
+    padding: 0.55rem 0.75rem;
+    border-radius: 8px;
+    transition: background 0.15s ease;
+}
+.filament-sidebar-group > button:hover { background: var(--ad-side-hover); }
+.filament-sidebar-group > button p,
+.filament-sidebar-group > button div {
+    color: #6b7794;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+.filament-sidebar-group > button svg { color: #6b7794; }
+
+.filament-sidebar-group > ul { margin-top: 0.15rem; padding-bottom: 0.25rem; }
+
+/* items */
+.filament-sidebar-item { overflow: visible; margin: 2px 0; }
+.filament-sidebar-item > a {
+    justify-content: flex-start;
+    gap: 0.8rem;
+    padding: 0.6rem 0.85rem;
+    border-radius: var(--ad-radius-sm);
+    color: var(--ad-side-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    position: relative;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+.filament-sidebar-item > a svg { color: #74809c; transition: color 0.18s ease; }
+.filament-sidebar-item > a:hover,
+.filament-sidebar-item > a:focus {
+    background: var(--ad-side-hover);
+    color: #fff;
+}
+.filament-sidebar-item > a:hover svg { color: var(--ad-accent); }
+
+.filament-sidebar-item-active > a,
+.filament-sidebar-item-active > a:hover {
+    background: linear-gradient(90deg, rgba(245, 158, 11, 0.24), rgba(245, 158, 11, 0.06));
+    color: #fff;
+    font-weight: 600;
+    box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.22);
+}
+.filament-sidebar-item-active > a svg { color: var(--ad-accent); }
+.filament-sidebar-item-active > a::before {
+    content: '';
+    position: absolute;
+    left: -0.85rem;
+    top: 22%;
+    bottom: 22%;
+    width: 4px;
+    border-radius: 0 4px 4px 0;
+    background: var(--ad-accent);
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.7);
+}
+
+/* badges in sidebar */
+.filament-sidebar-item > a > span:last-child:not(:first-child) { border-radius: 99px; }
+
+/* ---------- Topbar ---------- */
+.filament-main-topbar {
+    height: 4.5rem;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid var(--ad-border);
+}
+.filament-sidebar-open-button { color: var(--ad-muted); }
+
+.filament-breadcrumbs { font-size: 0.8rem; }
+.filament-breadcrumbs a { color: var(--ad-muted); transition: color 0.15s; }
+.filament-breadcrumbs a:hover { color: var(--ad-accent-strong); }
+
+/* Global search */
+.filament-global-search-input input,
+.filament-global-search input {
+    background: #f1f3f9;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    transition: all 0.18s ease;
+}
+.filament-global-search-input input:focus,
+.filament-global-search input:focus {
+    background: #fff;
+    border-color: var(--ad-accent);
+    box-shadow: 0 0 0 4px var(--ad-accent-soft);
+}
+.filament-global-search-results-container {
+    border-radius: var(--ad-radius);
+    border: 1px solid var(--ad-border);
+    box-shadow: var(--ad-shadow-lg);
+    overflow: hidden;
+}
+
+/* ---------- Main content ---------- */
+.filament-main { background: var(--ad-bg); }
+.filament-main-content { padding-top: 1.75rem; padding-bottom: 2rem; }
+
+.filament-header-heading {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--ad-text);
+}
+.filament-header-subheading { color: var(--ad-muted); }
+
+/* ---------- Cards / surfaces ---------- */
+.filament-forms-card-component,
+.filament-widget > div,
+.filament-stats-card,
+.filament-stats-overview-widget-card,
+.filament-tables-container,
+.filament-account-widget,
+.filament-info-widget > div,
+.filament-page > section > .rounded-xl,
+.filament-forms-section-component {
+    border-radius: var(--ad-radius);
+    border: 1px solid var(--ad-border);
+    box-shadow: var(--ad-shadow-sm);
+    background: var(--ad-surface);
+}
+.filament-tables-container,
+.filament-forms-card-component { overflow: hidden; }
+
+.filament-stats-overview-widget-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+.filament-stats-overview-widget-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--ad-shadow-md);
+}
+.filament-stats-overview-widget-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--ad-accent), #fbbf24);
+}
+
+/* Welcome (account) widget */
+.filament-account-widget {
+    padding: 1.25rem 1.5rem;
+    background:
+        radial-gradient(90% 160% at 100% 0%, rgba(245, 158, 11, 0.10), transparent 60%),
+        #fff;
+}
+.filament-user-avatar,
+.filament-account-widget .rounded-full {
+    box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--ad-accent-soft);
+}
+
+/* ---------- Tables ---------- */
+.filament-tables-header-container,
+.filament-tables-header-toolbar { padding: 0.75rem 1rem; }
+
+.filament-tables-table { font-size: 0.875rem; }
+.filament-tables-table thead tr { background: #f8f9fc; }
+.filament-tables-header-cell {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ad-muted);
+}
+.filament-tables-table tbody tr {
+    transition: background 0.15s ease;
+}
+.filament-tables-table tbody tr:hover { background: #fafbff; }
+.filament-tables-table tbody tr td,
+.filament-tables-table thead tr th { border-color: var(--ad-border); }
+.filament-tables-row td { padding-top: 0.15rem; padding-bottom: 0.15rem; }
+
+.filament-tables-image-column img { border-radius: 10px; box-shadow: 0 0 0 1px var(--ad-border); }
+
+.filament-tables-pagination-item { border-radius: 8px; }
+.filament-tables-pagination-item-active {
+    background: var(--ad-accent-soft);
+    color: var(--ad-accent-strong);
+    font-weight: 700;
+}
+
+.filament-tables-empty-state-heading { font-weight: 700; letter-spacing: -0.02em; }
+
+/* ---------- Buttons ---------- */
+.filament-button {
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+.filament-button:active { transform: translateY(1px); }
+.filament-button.bg-primary-600,
+.filament-button.bg-primary-500 {
+    background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%);
+    border-color: #e08e08;
+    color: #1b1206;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 6px 14px -6px rgba(245, 158, 11, 0.7);
+}
+.filament-button.bg-primary-600:hover,
+.filament-button.bg-primary-500:hover {
+    background: linear-gradient(180deg, #fcc93b 0%, #f7a10f 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 10px 20px -8px rgba(245, 158, 11, 0.8);
+}
+.filament-button.bg-white { border-color: var(--ad-border-strong); box-shadow: var(--ad-shadow-sm); }
+.filament-button.bg-white:hover { background: #f8f9fc; }
+
+.filament-icon-button { transition: background 0.15s ease, color 0.15s ease; }
+
+/* ---------- Form controls ---------- */
+.filament-forms-input,
+.filament-forms-text-input-component input,
+.filament-forms-select-component select,
+.filament-forms-textarea-component textarea,
+.filament-forms-field-wrapper input[type='text'],
+.filament-forms-field-wrapper input[type='email'],
+.filament-forms-field-wrapper input[type='number'],
+.filament-forms-field-wrapper input[type='password'],
+.filament-forms-field-wrapper input[type='url'],
+.filament-forms-field-wrapper input[type='search'],
+.filament-forms-field-wrapper select,
+.filament-forms-field-wrapper textarea,
+.filament-tables-search-input input,
+.filament-tables-filters-form select {
+    border-radius: 10px;
+    border-color: var(--ad-border-strong);
+    background-color: #fff;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.filament-forms-field-wrapper input:focus,
+.filament-forms-field-wrapper select:focus,
+.filament-forms-field-wrapper textarea:focus,
+.filament-tables-search-input input:focus {
+    border-color: var(--ad-accent);
+    box-shadow: 0 0 0 4px var(--ad-accent-soft);
+    outline: none;
+}
+.filament-forms-field-wrapper-label,
+.filament-forms-field-wrapper label span {
+    font-weight: 600;
+    color: #1e293b;
+}
+.filament-forms-field-wrapper-helper-text,
+.filament-forms-field-wrapper .text-gray-500 { color: var(--ad-muted); }
+
+/* Section / tabs */
+.filament-forms-section-component header h3 { font-weight: 700; letter-spacing: -0.02em; }
+.filament-tabs { border-radius: var(--ad-radius-sm); }
+.filament-tabs-item { border-radius: 8px; font-weight: 600; }
+
+/* Toggles & checkbox accents */
+.filament-forms-toggle-component button.bg-primary-600 { background-color: var(--ad-accent); }
+input[type='checkbox'].text-primary-600,
+input[type='radio'].text-primary-600 { color: var(--ad-accent); }
+
+/* ---------- Badges ---------- */
+.filament-tables-badge-column > div,
+.filament-badge { border-radius: 99px; font-weight: 600; }
+
+/* ---------- Dropdowns, modals, notifications ---------- */
+.filament-dropdown-panel {
+    border-radius: var(--ad-radius);
+    border: 1px solid var(--ad-border);
+    box-shadow: var(--ad-shadow-lg);
+    overflow: hidden;
+}
+.filament-dropdown-list-item { border-radius: 8px; margin: 0 0.35rem; }
+.filament-dropdown-list-item:hover { background: #f4f6fb; }
+
+.filament-modal-window {
+    border-radius: 18px;
+    box-shadow: var(--ad-shadow-lg);
+    border: 1px solid var(--ad-border);
+}
+.filament-modal .bg-black\/50,
+.filament-modal-close-overlay { backdrop-filter: blur(4px); }
+
+.filament-notifications-notification {
+    border-radius: var(--ad-radius);
+    border: 1px solid var(--ad-border);
+    box-shadow: var(--ad-shadow-lg);
+}
+
+/* ---------- Login ---------- */
+.filament-login-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(60% 50% at 15% 10%, rgba(245, 158, 11, 0.22), transparent 60%),
+        radial-gradient(50% 50% at 90% 90%, rgba(99, 102, 241, 0.18), transparent 60%),
+        linear-gradient(160deg, #0b1020 0%, #151d3a 100%);
+}
+.filament-login-page > div > div {
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.55);
+}
+.filament-login-page > div > div h2 { letter-spacing: -0.03em; color: var(--ad-text); }
+.filament-login-page .filament-brand { color: #0f172a; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 1023px) {
+    .filament-main-topbar { height: 4rem; }
+    .filament-header-heading { font-size: 1.4rem; }
+    .filament-sidebar-item-active > a::before { left: -0.85rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .filament-body * { transition: none !important; }
+}
+
+/* ==========================================================================
+   Forms & edit pages (v2)
+   ========================================================================== */
+
+/* Section cards */
+.filament-forms-section-component {
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+}
+.filament-forms-section-component:hover { box-shadow: var(--ad-shadow-md); }
+
+.filament-forms-section-header-wrapper {
+    background: #fff;
+    border-bottom: 1px solid var(--ad-border);
+    padding: 1.1rem 1.5rem;
+    min-height: 0;
+    position: relative;
+}
+.filament-forms-section-header-wrapper::before {
+    content: '';
+    width: 4px;
+    align-self: stretch;
+    margin-right: 0.9rem;
+    border-radius: 99px;
+    background: linear-gradient(180deg, #fbbf24, var(--ad-accent-strong));
+    flex: none;
+}
+.filament-forms-section-header h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ad-text);
+}
+.filament-forms-section-header p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--ad-muted);
+    margin-top: 0.15rem;
+}
+.filament-forms-section-content-wrapper,
+.filament-forms-section-component > div:last-child { background: #fff; }
+.filament-forms-section-content { padding: 1.5rem; }
+
+/* Field labels / hints */
+.filament-forms-field-wrapper { row-gap: 0.4rem; }
+.filament-forms-field-wrapper-label,
+.filament-forms-field-wrapper label > span {
+    font-size: 0.82rem;
+    letter-spacing: -0.005em;
+}
+.filament-forms-field-wrapper-label sup,
+.filament-forms-field-wrapper label sup { color: #ef4444; font-weight: 700; }
+.filament-forms-field-wrapper .text-sm.text-gray-500,
+.filament-forms-field-wrapper p.text-gray-500 { font-size: 0.78rem; line-height: 1.45; }
+
+/* Inputs */
+.filament-forms-field-wrapper input:not([type='checkbox']):not([type='radio']):not([type='file']),
+.filament-forms-field-wrapper select,
+.filament-forms-field-wrapper textarea {
+    min-height: 2.75rem;
+    padding-left: 0.9rem;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+.filament-forms-field-wrapper input:hover:not(:focus),
+.filament-forms-field-wrapper select:hover:not(:focus),
+.filament-forms-field-wrapper textarea:hover:not(:focus) { border-color: #b8bfd0; }
+.filament-forms-field-wrapper .filament-forms-affix-component,
+.filament-forms-text-input-component > div { border-radius: 10px; }
+
+/* Toggle: pill card feel + brand colour */
+.filament-forms-toggle-component { padding: 0.15rem 0; }
+.filament-forms-toggle-component button[role='switch'] {
+    height: 1.5rem;
+    width: 2.75rem;
+    border-radius: 99px;
+    box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.12);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.filament-forms-toggle-component button[role='switch'].bg-primary-600 {
+    background: linear-gradient(180deg, #fbbf24, #f59e0b);
+    box-shadow: 0 4px 10px -3px rgba(245, 158, 11, 0.6);
+}
+.filament-forms-toggle-component button[role='switch'] > span {
+    height: 1.25rem;
+    width: 1.25rem;
+    margin: 0.125rem;
+    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.25);
+}
+.filament-forms-toggle-component button[role='switch'] + span,
+.filament-forms-toggle-component label span { font-weight: 600; }
+
+/* File upload (FilePond) */
+.filament-forms-file-upload-component .filepond--root { font-family: inherit; }
+.filament-forms-file-upload-component .filepond--panel-root {
+    background: #f8f9fc;
+    border: 1.5px dashed var(--ad-border-strong);
+    border-radius: 12px;
+}
+.filament-forms-file-upload-component .filepond--drop-label { color: var(--ad-muted); }
+.filament-forms-file-upload-component .filepond--label-action {
+    color: var(--ad-accent-strong);
+    text-decoration-color: var(--ad-accent);
+}
+.filament-forms-file-upload-component .filepond--item-panel { border-radius: 12px; }
+.filament-forms-file-upload-component .filepond--image-preview-wrapper { border-radius: 12px; }
+.filament-forms-file-upload-component .filepond--root:hover .filepond--panel-root {
+    border-color: var(--ad-accent);
+    background: #fffaf0;
+}
+
+/* Rich editor / repeater / builder / key-value */
+.filament-forms-rich-editor-component > div,
+.filament-forms-markdown-editor-component > div {
+    border-radius: 12px;
+    border-color: var(--ad-border-strong);
+}
+.filament-forms-repeater-component-item,
+.filament-forms-builder-component-item,
+.filament-forms-repeater-component ul > li > div {
+    border-radius: 12px;
+    border-color: var(--ad-border);
+}
+.filament-forms-repeater-component > ul > li,
+.filament-forms-builder-component > ul > li {
+    border-radius: 12px;
+    box-shadow: var(--ad-shadow-sm);
+}
+
+/* Tabs */
+.filament-forms-tabs-component {
+    border-radius: var(--ad-radius);
+    border-color: var(--ad-border);
+    box-shadow: var(--ad-shadow-sm);
+    overflow: hidden;
+}
+.filament-forms-tabs-component > div:first-child { background: #f8f9fc; border-color: var(--ad-border); }
+.filament-forms-tabs-component [role='tab'] { font-weight: 600; transition: color 0.15s, background 0.15s; }
+.filament-forms-tabs-component [role='tab'][aria-selected='true'] {
+    color: var(--ad-accent-strong);
+    background: #fff;
+    box-shadow: inset 0 -2px 0 var(--ad-accent);
+}
+
+/* Select dropdown list */
+.choices__list--dropdown, .filament-forms-select-component [role='listbox'] {
+    border-radius: 12px;
+    border-color: var(--ad-border);
+    box-shadow: var(--ad-shadow-lg);
+}
+
+/* Page header actions (Save / Cancel / Delete row) */
+.filament-header { margin-bottom: 0.5rem; }
+.filament-page-actions,
+.filament-header .filament-page-actions { gap: 0.6rem; }
+.filament-form-actions { padding-top: 0.5rem; gap: 0.6rem; }
+.filament-form-actions .filament-button,
+.filament-page-actions .filament-button { padding: 0.55rem 1.1rem; }
+
+/* Danger button gets the same polish */
+.filament-button.bg-danger-600 {
+    background: linear-gradient(180deg, #f43f5e, #e11d48);
+    box-shadow: 0 6px 14px -6px rgba(225, 29, 72, 0.7);
+}
+.filament-button.bg-danger-600:hover { transform: translateY(-1px); }
+
+/* Relation managers */
+.filament-resources-relation-manager { margin-top: 0.5rem; }
+
+/* Breadcrumb separators */
+.filament-breadcrumbs li:not(:last-child)::after { color: #cbd2e0; }
+.filament-breadcrumbs li:last-child a,
+.filament-breadcrumbs li:last-child span { color: var(--ad-text); font-weight: 600; }
+
+@media (max-width: 767px) {
+    .filament-forms-section-header-wrapper { padding: 0.9rem 1rem; }
+    .filament-forms-section-content { padding: 1rem; }
+}

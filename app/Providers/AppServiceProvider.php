@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Mail\Transport\BrevoTransport;
+use Filament\Facades\Filament;
 use Illuminate\Foundation\Console\StorageLinkCommand;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
@@ -37,6 +38,14 @@ class AppServiceProvider extends ServiceProvider
                     FILTER_VALIDATE_BOOLEAN
                 ),
             );
+        });
+
+        // Modern look & feel for the Filament admin panel (styles only).
+        Filament::serving(function () {
+            Filament::registerStyles([
+                asset('css/admin-theme.css').'?v='.@filemtime(public_path('css/admin-theme.css')),
+                asset('css/admin-theme-dark.css').'?v='.@filemtime(public_path('css/admin-theme-dark.css')),
+            ]);
         });
 
         // Use current request origin for storage URLs so Filament file previews
