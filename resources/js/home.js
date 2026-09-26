@@ -31,6 +31,7 @@ function initIjaraEstimator() {
     planTag: q('[data-ijara-summary-plan-tag]'),
     term: q('[data-ijara-summary-term]'),
     monthly: q('[data-ijara-monthly]'),
+    perMonth: q('[data-ijara-per-month]'),
     down: q('[data-ijara-down]'),
     status: q('[data-ijara-status]'),
     quoteTitle: q('[data-ijara-quote-title]'),
@@ -88,6 +89,7 @@ function initIjaraEstimator() {
   const groupBox = q('[data-ijara-group]');
   const groupTemplate = q('[data-ijara-group-template]');
   const termEmpty = q('[data-ijara-term-empty]');
+  const termLabel = q('[data-ijara-term-label]');
   const groups = data.groups || [];
 
   // Months a plan offers in one option; before a plan is chosen, the option's standard months.
@@ -181,7 +183,7 @@ function initIjaraEstimator() {
       }
       [...groupBox.children].forEach((btn, i) => {
         btn.disabled = !available[i].length;
-        btn.querySelector('[data-group-months]').textContent = available[i].length ? available[i].join(', ') + ' months' : 'Not offered';
+        btn.querySelector('[data-group-months]').textContent = available[i].length ? available[i].join(' / ') : 'Not offered';
         btn.setAttribute('aria-pressed', String(i === selectedGroup));
       });
     }
@@ -189,6 +191,7 @@ function initIjaraEstimator() {
     const allowed = selectedGroup >= 0 ? available[selectedGroup].map(String) : [];
     if (selectedTerm && !allowed.includes(selectedTerm)) selectedTerm = '';
     termEmpty?.classList.toggle('hidden', selectedGroup >= 0);
+    termLabel?.classList.toggle('hidden', selectedGroup < 0);
 
     termButtons.forEach((btn) => {
       const ok = allowed.includes(btn.dataset.term);
@@ -241,22 +244,22 @@ function initIjaraEstimator() {
     setText(out.plan, planName || '-');
     setText(out.planTag, planTag);
     setText(out.term, months ? `${months} months` : '-');
-    setText(out.monthly, rate ? formatMvr(rate.monthly) : 'To be confirmed');
+    setText(out.monthly, rate ? formatMvr(rate.monthly) : 'MVR -');
     setText(out.down, down !== null ? formatMvr(down) : 'To be confirmed');
 
     const whatsapp = (msg) => `https://wa.me/9607797442?text=${encodeURIComponent(msg)}`;
 
     if (rate) {
       setStatus('ready', 'Approved figures');
-      out.quoteTitle.textContent = `${months} months on the ${planName} plan`;
-      out.quoteText.textContent = 'Approved figures. Your final plan is confirmed by our sales team.';
-      out.note.textContent = 'Continue on WhatsApp and our team will confirm your plan.';
+      if (out.quoteTitle) out.quoteTitle.textContent = `${months} months on the ${planName} plan`;
+      if (out.quoteText) out.quoteText.textContent = 'Approved figures. Your final plan is confirmed by our sales team.';
+      out.note.textContent = 'Approved figures. Your final plan is confirmed by our sales team.';
       setCta('Continue', whatsapp(`Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${down !== null ? formatMvr(down) : "to be confirmed"}, monthly lease ${formatMvr(rate.monthly)}).`), false);
     } else if (picked) {
       setStatus('quote', 'Quote required');
-      out.quoteTitle.textContent = 'Get your personalised quote';
-      out.quoteText.textContent = 'Pricing for this combination is not available online yet.';
-      out.note.textContent = 'Send your selection to our team for pricing and next steps.';
+      if (out.quoteTitle) out.quoteTitle.textContent = 'Get your personalised quote';
+      if (out.quoteText) out.quoteText.textContent = 'Pricing for this combination is not available online yet.';
+      out.note.textContent = 'Amounts to be confirmed by our team - not an approved quote.';
       setCta('Request a quote', whatsapp(`Hi LITUS, please confirm the Ijara down payment and monthly lease for: ${model.name}, ${planName} plan, ${months} months.`), false);
     } else {
       let next = 'Select a model, plan and lease term to see your figures.';
@@ -265,9 +268,9 @@ function initIjaraEstimator() {
       else if (!selectedPlan) next = 'Now choose an Ijara plan.';
       else if (!months) next = 'Now choose your lease term.';
       setStatus('idle', 'Select options');
-      out.quoteTitle.textContent = 'Choose your options';
-      out.quoteText.textContent = next;
-      out.note.textContent = 'Send your selection to our team for pricing and next steps.';
+      if (out.quoteTitle) out.quoteTitle.textContent = 'Choose your options';
+      if (out.quoteText) out.quoteText.textContent = next;
+      out.note.textContent = 'Amounts to be confirmed by our team - not an approved quote.';
       setCta('Request a quote', '#', true);
     }
   };
