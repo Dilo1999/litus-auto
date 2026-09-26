@@ -26,8 +26,8 @@
                         <span class="{{ $stepBadge }}">1</span>
                         <h3 class="{{ $stepTitle }}">Choose your bike</h3>
                     </div>
-                    <div class="grid gap-5 md:grid-cols-[1.05fr_1fr] md:items-center">
-                        <div class="relative flex h-[210px] items-center justify-center overflow-hidden rounded-xl bg-[linear-gradient(140deg,#F1F5FB_0%,#E3EBF7_100%)] max-md:h-[200px]">
+                    <div class="grid gap-5 md:grid-cols-[1.2fr_1fr] md:items-center">
+                        <div class="relative flex h-[270px] items-center justify-center rounded-xl max-md:h-[240px]">
                             <img data-ijara-image src="" alt="" class="relative hidden max-h-[92%] max-w-[92%] object-contain drop-shadow-[0_16px_14px_rgba(9,17,32,.2)]">
                             <div data-ijara-image-empty class="px-6 text-center text-[13px] font-medium text-litus-text-3">Your motorcycle preview appears here</div>
                         </div>
