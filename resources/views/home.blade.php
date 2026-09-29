@@ -107,13 +107,6 @@
         </div>
     </section>
 
-    {{-- FIND YOUR RIDE — overlapping filter bar (desktop) --}}
-    <div class="relative z-[6] hidden -mt-[52px] min-[961px]:block">
-        <div class="litus-container">
-            <x-home-quick-find-form variant="bar" :brands="$brands" />
-        </div>
-    </div>
-
     {{-- HERO — mobile & tablet (optimised layout) --}}
     <section class="overflow-hidden bg-litus-ink min-[961px]:hidden">
         <div class="relative w-full overflow-hidden bg-litus-ink text-white">
@@ -171,6 +164,13 @@
     {{-- ONGOING PROMOTIONS --}}
     <section id="offers" class="litus-sec scroll-mt-24 bg-[linear-gradient(180deg,#eef4ff_0%,#fff_38%)]">
         <div class="litus-container">
+            {{-- FIND YOUR RIDE — overlapping filter bar (desktop). Lives here (not as a standalone sibling)
+                 so its negative margin is always painted by the hero above or this section's own
+                 background below - no gap of bare page background in between. --}}
+            <div class="relative z-[6] mb-10 hidden -mt-[150px] min-[961px]:block">
+                <x-home-quick-find-form variant="bar" :brands="$brands" />
+            </div>
+
             <div class="mb-[38px] flex flex-wrap items-end justify-between gap-6">
                 <div class="max-w-[660px]">
                     <span class="litus-eyebrow">Ongoing Promotions</span>

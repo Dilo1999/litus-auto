@@ -25,12 +25,17 @@
 @endphp
 
 @if ($isBar)
-    <div class="flex flex-col gap-5 rounded-[22px] border border-litus-line bg-white px-5 py-5 shadow-[0_24px_60px_rgba(9,17,32,0.18)] sm:px-7 sm:py-6 lg:flex-row lg:items-end lg:gap-7">
-        <div class="shrink-0 lg:pb-[13px]">
+    <div class="relative flex flex-col gap-5 overflow-hidden rounded-[22px] border border-white/40 bg-white/45 px-5 py-5 shadow-[0_1px_0_0_rgba(255,255,255,0.75)_inset,0_1px_16px_0_rgba(255,255,255,0.25)_inset,0_24px_60px_rgba(9,17,32,0.22)] ring-1 ring-inset ring-white/30 backdrop-blur-2xl backdrop-saturate-[1.8] sm:px-7 sm:py-6 lg:flex-row lg:items-end lg:gap-7">
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/35 via-white/5 to-transparent" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/95 to-transparent" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-white/35 blur-3xl" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -bottom-20 -left-10 h-44 w-44 rounded-full bg-litus-primary-light/20 blur-3xl" aria-hidden="true"></div>
+
+        <div class="relative shrink-0 lg:pb-[13px]">
             <h4 class="font-display text-[clamp(18px,1.8vw,22px)] font-bold tracking-[-0.02em] {{ $titleClass }}">Find your ride</h4>
         </div>
 
-        <form action="{{ route('motorcycles') }}" method="get" class="grid flex-1 grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-4 lg:flex lg:items-end" data-quick-find>
+        <form action="{{ route('motorcycles') }}" method="get" class="relative grid flex-1 grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-4 lg:flex lg:items-end" data-quick-find>
             <div class="lg:min-w-[150px] lg:flex-1">
                 <label for="fBrand{{ $suffix }}" class="mb-1.5 block text-[12px] font-semibold tracking-[0.02em] {{ $labelClass }}">Model</label>
                 <div class="litus-select-wrap">

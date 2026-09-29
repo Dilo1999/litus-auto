@@ -57,8 +57,8 @@ class IjaraRates
                     }
                 }
 
-                $hasPromo = $motorcycle->hasPromotion() && $motorcycle->discountAmount() > 0;
-                $price = $hasPromo ? $motorcycle->promotionalSalePrice() : (float) $motorcycle->original_price;
+                // Ijara pricing always uses the original price, never a promotional sale price.
+                $price = (float) $motorcycle->original_price;
 
                 $models[] = [
                     'key' => $motorcycle->slug,
