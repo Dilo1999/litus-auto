@@ -32,6 +32,7 @@ function initIjaraEstimator() {
     term: q('[data-ijara-summary-term]'),
     monthly: q('[data-ijara-monthly]'),
     down: q('[data-ijara-down]'),
+    total: q('[data-ijara-total]'),
     status: q('[data-ijara-status]'),
     statusLabel: q('[data-ijara-status-label]'),
     quoteTitle: q('[data-ijara-quote-title]'),
@@ -334,6 +335,7 @@ function initIjaraEstimator() {
     setText(out.term, months ? `${months} months` : '-');
     setText(out.monthly, rate ? formatMvr(rate.monthly) : 'To be confirmed');
     setText(out.down, down !== null ? formatMvr(down) : 'To be confirmed');
+    setText(out.total, rate ? formatMvr(down + rate.monthly * months) : 'To be confirmed');
 
     const whatsapp = (msg) => `https://wa.me/9607797442?text=${encodeURIComponent(msg)}`;
 

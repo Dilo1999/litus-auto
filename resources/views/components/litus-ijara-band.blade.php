@@ -137,14 +137,6 @@
                         </div>
                     </dl>
 
-                    <div class="mt-3.5 flex items-start gap-2.5 rounded-lg bg-[#EAF2FF] px-3.5 py-2.5">
-                        <svg class="mt-0.5 h-4 w-4 shrink-0 text-litus-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
-                        <div class="min-w-0">
-                            <p class="text-[12.5px] font-semibold text-litus-ink" data-ijara-quote-title>Choose your options</p>
-                            <p class="mt-0.5 text-[12px] leading-snug text-litus-text-2" data-ijara-quote-text>Select a model, plan and lease term to see your figures.</p>
-                        </div>
-                    </div>
-
                     <dl class="mt-3.5 flex flex-col divide-y divide-litus-line border-b border-litus-line text-[14px]">
                         <div class="flex items-center justify-between gap-4 py-2.5">
                             <dt class="text-litus-text-2">Monthly lease</dt>
@@ -153,6 +145,13 @@
                         <div class="flex items-center justify-between gap-4 py-2.5">
                             <dt class="text-litus-text-2">Down payment</dt>
                             <dd class="text-right text-[15px] font-bold text-litus-ink" data-ijara-down>To be confirmed</dd>
+                        </div>
+                    </dl>
+
+                    <dl class="mt-6 flex flex-col border-b border-litus-line text-[14px]">
+                        <div class="flex items-center justify-between gap-4 py-2.5">
+                            <dt class="font-semibold text-litus-text-2">Total amount</dt>
+                            <dd class="text-right text-[19px] font-extrabold text-litus-ink" data-ijara-total>To be confirmed</dd>
                         </div>
                     </dl>
 
