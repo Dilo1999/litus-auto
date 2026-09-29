@@ -3,13 +3,16 @@
 namespace App\Filament\Widgets;
 
 use App\Filament\Resources\ShowroomResource;
+use App\Filament\Support\Stat;
 use App\Models\Showroom;
-use Filament\Widgets\StatsOverviewWidget;
-use Filament\Widgets\StatsOverviewWidget\Card;
 
-class LocationsOverview extends StatsOverviewWidget
+class LocationsOverview extends GroupedStatsOverviewWidget
 {
     protected static ?int $sort = 30;
+
+    protected static ?string $heading = 'Locations';
+
+    protected static ?string $subheading = 'Showrooms & service centres';
 
     protected function getCards(): array
     {
@@ -18,10 +21,12 @@ class LocationsOverview extends StatsOverviewWidget
         $featured = Showroom::where('is_published', true)->where('is_featured', true)->count();
 
         return [
-            Card::make('Locations · Showrooms & centres published', $published)
+            Stat::make('Showrooms & centres published', $published)
                 ->description("of {$total} total · {$featured} featured")
-                ->descriptionIcon('heroicon-s-office-building')
-                ->color('success')
+                ->icon('heroicon-s-office-building')
+                ->tone('success')
+                ->status($total > 0 && $published === $total ? 'All live' : ($published > 0 ? 'Partial' : 'None live'))
+                ->progress($total > 0 ? (int) round($published / $total * 100) : 0)
                 ->url(ShowroomResource::getUrl('index')),
         ];
     }

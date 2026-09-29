@@ -17,6 +17,18 @@
     --ad-side: #080c18;
     --ad-side-2: #0c1122;
     color-scheme: dark;
+
+    /* Semantic tones (stat cards, status pills) */
+    --ad-success: #34d399;
+    --ad-success-soft: rgba(52, 211, 153, 0.16);
+    --ad-warning: #f5a524;
+    --ad-warning-soft: rgba(245, 165, 36, 0.18);
+    --ad-danger: #fb7185;
+    --ad-danger-soft: rgba(251, 113, 133, 0.16);
+    --ad-info: #60a5fa;
+    --ad-info-soft: rgba(96, 165, 250, 0.16);
+    --ad-neutral: #8891ab;
+    --ad-neutral-soft: rgba(255, 255, 255, 0.06);
 }
 
 body.filament-body, .filament-body,
@@ -305,3 +317,25 @@ body.filament-body, .filament-body,
 
 /* Toggle row cards (Ijara plan rows) */
 .filament-forms-toggle-component + *, .filament-forms-toggle-component { color: var(--ad-text); }
+
+/* ==========================================================================
+   Dashboard redesign — dark palette
+   ========================================================================== */
+
+.ad-hero {
+    background: linear-gradient(120deg, var(--ad-surface) 0%, var(--ad-surface-2) 100%);
+    border-color: var(--ad-border);
+}
+.ad-hero-name { color: var(--ad-text); }
+.ad-hero-stat-n { color: var(--ad-text); }
+.ad-hero-signout { background: var(--ad-surface-2); border-color: var(--ad-border-strong); color: var(--ad-muted); }
+
+.ad-stat { background: var(--ad-surface); border-color: var(--ad-border); }
+.ad-stat:hover { border-color: var(--ad-border-strong); }
+.ad-stat-body .ad-stat-value { color: var(--ad-text); }
+.ad-stat-bar-track { background: rgba(255, 255, 255, 0.07); }
+
+.filament-tables-empty-state > div:first-child {
+    background: var(--ad-accent-soft) !important;
+    color: #ffb946 !important;
+}

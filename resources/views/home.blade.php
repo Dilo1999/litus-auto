@@ -125,7 +125,7 @@
     {{-- HERO — mobile & tablet (optimised layout) --}}
     <section class="overflow-hidden bg-litus-ink min-[961px]:hidden">
         <div class="relative w-full overflow-hidden bg-litus-ink text-white">
-            <div class="relative w-full h-[clamp(240px,48vh,380px)] overflow-hidden sm:mx-auto sm:max-w-[720px]">
+            <div class="relative w-full h-[clamp(320px,62vh,520px)] overflow-hidden sm:mx-auto sm:max-w-[720px]">
                 <img src="{{ $heroBgMobile }}"
                      alt=""
                      class="absolute inset-0 h-full w-full object-cover object-[center_42%]"
@@ -135,9 +135,9 @@
                 <div class="pointer-events-none absolute inset-0 opacity-[0.14]"
                      style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px;"></div>
 
-                <div class="relative z-[3] flex min-h-full flex-col litus-container pt-10 pb-4">
+                <div class="relative z-[3] flex h-full flex-col justify-end litus-container pt-[clamp(32px,9vh,64px)] pb-9">
                     <div class="max-w-[36rem]">
-                        <span class="mb-3 inline-flex max-w-full items-center gap-2 rounded-full border border-white/16 bg-white/[0.08] px-3 py-1.5 text-[10.5px] font-semibold leading-snug backdrop-blur-[2px]">
+                        <span class="hidden">
                             <span class="litus-live-dot h-[6px] w-[6px] shrink-0 rounded-full bg-[#3DDC84]" aria-hidden="true"></span>
                             <span class="truncate">{{ $campaignCount }} live campaign{{ $campaignCount === 1 ? '' : 's' }} · {{ now()->format('j M Y') }}</span>
                         </span>
@@ -287,18 +287,36 @@
                 </p>
             </div>
 
-            <div class="flex flex-col gap-3 max-md:gap-3 md:grid md:grid-cols-2 md:gap-[22px] xl:grid-cols-4">
-                @foreach ($whyLitus as $item)
-                    <article class="litus-feature {{ $item['acc'] }} group flex items-start gap-3.5 rounded-2xl border border-white/12 bg-white/[0.05] p-4 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.09] md:flex-col md:items-stretch md:rounded-[20px] md:px-[26px] md:py-[30px]">
-                        <div class="grid h-11 w-11 shrink-0 place-items-center acc-tile relative z-[1] rounded-xl md:mb-[18px] md:h-[46px] md:w-[46px] md:rounded-[13px]">
-                            <x-litus-icon :name="$item['icon']" class="h-[17px] w-[17px]" />
-                        </div>
-                        <div class="min-w-0 flex-1 md:flex-none">
-                            <h4 class="mb-1 text-[15px] font-bold leading-snug text-white md:mb-2 md:text-lg">{{ $item['title'] }}</h4>
-                            <p class="text-[13px] leading-relaxed text-white/65 md:text-[14.5px] md:leading-normal">{{ $item['text'] }}</p>
-                        </div>
-                    </article>
-                @endforeach
+            <div data-home-card-slider-wrap>
+                <div data-home-card-slider
+                     data-interval="4000"
+                     class="min-w-0 flex flex-col gap-3 max-md:-mx-4 max-md:flex-row max-md:gap-3 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 md:gap-[22px] xl:grid-cols-4">
+                    @foreach ($whyLitus as $item)
+                        <article data-home-card-slide
+                                 class="litus-feature {{ $item['acc'] }} group flex items-start gap-3.5 rounded-2xl border border-white/12 bg-white/[0.05] p-4 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.09] md:flex-col md:items-stretch md:rounded-[20px] md:px-[26px] md:py-[30px] max-md:w-[82%] max-md:shrink-0 max-md:snap-center">
+                            <div class="grid h-11 w-11 shrink-0 place-items-center acc-tile relative z-[1] rounded-xl md:mb-[18px] md:h-[46px] md:w-[46px] md:rounded-[13px]">
+                                <x-litus-icon :name="$item['icon']" class="h-[17px] w-[17px]" />
+                            </div>
+                            <div class="min-w-0 flex-1 md:flex-none">
+                                <h4 class="mb-1 text-[15px] font-bold leading-snug text-white md:mb-2 md:text-lg">{{ $item['title'] }}</h4>
+                                <p class="text-[13px] leading-relaxed text-white/65 md:text-[14.5px] md:leading-normal">{{ $item['text'] }}</p>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+
+                @if (count($whyLitus) > 1)
+                    <div class="mt-4 hidden items-center justify-center gap-1.5 max-md:flex" data-home-card-dots aria-hidden="true">
+                        @foreach ($whyLitus as $index => $item)
+                            <span @class([
+                                'h-1.5 rounded-full transition-all duration-300',
+                                'w-5 bg-litus-primary' => $index === 0,
+                                'w-1.5 bg-litus-line-2' => $index !== 0,
+                            ])
+                                  data-home-card-dot></span>
+                        @endforeach
+                    </div>
+                @endif
             </div>
         </div>
     </section>

@@ -1,6 +1,6 @@
 @php
     $terms = \App\Support\IjaraPlans::termsFor();
-    $choice = 'litus-radio-card group relative flex min-h-[64px] flex-col items-center justify-center gap-0.5 rounded-xl border-[1.5px] border-litus-line bg-white px-2.5 py-3 text-center transition duration-150 hover:border-litus-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-litus-primary/40 disabled:cursor-not-allowed disabled:border-litus-line disabled:bg-litus-paper-3 disabled:opacity-55 disabled:hover:border-litus-line aria-pressed:border-litus-primary aria-pressed:bg-[#EAF2FF] aria-pressed:shadow-[0_6px_16px_rgba(18,87,214,.12)]';
+    $choice = 'litus-radio-card group relative flex min-h-[64px] flex-col items-center justify-center gap-0.5 rounded-xl border-[1.5px] border-litus-line bg-white px-2.5 py-3 text-center transition duration-150 hover:border-litus-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-litus-primary/40 disabled:cursor-not-allowed disabled:border-litus-line disabled:bg-litus-paper-3 disabled:opacity-55 disabled:hover:border-litus-line aria-pressed:border-litus-primary aria-pressed:bg-[#EAF2FF] aria-pressed:shadow-[0_6px_16px_rgba(18,87,214,.12)] max-md:w-[122px] max-md:shrink-0 max-md:snap-start';
     $stepBadge = 'grid h-8 w-8 shrink-0 place-items-center rounded-full bg-litus-primary text-[14px] font-bold text-white shadow-[0_4px_10px_rgba(18,87,214,.28)]';
     $stepTitle = 'font-display text-[17px] font-bold tracking-[-0.02em] text-litus-ink';
 @endphp
@@ -18,7 +18,7 @@
 
         <div class="grid items-start gap-4 min-[961px]:items-stretch min-[961px]:grid-cols-[1.6fr_1fr] min-[961px]:gap-5">
             {{-- Steps --}}
-            <div class="max-md:space-y-3 md:rounded-[18px] md:border md:border-litus-line md:bg-white md:p-5 md:shadow-[0_1px_2px_rgba(9,17,32,.04),0_14px_36px_rgba(9,17,32,.06)]">
+            <div class="min-w-0 max-md:space-y-3 md:rounded-[18px] md:border md:border-litus-line md:bg-white md:p-5 md:shadow-[0_1px_2px_rgba(9,17,32,.04),0_14px_36px_rgba(9,17,32,.06)]">
                 {{-- 1. Bike --}}
                 <div class="max-md:rounded-2xl max-md:border max-md:border-litus-line max-md:bg-white max-md:p-4 max-md:shadow-[0_1px_2px_rgba(9,17,32,.04),0_10px_28px_rgba(9,17,32,.05)]">
                     <div class="mb-3 flex items-center gap-3">
@@ -26,8 +26,8 @@
                         <h3 class="{{ $stepTitle }}">Choose your bike</h3>
                     </div>
                     <div class="grid gap-5 md:grid-cols-[1.2fr_1fr] md:items-center">
-                        <div class="relative flex h-[190px] items-center justify-center rounded-xl max-md:h-[180px]">
-                            <img data-ijara-image src="" alt="" class="relative hidden max-h-full max-w-full object-contain drop-shadow-[0_16px_14px_rgba(9,17,32,.2)]">
+                        <div class="relative flex h-[190px] items-center justify-center rounded-xl max-md:h-[180px] max-md:-mx-4">
+                            <img data-ijara-image src="" alt="" class="relative hidden max-h-full max-w-full object-contain drop-shadow-[0_16px_14px_rgba(9,17,32,.2)] max-md:absolute max-md:inset-0 max-md:m-auto max-md:h-[220px] max-md:max-h-none max-md:w-auto max-md:max-w-[92%]">
                             <div data-ijara-image-empty class="px-6 text-center text-[13px] font-medium text-litus-text-3">Your motorcycle preview appears here</div>
                         </div>
                         <div class="flex min-w-0 flex-col">
@@ -58,7 +58,7 @@
                             Compare plans <x-litus-icon name="arrow-right" class="h-3.5 w-3.5" />
                         </a>
                     </div>
-                    <div class="grid grid-cols-2 gap-2 min-[560px]:grid-cols-3 lg:grid-cols-5" role="group" aria-labelledby="ijara-plan-label" data-ijara-plan-group></div>
+                    <div class="grid grid-cols-2 gap-2 min-[560px]:grid-cols-3 lg:grid-cols-5 max-md:flex max-md:grid-cols-none max-md:gap-2.5 max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden" role="group" aria-labelledby="ijara-plan-label" data-ijara-plan-group></div>
                     <template data-ijara-plan-template>
                         <button type="button" aria-pressed="false" class="{{ $choice }}">
                             <b class="text-[14px] font-bold leading-tight text-litus-ink" data-plan-name></b>
@@ -106,10 +106,14 @@
                 </div>
             </div>
 
-            {{-- Summary --}}
-            <aside class="flex flex-col overflow-hidden rounded-2xl border border-litus-line bg-white shadow-[0_1px_2px_rgba(9,17,32,.04),0_14px_36px_rgba(9,17,32,.06)]">
-                <div class="border-b border-litus-line px-5 py-3.5 sm:px-6">
+            {{-- Summary — on mobile this becomes a popup that opens once model + plan + term are all picked --}}
+            <aside data-ijara-summary
+                   class="flex flex-col overflow-hidden rounded-2xl border border-litus-line bg-white shadow-[0_1px_2px_rgba(9,17,32,.04),0_14px_36px_rgba(9,17,32,.06)] max-[960px]:fixed max-[960px]:inset-x-0 max-[960px]:bottom-0 max-[960px]:top-auto max-[960px]:z-[80] max-[960px]:max-h-[85vh] max-[960px]:translate-y-full max-[960px]:overflow-y-auto max-[960px]:rounded-b-none max-[960px]:transition-transform max-[960px]:duration-300">
+                <div class="flex items-center justify-between gap-3 border-b border-litus-line px-5 py-3.5 sm:px-6">
                     <h3 class="font-display text-[17px] font-bold tracking-[-0.01em] text-litus-ink">Your Ijara summary</h3>
+                    <button type="button" data-ijara-summary-close aria-label="Close" class="hidden max-[960px]:grid h-8 w-8 shrink-0 place-items-center rounded-full text-litus-text-2 transition hover:bg-litus-paper-3">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    </button>
                 </div>
 
                 <div class="flex flex-1 flex-col px-5 pb-4 pt-3.5 sm:px-6">
@@ -153,11 +157,11 @@
                     </dl>
 
                     <a href="#" target="_blank" rel="noopener noreferrer" data-ijara-continue aria-disabled="true"
-                       class="mt-3.5 flex min-h-[48px] w-full items-center justify-center gap-2 rounded-lg bg-litus-primary px-5 py-2.5 text-[15px] font-semibold text-white shadow-[0_8px_20px_rgba(18,87,214,.25)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover aria-disabled:pointer-events-none aria-disabled:opacity-40 aria-disabled:shadow-none max-md:hidden">
+                       class="mt-3.5 flex min-h-[48px] w-full items-center justify-center gap-2 rounded-lg bg-litus-primary px-5 py-2.5 text-[15px] font-semibold text-white shadow-[0_8px_20px_rgba(18,87,214,.25)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover aria-disabled:pointer-events-none aria-disabled:opacity-40 aria-disabled:shadow-none">
                         <span data-ijara-continue-label>Request a quote</span>
                         <x-litus-icon name="arrow-right" class="h-4 w-4" />
                     </a>
-                    <p class="mt-2 text-center text-[12px] text-litus-text-3 max-md:hidden" data-ijara-note>Our team will confirm pricing and next steps.</p>
+                    <p class="mt-2 text-center text-[12px] text-litus-text-3" data-ijara-note>Our team will confirm pricing and next steps.</p>
 
                     <div class="mt-3.5 border-t border-litus-line pt-3.5 text-center md:hidden">
                         <a href="{{ route('contact') }}" class="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-litus-primary">
@@ -168,8 +172,10 @@
             </aside>
         </div>
 
+        <div data-ijara-summary-backdrop class="max-[960px]:fixed max-[960px]:inset-0 max-[960px]:z-[75] max-[960px]:bg-litus-ink/50 max-[960px]:backdrop-blur-[2px] max-[960px]:opacity-0 max-[960px]:pointer-events-none max-[960px]:transition-opacity max-[960px]:duration-300"></div>
+
         {{-- Sticky action bar (mobile). Moved to <body> by home.js so scroll-reveal transforms cannot trap it. --}}
-        <div data-ijara-bar class="pointer-events-none fixed inset-x-0 bottom-0 z-[60] translate-y-full border-t border-litus-line bg-white px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-2 shadow-[0_-12px_32px_rgba(9,17,32,.14)] transition-transform duration-300 md:hidden">
+        <div data-ijara-bar class="hidden pointer-events-none fixed inset-x-0 bottom-0 z-[60] translate-y-full border-t border-litus-line bg-white px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-2 shadow-[0_-12px_32px_rgba(9,17,32,.14)] transition-transform duration-300 md:hidden">
             <span class="mx-auto mb-1.5 block h-1 w-10 rounded-full bg-litus-line-2" aria-hidden="true"></span>
             <p class="mb-2 text-center text-[12px] font-semibold text-litus-ink" data-ijara-bar-text>Choose your options</p>
             <a href="#" target="_blank" rel="noopener noreferrer" data-ijara-continue aria-disabled="true"

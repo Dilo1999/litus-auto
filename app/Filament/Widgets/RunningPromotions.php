@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use App\Filament\Resources\PromotionResource;
 use App\Models\Promotion;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Widgets\TableWidget;
@@ -16,6 +17,11 @@ class RunningPromotions extends TableWidget
     protected int | string | array $columnSpan = 'full';
 
     protected static ?string $heading = 'Running promotions';
+
+    protected function getTableDescription(): ?string
+    {
+        return 'Currently active on the storefront';
+    }
 
     protected function getTableQuery(): Builder
     {
@@ -54,8 +60,36 @@ class RunningPromotions extends TableWidget
         return false;
     }
 
+    protected function getTableEmptyStateIcon(): ?string
+    {
+        return 'heroicon-o-tag';
+    }
+
     protected function getTableEmptyStateHeading(): ?string
     {
         return 'No promotions are running right now';
+    }
+
+    protected function getTableEmptyStateDescription(): ?string
+    {
+        $idle = Promotion::count() - Promotion::published()->currentlyActive()->count();
+
+        if ($idle === 0) {
+            return 'Create a promotion to feature it on the storefront.';
+        }
+
+        return $idle === 1
+            ? 'You have 1 promotion in the catalog that isn\'t live. Publish it or schedule a new one to fill this space.'
+            : "You have {$idle} promotions in the catalog that aren't live. Publish one or schedule a new one to fill this space.";
+    }
+
+    protected function getTableEmptyStateActions(): array
+    {
+        return [
+            Action::make('createPromotion')
+                ->label('Review promotions')
+                ->icon('heroicon-o-arrow-right')
+                ->url(PromotionResource::getUrl('index')),
+        ];
     }
 }

@@ -49,6 +49,34 @@ function initIjaraEstimator() {
   const bar = q('[data-ijara-bar]');
   const barText = q('[data-ijara-bar-text]');
 
+  // Mobile-only popup: the desktop-visible summary <aside> becomes a bottom sheet
+  // that opens automatically once model + plan + term are all chosen.
+  const summaryModal = q('[data-ijara-summary]');
+  const summaryBackdrop = q('[data-ijara-summary-backdrop]');
+  const summaryClose = q('[data-ijara-summary-close]');
+  const mobileMq = window.matchMedia('(max-width: 960px)');
+  let summaryLastKey = null;
+
+  const openSummary = () => {
+    if (!summaryModal || !summaryBackdrop) return;
+    summaryModal.classList.remove('max-[960px]:translate-y-full');
+    summaryBackdrop.classList.remove('max-[960px]:opacity-0', 'max-[960px]:pointer-events-none');
+    document.body.classList.add('overflow-hidden');
+  };
+
+  const closeSummary = () => {
+    if (!summaryModal || !summaryBackdrop) return;
+    summaryModal.classList.add('max-[960px]:translate-y-full');
+    summaryBackdrop.classList.add('max-[960px]:opacity-0', 'max-[960px]:pointer-events-none');
+    document.body.classList.remove('overflow-hidden');
+  };
+
+  summaryClose?.addEventListener('click', closeSummary);
+  summaryBackdrop?.addEventListener('click', closeSummary);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeSummary();
+  });
+
   // The bar is position:fixed; scroll-reveal transforms on ancestors would trap it, so it lives on <body>.
   if (bar) {
     document.body.appendChild(bar);
@@ -244,6 +272,18 @@ function initIjaraEstimator() {
     const downKey = chosenGroup && chosenGroup.label === 'Plan B' ? 'down_b' : 'down_a';
     const down = planData && chosenGroup && planData[downKey] !== null && planData[downKey] !== undefined ? Number(planData[downKey]) : null;
     const picked = Boolean(model && selectedPlan && months);
+
+    // Reopen the popup whenever the completed combination actually changes (not just on
+    // the first time all three are picked), so it always reflects the latest choice.
+    if (picked) {
+      const key = `${model.key}|${selectedPlan}|${chosenGroup ? chosenGroup.label : ''}|${months}`;
+      if (key !== summaryLastKey && mobileMq.matches) {
+        openSummary();
+      }
+      summaryLastKey = key;
+    } else {
+      summaryLastKey = null;
+    }
 
     // Plan A (any term): the 2.5% is a MONTHLY rate, charged on the amount remaining after the down payment.
     //   Remaining Amount   = Price - Advance

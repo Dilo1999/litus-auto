@@ -4,14 +4,17 @@ namespace App\Filament\Widgets;
 
 use App\Filament\Resources\GalleryVideoResource;
 use App\Filament\Resources\MotorcycleGalleryResource;
+use App\Filament\Support\Stat;
 use App\Models\GalleryImage;
 use App\Models\GalleryVideo;
-use Filament\Widgets\StatsOverviewWidget;
-use Filament\Widgets\StatsOverviewWidget\Card;
 
-class GalleryOverview extends StatsOverviewWidget
+class GalleryOverview extends GroupedStatsOverviewWidget
 {
     protected static ?int $sort = 20;
+
+    protected static ?string $heading = 'Gallery';
+
+    protected static ?string $subheading = 'Photos & TikTok videos';
 
     protected function getCards(): array
     {
@@ -24,15 +27,19 @@ class GalleryOverview extends StatsOverviewWidget
         $videoPub = GalleryVideo::where('is_published', true)->count();
 
         return [
-            Card::make('Gallery · Motorcycle photos published', $bikeImgPub)
+            Stat::make('Motorcycle photos published', $bikeImgPub)
                 ->description("of {$bikeImgTotal} total")
-                ->descriptionIcon('heroicon-s-photograph')
-                ->color('success')
+                ->icon('heroicon-s-photograph')
+                ->tone('success')
+                ->status($bikeImgTotal > 0 && $bikeImgPub === $bikeImgTotal ? 'All live' : ($bikeImgPub > 0 ? 'Partial' : 'None live'))
+                ->progress($bikeImgTotal > 0 ? (int) round($bikeImgPub / $bikeImgTotal * 100) : 0)
                 ->url(MotorcycleGalleryResource::getUrl('index')),
-            Card::make('Gallery · TikTok videos published', $videoPub)
+            Stat::make('TikTok videos published', $videoPub)
                 ->description("of {$videoTotal} total")
-                ->descriptionIcon('heroicon-s-film')
-                ->color('danger')
+                ->icon('heroicon-s-film')
+                ->tone('info')
+                ->status($videoTotal > 0 && $videoPub === $videoTotal ? 'All live' : ($videoPub > 0 ? 'Partial' : 'None live'))
+                ->progress($videoTotal > 0 ? (int) round($videoPub / $videoTotal * 100) : 0)
                 ->url(GalleryVideoResource::getUrl('index')),
         ];
     }

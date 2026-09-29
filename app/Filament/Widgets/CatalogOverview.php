@@ -5,15 +5,18 @@ namespace App\Filament\Widgets;
 use App\Filament\Resources\IjaraPlanResource;
 use App\Filament\Resources\MotorcycleResource;
 use App\Filament\Resources\PromotionResource;
+use App\Filament\Support\Stat;
 use App\Models\IjaraPlan;
 use App\Models\Motorcycle;
 use App\Models\Promotion;
-use Filament\Widgets\StatsOverviewWidget;
-use Filament\Widgets\StatsOverviewWidget\Card;
 
-class CatalogOverview extends StatsOverviewWidget
+class CatalogOverview extends GroupedStatsOverviewWidget
 {
     protected static ?int $sort = 10;
+
+    protected static ?string $heading = 'Catalog';
+
+    protected static ?string $subheading = 'Motorcycles, promotions & Ijara plans';
 
     protected function getCards(): array
     {
@@ -28,20 +31,26 @@ class CatalogOverview extends StatsOverviewWidget
         $plansPublished = IjaraPlan::where('is_published', true)->count();
 
         return [
-            Card::make('Catalog · Motorcycles published', $bikesPublished)
+            Stat::make('Motorcycles published', $bikesPublished)
                 ->description("of {$bikesTotal} total · {$topSelling} top selling")
-                ->descriptionIcon('heroicon-s-truck')
-                ->color('success')
+                ->icon('heroicon-s-truck')
+                ->tone('success')
+                ->status($bikesTotal > 0 && $bikesPublished === $bikesTotal ? 'All live' : ($bikesPublished > 0 ? 'Partial' : 'None live'))
+                ->progress($bikesTotal > 0 ? (int) round($bikesPublished / $bikesTotal * 100) : 0)
                 ->url(MotorcycleResource::getUrl('index')),
-            Card::make('Catalog · Running promotions', $promoRunning)
+            Stat::make('Running promotions', $promoRunning)
                 ->description("of {$promoTotal} promotions")
-                ->descriptionIcon('heroicon-s-tag')
-                ->color($promoRunning > 0 ? 'warning' : 'secondary')
+                ->icon('heroicon-s-tag')
+                ->tone($promoRunning > 0 ? 'warning' : 'neutral')
+                ->status($promoRunning > 0 ? 'Active' : 'Idle')
+                ->progress($promoTotal > 0 ? (int) round($promoRunning / $promoTotal * 100) : 0)
                 ->url(PromotionResource::getUrl('index')),
-            Card::make('Catalog · Ijara plans published', $plansPublished)
+            Stat::make('Ijara plans published', $plansPublished)
                 ->description("of {$plansTotal} plans")
-                ->descriptionIcon('heroicon-s-clipboard-list')
-                ->color('primary')
+                ->icon('heroicon-s-clipboard-list')
+                ->tone('primary')
+                ->status($plansTotal > 0 && $plansPublished === $plansTotal ? 'All live' : ($plansPublished > 0 ? 'Partial' : 'None live'))
+                ->progress($plansTotal > 0 ? (int) round($plansPublished / $plansTotal * 100) : 0)
                 ->url(IjaraPlanResource::getUrl('index')),
         ];
     }

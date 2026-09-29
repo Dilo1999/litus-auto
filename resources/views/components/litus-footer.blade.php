@@ -63,8 +63,8 @@
                 </div>
             </div>
 
-            {{-- Explore + Support — 2 columns on mobile, grid columns on desktop --}}
-            <div class="grid grid-cols-2 gap-4 sm:gap-6 lg:contents">
+            {{-- Explore + Support — hidden on mobile, grid columns on desktop --}}
+            <div class="hidden lg:contents">
                 <div>
                     <h5 class="mb-3 text-[10.5px] font-bold uppercase tracking-[0.16em] text-white sm:mb-[18px] sm:text-[11.5px]">Explore</h5>
                     <ul class="grid gap-2.5 sm:gap-[11px]">
