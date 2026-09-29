@@ -26,7 +26,7 @@ class PageSetting extends Model
     public static function pageDefinitions(): array
     {
         return collect(PageSeo::pageDefinitions())
-            ->reject(fn (array $definition, string $routeName) => $routeName === 'motorcycle.show')
+            ->reject(fn (array $definition, string $routeName) => in_array($routeName, ['motorcycle.show', 'promotions'], true))
             ->map(fn (array $definition, string $routeName) => [
                 'label' => $definition['label'],
                 'sort' => $definition['sort'],

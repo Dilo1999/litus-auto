@@ -11,6 +11,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Facades\Auth;
 
@@ -128,9 +129,17 @@ class PageSettingResource extends Resource
                     ->label('Page')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('hero_image_desktop')
-                    ->label('Hero images')
-                    ->formatStateUsing(fn (?string $state, PageSetting $record) => filled($state) || filled($record->hero_image_mobile) ? 'Custom' : 'Default'),
+                ImageColumn::make('hero_image_desktop')
+                    ->label('Desktop hero')
+                    ->getStateUsing(fn (PageSetting $record): ?string => PageSetting::heroForRoute($record->route_name)['desktop'])
+                    ->height(48),
+                ImageColumn::make('hero_image_mobile')
+                    ->label('Mobile hero')
+                    ->getStateUsing(fn (PageSetting $record): ?string => PageSetting::heroForRoute($record->route_name)['mobile'])
+                    ->height(48),
+                TextColumn::make('hero_status')
+                    ->label('Status')
+                    ->getStateUsing(fn (PageSetting $record): string => filled($record->hero_image_desktop) || filled($record->hero_image_mobile) ? 'Custom' : 'Default'),
             ])
             ->defaultSort('sort_order')
             ->actions([
