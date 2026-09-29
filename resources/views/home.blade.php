@@ -80,8 +80,10 @@
     <section class="relative hidden overflow-hidden bg-litus-ink text-white min-[961px]:block hero-stage min-h-[min(38vw,820px)]">
         <img src="{{ $heroBg }}"
              alt=""
-             class="absolute inset-x-0 top-0 h-auto w-full max-w-none [-webkit-mask-image:linear-gradient(to_bottom,#000_70%,transparent_90%)] [mask-image:linear-gradient(to_bottom,#000_70%,transparent_90%)]"
+             class="absolute inset-x-0 top-0 h-auto w-full max-w-none [-webkit-mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)] [mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)]"
              aria-hidden="true">
+        {{-- The image can be taller than the section, so fade the section's own bottom edge into the page colour. --}}
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-[220px] bg-gradient-to-b from-transparent to-litus-ink"></div>
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(7,19,43,0.96)_0%,rgba(7,19,43,0.88)_34%,rgba(7,19,43,0.55)_62%,rgba(7,19,43,0.35)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0"
              style="background:
