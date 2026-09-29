@@ -8,7 +8,7 @@
     ];
 @endphp
 
-<nav class="fixed inset-x-3 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] z-[70] mx-auto max-w-[420px] rounded-[26px] border border-litus-line bg-white/95 shadow-[0_12px_32px_rgba(9,17,32,0.16)] backdrop-blur-xl xl:hidden"
+<nav class="fixed inset-x-3 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] z-[70] mx-auto max-w-[420px] rounded-[26px] border border-white/40 bg-white/45 shadow-[0_1px_0_0_rgba(255,255,255,0.7)_inset,0_1px_16px_0_rgba(255,255,255,0.25)_inset,0_12px_32px_rgba(9,17,32,0.18)] ring-1 ring-inset ring-white/30 backdrop-blur-2xl backdrop-saturate-[1.8] xl:hidden"
      data-litus-bottom-nav
      aria-label="Primary">
     <div class="flex items-stretch justify-between px-1 py-1.5">
