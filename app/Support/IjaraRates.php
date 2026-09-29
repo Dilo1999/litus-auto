@@ -32,9 +32,8 @@ class IjaraRates
      * price while a promotion is active) and, for each plan it is offered on, the down payment.
      *
      * The monthly payment is worked out in the browser:
-     *   financial charge = (price - advance) x rate x months
-     *   monthly payment  = (price - advance + financial charge) / months
-     * where the rate (% per month) is set per plan and per option (Plan A / Plan B) in the admin panel.
+     *   Plan A (any term):        Monthly = (Price - Advance) / Months
+     *   Plan B (36 or 48 months): Monthly = (Price - MVR 4,000 - Advance) / Months
      */
     public static function calculatorData(): array
     {

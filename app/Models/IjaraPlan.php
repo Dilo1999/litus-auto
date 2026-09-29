@@ -28,8 +28,6 @@ class IjaraPlan extends Model
         'important_note',
         'terms',
         'term_groups',
-        'rate_plan_a',
-        'rate_plan_b',
         'show_in_calculator',
         'is_published',
         'sort_order',
@@ -41,8 +39,6 @@ class IjaraPlan extends Model
         'documents' => 'array',
         'terms' => 'array',
         'term_groups' => 'array',
-        'rate_plan_a' => 'float',
-        'rate_plan_b' => 'float',
         'show_in_calculator' => 'boolean',
         'is_published' => 'boolean',
         'sort_order' => 'integer',
@@ -119,8 +115,6 @@ class IjaraPlan extends Model
             ->map(fn (array $allowed, string $label) => [
                 'label' => $label,
                 'months' => $months->filter(fn ($m) => in_array($m, $allowed, true))->values()->all(),
-                // Financial charge rate, % per month (flat), for this option.
-                'rate' => (float) ($label === 'Plan A' ? ($this->rate_plan_a ?? 2.5) : ($this->rate_plan_b ?? 2.5)),
             ])
             ->filter(fn ($g) => $g['months'])
             ->values()
