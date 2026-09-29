@@ -31,12 +31,18 @@ class IjaraRates
      * Calculator payload: every published model that is on Ijara with its current price (the promotional
      * price while a promotion is active) and, for each plan it is offered on, the down payment.
      *
-     * The monthly payment is worked out in the browser:
-     *   Plan A (any term):        Monthly = (Price - Advance) / Months
-     *   Plan B (36 or 48 months): Discounted Price = Price - MVR 4,000
-     *                             Financed Amount  = Discounted Price - Advance
-     *                             Amount with 2.5% = Financed Amount x 1.025
-     *                             Monthly Payment  = Amount with 2.5% / Months
+     * The monthly payment is worked out in the browser (resources/js/home.js):
+     *   Plan A (any term): 2.5% is a MONTHLY rate on the amount remaining after the down payment.
+     *     Remaining Amount   = Price - Advance
+     *     Monthly Interest   = Remaining Amount x 0.025
+     *     Total Interest     = Monthly Interest x Number of Months
+     *     Total Lease Amount = Remaining Amount + Total Interest
+     *     Monthly Lease      = Total Lease Amount / Number of Months
+     *   Plan B (36 or 48 months only): 2.5% is a ONE-TIME charge, after a flat MVR 4,000 price cut.
+     *     Discounted Price = Price - MVR 4,000
+     *     Financed Amount  = Discounted Price - Advance
+     *     Amount with 2.5% = Financed Amount x 1.025
+     *     Monthly Payment  = Amount with 2.5% / Months
      */
     public static function calculatorData(): array
     {
