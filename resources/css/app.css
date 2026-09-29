@@ -650,32 +650,7 @@ h1, h2, h3, h4, h5, h6, p, li, td, th, span, b, strong {
   .litus-orb { animation: none; }
 }
 
-/* ---------- Ijara calculator (radio cards + status pill) ---------- */
-.litus-radio {
-  position: relative;
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-  border-radius: 9999px;
-  border: 1.5px solid #9fb0c8;
-  background: #fff;
-  transition: border-color 0.15s ease;
-}
-.litus-radio::after {
-  content: '';
-  position: absolute;
-  inset: 3px;
-  border-radius: 9999px;
-  background: var(--color-litus-primary);
-  transform: scale(0);
-  transition: transform 0.15s ease;
-}
-.litus-radio-card[aria-pressed='true'] .litus-radio {
-  border-color: var(--color-litus-primary);
-}
-.litus-radio-card[aria-pressed='true'] .litus-radio::after {
-  transform: scale(1);
-}
+/* ---------- Ijara calculator (status pill) ---------- */
 
 .litus-ijara-status {
   display: inline-flex;

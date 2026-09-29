@@ -31,9 +31,9 @@ function initIjaraEstimator() {
     planTag: q('[data-ijara-summary-plan-tag]'),
     term: q('[data-ijara-summary-term]'),
     monthly: q('[data-ijara-monthly]'),
-    perMonth: q('[data-ijara-per-month]'),
     down: q('[data-ijara-down]'),
     status: q('[data-ijara-status]'),
+    statusLabel: q('[data-ijara-status-label]'),
     quoteTitle: q('[data-ijara-quote-title]'),
     quoteText: q('[data-ijara-quote-text]'),
     note: q('[data-ijara-note]'),
@@ -85,6 +85,7 @@ function initIjaraEstimator() {
   let selectedPlan = '';
   let selectedGroup = -1; // index into data.groups: 0 = Plan A (6 / 12 / 24 months), 1 = Plan B (36 / 48 months)
   let selectedTerm = '';
+  const groupSection = q('[data-ijara-group-section]');
   const groupWrap = q('[data-ijara-group-wrap]');
   const groupBox = q('[data-ijara-group]');
   const groupTemplate = q('[data-ijara-group-template]');
@@ -117,7 +118,11 @@ function initIjaraEstimator() {
   const setStatus = (state, label) => {
     if (!out.status) return;
     out.status.dataset.state = state;
-    out.status.textContent = label;
+    if (out.statusLabel) {
+      out.statusLabel.textContent = label;
+    } else {
+      out.status.textContent = label;
+    }
   };
 
   const setModelOptions = () => {
@@ -188,15 +193,19 @@ function initIjaraEstimator() {
       });
     }
 
+    // Only show the Plan A / Plan B toggle when the customer actually has a choice to make.
+    const showGroupToggle = usable.length > 1;
+    groupSection?.classList.toggle('hidden', !showGroupToggle);
+    groupSection?.classList.toggle('flex', showGroupToggle);
+
     const allowed = selectedGroup >= 0 ? available[selectedGroup].map(String) : [];
     if (selectedTerm && !allowed.includes(selectedTerm)) selectedTerm = '';
-    termEmpty?.classList.toggle('hidden', selectedGroup >= 0);
+    termEmpty?.classList.toggle('hidden', selectedGroup >= 0 || usable.length === 0);
     termLabel?.classList.toggle('hidden', selectedGroup < 0);
 
     termButtons.forEach((btn) => {
       const ok = allowed.includes(btn.dataset.term);
       btn.disabled = !ok;
-      btn.style.display = ok ? '' : 'none';
       btn.setAttribute('aria-pressed', String(btn.dataset.term === selectedTerm));
     });
 
@@ -229,13 +238,15 @@ function initIjaraEstimator() {
     // Summary
     const months = Number(selectedTerm) || 0;
     const planData = model && selectedPlan ? model.plans[selectedPlan] : null;
-    // The down payment (advance) is set per bike and plan, so it shows as soon as a plan is chosen.
-    const down = planData && planData.down !== null && planData.down !== undefined ? Number(planData.down) : null;
+    // The down payment (advance) is set per bike, plan AND option (Plan A / Plan B), so it only shows
+    // once an option is picked (or picked automatically, when the plan only has one).
+    const chosenGroup = selectedGroup >= 0 ? groups[selectedGroup] : null;
+    const downKey = chosenGroup && chosenGroup.label === 'Plan B' ? 'down_b' : 'down_a';
+    const down = planData && chosenGroup && planData[downKey] !== null && planData[downKey] !== undefined ? Number(planData[downKey]) : null;
     const picked = Boolean(model && selectedPlan && months);
 
     // Financial charge = (price - advance) x rate x months; monthly payment = (price - advance + charge) / months.
     // The rate (% per month) is set per plan and per option (Plan A / Plan B) in the admin panel.
-    const chosenGroup = selectedGroup >= 0 ? groups[selectedGroup] : null;
     const option = chosenGroup ? ((data.planGroups && data.planGroups[selectedPlan]) || []).find((g) => g.label === chosenGroup.label) : null;
     const ratePct = option && option.rate !== undefined && option.rate !== null ? Number(option.rate) : null;
     const price = model && model.price ? Number(model.price) : null;
@@ -255,7 +266,7 @@ function initIjaraEstimator() {
     setText(out.plan, planName || '-');
     setText(out.planTag, planTag);
     setText(out.term, months ? `${months} months` : '-');
-    setText(out.monthly, rate ? formatMvr(rate.monthly) : 'MVR -');
+    setText(out.monthly, rate ? formatMvr(rate.monthly) : 'To be confirmed');
     setText(out.down, down !== null ? formatMvr(down) : 'To be confirmed');
 
     const whatsapp = (msg) => `https://wa.me/9607797442?text=${encodeURIComponent(msg)}`;

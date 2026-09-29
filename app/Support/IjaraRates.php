@@ -7,12 +7,14 @@ use App\Models\Motorcycle;
 class IjaraRates
 {
     /**
-     * Down payment (advance) for one bike on one plan: entered on the motorcycle's admin page,
-     * with config/ijara_rates.php as a fallback. Returned exactly as entered.
+     * Down payment (advance) for one bike, on one plan and option (Plan A / Plan B): entered on the
+     * motorcycle's admin page, with config/ijara_rates.php as a fallback. Returned exactly as entered.
      */
-    public static function planDown(Motorcycle $motorcycle, string $planKey): int|float|null
+    public static function planDown(Motorcycle $motorcycle, string $planKey, string $option = 'a'): int|float|null
     {
-        $stored = $motorcycle->ijara_rates[$planKey]['down'] ?? null;
+        $row = $motorcycle->ijara_rates[$planKey] ?? [];
+        // Plans saved before the Plan A / Plan B split kept a single "down" figure.
+        $stored = $row["down_{$option}"] ?? $row['down'] ?? null;
 
         if (is_numeric($stored)) {
             return $stored + 0;
@@ -47,7 +49,11 @@ class IjaraRates
                 foreach ($plans as $planKey => $planName) {
                     if (in_array($planKey, $motorcycle->ijara_plans ?? [], true)) {
                         // A plan offered on this bike is always listed, even before its down payment is entered.
-                        $modelPlans[$planKey] = ['down' => self::planDown($motorcycle, $planKey)];
+                        // Down payment can differ between Plan A (6/12/24 months) and Plan B (36/48 months).
+                        $modelPlans[$planKey] = [
+                            'down_a' => self::planDown($motorcycle, $planKey, 'a'),
+                            'down_b' => self::planDown($motorcycle, $planKey, 'b'),
+                        ];
                     }
                 }
 
@@ -84,16 +90,29 @@ class IjaraRates
     public static function gaps(): array
     {
         $gaps = [];
+        // The option labels (Plan A / Plan B) each calculator plan actually offers, so a plan with only
+        // Plan A isn't flagged for a missing Plan B down payment it will never need.
+        $planOptions = collect(IjaraPlans::all())->mapWithKeys(fn (array $plan) => [
+            $plan['id'] => collect($plan['termGroups'] ?? [])->pluck('label')->all() ?: ['Plan A'],
+        ]);
 
         Motorcycle::query()->where('is_published', true)->where('ijara_enabled', true)->orderBy('name')->get()
-            ->each(function (Motorcycle $motorcycle) use (&$gaps) {
+            ->each(function (Motorcycle $motorcycle) use (&$gaps, $planOptions) {
                 if ((float) $motorcycle->original_price <= 0) {
                     $gaps[] = "{$motorcycle->name}: no price set";
                 }
 
                 foreach (IjaraPlans::calculatorPlans() as $planKey => $planName) {
-                    if (in_array($planKey, $motorcycle->ijara_plans ?? [], true) && self::planDown($motorcycle, $planKey) === null) {
-                        $gaps[] = "{$motorcycle->name} / {$planName}: no down payment";
+                    if (! in_array($planKey, $motorcycle->ijara_plans ?? [], true)) {
+                        continue;
+                    }
+
+                    foreach ($planOptions->get($planKey, ['Plan A']) as $label) {
+                        $option = $label === 'Plan B' ? 'b' : 'a';
+
+                        if (self::planDown($motorcycle, $planKey, $option) === null) {
+                            $gaps[] = "{$motorcycle->name} / {$planName} ({$label}): no down payment";
+                        }
                     }
                 }
             });

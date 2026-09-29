@@ -111,8 +111,9 @@ class MotorcycleResource extends Resource
     }
 
     /**
-     * One row per Ijara plan: a switch for the plan and, only while it is on, this bike's down payment for it.
-     * Stored in motorcycles.ijara_rates as [plan => ['down' => amount]]; the switches also drive ijara_plans
+     * One row per Ijara plan: a switch for the plan and, only while it is on, this bike's down payment for
+     * each option it offers (Plan A / Plan B). Stored in motorcycles.ijara_rates as
+     * [plan => ['down_a' => amount, 'down_b' => amount]]; the switches also drive ijara_plans
      * (see ijaraDataForSave / ijaraDataForForm).
      *
      * @return array<int, Forms\Components\Component>
@@ -127,6 +128,19 @@ class MotorcycleResource extends Resource
 
         return $plans->map(function (IjaraPlan $plan) {
             $enabled = "ijara_rates.{$plan->slug}.enabled";
+            // Which options (Plan A, Plan B) this plan actually offers; most plans offer both and need a
+            // separate down payment for each, since a customer picks one option before choosing their term.
+            $labels = collect($plan->normalizedGroups())->pluck('label')->all() ?: ['Plan A'];
+            $multiOption = count($labels) > 1;
+
+            $downFields = collect($labels)->map(fn (string $label) => TextInput::make("ijara_rates.{$plan->slug}.".($label === 'Plan B' ? 'down_b' : 'down_a'))
+                ->label($multiOption ? "Down payment - {$label}" : 'Down payment')
+                ->prefix('MVR')
+                ->numeric()
+                ->minValue(0)
+                ->required()
+                ->visible(fn (\Closure $get) => (bool) $get($enabled)))
+                ->all();
 
             return Forms\Components\Grid::make(['default' => 1, 'md' => 2])
                 ->extraAttributes(['class' => 'rounded-lg border border-gray-200 p-4'])
@@ -134,14 +148,9 @@ class MotorcycleResource extends Resource
                     Toggle::make($enabled)
                         ->label($plan->name.($plan->tag ? " - {$plan->tag}" : ''))
                         ->default(false)
-                        ->reactive(),
-                    TextInput::make("ijara_rates.{$plan->slug}.down")
-                        ->label('Down payment')
-                        ->prefix('MVR')
-                        ->numeric()
-                        ->minValue(0)
-                        ->required()
-                        ->visible(fn (\Closure $get) => (bool) $get($enabled)),
+                        ->reactive()
+                        ->columnSpan($multiOption ? 2 : 1),
+                    ...$downFields,
                 ]);
         })->all();
     }
@@ -156,7 +165,10 @@ class MotorcycleResource extends Resource
         foreach ($rates as $slug => $row) {
             if (! empty($row['enabled'])) {
                 $plans[] = $slug;
-                $clean[$slug] = ['down' => $row['down'] ?? null];
+                $clean[$slug] = [
+                    'down_a' => $row['down_a'] ?? null,
+                    'down_b' => $row['down_b'] ?? null,
+                ];
             }
         }
 
@@ -174,6 +186,11 @@ class MotorcycleResource extends Resource
 
         foreach (IjaraPlan::query()->pluck('slug') as $slug) {
             $rates[$slug]['enabled'] = in_array($slug, $plans, true);
+
+            // Plans saved before the Plan A / Plan B split kept a single "down" figure; carry it over as Plan A's.
+            if (array_key_exists('down', $rates[$slug]) && ! array_key_exists('down_a', $rates[$slug])) {
+                $rates[$slug]['down_a'] = $rates[$slug]['down'];
+            }
         }
 
         $data['ijara_rates'] = $rates;
