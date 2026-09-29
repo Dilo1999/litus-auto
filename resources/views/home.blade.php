@@ -77,10 +77,10 @@
     <x-litus-header active="Home" />
 
     {{-- HERO — desktop (original layout, unchanged) --}}
-    <section class="relative hidden overflow-hidden bg-litus-ink text-white min-[961px]:block hero-stage">
+    <section class="relative hidden overflow-hidden bg-litus-ink text-white min-[961px]:block hero-stage min-h-[min(38vw,820px)]">
         <img src="{{ $heroBg }}"
              alt=""
-             class="absolute inset-x-0 top-0 h-auto w-full max-w-none [-webkit-mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)] [mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)]"
+             class="absolute inset-x-0 top-0 h-auto w-full max-w-none [-webkit-mask-image:linear-gradient(to_bottom,#000_70%,transparent_90%)] [mask-image:linear-gradient(to_bottom,#000_70%,transparent_90%)]"
              aria-hidden="true">
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(7,19,43,0.96)_0%,rgba(7,19,43,0.88)_34%,rgba(7,19,43,0.55)_62%,rgba(7,19,43,0.35)_100%)]"></div>
         <div class="pointer-events-none absolute inset-0"
@@ -93,7 +93,7 @@
         <div class="pointer-events-none absolute inset-0 opacity-[0.28]"
              style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px; mask-image: radial-gradient(700px 500px at 30% 30%, #000, transparent 78%);"></div>
 
-        <div class="relative z-[3] litus-container py-[clamp(48px,6vw,88px)] pb-10">
+        <div class="relative z-[3] litus-container py-[clamp(40px,5vw,72px)] pb-8">
             <div class="max-w-[640px]">
                 <span class="mb-[22px] inline-flex w-fit max-w-full items-center gap-2.5 rounded-full border border-white/16 bg-white/[0.08] px-4 py-2 text-[12.5px] font-semibold">
                     <span class="litus-live-dot h-[7px] w-[7px] shrink-0 rounded-full bg-[#3DDC84] shadow-[0_0_0_0_rgba(61,220,132,0.7)]" aria-hidden="true"></span>
