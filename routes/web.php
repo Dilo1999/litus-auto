@@ -15,7 +15,8 @@ use Illuminate\Support\Str;
 
 // Serve storage files when symlink doesn't work (e.g. shared hosting / cPanel)
 Route::match(['get', 'head'], 'storage/{path}', function () {
-    $requestPath = ltrim(request()->path(), '/');
+    // decodedPath() so file names with spaces/brackets (%20, %28 ...) resolve
+    $requestPath = ltrim(request()->decodedPath(), '/');
     if (!str_starts_with($requestPath, 'storage/')) {
         abort(404);
     }
