@@ -33,7 +33,10 @@ class IjaraRates
      *
      * The monthly payment is worked out in the browser:
      *   Plan A (any term):        Monthly = (Price - Advance) / Months
-     *   Plan B (36 or 48 months): Monthly = (Price - MVR 4,000 - Advance) / Months
+     *   Plan B (36 or 48 months): Discounted Price = Price - MVR 4,000
+     *                             Financed Amount  = Discounted Price - Advance
+     *                             Amount with 2.5% = Financed Amount x 1.025
+     *                             Monthly Payment  = Amount with 2.5% / Months
      */
     public static function calculatorData(): array
     {

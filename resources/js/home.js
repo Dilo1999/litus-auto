@@ -245,17 +245,21 @@ function initIjaraEstimator() {
     const down = planData && chosenGroup && planData[downKey] !== null && planData[downKey] !== undefined ? Number(planData[downKey]) : null;
     const picked = Boolean(model && selectedPlan && months);
 
-    // Plan A (any term): Monthly = (Price - Advance) / Months.
-    // Plan B (36 or 48 months): a flat MVR 4,000 is taken off the price first, then the same division.
-    //   Discounted Price = Price - 4,000; Monthly = (Discounted Price - Advance) / Months.
+    // Plan A (any term):        Monthly = (Price - Advance) / Months.
+    // Plan B (36 or 48 months): Discounted Price = Price - MVR 4,000
+    //                           Financed Amount  = Discounted Price - Advance
+    //                           Amount with 2.5% = Financed Amount x 1.025
+    //                           Monthly Payment  = Amount with 2.5% / Months
     const PLAN_B_DISCOUNT = 4000;
+    const PLAN_B_MARKUP = 0.025;
     const price = model && model.price ? Number(model.price) : null;
     const isPlanB = chosenGroup && chosenGroup.label === 'Plan B';
     const basePrice = price !== null && isPlanB ? price - PLAN_B_DISCOUNT : price;
     const financed = basePrice !== null && down !== null ? basePrice - down : null;
+    const payable = financed !== null && isPlanB ? financed * (1 + PLAN_B_MARKUP) : financed;
     let rate = null;
-    if (picked && financed !== null && financed > 0) {
-      rate = { monthly: Math.ceil(financed / months), discount: isPlanB ? PLAN_B_DISCOUNT : 0 };
+    if (picked && payable !== null && payable > 0) {
+      rate = { monthly: Math.ceil(payable / months), discount: isPlanB ? PLAN_B_DISCOUNT : 0, markup: isPlanB };
     }
 
     setText(out.model, model ? model.name : 'No model selected');
@@ -275,11 +279,11 @@ function initIjaraEstimator() {
     if (rate) {
       setStatus('ready', 'Calculated');
       if (out.quoteTitle) out.quoteTitle.textContent = `${months} months on the ${planName} plan`;
-      if (out.quoteText) out.quoteText.textContent = rate.discount
-        ? `Includes an MVR ${rate.discount.toLocaleString('en-US')} price reduction for Plan B.`
+      if (out.quoteText) out.quoteText.textContent = rate.markup
+        ? `Includes an MVR ${rate.discount.toLocaleString('en-US')} price reduction and a 2.5% charge for Plan B.`
         : 'No interest - your monthly payment is the balance split evenly over the term.';
-      out.note.textContent = (rate.discount
-        ? `Price reduced by MVR ${rate.discount.toLocaleString('en-US')} for Plan B before the advance is deducted. `
+      out.note.textContent = (rate.markup
+        ? `Price reduced by MVR ${rate.discount.toLocaleString('en-US')} for Plan B, then a 2.5% charge applied. `
         : '') + 'Your final plan is confirmed by our sales team.';
       setCta('Continue', whatsapp(`Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${down !== null ? formatMvr(down) : "to be confirmed"}, monthly lease ${formatMvr(rate.monthly)}).`), false);
     } else if (picked) {
