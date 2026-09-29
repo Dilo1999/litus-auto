@@ -14,6 +14,10 @@ function initIjaraEstimator() {
   const modelSel = q('[data-ijara-model]');
   const modelHint = q('[data-ijara-model-hint]');
   const modelName = q('[data-ijara-model-name]');
+  const brand = q('[data-ijara-brand]');
+  const watermark = q('[data-ijara-watermark]');
+  const specsBox = q('[data-ijara-specs]');
+  const steps = [...root.querySelectorAll('[data-ijara-step]')];
   const vehiclePrice = q('[data-ijara-vehicle-price]');
   const image = q('[data-ijara-image]');
   const imageEmpty = q('[data-ijara-image-empty]');
@@ -35,7 +39,6 @@ function initIjaraEstimator() {
     total: q('[data-ijara-total]'),
     status: q('[data-ijara-status]'),
     statusLabel: q('[data-ijara-status-label]'),
-    quoteTitle: q('[data-ijara-quote-title]'),
     quoteText: q('[data-ijara-quote-text]'),
     note: q('[data-ijara-note]'),
   };
@@ -175,6 +178,7 @@ function initIjaraEstimator() {
       const btn = planTemplate.content.firstElementChild.cloneNode(true);
       btn.querySelector('[data-plan-name]').textContent = data.plans[key];
       btn.querySelector('[data-plan-tag]').textContent = tagFor(key);
+      (btn.querySelector(`[data-plan-icon="${key}"]`) || btn.querySelector('[data-plan-icon=""]'))?.classList.remove('hidden');
       btn.dataset.plan = key;
       btn.addEventListener('click', () => {
         selectedPlan = key;
@@ -250,6 +254,28 @@ function initIjaraEstimator() {
     });
     imageEmpty?.classList.toggle('hidden', hasImage);
     setText(modelName, model ? model.name : 'Select a model');
+    if (brand) {
+      brand.textContent = (model && model.brand) || '';
+      brand.classList.toggle('hidden', !(model && model.brand));
+    }
+    if (watermark) {
+      const words = model ? model.name.split(' ') : [];
+      watermark.textContent = (words[0] && words[0].length > 1 ? words[0] : words.slice(0, 2).join(' ')).toUpperCase();
+    }
+    if (specsBox) {
+      const specs = (model && model.specs) || {};
+      let anySpec = false;
+      specsBox.querySelectorAll('[data-ijara-spec]').forEach((item) => {
+        const value = specs[item.dataset.ijaraSpec];
+        item.classList.toggle('hidden', !value);
+        if (value) {
+          item.querySelector('[data-spec-value]').textContent = value;
+          anySpec = true;
+        }
+      });
+      specsBox.classList.toggle('hidden', !anySpec);
+      specsBox.classList.toggle('grid', anySpec);
+    }
     setText(vehiclePrice, model && model.price ? formatMvr(model.price) : '-');
     modelHint.textContent = model
       ? `${offered.length} plan${offered.length === 1 ? '' : 's'} offered for this model.`
@@ -273,6 +299,14 @@ function initIjaraEstimator() {
     const downKey = chosenGroup && chosenGroup.label === 'Plan B' ? 'down_b' : 'down_a';
     const down = planData && chosenGroup && planData[downKey] !== null && planData[downKey] !== undefined ? Number(planData[downKey]) : null;
     const picked = Boolean(model && selectedPlan && months);
+
+    const reached = picked ? 3 : model ? 2 : 1;
+    steps.forEach((step) => {
+      const n = Number(step.dataset.ijaraStep);
+      step.dataset.state = n < reached ? 'done' : n === reached ? 'active' : 'todo';
+      if (n === reached) step.setAttribute('aria-current', 'step');
+      else step.removeAttribute('aria-current');
+    });
 
     // Reopen the popup whenever the completed combination actually changes (not just on
     // the first time all three are picked), so it always reflects the latest choice.
@@ -336,22 +370,19 @@ function initIjaraEstimator() {
     setText(out.monthly, rate ? formatMvr(rate.monthly) : 'To be confirmed');
     setText(out.down, down !== null ? formatMvr(down) : 'To be confirmed');
     setText(out.total, rate ? formatMvr(down + rate.monthly * months) : 'To be confirmed');
+    if (out.total) out.total.dataset.pending = String(!rate);
 
     const whatsapp = (msg) => `https://wa.me/9607797442?text=${encodeURIComponent(msg)}`;
 
     if (rate) {
-      setStatus('ready', 'Calculated');
-      if (out.quoteTitle) out.quoteTitle.textContent = `${months} months on the ${planName} plan`;
-      if (out.quoteText) out.quoteText.textContent = rate.markup
-        ? `Includes an MVR ${rate.discount.toLocaleString('en-US')} price reduction and a 2.5% monthly rate for Plan B.`
-        : 'Includes a 2.5% monthly rate on the balance after your advance.';
+      setStatus('ready', 'Quote calculated');
+      if (out.quoteText) out.quoteText.textContent = 'Based on current rates and your selected options.';
       out.note.textContent = (rate.markup
         ? `Price reduced by MVR ${rate.discount.toLocaleString('en-US')} for Plan B, then a 2.5% monthly rate applied. `
         : 'Includes a 2.5% monthly rate on the balance after your advance. ') + 'Your final plan is confirmed by our sales team.';
       setCta('Continue', whatsapp(`Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${down !== null ? formatMvr(down) : "to be confirmed"}, monthly lease ${formatMvr(rate.monthly)}).`), false);
     } else if (picked) {
       setStatus('quote', 'Quote required');
-      if (out.quoteTitle) out.quoteTitle.textContent = 'Get your personalised quote';
       if (out.quoteText) out.quoteText.textContent = 'Pricing for this combination is not available online yet.';
       out.note.textContent = 'Amounts to be confirmed by our team - not an approved quote.';
       setCta('Request a quote', whatsapp(`Hi LITUS, please confirm the Ijara down payment and monthly lease for: ${model.name}, ${planName} plan, ${months} months.`), false);
@@ -361,8 +392,7 @@ function initIjaraEstimator() {
       else if (!model) next = 'Start by choosing your bike.';
       else if (!selectedPlan) next = 'Now choose an Ijara plan.';
       else if (!months) next = 'Now choose your lease term.';
-      setStatus('idle', 'Select options');
-      if (out.quoteTitle) out.quoteTitle.textContent = 'Choose your options';
+      setStatus('idle', 'Select your options');
       if (out.quoteText) out.quoteText.textContent = next;
       out.note.textContent = 'Amounts to be confirmed by our team - not an approved quote.';
       setCta('Request a quote', '#', true);

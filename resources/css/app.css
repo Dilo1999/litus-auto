@@ -610,19 +610,66 @@ h1, h2, h3, h4, h5, h6, p, li, td, th, span, b, strong {
   .litus-orb { animation: none; }
 }
 
-/* ---------- Ijara calculator (status pill) ---------- */
+/* ---------- Ijara calculator ---------- */
 
 .litus-ijara-status {
-  display: inline-flex;
+  --st-bg: #eef3fa;
+  --st-dot: #8a9bb5;
+  --st-title: #3f587a;
+  --st-text: #71809c;
+  display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 11px;
+  gap: 11px;
+  padding: 14px;
+  border-radius: 13px;
+  background: var(--st-bg);
+  transition: background-color .25s ease;
+}
+.litus-ijara-status[data-state='quote'] { --st-bg: #fff3e4; --st-dot: #d97706; --st-title: #b45309; --st-text: #c2772b; }
+.litus-ijara-status[data-state='ready'] { --st-bg: #e7f8f0; --st-dot: #1fa56b; --st-title: #137850; --st-text: #43a17c; }
+.litus-ijara-status-dot {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  flex-shrink: 0;
   border-radius: 9999px;
-  border: 1px solid transparent;
-  font-size: 12px;
+  background: var(--st-dot);
+  color: #fff;
+}
+.litus-ijara-status-dot > svg { display: none; }
+.litus-ijara-status[data-state='idle'] [data-status-icon='idle'],
+.litus-ijara-status[data-state='quote'] [data-status-icon='quote'],
+.litus-ijara-status[data-state='ready'] [data-status-icon='ready'] { display: block; }
+.litus-ijara-status-title { color: var(--st-title); }
+.litus-ijara-status-text { color: var(--st-text); }
+
+.litus-ijara-step {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #8090a8;
+  font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
+  transition: color .25s ease;
 }
-.litus-ijara-status[data-state='idle'] { background: #eef2f8; color: #586880; }
-.litus-ijara-status[data-state='quote'] { background: #fff3e4; color: #b45309; border-color: #fbd9a8; }
-.litus-ijara-status[data-state='ready'] { background: #e3f8ef; color: #0b7a55; border-color: #b7ebd5; }
+.litus-ijara-step-num {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  background: #c8d5e6;
+  color: #fff;
+  font-size: 13px;
+  box-shadow: 0 4px 10px rgba(30, 65, 110, .08);
+  transition: background-color .25s ease, box-shadow .25s ease;
+}
+.litus-ijara-step[data-state='active'],
+.litus-ijara-step[data-state='done'] { color: var(--color-litus-ink); }
+.litus-ijara-step[data-state='active'] .litus-ijara-step-num,
+.litus-ijara-step[data-state='done'] .litus-ijara-step-num {
+  background: var(--color-litus-primary);
+  box-shadow: 0 5px 14px rgba(18, 87, 214, .28);
+}

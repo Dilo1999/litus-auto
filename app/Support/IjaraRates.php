@@ -70,12 +70,20 @@ class IjaraRates
 
                 // Ijara pricing always uses the original price, never a promotional sale price.
                 $price = (float) $motorcycle->original_price;
+                $engine = $motorcycle->engineCapacity();
+                $transmission = $motorcycle->specValue('Transmission Type');
 
                 $models[] = [
                     'key' => $motorcycle->slug,
                     'name' => $motorcycle->name,
+                    'brand' => filled($motorcycle->brand) ? $motorcycle->brand : null,
                     'image' => $motorcycle->cardImageUrl(),
                     'price' => $price > 0 ? (int) round($price) : null,
+                    'specs' => array_filter([
+                        'engine' => is_numeric($engine) ? "{$engine} cc" : $engine,
+                        'transmission' => $transmission ? trim(preg_replace('/\s*transmission$/i', '', $transmission)) : null,
+                        'tank' => $motorcycle->fuelTankCapacity(),
+                    ]),
                     'plans' => $modelPlans,
                 ];
             });
