@@ -64,8 +64,8 @@ body.mx-leaving {
 .mx-top {
   position: fixed;
   right: 20px;
-  bottom: 20px;
-  z-index: 90;
+  bottom: calc(96px + env(safe-area-inset-bottom));
+  z-index: 60;
   display: grid;
   place-items: center;
   width: 46px;
@@ -91,6 +91,11 @@ body.mx-leaving {
 .mx-top:hover { background: #0B47B0; scale: 1.08; }
 .mx-top:active { scale: 0.94; }
 .mx-top svg { width: 18px; height: 18px; }
+
+/* Above 1280px the floating bottom nav is hidden (xl:hidden), so this can sit at the corner again. */
+@media (min-width: 1280px) {
+  .mx-top { bottom: 20px; z-index: 90; }
+}
 
 /* Header ----------------------------------------------------------------- */
 [data-litus-header] {

@@ -13,7 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen bg-white font-sans text-[#0C1524] antialiased">
+<body class="min-h-screen bg-white pb-[calc(88px+env(safe-area-inset-bottom))] font-sans text-[#0C1524] antialiased xl:pb-0">
     @yield('content')
+    <x-litus-bottom-nav />
 </body>
 </html>
