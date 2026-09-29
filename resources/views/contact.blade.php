@@ -85,7 +85,7 @@
         <div class="pointer-events-none absolute inset-0 z-[2] opacity-[0.28]"
              style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px; mask-image: radial-gradient(700px 500px at 30% 30%, #000, transparent 78%);"></div>
 
-        <div class="relative z-[3] litus-container py-[clamp(32px,4vw,56px)] pb-[clamp(28px,3.5vw,44px)]">
+        <div class="relative z-[3] litus-container py-[clamp(56px,6vw,96px)] pb-[clamp(48px,5vw,80px)]">
             <div class="max-w-[560px] lg:max-w-[580px]">
                 <span class="mb-3 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-sky">Customer Support</span>
                 <h1 class="font-display text-[clamp(28px,3.8vw,46px)] font-bold leading-[1.08] tracking-[-0.032em] drop-shadow-[0_6px_20px_rgba(0,0,0,0.45)]">
