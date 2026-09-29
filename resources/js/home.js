@@ -276,7 +276,7 @@ function initIjaraEstimator() {
       specsBox.classList.toggle('hidden', !anySpec);
       specsBox.classList.toggle('grid', anySpec);
     }
-    setText(vehiclePrice, model && model.price ? formatMvr(model.price) : '-');
+    setText(vehiclePrice, model && model.price ? formatMvr(model.price) : '');
     modelHint.textContent = model
       ? `${offered.length} plan${offered.length === 1 ? '' : 's'} offered for this model.`
       : 'Pick a motorcycle to see the plans offered for it.';

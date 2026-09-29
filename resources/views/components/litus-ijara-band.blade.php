@@ -9,7 +9,7 @@
     $checkBadge = 'absolute -right-2 -top-2 hidden h-[22px] w-[22px] place-items-center rounded-full bg-litus-primary text-white shadow-[0_4px_8px_rgba(18,87,214,.25)] ring-2 ring-white group-aria-pressed:grid';
     $choice = 'group relative flex min-h-[70px] items-center gap-2.5 rounded-[14px] border border-[#dfe7f1] bg-[#f9fbfe] p-3 text-left transition duration-200 hover:-translate-y-px hover:border-[#8eb7ef] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-litus-primary/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:border-[#dfe7f1] aria-pressed:border-litus-primary aria-pressed:bg-[#f1f6ff] aria-pressed:shadow-[0_0_0_.5px_var(--color-litus-primary),0_4px_14px_rgba(18,87,214,.08)]';
     $planIcons = ['prime' => 'crown', 'family' => 'users', 'secure' => 'shield', 'flexi' => 'refresh-cw', 'freedom' => 'send', 'premium' => 'award'];
-    $specs = ['engine' => ['gauge', 'Engine'], 'transmission' => ['settings', 'Transmission'], 'tank' => ['fuel', 'Fuel tank']];
+    $specs = ['engine' => [null, 'Engine'], 'transmission' => ['settings', 'Transmission'], 'tank' => ['fuel', 'Fuel tank']];
     $steps = ['Select Model', 'Plan & Terms', 'Get Quote'];
 @endphp
 
@@ -77,7 +77,11 @@
                             <div data-ijara-specs class="mt-5 hidden grid-cols-3 gap-3.5">
                                 @foreach ($specs as $key => [$icon, $label])
                                     <div data-ijara-spec="{{ $key }}" class="flex min-w-0 items-center gap-2 max-[420px]:flex-col max-[420px]:text-center">
-                                        <x-litus-icon :name="$icon" class="h-5 w-5 shrink-0 text-[#203656]" />
+                                        @if ($key === 'engine')
+                                            <img src="{{ asset('images/details_page/'.rawurlencode('icons8-engine-50 (2).png')) }}" alt="" class="h-5 w-5 shrink-0 object-contain" aria-hidden="true">
+                                        @else
+                                            <x-litus-icon :name="$icon" class="h-5 w-5 shrink-0 text-[#203656]" />
+                                        @endif
                                         <div class="min-w-0">
                                             <span class="block truncate text-[13px] font-extrabold text-litus-ink" data-spec-value></span>
                                             <span class="mt-0.5 block text-[10.5px] text-[#71809c]">{{ $label }}</span>
@@ -88,7 +92,7 @@
 
                             <div class="mt-5 rounded-2xl bg-gradient-to-br from-[#f5f9ff] to-[#eef5ff] p-[18px]">
                                 <span class="mb-1 block text-[12px] text-[#647590]">Vehicle price</span>
-                                <b class="block font-display text-[clamp(24px,2.6vw,30px)] font-extrabold leading-tight tracking-[-0.025em] text-litus-ink" data-ijara-vehicle-price>-</b>
+                                <b class="block font-display text-[clamp(24px,2.6vw,30px)] font-extrabold leading-tight tracking-[-0.025em] text-litus-ink min-h-[1.25em]" data-ijara-vehicle-price></b>
                             </div>
                         </div>
                     </div>
@@ -166,9 +170,9 @@
                     <div class="grid grid-cols-3 gap-2.5 min-[480px]:grid-cols-5" role="group" aria-labelledby="ijara-term-label" data-ijara-term>
                         @foreach ($terms as $term)
                             <button type="button" data-term="{{ $term }}" aria-pressed="false"
-                                    class="group relative h-[50px] whitespace-nowrap rounded-[11px] border border-[#dfe7f1] bg-white px-2 text-[13.5px] font-bold text-[#35425a] transition hover:border-litus-primary hover:text-litus-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-litus-primary/40 disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:border-[#dfe7f1] disabled:hover:text-[#35425a] aria-pressed:border-litus-primary aria-pressed:bg-litus-primary aria-pressed:text-white aria-pressed:shadow-[0_6px_14px_rgba(18,87,214,.2)] aria-pressed:hover:text-white">
+                                    class="group flex h-[50px] items-center justify-center gap-1.5 whitespace-nowrap rounded-[11px] border border-[#dfe7f1] bg-white px-2 text-[13.5px] font-bold text-[#35425a] transition hover:border-litus-primary hover:text-litus-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-litus-primary/40 disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:border-[#dfe7f1] disabled:hover:text-[#35425a] aria-pressed:border-litus-primary aria-pressed:bg-litus-primary aria-pressed:text-white aria-pressed:shadow-[0_6px_14px_rgba(18,87,214,.2)] aria-pressed:hover:text-white">
+                                <span class="hidden h-[18px] w-[18px] shrink-0 place-items-center rounded-full bg-white text-litus-primary group-aria-pressed:grid" aria-hidden="true"><x-litus-icon name="check" class="h-3 w-3" stroke-width="3" /></span>
                                 {{ $term }} months
-                                <span class="{{ $checkBadge }}" aria-hidden="true"><x-litus-icon name="check" class="h-3 w-3" stroke-width="3" /></span>
                             </button>
                         @endforeach
                     </div>
