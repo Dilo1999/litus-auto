@@ -28,6 +28,13 @@ class StorageLinkRelative extends Command
             $linkPath = $this->pathString($link);
             $targetPath = $this->resolvePath($target);
 
+            // The web root is the project root, so public_path('storage') can be the
+            // real storage directory. Never replace it with a link.
+            if ($this->resolvePath($link) === $this->resolvePath(storage_path())) {
+                $this->components->warn("Skipping [{$linkPath}]: it is the application storage directory. Storage files are served by the storage.serve route.");
+                continue;
+            }
+
             if (! is_dir($targetPath)) {
                 File::ensureDirectoryExists($targetPath);
                 $this->components->warn("Created missing target directory: {$targetPath}");

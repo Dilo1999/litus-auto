@@ -1,0 +1,21 @@
+{
+  "font/A4SPEED-Bold.ttf": {
+    "file": "assets/A4SPEED-Bold-Bl8GGcJL.ttf",
+    "src": "font/A4SPEED-Bold.ttf"
+  },
+  "images/badges/red-sale.png": {
+    "file": "assets/red-sale-BQIyD62K.png",
+    "src": "images/badges/red-sale.png"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-CBfN9Enq.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-Jd6PsvcJ.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}

@@ -69,8 +69,9 @@ return [
     |
     */
 
-    'links' => [
-        public_path('storage') => storage_path('app/public'),
-    ],
+    // No links: the web root is the project root, so public_path('storage') is the
+    // real storage directory. Files in storage/app/public are served by the
+    // "storage.serve" route in routes/web.php instead.
+    'links' => [],
 
 ];

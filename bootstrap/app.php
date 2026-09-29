@@ -17,6 +17,18 @@ $app = new Illuminate\Foundation\Application(
 
 /*
 |--------------------------------------------------------------------------
+| Public Path
+|--------------------------------------------------------------------------
+|
+| The web document root is the project root (cPanel public_html) instead
+| of the default "public" folder, so public_path() resolves to base_path().
+|
+*/
+
+$app->usePublicPath($app->basePath());
+
+/*
+|--------------------------------------------------------------------------
 | Bind Important Interfaces
 |--------------------------------------------------------------------------
 |

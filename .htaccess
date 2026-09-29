@@ -1,0 +1,52 @@
+# The project root is the web document root (cPanel public_html).
+# Only the public asset folders/files below are served directly; every other
+# request (including .env, vendor/, storage/, app/, config/ ...) goes to Laravel.
+
+Options -MultiViews -Indexes
+
+DirectoryIndex index.php
+
+# Deny hidden files (.env, .git, .htaccess ...) and project files even if
+# mod_rewrite were unavailable.
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+<FilesMatch "^(artisan|composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml|vite\.config\.js|README\.md|.*\.log)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Allow Let's Encrypt / cPanel AutoSSL validation
+    RewriteRule ^\.well-known/ - [L]
+
+    # Block hidden files and folders (.env, .git ...)
+    RewriteRule (^|/)\. - [F,L]
+
+    # Block application source folders
+    RewriteRule ^(app|bootstrap|config|database|lang|node_modules|resources|routes|tests|vendor)(/|$) - [F,L]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Front controller itself
+    RewriteRule ^index\.php$ - [L]
+
+    # Serve existing files from the public asset folders directly
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^(build|css|font|images)/ - [L]
+
+    # Serve public root files directly
+    RewriteRule ^(favicon\.ico|robots\.txt|sitemap\.xml)$ - [L]
+
+    # Send everything else to the Front Controller
+    # (storage/* is served safely by the "storage.serve" route)
+    RewriteRule ^ index.php [L]
+</IfModule>
