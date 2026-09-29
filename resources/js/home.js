@@ -447,7 +447,7 @@ function initHomeScrollCardSlider(track) {
 }
 
 // Testimonials: pages through 3 cards at a time on desktop, 1 at a time on mobile,
-// auto-advancing with dot pagination sized to the current page count.
+// sliding horizontally between pages with auto-advance and dot pagination.
 function initTestimonialSlider(root) {
   const track = root.querySelector('[data-testi-track]');
   const dotsRoot = root.querySelector('[data-testi-dots]');
@@ -459,11 +459,28 @@ function initTestimonialSlider(root) {
   const intervalMs = Number(root.dataset.interval) || 5000;
   const desktopMq = window.matchMedia('(min-width: 768px)');
 
+  track.classList.add('flex', 'transition-transform', 'duration-500', 'ease-in-out');
+  track.classList.remove('grid', 'grid-cols-1', 'md:grid-cols-3', 'gap-6');
+
   let perPage = desktopMq.matches ? 3 : 1;
   let page = 0;
-  let pages = Math.max(1, Math.ceil(cards.length / perPage));
+  let pages = 1;
   let timer = null;
   let resumeTimer = null;
+
+  const buildSlides = () => {
+    pages = Math.max(1, Math.ceil(cards.length / perPage));
+    track.innerHTML = '';
+    for (let i = 0; i < pages; i += 1) {
+      const slide = document.createElement('div');
+      slide.className = 'grid w-full shrink-0 grid-cols-1 gap-6 md:grid-cols-3';
+      cards.slice(i * perPage, i * perPage + perPage).forEach((card) => {
+        card.classList.remove('hidden');
+        slide.appendChild(card);
+      });
+      track.appendChild(slide);
+    }
+  };
 
   const renderDots = () => {
     if (!dotsRoot) return;
@@ -484,22 +501,8 @@ function initTestimonialSlider(root) {
   };
 
   const render = () => {
-    pages = Math.max(1, Math.ceil(cards.length / perPage));
     if (page >= pages) page = 0;
-
-    cards.forEach((card, i) => {
-      const onPage = Math.floor(i / perPage) === page;
-      if (onPage) {
-        card.classList.remove('hidden');
-        window.requestAnimationFrame(() => card.classList.remove('opacity-0'));
-      } else {
-        card.classList.add('opacity-0');
-        window.setTimeout(() => {
-          if (Math.floor(cards.indexOf(card) / perPage) !== page) card.classList.add('hidden');
-        }, 300);
-      }
-    });
-
+    track.style.transform = `translateX(-${page * 100}%)`;
     renderDots();
   };
 
@@ -529,10 +532,12 @@ function initTestimonialSlider(root) {
   desktopMq.addEventListener('change', (event) => {
     perPage = event.matches ? 3 : 1;
     page = 0;
+    buildSlides();
     render();
     start();
   });
 
+  buildSlides();
   render();
   start();
 }

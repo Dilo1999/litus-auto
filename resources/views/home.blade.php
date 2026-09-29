@@ -518,29 +518,31 @@
             </div>
 
             <div data-testi-slider data-interval="5000">
-                <div data-testi-track class="grid grid-cols-1 gap-6 md:grid-cols-3">
-                    @foreach ($testimonials as $index => $item)
-                        @php $tAcc = ['acc-blue', 'acc-teal', 'acc-violet'][$index % 3]; @endphp
-                        <div data-testi-card @class(['transition-opacity', 'duration-300', 'hidden' => $index >= 3])>
-                            <article class="{{ $tAcc }} litus-card-lift relative flex h-full flex-col overflow-hidden rounded-2xl border border-litus-line bg-gradient-to-b from-white to-[#F3F7FF] px-4 py-5 shadow-[0_1px_2px_rgba(9,17,32,0.04)] sm:rounded-[20px] sm:px-[28px] sm:py-[32px]"><span class="pointer-events-none absolute right-5 top-1 font-display text-[88px] font-extrabold leading-none acc-text opacity-25" aria-hidden="true">&rdquo;</span>
-                                <div class="mb-3 flex gap-0.5 text-[#F5A524] sm:mb-3.5">
-                                    @for ($i = 0; $i < 5; $i++)
-                                        <x-litus-icon name="star" class="h-3.5 w-3.5 fill-current" fill="currentColor" />
-                                    @endfor
-                                </div>
-                                <p class="mb-4 flex-1 text-[14px] leading-relaxed text-litus-text sm:mb-[18px] sm:text-[15px] sm:leading-normal">“{{ $item['quote'] }}”</p>
-                                <div class="flex items-center gap-3 border-t border-litus-line pt-4 sm:border-0 sm:pt-0">
-                                    <div class="grid h-10 w-10 shrink-0 place-items-center rounded-full acc-tile text-sm font-bold text-white sm:h-[38px] sm:w-[38px]">
-                                        {{ mb_substr($item['name'], 0, 1) }}
+                <div class="overflow-hidden">
+                    <div data-testi-track class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                        @foreach ($testimonials as $index => $item)
+                            @php $tAcc = ['acc-blue', 'acc-teal', 'acc-violet'][$index % 3]; @endphp
+                            <div data-testi-card @class(['hidden' => $index >= 3])>
+                                <article class="{{ $tAcc }} litus-card-lift relative flex h-full flex-col overflow-hidden rounded-2xl border border-litus-line bg-gradient-to-b from-white to-[#F3F7FF] px-4 py-5 shadow-[0_1px_2px_rgba(9,17,32,0.04)] sm:rounded-[20px] sm:px-[28px] sm:py-[32px]"><span class="pointer-events-none absolute right-5 top-1 font-display text-[88px] font-extrabold leading-none acc-text opacity-25" aria-hidden="true">&rdquo;</span>
+                                    <div class="mb-3 flex gap-0.5 text-[#F5A524] sm:mb-3.5">
+                                        @for ($i = 0; $i < 5; $i++)
+                                            <x-litus-icon name="star" class="h-3.5 w-3.5 fill-current" fill="currentColor" />
+                                        @endfor
                                     </div>
-                                    <div class="min-w-0">
-                                        <b class="block text-sm text-litus-text">{{ $item['name'] }}</b>
-                                        <span class="text-xs text-litus-text-2">{{ $item['location'] }}</span>
+                                    <p class="mb-4 flex-1 text-[14px] leading-relaxed text-litus-text sm:mb-[18px] sm:text-[15px] sm:leading-normal">“{{ $item['quote'] }}”</p>
+                                    <div class="flex items-center gap-3 border-t border-litus-line pt-4 sm:border-0 sm:pt-0">
+                                        <div class="grid h-10 w-10 shrink-0 place-items-center rounded-full acc-tile text-sm font-bold text-white sm:h-[38px] sm:w-[38px]">
+                                            {{ mb_substr($item['name'], 0, 1) }}
+                                        </div>
+                                        <div class="min-w-0">
+                                            <b class="block text-sm text-litus-text">{{ $item['name'] }}</b>
+                                            <span class="text-xs text-litus-text-2">{{ $item['location'] }}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </article>
-                        </div>
-                    @endforeach
+                                </article>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
 
                 @if (count($testimonials) > 1)
