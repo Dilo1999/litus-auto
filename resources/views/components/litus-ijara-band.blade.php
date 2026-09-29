@@ -109,10 +109,10 @@
             {{-- Summary — on mobile this becomes a popup that opens once model + plan + term are all picked --}}
             <aside data-ijara-summary
                    class="flex flex-col overflow-hidden rounded-2xl border border-litus-line bg-white shadow-[0_1px_2px_rgba(9,17,32,.04),0_14px_36px_rgba(9,17,32,.06)] max-[960px]:fixed max-[960px]:inset-x-0 max-[960px]:bottom-0 max-[960px]:top-auto max-[960px]:z-[80] max-[960px]:max-h-[85vh] max-[960px]:translate-y-full max-[960px]:overflow-y-auto max-[960px]:rounded-b-none max-[960px]:transition-transform max-[960px]:duration-300">
-                <div class="flex items-center justify-between gap-3 border-b border-litus-line px-5 py-3.5 sm:px-6">
-                    <h3 class="font-display text-[17px] font-bold tracking-[-0.01em] text-litus-ink">Your Ijara summary</h3>
-                    <button type="button" data-ijara-summary-close aria-label="Close" class="hidden max-[960px]:grid h-8 w-8 shrink-0 place-items-center rounded-full text-litus-text-2 transition hover:bg-litus-paper-3">
-                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                <div class="relative flex items-center justify-center border-b border-litus-line px-5 py-5 sm:px-6">
+                    <h3 class="text-center font-display text-[20px] font-bold tracking-[-0.01em] text-litus-ink">Your Ijara summary</h3>
+                    <button type="button" data-ijara-summary-close aria-label="Close" class="absolute right-5 top-1/2 hidden h-9 w-9 shrink-0 -translate-y-1/2 place-items-center rounded-full text-litus-text-2 transition hover:bg-litus-paper-3 max-[960px]:grid sm:right-6">
+                        <svg class="h-[18px] w-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                     </button>
                 </div>
 
