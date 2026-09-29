@@ -68,7 +68,7 @@
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.1),rgba(2,10,19,0.95))]"></div>
 
         <div class="relative z-[2] flex flex-col">
-            <div class="litus-container pt-12 pb-4">
+            <div class="litus-container pt-20 pb-5">
                 <div class="max-w-[36rem]">
                     <p class="mb-3 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#0065ef]">
                         LITUS Gallery
@@ -82,7 +82,7 @@
                 </div>
             </div>
 
-            <div class="litus-container pb-4">
+            <div class="litus-container pb-10">
                 <div class="flex flex-row gap-2">
                     <button type="button"
                             data-gallery-scroll-grid
