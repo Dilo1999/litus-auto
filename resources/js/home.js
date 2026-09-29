@@ -252,22 +252,27 @@ function initIjaraEstimator() {
     //   Total Lease Amount = Remaining Amount + Total Interest
     //   Monthly Lease      = Total Lease Amount / Number of Months
     //
-    // Plan B (36 or 48 months only) - unchanged:
-    //   Discounted Price = Price - MVR 4,000
-    //   Financed Amount  = Discounted Price - Advance
-    //   Amount with 2.5% = Financed Amount x 1.025   (one-time, not per month)
-    //   Monthly Payment  = Amount with 2.5% / Months
+    // Plan B (36 or 48 months only): the 2.5% is also a MONTHLY rate, but on the price AFTER a flat
+    // MVR 4,000 discount, and the advance is deducted both before and after the finance charge is added:
+    //   Actual Price After Discount = Price - MVR 4,000
+    //   Financed Amount             = Actual Price After Discount - Advance
+    //   Finance Charge              = Financed Amount x 0.025 x Number of Months
+    //   Total Price                 = Actual Price After Discount + Finance Charge
+    //   Balance                     = Total Price - Advance
+    //   Monthly Payment             = Balance / Number of Months
     const PLAN_A_MONTHLY_RATE = 0.025;
     const PLAN_B_DISCOUNT = 4000;
-    const PLAN_B_MARKUP = 0.025;
+    const PLAN_B_MONTHLY_RATE = 0.025;
     const price = model && model.price ? Number(model.price) : null;
     const isPlanB = chosenGroup && chosenGroup.label === 'Plan B';
-    const basePrice = price !== null && isPlanB ? price - PLAN_B_DISCOUNT : price;
-    const financed = basePrice !== null && down !== null ? basePrice - down : null; // "Remaining Amount" for Plan A
-    let payable = financed;
-    if (financed !== null) {
+    const basePrice = price !== null && isPlanB ? price - PLAN_B_DISCOUNT : price; // "Actual Price After Discount" for Plan B
+    const financed = basePrice !== null && down !== null ? basePrice - down : null; // "Remaining Amount" / "Financed Amount"
+    let payable = financed; // "Total Lease Amount" (A) / "Balance" (B)
+    if (financed !== null && basePrice !== null && down !== null) {
       if (isPlanB) {
-        payable = financed * (1 + PLAN_B_MARKUP);
+        const financeCharge = financed * PLAN_B_MONTHLY_RATE * months;
+        const totalPrice = basePrice + financeCharge;
+        payable = totalPrice - down;
       } else {
         const totalInterest = financed * PLAN_A_MONTHLY_RATE * months;
         payable = financed + totalInterest;
@@ -296,10 +301,10 @@ function initIjaraEstimator() {
       setStatus('ready', 'Calculated');
       if (out.quoteTitle) out.quoteTitle.textContent = `${months} months on the ${planName} plan`;
       if (out.quoteText) out.quoteText.textContent = rate.markup
-        ? `Includes an MVR ${rate.discount.toLocaleString('en-US')} price reduction and a 2.5% charge for Plan B.`
+        ? `Includes an MVR ${rate.discount.toLocaleString('en-US')} price reduction and a 2.5% monthly rate for Plan B.`
         : 'Includes a 2.5% monthly rate on the balance after your advance.';
       out.note.textContent = (rate.markup
-        ? `Price reduced by MVR ${rate.discount.toLocaleString('en-US')} for Plan B, then a 2.5% charge applied. `
+        ? `Price reduced by MVR ${rate.discount.toLocaleString('en-US')} for Plan B, then a 2.5% monthly rate applied. `
         : 'Includes a 2.5% monthly rate on the balance after your advance. ') + 'Your final plan is confirmed by our sales team.';
       setCta('Continue', whatsapp(`Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${down !== null ? formatMvr(down) : "to be confirmed"}, monthly lease ${formatMvr(rate.monthly)}).`), false);
     } else if (picked) {

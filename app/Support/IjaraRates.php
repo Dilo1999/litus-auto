@@ -38,11 +38,14 @@ class IjaraRates
      *     Total Interest     = Monthly Interest x Number of Months
      *     Total Lease Amount = Remaining Amount + Total Interest
      *     Monthly Lease      = Total Lease Amount / Number of Months
-     *   Plan B (36 or 48 months only): 2.5% is a ONE-TIME charge, after a flat MVR 4,000 price cut.
-     *     Discounted Price = Price - MVR 4,000
-     *     Financed Amount  = Discounted Price - Advance
-     *     Amount with 2.5% = Financed Amount x 1.025
-     *     Monthly Payment  = Amount with 2.5% / Months
+     *   Plan B (36 or 48 months only): also a MONTHLY 2.5% rate, but on the price after a flat MVR 4,000
+     *   discount, with the advance deducted both before and after the finance charge is added.
+     *     Actual Price After Discount = Price - MVR 4,000
+     *     Financed Amount             = Actual Price After Discount - Advance
+     *     Finance Charge              = Financed Amount x 0.025 x Number of Months
+     *     Total Price                 = Actual Price After Discount + Finance Charge
+     *     Balance                     = Total Price - Advance
+     *     Monthly Payment             = Balance / Number of Months
      */
     public static function calculatorData(): array
     {
