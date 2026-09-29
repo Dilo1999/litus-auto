@@ -380,7 +380,7 @@ function initIjaraEstimator() {
       out.note.textContent = (rate.markup
         ? `Price reduced by MVR ${rate.discount.toLocaleString('en-US')} for Plan B, then a 2.5% monthly rate applied. `
         : 'Includes a 2.5% monthly rate on the balance after your advance. ') + 'Your final plan is confirmed by our sales team.';
-      setCta('Continue', whatsapp(`Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${down !== null ? formatMvr(down) : "to be confirmed"}, monthly lease ${formatMvr(rate.monthly)}).`), false);
+      setCta('Continue to next step', whatsapp(`Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${down !== null ? formatMvr(down) : "to be confirmed"}, monthly lease ${formatMvr(rate.monthly)}).`), false);
     } else if (picked) {
       setStatus('quote', 'Quote required');
       if (out.quoteText) out.quoteText.textContent = 'Pricing for this combination is not available online yet.';

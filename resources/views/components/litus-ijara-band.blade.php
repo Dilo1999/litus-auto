@@ -181,10 +181,10 @@
 
             {{-- Summary — on mobile this becomes a popup that opens once model + plan + term are all picked --}}
             <aside data-ijara-summary
-                   class="flex flex-col overflow-hidden rounded-[25px] bg-[linear-gradient(145deg,#123873_0%,#1157ce_48%,#2773ed_100%)] shadow-[0_22px_55px_rgba(20,78,160,.16)] min-[961px]:sticky min-[961px]:top-24 max-[960px]:fixed max-[960px]:inset-x-0 max-[960px]:bottom-0 max-[960px]:top-auto max-[960px]:z-[80] max-[960px]:max-h-[85vh] max-[960px]:translate-y-full max-[960px]:overflow-y-auto max-[960px]:rounded-b-none max-[960px]:transition-transform max-[960px]:duration-300">
-                <div class="relative flex items-center gap-4 px-6 pb-[22px] pt-6 text-white sm:px-7 sm:pt-7">
-                    <span class="grid h-14 w-14 shrink-0 place-items-center rounded-full border border-white/15 bg-white/15">
-                        <x-litus-icon name="file-text" class="h-6 w-6" />
+                   class="flex flex-col overflow-hidden rounded-[26px] border border-white bg-[#f3f7fd] shadow-[0_22px_55px_rgba(20,78,160,.16)] min-[961px]:sticky min-[961px]:top-24 max-[960px]:fixed max-[960px]:inset-x-0 max-[960px]:bottom-0 max-[960px]:top-auto max-[960px]:z-[80] max-[960px]:max-h-[85vh] max-[960px]:translate-y-full max-[960px]:overflow-y-auto max-[960px]:rounded-b-none max-[960px]:transition-transform max-[960px]:duration-300">
+                <div class="relative flex items-center gap-4 bg-[linear-gradient(145deg,#123873_0%,#1157ce_50%,#2773ed_100%)] px-6 pb-12 pt-6 text-white sm:px-7 sm:pt-7">
+                    <span class="grid h-[60px] w-[60px] shrink-0 place-items-center rounded-full border border-white/20 bg-white/15">
+                        <x-litus-icon name="file-text" class="h-7 w-7" />
                     </span>
                     <div class="min-w-0 max-[960px]:pr-8">
                         <h3 class="font-display text-[21px] font-bold tracking-[-0.01em] sm:text-[22px]">Your Ijara summary</h3>
@@ -195,7 +195,7 @@
                     </button>
                 </div>
 
-                <div class="mx-3 mb-3 flex flex-1 flex-col rounded-[22px] bg-white p-4 sm:p-5">
+                <div class="relative mx-3 -mt-7 mb-3 flex flex-1 flex-col rounded-[22px] bg-white p-4 shadow-[0_8px_24px_rgba(20,60,120,.08)] sm:p-5">
                     <div data-ijara-status data-state="idle" class="litus-ijara-status" role="status" aria-live="polite">
                         <span class="litus-ijara-status-dot">
                             <x-litus-icon name="info" class="h-4 w-4" data-status-icon="idle" />
@@ -208,46 +208,46 @@
                         </div>
                     </div>
 
-                    <dl class="mt-1.5 divide-y divide-[#e5eaf1] text-[13.5px]">
-                        <div class="flex min-h-[53px] items-center justify-between gap-3">
-                            <dt class="flex items-center gap-2.5 text-[#647590]"><x-litus-icon name="bike" class="h-5 w-5 shrink-0 text-[#3f587a]" /> Bike model</dt>
-                            <dd class="text-right font-extrabold text-litus-ink" data-ijara-summary-model>-</dd>
+                    <dl class="mt-1.5 divide-y divide-[#e5eaf1] text-[14px]">
+                        <div class="flex min-h-[56px] items-center justify-between gap-3">
+                            <dt class="flex items-center gap-3 text-[#647590]"><x-litus-icon name="bike" class="h-[22px] w-[22px] shrink-0 text-[#3f587a]" /> Bike model</dt>
+                            <dd class="text-right text-[14.5px] font-extrabold text-litus-ink" data-ijara-summary-model>-</dd>
                         </div>
-                        <div class="flex min-h-[53px] items-center justify-between gap-3">
-                            <dt class="flex items-center gap-2.5 text-[#647590]"><x-litus-icon name="file-text" class="h-5 w-5 shrink-0 text-[#3f587a]" /> Ijara plan</dt>
-                            <dd class="text-right font-extrabold text-litus-ink" data-ijara-summary-plan>-</dd>
+                        <div class="flex min-h-[56px] items-center justify-between gap-3">
+                            <dt class="flex items-center gap-3 text-[#647590]"><x-litus-icon name="file-text" class="h-[22px] w-[22px] shrink-0 text-[#3f587a]" /> Ijara plan</dt>
+                            <dd class="text-right text-[14.5px] font-extrabold text-litus-ink" data-ijara-summary-plan>-</dd>
                         </div>
-                        <div class="flex min-h-[53px] items-center justify-between gap-3">
-                            <dt class="flex items-center gap-2.5 text-[#647590]"><x-litus-icon name="calendar" class="h-5 w-5 shrink-0 text-[#3f587a]" /> Lease term</dt>
-                            <dd class="text-right font-extrabold text-litus-ink" data-ijara-summary-term>-</dd>
+                        <div class="flex min-h-[56px] items-center justify-between gap-3">
+                            <dt class="flex items-center gap-3 text-[#647590]"><x-litus-icon name="calendar" class="h-[22px] w-[22px] shrink-0 text-[#3f587a]" /> Lease term</dt>
+                            <dd class="text-right text-[14.5px] font-extrabold text-litus-ink" data-ijara-summary-term>-</dd>
                         </div>
-                        <div class="flex min-h-[53px] items-center justify-between gap-3">
-                            <dt class="flex items-center gap-2.5 text-[#647590]"><x-litus-icon name="wallet" class="h-5 w-5 shrink-0 text-[#3f587a]" /> Monthly lease</dt>
-                            <dd class="text-right text-[16px] font-extrabold text-litus-primary sm:text-[17px]" data-ijara-monthly>To be confirmed</dd>
+                        <div class="flex min-h-[56px] items-center justify-between gap-3">
+                            <dt class="flex items-center gap-3 text-[#647590]"><x-litus-icon name="wallet" class="h-[22px] w-[22px] shrink-0 text-[#3f587a]" /> Monthly lease</dt>
+                            <dd class="text-right text-[17px] font-extrabold text-litus-primary sm:text-[18px]" data-ijara-monthly>To be confirmed</dd>
                         </div>
-                        <div class="flex min-h-[53px] items-center justify-between gap-3">
-                            <dt class="flex items-center gap-2.5 text-[#647590]"><x-litus-icon name="hand-coins" class="h-5 w-5 shrink-0 text-[#3f587a]" /> Down payment</dt>
-                            <dd class="text-right text-[16px] font-extrabold text-litus-primary sm:text-[17px]" data-ijara-down>To be confirmed</dd>
+                        <div class="flex min-h-[56px] items-center justify-between gap-3">
+                            <dt class="flex items-center gap-3 text-[#647590]"><x-litus-icon name="hand-coins" class="h-[22px] w-[22px] shrink-0 text-[#3f587a]" /> Down payment</dt>
+                            <dd class="text-right text-[17px] font-extrabold text-litus-primary sm:text-[18px]" data-ijara-down>To be confirmed</dd>
                         </div>
                     </dl>
 
-                    <div class="mt-3 flex items-center gap-3 rounded-[13px] bg-gradient-to-br from-[#f0f6ff] to-[#e5f0ff] p-4">
-                        <x-litus-icon name="coins" class="h-7 w-7 shrink-0 text-litus-primary" />
+                    <div class="mt-3.5 flex items-center gap-3.5 rounded-2xl bg-gradient-to-br from-[#f0f6ff] to-[#e5f0ff] p-[18px]">
+                        <x-litus-icon name="coins" class="h-9 w-9 shrink-0 text-litus-primary" />
                         <div class="min-w-0 flex-1">
-                            <strong class="block text-[13.5px] font-bold text-litus-primary">Total amount</strong>
-                            <small class="block text-[10.5px] leading-snug text-[#6d7c94]">(Down payment + All monthly payments)</small>
+                            <strong class="block text-[14.5px] font-bold text-litus-primary">Total amount</strong>
+                            <small class="mt-0.5 block text-[11px] leading-snug text-[#6d7c94]">(Down payment + All monthly payments)</small>
                         </div>
-                        <b class="whitespace-nowrap text-right font-display text-[clamp(20px,2vw,24px)] font-extrabold text-litus-primary data-[pending=true]:text-[14px] data-[pending=true]:font-bold" data-ijara-total data-pending="true">To be confirmed</b>
+                        <b class="whitespace-nowrap text-right font-display text-[clamp(22px,2.3vw,28px)] font-extrabold text-litus-primary data-[pending=true]:text-[14px] data-[pending=true]:font-bold" data-ijara-total data-pending="true">To be confirmed</b>
                     </div>
 
                     <a href="#" target="_blank" rel="noopener noreferrer" data-ijara-continue aria-disabled="true"
-                       class="mt-[18px] flex h-[55px] w-full items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-litus-primary to-[#1768ea] text-[15px] font-extrabold text-white shadow-[0_8px_18px_rgba(18,87,214,.24)] transition hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(18,87,214,.3)] aria-disabled:pointer-events-none aria-disabled:opacity-40 aria-disabled:shadow-none">
+                       class="mt-5 flex h-[58px] w-full items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-litus-primary to-[#1768ea] text-[15.5px] font-bold text-white shadow-[0_8px_18px_rgba(18,87,214,.24)] transition hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(18,87,214,.3)] aria-disabled:pointer-events-none aria-disabled:opacity-40 aria-disabled:shadow-none">
                         <span data-ijara-continue-label>Request a quote</span>
-                        <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                        <x-litus-icon name="arrow-right" class="h-[18px] w-[18px]" />
                     </a>
 
-                    <p class="mt-3.5 rounded-[11px] bg-[#f1f6fd] px-4 py-3 text-center text-[11.5px] leading-relaxed text-[#71809a]">
-                        <x-litus-icon name="info" class="mr-1 inline h-3.5 w-3.5 -translate-y-px text-litus-primary" />
+                    <p class="mt-4 flex items-start gap-2.5 rounded-xl bg-[#f1f6fd] px-4 py-3.5 text-[12px] leading-relaxed text-[#647590]">
+                        <x-litus-icon name="info" class="mt-0.5 h-4 w-4 shrink-0 text-litus-primary" />
                         <span data-ijara-note>Our team will confirm pricing and next steps.</span>
                     </p>
 
