@@ -4,8 +4,9 @@
 ])
 
 @php
-    $isLight = $variant === 'light';
-    $suffix = $isLight ? 'Mobile' : 'Desktop';
+    $isBar = $variant === 'bar';
+    $isLight = $variant === 'light' || $isBar;
+    $suffix = $isLight ? ($isBar ? 'Bar' : 'Mobile') : 'Desktop';
     $brandList = $brands ?? collect();
 
     $cardClass = $isLight
@@ -23,53 +24,107 @@
     $chevronClass = $isLight ? 'text-litus-text-3' : 'text-white/55';
 @endphp
 
-<div @class([$cardClass])>
-    <h4 class="mb-1.5 font-display text-[clamp(20px,2.2vw,26px)] font-semibold tracking-[-0.02em] {{ $titleClass }}">Find your ride</h4>
-    <p class="mb-5 text-xs {{ $subtitleClass }}">Three questions. We will show you what fits.</p>
-
-    <form action="{{ route('motorcycles') }}" method="get" class="space-y-4" data-quick-find>
-        <div>
-            <label for="fBrand{{ $suffix }}" class="mb-1.5 block text-[12.5px] font-semibold tracking-[0.02em] {{ $labelClass }}">Brand</label>
-            <div class="litus-select-wrap">
-                <select id="fBrand{{ $suffix }}" name="brand" class="{{ $selectClass }}">
-                    <option value="all" class="bg-white text-litus-text">Any brand</option>
-                    @foreach ($brandList as $brand)
-                        <option value="{{ $brand }}" class="bg-white text-litus-text">{{ $brand }}</option>
-                    @endforeach
-                </select>
-                <x-litus-icon name="chevron-down" class="litus-select-chevron h-4 w-4 {{ $chevronClass }}" />
-            </div>
+@if ($isBar)
+    <div class="flex flex-col gap-5 rounded-[22px] border border-litus-line bg-white px-5 py-5 shadow-[0_24px_60px_rgba(9,17,32,0.18)] sm:px-7 sm:py-6 lg:flex-row lg:items-end lg:gap-7">
+        <div class="shrink-0 lg:pb-[13px]">
+            <h4 class="font-display text-[clamp(18px,1.8vw,22px)] font-bold tracking-[-0.02em] {{ $titleClass }}">Find your ride</h4>
         </div>
 
-        <div>
-            <label for="fBudget{{ $suffix }}" class="mb-1.5 block text-[12.5px] font-semibold tracking-[0.02em] {{ $labelClass }}">Budget</label>
-            <div class="litus-select-wrap">
-                <select id="fBudget{{ $suffix }}" name="budget" class="{{ $selectClass }}">
-                    <option value="999999" class="bg-white text-litus-text">Any budget</option>
-                    <option value="60000" class="bg-white text-litus-text">Under MVR 60,000</option>
-                    <option value="80000" class="bg-white text-litus-text">Under MVR 80,000</option>
-                    <option value="110000" class="bg-white text-litus-text">Under MVR 110,000</option>
-                </select>
-                <x-litus-icon name="chevron-down" class="litus-select-chevron h-4 w-4 {{ $chevronClass }}" />
+        <form action="{{ route('motorcycles') }}" method="get" class="grid flex-1 grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-4 lg:flex lg:items-end" data-quick-find>
+            <div class="lg:min-w-[150px] lg:flex-1">
+                <label for="fBrand{{ $suffix }}" class="mb-1.5 block text-[12px] font-semibold tracking-[0.02em] {{ $labelClass }}">Model</label>
+                <div class="litus-select-wrap">
+                    <select id="fBrand{{ $suffix }}" name="brand" class="{{ $selectClass }}">
+                        <option value="all">All models</option>
+                        @foreach ($brandList as $brand)
+                            <option value="{{ $brand }}">{{ $brand }}</option>
+                        @endforeach
+                    </select>
+                    <x-litus-icon name="chevron-down" class="litus-select-chevron h-4 w-4 {{ $chevronClass }}" />
+                </div>
             </div>
-        </div>
 
-        <div>
-            <label for="fPay{{ $suffix }}" class="mb-1.5 block text-[12.5px] font-semibold tracking-[0.02em] {{ $labelClass }}">How you want to pay</label>
-            <div class="litus-select-wrap">
-                <select id="fPay{{ $suffix }}" name="pay" class="{{ $selectClass }}">
-                    <option value="ijara" class="bg-white text-litus-text">Ijara monthly plan</option>
-                    <option value="full" class="bg-white text-litus-text">Full payment</option>
-                    <option value="unsure" class="bg-white text-litus-text">Not sure yet</option>
-                </select>
-                <x-litus-icon name="chevron-down" class="litus-select-chevron h-4 w-4 {{ $chevronClass }}" />
+            <div class="lg:min-w-[150px] lg:flex-1">
+                <label for="fBudget{{ $suffix }}" class="mb-1.5 block text-[12px] font-semibold tracking-[0.02em] {{ $labelClass }}">Budget</label>
+                <div class="litus-select-wrap">
+                    <select id="fBudget{{ $suffix }}" name="budget" class="{{ $selectClass }}">
+                        <option value="999999">Any budget</option>
+                        <option value="60000">Under MVR 60,000</option>
+                        <option value="80000">Under MVR 80,000</option>
+                        <option value="110000">Under MVR 110,000</option>
+                    </select>
+                    <x-litus-icon name="chevron-down" class="litus-select-chevron h-4 w-4 {{ $chevronClass }}" />
+                </div>
             </div>
-        </div>
 
-        <button type="submit"
-                class="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-litus-primary px-6 py-3.5 text-[14.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
-            Show Me Motorcycles
-            <x-litus-icon name="arrow-right" class="h-4 w-4" />
-        </button>
-    </form>
-</div>
+            <div class="col-span-2 sm:col-span-1 lg:min-w-[150px] lg:flex-1">
+                <label for="fPay{{ $suffix }}" class="mb-1.5 block text-[12px] font-semibold tracking-[0.02em] {{ $labelClass }}">Payment</label>
+                <div class="litus-select-wrap">
+                    <select id="fPay{{ $suffix }}" name="pay" class="{{ $selectClass }}">
+                        <option value="ijara">Ijara monthly plan</option>
+                        <option value="full">Full payment</option>
+                        <option value="unsure">Not sure yet</option>
+                    </select>
+                    <x-litus-icon name="chevron-down" class="litus-select-chevron h-4 w-4 {{ $chevronClass }}" />
+                </div>
+            </div>
+
+            <button type="submit"
+                    class="col-span-2 inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-7 py-3.5 text-[14.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover sm:col-span-3 lg:col-span-1 lg:w-auto">
+                Show Bikes
+                <x-litus-icon name="arrow-right" class="h-4 w-4" />
+            </button>
+        </form>
+    </div>
+@else
+    <div @class([$cardClass])>
+        <h4 class="mb-1.5 font-display text-[clamp(20px,2.2vw,26px)] font-semibold tracking-[-0.02em] {{ $titleClass }}">Find your ride</h4>
+        <p class="mb-5 text-xs {{ $subtitleClass }}">Three questions. We will show you what fits.</p>
+
+        <form action="{{ route('motorcycles') }}" method="get" class="space-y-4" data-quick-find>
+            <div>
+                <label for="fBrand{{ $suffix }}" class="mb-1.5 block text-[12.5px] font-semibold tracking-[0.02em] {{ $labelClass }}">Brand</label>
+                <div class="litus-select-wrap">
+                    <select id="fBrand{{ $suffix }}" name="brand" class="{{ $selectClass }}">
+                        <option value="all" class="bg-white text-litus-text">Any brand</option>
+                        @foreach ($brandList as $brand)
+                            <option value="{{ $brand }}" class="bg-white text-litus-text">{{ $brand }}</option>
+                        @endforeach
+                    </select>
+                    <x-litus-icon name="chevron-down" class="litus-select-chevron h-4 w-4 {{ $chevronClass }}" />
+                </div>
+            </div>
+
+            <div>
+                <label for="fBudget{{ $suffix }}" class="mb-1.5 block text-[12.5px] font-semibold tracking-[0.02em] {{ $labelClass }}">Budget</label>
+                <div class="litus-select-wrap">
+                    <select id="fBudget{{ $suffix }}" name="budget" class="{{ $selectClass }}">
+                        <option value="999999" class="bg-white text-litus-text">Any budget</option>
+                        <option value="60000" class="bg-white text-litus-text">Under MVR 60,000</option>
+                        <option value="80000" class="bg-white text-litus-text">Under MVR 80,000</option>
+                        <option value="110000" class="bg-white text-litus-text">Under MVR 110,000</option>
+                    </select>
+                    <x-litus-icon name="chevron-down" class="litus-select-chevron h-4 w-4 {{ $chevronClass }}" />
+                </div>
+            </div>
+
+            <div>
+                <label for="fPay{{ $suffix }}" class="mb-1.5 block text-[12.5px] font-semibold tracking-[0.02em] {{ $labelClass }}">How you want to pay</label>
+                <div class="litus-select-wrap">
+                    <select id="fPay{{ $suffix }}" name="pay" class="{{ $selectClass }}">
+                        <option value="ijara" class="bg-white text-litus-text">Ijara monthly plan</option>
+                        <option value="full" class="bg-white text-litus-text">Full payment</option>
+                        <option value="unsure" class="bg-white text-litus-text">Not sure yet</option>
+                    </select>
+                    <x-litus-icon name="chevron-down" class="litus-select-chevron h-4 w-4 {{ $chevronClass }}" />
+                </div>
+            </div>
+
+            <button type="submit"
+                    class="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-litus-primary px-6 py-3.5 text-[14.5px] font-semibold text-white shadow-[0_8px_22px_rgba(18,87,214,0.3)] transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
+                Show Me Motorcycles
+                <x-litus-icon name="arrow-right" class="h-4 w-4" />
+            </button>
+        </form>
+    </div>
+@endif

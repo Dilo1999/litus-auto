@@ -52,13 +52,6 @@
         ],
     ];
 
-    $heroFeatures = [
-        ['icon' => 'clock', 'acc' => 'acc-sky', 'title' => 'Since 2014', 'desc' => 'Twelve years serving Maldivian riders'],
-        ['icon' => 'map-pin', 'acc' => 'acc-teal', 'title' => $showroomCount.' Locations', 'desc' => 'Showrooms & service centers across the Maldives'],
-        ['icon' => 'shield', 'acc' => 'acc-green', 'title' => 'Ijara Plans', 'desc' => 'Islamic leasing standards'],
-        ['icon' => 'wrench', 'acc' => 'acc-amber', 'title' => 'Full Service', 'desc' => 'Genuine parts, trained technicians'],
-    ];
-
     $hero = \App\Models\PageSetting::heroForRoute('home');
     $heroBg = $hero['desktop'];
     $heroBgMobile = $hero['mobile'];
@@ -69,7 +62,7 @@
     <x-litus-header active="Home" />
 
     {{-- HERO — desktop (original layout, unchanged) --}}
-    <section class="relative hidden overflow-hidden bg-litus-ink pb-[82px] text-white max-[1100px]:pb-8 min-[961px]:block hero-stage">
+    <section class="relative hidden overflow-hidden bg-litus-ink text-white min-[961px]:block hero-stage">
         <img src="{{ $heroBg }}"
              alt=""
              class="absolute inset-x-0 top-0 h-auto w-full max-w-none [-webkit-mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)] [mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)]"
@@ -86,39 +79,40 @@
              style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 76px 76px; mask-image: radial-gradient(700px 500px at 30% 30%, #000, transparent 78%);"></div>
 
         <div class="relative z-[3] litus-container py-[clamp(48px,6vw,88px)] pb-10">
-            <div class="grid items-center gap-[52px] min-[961px]:grid-cols-[1.06fr_0.94fr]">
-                <div>
-                    <span class="mb-[22px] inline-flex w-fit max-w-full items-center gap-2.5 rounded-full border border-white/16 bg-white/[0.08] px-4 py-2 text-[12.5px] font-semibold">
-                        <span class="litus-live-dot h-[7px] w-[7px] shrink-0 rounded-full bg-[#3DDC84] shadow-[0_0_0_0_rgba(61,220,132,0.7)]" aria-hidden="true"></span>
-                        {{ $campaignCount }} campaign{{ $campaignCount === 1 ? '' : 's' }} running now · Updated {{ now()->format('j M Y') }}
-                    </span>
-                    <h1 class="font-display text-[clamp(40px,6.2vw,78px)] font-extrabold leading-[1.08] tracking-[-0.035em]">
-                        Ride your own.<br>
-                        <span class="litus-text-gradient">From MVR 1,340</span><br>
-                        a month.
-                    </h1>
-                    <p class="mt-[22px] max-w-[520px] text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.72]">
-                        Honda and Yamaha scooters, genuine parts and expert service - across five showrooms in the Maldives. Buy outright, or own it on a Shariah-compliant Ijara plan.
-                    </p>
-                    <div class="litus-cta-row mt-8">
-                        <a href="#offers"
-                           class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
-                            See This Month’s Campaigns
-                            <x-litus-icon name="arrow-right" class="h-4 w-4" />
-                        </a>
-                        <a href="{{ route('ownership-plans') }}"
-                           class="inline-flex items-center justify-center rounded-lg border-[1.5px] border-white/32 px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10">
-                            How Ijara Works
-                        </a>
-                    </div>
+            <div class="max-w-[640px]">
+                <span class="mb-[22px] inline-flex w-fit max-w-full items-center gap-2.5 rounded-full border border-white/16 bg-white/[0.08] px-4 py-2 text-[12.5px] font-semibold">
+                    <span class="litus-live-dot h-[7px] w-[7px] shrink-0 rounded-full bg-[#3DDC84] shadow-[0_0_0_0_rgba(61,220,132,0.7)]" aria-hidden="true"></span>
+                    {{ $campaignCount }} campaign{{ $campaignCount === 1 ? '' : 's' }} running now · Updated {{ now()->format('j M Y') }}
+                </span>
+                <h1 class="font-display text-[clamp(40px,6.2vw,78px)] font-extrabold leading-[1.08] tracking-[-0.035em]">
+                    Ride your own.<br>
+                    <span class="litus-text-gradient">From MVR 1,340</span><br>
+                    a month.
+                </h1>
+                <p class="mt-[22px] max-w-[520px] text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-white/[0.72]">
+                    Honda and Yamaha scooters, genuine parts and expert service - across five showrooms in the Maldives. Buy outright, or own it on a Shariah-compliant Ijara plan.
+                </p>
+                <div class="litus-cta-row mt-8">
+                    <a href="#offers"
+                       class="inline-flex items-center justify-center gap-2 rounded-lg bg-litus-primary px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-litus-primary-hover">
+                        See This Month’s Campaigns
+                        <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                    </a>
+                    <a href="{{ route('ownership-plans') }}"
+                       class="inline-flex items-center justify-center rounded-lg border-[1.5px] border-white/32 px-8 py-[17px] text-[15.5px] font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10">
+                        How Ijara Works
+                    </a>
                 </div>
-
-                <x-home-quick-find-form variant="dark" :brands="$brands" />
             </div>
         </div>
-
-        <x-litus-hero-features :features="$heroFeatures" />
     </section>
+
+    {{-- FIND YOUR RIDE — overlapping filter bar (desktop) --}}
+    <div class="relative z-[6] hidden -mt-[52px] min-[961px]:block">
+        <div class="litus-container">
+            <x-home-quick-find-form variant="bar" :brands="$brands" />
+        </div>
+    </div>
 
     {{-- HERO — mobile & tablet (optimised layout) --}}
     <section class="overflow-hidden bg-litus-ink min-[961px]:hidden">
@@ -164,8 +158,6 @@
                 </div>
             </div>
         </div>
-
-        <x-litus-hero-features :features="$heroFeatures" />
 
         <div class="bg-litus-paper-3 px-4 py-6">
             <div class="litus-container !px-0">
