@@ -311,11 +311,6 @@ function initIjaraEstimator() {
 }
 
 function initHomeCardSlider(track) {
-  if (track.dataset.sliderEffect === 'fade') {
-    initHomeFadeCardSlider(track);
-    return;
-  }
-
   initHomeScrollCardSlider(track);
 }
 
@@ -426,58 +421,66 @@ function initHomeScrollCardSlider(track) {
   }
 }
 
-function initHomeFadeCardSlider(track) {
-  const wrap = track.closest('[data-home-card-slider-wrap]');
-  const dotsRoot = wrap?.querySelector('[data-home-card-dots]');
-  const slides = Array.from(track.querySelectorAll('[data-home-card-slide]'));
-  const dots = dotsRoot ? Array.from(dotsRoot.querySelectorAll('[data-home-card-dot]')) : [];
+// Testimonials: pages through 3 cards at a time on desktop, 1 at a time on mobile,
+// auto-advancing with dot pagination sized to the current page count.
+function initTestimonialSlider(root) {
+  const track = root.querySelector('[data-testi-track]');
+  const dotsRoot = root.querySelector('[data-testi-dots]');
+  if (!track) return;
 
-  if (slides.length < 2) return;
+  const cards = Array.from(track.querySelectorAll('[data-testi-card]'));
+  if (cards.length < 2) return;
 
-  const mq = window.matchMedia('(max-width: 767px)');
-  const intervalMs = Number(track.dataset.interval) || 5000;
+  const intervalMs = Number(root.dataset.interval) || 5000;
+  const desktopMq = window.matchMedia('(min-width: 768px)');
 
-  let activeIndex = slides.findIndex((slide) => slide.classList.contains('is-active'));
-  if (activeIndex < 0) activeIndex = 0;
-
+  let perPage = desktopMq.matches ? 3 : 1;
+  let page = 0;
+  let pages = Math.max(1, Math.ceil(cards.length / perPage));
   let timer = null;
   let resumeTimer = null;
-  let touchStartX = 0;
 
-  const setDots = (index) => {
-    dots.forEach((dot, i) => {
-      const isActive = i === index;
-      dot.classList.toggle('w-5', isActive);
-      dot.classList.toggle('w-1.5', !isActive);
-      dot.classList.toggle('bg-litus-primary', isActive);
-      dot.classList.toggle('bg-litus-line-2', !isActive);
-    });
-  };
-
-  const syncHeight = () => {
-    if (!mq.matches) {
-      track.style.minHeight = '';
-      return;
+  const renderDots = () => {
+    if (!dotsRoot) return;
+    dotsRoot.innerHTML = '';
+    dotsRoot.classList.toggle('hidden', pages <= 1);
+    for (let i = 0; i < pages; i += 1) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', `Show reviews page ${i + 1}`);
+      dot.className = `h-1.5 rounded-full transition-all duration-300 ${i === page ? 'w-5 bg-litus-primary' : 'w-1.5 bg-litus-line-2'}`;
+      dot.addEventListener('click', () => {
+        stop();
+        goTo(i);
+        scheduleResume();
+      });
+      dotsRoot.appendChild(dot);
     }
-
-    const activeSlide = slides[activeIndex];
-    track.style.minHeight = activeSlide ? `${activeSlide.offsetHeight}px` : '';
   };
 
-  const setActive = (index) => {
-    activeIndex = (index + slides.length) % slides.length;
+  const render = () => {
+    pages = Math.max(1, Math.ceil(cards.length / perPage));
+    if (page >= pages) page = 0;
 
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('is-active', i === activeIndex);
+    cards.forEach((card, i) => {
+      const onPage = Math.floor(i / perPage) === page;
+      if (onPage) {
+        card.classList.remove('hidden');
+        window.requestAnimationFrame(() => card.classList.remove('opacity-0'));
+      } else {
+        card.classList.add('opacity-0');
+        window.setTimeout(() => {
+          if (Math.floor(cards.indexOf(card) / perPage) !== page) card.classList.add('hidden');
+        }, 300);
+      }
     });
 
-    setDots(activeIndex);
-    window.requestAnimationFrame(syncHeight);
+    renderDots();
   };
 
   const goTo = (index) => {
-    if (!mq.matches) return;
-    setActive(index);
+    page = (index + pages) % pages;
+    render();
   };
 
   const stop = () => {
@@ -489,75 +492,24 @@ function initHomeFadeCardSlider(track) {
 
   const start = () => {
     stop();
-    if (!mq.matches) return;
-
-    timer = window.setInterval(() => {
-      goTo(activeIndex + 1);
-    }, intervalMs);
+    if (pages <= 1) return;
+    timer = window.setInterval(() => goTo(page + 1), intervalMs);
   };
 
   const scheduleResume = () => {
     window.clearTimeout(resumeTimer);
-    resumeTimer = window.setTimeout(start, 4500);
+    resumeTimer = window.setTimeout(start, Math.max(2000, intervalMs - 500));
   };
 
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      if (!mq.matches) return;
-      stop();
-      goTo(i);
-      scheduleResume();
-    });
-  });
-
-  track.addEventListener(
-    'touchstart',
-    (event) => {
-      if (!mq.matches) return;
-      touchStartX = event.touches[0]?.clientX ?? 0;
-      stop();
-    },
-    { passive: true },
-  );
-
-  track.addEventListener(
-    'touchend',
-    (event) => {
-      if (!mq.matches) return;
-
-      const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX;
-      const delta = touchEndX - touchStartX;
-
-      if (delta < -48) {
-        goTo(activeIndex + 1);
-      } else if (delta > 48) {
-        goTo(activeIndex - 1);
-      }
-
-      scheduleResume();
-    },
-    { passive: true },
-  );
-
-  mq.addEventListener('change', () => {
-    if (mq.matches) {
-      setActive(activeIndex);
-      start();
-    } else {
-      stop();
-      slides.forEach((slide) => slide.classList.add('is-active'));
-      track.style.minHeight = '';
-    }
-  });
-
-  window.addEventListener('resize', syncHeight);
-
-  if (mq.matches) {
-    setActive(activeIndex);
+  desktopMq.addEventListener('change', (event) => {
+    perPage = event.matches ? 3 : 1;
+    page = 0;
+    render();
     start();
-  } else {
-    slides.forEach((slide) => slide.classList.add('is-active'));
-  }
+  });
+
+  render();
+  start();
 }
 
 function initHomeCardSliders() {
@@ -567,6 +519,7 @@ function initHomeCardSliders() {
 function initHomePage() {
   initIjaraEstimator();
   initHomeCardSliders();
+  document.querySelectorAll('[data-testi-slider]').forEach(initTestimonialSlider);
 }
 
 if (document.readyState === 'loading') {

@@ -50,6 +50,21 @@
             'name' => 'Ibrahim S.',
             'location' => 'Fuvahmulah',
         ],
+        [
+            'quote' => 'My Ijara term ended early because I could suddenly afford to settle the balance. The team recalculated the payoff amount on the spot and there were no hidden fees.',
+            'name' => 'Mariyam N.',
+            'location' => 'Hulhumalé',
+        ],
+        [
+            'quote' => 'I called three shops looking for a side mirror for my PCX. LITUS had it in stock and fitted it while I waited.',
+            'name' => 'Hassan A.',
+            'location' => 'Kulhudhuffushi',
+        ],
+        [
+            'quote' => 'I am not mechanically minded, so I appreciated that the service advisor explained what needed doing and what could wait, instead of just handing me a big bill.',
+            'name' => 'Aishath H.',
+            'location' => 'Malé',
+        ],
     ];
 
     $hero = \App\Models\PageSetting::heroForRoute('home');
@@ -502,16 +517,12 @@
                 <h2 class="font-display text-[clamp(22px,5.5vw,40px)] font-bold tracking-[-0.028em] text-litus-text">What <span class="litus-text-gradient-blue">customers</span> say</h2>
             </div>
 
-            <div data-home-card-slider-wrap>
-                <div
-                    data-home-card-slider
-                    data-slider-effect="fade"
-                    data-interval="5000"
-                    class="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div data-testi-slider data-interval="5000">
+                <div data-testi-track class="grid grid-cols-1 gap-6 md:grid-cols-3">
                     @foreach ($testimonials as $index => $item)
                         @php $tAcc = ['acc-blue', 'acc-teal', 'acc-violet'][$index % 3]; @endphp
-                        <div data-home-card-slide @class(['is-active' => $index === 0])>
-                            <article class="litus-feature {{ $tAcc }} litus-card-lift relative flex h-full flex-col overflow-hidden rounded-2xl border border-litus-line bg-gradient-to-b from-white to-[#F3F7FF] px-4 py-5 shadow-[0_1px_2px_rgba(9,17,32,0.04)] sm:rounded-[20px] sm:px-[28px] sm:py-[32px]"><span class="pointer-events-none absolute right-5 top-1 font-display text-[88px] font-extrabold leading-none acc-text opacity-25" aria-hidden="true">&rdquo;</span>
+                        <div data-testi-card @class(['transition-opacity', 'duration-300', 'hidden' => $index >= 3])>
+                            <article class="{{ $tAcc }} litus-card-lift relative flex h-full flex-col overflow-hidden rounded-2xl border border-litus-line bg-gradient-to-b from-white to-[#F3F7FF] px-4 py-5 shadow-[0_1px_2px_rgba(9,17,32,0.04)] sm:rounded-[20px] sm:px-[28px] sm:py-[32px]"><span class="pointer-events-none absolute right-5 top-1 font-display text-[88px] font-extrabold leading-none acc-text opacity-25" aria-hidden="true">&rdquo;</span>
                                 <div class="mb-3 flex gap-0.5 text-[#F5A524] sm:mb-3.5">
                                     @for ($i = 0; $i < 5; $i++)
                                         <x-litus-icon name="star" class="h-3.5 w-3.5 fill-current" fill="currentColor" />
@@ -533,18 +544,7 @@
                 </div>
 
                 @if (count($testimonials) > 1)
-                    <div class="mt-4 hidden items-center justify-center gap-1.5 max-md:flex" data-home-card-dots aria-hidden="true">
-                        @foreach ($testimonials as $index => $item)
-                            <button type="button"
-                                    @class([
-                                        'h-1.5 rounded-full transition-all duration-300',
-                                        'w-5 bg-litus-primary' => $index === 0,
-                                        'w-1.5 bg-litus-line-2' => $index !== 0,
-                                    ])
-                                    data-home-card-dot
-                                    aria-label="Show review {{ $index + 1 }}"></button>
-                        @endforeach
-                    </div>
+                    <div class="mt-6 flex items-center justify-center gap-1.5" data-testi-dots aria-hidden="true"></div>
                 @endif
             </div>
         </div>
@@ -553,7 +553,7 @@
     {{-- SERVICE + PARTS --}}
     <section class="litus-sec-tight litus-sec-tint">
         <div class="litus-container grid grid-cols-2 gap-3 sm:gap-6">
-            <article class="litus-card-lift acc-sky relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-white/10 px-3.5 py-4 text-white shadow-[0_18px_44px_rgba(9,17,32,0.18)] sm:rounded-[22px] sm:px-8 sm:py-9" style="background: radial-gradient(360px 220px at 100% 0%, var(--acc-a), transparent 70%), linear-gradient(135deg, #0a1a3a, #07132B);">
+            <article class="litus-card-lift acc-sky relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-white/10 px-3.5 py-4 text-white shadow-[0_18px_44px_rgba(9,17,32,0.18)] sm:rounded-[22px] sm:px-8 sm:py-9" style="background: linear-gradient(135deg, #0a1a3a, #07132B);">
                 <div class="mb-3 grid h-10 w-10 place-items-center acc-tile rounded-xl sm:mb-[18px] sm:h-[46px] sm:w-[46px] sm:rounded-[13px]">
                     <x-litus-icon name="wrench" class="h-4 w-4 sm:h-[17px] sm:w-[17px]" />
                 </div>
@@ -568,7 +568,7 @@
                     <x-litus-icon name="arrow-right" class="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
                 </a>
             </article>
-            <article class="litus-card-lift acc-teal relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-white/10 px-3.5 py-4 text-white shadow-[0_18px_44px_rgba(9,17,32,0.18)] sm:rounded-[22px] sm:px-8 sm:py-9" style="background: radial-gradient(360px 220px at 100% 0%, var(--acc-a), transparent 70%), linear-gradient(135deg, #0a1a3a, #07132B);">
+            <article class="litus-card-lift acc-teal relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-white/10 px-3.5 py-4 text-white shadow-[0_18px_44px_rgba(9,17,32,0.18)] sm:rounded-[22px] sm:px-8 sm:py-9" style="background: linear-gradient(135deg, #0a1a3a, #07132B);">
                 <div class="mb-3 grid h-10 w-10 place-items-center acc-tile rounded-xl sm:mb-[18px] sm:h-[46px] sm:w-[46px] sm:rounded-[13px]">
                     <x-litus-icon name="zap" class="h-4 w-4 sm:h-[17px] sm:w-[17px]" />
                 </div>

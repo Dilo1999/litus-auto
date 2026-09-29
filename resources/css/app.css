@@ -155,46 +155,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
 }
 
-/* Testimonials — fade + slide-up on mobile */
-@media (max-width: 767px) {
-  [data-slider-effect='fade'] {
-    position: relative;
-    overflow: hidden;
-  }
-
-  [data-slider-effect='fade'] [data-home-card-slide] {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    opacity: 0;
-    transform: translateY(14px) scale(0.98);
-    transition:
-      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-    pointer-events: none;
-    z-index: 0;
-    will-change: opacity, transform;
-  }
-
-  [data-slider-effect='fade'] [data-home-card-slide].is-active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
-    z-index: 1;
-  }
-}
-
-@media (min-width: 768px) {
-  [data-slider-effect='fade'] [data-home-card-slide] {
-    position: static;
-    opacity: 1;
-    transform: none;
-    pointer-events: auto;
-    z-index: auto;
-  }
-}
-
 [data-home-card-dot] {
   border: none;
   padding: 0;
