@@ -181,8 +181,8 @@
 
             {{-- Summary — on mobile this becomes a popup that opens once model + plan + term are all picked --}}
             <aside data-ijara-summary
-                   class="flex flex-col overflow-hidden rounded-[26px] border border-white bg-[#f3f7fd] shadow-[0_22px_55px_rgba(20,78,160,.16)] min-[961px]:sticky min-[961px]:top-24 max-[960px]:fixed max-[960px]:inset-x-0 max-[960px]:bottom-0 max-[960px]:top-auto max-[960px]:z-[80] max-[960px]:max-h-[85vh] max-[960px]:translate-y-full max-[960px]:overflow-y-auto max-[960px]:rounded-b-none max-[960px]:transition-transform max-[960px]:duration-300">
-                <div class="relative flex items-center gap-4 bg-[linear-gradient(145deg,#123873_0%,#1157ce_50%,#2773ed_100%)] px-6 pb-12 pt-6 text-white sm:px-7 sm:pt-7">
+                   class="flex flex-col overflow-hidden rounded-[26px] border border-white bg-[linear-gradient(180deg,rgba(243,247,253,0)_0px,rgba(243,247,253,0)_100px,rgba(243,247,253,.85)_230px,#f3f7fd_320px),linear-gradient(145deg,#123873_0%,#1157ce_50%,#2773ed_100%)] shadow-[0_22px_55px_rgba(20,78,160,.16)] min-[961px]:sticky min-[961px]:top-24 max-[960px]:fixed max-[960px]:inset-x-0 max-[960px]:bottom-0 max-[960px]:top-auto max-[960px]:z-[80] max-[960px]:max-h-[85vh] max-[960px]:translate-y-full max-[960px]:overflow-y-auto max-[960px]:rounded-b-none max-[960px]:transition-transform max-[960px]:duration-300">
+                <div class="relative flex items-center gap-4 px-6 pb-12 pt-6 text-white sm:px-7 sm:pt-7">
                     <span class="grid h-[60px] w-[60px] shrink-0 place-items-center rounded-full border border-white/20 bg-white/15">
                         <x-litus-icon name="file-text" class="h-7 w-7" />
                     </span>
