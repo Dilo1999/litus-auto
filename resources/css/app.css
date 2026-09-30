@@ -675,44 +675,15 @@ h1, h2, h3, h4, h5, h6, p, li, td, th, span, b, strong {
 }
 
 /* Home campaign slider (md+): let the neighbouring cards peek past the container edges,
-   under a brand-blue shade so the three main cards stay the focus. */
+   faded out so the three main cards stay the focus. */
 @media (min-width: 768px) {
   .campaign-peek {
     --peek: 24px;
-    position: relative;
     margin: -16px calc(var(--peek) * -1);
     padding: 16px var(--peek);
     overflow-x: clip;
-  }
-
-  .campaign-peek::before,
-  .campaign-peek::after {
-    content: '';
-    position: absolute;
-    top: 16px;
-    bottom: 16px;
-    z-index: 2;
-    width: var(--peek);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.25s ease;
-  }
-
-  .campaign-peek[data-peek-left]::before,
-  .campaign-peek[data-peek-right]::after {
-    opacity: 1;
-  }
-
-  .campaign-peek::before {
-    left: 0;
-    border-radius: 0 20px 20px 0;
-    background: linear-gradient(90deg, rgba(18, 87, 214, 0.9), rgba(18, 87, 214, 0.55));
-  }
-
-  .campaign-peek::after {
-    right: 0;
-    border-radius: 20px 0 0 20px;
-    background: linear-gradient(270deg, rgba(18, 87, 214, 0.9), rgba(18, 87, 214, 0.55));
+    -webkit-mask-image: linear-gradient(90deg, rgb(0 0 0 / 0.55) 0, #000 var(--peek), #000 calc(100% - var(--peek)), rgb(0 0 0 / 0.55) 100%);
+    mask-image: linear-gradient(90deg, rgb(0 0 0 / 0.55) 0, #000 var(--peek), #000 calc(100% - var(--peek)), rgb(0 0 0 / 0.55) 100%);
   }
 }
 

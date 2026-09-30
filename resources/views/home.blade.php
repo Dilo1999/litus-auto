@@ -210,24 +210,22 @@
                         </a>
                     </div>
 
-                    <div data-home-card-slider-wrap>
-                        <div class="campaign-peek">
-                            <div
-                                data-home-card-slider
-                                data-campaign-hscroll-track
-                                data-interval="4000"
-                                class="flex gap-4 max-md:-mx-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:gap-6 md:will-change-transform">
-                                @forelse ($promoMotorcycles as $motorcycle)
-                                    <div data-home-card-slide class="h-auto shrink-0 max-md:w-[min(88%,340px)] max-md:snap-center md:w-[calc((100%_-_24px)/2)] xl:w-[calc((100%_-_48px)/3)]">
-                                        <x-card.promotion-card :motorcycle="$motorcycle" />
-                                    </div>
-                                @empty
-                                    <div class="w-full rounded-[20px] border border-dashed border-litus-primary-light/40 bg-white/70 px-6 py-14 text-center text-litus-text-2 shadow-[0_1px_2px_rgba(9,17,32,0.04)]"><div class="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-litus-primary-light to-litus-primary text-white shadow-[0_8px_20px_rgba(18,87,214,0.3)]"><x-litus-icon name="zap" class="h-5 w-5" /></div>
-                                        <p class="font-semibold text-litus-text">No active campaigns at the moment.</p>
-                                        <p class="mt-1 text-sm">Check back soon or browse our full motorcycle range.</p>
-                                    </div>
-                                @endforelse
-                            </div>
+                    <div data-home-card-slider-wrap class="campaign-peek">
+                        <div
+                            data-home-card-slider
+                            data-campaign-hscroll-track
+                            data-interval="4000"
+                            class="flex gap-4 max-md:-mx-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:gap-6 md:will-change-transform">
+                            @forelse ($promoMotorcycles as $motorcycle)
+                                <div data-home-card-slide class="h-auto shrink-0 max-md:w-[min(88%,340px)] max-md:snap-center md:w-[calc((100%_-_24px)/2)] xl:w-[calc((100%_-_48px)/3)]">
+                                    <x-card.promotion-card :motorcycle="$motorcycle" />
+                                </div>
+                            @empty
+                                <div class="w-full rounded-[20px] border border-dashed border-litus-primary-light/40 bg-white/70 px-6 py-14 text-center text-litus-text-2 shadow-[0_1px_2px_rgba(9,17,32,0.04)]"><div class="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-litus-primary-light to-litus-primary text-white shadow-[0_8px_20px_rgba(18,87,214,0.3)]"><x-litus-icon name="zap" class="h-5 w-5" /></div>
+                                    <p class="font-semibold text-litus-text">No active campaigns at the moment.</p>
+                                    <p class="mt-1 text-sm">Check back soon or browse our full motorcycle range.</p>
+                                </div>
+                            @endforelse
                         </div>
 
                         @if ($promoMotorcycles->count() > 1)

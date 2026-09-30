@@ -637,11 +637,6 @@ function initCampaignHScroll(root) {
   const bar = root.querySelector('[data-campaign-hscroll-bar]');
   const count = root.querySelector('[data-campaign-hscroll-count]');
   const slides = Array.from(track.querySelectorAll('[data-home-card-slide]'));
-  const peek = track.closest('.campaign-peek');
-  const setPeek = (left, right) => {
-    peek?.toggleAttribute('data-peek-left', left);
-    peek?.toggleAttribute('data-peek-right', right);
-  };
 
   const desktopMq = window.matchMedia('(min-width: 768px)');
   const reduceMq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -658,7 +653,6 @@ function initCampaignHScroll(root) {
     pin.style.top = '';
     track.style.transform = '';
     track.style.overflowX = '';
-    setPeek(false, false);
     progress?.classList.add('hidden');
     progress?.classList.remove('flex');
   };
@@ -670,7 +664,6 @@ function initCampaignHScroll(root) {
     const passed = stickyTop - root.getBoundingClientRect().top;
     const ratio = Math.min(1, Math.max(0, passed / distance));
     track.style.transform = `translate3d(${-ratio * distance}px, 0, 0)`;
-    setPeek(ratio > 0.001, ratio < 0.999);
 
     if (bar) bar.style.transform = `scaleX(${ratio})`;
     if (count && slides.length) {
