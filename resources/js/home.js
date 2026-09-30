@@ -420,6 +420,21 @@ function initHomeScrollCardSlider(track) {
   const wrap = track.closest('[data-home-card-slider-wrap]');
   const dotsRoot = wrap?.querySelector('[data-home-card-dots]');
   const slides = Array.from(track.querySelectorAll('[data-home-card-slide]'));
+  const peek = track.closest('.campaign-peek');
+
+  // Cards cut off at the peek edges get a rounded clip, so the cut side curves like a card corner.
+  const clipEdgeCards = () => {
+    if (!peek) return;
+    const bounds = peek.getBoundingClientRect();
+    slides.forEach((slide) => {
+      const rect = slide.getBoundingClientRect();
+      const left = Math.max(0, bounds.left - rect.left);
+      const right = Math.max(0, rect.right - bounds.right);
+      slide.style.clipPath = left > 0 || right > 0
+        ? `inset(0 ${Math.min(right, rect.width)}px 0 ${Math.min(left, rect.width)}px round 18px)`
+        : '';
+    });
+  };
   const dots = dotsRoot ? Array.from(dotsRoot.querySelectorAll('[data-home-card-dot]')) : [];
 
   if (slides.length < 2) return;
@@ -653,6 +668,7 @@ function initCampaignHScroll(root) {
     pin.style.top = '';
     track.style.transform = '';
     track.style.overflowX = '';
+    slides.forEach((slide) => { slide.style.clipPath = ''; });
     progress?.classList.add('hidden');
     progress?.classList.remove('flex');
   };
@@ -664,6 +680,7 @@ function initCampaignHScroll(root) {
     const passed = stickyTop - root.getBoundingClientRect().top;
     const ratio = Math.min(1, Math.max(0, passed / distance));
     track.style.transform = `translate3d(${-ratio * distance}px, 0, 0)`;
+    clipEdgeCards();
 
     if (bar) bar.style.transform = `scaleX(${ratio})`;
     if (count && slides.length) {
