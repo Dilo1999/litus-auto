@@ -210,7 +210,7 @@
                         </a>
                     </div>
 
-                    <div data-home-card-slider-wrap class="md:overflow-x-clip">
+                    <div data-home-card-slider-wrap class="campaign-peek">
                         <div
                             data-home-card-slider
                             data-campaign-hscroll-track
