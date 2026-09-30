@@ -623,9 +623,107 @@ function initHomeCardSliders() {
   document.querySelectorAll('[data-home-card-slider]').forEach(initHomeCardSlider);
 }
 
+/**
+ * Campaign cards (md+): pin the block and turn vertical scroll into horizontal card movement.
+ * The wrapper gets extra height equal to the horizontal overflow, so the page resumes scrolling
+ * as soon as the last card is in view. Phones keep the native swipe slider.
+ */
+function initCampaignHScroll(root) {
+  const pin = root.querySelector('[data-campaign-hscroll-pin]');
+  const track = root.querySelector('[data-campaign-hscroll-track]');
+  if (!pin || !track) return;
+
+  const progress = root.querySelector('[data-campaign-hscroll-progress]');
+  const bar = root.querySelector('[data-campaign-hscroll-bar]');
+  const count = root.querySelector('[data-campaign-hscroll-count]');
+  const slides = Array.from(track.querySelectorAll('[data-home-card-slide]'));
+
+  const desktopMq = window.matchMedia('(min-width: 768px)');
+  const reduceMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const headerOffset = 72;
+
+  let distance = 0;
+  let stickyTop = headerOffset;
+  let active = false;
+  let ticking = false;
+
+  const reset = () => {
+    active = false;
+    root.style.height = '';
+    pin.style.top = '';
+    track.style.transform = '';
+    track.style.overflowX = '';
+    progress?.classList.add('hidden');
+    progress?.classList.remove('flex');
+  };
+
+  const update = () => {
+    ticking = false;
+    if (!active) return;
+
+    const passed = stickyTop - root.getBoundingClientRect().top;
+    const ratio = Math.min(1, Math.max(0, passed / distance));
+    track.style.transform = `translate3d(${-ratio * distance}px, 0, 0)`;
+
+    if (bar) bar.style.transform = `scaleX(${ratio})`;
+    if (count && slides.length) {
+      const step = slides[0].offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || 0);
+      const visible = Math.max(1, Math.round(track.clientWidth / step));
+      const shown = Math.min(slides.length, Math.round((ratio * distance) / step) + visible);
+      count.textContent = String(shown);
+    }
+  };
+
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  };
+
+  const measure = () => {
+    reset();
+    if (!desktopMq.matches) return;
+
+    distance = Math.max(0, track.scrollWidth - track.clientWidth);
+    if (distance < 1) return;
+
+    if (reduceMq.matches) {
+      // No scroll-jacking for reduced motion: plain horizontal scroll instead.
+      track.style.overflowX = 'auto';
+      return;
+    }
+
+    progress?.classList.remove('hidden');
+    progress?.classList.add('flex');
+
+    // If the pinned block is taller than the viewport, stick it by its bottom edge so the cards stay visible.
+    stickyTop = Math.min(headerOffset, window.innerHeight - pin.offsetHeight);
+    pin.style.top = `${stickyTop}px`;
+    root.style.height = `${pin.offsetHeight + distance}px`;
+    active = true;
+    update();
+  };
+
+  let resizeTimer = null;
+  const scheduleMeasure = () => {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(measure, 120);
+  };
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', scheduleMeasure);
+  desktopMq.addEventListener('change', measure);
+  reduceMq.addEventListener('change', measure);
+  if ('ResizeObserver' in window) new ResizeObserver(scheduleMeasure).observe(track);
+  window.addEventListener('load', measure);
+
+  measure();
+}
+
 function initHomePage() {
   initIjaraEstimator();
   initHomeCardSliders();
+  document.querySelectorAll('[data-campaign-hscroll]').forEach(initCampaignHScroll);
   document.querySelectorAll('[data-testi-slider]').forEach(initTestimonialSlider);
 }
 

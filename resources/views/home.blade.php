@@ -187,51 +187,69 @@
             <div class="relative z-[6] mb-10 hidden -mt-[150px] min-[961px]:block">
                 <x-home-quick-find-form variant="bar" :brands="$brands" />
             </div>
+        </div>
 
-            <div class="mb-[38px] flex flex-wrap items-end justify-between gap-6">
-                <div class="max-w-[660px]">
-                    <span class="litus-eyebrow">Ongoing Promotions</span>
-                    <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Live campaigns, with <span class="litus-text-gradient-blue">real end dates</span></h2>
-                    <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
-                        Each campaign covers selected motorcycles. Open one to see the model details and the price of each.
-                    </p>
-                </div>
-                <a href="{{ route('promotions') }}"
-                   class="inline-flex items-center justify-center gap-2 rounded-lg border-[1.5px] border-litus-line-2 bg-white px-6 py-3.5 text-[14.5px] font-semibold text-litus-ink transition hover:-translate-y-0.5 hover:border-litus-primary-light hover:text-litus-primary">
-                    All {{ $campaignCount }} Campaigns
-                    <x-litus-icon name="arrow-right" class="h-4 w-4" />
-                </a>
-            </div>
-
-            <div data-home-card-slider-wrap>
-                <div
-                    data-home-card-slider
-                    data-interval="4000"
-                    class="grid grid-cols-1 gap-6 max-md:-mx-4 max-md:flex max-md:gap-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:grid-cols-2 xl:grid-cols-3">
-                    @forelse ($promoMotorcycles->take(3) as $motorcycle)
-                        <div data-home-card-slide class="h-full max-md:w-[min(88%,340px)] max-md:shrink-0 max-md:snap-center">
-                            <x-card.promotion-card :motorcycle="$motorcycle" />
+        {{-- Pinned horizontal slider (md+): while this block is pinned, vertical wheel/scroll
+             moves the cards sideways; once the last card is in view the page scrolls on.
+             Phones keep the native swipe slider. Driven by initCampaignHScroll() in home.js. --}}
+        <div data-campaign-hscroll>
+            <div data-campaign-hscroll-pin class="md:sticky md:top-[72px] md:overflow-x-clip md:py-6">
+                <div class="litus-container">
+                    <div class="mb-[38px] flex flex-wrap items-end justify-between gap-6">
+                        <div class="max-w-[660px]">
+                            <span class="litus-eyebrow">Ongoing Promotions</span>
+                            <h2 class="font-display text-[clamp(26px,3.4vw,40px)] font-bold tracking-[-0.028em] text-litus-text">Live campaigns, with <span class="litus-text-gradient-blue">real end dates</span></h2>
+                            <p class="mt-4 text-[clamp(16.5px,1.5vw,19px)] leading-[1.66] text-litus-text-2">
+                                Each campaign covers selected motorcycles. Open one to see the model details and the price of each.
+                            </p>
                         </div>
-                    @empty
-                        <div class="col-span-full rounded-[20px] border border-dashed border-litus-primary-light/40 bg-white/70 px-6 py-14 text-center text-litus-text-2 shadow-[0_1px_2px_rgba(9,17,32,0.04)] max-md:w-full"><div class="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-litus-primary-light to-litus-primary text-white shadow-[0_8px_20px_rgba(18,87,214,0.3)]"><x-litus-icon name="zap" class="h-5 w-5" /></div>
-                            <p class="font-semibold text-litus-text">No active campaigns at the moment.</p>
-                            <p class="mt-1 text-sm">Check back soon or browse our full motorcycle range.</p>
-                        </div>
-                    @endforelse
-                </div>
-
-                @if ($promoMotorcycles->count() > 1)
-                    <div class="mt-4 hidden items-center justify-center gap-1.5 max-md:flex" data-home-card-dots aria-hidden="true">
-                        @foreach ($promoMotorcycles->take(3) as $index => $motorcycle)
-                            <span @class([
-                                'h-1.5 rounded-full transition-all duration-300',
-                                'w-5 bg-litus-primary' => $index === 0,
-                                'w-1.5 bg-litus-line-2' => $index !== 0,
-                            ])
-                                  data-home-card-dot></span>
-                        @endforeach
+                        <a href="{{ route('promotions') }}"
+                           class="inline-flex items-center justify-center gap-2 rounded-lg border-[1.5px] border-litus-line-2 bg-white px-6 py-3.5 text-[14.5px] font-semibold text-litus-ink transition hover:-translate-y-0.5 hover:border-litus-primary-light hover:text-litus-primary">
+                            All {{ $campaignCount }} Campaigns
+                            <x-litus-icon name="arrow-right" class="h-4 w-4" />
+                        </a>
                     </div>
-                @endif
+
+                    <div data-home-card-slider-wrap>
+                        <div
+                            data-home-card-slider
+                            data-campaign-hscroll-track
+                            data-interval="4000"
+                            class="flex gap-4 max-md:-mx-4 max-md:snap-x max-md:snap-mandatory max-md:overflow-x-auto max-md:scroll-smooth max-md:px-4 max-md:pb-1 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden md:gap-6 md:will-change-transform">
+                            @forelse ($promoMotorcycles as $motorcycle)
+                                <div data-home-card-slide class="h-auto shrink-0 max-md:w-[min(88%,340px)] max-md:snap-center md:w-[calc((100%_-_24px)/2)] xl:w-[calc((100%_-_48px)/3)]">
+                                    <x-card.promotion-card :motorcycle="$motorcycle" />
+                                </div>
+                            @empty
+                                <div class="w-full rounded-[20px] border border-dashed border-litus-primary-light/40 bg-white/70 px-6 py-14 text-center text-litus-text-2 shadow-[0_1px_2px_rgba(9,17,32,0.04)]"><div class="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-litus-primary-light to-litus-primary text-white shadow-[0_8px_20px_rgba(18,87,214,0.3)]"><x-litus-icon name="zap" class="h-5 w-5" /></div>
+                                    <p class="font-semibold text-litus-text">No active campaigns at the moment.</p>
+                                    <p class="mt-1 text-sm">Check back soon or browse our full motorcycle range.</p>
+                                </div>
+                            @endforelse
+                        </div>
+
+                        @if ($promoMotorcycles->count() > 1)
+                            <div class="mt-4 hidden items-center justify-center gap-1.5 max-md:flex" data-home-card-dots aria-hidden="true">
+                                @foreach ($promoMotorcycles as $index => $motorcycle)
+                                    <span @class([
+                                        'h-1.5 rounded-full transition-all duration-300',
+                                        'w-5 bg-litus-primary' => $index === 0,
+                                        'w-1.5 bg-litus-line-2' => $index !== 0,
+                                    ])
+                                          data-home-card-dot></span>
+                                @endforeach
+                            </div>
+
+                            {{-- Desktop progress (shown by JS only when the slider actually overflows) --}}
+                            <div class="mt-8 hidden items-center gap-4 max-md:!hidden" data-campaign-hscroll-progress aria-hidden="true">
+                                <div class="h-1 flex-1 overflow-hidden rounded-full bg-litus-line">
+                                    <div class="h-full w-full origin-left scale-x-0 rounded-full bg-litus-primary" data-campaign-hscroll-bar></div>
+                                </div>
+                                <span class="text-[13px] font-semibold tabular-nums text-litus-text-2"><span data-campaign-hscroll-count>1</span> / {{ $campaignCount }}</span>
+                            </div>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
     </section>
