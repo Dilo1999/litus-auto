@@ -420,21 +420,6 @@ function initHomeScrollCardSlider(track) {
   const wrap = track.closest('[data-home-card-slider-wrap]');
   const dotsRoot = wrap?.querySelector('[data-home-card-dots]');
   const slides = Array.from(track.querySelectorAll('[data-home-card-slide]'));
-  const peek = track.closest('.campaign-peek');
-
-  // Cards cut off at the peek edges get a rounded clip, so the cut side curves like a card corner.
-  const clipEdgeCards = () => {
-    if (!peek) return;
-    const bounds = peek.getBoundingClientRect();
-    slides.forEach((slide) => {
-      const rect = slide.getBoundingClientRect();
-      const left = Math.max(0, bounds.left - rect.left);
-      const right = Math.max(0, rect.right - bounds.right);
-      slide.style.clipPath = left > 0 || right > 0
-        ? `inset(0 ${Math.min(right, rect.width)}px 0 ${Math.min(left, rect.width)}px round 18px)`
-        : '';
-    });
-  };
   const dots = dotsRoot ? Array.from(dotsRoot.querySelectorAll('[data-home-card-dot]')) : [];
 
   if (slides.length < 2) return;
@@ -652,6 +637,21 @@ function initCampaignHScroll(root) {
   const bar = root.querySelector('[data-campaign-hscroll-bar]');
   const count = root.querySelector('[data-campaign-hscroll-count]');
   const slides = Array.from(track.querySelectorAll('[data-home-card-slide]'));
+  const peek = track.closest('.campaign-peek');
+
+  // Cards cut off at the peek edges get a rounded clip, so the cut side curves like a card corner.
+  const clipEdgeCards = () => {
+    if (!peek) return;
+    const bounds = peek.getBoundingClientRect();
+    slides.forEach((slide) => {
+      const rect = slide.getBoundingClientRect();
+      const left = Math.max(0, bounds.left - rect.left);
+      const right = Math.max(0, rect.right - bounds.right);
+      slide.style.clipPath = left > 0 || right > 0
+        ? `inset(0 ${Math.min(right, rect.width)}px 0 ${Math.min(left, rect.width)}px round 18px)`
+        : '';
+    });
+  };
 
   const desktopMq = window.matchMedia('(min-width: 768px)');
   const reduceMq = window.matchMedia('(prefers-reduced-motion: reduce)');
