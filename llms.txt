@@ -1,0 +1,31 @@
+# LITUS Automobiles
+
+> LITUS Automobiles sells Honda and Yamaha motorcycles and scooters in the Maldives, with genuine parts, servicing at LITUS service centres, and Shariah-compliant Ijara ownership plans that let customers pay monthly instead of buying outright.
+
+All prices on the site are in Maldivian Rufiyaa (MVR). Promotions are time-limited and each one shows its end date, so check the live page before quoting a price or offer.
+
+Contact: +960 779 7442 (phone and WhatsApp), sales@litusgroup.mv
+Head office: Ma. Elysium, Buruzu Magu, Malé, Maldives
+Opening hours: Sunday to Thursday, 9:30 AM to 6:00 PM
+
+## Motorcycles and offers
+
+- [Motorcycles](https://litusautomobiles.com/motorcycles): The full Honda and Yamaha range, with engine size, price and monthly Ijara estimates for each model.
+- [Promotions](https://litusautomobiles.com/promotions): Live campaigns with the saving on each model and the date each offer ends.
+- [Ijara ownership plans](https://litusautomobiles.com/ownership-plans): How the Shariah-compliant Ijara leasing plans work, the available terms, and what is needed to apply.
+
+## Ownership and after-sales
+
+- [Service centre](https://litusautomobiles.com/service-center): Servicing and maintenance at LITUS service centres, with online appointment booking.
+- [Parts](https://litusautomobiles.com/parts): Genuine Honda and Yamaha parts, with an enquiry form for ordering.
+
+## Company
+
+- [Home](https://litusautomobiles.com/): Overview of the range, current campaigns and why customers choose LITUS.
+- [About us](https://litusautomobiles.com/about-us): The company, the team and its showrooms.
+- [Contact us](https://litusautomobiles.com/contact-us): Showroom and service centre locations, phone numbers and a contact form.
+
+## Optional
+
+- [Gallery](https://litusautomobiles.com/gallery): Photos of LITUS motorcycles, events and customers.
+- [Sitemap](https://litusautomobiles.com/sitemap.xml): Machine-readable list of all public pages.
