@@ -44,7 +44,7 @@ DirectoryIndex index.php
     RewriteRule ^(build|css|font|images)/ - [L]
 
     # Serve public root files directly
-    RewriteRule ^(favicon\.ico|robots\.txt|sitemap\.xml)$ - [L]
+    RewriteRule ^(favicon\.ico|robots\.txt|sitemap\.xml|llms\.txt|google[0-9a-f]+\.html)$ - [L]
 
     # Send everything else to the Front Controller
     # (storage/* is served safely by the "storage.serve" route)
