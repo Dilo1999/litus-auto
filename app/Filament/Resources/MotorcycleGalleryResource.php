@@ -13,7 +13,7 @@ class MotorcycleGalleryResource extends Resource
 
     protected static ?string $model = GalleryImage::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-truck';
+    protected static ?string $navigationIcon = 'heroicon-o-photograph';
 
     protected static ?string $navigationGroup = 'Gallery';
 
@@ -29,6 +29,11 @@ class MotorcycleGalleryResource extends Resource
     public static function getCategoryLabel(): string
     {
         return 'Motorcycles';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Motorcycle Photos';
     }
 
     public static function getPages(): array

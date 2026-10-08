@@ -42,6 +42,8 @@ class AppServiceProvider extends ServiceProvider
 
         // Modern look & feel for the Filament admin panel (styles only).
         Filament::serving(function () {
+            Filament::registerNavigationGroups(['Catalog', 'Gallery', 'Locations', 'Settings', 'Super Settings']);
+
             Filament::registerStyles([
                 asset('css/admin-theme.css').'?v='.@filemtime(public_path('css/admin-theme.css')),
                 asset('css/admin-theme-dark.css').'?v='.@filemtime(public_path('css/admin-theme-dark.css')),
