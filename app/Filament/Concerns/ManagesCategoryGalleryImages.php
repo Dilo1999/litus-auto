@@ -56,6 +56,9 @@ trait ManagesCategoryGalleryImages
                         ->preserveFilenames()
                         ->required()
                         ->maxFiles(40)
+                        ->panelLayout('grid')
+                        ->imagePreviewHeight('140')
+                        ->extraAttributes(['class' => 'ad-upload-grid'])
                         ->helperText('Select one or more images. Recommended: landscape photos, at least 1200px wide.')
                         ->columnSpanFull(),
                 ])

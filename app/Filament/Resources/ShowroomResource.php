@@ -71,7 +71,11 @@ class ShowroomResource extends Resource
                             ->directory('showrooms')
                             ->disk('public')
                             ->preserveFilenames()
-                            ->helperText('Upload one or more photos. The first image is the cover; extras rotate in the card slider.')
+                            ->panelLayout('grid')
+                            ->imagePreviewHeight('140')
+                            ->enableReordering()
+                            ->extraAttributes(['class' => 'ad-upload-grid'])
+                            ->helperText('Upload one or more photos. The first image is the cover; extras rotate in the card slider. Drag thumbnails to reorder.')
                             ->columnSpanFull(),
                     ]),
 
