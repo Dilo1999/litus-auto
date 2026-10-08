@@ -43,12 +43,16 @@ class UserResource extends Resource
                     ->schema([
                         TextInput::make('name')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->disabled(fn ($context) => $context === 'edit')
+                            ->dehydrated(fn ($context) => $context === 'create'),
                         TextInput::make('email')
                             ->email()
                             ->required()
                             ->unique(ignoreRecord: true)
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->disabled(fn ($context) => $context === 'edit')
+                            ->dehydrated(fn ($context) => $context === 'create'),
                         TextInput::make('password')
                             ->password()
                             ->dehydrated(fn ($state) => filled($state))
