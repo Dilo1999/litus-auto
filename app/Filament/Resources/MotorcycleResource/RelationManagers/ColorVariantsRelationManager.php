@@ -53,7 +53,11 @@ class ColorVariantsRelationManager extends RelationManager
                             ->directory('motorcycles/spin')
                             ->preserveFilenames()
                             ->maxFiles(72)
-                            ->helperText('Order follows upload sequence. Maximum file size per image: 700KB.'),
+                            ->panelLayout('grid')
+                            ->imagePreviewHeight('140')
+                            ->enableReordering()
+                            ->extraAttributes(['class' => 'ad-upload-grid'])
+                            ->helperText('Order follows upload sequence — drag thumbnails to reorder. Maximum file size per image: 700KB.'),
                     ]),
             ]);
     }

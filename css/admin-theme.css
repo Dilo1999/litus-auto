@@ -679,3 +679,25 @@ input[type='radio'].text-primary-600 { color: var(--ad-accent); }
 .filament-tables-empty-state [class*='text-lg'] { font-weight: 700; letter-spacing: -0.01em; color: var(--ad-text); }
 .filament-tables-empty-state p,
 .filament-tables-empty-state [class*='text-gray-500'] { font-size: 0.82rem; color: var(--ad-muted); max-width: 26rem; line-height: 1.5; }
+
+/* ---------- Multi-image upload as a thumbnail grid (e.g. 360° spin frames) ---------- */
+.ad-upload-grid .filepond--item {
+    width: calc(25% - 0.5em);
+}
+.ad-upload-grid .filepond--item-panel,
+.ad-upload-grid .filepond--image-preview-wrapper { border-radius: 12px; }
+.ad-upload-grid .filepond--image-preview { background: #0b1020; }
+.ad-upload-grid .filepond--file-info-main { font-size: 0.72rem; }
+.ad-upload-grid .filepond--file-info-sub { font-size: 0.65rem; opacity: .7; }
+.ad-upload-grid .filepond--item:hover .filepond--item-panel { box-shadow: 0 0 0 2px var(--ad-accent); }
+.ad-upload-grid .filepond--item[data-filepond-item-state*='drag'] { cursor: grabbing; }
+
+@media (min-width: 1280px) {
+    .ad-upload-grid .filepond--item { width: calc(20% - 0.5em); }
+}
+@media (max-width: 767px) {
+    .ad-upload-grid .filepond--item { width: calc(33.333% - 0.5em); }
+}
+@media (max-width: 479px) {
+    .ad-upload-grid .filepond--item { width: calc(50% - 0.5em); }
+}
