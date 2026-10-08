@@ -1,7 +1,7 @@
 <x-filament::widget class="ad-dash-widget">
     <div class="ad-bento">
         {{-- Latest motorcycles --}}
-        <section class="ad-card ad-bento-bikes" aria-labelledby="ad-bikes-title">
+        <section class="ad-card ad-bento-bikes ad-rise" style="--i: 12" aria-labelledby="ad-bikes-title">
             <header class="ad-card-head">
                 <div>
                     <h3 id="ad-bikes-title" class="ad-card-title">Latest motorcycles</h3>
@@ -18,7 +18,7 @@
             @else
                 <div class="ad-bikes">
                     @foreach ($bikes as $bike)
-                        <a href="{{ $bike['url'] }}" class="ad-bike">
+                        <a href="{{ $bike['url'] }}" class="ad-bike ad-rise" style="--i: {{ 13 + $loop->index }}">
                             <div class="ad-bike-media">
                                 @if ($bike['image'])
                                     <img src="{{ $bike['image'] }}" alt="" loading="lazy">
@@ -48,14 +48,14 @@
         </section>
 
         {{-- Needs attention --}}
-        <section class="ad-card ad-bento-attention" id="ad-attention" aria-labelledby="ad-attn-title">
+        <section class="ad-card ad-bento-attention ad-rise" style="--i: 13" id="ad-attention" aria-labelledby="ad-attn-title">
             <header class="ad-card-head">
                 <div>
                     <h3 id="ad-attn-title" class="ad-card-title">Needs attention</h3>
                     <p class="ad-card-sub">Things to fix or finish</p>
                 </div>
                 @if ($attention->isNotEmpty())
-                    <span class="ad-count">{{ $attention->count() }}</span>
+                    <span class="ad-count ad-count--pulse">{{ $attention->count() }}</span>
                 @endif
             </header>
 
@@ -67,7 +67,7 @@
             @else
                 <ul class="ad-list">
                     @foreach ($attention as $item)
-                        <li class="ad-list-row">
+                        <li class="ad-list-row ad-slide" style="--i: {{ 14 + $loop->index }}">
                             <span class="ad-list-icon ad-tone--{{ $item['tone'] }}">
                                 <x-dynamic-component :component="$item['icon']" aria-hidden="true" />
                             </span>
@@ -80,7 +80,7 @@
         </section>
 
         {{-- Recent activity --}}
-        <section class="ad-card ad-bento-activity" aria-labelledby="ad-activity-title">
+        <section class="ad-card ad-bento-activity ad-rise" style="--i: 14" aria-labelledby="ad-activity-title">
             <header class="ad-card-head">
                 <div>
                     <h3 id="ad-activity-title" class="ad-card-title">Recent activity</h3>
@@ -93,7 +93,7 @@
             @else
                 <ol class="ad-feed">
                     @foreach ($activity as $event)
-                        <li>
+                        <li class="ad-slide" style="--i: {{ 15 + $loop->index }}">
                             <a href="{{ $event['url'] }}" class="ad-feed-row">
                                 <span class="ad-feed-icon"><x-dynamic-component :component="$event['icon']" aria-hidden="true" /></span>
                                 <span class="ad-feed-text">

@@ -303,6 +303,101 @@
     .ad-list-row { flex-wrap: wrap; }
 }
 
+
+/* ==========================================================================
+   Motion — entrance, data reveal and hover effects.
+   Delays are driven by --i (stagger index) set in the Blade views.
+   Everything is switched off under prefers-reduced-motion (bottom of file).
+   ========================================================================== */
+
+@keyframes ad-rise   { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes ad-slide  { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
+@keyframes ad-pop    { 0% { opacity: 0; transform: scale(.82) rotate(-8deg); } 70% { opacity: 1; transform: scale(1.03); } 100% { opacity: 1; transform: none; } }
+@keyframes ad-fade   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ad-ring   { from { stroke-dashoffset: var(--ad-circ); } to { stroke-dashoffset: var(--ad-off); } }
+@keyframes ad-grow   { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes ad-orb    { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-40px, 24px) scale(1.15); } }
+@keyframes ad-shine  { from { transform: translateX(-120%) skewX(-18deg); } to { transform: translateX(220%) skewX(-18deg); } }
+@keyframes ad-pulse  { 0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, .45); } 70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); } 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
+@keyframes ad-blink  { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+@keyframes ad-sheen  { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+.ad-anim  { animation: ad-fade .5s ease both; }
+.ad-rise  { animation: ad-rise .6s var(--ad-ease) both; animation-delay: calc(var(--i, 0) * 60ms); }
+.ad-slide { animation: ad-slide .5s var(--ad-ease) both; animation-delay: calc(var(--i, 0) * 60ms); }
+.ad-pop   { animation: ad-pop .8s var(--ad-ease) both; animation-delay: calc(var(--i, 0) * 60ms); }
+
+/* Hero: drifting ambient glow behind the content */
+.ad-hero2 > :not(.ad-hero2-orb) { position: relative; z-index: 1; }
+.ad-hero2-orb {
+    position: absolute; z-index: 0; top: -120px; right: 8%; width: 360px; height: 360px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(245, 158, 11, .20), transparent 65%);
+    filter: blur(10px); pointer-events: none;
+    animation: ad-orb 14s ease-in-out infinite;
+}
+
+/* Greeting name: slow golden sheen */
+.ad-hero2-title span {
+    background: linear-gradient(100deg, #f59e0b 0%, #fbbf24 30%, #fff1c7 45%, #fbbf24 60%, #f59e0b 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    animation: ad-sheen 6s linear infinite;
+}
+
+/* Ring draws itself, then breathes softly */
+.ad-ring-fill { animation: ad-ring 1.4s var(--ad-ease) .35s both; }
+.ad-hero2-gauge::before {
+    content: ''; position: absolute; inset: 14px; border-radius: 50%;
+    box-shadow: 0 0 40px rgba(245, 158, 11, .18); animation: ad-blink 4s ease-in-out infinite;
+}
+
+/* Primary quick action: light sweep on hover */
+.ad-qa-btn { position: relative; overflow: hidden; }
+.ad-qa-btn--primary::after {
+    content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 40%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .55), transparent);
+    transform: translateX(-120%) skewX(-18deg);
+}
+.ad-qa-btn--primary:hover::after { animation: ad-shine .8s ease; }
+.ad-qa-btn:hover .ad-ico-sm { transform: rotate(90deg); }
+.ad-qa-btn .ad-ico-sm { transition: transform .25s var(--ad-ease); }
+
+/* Tiles: bars grow in, spotlight follows hover, icon lifts */
+.ad-tile-bar > span { transform-origin: left center; animation: ad-grow 1s var(--ad-ease) both; animation-delay: calc(var(--i, 0) * 60ms + 250ms); }
+.ad-tile { overflow: hidden; isolation: isolate; }
+.ad-tile::before {
+    content: ''; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity .25s;
+    background: radial-gradient(240px circle at 100% 0%, rgba(245, 158, 11, .14), transparent 60%);
+}
+.ad-tile:hover::before { opacity: 1; }
+.ad-tile-icon { transition: transform .25s var(--ad-ease), background .25s, color .25s; }
+.ad-tile:hover .ad-tile-icon { transform: translateY(-2px) rotate(-6deg); background: var(--ad-accent); color: #1b1206; }
+.ad-status--partial::before { animation: ad-blink 1.6s ease-in-out infinite; }
+
+/* Bikes: image floats up on hover with a warm glow underneath */
+.ad-bike-media::after {
+    content: ''; position: absolute; left: 20%; right: 20%; bottom: 8%; height: 14px; border-radius: 50%;
+    background: rgba(0, 0, 0, .45); filter: blur(8px); transition: transform .35s var(--ad-ease), opacity .35s;
+}
+.ad-bike-media img { z-index: 1; }
+.ad-bike:hover .ad-bike-media img { transform: translateY(-6px) scale(1.05); }
+.ad-bike:hover .ad-bike-media::after { transform: scaleX(.8); opacity: .6; }
+.ad-bike-media .ad-badge { z-index: 2; }
+
+/* Needs-attention counter pings; rows nudge on hover */
+.ad-count--pulse { animation: ad-pulse 2s ease-out 1s 3; }
+.ad-list-row { transition: transform .2s var(--ad-ease); }
+.ad-list-row:hover { transform: translateX(3px); }
+.ad-feed-icon { transition: border-color .2s, color .2s, transform .2s var(--ad-ease); }
+.ad-feed-row:hover .ad-feed-icon { border-color: var(--ad-accent); color: var(--ad-accent); transform: scale(1.08); }
+
+/* Cards: hairline accent glow on hover */
+.ad-card { transition: border-color .25s, box-shadow .25s; }
+.ad-card:hover { border-color: rgba(245, 158, 11, .28); box-shadow: var(--ad-shadow-md), 0 0 0 1px rgba(245, 158, 11, .06); }
+
 @media (prefers-reduced-motion: reduce) {
-    .ad-tile, .ad-bike, .ad-qa-btn, .ad-ring-fill, .ad-bike-media img { transition: none !important; }
+    .filament-dashboard-page *,
+    .filament-dashboard-page *::before,
+    .filament-dashboard-page *::after { animation: none !important; transition: none !important; }
+    .ad-hero2-orb { display: none; }
 }

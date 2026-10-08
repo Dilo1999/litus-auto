@@ -1,6 +1,6 @@
 <x-filament::widget class="ad-dash-widget">
     <section aria-labelledby="ad-pulse-title">
-        <div class="ad-section-head">
+        <div class="ad-section-head ad-rise" style="--i: 5">
             <h3 id="ad-pulse-title" class="ad-section-title">Content pulse</h3>
             <p class="ad-section-hint">Live on the storefront vs. total in the admin</p>
         </div>
@@ -10,7 +10,7 @@
                 @php
                     $state = $type['total'] === 0 ? 'empty' : ($type['drafts'] > 0 || $type['live'] < $type['total'] ? 'partial' : 'ok');
                 @endphp
-                <a href="{{ $type['url'] }}" class="ad-tile" style="--ad-pct: {{ $type['percent'] }}%">
+                <a href="{{ $type['url'] }}" class="ad-tile ad-rise" style="--ad-pct: {{ $type['percent'] }}%; --i: {{ 6 + $loop->index }}">
                     <div class="ad-tile-head">
                         <span class="ad-tile-icon">
                             <x-dynamic-component :component="$type['icon']" aria-hidden="true" />
@@ -20,7 +20,7 @@
                     </div>
 
                     <div class="ad-tile-value">
-                        <span>{{ $type['live'] }}</span>
+                        <x-admin.count-up :value="$type['live']" />
                         <span class="ad-tile-of">/ {{ $type['total'] }} live</span>
                     </div>
 

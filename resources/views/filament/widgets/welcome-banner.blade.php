@@ -4,11 +4,12 @@
     $dash = $circumference * $summary['percent'] / 100;
 @endphp
 <x-filament::widget class="ad-dash-widget">
-    <section class="ad-hero2" aria-label="Overview">
+    <section class="ad-hero2 ad-anim" aria-label="Overview">
+        <span class="ad-hero2-orb" aria-hidden="true"></span>
         <div class="ad-hero2-main">
-            <p class="ad-eyebrow">{{ $today }}</p>
-            <h2 class="ad-hero2-title">{{ $greeting }}, <span>{{ $firstName }}</span></h2>
-            <p class="ad-hero2-lead">
+            <p class="ad-eyebrow ad-rise" style="--i: 1">{{ $today }}</p>
+            <h2 class="ad-hero2-title ad-rise" style="--i: 2">{{ $greeting }}, <span>{{ $firstName }}</span></h2>
+            <p class="ad-hero2-lead ad-rise" style="--i: 3">
                 Your storefront is <strong>{{ $summary['percent'] }}% live</strong>.
                 {{ $summary['live'] }} of {{ $summary['total'] }} items are visible to customers
                 @if ($attentionCount > 0)
@@ -19,7 +20,7 @@
             </p>
 
             @if ($quickActions->isNotEmpty())
-                <div class="ad-qa" role="group" aria-label="Quick actions">
+                <div class="ad-qa ad-rise" style="--i: 4" role="group" aria-label="Quick actions">
                     @foreach ($quickActions as $action)
                         <a href="{{ $action['url'] }}" class="ad-qa-btn {{ $loop->first ? 'ad-qa-btn--primary' : '' }}">
                             <x-heroicon-o-plus class="ad-ico-sm" aria-hidden="true" />
@@ -30,31 +31,33 @@
             @endif
         </div>
 
-        <div class="ad-hero2-gauge">
+        <div class="ad-hero2-gauge ad-pop" style="--i: 3">
             <svg viewBox="0 0 128 128" class="ad-ring" role="img" aria-label="{{ $summary['percent'] }}% of content is live">
                 <circle cx="64" cy="64" r="{{ $radius }}" class="ad-ring-track" />
                 <circle cx="64" cy="64" r="{{ $radius }}" class="ad-ring-fill"
-                    stroke-dasharray="{{ round($dash, 2) }} {{ round($circumference, 2) }}"
+                    stroke-dasharray="{{ round($circumference, 2) }}"
+                    stroke-dashoffset="{{ round($circumference - $dash, 2) }}"
+                    style="--ad-circ: {{ round($circumference, 2) }}; --ad-off: {{ round($circumference - $dash, 2) }}"
                     transform="rotate(-90 64 64)" />
             </svg>
             <div class="ad-ring-center">
-                <span class="ad-ring-value">{{ $summary['percent'] }}<small>%</small></span>
+                <span class="ad-ring-value"><x-admin.count-up :value="$summary['percent']" :duration="1200" /><small>%</small></span>
                 <span class="ad-ring-label">live</span>
             </div>
         </div>
 
-        <dl class="ad-hero2-stats">
+        <dl class="ad-hero2-stats ad-rise" style="--i: 4">
             <div>
                 <dt>Live items</dt>
-                <dd>{{ $summary['live'] }}</dd>
+                <dd><x-admin.count-up :value="$summary['live']" /></dd>
             </div>
             <div>
                 <dt>Unpublished</dt>
-                <dd class="{{ $summary['drafts'] > 0 ? 'is-warn' : '' }}">{{ $summary['drafts'] }}</dd>
+                <dd class="{{ $summary['drafts'] > 0 ? 'is-warn' : '' }}"><x-admin.count-up :value="$summary['drafts']" /></dd>
             </div>
             <div>
                 <dt>Promotions running</dt>
-                <dd>{{ $runningPromos }}</dd>
+                <dd><x-admin.count-up :value="$runningPromos" /></dd>
             </div>
         </dl>
     </section>
