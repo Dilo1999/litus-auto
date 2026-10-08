@@ -45,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
             Filament::registerStyles([
                 asset('css/admin-theme.css').'?v='.@filemtime(public_path('css/admin-theme.css')),
                 asset('css/admin-theme-dark.css').'?v='.@filemtime(public_path('css/admin-theme-dark.css')),
+                asset('css/admin-dashboard.css').'?v='.@filemtime(public_path('css/admin-dashboard.css')),
             ]);
         });
 

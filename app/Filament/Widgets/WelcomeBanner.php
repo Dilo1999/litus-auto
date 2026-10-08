@@ -2,12 +2,7 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\GalleryImage;
-use App\Models\GalleryVideo;
-use App\Models\IjaraPlan;
-use App\Models\Motorcycle;
-use App\Models\Promotion;
-use App\Models\Showroom;
+use App\Filament\Support\ContentInventory;
 use Filament\Facades\Filament;
 use Filament\Widgets\Widget;
 
@@ -30,34 +25,23 @@ class WelcomeBanner extends Widget
             default => 'Good evening',
         };
 
-        $liveCount = Motorcycle::where('is_published', true)->count()
-            + Promotion::published()->currentlyActive()->count()
-            + IjaraPlan::where('is_published', true)->count()
-            + GalleryImage::where('is_published', true)->count()
-            + GalleryVideo::where('is_published', true)->count()
-            + Showroom::where('is_published', true)->count();
-
-        $attentionCount = Motorcycle::where('is_published', false)->count()
-            + Promotion::where('is_published', false)->count()
-            + IjaraPlan::where('is_published', false)->count()
-            + GalleryImage::where('is_published', false)->count()
-            + GalleryVideo::where('is_published', false)->count()
-            + Showroom::where('is_published', false)->count();
-
         $name = Filament::getUserName($user);
-        $initials = collect(preg_split('/\s+/', trim($name)))
-            ->filter()
-            ->map(fn (string $part) => mb_substr($part, 0, 1))
-            ->take(2)
-            ->implode('');
+        $types = ContentInventory::types();
+        $summary = ContentInventory::summary();
+
+        $quickActions = collect(['motorcycles' => 'Add motorcycle', 'promotions' => 'New promotion', 'videos' => 'Add video', 'showrooms' => 'Add showroom'])
+            ->filter(fn ($label, $key) => filled($types[$key]['createUrl'] ?? null))
+            ->map(fn ($label, $key) => ['label' => $label, 'icon' => $types[$key]['icon'], 'url' => $types[$key]['createUrl']])
+            ->values();
 
         return [
-            'name' => $name,
-            'initials' => $initials !== '' ? mb_strtoupper($initials) : 'A',
+            'firstName' => str($name)->before(' ')->toString() ?: $name,
             'greeting' => $greeting,
-            'liveCount' => $liveCount,
-            'attentionCount' => $attentionCount,
-            'today' => now()->format('D j M'),
+            'today' => now()->format('l, j F Y'),
+            'summary' => $summary,
+            'attentionCount' => ContentInventory::attention()->count(),
+            'runningPromos' => $types['promotions']['live'] ?? 0,
+            'quickActions' => $quickActions,
         ];
     }
 }

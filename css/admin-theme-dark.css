@@ -322,19 +322,6 @@ body.filament-body, .filament-body,
    Dashboard redesign — dark palette
    ========================================================================== */
 
-.ad-hero {
-    background: linear-gradient(120deg, var(--ad-surface) 0%, var(--ad-surface-2) 100%);
-    border-color: var(--ad-border);
-}
-.ad-hero-name { color: var(--ad-text); }
-.ad-hero-stat-n { color: var(--ad-text); }
-.ad-hero-signout { background: var(--ad-surface-2); border-color: var(--ad-border-strong); color: var(--ad-muted); }
-
-.ad-stat { background: var(--ad-surface); border-color: var(--ad-border); }
-.ad-stat:hover { border-color: var(--ad-border-strong); }
-.ad-stat-body .ad-stat-value { color: var(--ad-text); }
-.ad-stat-bar-track { background: rgba(255, 255, 255, 0.07); }
-
 .filament-tables-empty-state > div:first-child {
     background: var(--ad-accent-soft) !important;
     color: #ffb946 !important;
