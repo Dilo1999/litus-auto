@@ -6,6 +6,7 @@ use App\Mail\ContactFormMail;
 use App\Mail\MotorcycleEnquiryMail;
 use App\Mail\PartsInquiryMail;
 use App\Mail\ServiceAppointmentMail;
+use App\Models\Inquiry;
 use App\Services\TelegramNotifier;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -65,6 +66,8 @@ class InquiryFormController extends Controller
             ], 500);
         }
 
+        Inquiry::record(Inquiry::TYPE_SERVICE, 'service-appointment');
+
         return response()->json(['message' => 'Appointment request submitted.']);
     }
 
@@ -105,6 +108,8 @@ class InquiryFormController extends Controller
                 'message' => 'Could not send your inquiry. Please try again.',
             ], 500);
         }
+
+        Inquiry::record(Inquiry::TYPE_PARTS, 'parts-inquiry');
 
         return response()->json(['message' => 'Parts inquiry submitted.']);
     }
@@ -151,6 +156,8 @@ class InquiryFormController extends Controller
             ], 500);
         }
 
+        Inquiry::record(Inquiry::TYPE_SALES, 'motorcycle-enquiry');
+
         return response()->json(['message' => 'Enquiry submitted.']);
     }
 
@@ -185,6 +192,8 @@ class InquiryFormController extends Controller
                 'message' => 'Could not send your message. Please try again.',
             ], 500);
         }
+
+        Inquiry::record(Inquiry::typeForContact($validated['inquiry_type']), 'contact');
 
         return response()->json(['message' => 'Message submitted.']);
     }
