@@ -125,14 +125,18 @@ function initIjaraEstimator() {
   const termLabel = q('[data-ijara-term-label]');
   const groups = data.groups || [];
 
+  const currentModel = () => data.models.find((m) => m.key === modelSel.value);
+
   // Months a plan offers in one option; before a plan is chosen, the option's standard months.
+  // An option the admin switched off for the chosen bike offers none.
   const optionMonths = (planKey, index) => {
     if (!planKey) return groups[index].months;
+    const model = currentModel();
+    const options = model && model.plans[planKey] && model.plans[planKey].options;
+    if (options && options[groups[index].label === 'Plan B' ? 'b' : 'a'] === false) return [];
     const found = ((data.planGroups && data.planGroups[planKey]) || []).find((g) => g.label === groups[index].label);
     return found ? found.months : [];
   };
-
-  const currentModel = () => data.models.find((m) => m.key === modelSel.value);
   const tagFor = (key) => (data.planTags && data.planTags[key]) || '';
 
   // Small fade-in whenever a figure changes.

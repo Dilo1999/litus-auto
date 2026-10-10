@@ -12,6 +12,10 @@ class IjaraRates
      */
     public static function planDown(Motorcycle $motorcycle, string $planKey, string $option = 'a'): int|float|null
     {
+        if (! self::optionEnabled($motorcycle, $planKey, $option)) {
+            return null;
+        }
+
         $row = $motorcycle->ijara_rates[$planKey] ?? [];
         // Plans saved before the Plan A / Plan B split kept a single "down" figure.
         $stored = $row["down_{$option}"] ?? $row['down'] ?? null;
@@ -25,6 +29,12 @@ class IjaraRates
             ->filter(fn ($v) => is_numeric($v));
 
         return $configDowns->isNotEmpty() ? $configDowns->min() + 0 : null;
+    }
+
+    /** Whether this bike is offered on one option (Plan A / Plan B) of a plan; switched on unless the admin turned it off. */
+    public static function optionEnabled(Motorcycle $motorcycle, string $planKey, string $option): bool
+    {
+        return (bool) ($motorcycle->ijara_rates[$planKey]["{$option}_enabled"] ?? true);
     }
 
     /**
@@ -61,9 +71,14 @@ class IjaraRates
                     if (in_array($planKey, $motorcycle->ijara_plans ?? [], true)) {
                         // A plan offered on this bike is always listed, even before its down payment is entered.
                         // Down payment can differ between Plan A (6/12/24 months) and Plan B (36/48 months).
+                        // Options the admin switched off for this bike are hidden in the calculator.
                         $modelPlans[$planKey] = [
                             'down_a' => self::planDown($motorcycle, $planKey, 'a'),
                             'down_b' => self::planDown($motorcycle, $planKey, 'b'),
+                            'options' => [
+                                'a' => self::optionEnabled($motorcycle, $planKey, 'a'),
+                                'b' => self::optionEnabled($motorcycle, $planKey, 'b'),
+                            ],
                         ];
                     }
                 }
@@ -129,7 +144,7 @@ class IjaraRates
                     foreach ($planOptions->get($planKey, ['Plan A']) as $label) {
                         $option = $label === 'Plan B' ? 'b' : 'a';
 
-                        if (self::planDown($motorcycle, $planKey, $option) === null) {
+                        if (self::optionEnabled($motorcycle, $planKey, $option) && self::planDown($motorcycle, $planKey, $option) === null) {
                             $gaps[] = "{$motorcycle->name} / {$planName} ({$label}): no down payment";
                         }
                     }

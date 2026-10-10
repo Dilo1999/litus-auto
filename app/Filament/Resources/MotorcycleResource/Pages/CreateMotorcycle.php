@@ -22,6 +22,16 @@ class CreateMotorcycle extends CreateRecord
 
             $this->halt();
         }
+
+        if ($plan = MotorcycleResource::ijaraPlanWithoutOption($this->data)) {
+            Notification::make()
+                ->title("Switch on Plan A or Plan B for {$plan}")
+                ->body('Or switch the plan off for this bike.')
+                ->danger()
+                ->send();
+
+            $this->halt();
+        }
     }
 
     protected function mutateFormDataBeforeCreate(array $data): array

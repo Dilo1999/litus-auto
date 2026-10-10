@@ -112,9 +112,10 @@ class MotorcycleResource extends Resource
 
     /**
      * One row per Ijara plan: a switch for the plan and, only while it is on, this bike's down payment for
-     * each option it offers (Plan A / Plan B). Stored in motorcycles.ijara_rates as
-     * [plan => ['down_a' => amount, 'down_b' => amount]]; the switches also drive ijara_plans
-     * (see ijaraDataForSave / ijaraDataForForm).
+     * each option it offers (Plan A / Plan B). When a plan offers both options, each one has its own switch
+     * so a bike can be offered on just one of them. Stored in motorcycles.ijara_rates as
+     * [plan => ['down_a' => amount, 'down_b' => amount, 'a_enabled' => bool, 'b_enabled' => bool]];
+     * the plan switches also drive ijara_plans (see ijaraDataForSave / ijaraDataForForm).
      *
      * @return array<int, Forms\Components\Component>
      */
@@ -130,17 +131,33 @@ class MotorcycleResource extends Resource
             $enabled = "ijara_rates.{$plan->slug}.enabled";
             // Which options (Plan A, Plan B) this plan actually offers; most plans offer both and need a
             // separate down payment for each, since a customer picks one option before choosing their term.
-            $labels = collect($plan->normalizedGroups())->pluck('label')->all() ?: ['Plan A'];
+            $labels = static::ijaraPlanOptions($plan);
             $multiOption = count($labels) > 1;
 
-            $downFields = collect($labels)->map(fn (string $label) => TextInput::make("ijara_rates.{$plan->slug}.".($label === 'Plan B' ? 'down_b' : 'down_a'))
-                ->label($multiOption ? "Down payment - {$label}" : 'Down payment')
-                ->prefix('MVR')
-                ->numeric()
-                ->minValue(0)
-                ->required()
-                ->visible(fn (\Closure $get) => (bool) $get($enabled)))
-                ->all();
+            $downFields = collect($labels)->map(function (string $label) use ($plan, $enabled, $multiOption) {
+                $option = $label === 'Plan B' ? 'b' : 'a';
+                $optionEnabled = "ijara_rates.{$plan->slug}.{$option}_enabled";
+
+                $down = TextInput::make("ijara_rates.{$plan->slug}.down_{$option}")
+                    ->label($multiOption ? "Down payment - {$label}" : 'Down payment')
+                    ->prefix('MVR')
+                    ->numeric()
+                    ->minValue(0)
+                    ->required()
+                    ->visible(fn (\Closure $get) => (bool) $get($enabled) && (! $multiOption || (bool) $get($optionEnabled)));
+
+                if (! $multiOption) {
+                    return $down;
+                }
+
+                return Forms\Components\Group::make([
+                    Toggle::make($optionEnabled)
+                        ->label("Offer {$label}")
+                        ->default(true)
+                        ->reactive(),
+                    $down,
+                ])->visible(fn (\Closure $get) => (bool) $get($enabled));
+            })->all();
 
             return Forms\Components\Grid::make(['default' => 1, 'md' => 2])
                 ->extraAttributes(['class' => 'rounded-lg border border-gray-200 p-4'])
@@ -155,7 +172,20 @@ class MotorcycleResource extends Resource
         })->all();
     }
 
-    /** Form state -> database: the plan switches become the ijara_plans list, and only switched-on plans keep a down payment. */
+    /**
+     * The options (Plan A / Plan B) a plan offers, by label.
+     *
+     * @return list<string>
+     */
+    public static function ijaraPlanOptions(IjaraPlan $plan): array
+    {
+        return collect($plan->normalizedGroups())->pluck('label')->values()->all() ?: ['Plan A'];
+    }
+
+    /**
+     * Form state -> database: the plan switches become the ijara_plans list, and only switched-on plans keep a
+     * down payment. A switched-off option (Plan A / Plan B) keeps no down payment either.
+     */
     public static function ijaraDataForSave(array $data): array
     {
         $rates = (array) ($data['ijara_rates'] ?? []);
@@ -164,10 +194,15 @@ class MotorcycleResource extends Resource
 
         foreach ($rates as $slug => $row) {
             if (! empty($row['enabled'])) {
+                $aEnabled = (bool) ($row['a_enabled'] ?? true);
+                $bEnabled = (bool) ($row['b_enabled'] ?? true);
+
                 $plans[] = $slug;
                 $clean[$slug] = [
-                    'down_a' => $row['down_a'] ?? null,
-                    'down_b' => $row['down_b'] ?? null,
+                    'down_a' => $aEnabled ? ($row['down_a'] ?? null) : null,
+                    'down_b' => $bEnabled ? ($row['down_b'] ?? null) : null,
+                    'a_enabled' => $aEnabled,
+                    'b_enabled' => $bEnabled,
                 ];
             }
         }
@@ -186,6 +221,9 @@ class MotorcycleResource extends Resource
 
         foreach (IjaraPlan::query()->pluck('slug') as $slug) {
             $rates[$slug]['enabled'] = in_array($slug, $plans, true);
+            // Bikes saved before the per-option switches offered every option the plan has.
+            $rates[$slug]['a_enabled'] = (bool) ($rates[$slug]['a_enabled'] ?? true);
+            $rates[$slug]['b_enabled'] = (bool) ($rates[$slug]['b_enabled'] ?? true);
 
             // Plans saved before the Plan A / Plan B split kept a single "down" figure; carry it over as Plan A's.
             if (array_key_exists('down', $rates[$slug]) && ! array_key_exists('down_a', $rates[$slug])) {
@@ -206,6 +244,33 @@ class MotorcycleResource extends Resource
         }
 
         return collect((array) ($data['ijara_rates'] ?? []))->doesntContain(fn ($row) => ! empty($row['enabled']));
+    }
+
+    /** Name of the first switched-on plan whose Plan A and Plan B are both switched off, if any. */
+    public static function ijaraPlanWithoutOption(array $data): ?string
+    {
+        if (empty($data['ijara_enabled'])) {
+            return null;
+        }
+
+        $rates = (array) ($data['ijara_rates'] ?? []);
+
+        foreach (IjaraPlan::query()->orderBy('sort_order')->get() as $plan) {
+            $row = (array) ($rates[$plan->slug] ?? []);
+
+            if (empty($row['enabled'])) {
+                continue;
+            }
+
+            $offered = collect(static::ijaraPlanOptions($plan))
+                ->contains(fn (string $label) => (bool) ($row[($label === 'Plan B' ? 'b' : 'a').'_enabled'] ?? true));
+
+            if (! $offered) {
+                return $plan->name;
+            }
+        }
+
+        return null;
     }
 
     public static function table(Table $table): Table
