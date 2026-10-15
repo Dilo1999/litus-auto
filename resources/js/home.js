@@ -348,10 +348,11 @@ function initIjaraEstimator() {
     const PLAN_A_MONTHLY_RATE = 0.025;
     const PLAN_B_DISCOUNT = 4000;
     const PLAN_B_MONTHLY_RATE = 0.025;
-    // Premium only: same Plan A formula, but its own MONTHLY rate per term (6 months: no interest).
-    const PREMIUM_MONTHLY_RATES = { 6: 0, 8: 0.0105, 12: 0.011 };
-    const premiumRate = selectedPlan === 'premium' && PREMIUM_MONTHLY_RATES[months] !== undefined ? PREMIUM_MONTHLY_RATES[months] : null;
-    const planAMonthlyRate = premiumRate !== null ? premiumRate : PLAN_A_MONTHLY_RATE;
+    // Premium only: the term's price multiplier (6 months: same as the actual price; 8 months: x 1.05; 12 months: x 1.10).
+    //   Plan Price      = Actual Price x Multiplier
+    //   Monthly Payment = (Plan Price - Down Payment for that term) / Number of Months
+    const PREMIUM_PRICE_MULTIPLIERS = { 6: 1, 8: 1.05, 12: 1.1 };
+    const premiumMultiplier = selectedPlan === 'premium' && PREMIUM_PRICE_MULTIPLIERS[months] !== undefined ? PREMIUM_PRICE_MULTIPLIERS[months] : null;
     const price = model && model.price ? Number(model.price) : null;
     const isPlanB = chosenGroup && chosenGroup.label === 'Plan B';
     const basePrice = price !== null && isPlanB ? price - PLAN_B_DISCOUNT : price; // "Actual Price After Discount" for Plan B
@@ -363,7 +364,7 @@ function initIjaraEstimator() {
         const totalPrice = basePrice + financeCharge;
         payable = totalPrice - down;
       } else {
-        const totalInterest = financed * planAMonthlyRate * months;
+        const totalInterest = financed * PLAN_A_MONTHLY_RATE * months;
         payable = financed + totalInterest;
       }
     }
@@ -371,6 +372,19 @@ function initIjaraEstimator() {
     if (picked && payable !== null && payable > 0) {
       rate = { monthly: Math.ceil(payable / months), discount: isPlanB ? PLAN_B_DISCOUNT : 0, markup: isPlanB };
     }
+    // Premium replaces the result above with its own figures, kept to the cent like the price sheet.
+    if (picked && premiumMultiplier !== null && price !== null && down !== null) {
+      const planPrice = Math.round(price * premiumMultiplier * 100) / 100;
+      const balance = planPrice - down;
+      rate = balance > 0 ? { monthly: Math.round((balance / months) * 100) / 100, total: planPrice, discount: 0, markup: false } : null;
+    }
+    // Premium amounts show cents (e.g. MVR 25,541.25); every other plan keeps whole MVR.
+    const fmt = premiumMultiplier !== null
+      ? (value) => {
+        const digits = Number.isInteger(Number(value)) ? 0 : 2;
+        return `MVR ${Number(value).toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits })}`;
+      }
+      : formatMvr;
 
     setText(out.model, model ? model.name : 'No model selected');
     setText(mob.model, model ? model.name : '-');
@@ -381,9 +395,9 @@ function initIjaraEstimator() {
     setText(out.plan, planName || '-');
     setText(out.planTag, planTag);
     setText(out.term, months ? `${months} months` : '-');
-    setText(out.monthly, rate ? formatMvr(rate.monthly) : 'To be confirmed');
-    setText(out.down, down !== null ? formatMvr(down) : 'To be confirmed');
-    setText(out.total, rate ? formatMvr(down + rate.monthly * months) : 'To be confirmed');
+    setText(out.monthly, rate ? fmt(rate.monthly) : 'To be confirmed');
+    setText(out.down, down !== null ? fmt(down) : 'To be confirmed');
+    setText(out.total, rate ? fmt(rate.total !== undefined ? rate.total : down + rate.monthly * months) : 'To be confirmed');
     if (out.total) out.total.dataset.pending = String(!rate);
 
     const whatsapp = (msg) => `https://wa.me/9607797442?text=${encodeURIComponent(msg)}`;
@@ -391,12 +405,16 @@ function initIjaraEstimator() {
     if (rate) {
       setStatus('ready', 'Quote calculated');
       if (out.quoteText) out.quoteText.textContent = 'Based on current rates and your selected options.';
-      let rateNote = 'Includes a 2.5% monthly rate on the balance after your advance. ';
-      if (rate.markup) rateNote = `Price reduced by MVR ${rate.discount.toLocaleString('en-US')} for Plan B, then a 2.5% monthly rate applied. `;
-      else if (premiumRate === 0) rateNote = 'No interest on this term - the balance after your advance is split evenly. ';
-      else if (premiumRate !== null) rateNote = `Includes a ${+(premiumRate * 100).toFixed(2)}% monthly rate on the balance after your advance. `;
-      out.note.textContent = rateNote + 'Your final plan is confirmed by our sales team.';
-      setCta('Continue to next step', whatsapp(`Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${down !== null ? formatMvr(down) : "to be confirmed"}, monthly lease ${formatMvr(rate.monthly)}).`), false);
+      if (premiumMultiplier !== null) {
+        out.note.textContent = (premiumMultiplier === 1
+          ? 'No added cost on this term - the balance after your advance is split evenly. '
+          : `Plan price is the vehicle price x ${premiumMultiplier.toFixed(2)}, less your advance, split evenly. `) + 'Your final plan is confirmed by our sales team.';
+      } else {
+        out.note.textContent = (rate.markup
+          ? `Price reduced by MVR ${rate.discount.toLocaleString('en-US')} for Plan B, then a 2.5% monthly rate applied. `
+          : 'Includes a 2.5% monthly rate on the balance after your advance. ') + 'Your final plan is confirmed by our sales team.';
+      }
+      setCta('Continue to next step', whatsapp(`Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${down !== null ? fmt(down) : "to be confirmed"}, monthly lease ${fmt(rate.monthly)}).`), false);
     } else if (picked) {
       setStatus('quote', 'Quote required');
       if (out.quoteText) out.quoteText.textContent = 'Pricing for this combination is not available online yet.';
