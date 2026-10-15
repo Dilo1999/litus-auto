@@ -348,6 +348,10 @@ function initIjaraEstimator() {
     const PLAN_A_MONTHLY_RATE = 0.025;
     const PLAN_B_DISCOUNT = 4000;
     const PLAN_B_MONTHLY_RATE = 0.025;
+    // Premium only: same Plan A formula, but its own MONTHLY rate per term (6 months: no interest).
+    const PREMIUM_MONTHLY_RATES = { 6: 0, 8: 0.0105, 12: 0.011 };
+    const premiumRate = selectedPlan === 'premium' && PREMIUM_MONTHLY_RATES[months] !== undefined ? PREMIUM_MONTHLY_RATES[months] : null;
+    const planAMonthlyRate = premiumRate !== null ? premiumRate : PLAN_A_MONTHLY_RATE;
     const price = model && model.price ? Number(model.price) : null;
     const isPlanB = chosenGroup && chosenGroup.label === 'Plan B';
     const basePrice = price !== null && isPlanB ? price - PLAN_B_DISCOUNT : price; // "Actual Price After Discount" for Plan B
@@ -359,7 +363,7 @@ function initIjaraEstimator() {
         const totalPrice = basePrice + financeCharge;
         payable = totalPrice - down;
       } else {
-        const totalInterest = financed * PLAN_A_MONTHLY_RATE * months;
+        const totalInterest = financed * planAMonthlyRate * months;
         payable = financed + totalInterest;
       }
     }
@@ -387,9 +391,11 @@ function initIjaraEstimator() {
     if (rate) {
       setStatus('ready', 'Quote calculated');
       if (out.quoteText) out.quoteText.textContent = 'Based on current rates and your selected options.';
-      out.note.textContent = (rate.markup
-        ? `Price reduced by MVR ${rate.discount.toLocaleString('en-US')} for Plan B, then a 2.5% monthly rate applied. `
-        : 'Includes a 2.5% monthly rate on the balance after your advance. ') + 'Your final plan is confirmed by our sales team.';
+      let rateNote = 'Includes a 2.5% monthly rate on the balance after your advance. ';
+      if (rate.markup) rateNote = `Price reduced by MVR ${rate.discount.toLocaleString('en-US')} for Plan B, then a 2.5% monthly rate applied. `;
+      else if (premiumRate === 0) rateNote = 'No interest on this term - the balance after your advance is split evenly. ';
+      else if (premiumRate !== null) rateNote = `Includes a ${+(premiumRate * 100).toFixed(2)}% monthly rate on the balance after your advance. `;
+      out.note.textContent = rateNote + 'Your final plan is confirmed by our sales team.';
       setCta('Continue to next step', whatsapp(`Hi LITUS, I would like to proceed with an Ijara plan: ${model.name}, ${planName} plan, ${months} months (down payment ${down !== null ? formatMvr(down) : "to be confirmed"}, monthly lease ${formatMvr(rate.monthly)}).`), false);
     } else if (picked) {
       setStatus('quote', 'Quote required');

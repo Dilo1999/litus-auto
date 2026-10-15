@@ -67,6 +67,8 @@ class IjaraRates
      *     Total Interest     = Monthly Interest x Number of Months
      *     Total Lease Amount = Remaining Amount + Total Interest
      *     Monthly Lease      = Total Lease Amount / Number of Months
+     *   Premium: the Plan A formula with its own monthly rate per term (6 months 0%, 8 months 1.05%, 12 months 1.1%)
+     *   and a separate down payment per term.
      *   Plan B (36 or 48 months only): also a MONTHLY 2.5% rate, but on the price after a flat MVR 4,000
      *   discount, with the advance deducted both before and after the finance charge is added.
      *     Actual Price After Discount = Price - MVR 4,000
