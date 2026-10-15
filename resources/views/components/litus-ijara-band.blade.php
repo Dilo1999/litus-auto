@@ -113,7 +113,7 @@
                         </a>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-2.5 min-[560px]:grid-cols-3 xl:grid-cols-5" role="group" aria-labelledby="ijara-plan-label" data-ijara-plan-group></div>
+                    <div class="grid grid-cols-2 gap-2.5 min-[560px]:grid-cols-3 xl:grid-cols-none xl:grid-flow-col xl:auto-cols-fr" role="group" aria-labelledby="ijara-plan-label" data-ijara-plan-group></div>
                     <template data-ijara-plan-template>
                         <button type="button" aria-pressed="false" class="{{ $choice }}">
                             <span class="grid h-6 w-6 shrink-0 place-items-center text-litus-primary">
@@ -167,7 +167,7 @@
                     </div>
 
                     <p class="mb-3 text-[12.5px] text-[#71809c]" data-ijara-term-empty>Choose Plan A or Plan B to pick your months.</p>
-                    <div class="grid grid-cols-3 gap-2.5 min-[480px]:grid-cols-5" role="group" aria-labelledby="ijara-term-label" data-ijara-term>
+                    <div class="grid grid-cols-3 gap-2.5 sm:grid-cols-none sm:grid-flow-col sm:auto-cols-fr" role="group" aria-labelledby="ijara-term-label" data-ijara-term>
                         @foreach ($terms as $term)
                             <button type="button" data-term="{{ $term }}" aria-pressed="false"
                                     class="group flex h-[50px] items-center justify-center gap-1.5 whitespace-nowrap rounded-[11px] border border-[#dfe7f1] bg-white px-2 text-[13.5px] font-bold text-[#35425a] transition hover:border-litus-primary hover:text-litus-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-litus-primary/40 disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:border-[#dfe7f1] disabled:hover:text-[#35425a] aria-pressed:border-litus-primary aria-pressed:bg-litus-primary aria-pressed:text-white aria-pressed:shadow-[0_6px_14px_rgba(18,87,214,.2)] aria-pressed:hover:text-white">
