@@ -301,7 +301,13 @@ function initIjaraEstimator() {
     // once an option is picked (or picked automatically, when the plan only has one).
     const chosenGroup = selectedGroup >= 0 ? groups[selectedGroup] : null;
     const downKey = chosenGroup && chosenGroup.label === 'Plan B' ? 'down_b' : 'down_a';
-    const down = planData && chosenGroup && planData[downKey] !== null && planData[downKey] !== undefined ? Number(planData[downKey]) : null;
+    // Premium has its own down payment for each month (down_months), so it shows once the months are picked.
+    const monthDowns = planData && planData.down_months;
+    let down = planData && chosenGroup && planData[downKey] !== null && planData[downKey] !== undefined ? Number(planData[downKey]) : null;
+    if (monthDowns) {
+      const monthDown = months ? monthDowns[months] : null;
+      down = monthDown !== null && monthDown !== undefined ? Number(monthDown) : null;
+    }
     const picked = Boolean(model && selectedPlan && months);
 
     const reached = picked ? 3 : model ? 2 : 1;

@@ -31,6 +31,25 @@ class IjaraRates
         return $configDowns->isNotEmpty() ? $configDowns->min() + 0 : null;
     }
 
+    /**
+     * Premium only: a separate down payment for each month ticked on the plan, entered on the motorcycle's
+     * admin page as down_6, down_8, down_12 ... Null for every other plan.
+     *
+     * @return array<int, int|float|null>|null
+     */
+    public static function monthDowns(Motorcycle $motorcycle, string $planKey): ?array
+    {
+        if ($planKey !== 'premium') {
+            return null;
+        }
+
+        $row = $motorcycle->ijara_rates[$planKey] ?? [];
+
+        return collect(IjaraPlans::termsFor($planKey))
+            ->mapWithKeys(fn (int $month) => [$month => is_numeric($row["down_{$month}"] ?? null) ? $row["down_{$month}"] + 0 : null])
+            ->all();
+    }
+
     /** Whether this bike is offered on one option (Plan A / Plan B) of a plan; switched on unless the admin turned it off. */
     public static function optionEnabled(Motorcycle $motorcycle, string $planKey, string $option): bool
     {
@@ -80,6 +99,11 @@ class IjaraRates
                                 'b' => self::optionEnabled($motorcycle, $planKey, 'b'),
                             ],
                         ];
+
+                        // Premium: the down payment depends on the month the customer picks.
+                        if (($monthDowns = self::monthDowns($motorcycle, $planKey)) !== null) {
+                            $modelPlans[$planKey]['down_months'] = (object) $monthDowns;
+                        }
                     }
                 }
 
@@ -138,6 +162,16 @@ class IjaraRates
 
                 foreach (IjaraPlans::calculatorPlans() as $planKey => $planName) {
                     if (! in_array($planKey, $motorcycle->ijara_plans ?? [], true)) {
+                        continue;
+                    }
+
+                    if (($monthDowns = self::monthDowns($motorcycle, $planKey)) !== null) {
+                        foreach ($monthDowns as $month => $down) {
+                            if ($down === null) {
+                                $gaps[] = "{$motorcycle->name} / {$planName} ({$month} months): no down payment";
+                            }
+                        }
+
                         continue;
                     }
 
