@@ -13,6 +13,8 @@ class PageSetting extends Model
         'page_label',
         'hero_image_desktop',
         'hero_image_mobile',
+        'hero_video_desktop',
+        'hero_video_url',
         'sort_order',
     ];
 
@@ -107,6 +109,53 @@ class PageSetting extends Model
             'desktop' => $desktop,
             'mobile' => $mobile,
         ];
+    }
+
+    /**
+     * Desktop-only hero video. An uploaded file wins over a pasted link; a YouTube or Vimeo
+     * link becomes a muted background embed, any other link is played as a direct video file.
+     *
+     * @return array{type: 'file'|'youtube'|'vimeo', src: string}|null
+     */
+    public static function heroVideoForRoute(string $routeName): ?array
+    {
+        $page = static::forRoute($routeName);
+
+        if (filled($page?->hero_video_desktop)) {
+            return ['type' => 'file', 'src' => static::resolveImageUrl($page->hero_video_desktop)];
+        }
+
+        return static::parseVideoUrl($page?->hero_video_url);
+    }
+
+    /**
+     * @return array{type: 'file'|'youtube'|'vimeo', src: string}|null
+     */
+    public static function parseVideoUrl(?string $url): ?array
+    {
+        $url = trim((string) $url);
+
+        if ($url === '' || ! preg_match('#^https?://#i', $url)) {
+            return null;
+        }
+
+        if (preg_match('#(?:youtube\.com/(?:watch\?(?:.*&)?v=|embed/|shorts/|live/)|youtu\.be/)([A-Za-z0-9_-]{11})#', $url, $m)) {
+            $id = $m[1];
+
+            return [
+                'type' => 'youtube',
+                'src' => "https://www.youtube-nocookie.com/embed/{$id}?autoplay=1&mute=1&loop=1&playlist={$id}&controls=0&playsinline=1&rel=0&modestbranding=1&disablekb=1&iv_load_policy=3",
+            ];
+        }
+
+        if (preg_match('#vimeo\.com/(?:video/)?(\d+)#', $url, $m)) {
+            return [
+                'type' => 'vimeo',
+                'src' => "https://player.vimeo.com/video/{$m[1]}?background=1&autoplay=1&loop=1&muted=1",
+            ];
+        }
+
+        return ['type' => 'file', 'src' => $url];
     }
 
     /**

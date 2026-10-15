@@ -68,6 +68,25 @@ class PageSettingResource extends Resource
                             ->helperText(fn (?PageSetting $record) => static::heroImageGuidance($record?->route_name, 'mobile')),
                     ])
                     ->columns(2),
+                Forms\Components\Section::make('Desktop hero video')
+                    ->description('Optional. Plays muted and looped behind the hero text on desktop only (961px and wider) — mobile keeps the image. The desktop image above is shown while the video loads. If both an upload and a link are set, the uploaded video is used.')
+                    ->visible(fn (?PageSetting $record) => $record?->route_name === 'home')
+                    ->schema([
+                        FileUpload::make('hero_video_desktop')
+                            ->label('Upload video')
+                            ->acceptedFileTypes(['video/mp4', 'video/webm'])
+                            ->directory('heroes/videos')
+                            ->disk('public')
+                            ->maxSize(102400)
+                            ->helperText('MP4 (H.264) or WebM, up to 100MB. Keep it short (10–30s), landscape, at least 1920×800, and compressed — ideally under 15MB so the page stays fast.'),
+                        Forms\Components\TextInput::make('hero_video_url')
+                            ->label('Or video link')
+                            ->url()
+                            ->maxLength(1000)
+                            ->placeholder('https://www.youtube.com/watch?v=… or https://example.com/hero.mp4')
+                            ->helperText('YouTube, Vimeo, or a direct link to an .mp4/.webm file.'),
+                    ])
+                    ->columns(2),
             ]);
     }
 
@@ -139,7 +158,7 @@ class PageSettingResource extends Resource
                     ->height(48),
                 TextColumn::make('hero_status')
                     ->label('Status')
-                    ->getStateUsing(fn (PageSetting $record): string => filled($record->hero_image_desktop) || filled($record->hero_image_mobile) ? 'Custom' : 'Default'),
+                    ->getStateUsing(fn (PageSetting $record): string => filled($record->hero_image_desktop) || filled($record->hero_image_mobile) || filled($record->hero_video_desktop) || filled($record->hero_video_url) ? 'Custom' : 'Default'),
             ])
             ->defaultSort('sort_order')
             ->actions([
