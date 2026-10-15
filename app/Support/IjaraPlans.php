@@ -14,6 +14,21 @@ class IjaraPlans
 
     public const PLAN_B_MONTHS = [36, 48];
 
+    /** The Premium plan has its own months (Plan A only) and no Plan B. */
+    public const PREMIUM_MONTHS = [6, 8, 12];
+
+    /** Months the given plan can offer under Plan A. */
+    public static function planAMonths(?string $slug): array
+    {
+        return $slug === 'premium' ? self::PREMIUM_MONTHS : self::PLAN_A_MONTHS;
+    }
+
+    /** Months the given plan can offer under Plan B (none for Premium). */
+    public static function planBMonths(?string $slug): array
+    {
+        return $slug === 'premium' ? [] : self::PLAN_B_MONTHS;
+    }
+
     /**
      * Published plans for the website: managed in the admin panel (Ijara Plans),
      * falling back to the built-in defaults until the table exists and is populated.

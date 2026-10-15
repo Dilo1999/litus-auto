@@ -109,11 +109,13 @@ class IjaraPlanResource extends Resource
                     ->columns(2),
 
                 Forms\Components\Section::make('Available months')
-                    ->description('Plan A offers 6, 12 and 24 months. Plan B offers 36 and 48 months. In the payment calculator the customer picks Plan A or Plan B first and then sees only that option\'s months. Tick what this plan offers; leave Plan B empty if it offers neither 36 nor 48.')
+                    ->description(fn (\Closure $get) => $get('slug') === 'premium'
+                        ? 'Premium offers 6, 8 and 12 months. Tick what this plan offers.'
+                        : 'Plan A offers 6, 12 and 24 months. Plan B offers 36 and 48 months. In the payment calculator the customer picks Plan A or Plan B first and then sees only that option\'s months. Tick what this plan offers; leave Plan B empty if it offers neither 36 nor 48.')
                     ->schema([
                         CheckboxList::make('term_groups.0.months')
-                            ->label('Plan A - months')
-                            ->options(collect(IjaraPlans::PLAN_A_MONTHS)->mapWithKeys(fn (int $m) => [$m => "{$m} months"])->all())
+                            ->label(fn (\Closure $get) => $get('slug') === 'premium' ? 'Months' : 'Plan A - months')
+                            ->options(fn (\Closure $get) => collect(IjaraPlans::planAMonths($get('slug')))->mapWithKeys(fn (int $m) => [$m => "{$m} months"])->all())
                             ->columns(3)
                             ->required()
                             ->validationAttribute('Plan A months')
@@ -123,6 +125,7 @@ class IjaraPlanResource extends Resource
                             ->options(collect(IjaraPlans::PLAN_B_MONTHS)->mapWithKeys(fn (int $m) => [$m => "{$m} months"])->all())
                             ->columns(3)
                             ->validationAttribute('Plan B months')
+                            ->hidden(fn (\Closure $get) => $get('slug') === 'premium')
                             ->columnSpanFull(),
                         Toggle::make('show_in_calculator')
                             ->label('Include in the payment calculator')

@@ -102,7 +102,8 @@ class IjaraPlan extends Model
      */
     public function normalizedGroups(): array
     {
-        // Plan A can only hold 6 / 12 / 24 months and Plan B only 36 / 48, so the split follows the month itself.
+        // Plan A can only hold 6 / 12 / 24 months and Plan B only 36 / 48 (Premium: Plan A 6 / 8 / 12, no Plan B),
+        // so the split follows the month itself.
         $stored = collect($this->term_groups)->pluck('months')->flatten();
 
         if ($stored->isEmpty()) {
@@ -111,7 +112,7 @@ class IjaraPlan extends Model
 
         $months = $stored->map(fn ($m) => (int) $m)->unique()->sort()->values();
 
-        return collect(['Plan A' => IjaraPlans::PLAN_A_MONTHS, 'Plan B' => IjaraPlans::PLAN_B_MONTHS])
+        return collect(['Plan A' => IjaraPlans::planAMonths($this->slug), 'Plan B' => IjaraPlans::planBMonths($this->slug)])
             ->map(fn (array $allowed, string $label) => [
                 'label' => $label,
                 'months' => $months->filter(fn ($m) => in_array($m, $allowed, true))->values()->all(),
