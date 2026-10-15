@@ -92,6 +92,8 @@
     ];
 
     $pickDropHeroImage = asset('images/service_center/pick-drop/'.rawurlencode('Main 2.webp'));
+    // Plays over the image above, which stays as the loading fallback.
+    $pickDropHeroVideo = \App\Models\PageSetting::parseVideoUrl('https://youtu.be/rt7F9eQFRzY');
 
     $pickDropFeatures = [
         ['icon' => 'map-pin', 'text' => 'Across the Maldives'],
@@ -282,15 +284,18 @@
              alt=""
              class="absolute inset-0 hidden h-full w-full object-cover object-[center_right] min-[961px]:block"
              aria-hidden="true">
+        <x-litus-bg-video :video="$pickDropHeroVideo" media="(min-width: 961px)" class="hidden min-[961px]:block" />
 
-        {{-- Mobile: title over image --}}
-        <div class="relative h-[clamp(240px,56vw,320px)] overflow-hidden min-[961px]:hidden">
-            <img src="{{ $pickDropHeroImage }}"
-                 alt=""
-                 class="h-full w-full object-cover object-[center_35%]"
-                 aria-hidden="true">
-            <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.15)_0%,rgba(255,255,255,0.9)_62%,#ffffff_100%)]"></div>
-            <div class="absolute inset-x-0 bottom-0 litus-container pb-5">
+        {{-- Mobile: full 16:9 video (uncropped, no overlay), title below it --}}
+        <div class="min-[961px]:hidden">
+            <div class="relative aspect-video w-full overflow-hidden bg-litus-paper-3">
+                <img src="{{ $pickDropHeroImage }}"
+                     alt=""
+                     class="h-full w-full object-cover object-[center_35%]"
+                     aria-hidden="true">
+                <x-litus-bg-video :video="$pickDropHeroVideo" media="(max-width: 960px)" />
+            </div>
+            <div class="litus-container pt-6">
                 <span class="mb-2.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Pick &amp; Drop Service</span>
                 <h2 class="max-w-[14ch] font-display text-[clamp(26px,7vw,34px)] font-bold leading-[1.1] tracking-[-0.028em] text-litus-text">
                     We Pick. We Service.<br> We Drop.
