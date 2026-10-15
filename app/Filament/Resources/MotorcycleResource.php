@@ -133,8 +133,17 @@ class MotorcycleResource extends Resource
             // separate down payment for each, since a customer picks one option before choosing their term.
             $labels = static::ijaraPlanOptions($plan);
             $multiOption = count($labels) > 1;
+            // Premium takes a separate down payment for each month ticked on the plan (e.g. 6 / 8 / 12).
+            $perMonth = static::ijaraPerMonthDowns($plan);
 
-            $downFields = collect($labels)->map(function (string $label) use ($plan, $enabled, $multiOption) {
+            $downFields = $perMonth ? collect($perMonth)->map(fn (int $month) => TextInput::make("ijara_rates.{$plan->slug}.down_{$month}")
+                ->label("Down payment - {$month} months")
+                ->prefix('MVR')
+                ->numeric()
+                ->minValue(0)
+                ->required()
+                ->visible(fn (\Closure $get) => (bool) $get($enabled)))
+                ->all() : collect($labels)->map(function (string $label) use ($plan, $enabled, $multiOption) {
                 $option = $label === 'Plan B' ? 'b' : 'a';
                 $optionEnabled = "ijara_rates.{$plan->slug}.{$option}_enabled";
 
@@ -166,7 +175,7 @@ class MotorcycleResource extends Resource
                         ->label($plan->name.($plan->tag ? " - {$plan->tag}" : ''))
                         ->default(false)
                         ->reactive()
-                        ->columnSpan($multiOption ? 2 : 1),
+                        ->columnSpan($multiOption || count($perMonth) > 1 ? 2 : 1),
                     ...$downFields,
                 ]);
         })->all();
@@ -180,6 +189,21 @@ class MotorcycleResource extends Resource
     public static function ijaraPlanOptions(IjaraPlan $plan): array
     {
         return collect($plan->normalizedGroups())->pluck('label')->values()->all() ?: ['Plan A'];
+    }
+
+    /**
+     * Months that each take their own down payment on this plan: only Premium, using the months ticked on
+     * the plan. Empty for every other plan, which keeps one down payment per option (Plan A / Plan B).
+     *
+     * @return list<int>
+     */
+    public static function ijaraPerMonthDowns(IjaraPlan $plan): array
+    {
+        if ($plan->slug !== 'premium') {
+            return [];
+        }
+
+        return collect($plan->normalizedGroups())->pluck('months')->flatten()->map(fn ($m) => (int) $m)->unique()->sort()->values()->all();
     }
 
     /**
@@ -204,6 +228,13 @@ class MotorcycleResource extends Resource
                     'a_enabled' => $aEnabled,
                     'b_enabled' => $bEnabled,
                 ];
+
+                // Per-month down payments (Premium only), stored as down_6, down_8, down_12 ...
+                foreach ((array) $row as $key => $value) {
+                    if (preg_match('/^down_\d+$/', (string) $key)) {
+                        $clean[$slug][$key] = $value;
+                    }
+                }
             }
         }
 
