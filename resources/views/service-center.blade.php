@@ -284,7 +284,7 @@
              alt=""
              class="absolute inset-0 hidden h-full w-full object-cover object-[center_right] min-[961px]:block"
              aria-hidden="true">
-        <x-litus-bg-video :video="$pickDropHeroVideo" media="(min-width: 961px)" class="hidden min-[961px]:block" />
+        <x-litus-bg-video :video="$pickDropHeroVideo" sound media="(min-width: 961px)" class="hidden min-[961px]:block" />
 
         {{-- Mobile: full 16:9 video (uncropped, no overlay), title below it --}}
         <div class="min-[961px]:hidden">
@@ -293,7 +293,7 @@
                      alt=""
                      class="h-full w-full object-cover object-[center_35%]"
                      aria-hidden="true">
-                <x-litus-bg-video :video="$pickDropHeroVideo" media="(max-width: 960px)" />
+                <x-litus-bg-video :video="$pickDropHeroVideo" sound media="(max-width: 960px)" />
             </div>
             <div class="litus-container pt-6">
                 <span class="mb-2.5 block text-[11.5px] font-bold uppercase tracking-[0.19em] text-litus-primary">Pick &amp; Drop Service</span>
