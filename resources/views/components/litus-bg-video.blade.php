@@ -3,12 +3,13 @@
     'media' => null,      // only load the video when this media query matches, e.g. '(min-width: 961px)'
     'poster' => null,
     'sound' => false,     // show a sound on/off button (browsers only allow autoplay while muted)
+    'videoClass' => '',   // extra classes for an uploaded <video>, e.g. 'object-[center_right]'
 ])
 
 @php
     // Vimeo's background mode is always silent, so sound is only offered for files and YouTube.
     $withSound = $sound && in_array($video['type'], ['file', 'youtube'], true);
-    $src = $video['src'] . ($withSound && $video['type'] === 'youtube' ? '&enablejsapi=1' : '');
+    $src = $video['src'];
 @endphp
 
 {{-- Muted, looped background video that covers its positioned parent. The source is attached by
@@ -18,7 +19,7 @@
     <div class="absolute inset-0 overflow-hidden opacity-0 transition-opacity duration-700 [container-type:size]" data-bg-video-media aria-hidden="true">
         @if ($video['type'] === 'file')
             <video data-src="{{ $src }}" @if ($poster) poster="{{ $poster }}" @endif muted loop playsinline preload="none"
-                   class="absolute inset-0 h-full w-full object-cover"></video>
+                   class="absolute inset-0 h-full w-full object-cover {{ $videoClass }}"></video>
         @else
             <iframe data-src="{{ $src }}" title="Background video" tabindex="-1" frameborder="0"
                     allow="autoplay; encrypted-media; picture-in-picture"
@@ -73,8 +74,44 @@
             video.play().catch(() => {});
             return;
         }
-        // Give the embed a moment to get past its loading/title frame before fading in.
-        frame.addEventListener('load', () => setTimeout(show, 1200), { once: true });
+        // Only fade in once the player reports real playback, so a blocked embed (e.g. YouTube's
+        // "confirm you're not a bot" screen) never covers the fallback image. YouTube shows its
+        // play/pause/skip overlay for ~3s after playback starts, so wait it out before fading in.
+        const isYouTube = @json($video['type'] === 'youtube');
+        const post = (msg) => frame.contentWindow.postMessage(JSON.stringify(msg), '*');
+        const onMessage = (event) => {
+            if (event.source !== frame.contentWindow) return;
+            let data = event.data;
+            try { if (typeof data === 'string') data = JSON.parse(data); } catch { return; }
+            if (!data) return;
+            const state = isYouTube
+                ? data.event === 'onStateChange' ? data.info : data.info?.playerState
+                : null;
+            const playing = isYouTube ? state === 1 : data.event === 'play' || data.event === 'playProgress';
+            if (isYouTube && data.event === 'onReady') {
+                post({ event: 'command', func: 'addEventListener', args: ['onStateChange'] });
+            }
+            if (!isYouTube && data.event === 'ready') {
+                post({ method: 'addEventListener', value: 'play' });
+                post({ method: 'addEventListener', value: 'playProgress' });
+            }
+            // YouTube is looped here rather than with loop=1&playlist=…, which turns the embed into
+            // a playlist with prev/next buttons and reloads (flashing the controls) on every loop.
+            if (isYouTube && state === 0) {
+                post({ event: 'command', func: 'seekTo', args: [0, true] });
+                post({ event: 'command', func: 'playVideo', args: [] });
+            }
+            if (playing && !shown) {
+                shown = true;
+                setTimeout(show, isYouTube ? 3500 : 600);
+                if (!isYouTube) window.removeEventListener('message', onMessage);
+            }
+        };
+        let shown = false;
+        window.addEventListener('message', onMessage);
+        frame.addEventListener('load', () => {
+            if (isYouTube) post({ event: 'listening', id: 'bg-video', channel: 'widget' });
+        }, { once: true });
         frame.src = frame.dataset.src;
     })();
 </script>
