@@ -18,6 +18,7 @@ class Showroom extends Model
     protected $fillable = [
         'name',
         'address',
+        'map_url',
         'phone',
         'services',
         'images',
@@ -80,7 +81,7 @@ class Showroom extends Model
     /**
      * Shape used by About / Home / Contact blades.
      *
-     * @return array{name: string, address: string, phone: string|null, services: array, featured: bool, images: array, img: string|null}
+     * @return array{name: string, address: string|null, map_url: string, phone: string|null, services: array, featured: bool, images: array, img: string|null}
      */
     public function toViewArray(): array
     {
@@ -89,12 +90,25 @@ class Showroom extends Model
         return [
             'name' => $this->name,
             'address' => $this->address,
+            'map_url' => $this->mapUrl(),
             'phone' => $this->phone,
             'services' => array_values($this->services ?? []),
             'featured' => (bool) $this->is_featured,
             'images' => $images,
             'img' => $images[0] ?? null,
         ];
+    }
+
+    /**
+     * Admin-provided map link, or a Google Maps search for the name + address.
+     */
+    public function mapUrl(): string
+    {
+        if (filled($this->map_url)) {
+            return $this->map_url;
+        }
+
+        return 'https://www.google.com/maps/search/?api=1&query='.urlencode(trim($this->name.' '.($this->address ?: 'Maldives')));
     }
 
     private function resolveImageUrl(string $path): string

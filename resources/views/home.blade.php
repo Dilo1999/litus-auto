@@ -513,12 +513,18 @@
                                 </div>
 
                                 <div class="flex flex-1 flex-col px-4 pb-4 pt-4 sm:px-[26px] sm:pb-[26px] sm:pt-5">
-                                    <h4 class="mb-1.5 text-[17px] font-bold leading-snug text-litus-text sm:mb-2 sm:text-lg">{{ $showroom['name'] }}</h4>
-                                    <p class="mb-4 flex-1 text-[13.5px] leading-relaxed text-litus-text-2 sm:mb-5 sm:text-[14.5px]">{{ $showroom['address'] }}</p>
-                                    <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode(trim(($showroom['name'] ?? '').' '.($showroom['address'] ?? ''))) }}"
+                                    <h4 @class([
+                                        'text-[17px] font-bold leading-snug text-litus-text sm:text-lg',
+                                        'mb-1.5 sm:mb-2' => filled($showroom['address']),
+                                        'mb-4 sm:mb-5' => blank($showroom['address']),
+                                    ])>{{ $showroom['name'] }}</h4>
+                                    @if (filled($showroom['address']))
+                                        <p class="mb-4 flex-1 text-[13.5px] leading-relaxed text-litus-text-2 sm:mb-5 sm:text-[14.5px]">{{ $showroom['address'] }}</p>
+                                    @endif
+                                    <a href="{{ $showroom['map_url'] }}"
                                        target="_blank"
                                        rel="noopener noreferrer"
-                                       class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border-[1.5px] border-litus-line-2 bg-white px-4 py-2.5 text-[13.5px] font-semibold text-litus-ink transition hover:border-litus-primary-light hover:text-litus-primary">
+                                       class="mt-auto inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border-[1.5px] border-litus-line-2 bg-white px-4 py-2.5 text-[13.5px] font-semibold text-litus-ink transition hover:border-litus-primary-light hover:text-litus-primary">
                                         <x-litus-icon name="map-pin" class="h-4 w-4 shrink-0" />
                                         View Location
                                     </a>

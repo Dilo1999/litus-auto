@@ -47,8 +47,14 @@ class ShowroomResource extends Resource
                             ->maxLength(255)
                             ->placeholder('e.g. Malé Showroom'),
                         TextInput::make('address')
-                            ->required()
-                            ->maxLength(500)
+                            ->maxLength(255)
+                            ->columnSpanFull(),
+                        TextInput::make('map_url')
+                            ->label('Map URL')
+                            ->url()
+                            ->maxLength(1000)
+                            ->placeholder('https://maps.app.goo.gl/...')
+                            ->helperText('Google Maps link for this location. Leave empty to search by name and address.')
                             ->columnSpanFull(),
                         TextInput::make('phone')
                             ->tel()

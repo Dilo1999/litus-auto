@@ -422,7 +422,7 @@
                                 <x-litus-icon name="map-pin" class="h-4 w-4" />
                             </div>
                             <h4 class="mb-2 text-[16px] font-bold text-litus-text sm:text-lg">{{ $showroom['name'] }}</h4>
-                            <p class="mb-3 text-[14px] leading-relaxed text-litus-text-2 sm:mb-3.5 sm:text-[14.5px]">{{ $showroom['address'] }}</p>
+                            <a href="{{ $showroom['map_url'] }}" target="_blank" rel="noopener noreferrer" class="mb-3 inline-flex items-start gap-1.5 self-start text-[14px] leading-relaxed text-litus-text-2 underline-offset-2 transition hover:text-litus-primary hover:underline sm:mb-3.5 sm:text-[14.5px]"><x-litus-icon name="map-pin" class="mt-1 h-3.5 w-3.5 shrink-0" />{{ $showroom['address'] ?: 'View on map' }}</a>
                             <div class="mb-3 flex flex-wrap gap-1.5 sm:mb-4 sm:gap-2">
                                 @foreach ($showroom['services'] as $service)
                                     <span class="rounded-full bg-litus-paper-3 px-2.5 py-1 text-[11.5px] font-semibold text-litus-text-2 sm:px-3 sm:py-1.5 sm:text-[12.5px]">{{ $service }}</span>
