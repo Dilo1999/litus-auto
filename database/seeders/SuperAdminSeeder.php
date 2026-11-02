@@ -16,7 +16,7 @@ class SuperAdminSeeder extends Seeder
             ['email' => User::SUPER_ADMIN_EMAIL],
             [
                 'name' => 'Super Admin',
-                'password' => '12345678',
+                'password' => 'autolitus@adminweb',
                 'role' => User::ROLE_SUPER_ADMIN,
             ]
         );

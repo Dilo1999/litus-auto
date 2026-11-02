@@ -21,7 +21,7 @@ class User extends Authenticatable implements FilamentUser
 
     public const ROLE_VIEWER = 'viewer';
 
-    public const SUPER_ADMIN_EMAIL = 'admin@gmail.com';
+    public const SUPER_ADMIN_EMAIL = 'dev@litusmaldives.com';
 
     /**
      * The attributes that are mass assignable.
