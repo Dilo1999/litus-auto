@@ -63,3 +63,7 @@ Route::post('/forms/motorcycle-enquiry', [InquiryFormController::class, 'motorcy
     ->name('forms.motorcycle-enquiry');
 Route::post('/forms/contact', [InquiryFormController::class, 'contact'])
     ->name('forms.contact');
+
+// Laravel's auth layer redirects guests to route('login') (e.g. when AuthenticateSession
+// logs a user out after their password changes), so point it at the Filament login page.
+Route::get('/login', fn () => redirect()->route('filament.auth.login'))->name('login');
